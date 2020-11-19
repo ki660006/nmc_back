@@ -1,0 +1,1272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="errpd.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
+    <value>6, 14</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>792, 605</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtRegNm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txtRegNm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtRegNm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>704, 544</value>
+  </data>
+  <data name="txtRegNm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtRegNm.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="&gt;&gt;txtRegNm.Name" xml:space="preserve">
+    <value>txtRegNm</value>
+  </data>
+  <data name="&gt;&gt;txtRegNm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtRegNm.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;txtRegNm.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtUEDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txtUEDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtUEDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 544</value>
+  </data>
+  <data name="txtUEDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="txtUEDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtUEDT.Name" xml:space="preserve">
+    <value>txtUEDT</value>
+  </data>
+  <data name="&gt;&gt;txtUEDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtUEDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;txtUEDT.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblUEDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblUEDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblUEDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 544</value>
+  </data>
+  <data name="lblUEDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblUEDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblUEDT.Text" xml:space="preserve">
+    <value>종료일시(선택)</value>
+  </data>
+  <data name="lblUEDT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUEDT.Name" xml:space="preserve">
+    <value>lblUEDT</value>
+  </data>
+  <data name="&gt;&gt;lblUEDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUEDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;lblUEDT.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtRegDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txtRegDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtRegDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>512, 544</value>
+  </data>
+  <data name="txtRegDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="txtRegDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtRegDT.Name" xml:space="preserve">
+    <value>txtRegDT</value>
+  </data>
+  <data name="&gt;&gt;txtRegDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtRegDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;txtRegDT.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtUSDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txtUSDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtUSDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 544</value>
+  </data>
+  <data name="txtUSDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="txtUSDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtUSDT.Name" xml:space="preserve">
+    <value>txtUSDT</value>
+  </data>
+  <data name="&gt;&gt;txtUSDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtUSDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;txtUSDT.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblUserNm.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblUserNm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblUserNm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>618, 544</value>
+  </data>
+  <data name="lblUserNm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="lblUserNm.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblUserNm.Text" xml:space="preserve">
+    <value>최종등록자</value>
+  </data>
+  <data name="lblUserNm.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUserNm.Name" xml:space="preserve">
+    <value>lblUserNm</value>
+  </data>
+  <data name="&gt;&gt;lblUserNm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUserNm.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;lblUserNm.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblRegDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblRegDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblRegDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>426, 544</value>
+  </data>
+  <data name="lblRegDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 21</value>
+  </data>
+  <data name="lblRegDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblRegDT.Text" xml:space="preserve">
+    <value>최종등록일시</value>
+  </data>
+  <data name="lblRegDT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblRegDT.Name" xml:space="preserve">
+    <value>lblRegDT</value>
+  </data>
+  <data name="&gt;&gt;lblRegDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRegDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;lblRegDT.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblUSDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="lblUSDT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblUSDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 544</value>
+  </data>
+  <data name="lblUSDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblUSDT.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblUSDT.Text" xml:space="preserve">
+    <value>시작일시(선택)</value>
+  </data>
+  <data name="lblUSDT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUSDT.Name" xml:space="preserve">
+    <value>lblUSDT</value>
+  </data>
+  <data name="&gt;&gt;lblUSDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUSDT.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;lblUSDT.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="txtRegID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="txtRegID.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtRegID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>704, 544</value>
+  </data>
+  <data name="txtRegID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="txtRegID.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtRegID.Name" xml:space="preserve">
+    <value>txtRegID</value>
+  </data>
+  <data name="&gt;&gt;txtRegID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtRegID.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;txtRegID.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="grpCdInfo1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="lblSameCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblSameCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 178</value>
+  </data>
+  <data name="lblSameCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblSameCd.TabIndex" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <data name="lblSameCd.Text" xml:space="preserve">
+    <value>대표코드(통계)</value>
+  </data>
+  <data name="lblSameCd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblSameCd.Name" xml:space="preserve">
+    <value>lblSameCd</value>
+  </data>
+  <data name="&gt;&gt;lblSameCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSameCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblSameCd.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtSameCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtSameCd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtSameCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 178</value>
+  </data>
+  <data name="txtSameCd.MaxLength" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="txtSameCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="txtSameCd.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;txtSameCd.Name" xml:space="preserve">
+    <value>txtSameCd</value>
+  </data>
+  <data name="&gt;&gt;txtSameCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSameCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtSameCd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="txtDispSeq.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtDispSeq.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtDispSeq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 156</value>
+  </data>
+  <data name="txtDispSeq.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="txtDispSeq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="txtDispSeq.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;txtDispSeq.Name" xml:space="preserve">
+    <value>txtDispSeq</value>
+  </data>
+  <data name="&gt;&gt;txtDispSeq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDispSeq.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtDispSeq.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblDispSeq.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblDispSeq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 156</value>
+  </data>
+  <data name="lblDispSeq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblDispSeq.TabIndex" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="lblDispSeq.Text" xml:space="preserve">
+    <value>정렬순서</value>
+  </data>
+  <data name="lblDispSeq.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblDispSeq.Name" xml:space="preserve">
+    <value>lblDispSeq</value>
+  </data>
+  <data name="&gt;&gt;lblDispSeq.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDispSeq.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblDispSeq.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblAntiNmS.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblAntiNmS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 38</value>
+  </data>
+  <data name="lblAntiNmS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblAntiNmS.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblAntiNmS.Text" xml:space="preserve">
+    <value>항균제명(약어)</value>
+  </data>
+  <data name="lblAntiNmS.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmS.Name" xml:space="preserve">
+    <value>lblAntiNmS</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmS.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmS.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtAntiNmS.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtAntiNmS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 38</value>
+  </data>
+  <data name="txtAntiNmS.MaxLength" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txtAntiNmS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
+  <data name="txtAntiNmS.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmS.Name" xml:space="preserve">
+    <value>txtAntiNmS</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmS.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmS.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 211</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>756, 2</value>
+  </data>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
+    <value>Label10</value>
+  </data>
+  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblAntiNmP.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblAntiNmP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 82</value>
+  </data>
+  <data name="lblAntiNmP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblAntiNmP.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAntiNmP.Text" xml:space="preserve">
+    <value>항균제명(출력)</value>
+  </data>
+  <data name="lblAntiNmP.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmP.Name" xml:space="preserve">
+    <value>lblAntiNmP</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmP.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmP.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="txtAntiNmP.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtAntiNmP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 82</value>
+  </data>
+  <data name="txtAntiNmP.MaxLength" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="txtAntiNmP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
+  <data name="txtAntiNmP.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmP.Name" xml:space="preserve">
+    <value>txtAntiNmP</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmP.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmP.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblAntiNmD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblAntiNmD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 60</value>
+  </data>
+  <data name="lblAntiNmD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblAntiNmD.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAntiNmD.Text" xml:space="preserve">
+    <value>항균제명(화면)</value>
+  </data>
+  <data name="lblAntiNmD.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmD.Name" xml:space="preserve">
+    <value>lblAntiNmD</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmD.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNmD.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="txtAntiNmD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtAntiNmD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 60</value>
+  </data>
+  <data name="txtAntiNmD.MaxLength" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="txtAntiNmD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
+  <data name="txtAntiNmD.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmD.Name" xml:space="preserve">
+    <value>txtAntiNmD</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmD.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNmD.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblAntiNm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblAntiNm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="lblAntiNm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblAntiNm.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAntiNm.Text" xml:space="preserve">
+    <value>항균제명</value>
+  </data>
+  <data name="lblAntiNm.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNm.Name" xml:space="preserve">
+    <value>lblAntiNm</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNm.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblAntiNm.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="txtAntiNm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtAntiNm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 16</value>
+  </data>
+  <data name="txtAntiNm.MaxLength" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="txtAntiNm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
+  <data name="txtAntiNm.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNm.Name" xml:space="preserve">
+    <value>txtAntiNm</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNm.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtAntiNm.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="txtWNCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtWNCd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtWNCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 134</value>
+  </data>
+  <data name="txtWNCd.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txtWNCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="txtWNCd.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;txtWNCd.Name" xml:space="preserve">
+    <value>txtWNCd</value>
+  </data>
+  <data name="&gt;&gt;txtWNCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtWNCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtWNCd.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblWNCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblWNCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 134</value>
+  </data>
+  <data name="lblWNCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblWNCd.TabIndex" type="System.Int32, mscorlib">
+    <value>126</value>
+  </data>
+  <data name="lblWNCd.Text" xml:space="preserve">
+    <value>WHONET코드</value>
+  </data>
+  <data name="lblWNCd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblWNCd.Name" xml:space="preserve">
+    <value>lblWNCd</value>
+  </data>
+  <data name="&gt;&gt;lblWNCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblWNCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblWNCd.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="txtIFCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="txtIFCd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtIFCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 112</value>
+  </data>
+  <data name="txtIFCd.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txtIFCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="txtIFCd.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;txtIFCd.Name" xml:space="preserve">
+    <value>txtIFCd</value>
+  </data>
+  <data name="&gt;&gt;txtIFCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtIFCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;txtIFCd.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="lblIFCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblIFCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 112</value>
+  </data>
+  <data name="lblIFCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblIFCd.TabIndex" type="System.Int32, mscorlib">
+    <value>127</value>
+  </data>
+  <data name="lblIFCd.Text" xml:space="preserve">
+    <value>IF코드</value>
+  </data>
+  <data name="lblIFCd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblIFCd.Name" xml:space="preserve">
+    <value>lblIFCd</value>
+  </data>
+  <data name="&gt;&gt;lblIFCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblIFCd.Parent" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;lblIFCd.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="grpCdInfo1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="grpCdInfo1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 63</value>
+  </data>
+  <data name="grpCdInfo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>764, 475</value>
+  </data>
+  <data name="grpCdInfo1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpCdInfo1.Text" xml:space="preserve">
+    <value>항균제정보</value>
+  </data>
+  <data name="&gt;&gt;grpCdInfo1.Name" xml:space="preserve">
+    <value>grpCdInfo1</value>
+  </data>
+  <data name="&gt;&gt;grpCdInfo1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpCdInfo1.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;grpCdInfo1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btnGetExcel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>579, 16</value>
+  </data>
+  <data name="btnGetExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 20</value>
+  </data>
+  <data name="btnGetExcel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnGetExcel.Text" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="btnGetExcel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnGetExcel.Name" xml:space="preserve">
+    <value>btnGetExcel</value>
+  </data>
+  <data name="&gt;&gt;btnGetExcel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnGetExcel.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;btnGetExcel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txtAntiCd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtAntiCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 16</value>
+  </data>
+  <data name="txtAntiCd.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txtAntiCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 21</value>
+  </data>
+  <data name="txtAntiCd.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtAntiCd.Name" xml:space="preserve">
+    <value>txtAntiCd</value>
+  </data>
+  <data name="&gt;&gt;txtAntiCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtAntiCd.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;txtAntiCd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblAntiCd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="lblAntiCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblAntiCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 16</value>
+  </data>
+  <data name="lblAntiCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 21</value>
+  </data>
+  <data name="lblAntiCd.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblAntiCd.Text" xml:space="preserve">
+    <value>항균제코드</value>
+  </data>
+  <data name="lblAntiCd.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblAntiCd.Name" xml:space="preserve">
+    <value>lblAntiCd</value>
+  </data>
+  <data name="&gt;&gt;lblAntiCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAntiCd.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;lblAntiCd.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnUE.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnUE.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnUE.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="btnUE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>686, 12</value>
+  </data>
+  <data name="btnUE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 27</value>
+  </data>
+  <data name="btnUE.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnUE.Text" xml:space="preserve">
+    <value>사용종료</value>
+  </data>
+  <data name="&gt;&gt;btnUE.Name" xml:space="preserve">
+    <value>btnUE</value>
+  </data>
+  <data name="&gt;&gt;btnUE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUE.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;btnUE.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="dtpUSTime.CustomFormat" xml:space="preserve">
+    <value>HH:mm:ss</value>
+  </data>
+  <data name="dtpUSTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 15</value>
+  </data>
+  <data name="dtpUSTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 21</value>
+  </data>
+  <data name="dtpUSTime.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dtpUSTime.Name" xml:space="preserve">
+    <value>dtpUSTime</value>
+  </data>
+  <data name="&gt;&gt;dtpUSTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpUSTime.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;dtpUSTime.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtUSDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="txtUSDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 15</value>
+  </data>
+  <data name="txtUSDay.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="txtUSDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 21</value>
+  </data>
+  <data name="txtUSDay.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtUSDay.Name" xml:space="preserve">
+    <value>txtUSDay</value>
+  </data>
+  <data name="&gt;&gt;txtUSDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtUSDay.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;txtUSDay.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dtpUSDay.CustomFormat" xml:space="preserve">
+    <value>yyyy-MM-dd</value>
+  </data>
+  <data name="dtpUSDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 15</value>
+  </data>
+  <data name="dtpUSDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 21</value>
+  </data>
+  <data name="dtpUSDay.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dtpUSDay.Name" xml:space="preserve">
+    <value>dtpUSDay</value>
+  </data>
+  <data name="&gt;&gt;dtpUSDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpUSDay.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;dtpUSDay.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblUSDayTime.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="lblUSDayTime.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt, style=Bold</value>
+  </data>
+  <data name="lblUSDayTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 15</value>
+  </data>
+  <data name="lblUSDayTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="lblUSDayTime.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblUSDayTime.Text" xml:space="preserve">
+    <value>시작일시</value>
+  </data>
+  <data name="lblUSDayTime.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUSDayTime.Name" xml:space="preserve">
+    <value>lblUSDayTime</value>
+  </data>
+  <data name="&gt;&gt;lblUSDayTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUSDayTime.Parent" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;lblUSDayTime.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpCd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="grpCd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="grpCd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>764, 44</value>
+  </data>
+  <data name="grpCd.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpCd.Name" xml:space="preserve">
+    <value>grpCd</value>
+  </data>
+  <data name="&gt;&gt;grpCd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpCd.Parent" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;grpCd.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="tbcTpg.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="tbcTpg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 21</value>
+  </data>
+  <data name="tbcTpg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>780, 576</value>
+  </data>
+  <data name="tbcTpg.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbcTpg.Text" xml:space="preserve">
+    <value>항균제정보</value>
+  </data>
+  <data name="&gt;&gt;tbcTpg.Name" xml:space="preserve">
+    <value>tbcTpg</value>
+  </data>
+  <data name="&gt;&gt;tbcTpg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcTpg.Parent" xml:space="preserve">
+    <value>tclSpc</value>
+  </data>
+  <data name="&gt;&gt;tbcTpg.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tclSpc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tclSpc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>굴림체, 9pt</value>
+  </data>
+  <data name="tclSpc.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="tclSpc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tclSpc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>788, 601</value>
+  </data>
+  <data name="tclSpc.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tclSpc.Name" xml:space="preserve">
+    <value>tclSpc</value>
+  </data>
+  <data name="&gt;&gt;tclSpc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tclSpc.Parent" xml:space="preserve">
+    <value>pnlTop</value>
+  </data>
+  <data name="&gt;&gt;tclSpc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>792, 605</value>
+  </data>
+  <data name="pnlTop.TabIndex" type="System.Int32, mscorlib">
+    <value>117</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Name" xml:space="preserve">
+    <value>pnlTop</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlTop.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>[17] 항균제</value>
+  </data>
+  <data name="&gt;&gt;errpd.Name" xml:space="preserve">
+    <value>errpd</value>
+  </data>
+  <data name="&gt;&gt;errpd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FDF17</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

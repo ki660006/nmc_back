@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C358B5A9-ADE1-46C9-A575-29F8A9CF27B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>AxAckResult</RootNamespace>
+    <AssemblyName>AxAckResult</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisLogFile>bin\AxAckResult.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisLogFile>bin\AxAckResult.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\AxInterop.FPSpreadADO.dll</HintPath>
+    </Reference>
+    <Reference Include="cbuttonlib, Version=1.0.3675.34145, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MainExe\Main\bin\cbuttonlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\x86\Debug\Interop.FPSpreadADO.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MainExe\Main\bin\Oracle.DataAccess.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AxRstInput.designer.vb">
+      <DependentUpon>AxRstInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AxRstInput.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AxRstInput_m.Designer.vb">
+      <DependentUpon>AxRstInput_m.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AxRstInput_m.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AxRstPatInfo.Designer.vb">
+      <DependentUpon>AxRstPatInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AxRstPatInfo.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CGRSTINPUT.vb" />
+    <Compile Include="FDEBUG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGABNORMAL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGABNQUERY.Designer.vb">
+      <DependentUpon>FGABNQUERY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGABNQUERY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGCVT.Designer.vb">
+      <DependentUpon>FGCVT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGCVT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGDIFF01.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGDIFF02.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGDURG.Designer.vb">
+      <DependentUpon>FGDURG.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGDURG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGFINAL_CMT.Designer.vb">
+      <DependentUpon>FGFINAL_CMT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGFINAL_CMT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGFINAL_CMT2.Designer.vb">
+      <DependentUpon>FGFINAL_CMT2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGFINAL_CMT2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGHISTORY.designer.vb">
+      <DependentUpon>FGHISTORY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGHISTORY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGMODIFY.Designer.vb">
+      <DependentUpon>FGMODIFY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGMODIFY.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGMULTILINERST.Designer.vb">
+      <DependentUpon>FGMULTILINERST.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGMULTILINERST.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGRST_REF.Designer.vb">
+      <DependentUpon>FGRST_REF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGRST_REF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGSMSSEND.Designer.vb">
+      <DependentUpon>FGSMSSEND.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGSMSSEND.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGTAT.Designer.vb">
+      <DependentUpon>FGTAT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGTAT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGUNFITSPC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPOPUPCD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPOPUP_HOA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PATINFO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AxRstInput_poct.designer.vb">
+      <DependentUpon>AxRstInput_poct.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AxRstInput_poct.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AxRstInput_wl.designer.vb">
+      <DependentUpon>AxRstInput_wl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AxRstInput_wl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FPOPUP_CVR.Designer.vb">
+      <DependentUpon>FPOPUP_CVR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FPOPUP_CVR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AxRstInput.resx">
+      <DependentUpon>AxRstInput.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AxRstInput_m.resx">
+      <DependentUpon>AxRstInput_m.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AxRstPatInfo.resx">
+      <DependentUpon>AxRstPatInfo.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FDEBUG.resx">
+      <DependentUpon>FDEBUG.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGABNORMAL.resx">
+      <DependentUpon>FGABNORMAL.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGABNQUERY.resx">
+      <DependentUpon>FGABNQUERY.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGCVT.resx">
+      <DependentUpon>FGCVT.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGDIFF01.resx">
+      <DependentUpon>FGDIFF01.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGDIFF02.resx">
+      <DependentUpon>FGDIFF02.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGDURG.resx">
+      <DependentUpon>FGDURG.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGFINAL_CMT.resx">
+      <DependentUpon>FGFINAL_CMT.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGFINAL_CMT2.resx">
+      <DependentUpon>FGFINAL_CMT2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGHISTORY.resx">
+      <DependentUpon>FGHISTORY.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGMODIFY.resx">
+      <DependentUpon>FGMODIFY.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGMULTILINERST.resx">
+      <DependentUpon>FGMULTILINERST.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGRST_REF.resx">
+      <DependentUpon>FGRST_REF.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGSMSSEND.resx">
+      <DependentUpon>FGSMSSEND.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGTAT.resx">
+      <DependentUpon>FGTAT.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGUNFITSPC.resx">
+      <DependentUpon>FGUNFITSPC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPOPUPCD.resx">
+      <DependentUpon>FPOPUPCD.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPOPUP_HOA.resx">
+      <DependentUpon>FPOPUP_HOA.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PATINFO.resx">
+      <DependentUpon>PATINFO.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AxRstInput_poct.resx">
+      <DependentUpon>AxRstInput_poct.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AxRstInput_wl.resx">
+      <DependentUpon>AxRstInput_wl.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPOPUP_CVR.resx">
+      <DependentUpon>FPOPUP_CVR.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSDATASRC">
+      <Guid>{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AxAckCalcResult\AxAckCalcResult.vbproj">
+      <Project>{C5ACECA6-8DD6-4737-A2C6-069BED71CAEE}</Project>
+      <Name>AxAckCalcResult</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AxAckResultViewer\AxAckResultViewer.vbproj">
+      <Project>{FD1C9028-BC32-4C1D-A372-188200088010}</Project>
+      <Name>AxAckResultViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDHELP\CDHELP.vbproj">
+      <Project>{C862E58F-5AD2-4B8A-9EE2-F18597DEB520}</Project>
+      <Name>CDHELP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COMMON\COMMON.vbproj">
+      <Project>{540F18C0-1B89-4386-9DDB-AF22D046EED8}</Project>
+      <Name>COMMON</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBORA\DBORA.vbproj">
+      <Project>{087DB795-9EDE-4677-A142-22ECF244C93F}</Project>
+      <Name>DBORA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LISAPP\LISAPP.vbproj">
+      <Project>{4CE2B781-AE8D-4167-9C7C-B90F8A9AB6CB}</Project>
+      <Name>LISAPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OCSAPP\OCSAPP.vbproj">
+      <Project>{88852D08-78F2-4929-BAC1-5AA27D3C1DD0}</Project>
+      <Name>OCSAPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WEBSERVER\WEBSERVER.vbproj">
+      <Project>{015AEE8A-0628-44EB-9C65-3CDCA03A6D0E}</Project>
+      <Name>WEBSERVER</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

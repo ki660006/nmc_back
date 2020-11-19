@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A991A402-7386-4D02-A403-18E329A89D74}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>LISC</RootNamespace>
+    <AssemblyName>LISC</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>LISC.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>LISC.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>LISC.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\LISC.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>LISC.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\LISC.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\AxInterop.FPSpreadADO.dll</HintPath>
+    </Reference>
+    <Reference Include="cbuttonlib, Version=1.0.3675.34145, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ACK@LIS\MainExe\Main\bin\cbuttonlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\x86\Debug\Interop.FPSpreadADO.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CSF_C01.vb" />
+    <Compile Include="FGC01_S01.Designer.vb">
+      <DependentUpon>FGC01_S01.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC01_S01.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC01_S02.Designer.vb">
+      <DependentUpon>FGC01_S02.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC01_S02.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC31.designer.vb">
+      <DependentUpon>FGC31.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC31.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC31_S01.designer.vb">
+      <DependentUpon>FGC31_S01.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC31_S01.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC31_S02.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC31_S03.Designer.vb">
+      <DependentUpon>FGC31_S03.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC31_S03.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC31_S04.Designer.vb">
+      <DependentUpon>FGC31_S04.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC31_S04.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC32.designer.vb">
+      <DependentUpon>FGC32.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC32.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC33.designer.vb">
+      <DependentUpon>FGC33.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC33.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGC99.Designer.vb">
+      <DependentUpon>FGC99.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGC99.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FGC01_S01.resx">
+      <DependentUpon>FGC01_S01.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC01_S02.resx">
+      <DependentUpon>FGC01_S02.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC31.resx">
+      <DependentUpon>FGC31.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC31_S01.resx">
+      <DependentUpon>FGC31_S01.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC31_S02.resx">
+      <DependentUpon>FGC31_S02.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC31_S03.resx">
+      <DependentUpon>FGC31_S03.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC31_S04.resx">
+      <DependentUpon>FGC31_S04.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC32.resx">
+      <DependentUpon>FGC32.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC33.resx">
+      <DependentUpon>FGC33.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGC99.resx">
+      <DependentUpon>FGC99.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSDATASRC">
+      <Guid>{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonDLL\AxAckCollector\AxAckCollector.vbproj">
+      <Project>{C65718EF-9C4C-4736-A3B3-3ABFADEA7E11}</Project>
+      <Name>AxAckCollector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\AxAckPatientInfo\AxAckPatientInfo.vbproj">
+      <Project>{1C59FF9D-EC7A-47CE-95BA-FD6C4E50A8AC}</Project>
+      <Name>AxAckPatientInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\AxAckPrinterSetting\AxAckPrinterSetting.vbproj">
+      <Project>{F6AD16DA-0F99-4DB5-B36F-A6D84F0E1334}</Project>
+      <Name>AxAckPrinterSetting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\CDHELP\CDHELP.vbproj">
+      <Project>{C862E58F-5AD2-4B8A-9EE2-F18597DEB520}</Project>
+      <Name>CDHELP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\COMMON\COMMON.vbproj">
+      <Project>{540F18C0-1B89-4386-9DDB-AF22D046EED8}</Project>
+      <Name>COMMON</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\LISAPP\LISAPP.vbproj">
+      <Project>{4CE2B781-AE8D-4167-9C7C-B90F8A9AB6CB}</Project>
+      <Name>LISAPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\LISLOGIN\LISLOGIN.vbproj">
+      <Project>{EF4A1A49-4796-4430-8926-A5B3EDF83317}</Project>
+      <Name>LISLOGIN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\OCSAPP\OCSAPP.vbproj">
+      <Project>{88852D08-78F2-4929-BAC1-5AA27D3C1DD0}</Project>
+      <Name>OCSAPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\POPUPPRT\POPUPPRT.vbproj">
+      <Project>{12C24F25-281C-4311-B84D-0CE505C6DE31}</Project>
+      <Name>POPUPPRT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\PRTAPP\PRTAPP.vbproj">
+      <Project>{53A28F09-6AE3-44BE-B589-7BDA5A4A5132}</Project>
+      <Name>PRTAPP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\WEBSERVER\WEBSERVER.vbproj">
+      <Project>{015AEE8A-0628-44EB-9C65-3CDCA03A6D0E}</Project>
+      <Name>WEBSERVER</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LISR\LISR.vbproj">
+      <Project>{99C2FE0F-B15B-4A79-9AFE-8E347733D6F7}</Project>
+      <Name>LISR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LISV\LISV.vbproj">
+      <Project>{F7C0227C-1150-4E58-88C4-2A6F69A69569}</Project>
+      <Name>LISV</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

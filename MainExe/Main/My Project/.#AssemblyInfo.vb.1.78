@@ -1,0 +1,96 @@
+﻿Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' 어셈블리의 일반 정보는 다음 특성 집합을 통해 제어됩니다.
+' 어셈블리와 관련된 정보를 수정하려면
+' 이 특성 값을 변경하십시오.
+
+' 어셈블리 특성 값을 검토합니다.
+
+<Assembly: AssemblyTitle("Main")> 
+<Assembly: AssemblyDescription("MEDI@CK.NET LIS 프로그램")> 
+<Assembly: AssemblyCompany("ACK Co.,Ltd.")> 
+<Assembly: AssemblyProduct("MEDI@CK .Net v3")> 
+<Assembly: AssemblyCopyright("Copyrightⓒ 2010 ACK Co.,Ltd. All rights reserved")> 
+<Assembly: AssemblyTrademark("MEDI@CK")> 
+<Assembly: ComVisible(False)> 
+
+'이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
+<Assembly: Guid("56056c38-264b-4505-8df2-597ec2d38dee")> 
+'<Assembly: AssemblyFileVersion("1.0.0.0")> 
+
+' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
+'
+'      주 버전
+'      부 버전
+'      빌드 번호
+'      수정 버전
+'
+' 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 버전이 자동으로
+' 지정되도록 할 수 있습니다.s
+' <Assembly: AssemblyVersion("1.0.*")> 
+'Version 3.1.10.100 --> 2011/01/01 : 3.1.10.100으로 초기 셋팅
+'Version 3.1.10.259 --> 2013/02/19 : TAT조회(LISS,LISAPP),수술확정조회화면(LISB),보관검체(CDHELP),검체전달(LISJ)
+'Version 3.1.10.313 --> 2013/06/20 : DB 접속 변경
+'Version 3.1.10.318 --> 2013/06/26 : LISS, LISAPP, LIST, OCSAPP, LISB
+'Version 3.1.10.333 --> 2013/07/08 : LISS, LISAPP, LIST, ws_gs
+'Version 3.1.10.334 --> 2013/07/10 : ws_pb, LISAPP 
+'Version 3.1.10.335 --> 2013/07/11 : LISAPP(TAT 시간대비 통계 튜닝), common(미생물추가처방코드), LISS(환자/검체 상태조회)
+'Version 3.1.10.336 --> 2013/07/16 : AxRichTextBox(글씨 버그 수정), LISAPP(혈액은행 접수 취소 후 접수시 버그 수정), 미생물 추가처방(LISM, LISR, WEBSERVER)
+'Version 3.1.10.337 --> 2013/07/17 : LISAPP(부적합검체에서 진료과표시 수정)
+'Version 3.1.10.338 --> 2013/07/18 : LISAPP(혈액 입출고현황 조회, 미생물 퇴원환자 추가처방 못 하게 막음, 이미지결과 오류), LISM, LISR
+'Version 3.1.10.340 --> 2013/07/22 : LISAPP(TAT 조회, 재검내역 조회)
+'Version 3.1.10.341 --> 2013/07/25 : LISB 수혈보유혈액조회시 출고성분제제 표시변경
+'Version 3.1.10.342 --> 2013/07/29 : lism, WEbserver, common, lislogin, lisapp, axackresult
+'Version 3.1.10.343 --> 2013/07/30 : LISAPP, LISS
+'Version 3.1.10.344 --> 2013/07/30 : LISAPP(미생물 worklist 출력 순서)
+'Version 3.1.10.345 --> 2013/07/30 : LISAPP(미생물 worklist 출력 순서), 재배포
+'Version 3.1.10.347 --> 2013/08/02 : LISS, LISM, AxAckRichTextBox(메세지창, 프린터 오류), POPUPWIN(comment 스펠링)
+'Version 3.1.10.348 --> 2013/08/07 : LISS, LISF, LISJ (작업그룹 코드 선택 시 베터리 코드 가능하도록)
+'Version 3.1.10.349 --> 2013/08/07 : LISB(혈액입고 시 성분제제별 유효기간), LISAPP(미생물 worklist 출력 순서), WEbserver
+'Version 3.1.10.350 --> 2013/08/07 : ts_gs.xls, ws_GS.xls
+'Version 3.1.10.351 --> 2013/08/21 : LISR
+'Version 3.1.10.353 --> 2013/08/21 : LISAPP
+'Version 3.1.10.354 --> 2013/08/21 : AxAckResult, LISM, LISR, LISS, LISV
+'Version 3.1.10.355 --> 2013/08/27 : AxAckResult
+'Version 3.1.10.336 --> 2013/09/02 : 유저 비밀번호 병원 정책 반영(LISLOGIN), 미생물 상태값(LISAPP), 특이결과 출력 폰트수정(LISS)
+'Version 3.1.10.359 --> 2013/09/09 : Alert Rule 버그 수정(LISF), COMMON
+'Version 3.1.10.361 --> 2013/09/11 : A/S 접수 및 현황 화면추가
+'Version 3.1.10.362 --> 2013/10/29 : 특수보고소견관리 삭제오류 수정(lisapp),진단명가져오는 쿼리 수정(ocsapp)
+'Version 3.1.10.363 --> 2013/11/05 : 혈액 보관검체관리 오류수정, 가출고 차수별 표시수정 (LISB),개발서버 ip변경(lislogin)
+'Version 3.1.10.364 --> 2013/11/07 : 검체별환자리스트 부서명출력수정 (lisapp)
+'Version 3.1.10.365 --> 2013/11/11 : 혈액은행및 결과입력시 회색칸 결과입력 막음 (AxAckResult)보관검체 리스트 오류수정(lisapp)
+'Version 3.1.10.366 --> 2013/11/18 : 결과입력시 줄바꿈 안되는 오류 수정 (AxAckResult)
+'Version 3.1.10.367 --> 2013/11/27 : 보관검체관리(LISB),혈액이력조회(LISAPP),바코드출력'&amp;'표기수정(PRTAPP)
+'Version 3.1.10.368 --> 2013/12/05 : 환자이름조회 오류 수정(LISR),미생물통계 접수일자통계조건 수정(LIST,LISAPP)
+'Version 3.1.10.369 --> 2013/12/10 : 미생물통계 화면 라디오버튼 수정(LIST)
+'Version 3.1.10.370 --> 2013/12/20 : 외부의뢰 이미지 결과전송 방법수정(LISR) 
+'Version 3.1.10.371 --> 2014/01/07 : 이미지전송확인기능 추가, 이미지 ais 연동 로직수정(LISR,LISAPP,AxRichtextbox),EMR에서 검사정보기능 추가(CDHELP)
+'Version 3.1.10.372 --> 2014/01/14 : 이미지전송확인기능 추가, 이미지 ais 연동 버그픽스 (LISR,AxRichtextbox)
+'Version 3.1.10.373 --> 2014/02/09 : 누적결과 조회 오류때문에 임시로 막음(CGLISAPP_V)
+'Version 3.1.10.374 --> 2014/02/13 : 누적결과 조회 쿼리수정(CGLISAPP_V), 세부검사 등록수정 (LISF), 통계 건수 오류수정(LIST)
+'Version 3.1.10.375 --> 2014/02/14 : 세부검사 등록수정 (LISF)
+'Version 3.1.10.376 --> 2014/02/13 : 누적결과 조회 재검표시(CGLISAPP_V, LISV).미생물i/f 구조체 rstdt 추가(common)
+'Version 3.1.10.378 --> 2014/04/23 : 종합검증 처방발생수정 , 세포면역 시트 추가(CGLISAPP_S, LISS,CGLISAPP_R,CGLISAPP_M,CGLISAPP_G,LIS_R)
+'Version 3.1.10.379 --> 2014/05/08 : 최종보고수정률 진료과오류픽스(LISAPP), 결과조회(일일보고서)출력시 진료과 오류(AxAckResultViewer) 
+'Version 3.1.10.381 --> 2014/05/14 : 종합검증 처방발생 수정 배포(LISAPP) 
+'Version 3.1.10.382 --> 2014/05/19 : 미생물 통계수정 (LISAPP), 혈액은행 폐기율 엑셀 수정 (LISB)
+'Version 3.1.10.383 --> 2014/05/21 : 혈액은행 폐기율 통계임시수정lb043m_temp (LISAPP), 혈액은행 입출고현황통계 수정
+'Version 3.1.10.384 --> 2014/05/22 : 혈액은행 폐기율 통계오류수정 (LISAPP)
+'Version 3.1.10.385 --> 2014/05/26 : 워크리스트 조회 오류 수정(LISAPP, LISS)
+'Version 3.1.10.386 --> 2014/05/27 : 종합검증 자동 연동프로그램 쿼리 오류 수정 (popupwin)
+'Version 3.1.10.387 --> 2014/05/27 : Alert Rule 수정 쿼리 오류 수정 (LISAPP)
+'Version 3.1.10.388 --> 2014/07/08 : TAT관리 (LIST) , 바코드재출력 (LISJ) , 검체별감염정보(AxAckResult)
+'Version 3.1.10.389 --> 2014/07/08 : 미생물 분야별 결과저장 및 보고 검사분야별 조회 쿼리 수정.(LISAPP)
+'Version 3.1.10.390 --> 2014/07/10 : SMS 전송 발신자 번호 표시 수정. 
+'Version 3.1.10.392 --> 2014/07/11 : 미생물 분야별 결과저장 및 보고 검사분야별 조회 쿼리 수정.(LISAPP)
+'Version 3.1.10.392 --> 2014/07/11 : 누적결과조회 신생아표수정(LISAPP, LISV)
+'Version 3.1.10.394 --> 2014/07/31 : 바코드 SATO 감염정보표시 수정
+'Version 3.1.10.396 --> 2014/08/05 : 미생물 work list 출력 오류 수정(LISS)
+'Version 3.1.10.398 --> 2014/08/28 : 바코드 루칸/세우 감염정보표시 수정
+'Version 3.1.10.400 --> 2014/09/18 : 종합검증처방의 , 누적검사 특수결과표시, 세포면역 워크시트, 채혈특이사항오류수정
+'Version 3.1.10.401 --> 2014/09/22 : 특수혈액 워크시트 출력물수정, 병동조회오류 수정
+'Version 3.1.10.403 --> 2014/10/06 : 질병관리본부 혈액재고화면 (LISAPP, LISB , MAIN)
+'Version 3.1.10.405 --> 2014/10/10 : 감염정보 바코트 폰트변경
+<Assembly: AssemblyVersion("3.1.10.406")> 
