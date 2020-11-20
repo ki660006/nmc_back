@@ -830,6 +830,7 @@ Partial Class FGB06
         Me.CButton1.Text = "수혈처방조회"
         Me.CButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.CButton1.TextMargin = New System.Windows.Forms.Padding(0)
+        Me.CButton1.Visible = False
         '
         'btnOrdbld
         '

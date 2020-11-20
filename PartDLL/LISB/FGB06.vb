@@ -1633,8 +1633,8 @@ Public Class FGB06
     End Sub
 
     Private Sub btnOrdbld_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOrdbld.Click
-        Dim obj As New FGB06_S01
-        'Dim obj As New FGB06_S02
+        'Dim obj As New FGB06_S01
+        Dim obj As New FGB06_S02
         obj.Show()
     End Sub
 
