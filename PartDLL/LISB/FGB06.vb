@@ -1638,8 +1638,4 @@ Public Class FGB06
         obj.Show()
     End Sub
 
-    Private Sub CButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CButton1.Click
-        Dim obj As New FGB06_S02
-        obj.Show()
-    End Sub
 End Class
