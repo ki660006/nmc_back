@@ -39,5 +39,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.336 --> 2018/08/21 : 응급바코드 임시배포
 'Version 3.1.10.337 --> 2019/04/25 : 환자 혈액형 여부 바코드 표시
 'Version 3.1.10.338 --> 2020/08/04 : 세포면역 배지바코드 출력 추가
+'Version 3.1.10.339 --> 2020/11/23 : 바코드 재출력시 자체응급 R표시
 
-<Assembly: AssemblyVersion("3.1.10.338")> 
+<Assembly: AssemblyVersion("3.1.10.339")> 
