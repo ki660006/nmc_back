@@ -75,5 +75,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.368 --> 2020/05/25 : 수혈처방조회 혈액불출요청시간 추가
 'Version 3.1.10.369 --> 2020/08/04 : 수혈접수처방조회 쿼리 수정
 'Version 3.1.10.370 --> 2020/11/23 : 혈액불출요청시간 수정, 출고화면 혈액번호 조회시 등록번호 선입력 확인
+'Version 3.1.10.371 --> 2020/11/24 : 출고화면 등록번호 조회후 혈액번호로 조회시 환자 체크
 
-<Assembly: AssemblyVersion("3.1.10.370")> 
+<Assembly: AssemblyVersion("3.1.10.371")> 

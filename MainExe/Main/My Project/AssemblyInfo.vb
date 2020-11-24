@@ -222,5 +222,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.725 --> 2020/10/20 : AxAckRichTextBox
 'Version 3.1.10.726 --> 2020/10/22 : POPUPWIN
 'Version 3.1.10.727 --> 2020/11/23 : BCPRT01, PRTAPP, AxAckRichTextBox, LISAPP, OCSAPP, LISB, LISJ
+'Version 3.1.10.728 --> 2020/11/24 : AxAckPatienInfo, LISAPP, LISB
 
-<Assembly: AssemblyVersion("3.1.10.727")> 
+<Assembly: AssemblyVersion("3.1.10.728")> 

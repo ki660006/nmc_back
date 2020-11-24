@@ -612,11 +612,11 @@ Public Class FGB09
         If e.KeyCode = Keys.Enter Then
 
             '<<JJH 혈액번호로 조회시 등록번호 입력필수 추가 (사용자요청)
-            If Me.txtRegno.Text = "" Then
-                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "등록번호를 먼저 입력하시기 바랍니다.")
-                Me.txtRegno.Focus()
-                Return
-            End If
+            'If Me.txtRegno.Text = "" Then
+            '    CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "등록번호를 먼저 입력하시기 바랍니다.")
+            '    Me.txtRegno.Focus()
+            '    Return
+            'End If
 
             ls_Bldno = txtSBldno.Text
 
@@ -632,6 +632,17 @@ Public Class FGB09
             End If
 
             Me.txtSBldno.Text = ls_Bldno
+
+            '// JJH 환자의 가출고혈액 체크
+            If Me.AxTnsPatinfo1.Regno() <> "" Then
+                If CGDA_BT.Bld_Bfout_Chk(ls_Bldno, Me.AxTnsPatinfo1.Regno()) <> "Y" Then
+                    If CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "다른 환자의 혈액입니다 그래도 진행하시겠습니까?") = False Then
+                        Me.txtSBldno.Focus()
+                        Me.txtSBldno.SelectAll()
+                        Return
+                    End If
+                End If
+            End If
 
             btnSearch_Click(Nothing, Nothing)
 
