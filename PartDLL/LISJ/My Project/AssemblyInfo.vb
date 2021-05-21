@@ -52,5 +52,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.350 --> 2020/02/27 : 특수보고서 코로나 결과값 접수취소,reject 진행시 lrs17m 데이터 삭제 추가
 'Version 3.1.10.351 --> 2020/06/23 : 채혈접수취소, 채혈취소, Reject할때 자체응급 삭제 추가
 'Version 3.1.10.352 --> 2020/06/30 : 위탁검사 녹십자 추가
+'Version 3.1.10.353 --> 2020/11/23 : 바코드 재출력시 자체응급 추가
 
-<Assembly: AssemblyVersion("3.1.10.352")> 
+<Assembly: AssemblyVersion("3.1.10.353")> 

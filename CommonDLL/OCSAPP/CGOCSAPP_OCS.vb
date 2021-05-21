@@ -1200,7 +1200,7 @@ Namespace OcsLink
                 sSql += "           FROM VW_ACK_OCS_ORD_INFO o LEFT OUTER JOIN EMR.MNRMDEEX c                                                                        "
                 sSql += "                                                   ON c.prcpdd = o.orddate                                                                  "
                 sSql += "                                                  AND c.instcd = '031'                                                                      "
-                sSql += "                                                  AND c.prcphistno = o.prcphistno                                                           "
+                sSql += "                                                  /*AND c.prcphistno = o.prcphistno*/                                                        "
                 sSql += "                                                  AND c.execprcpuniqno = o.ordseqno                                                         "
                 sSql += "                                                  AND c.prcpno = o.prcpno                                                                   "
                 sSql += "                , lf120m f"

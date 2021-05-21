@@ -39,9 +39,6 @@ Partial Class FGB06
         Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.dtpDate0 = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -92,7 +89,6 @@ Partial Class FGB06
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CButton1 = New CButtonLib.CButton()
         Me.btnOrdbld = New CButtonLib.CButton()
         Me.pnlSearchGbn.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -779,7 +775,6 @@ Partial Class FGB06
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.CButton1)
         Me.Panel1.Controls.Add(Me.btnOrdbld)
         Me.Panel1.Controls.Add(Me.btnSearch)
         Me.Panel1.Controls.Add(Me.btnExit)
@@ -791,54 +786,14 @@ Partial Class FGB06
         Me.Panel1.Size = New System.Drawing.Size(1183, 32)
         Me.Panel1.TabIndex = 204
         '
-        'CButton1
+        'btnOrdbld
         '
         DesignerRectTracker9.IsActive = False
         DesignerRectTracker9.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker9.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.CButton1.CenterPtTracker = DesignerRectTracker9
+        Me.btnOrdbld.CenterPtTracker = DesignerRectTracker9
         CBlendItems5.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
         CBlendItems5.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
-        Me.CButton1.ColorFillBlend = CBlendItems5
-        Me.CButton1.ColorFillSolid = System.Drawing.SystemColors.Control
-        Me.CButton1.Corners.All = CType(6, Short)
-        Me.CButton1.Corners.LowerLeft = CType(6, Short)
-        Me.CButton1.Corners.LowerRight = CType(6, Short)
-        Me.CButton1.Corners.UpperLeft = CType(6, Short)
-        Me.CButton1.Corners.UpperRight = CType(6, Short)
-        Me.CButton1.FillType = CButtonLib.CButton.eFillType.GradientLinear
-        Me.CButton1.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        Me.CButton1.FocalPoints.CenterPtX = 0.4672897!
-        Me.CButton1.FocalPoints.CenterPtY = 0.2!
-        Me.CButton1.FocalPoints.FocusPtX = 0.0!
-        Me.CButton1.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker10.IsActive = False
-        DesignerRectTracker10.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker10.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.CButton1.FocusPtTracker = DesignerRectTracker10
-        Me.CButton1.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.CButton1.ForeColor = System.Drawing.Color.White
-        Me.CButton1.Image = Nothing
-        Me.CButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.CButton1.ImageIndex = 0
-        Me.CButton1.ImageSize = New System.Drawing.Size(16, 16)
-        Me.CButton1.Location = New System.Drawing.Point(110, 3)
-        Me.CButton1.Name = "CButton1"
-        Me.CButton1.Shape = CButtonLib.CButton.eShape.Rectangle
-        Me.CButton1.SideImage = Nothing
-        Me.CButton1.SideImageSize = New System.Drawing.Size(48, 48)
-        Me.CButton1.Size = New System.Drawing.Size(107, 25)
-        Me.CButton1.TabIndex = 188
-        Me.CButton1.Text = "수혈처방조회"
-        Me.CButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
-        Me.CButton1.TextMargin = New System.Windows.Forms.Padding(0)
-        '
-        'btnOrdbld
-        '
-        DesignerRectTracker11.IsActive = False
-        DesignerRectTracker11.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker11.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnOrdbld.CenterPtTracker = DesignerRectTracker11
-        CBlendItems6.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems6.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
-        Me.btnOrdbld.ColorFillBlend = CBlendItems6
+        Me.btnOrdbld.ColorFillBlend = CBlendItems5
         Me.btnOrdbld.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnOrdbld.Corners.All = CType(6, Short)
         Me.btnOrdbld.Corners.LowerLeft = CType(6, Short)
@@ -851,9 +806,9 @@ Partial Class FGB06
         Me.btnOrdbld.FocalPoints.CenterPtY = 0.2!
         Me.btnOrdbld.FocalPoints.FocusPtX = 0.0!
         Me.btnOrdbld.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker12.IsActive = False
-        DesignerRectTracker12.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker12.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnOrdbld.FocusPtTracker = DesignerRectTracker12
+        DesignerRectTracker10.IsActive = False
+        DesignerRectTracker10.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker10.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnOrdbld.FocusPtTracker = DesignerRectTracker10
         Me.btnOrdbld.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnOrdbld.ForeColor = System.Drawing.Color.White
         Me.btnOrdbld.Image = Nothing
@@ -968,5 +923,4 @@ Partial Class FGB06
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents cboFilter As System.Windows.Forms.ComboBox
     Friend WithEvents btnOrdbld As CButtonLib.CButton
-    Friend WithEvents CButton1 As CButtonLib.CButton
 End Class

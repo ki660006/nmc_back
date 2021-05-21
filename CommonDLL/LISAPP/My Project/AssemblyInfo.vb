@@ -165,5 +165,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.504 --> 2020/08/05 : 미생물 Field, MTB, NTM 이전 결과에 따른 색표시 추가
 'Version 3.1.10.505 --> 2020/09/03 : 검사마스터 검체단위 추가
 'Version 3.1.10.506 --> 2020/09/24 : 재검내역조회에 이전결과 추가
+'Version 3.1.10.507 --> 2020/11/23 : 바코드 재출력시 자체응급 추가
+'Version 3.1.10.508 --> 2020/11/24 : 혈액-등록번호 체크 추가
 
-<Assembly: AssemblyVersion("3.1.10.506")> 
+<Assembly: AssemblyVersion("3.1.10.508")> 

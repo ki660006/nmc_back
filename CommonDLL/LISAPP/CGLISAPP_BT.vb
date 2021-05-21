@@ -5949,6 +5949,39 @@ Namespace APP_BT
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             End Try
         End Function
+
+        Public Shared Function Bld_Bfout_Chk(ByVal rsBldno As String, ByVal rsRegno As String) As String
+            ' 가출고 환자 체크
+            Dim sFn As String = "Public Shared Function Bld_Bfout_Chk(ByVal rsBldno As String, ByVal rsRegno As String) As String"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+            Dim dt As New DataTable
+
+            Try
+                sSql += " SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE '' END YN "
+                sSql += "   FROM LB030M A, LB043M B "
+                sSql += "  WHERE A.BLDNO = B.BLDNO "
+                sSql += "    AND A.TNSJUBSUNO = B.TNSJUBSUNO "
+                sSql += "    AND A.BLDNO = :BLDNO "
+                sSql += "    AND B.REGNO = :REGNO "
+
+                alParm.Add(New OracleParameter("BLDNO", OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
+                alParm.Add(New OracleParameter("REGNO", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
+
+                DbCommand()
+                dt = DbExecuteQuery(sSql, alParm)
+
+                If dt.Rows.Count > 0 Then
+                    Return dt.Rows(0).Item("YN").ToString
+                Else
+                    Return ""
+                End If
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+
 #End Region
 
 #Region " 혈액반납/폐기 "

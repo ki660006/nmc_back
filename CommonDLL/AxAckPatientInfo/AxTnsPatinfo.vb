@@ -17,6 +17,13 @@ Public Class AxTnsPatinfo
         End Get
     End Property
 
+    '//JJH
+    Public ReadOnly Property Regno() As String
+        Get
+            Return Me.lblRegno.Text
+        End Get
+    End Property
+
     Public ReadOnly Property Ab_Screen() As String
         Get
             With Me.spdPatInfo
