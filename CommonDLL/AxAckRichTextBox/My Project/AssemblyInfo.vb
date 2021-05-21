@@ -40,5 +40,6 @@ Imports System.Runtime.InteropServices
 'Version 4.3.10.347 --> 2018/02/27 : vs2010 upgarde
 'Version 4.3.10.348 --> 2019/02/27 : vs2010 upgarde
 'Version 4.3.10.349 --> 2020/10/20 : 특수보고서 출력시 하단에 페이지수 출력
+'Version 4.3.10.350 --> 2020/11/23 : 특수보고서 출력시 하단에 페이지수 출력 - 위치 재조정
 
-<Assembly: AssemblyVersion("4.3.10.349")> 
+<Assembly: AssemblyVersion("4.3.10.350")> 

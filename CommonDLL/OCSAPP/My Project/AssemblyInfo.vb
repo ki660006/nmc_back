@@ -48,5 +48,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.342 --> 2020/05/25 : 혈액종양 진단명일때 색표시
 'Version 3.1.10.343 --> 2020/06/02 : 혈액종양 진단명추가
 'Version 3.1.10.344 --> 2020/08/04 : 수혈접수처방조회 쿼리 수정, 혈액종양 진단 판정받은 환자일때 진단명 색표시
+'Version 3.1.10.345 --> 2020/11/23 : 수혈접수처방조회 혈액불출요청시간 수정
 
-<Assembly: AssemblyVersion("3.1.10.344")> 
+<Assembly: AssemblyVersion("3.1.10.345")> 

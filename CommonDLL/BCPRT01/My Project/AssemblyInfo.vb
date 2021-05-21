@@ -50,5 +50,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.349 --> 2019/08/20 : 바코드 혈액은행 채혈자 박스추가(sato, lukhan은 해야함)
 'Version 3.1.10.350 --> 2019/11/20 : 배포
 'Version 3.1.10.351 --> 2020/08/05 : LUKHAN >> 미채혈바코드, 검사분야 표시 수정
+'Version 3.1.10.352 --> 2020/11/23 : LUKHAN, SATO 자체응급 바코드 R표시, 크기조정2
 
-<Assembly: AssemblyVersion("3.1.10.351")> 
+<Assembly: AssemblyVersion("3.1.10.352")> 

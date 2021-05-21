@@ -1041,7 +1041,7 @@ Namespace APP_J
                 sSql += "       END status,"
                 sSql += "       f1.colorgbn,"
                 sSql += "       CASE WHEN f6.bccnt = 'B' THEN f6.bccnt ELSE '1' END bccnt"
-                sSql += "       , CASE WHEN nvl(j5.bcno, ' ') <> ' ' THEN 'Y' ELSE 'N' END eryn " '-- JJH 자체응급 추가
+                sSql += "       , CASE WHEN nvl(j5.bcno, ' ') <> ' ' THEN 'R' ELSE '' END eryn " '-- JJH 자체응급 추가
                 sSql += "  FROM lj010m j,  lj011m j1, lf060m f6,"
                 sSql += "       lf030m f3, lf040m f4, lf010m f1"
                 sSql += "       , lj015m j5 " '-- JJH 자체응급 추가

@@ -620,7 +620,7 @@ Namespace APP_BC
                         sSql += "       CASE WHEN f6.bccnt = 'B' THEN f6.bccnt ELSE '1' END bccnt"
                         'sSql += "       ,fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno "  '<< JJH 세포면역[H4] 작업번호 '
 
-                        sSql += "       ,(SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE '' END YN "
+                        sSql += "       ,(SELECT CASE WHEN COUNT(*) > 0 THEN 'R' ELSE '' END YN "
                         sSql += "           FROM LJ015M "
                         sSql += "          WHERE BCNO = j.bcno) ERPRTYN"
 
