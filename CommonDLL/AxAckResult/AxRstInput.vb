@@ -8,6 +8,7 @@ Imports COMMON.SVar
 Imports LISAPP.APP_BT
 
 Public Class AxRstInput
+    'test위해 삽입
 
     Private moForm As Windows.Forms.Form
     Private _a_dr As Object
