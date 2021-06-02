@@ -810,6 +810,13 @@ Namespace APP_S
                 'sSql += "       fn_ack_get_slip_dispseq(f6.partcd, f6.spccd) sort1,"
                 sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1,"
                 sSql += "       f6.dispseql sort2, fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt" '2018-11-30 처방일자(orddt) 추가
+
+                '20210201 jhs 보고자 보고일시 수정 추가 
+                 sSql += "      , fn_ack_get_usr_name(r.mwid) mwid "
+                sSql += "      , fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt"
+                sSql += "      , fn_ack_get_usr_name(r.fnid) fnid "
+                sSql += "      , fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt"
+                '--------------------------------------------------------------------
                 sSql += "  FROM lj010m j, " + sTableNm + " r, lf060m f6, lf030m f3"
                 sSql += " WHERE r.wkymd   = :wkymd"
                 sSql += "   AND r.wkgrpcd = :wgrpcd"
@@ -887,6 +894,12 @@ Namespace APP_S
                 'sSql += "       fn_ack_get_slip_dispseq(f6.partcd, f6.spccd, r.tkdt) sort1,"
                 sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1,"
                 sSql += "       f6.dispseql sort2, fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt" '2018-11-30 처방일자(orddt) 추가
+                '20210201 jhs 보고자 보고일시 수정 추가 
+                sSql += "      , fn_ack_get_usr_name(r.mwid) mwid "
+                sSql += "      , fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt"
+                sSql += "      , fn_ack_get_usr_name(r.fnid) fnid "
+                sSql += "      , fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt"
+                '--------------------------------------------------
                 sSql += "  FROM lj010m j, " + sTableNm + " r, lf060m f6, lf030m f3"
                 sSql += " WHERE r.tkdt >= :dates"             ' 2018-11-07 rstdt -> tkdt
                 sSql += "   AND r.tkdt <= :datee || '235959'" ' 2018-11-07 rstdt -> tkdt
@@ -1646,143 +1659,149 @@ Namespace APP_S
                 If rsQryGbn = "" Then
                     '결과단위 TAT
 
-                    sSql += "SELECT f6.partcd, r.bcno,"
-                    sSql += "       f6.testcd, j.regno, j.statgbn, j.iogbn, FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) deptcd, j.wardno,"
-                    sSql += "       j.patnm, j.sex || '/' || j.age sa,"
-                    sSql += "       fn_ack_get_dept_name(j.iogbn, j.deptcd) deptnm,"
-                    sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ws,"
-                    sSql += "       f6.tnmd, f6.spccd, f3.spcnmd,"
-                    sSql += "       fn_ack_date_str(j1.orgorddt, 'yyyy-mm-dd hh24:mi') orddt,"
-                    sSql += "       fn_ack_date_str(j1.colldt, 'yyyy-mm-dd hh24:mi') colldt,"
-                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,"
-                    sSql += "       fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt,"
-                    sSql += "       fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt,"
-                    sSql += "       fn_ack_date_diff(j1.orgorddt, j1.colldt, '1') t1,"
-                    sSql += "       fn_ack_date_diff(j1.colldt, r.tkdt, '1') t2,"
-                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '1') tat1,"
-                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat3,"
-                    sSql += "       fn_ack_date_diff(r.mwdt , r.fndt , '1') tat2,"
-                    sSql += "       fn_ack_date_diff(j1.orgorddt , r.fndt , '1') tot,"
+                    sSql += "SELECT f6.partcd, r.bcno," + vbCrLf
+                    sSql += "       f6.testcd, j.regno, j.statgbn, j.iogbn, FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) deptcd, j.wardno," + vbCrLf
+                    sSql += "       j.patnm, j.sex || '/' || j.age sa," + vbCrLf
+                    sSql += "       fn_ack_get_dept_name(j.iogbn, j.deptcd) deptnm," + vbCrLf
+                    sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ws," + vbCrLf
+                    sSql += "       f6.tnmd, f6.spccd, f3.spcnmd," + vbCrLf
+                    sSql += "       fn_ack_date_str(j1.orgorddt, 'yyyy-mm-dd hh24:mi') orddt," + vbCrLf
+                    sSql += "       fn_ack_date_str(j1.colldt, 'yyyy-mm-dd hh24:mi') colldt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt," + vbCrLf
+                    sSql += "       fn_ack_date_diff(j1.orgorddt, j1.colldt, '1') t1," + vbCrLf
+                    sSql += "       fn_ack_date_diff(j1.colldt, r.tkdt, '1') t2," + vbCrLf
+                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '1') tat1," + vbCrLf
+                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat3," + vbCrLf
+                    sSql += "       fn_ack_date_diff(r.mwdt , r.fndt , '1') tat2," + vbCrLf
+                    sSql += "       fn_ack_date_diff(j1.orgorddt , r.fndt , '1') tot," + vbCrLf
                     '<<< 20170511 TAT에서 소수점이 계산된 TAT는 오버타임으로 계산되서 소수점 버림 
-                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '3')) tat1_mi,"
-                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi,"
+                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '3')) tat1_mi," + vbCrLf
+                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi," + vbCrLf
                     '>>> 20170511 TAT에서 소수점이 계산된 TAT는 오버타임으로 계산되서 소수점 버림 
-                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi,"
-                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi,"
-                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyymmdd') tkdt_m, r.workno, f6.partcd || f6.slipcd slipcd, f2.dispseq sort_slip,"
-                    sSql += "       '[' || NVL(r51.cmtcd, '') || '] ' || r51.cmtcont cmtcont, f2.dispseq sort_slip, f6.dispseql sort_test,"
-                    sSql += "       fn_ack_get_usr_name(r.rstid) rstnm"
-                    sSql += "  FROM lf060m f6,"
-                    sSql += "       lj010m j, lj011m j1,"
-                    sSql += "       lf030m f3, lf021m f2,"
-                    sSql += "       ("
-                    sSql += "        SELECT bcno, tclscd, testcd, spccd, tkdt, wkdt, mwdt, fndt, NVL(fnid, mwid) rstid, wkymd || NVL(wkgrpcd, '') || NVL(wkno, '') workno"
-                    sSql += "          FROM lr010m"
-                    sSql += "         WHERE tkdt >= :dates"
-                    sSql += "           AND tkdt <= :datee || '235959'"
-                    sSql += "           AND (NVL(mwdt, ' ') <> ' ' OR NVL(fndt, ' ') <> ' ')"
-                    sSql += "         UNION ALL"
-                    sSql += "        SELECT bcno, tclscd, testcd, spccd, tkdt, wkdt, mwdt, fndt, NVL(fnid, mwid) rstid, wkymd || NVL(wkgrpcd, '') || NVL(wkno, '') workno"
-                    sSql += "          FROM lm010m"
-                    sSql += "         WHERE tkdt >= :dates"
-                    sSql += "           AND tkdt <= :datee || '235959'"
-                    sSql += "           AND (NVL(mwdt, ' ') <> ' ' OR NVL(fndt, ' ') <> ' ')"
-                    sSql += "       ) r,"
-                    sSql += "       lr051m r51"
-                    sSql += " WHERE f6.testcd  = r.testcd"
-                    sSql += "   AND f6.spccd   = r.spccd"
-                    sSql += "   AND f6.usdt   <= r.tkdt"
-                    sSql += "   AND f6.uedt   >  r.tkdt"
-                    sSql += "   AND f6.spccd   = f3.spccd"
-                    sSql += "   AND f3.usdt   <= r.tkdt"
-                    sSql += "   AND f3.uedt   >  r.tkdt"
-                    sSql += "   AND f6.partcd = f2.partcd"
-                    sSql += "   AND f6.slipcd = f2.slipcd"
-                    sSql += "   AND f2.usdt  <= r.tkdt"
-                    sSql += "   AND f2.uedt  >  r.tkdt"
-                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))"
-                    sSql += "   AND NVL(f6.tatyn, '0') = '1'"
+                    '20210202 JHS 휴일 tat 계산
+                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '1') tat1_mi_exp_holi," + vbCrLf
+                    '----------------------------------------------------
+                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi," + vbCrLf
+                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyymmdd') tkdt_m, r.workno, f6.partcd || f6.slipcd slipcd, f2.dispseq sort_slip," + vbCrLf
+                    sSql += "       '[' || NVL(r51.cmtcd, '') || '] ' || r51.cmtcont cmtcont, f2.dispseq sort_slip, f6.dispseql sort_test," + vbCrLf
+                    sSql += "       fn_ack_get_usr_name(r.rstid) rstnm" + vbCrLf
+                    sSql += "  FROM lf060m f6," + vbCrLf
+                    sSql += "       lj010m j, lj011m j1," + vbCrLf
+                    sSql += "       lf030m f3, lf021m f2," + vbCrLf
+                    sSql += "       (" + vbCrLf
+                    sSql += "        SELECT bcno, tclscd, testcd, spccd, tkdt, wkdt, mwdt, fndt, NVL(fnid, mwid) rstid, wkymd || NVL(wkgrpcd, '') || NVL(wkno, '') workno" + vbCrLf
+                    sSql += "          FROM lr010m" + vbCrLf
+                    sSql += "         WHERE tkdt >= :dates" + vbCrLf
+                    sSql += "           AND tkdt <= :datee || '235959'" + vbCrLf
+                    sSql += "           AND (NVL(mwdt, ' ') <> ' ' OR NVL(fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "         UNION ALL" + vbCrLf
+                    sSql += "        SELECT bcno, tclscd, testcd, spccd, tkdt, wkdt, mwdt, fndt, NVL(fnid, mwid) rstid, wkymd || NVL(wkgrpcd, '') || NVL(wkno, '') workno" + vbCrLf
+                    sSql += "          FROM lm010m" + vbCrLf
+                    sSql += "         WHERE tkdt >= :dates" + vbCrLf
+                    sSql += "           AND tkdt <= :datee || '235959'" + vbCrLf
+                    sSql += "           AND (NVL(mwdt, ' ') <> ' ' OR NVL(fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "       ) r," + vbCrLf
+                    sSql += "       lr051m r51" + vbCrLf
+                    sSql += " WHERE f6.testcd  = r.testcd" + vbCrLf
+                    sSql += "   AND f6.spccd   = r.spccd" + vbCrLf
+                    sSql += "   AND f6.usdt   <= r.tkdt" + vbCrLf
+                    sSql += "   AND f6.uedt   >  r.tkdt" + vbCrLf
+                    sSql += "   AND f6.spccd   = f3.spccd" + vbCrLf
+                    sSql += "   AND f3.usdt   <= r.tkdt" + vbCrLf
+                    sSql += "   AND f3.uedt   >  r.tkdt" + vbCrLf
+                    sSql += "   AND f6.partcd = f2.partcd" + vbCrLf
+                    sSql += "   AND f6.slipcd = f2.slipcd" + vbCrLf
+                    sSql += "   AND f2.usdt  <= r.tkdt" + vbCrLf
+                    sSql += "   AND f2.uedt  >  r.tkdt" + vbCrLf
+                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    sSql += "   AND NVL(f6.tatyn, '0') = '1'" + vbCrLf
                     If rsTestcd <> "" Then
-                        sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") "
+                        sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") " + vbCrLf
                     End If
-                    sSql += "   AND j.bcno    = j1.bcno"
-                    sSql += "   AND j1.bcno   = r.bcno"
-                    sSql += "   AND j1.tclscd = r.tclscd"
-                    sSql += "   AND r.bcno    = r51.bcno (+)"
-                    sSql += "   AND r.testcd  = r51.testcd (+)"
+                    sSql += "   AND j.bcno    = j1.bcno" + vbCrLf
+                    sSql += "   AND j1.bcno   = r.bcno" + vbCrLf
+                    sSql += "   AND j1.tclscd = r.tclscd" + vbCrLf
+                    sSql += "   AND r.bcno    = r51.bcno (+)" + vbCrLf
+                    sSql += "   AND r.testcd  = r51.testcd (+)" + vbCrLf
                 Else
                     '처방단위 TAT
                     sSql = ""
-                    sSql += "SELECT f6.partcd, r.bcno,"
-                    sSql += "       f6.testcd, j.regno, j.statgbn, j.iogbn, j.deptcd, j.wardno,"
-                    sSql += "       j.patnm, j.sex || '/' || j.age sa,"
-                    sSql += "       fn_ack_get_dept_abbr(j.iogbn, j.deptcd) deptnm,"
-                    sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, j.wardno || '/' || j.roomno ws,"
-                    sSql += "       f6.tnmd, f6.spccd, f3.spcnmd,"
-                    sSql += "       fn_ack_date_str(r.orgorddt, 'yyyy-mm-dd hh24:mi') orddt,"
-                    sSql += "       fn_ack_date_str(r.colldt, 'yyyy-mm-dd hh24:mi') colldt,"
-                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,"
-                    sSql += "       fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt,"
-                    sSql += "       fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt,"
-                    sSql += "       fn_ack_date_diff(r.orgorddt, r.colldt, '1') t1,"
-                    sSql += "       fn_ack_date_diff(r.colldt, r.tkdt, '1') t2,"
-                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '1') tat1,"
-                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat3,"
-                    sSql += "       fn_ack_date_diff(r.mwdt , r.fndt , '1') tat2,"
-                    sSql += "       fn_ack_date_diff(r.orgorddt , r.fndt , '1') tot,"
+                    sSql += "SELECT f6.partcd, r.bcno," + vbCrLf
+                    sSql += "       f6.testcd, j.regno, j.statgbn, j.iogbn, j.deptcd, j.wardno," + vbCrLf
+                    sSql += "       j.patnm, j.sex || '/' || j.age sa," + vbCrLf
+                    sSql += "       fn_ack_get_dept_abbr(j.iogbn, j.deptcd) deptnm," + vbCrLf
+                    sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, j.wardno || '/' || j.roomno ws," + vbCrLf
+                    sSql += "       f6.tnmd, f6.spccd, f3.spcnmd," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.orgorddt, 'yyyy-mm-dd hh24:mi') orddt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.colldt, 'yyyy-mm-dd hh24:mi') colldt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.mwdt, 'yyyy-mm-dd hh24:mi') mwdt," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.fndt, 'yyyy-mm-dd hh24:mi') fndt," + vbCrLf
+                    sSql += "       fn_ack_date_diff(r.orgorddt, r.colldt, '1') t1," + vbCrLf
+                    sSql += "       fn_ack_date_diff(r.colldt, r.tkdt, '1') t2," + vbCrLf
+                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '1') tat1," + vbCrLf
+                    sSql += "       fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat3," + vbCrLf
+                    sSql += "       fn_ack_date_diff(r.mwdt , r.fndt , '1') tat2," + vbCrLf
+                    sSql += "       fn_ack_date_diff(r.orgorddt , r.fndt , '1') tot," + vbCrLf
                     '<<< 20170511 TAT에서 소수점이 계산된 TAT는 오버타임으로 계산되서 소수점 버림 
-                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '3')) tat1_mi,"
-                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi,"
+                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.mwdt, '3')) tat1_mi," + vbCrLf
+                    sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi," + vbCrLf
                     '>>> 20170511
-                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi,"
-                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi,"
-                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyymmdd') tkdt_m, r.workno, f6.partcd || f6.slipcd slipcd,"
-                    sSql += "       '[' || r51.cmtcd || '] ' || r51.cmtcont cmtcont, f2.dispseq sort_slip, f6.dispseql sort_test,"
-                    sSql += "       fn_ack_get_usr_name(r.rstid) rstnm"
-                    sSql += "  FROM lf060m f6,"
-                    sSql += "       lj010m j,"
-                    sSql += "       lf030m f3, lf021m f2,"
-                    sSql += "       ("
-                    sSql += "        SELECT j0.bcno, j1.tclscd, j1.spccd, MIN(j1.orgorddt) orgorddt, MAX(j1.colldt) colldt, MIN(r.tkdt) tkdt, MIN(wkdt) wkdt, MAX(r.mwdt) mwdt, MAX(r.fndt) fndt, MAX(NVL(r.fnid, r.mwid)) rstid, '' workno"
-                    sSql += "          FROM lj010m j0, lj011m j1, lr010m r"
-                    sSql += "         WHERE r.tkdt   >= :dates"
-                    sSql += "           AND r.tkdt   <= :datee || '235959'"
-                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')"
-                    sSql += "           AND j1.bcno   = r.bcno"
-                    sSql += "           AND j1.tclscd = r.tclscd"
-                    sSql += "           AND j0.bcno   = j1.bcno"
-                    sSql += "         GROUP BY j0.bcno, j1.tclscd, j1.spccd"
-                    sSql += "         UNION ALL"
-                    sSql += "        SELECT j0.bcno, j1.tclscd, j1.spccd, MIN(j1.orgorddt) orgorddt, MAX(j1.colldt) colldt, MIN(r.tkdt) tkdt, MIN(wkdt) wkdt, MAX(r.mwdt) mwdt, MAX(r.fndt) fndt, MAX(NVL(r.fnid, r.mwid)) rstid, '' workno"
-                    sSql += "          FROM lj010m j0, lj011m j1, lM010m r"
-                    sSql += "         WHERE r.tkdt   >= :dates"
-                    sSql += "           AND r.tkdt   <= :datee || '235959'"
-                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')"
-                    sSql += "           AND j1.bcno   = r.bcno"
-                    sSql += "           AND j1.tclscd = r.tclscd"
-                    sSql += "           AND j0.bcno   = j1.bcno"
-                    sSql += "         GROUP BY j0.bcno, j1.tclscd, j1.spccd"
-                    sSql += "       ) r,"
-                    sSql += "       lr051m r51"
-                    sSql += " WHERE f6.testcd = r.tclscd"
-                    sSql += "   AND f6.spccd  = r.spccd"
-                    sSql += "   AND f6.usdt  <= r.tkdt"
-                    sSql += "   AND f6.uedt  >  r.tkdt"
-                    sSql += "   AND f6.spccd  = f3.spccd"
-                    sSql += "   AND f3.usdt  <= r.tkdt "
-                    sSql += "   AND f3.uedt  >  r.tkdt"
-                    sSql += "   AND f6.partcd = f2.partcd"
-                    sSql += "   AND f6.slipcd = f2.slipcd"
-                    sSql += "   AND f2.usdt  <= r.tkdt"
-                    sSql += "   AND f2.uedt  >  r.tkdt"
-                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))"
-                    sSql += "   AND NVL(f6.tatyn, '0') = '1'"
+                    '20210202 JHS 휴일 tat 계산
+                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat1_mi_exp_holi," + vbCrLf
+                    '----------------------------------------------------
+                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi," + vbCrLf
+                    sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi," + vbCrLf
+                    sSql += "       fn_ack_date_str(r.tkdt, 'yyyymmdd') tkdt_m, r.workno, f6.partcd || f6.slipcd slipcd," + vbCrLf
+                    sSql += "       '[' || r51.cmtcd || '] ' || r51.cmtcont cmtcont, f2.dispseq sort_slip, f6.dispseql sort_test," + vbCrLf
+                    sSql += "       fn_ack_get_usr_name(r.rstid) rstnm" + vbCrLf
+                    sSql += "  FROM lf060m f6," + vbCrLf
+                    sSql += "       lj010m j," + vbCrLf
+                    sSql += "       lf030m f3, lf021m f2," + vbCrLf
+                    sSql += "       (" + vbCrLf
+                    sSql += "        SELECT j0.bcno, j1.tclscd, j1.spccd, MIN(j1.orgorddt) orgorddt, MAX(j1.colldt) colldt, MIN(r.tkdt) tkdt, MIN(wkdt) wkdt, MAX(r.mwdt) mwdt, MAX(r.fndt) fndt, MAX(NVL(r.fnid, r.mwid)) rstid, '' workno" + vbCrLf
+                    sSql += "          FROM lj010m j0, lj011m j1, lr010m r" + vbCrLf
+                    sSql += "         WHERE r.tkdt   >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt   <= :datee || '235959'" + vbCrLf
+                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "           AND j1.bcno   = r.bcno" + vbCrLf
+                    sSql += "           AND j1.tclscd = r.tclscd" + vbCrLf
+                    sSql += "           AND j0.bcno   = j1.bcno" + vbCrLf
+                    sSql += "         GROUP BY j0.bcno, j1.tclscd, j1.spccd" + vbCrLf
+                    sSql += "         UNION ALL" + vbCrLf
+                    sSql += "        SELECT j0.bcno, j1.tclscd, j1.spccd, MIN(j1.orgorddt) orgorddt, MAX(j1.colldt) colldt, MIN(r.tkdt) tkdt, MIN(wkdt) wkdt, MAX(r.mwdt) mwdt, MAX(r.fndt) fndt, MAX(NVL(r.fnid, r.mwid)) rstid, '' workno" + vbCrLf
+                    sSql += "          FROM lj010m j0, lj011m j1, lM010m r" + vbCrLf
+                    sSql += "         WHERE r.tkdt   >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt   <= :datee || '235959'" + vbCrLf
+                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "           AND j1.bcno   = r.bcno" + vbCrLf
+                    sSql += "           AND j1.tclscd = r.tclscd" + vbCrLf
+                    sSql += "           AND j0.bcno   = j1.bcno" + vbCrLf
+                    sSql += "         GROUP BY j0.bcno, j1.tclscd, j1.spccd" + vbCrLf
+                    sSql += "       ) r," + vbCrLf
+                    sSql += "       lr051m r51" + vbCrLf
+                    sSql += " WHERE f6.testcd = r.tclscd" + vbCrLf
+                    sSql += "   AND f6.spccd  = r.spccd" + vbCrLf
+                    sSql += "   AND f6.usdt  <= r.tkdt" + vbCrLf
+                    sSql += "   AND f6.uedt  >  r.tkdt" + vbCrLf
+                    sSql += "   AND f6.spccd  = f3.spccd" + vbCrLf
+                    sSql += "   AND f3.usdt  <= r.tkdt " + vbCrLf
+                    sSql += "   AND f3.uedt  >  r.tkdt" + vbCrLf
+                    sSql += "   AND f6.partcd = f2.partcd" + vbCrLf
+                    sSql += "   AND f6.slipcd = f2.slipcd" + vbCrLf
+                    sSql += "   AND f2.usdt  <= r.tkdt" + vbCrLf
+                    sSql += "   AND f2.uedt  >  r.tkdt" + vbCrLf
+                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    sSql += "   AND NVL(f6.tatyn, '0') = '1'" + vbCrLf
                     If rsTestcd <> "" Then
-                        sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") "
+                        sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") " + vbCrLf
                     End If
-                    sSql += "   AND j.bcno      = r.bcno"
-                    sSql += "   AND r.bcno      = r51.bcno (+) "
-                    sSql += "   AND r.tclscd    = r51.testcd (+)"
+                    sSql += "   AND j.bcno      = r.bcno" + vbCrLf
+                    sSql += "   AND r.bcno      = r51.bcno (+) " + vbCrLf
+                    sSql += "   AND r.tclscd    = r51.testcd (+)" + vbCrLf
                 End If
 
                 al.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
@@ -1792,31 +1811,31 @@ Namespace APP_S
                 al.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
                 If rsRegNo <> "" Then
-                    sSql += "   AND j.regno = :regno"
+                    sSql += "   AND j.regno = :regno" + vbCrLf
                     al.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegNo))
                 End If
 
                 If rsEmerYN = "Y" Then
-                    sSql += "   AND NVL(j.statgbn, ' ') <> ' '"
+                    sSql += "   AND NVL(j.statgbn, ' ') <> ' '" + vbCrLf
                 ElseIf rsEmerYN = "N" Then
-                    sSql += "   AND NVL(j.statgbn, ' ') = ' '"
+                    sSql += "   AND NVL(j.statgbn, ' ') = ' '" + vbCrLf
                 End If
                 '<<< 20170511 TAT에서 소수점이 계산된 TAT는 오버타임으로 계산되서 소수점 버림 
                 If rbOverTime Then
-                    sSql += "   AND (trunc(fn_ack_date_diff(j1.tkdt, r.mwdt, '3')) > CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END OR"
-                    sSql += "        trunc(fn_ack_date_diff(j1.tkdt, r.fndt, '3')) > CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END"
+                    sSql += "   AND (trunc(fn_ack_date_diff(j1.tkdt, r.mwdt, '3')) > CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END OR" + vbCrLf
+                    sSql += "        trunc(fn_ack_date_diff(j1.tkdt, r.fndt, '3')) > CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END" + vbCrLf
                     sSql += "       )"
                 End If
 
                 If rsSlipCd <> "" Then
-                    sSql += "   AND f6.partcd = :partcd"
-                    sSql += "   AND f6.slipcd = :slipcd"
+                    sSql += "   AND f6.partcd = :partcd" + vbCrLf
+                    sSql += "   AND f6.slipcd = :slipcd" + vbCrLf
                     al.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(0, 1)))
                     al.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(1, 1)))
                 End If
 
                 If rschkTATCont Then
-                    sSql += "   AND r51.cmtcont is not null"
+                    sSql += "   AND r51.cmtcont is not null" + vbCrLf
                 End If
 
                 DbCommand()
@@ -3723,62 +3742,62 @@ Namespace APP_S
                 If rbMicroBioYn Then sTableNm = "lm010m"
 
                 sSql = ""
-                sSql += "SELECT DISTINCT"
-                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm,"
-                sSql += "       j.sex || '/'|| j.age sexage,"
-                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno,"
-                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm,"
-                sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno)  ELSE '' END deptinfo,"
-                sSql += "       f3.spcnmp, f3.spcnmd, fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
-                sSql += "       j.orddt," '20140128 정선영 추가, 처방일(의뢰일자) 추가
-                sSql += "       r.testcd, f6.tnmd, f6.tnmp, fn_ack_get_pat_befviewrst(r.bcno, r.testcd, r.spccd) bfviewrst,"
-                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)"
-                sSql += "          FROM lj011m ff"
-                sSql += "         WHERE bcno    = j.bcno"
-                sSql += "           AND spcflg IN ('1', '2', '3', '4')"
-                sSql += "           AND NVL(doctorrmk, ' ') <> ' '"
-                sSql += "       ) doctorrmk,"
-                sSql += "       j3.diagnm, NULL wlseq, r.spccd"
-                sSql += "  FROM " + sTableNm + " r, lf060m f6, lf030m f3, lj010m j, lj013m j3"
-                sSql += " WHERE r.tkdt >= :dates"
-                sSql += "   AND r.tkdt <= :datee || '5959'"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm," + vbCrLf
+                sSql += "       j.sex || '/'|| j.age sexage," + vbCrLf
+                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno," + vbCrLf
+                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm," + vbCrLf
+                sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno)  ELSE '' END deptinfo," + vbCrLf
+                sSql += "       f3.spcnmp, f3.spcnmd, fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt," + vbCrLf
+                sSql += "       j.orddt," + vbCrLf '20140128 정선영 추가, 처방일(의뢰일자) 추가
+                sSql += "       r.testcd, f6.tnmd, f6.tnmp, fn_ack_get_pat_befviewrst(r.bcno, r.testcd, r.spccd) bfviewrst," + vbCrLf
+                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)" + vbCrLf
+                sSql += "          FROM lj011m ff" + vbCrLf
+                sSql += "         WHERE bcno    = j.bcno" + vbCrLf
+                sSql += "           AND spcflg IN ('1', '2', '3', '4')" + vbCrLf
+                sSql += "           AND NVL(doctorrmk, ' ') <> ' '" + vbCrLf
+                sSql += "       ) doctorrmk," + vbCrLf
+                sSql += "       j3.diagnm, NULL wlseq, r.spccd" + vbCrLf
+                sSql += "  FROM " + sTableNm + " r, lf060m f6, lf030m f3, lj010m j, lj013m j3" + vbCrLf
+                sSql += " WHERE r.tkdt >= :dates" + vbCrLf
+                sSql += "   AND r.tkdt <= :datee || '5959'" + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsTkDtS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtS))
                 alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
 
                 If rsSpcCds <> "" Then
-                    sSql += "   AND j.spccd " + IIf(rbSpcSelect, " IN ", " NOT IN ").ToString + "('" + rsSpcCds.Replace(",", "','") + "')"
+                    sSql += "   AND j.spccd " + IIf(rbSpcSelect, " IN ", " NOT IN ").ToString + "('" + rsSpcCds.Replace(",", "','") + "')" + vbCrLf
                 End If
 
                 If rsTestCds <> "" Then
-                    sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')"
+                    sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')" + vbCrLf
                 ElseIf rsTGrpCd <> "" Then
-                    sSql += "   AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)"
+                    sSql += "   AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)" + vbCrLf
 
                     alParm.Add(New OracleParameter("tgrpcd", OracleDbType.Varchar2, rsTGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTGrpCd))
                 ElseIf rsPartSlip <> "" Then
-                    sSql += "   AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd) "
+                    sSql += "   AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd) " + vbCrLf
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(0, 1)))
                     alParm.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(1, 1)))
                 End If
 
                 If rsBcNo <> "" Then
-                    sSql += "   AND j.bcno = :bcno"
+                    sSql += "   AND j.bcno = :bcno" + vbCrLf
                     alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
                 End If
 
-                sSql += "   AND NVL(r.wkymd, ' ') <> ' '"
-                sSql += "   AND j.bcno   = r.bcno"
-                sSql += "   AND r.testcd = f6.testcd"
-                sSql += "   AND r.spccd  = f6.spccd"
-                sSql += "   AND f6.usdt <= r.tkdt"
-                sSql += "   AND f6.uedt >  r.tkdt"
-                sSql += "   AND r.spccd  = f3.spccd"
-                sSql += "   AND f3.usdt <= r.tkdt"
-                sSql += "   AND f3.uedt >  r.tkdt"
-                sSql += "   AND ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))"
-                sSql += "   AND j.bcno  = j3.bcno (+)"
+                sSql += "   AND NVL(r.wkymd, ' ') <> ' '" + vbCrLf
+                sSql += "   AND j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND r.testcd = f6.testcd" + vbCrLf
+                sSql += "   AND r.spccd  = f6.spccd" + vbCrLf
+                sSql += "   AND f6.usdt <= r.tkdt" + vbCrLf
+                sSql += "   AND f6.uedt >  r.tkdt" + vbCrLf
+                sSql += "   AND r.spccd  = f3.spccd" + vbCrLf
+                sSql += "   AND f3.usdt <= r.tkdt" + vbCrLf
+                sSql += "   AND f3.uedt >  r.tkdt" + vbCrLf
+                sSql += "   AND ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
+                sSql += "   AND j.bcno  = j3.bcno (+)" + vbCrLf
 
                 Dim sWhere As String = ""
 
@@ -3789,12 +3808,12 @@ Namespace APP_S
 
                 sSql += "   AND (" + sWhere + ")"
 
-                If rbMbtType Then sSql += "   AND NVL(f6.mbttype, '0') IN ('2', '3')"
+                If rbMbtType Then sSql += "   AND NVL(f6.mbttype, '0') IN ('2', '3')" + vbCrLf
 
                 If rbMicroBioYn Then
-                    sSql += " ORDER BY workno, tkdt, bcno"
+                    sSql += " ORDER BY workno, tkdt, bcno" + vbCrLf
                 Else
-                    sSql += " ORDER BY tkdt, bcno"
+                    sSql += " ORDER BY tkdt, bcno" + vbCrLf
                 End If
 
                 DbCommand()
@@ -3872,6 +3891,117 @@ Namespace APP_S
 
             End Try
         End Function
+        '20210414 jhs 체액검사정보 가져오기
+        Public Shared Function fnGet_WorkList_BFtest(ByVal rsBcNo As String, Optional ByVal rsTestCd As String = "", Optional ByVal rsSpccd As String = "") As DataTable
+            Dim sFn As String = "fnGet_WorkList_BFtest"
+
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                sSql += "  selecT r.bcno, r.testcd,f6.tnmd,substr(r.fndt,1,4) || '-'||substr(r.fndt,5,2) || '-'||substr(r.fndt,7,2) fndt ,r.spccd, f3.spcnm , r.viewrst , j13.diagnm, j13.diagnm_eng , " + vbCrLf
+                sSql += "    j.patnm, j.sex,j.age, j1.fkocs , j1.orddt, j1.regno, substr(r.tkdt,1,4) || '-'||substr(r.tkdt,5,2) || '-'||substr(r.tkdt,7,2) tkdt" + vbCrLf
+                'sSql += "    ,'' --진단명 일시없음" + vbCrLf
+                sSql += "   from lr010m r" + vbCrLf
+                sSql += "   inner join lj010m j " + vbCrLf
+                sSql += "       on  r.bcno = j.bcno" + vbCrLf
+                sSql += "   inner join lj011m j1" + vbCrLf
+                sSql += "       on r.bcno = j1.bcno " + vbCrLf
+                sSql += "   inner join lf060m f6" + vbCrLf
+                sSql += "       on r.testcd = f6.testcd" + vbCrLf
+                sSql += "       and r.spccd = f6.spccd" + vbCrLf
+                sSql += "       and r.tkdt >= f6.usdt" + vbCrLf
+                sSql += "       and r.tkdt <= f6.uedt" + vbCrLf
+                sSql += "   inner join lf030m f3" + vbCrLf
+                sSql += "       on r.spccd = f3.spccd" + vbCrLf
+                sSql += "       and r.tkdt >= f3.usdt" + vbCrLf
+                sSql += "       and r.tkdt <= f3.uedt" + vbCrLf
+                sSql += "   inner join lj013m j13" + vbCrLf
+                sSql += "       on r.bcno = j13.bcno " + vbCrLf
+                sSql += "   where j.regno  = (selecT j1.regno from lj011m j1 where bcno =  :bcno)" + vbCrLf
+                sSql += "     and j1.orddt = (selecT j1.orddt from lj011m j1 where bcno =  :bcno)" + vbCrLf
+
+
+                al.Add(New OracleParameter("bcno", rsBcNo))
+                al.Add(New OracleParameter("bcno", rsBcNo))
+                If rsTestCd <> "" Then
+                    sSql += "     and r.testcd = :testcd"
+                    al.Add(New OracleParameter("testcd", rsTestCd))
+                End If
+
+                sSql += "   order by r.bcno desc"
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, al)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+
+            End Try
+        End Function
+        '최근 등록번호에 ㄴ
+        Public Shared Function fnGet_WorkList_BFtest_spc(ByVal rsRegno As String, ByVal rsTestCd As String, ByVal rsSpccd As String) As DataTable
+            Dim sFn As String = "fnGet_WorkList_BFtest"
+
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                sSql += " selecT r.bcno, r.testcd, f6.tnmd, r.viewrst"
+                sSql += "  from lr010m r"
+                sSql += " inner join lf060m f6"
+                sSql += "    On r.testcd = f6.testcd"
+                sSql += "   and r.tkdt >= f6.usdt"
+                sSql += "   and r.tkdt <= f6.uedt "
+                sSql += " where r.regno  ='" + rsRegno + "'"
+                sSql += "   and f6.testcd ='" + rsTestCd + "'"
+                sSql += "   and f6.spccd = '" + rsSpccd + "'"
+                sSql += "   order by r.bcno desc"
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, al)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+
+            End Try
+        End Function
+
+
+
+        Public Shared Function fnGet_WorkList_BFtest_rr(ByVal rsBcNo As String, ByVal rsTestCd As String) As DataTable
+            Dim sFn As String = "fnGet_WorkList_BFtest_rr"
+
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                sSql += "" + vbCrLf
+                sSql += "  selecT x.bcno ,x.testcd ,x.spccd ,x.tnm , x.viewrst" + vbCrLf
+                sSql += "    from (  select r1.bcno, r1.testcd, r1.spccd, f6.tnm, r1.viewrst " + vbCrLf
+                sSql += "              from rr010m r1" + vbCrLf
+                sSql += "             inner join rf060m f6" + vbCrLf
+                sSql += "                on r1.testcd = f6.testcd" + vbCrLf
+                sSql += "               and r1.spccd = f6.spccd      " + vbCrLf
+                sSql += "               and r1.tkdt >= f6.usdt" + vbCrLf
+                sSql += "               and r1.tkdt <= f6.uedt" + vbCrLf
+                sSql += "             where r1.regno = (selecT j1.regno from lj011m j1 where bcno =  :bcno)" + vbCrLf
+                al.Add(New OracleParameter("bcno", rsBcNo))
+                sSql += "               and r1.testcd in (" + rsTestCd + ")" + vbCrLf
+                sSql += "             order by r1.bcno desc" + vbCrLf
+                sSql += "          ) x" + vbCrLf
+                sSql += "     where(rownum = 1)" + vbCrLf
+
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, al)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+
+            End Try
+        End Function
+        '------------------------------------------------------------------------------------
 
         Public Shared Function fnGet_WorkList_cs(ByVal rsBcNo As String) As DataTable
             Dim sFn As String = "fnGet_WorkList_cs"

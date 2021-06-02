@@ -10,6 +10,7 @@ Namespace COMM
     Public Class CdFn
         Private Const msFile As String = "File : CGLISAPP_COMM, Class : LISAPP.COMM.CdFn" + vbCrLf
 
+      
         Public Shared Function fnGet_CmtList_GV() As DataTable
             Dim sFn As String = "fnGet_CmtList_GV As DataTable"
 
@@ -46,10 +47,14 @@ Namespace COMM
                 DbCommand()
                 Return DbExecuteQuery(sSql, al)
 
+
+      
             Catch ex As Exception
                 Throw (New Exception(ex.Message + " @" + sFn, ex))
             End Try
         End Function
+
+
 
         '-- 장비 리스트 조회
         Public Shared Function fnGet_Eq_List(ByVal rsEqGbn As String) As DataTable
@@ -2485,6 +2490,34 @@ Namespace COMM
                 Throw (New Exception(ex.Message + " @" + sFn, ex))
             End Try
         End Function
+        '20210303 jhs 사용자간 공유사항 코멘트 추가
+        Public Shared Function fnGet_Rst_ShareComment_slip(ByVal rsBcNo As String) As DataTable
+            Dim sFn As String = "Public Shared Function fnGet_Rst_Comment_slip(String) As DataTablev"
+            Try
+                Dim sSql As String = ""
+                Dim alParm As New ArrayList
+
+                sSql += "SELECT r.bcno, r.partslip, r.slipnmd, fn_ack_get_bcno_ShareCmt_slip(r.bcno, r.partslip) cmtcont, 'S' status"
+                sSql += "  FROM (SELECT DISTINCT a.bcno, a.partcd || a.slipcd partslip, b.slipnmd"
+                sSql += "          FROM lrc40m a, lf021m b"
+                sSql += "         WHERE a.bcno   = :bcno"
+                sSql += "           AND a.partcd = b.partcd"
+                sSql += "           AND a.slipcd = b.slipcd"
+                sSql += "           AND a.regdt >= b.usdt"
+                sSql += "           AND a.regdt <  b.uedt"
+                sSql += "       ) r"
+
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+        End Function
+        '-------------------------------------
+
         Public Shared Function fnGet_GraedValue_C(ByVal rsTclsCd As String, ByVal rsRstVal As String) As String
             Dim sFn As String = "Private Function fnGet_GraedValue(String, String) As String"
 

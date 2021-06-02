@@ -533,6 +533,9 @@ Namespace APP_BC
                     Else
                         .REMARK = sRemark
                     End If
+                    '20210429 jhs 음영 표시 위해 검사 코드추가
+                    .TESTCD = r_listcollData.Item(0).TCLSCD
+                    '------------------------------------
                 End With
 
                 Return bpi
@@ -579,6 +582,10 @@ Namespace APP_BC
                         sSql += "       ) testnms,"
                         sSql += "       fn_ack_get_tgrp_nmbp_list(j.bcno) tgrpnm,"
                         sSql += "       CASE WHEN f6.bccnt = 'B' THEN f6.bccnt ELSE '1' END bccnt"
+                        '20201201 jhs 자체처방 자체응급로직이 추가 되지 않아 일단 공백으로 입력
+                        sSql += "       , '' ERPRTYN"
+                        sSql += "       , f6.testcd"
+                        '-------------------------------------------------------------------
                         sSql += "  FROM rj010m j,  rj011m j1, rf060m f6,"
                         sSql += "       lf030m f3, lf040m f4"
                         sSql += " WHERE j.bcno     = :bcno"
@@ -619,11 +626,12 @@ Namespace APP_BC
                         sSql += "       fn_ack_get_tgrp_nmbp_list(j.bcno) tgrpnm,"
                         sSql += "       CASE WHEN f6.bccnt = 'B' THEN f6.bccnt ELSE '1' END bccnt"
                         'sSql += "       ,fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno "  '<< JJH 세포면역[H4] 작업번호 '
-
                         sSql += "       ,(SELECT CASE WHEN COUNT(*) > 0 THEN 'R' ELSE '' END YN "
                         sSql += "           FROM LJ015M "
                         sSql += "          WHERE BCNO = j.bcno) ERPRTYN"
-
+                        '20210429 jhs 검사코드 추가
+                        sSql += "       , f6.testcd"
+                        '--------------------------------------------
                         sSql += "  FROM lj010m j,  lj011m j1, lf060m f6,"
                         '<< JJH 세포면역검사[H4] 작업번호 바코드에 출력되도록
                         'sSql += "  FROM lj010m j,  lr010m r, lj011m j1, lf060m f6,"
@@ -683,6 +691,7 @@ Namespace APP_BC
                             .TESTNMS = dt.Rows(ix2).Item("testnms").ToString
                             .TUBENM = dt.Rows(ix2).Item("tubenmbp").ToString
                             .XMATCH = ""
+                            .TESTCD = dt.Rows(ix2).Item("testcd").ToString
 
                             '<< JJH 자체응급
                             .ERPRTYN = dt.Rows(ix2).Item("ERPRTYN").ToString
@@ -957,7 +966,7 @@ Namespace APP_BC
 
         End Sub
 
-        Public Sub PrintDo_Micro(ByVal ra_Bcno As ArrayList, ByVal rsBarCnt As String)
+        Public Sub PrintDo_Micro(ByVal ra_Bcno As ArrayList, ByVal rsBarCnt As String, Optional ByVal rsBcBoolean As Boolean = False)
             Dim sFn As String = "PrintDo_Micro"
 
             Try
@@ -968,40 +977,40 @@ Namespace APP_BC
                     Dim alParm As New ArrayList
 
                     sSql = ""
-                    sSql += "SELECT DISTINCT"
-                    sSql += "       j.regno,   j.patnm, j.sex || '/' || j.age sexage, j.bcclscd, g.cultnm, g.bccnt,"
-                    sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno) ELSE '' END deptinfo,"
-                    sSql += "       j.iogbn, f3.spcnmbp, f4.tubenmbp || ' ' || f6.minspcvol tubenmbp, f6.testcd, f6.tnmbp, j.statgbn,"
-                    sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno,"
-                    sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
-                    sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno,"
-                    sSql += "       (SELECT doctorrmk"
-                    sSql += "          FROM lj011m"
-                    sSql += "         WHERE bcno    = j.bcno"
-                    sSql += "           AND spcflg IN ('1', '2', '3', '4')"
-                    sSql += "           AND NVL(doctorrmk, ' ') <> ' '"
-                    sSql += "           AND ROWNUM= 1"
-                    sSql += "       ) doctorrmk,"
-                    sSql += "       REPLACE(fn_ack_get_infection_prt(j.bcno), ',', '/') infinfo"
-                    sSql += "  FROM lj010m j,  lm010m r , lf060m f6,"
-                    sSql += "       lf030m f3, lf040m f4, lf250m g "
-                    sSql += " WHERE j.bcno    = :bcno"
-                    sSql += "   AND j.bcno    = r.bcno"
-                    sSql += "   AND r.spccd   = f3.spccd"
-                    sSql += "   AND r.tkdt   >= f3.usdt"
-                    sSql += "   AND r.tkdt   <  f3.uedt"
-                    sSql += "   AND r.testcd  = f6.testcd"
-                    sSql += "   AND r.spccd   = f6.spccd"
-                    sSql += "   AND r.tkdt   >= f6.usdt"
-                    sSql += "   AND r.tkdt   <  f6.uedt"
-                    sSql += "   AND f6.tubecd = f4.tubecd"
-                    sSql += "   AND r.tkdt   >= f4.usdt"
-                    sSql += "   AND r.tkdt   <  f4.uedt"
-                    sSql += "   AND r.testcd  = g.testcd"
-                    sSql += "   AND r.spccd   = g.spccd"
-                    sSql += "   AND SUBSTR(r.tkdt, 5, 4) >= g.usedays"
-                    sSql += "   AND SUBSTR(r.tkdt, 5, 4) <= g.usedaye"
-                    sSql += " ORDER BY g.cultnm"
+                    sSql += "SELECT DISTINCT" + vbCrLf
+                    sSql += "       j.regno,   j.patnm, j.sex || '/' || j.age sexage, j.bcclscd, g.cultnm, g.bccnt," + vbCrLf
+                    sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno) ELSE '' END deptinfo," + vbCrLf
+                    sSql += "       j.iogbn, f3.spcnmbp, f4.tubenmbp || ' ' || f6.minspcvol tubenmbp, f6.testcd, f6.tnmbp, j.statgbn," + vbCrLf
+                    sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno," + vbCrLf
+                    sSql += "       fn_ack_get_bcno_full(j.bcno) bcno," + vbCrLf
+                    sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno," + vbCrLf
+                    sSql += "       (SELECT doctorrmk" + vbCrLf
+                    sSql += "          FROM lj011m" + vbCrLf
+                    sSql += "         WHERE bcno    = j.bcno" + vbCrLf
+                    sSql += "           AND spcflg IN ('1', '2', '3', '4')" + vbCrLf
+                    sSql += "           AND NVL(doctorrmk, ' ') <> ' '" + vbCrLf
+                    sSql += "           AND ROWNUM= 1" + vbCrLf
+                    sSql += "       ) doctorrmk," + vbCrLf
+                    sSql += "       REPLACE(fn_ack_get_infection_prt(j.bcno), ',', '/') infinfo" + vbCrLf
+                    sSql += "  FROM lj010m j,  lm010m r , lf060m f6," + vbCrLf
+                    sSql += "       lf030m f3, lf040m f4, lf250m g " + vbCrLf
+                    sSql += " WHERE j.bcno    = :bcno" + vbCrLf
+                    sSql += "   AND j.bcno    = r.bcno" + vbCrLf
+                    sSql += "   AND r.spccd   = f3.spccd" + vbCrLf
+                    sSql += "   AND r.tkdt   >= f3.usdt" + vbCrLf
+                    sSql += "   AND r.tkdt   <  f3.uedt" + vbCrLf
+                    sSql += "   AND r.testcd  = f6.testcd" + vbCrLf
+                    sSql += "   AND r.spccd   = f6.spccd" + vbCrLf
+                    sSql += "   AND r.tkdt   >= f6.usdt" + vbCrLf
+                    sSql += "   AND r.tkdt   <  f6.uedt" + vbCrLf
+                    sSql += "   AND f6.tubecd = f4.tubecd" + vbCrLf
+                    sSql += "   AND r.tkdt   >= f4.usdt" + vbCrLf
+                    sSql += "   AND r.tkdt   <  f4.uedt" + vbCrLf
+                    sSql += "   AND r.testcd  = g.testcd" + vbCrLf
+                    sSql += "   AND r.spccd   = g.spccd" + vbCrLf
+                    sSql += "   AND SUBSTR(r.tkdt, 5, 4) >= g.usedays" + vbCrLf
+                    sSql += "   AND SUBSTR(r.tkdt, 5, 4) <= g.usedaye" + vbCrLf
+                    sSql += " ORDER BY g.cultnm" + vbCrLf
 
                     alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, ra_Bcno(ix).ToString.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, ra_Bcno(ix).ToString()))
 
@@ -1014,7 +1023,13 @@ Namespace APP_BC
                             Dim objBcInfo As New STU_BCPRTINFO
                             With objBcInfo
                                 .BCCLSCD = dt.Rows(ix2).Item("bcclscd").ToString
-                                .BCCNT = dt.Rows(ix2).Item("bccnt").ToString : If .BCCNT = "" Then .BCCNT = rsBarCnt
+                                '20210218 jhs 바코드 출력장 수로 출력 할 수 잇도록 구현
+                                If rsBcBoolean Then
+                                    .BCCNT = rsBarCnt
+                                Else
+                                    .BCCNT = dt.Rows(ix2).Item("bccnt").ToString : If .BCCNT = "" Then .BCCNT = rsBarCnt
+                                End If
+                                '--------------------------------------
                                 .BCNO = dt.Rows(ix2).Item("bcno").ToString
                                 .BCNO_MB = dt.Rows(ix2).Item("workno").ToString
                                 .BCNOPRT = dt.Rows(ix2).Item("prtbcno").ToString

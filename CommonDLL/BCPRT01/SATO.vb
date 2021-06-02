@@ -47,7 +47,11 @@ Public Class SATO
                             iPrtCnt = 2
                         ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "B" Then
                             '< CrossMatching 검체
-                            iPrtCnt = 2
+                            iPrtCnt = 2 ' 루칸 카운트 비교 논의 필요 
+                            '20210127 jhs 접수시 바코드 출력 로직 추가 
+                        ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J" Or CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J2" Then
+                            iPrtCnt = 1
+                            '-----------------------------------------------------
                         ElseIf IsNumeric(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT) Then
                             iPrtCnt = Convert.ToInt32(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT)
                         End If

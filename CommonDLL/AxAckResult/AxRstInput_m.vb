@@ -45,6 +45,7 @@ Public Class AxRstInput_m
     Private m_dt_Anti_BcNo As DataTable
     Private m_dt_Anti_BcNo_Bak As DataTable
     Private m_dt_Bac_BcNo As DataTable
+    Private m_dt_ShareCmt_bcno As DataTable
 
     Private m_dt_AntiCd As DataTable
     Private m_dt_BacCd As DataTable
@@ -105,7 +106,9 @@ Public Class AxRstInput_m
                                intCol = .GetColFromID("alertmark") Or _
                                intCol = .GetColFromID("rstcmt") Or intCol = .GetColFromID("bfviewrst2") Or intCol = .GetColFromID("bfbcno2") Or intCol = .GetColFromID("eqnm") Or _
                                intCol = .GetColFromID("testcd") Or intCol = .GetColFromID("spccd") Or intCol = .GetColFromID("tordcd") Or _
-                               intCol = .GetColFromID("reftcls") Or intCol = .GetColFromID("eqflag") Or intCol = .GetColFromID("slipcd") Or intCol = .GetColFromID("criticalmark") Then
+                               intCol = .GetColFromID("reftcls") Or intCol = .GetColFromID("eqflag") Or intCol = .GetColFromID("slipcd") Or intCol = .GetColFromID("criticalmark") Or _
+                               intCol = .GetColFromID("rrptst") Then
+                            '20210419 jhs rrptst 추가
                         Else
                             .Col = intCol : .ColHidden = True
                         End If
@@ -3696,6 +3699,7 @@ Public Class AxRstInput_m
                 End If
             End If
 
+
             Return True
 
         Catch ex As Exception
@@ -4346,6 +4350,8 @@ Public Class AxRstInput_m
         Dim sFn As String = "sbReg_Rst"
 
         Try
+
+
             mbLeveCellGbn = False
 
             Dim alReturn As New ArrayList
@@ -4513,6 +4519,7 @@ Public Class AxRstInput_m
                 End If
             End If
 
+
         Catch ex As Exception
             sbLog_Exception(ex.Message)
 
@@ -4667,11 +4674,11 @@ Public Class AxRstInput_m
 
             Me.txtCmtCont.Text = ""
             Me.txtCmtCont.Tag = ""
-
             Me.lstCode.Hide()
             Me.pnlCode.Visible = False
 
             Me.txtCmtCont.Visible = True
+
 
             Me.lblTestCd.Text = "" : Me.lblTnmd.Text = "" : Me.lblSpccd.Text = ""
             Me.txtTestCd.Text = ""
@@ -4715,6 +4722,7 @@ Public Class AxRstInput_m
             sbDisplay_Result(rsBcNo)  ''' 결과조회 
 
             sbGet_Alert_Rule()  '-- Alert Rule
+
 
             If Me.spdResult.MaxRows > 0 Then bFind = True
 
@@ -4831,6 +4839,7 @@ Public Class AxRstInput_m
             End If
             m_dt_Cmt_bcno = dt
 
+          
             sbDisplay_slip(rsBcNo)
 
             If bRstflgNotFN Then
@@ -8322,6 +8331,8 @@ Public Class AxRstInput_m
             MsgBox(ex.Message)
         End Try
     End Sub
+
+   
 End Class
 
 Friend Class BacInfo

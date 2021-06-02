@@ -2878,7 +2878,7 @@ Public Class MAIN
                     '-- 수탁검사 거래명세서
                     frmChild = New LISO.FGO04
                 Case mnuO_test.Text
-
+                    '--테스트
                     frmChild = New LISO.FGO99
 
 #If DEBUG Then
@@ -3483,6 +3483,7 @@ Public Class MAIN
                     frmChild = New LISF.FGF11
 
                 Case mnuHelp.Text
+                    '-- LIS 검사정보
                     'frmChild = New CDHELP.FGCDHELP_TEST
                     frmChild = New CDHELP.FGCDHELP_TEST_NEW
 

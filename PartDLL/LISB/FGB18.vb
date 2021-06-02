@@ -102,6 +102,71 @@ Public Class FGB18
                     .Col = .GetColFromID("o2") : .Text = r_dt.Rows(ix).Item("o2").ToString
                     .Col = .GetColFromID("ab2") : .Text = r_dt.Rows(ix).Item("ab2").ToString
                     .Col = .GetColFromID("availqty") : .Text = r_dt.Rows(ix).Item("availqty").ToString
+
+                    If r_dt.Rows(ix).Item("a113").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("a110").ToString = "Y" Then
+                            .Col = .GetColFromID("a1") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255) 'light gray 
+                        Else
+                            .Col = .GetColFromID("a1") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224) 'light blue
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("b113").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("b110").ToString = "Y" Then
+                            .Col = .GetColFromID("b1") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("b1") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("o113").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("o110").ToString = "Y" Then
+                            .Col = .GetColFromID("o1") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("o1") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("ab113").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("ab110").ToString = "Y" Then
+                            .Col = .GetColFromID("ab1") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("ab1") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("a213").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("a210").ToString = "Y" Then
+                            .Col = .GetColFromID("a2") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("a2") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("b213").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("b210").ToString = "Y" Then
+                            .Col = .GetColFromID("b2") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("b2") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("o213").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("o210").ToString = "Y" Then
+                            .Col = .GetColFromID("o2") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("o2") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
+                    If r_dt.Rows(ix).Item("ab213").ToString = "Y" Then
+                        If r_dt.Rows(ix).Item("ab210").ToString = "Y" Then
+                            .Col = .GetColFromID("ab2") : .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
+                        Else
+                            .Col = .GetColFromID("ab2") : .BackColor = System.Drawing.Color.FromArgb(224, 224, 224)
+                        End If
+                    End If
+
                 Next
 
                 sb_SetStBarSearchCnt(r_dt.Rows.Count)
@@ -192,6 +257,16 @@ Public Class FGB18
                     .Col = .GetColFromID("bldno") : .Text = r_dt.Rows(i).Item("bldno").ToString
                     .Col = .GetColFromID("dondt") : .Text = r_dt.Rows(i).Item("dondt").ToString
                     .Col = .GetColFromID("availdt") : .Text = r_dt.Rows(i).Item("availdt").ToString
+                    '20210302 jhs 유효일시 
+                    Dim TEST As Integer = CInt(DateDiff(DateInterval.Day, DateTime.Now(), DateTime.Parse(r_dt.Rows(i).Item("availdt").ToString)))
+                    If CInt(DateDiff(DateInterval.Day, DateTime.Now(), DateTime.Parse(r_dt.Rows(i).Item("availdt").ToString))) <= 13 Then
+                        If CInt(DateDiff(DateInterval.Day, DateTime.Now(), DateTime.Parse(r_dt.Rows(i).Item("availdt").ToString))) <= 10 Then
+                            .BackColor = System.Drawing.Color.FromArgb(234, 234, 255) '유효일시 10일 이내
+                        Else
+                            .BackColor = System.Drawing.Color.FromArgb(224, 224, 224) '유효일시 13일 이내
+                        End If
+                    End If
+                    '-----------------------------------------------------
                     .Col = .GetColFromID("indt") : .Text = r_dt.Rows(i).Item("indt").ToString
                     .Col = .GetColFromID("inid") : .Text = r_dt.Rows(i).Item("inid").ToString
                 Next

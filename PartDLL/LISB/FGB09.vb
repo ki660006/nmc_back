@@ -618,6 +618,16 @@ Public Class FGB09
             '    Return
             'End If
 
+
+            '20210121 jhs 등록번호 조회 하지 않았을 시 조회를 한번이라도 하고 진행하도록 수정 (사용자 요청)
+            If Me.AxTnsPatinfo1.Regno() = "" Then
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "환자 조회를 먼저 해주시기 바랍니다.")
+                Me.txtRegno.Focus()
+                Return
+            End If
+            '----------------------------------
+
+
             ls_Bldno = txtSBldno.Text
 
             If ls_Bldno.Length() = 10 Then
@@ -636,11 +646,13 @@ Public Class FGB09
             '// JJH 환자의 가출고혈액 체크
             If Me.AxTnsPatinfo1.Regno() <> "" Then
                 If CGDA_BT.Bld_Bfout_Chk(ls_Bldno, Me.AxTnsPatinfo1.Regno()) <> "Y" Then
-                    If CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "다른 환자의 혈액입니다 그래도 진행하시겠습니까?") = False Then
-                        Me.txtSBldno.Focus()
-                        Me.txtSBldno.SelectAll()
-                        Return
-                    End If
+                    'If CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "다른 환자의 혈액입니다 그래도 진행하시겠습니까?") = False Then
+                    '//JJH 2020-12-21 아예 진행이 불가능하도록 수정 (사용자 요청)
+                    CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, "다른 환자의 혈액입니다.")
+                    Me.txtSBldno.Focus()
+                    Me.txtSBldno.SelectAll()
+                    Return
+                    'End If
                 End If
             End If
 

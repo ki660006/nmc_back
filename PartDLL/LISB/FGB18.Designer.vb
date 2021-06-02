@@ -22,33 +22,41 @@ Partial Class FGB18
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
+        Me.components = New System.ComponentModel.Container()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB18))
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.btnSearch = New CButtonLib.CButton
-        Me.btnExit = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.Label98 = New System.Windows.Forms.Label
-        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.pnlStoreList = New System.Windows.Forms.Panel
-        Me.spdStored = New AxFPSpreadADO.AxfpSpread
-        Me.pnlStdDetail = New System.Windows.Forms.Panel
-        Me.spdStdDetail = New AxFPSpreadADO.AxfpSpread
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Panel1 = New System.Windows.Forms.Panel
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.btnSearch = New CButtonLib.CButton()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.Label98 = New System.Windows.Forms.Label()
+        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.pnlStoreList = New System.Windows.Forms.Panel()
+        Me.spdStored = New AxFPSpreadADO.AxfpSpread()
+        Me.pnlStdDetail = New System.Windows.Forms.Panel()
+        Me.spdStdDetail = New AxFPSpreadADO.AxfpSpread()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblOrdFlgB = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.lblNoColl = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.lblErFlgE = New System.Windows.Forms.Label()
+        Me.lblErFlgB = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlStoreList.SuspendLayout()
         CType(Me.spdStored, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +64,7 @@ Partial Class FGB18
         CType(Me.spdStdDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSearch
@@ -92,12 +101,10 @@ Partial Class FGB18
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnSearch.SideImage = Nothing
-        Me.btnSearch.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSearch.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnSearch.Size = New System.Drawing.Size(107, 25)
         Me.btnSearch.TabIndex = 186
         Me.btnSearch.Text = "조   회(F6)"
-        Me.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSearch.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -135,12 +142,10 @@ Partial Class FGB18
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(98, 25)
         Me.btnExit.TabIndex = 184
         Me.btnExit.Text = "종료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -178,12 +183,10 @@ Partial Class FGB18
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 183
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -322,6 +325,7 @@ Partial Class FGB18
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Panel5)
         Me.Panel1.Controls.Add(Me.btnSearch)
         Me.Panel1.Controls.Add(Me.btnExit)
         Me.Panel1.Controls.Add(Me.btnClear)
@@ -330,6 +334,115 @@ Partial Class FGB18
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1272, 32)
         Me.Panel1.TabIndex = 240
+        '
+        'Panel5
+        '
+        Me.Panel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.Label6)
+        Me.Panel5.Controls.Add(Me.lblOrdFlgB)
+        Me.Panel5.Controls.Add(Me.Label32)
+        Me.Panel5.Controls.Add(Me.lblNoColl)
+        Me.Panel5.Controls.Add(Me.Label26)
+        Me.Panel5.Controls.Add(Me.lblErFlgE)
+        Me.Panel5.Controls.Add(Me.lblErFlgB)
+        Me.Panel5.Location = New System.Drawing.Point(2, 1)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(217, 27)
+        Me.Panel5.TabIndex = 241
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(150, 2)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(63, 22)
+        Me.Label6.TabIndex = 209
+        Me.Label6.Text = "10일이내"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblOrdFlgB
+        '
+        Me.lblOrdFlgB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblOrdFlgB.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblOrdFlgB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblOrdFlgB.ForeColor = System.Drawing.Color.Black
+        Me.lblOrdFlgB.Location = New System.Drawing.Point(131, 5)
+        Me.lblOrdFlgB.Name = "lblOrdFlgB"
+        Me.lblOrdFlgB.Size = New System.Drawing.Size(18, 16)
+        Me.lblOrdFlgB.TabIndex = 208
+        Me.lblOrdFlgB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label32
+        '
+        Me.Label32.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label32.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label32.ForeColor = System.Drawing.Color.Black
+        Me.Label32.Location = New System.Drawing.Point(78, 2)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(55, 22)
+        Me.Label32.TabIndex = 190
+        Me.Label32.Text = "13일이내"
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblNoColl
+        '
+        Me.lblNoColl.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblNoColl.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lblNoColl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblNoColl.ForeColor = System.Drawing.Color.Black
+        Me.lblNoColl.Location = New System.Drawing.Point(59, 5)
+        Me.lblNoColl.Name = "lblNoColl"
+        Me.lblNoColl.Size = New System.Drawing.Size(18, 16)
+        Me.lblNoColl.TabIndex = 189
+        Me.lblNoColl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label26
+        '
+        Me.Label26.BackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(196, Byte), Integer), CType(CType(233, Byte), Integer))
+        Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label26.ForeColor = System.Drawing.Color.Black
+        Me.Label26.Location = New System.Drawing.Point(-1, -1)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(57, 27)
+        Me.Label26.TabIndex = 188
+        Me.Label26.Text = "유효일시"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblErFlgE
+        '
+        Me.lblErFlgE.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblErFlgE.BackColor = System.Drawing.Color.White
+        Me.lblErFlgE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblErFlgE.Font = New System.Drawing.Font("돋움체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblErFlgE.ForeColor = System.Drawing.Color.Crimson
+        Me.lblErFlgE.Location = New System.Drawing.Point(469, 28)
+        Me.lblErFlgE.Name = "lblErFlgE"
+        Me.lblErFlgE.Size = New System.Drawing.Size(56, 19)
+        Me.lblErFlgE.TabIndex = 207
+        Me.lblErFlgE.Text = "E 응급"
+        Me.lblErFlgE.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.lblErFlgE.UseCompatibleTextRendering = True
+        Me.lblErFlgE.Visible = False
+        '
+        'lblErFlgB
+        '
+        Me.lblErFlgB.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblErFlgB.BackColor = System.Drawing.Color.White
+        Me.lblErFlgB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblErFlgB.Font = New System.Drawing.Font("돋움체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblErFlgB.ForeColor = System.Drawing.Color.MediumBlue
+        Me.lblErFlgB.Location = New System.Drawing.Point(469, 46)
+        Me.lblErFlgB.Name = "lblErFlgB"
+        Me.lblErFlgB.Size = New System.Drawing.Size(56, 19)
+        Me.lblErFlgB.TabIndex = 206
+        Me.lblErFlgB.Text = "B 진료전"
+        Me.lblErFlgB.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.lblErFlgB.UseCompatibleTextRendering = True
+        Me.lblErFlgB.Visible = False
         '
         'FGB18
         '
@@ -359,6 +472,7 @@ Partial Class FGB18
         CType(Me.spdStdDetail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -379,4 +493,12 @@ Partial Class FGB18
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel5 As System.Windows.Forms.Panel
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents lblOrdFlgB As System.Windows.Forms.Label
+    Friend WithEvents Label32 As System.Windows.Forms.Label
+    Public WithEvents lblNoColl As System.Windows.Forms.Label
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents lblErFlgE As System.Windows.Forms.Label
+    Friend WithEvents lblErFlgB As System.Windows.Forms.Label
 End Class

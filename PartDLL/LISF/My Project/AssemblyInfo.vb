@@ -61,5 +61,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.342 --> 2020/08/06 : 검사 체취및 의뢰시 주의사항 텍스트박스 maxlength 증설
 'Version 3.1.10.343 --> 2020/09/03 : 검사마스터에 검체단위 추가
 'Version 3.1.10.344 --> 2020/10/12 : 검사코드관리 검사의뢰서/동의서, 시행처 다중선택 추가
+'Version 3.1.10.345 --> 2020/11/30 : 검사의뢰지침 세부검사 항목 설정 화면 추가개발
 
-<Assembly: AssemblyVersion("3.1.10.344")> 
+<Assembly: AssemblyVersion("3.1.10.345")> 

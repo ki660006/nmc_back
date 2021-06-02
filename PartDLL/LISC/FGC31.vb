@@ -198,9 +198,9 @@ Public Class FGC31
     End Sub
 
     Private Sub FGC01_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        'MsgBox("1")
         DS_FormDesige.sbInti(Me)
-
+        'MsgBox("2")
         Me.chkAutoTk.Visible = CType(IIf(PRG_CONST.BUTTON_COLL_TAKEYN = "1", True, False), Boolean)
         Me.chkAutoTk.Checked = CType(IIf(PRG_CONST.BUTTON_COLL_TAKEYN = "1", True, False), Boolean)
 
@@ -212,13 +212,13 @@ Public Class FGC31
 
         Me.dtpDateE.Value = Now
         Me.txtRegNo.MaxLength = PRG_CONST.Len_RegNo
-
+        'MsgBox("1")
         Me.lblBarPrinter.Text = (New PRTAPP.APP_BC.BCPrinter(Me.Name)).GetInfo.PRTNM
-
+        'MsgBox("2")
         sbDisplay_Dept()
-
+        'MsgBox("3")
         btnClear_Click(Nothing, Nothing)
-
+        'MsgBox("4")
         Me.axCollList.CallForm = AxAckCollector.enumCollectCallForm.CollectOut
         Me.axCollList.SearchMode = False
         Me.axCollList.CollUsrId = USER_INFO.USRID

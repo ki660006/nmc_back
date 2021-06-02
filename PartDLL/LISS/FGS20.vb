@@ -1822,7 +1822,8 @@ Public Class FGS20
     End Sub
     
     Private Sub btnWebKDCD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWebKDCD.Click
-        Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/pthgogan/pthgoganList.vp?"
+        'Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/pthgogan/pthgoganList.vp?"
+        Dim sUrl As String = "https://is.kdca.go.kr/tids/anids/pthgogan/pthgoganList.vp?" '병원체 주소 변경으로 변경
         Dim sOgcr As String = "cn=국립중앙의료원,ou=건강보험,ou=MOHW RA센터,ou=등록기관,ou=licensedCA,o=KICA,c=KR"
 
         sUrl += "&ogcr=" + UTF8EN(sOgcr)
@@ -1996,7 +1997,8 @@ Public Class FGS20
     End Sub
 
     Private Sub btnWebReq_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWebReq.Click
-        Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp?"
+        'Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp?"
+        Dim sUrl As String = "https://is.kdca.go.kr/tids/anids/piacpt/piAcptList.vp?" '병원체 주소 변경으로 변경
         Dim sOgcr As String = "cn=국립중앙의료원,ou=건강보험,ou=MOHW RA센터,ou=등록기관,ou=licensedCA,o=KICA,c=KR"
 
         'https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp? +  신고항목 (“&신고항목명 = 신고항목값, ... ”) 

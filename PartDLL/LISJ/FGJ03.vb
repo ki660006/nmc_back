@@ -48,6 +48,7 @@ Public Class FGJ03
     Friend WithEvents chkBar_cult As System.Windows.Forms.CheckBox
     Friend WithEvents chkBarInit As System.Windows.Forms.CheckBox
     Friend WithEvents btnTest As System.Windows.Forms.Button
+    Friend WithEvents chkMultiBc As System.Windows.Forms.CheckBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
 
 
@@ -149,6 +150,7 @@ Public Class FGJ03
         Me.chk = New System.Windows.Forms.CheckBox()
         Me.spdList = New AxFPSpreadADO.AxfpSpread()
         Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.chkMultiBc = New System.Windows.Forms.CheckBox()
         Me.btnTest = New System.Windows.Forms.Button()
         Me.chkBar_cult = New System.Windows.Forms.CheckBox()
         Me.btnClear = New CButtonLib.CButton()
@@ -427,6 +429,7 @@ Public Class FGJ03
         'pnlBottom
         '
         Me.pnlBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlBottom.Controls.Add(Me.chkMultiBc)
         Me.pnlBottom.Controls.Add(Me.btnTest)
         Me.pnlBottom.Controls.Add(Me.chkBar_cult)
         Me.pnlBottom.Controls.Add(Me.btnClear)
@@ -442,6 +445,17 @@ Public Class FGJ03
         Me.pnlBottom.Name = "pnlBottom"
         Me.pnlBottom.Size = New System.Drawing.Size(1091, 34)
         Me.pnlBottom.TabIndex = 4
+        '
+        'chkMultiBc
+        '
+        Me.chkMultiBc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkMultiBc.AutoSize = True
+        Me.chkMultiBc.Location = New System.Drawing.Point(521, 9)
+        Me.chkMultiBc.Name = "chkMultiBc"
+        Me.chkMultiBc.Size = New System.Drawing.Size(72, 16)
+        Me.chkMultiBc.TabIndex = 190
+        Me.chkMultiBc.Text = "다중출력"
+        Me.chkMultiBc.UseVisualStyleBackColor = True
         '
         'btnTest
         '
@@ -1223,6 +1237,7 @@ Public Class FGJ03
                     .Col = .GetColFromID("tnmbp") : .Text = r_dt.Rows(ix).Item("tnmbp").ToString.Trim
                     .Col = .GetColFromID("spcnmbp") : .Text = r_dt.Rows(ix).Item("spcnmbp").ToString.Trim
                     .Col = .GetColFromID("tubenmbp") : .Text = r_dt.Rows(ix).Item("tubenmbp").ToString.Trim
+                    .Col = .GetColFromID("testcd") : .Text = r_dt.Rows(ix).Item("testcd").ToString.Trim
                     .Col = .GetColFromID("tnmd") : .Text = r_dt.Rows(ix).Item("tnmd").ToString.Trim.Replace("'&apos;", "`")
 
                     If r_dt.Rows(ix).Item("colorgbn").ToString = "1" Then
@@ -1345,6 +1360,7 @@ Public Class FGJ03
                         .Col = .GetColFromID("doctorrmk") : Dim sDoctorRmk As String = .Text.Trim()
                         .Col = .GetColFromID("tgrpnmbp") : Dim sTgrpNmbp As String = .Text.Trim
                         .Col = .GetColFromID("bccnt") : Dim sBcCnt As String = .Text.Trim
+                        .Col = .GetColFromID("testcd") : Dim sTestcd As String = .Text.Trim() '20210429 jhs 검사코드 등록
                         .Col = .GetColFromID("eryn") : Dim sEryn As String = .Text.Trim()
 
                         Dim stu_bcdata As New STU_BCPRTINFO
@@ -1361,6 +1377,7 @@ Public Class FGJ03
                             .SPCNM = sSpcNmbp
                             .TUBENM = sTubeNmbp
                             .TESTNMS = sTnmpb
+                            .TESTCD = sTestcd '20210429 jhs 검사코드 등록
                             '.EMER = sStatGbn
                             .EMER = IIf(sStatGbn = "Y", "E", "").ToString
                             .INFINFO = LISAPP.APP_C.Collfn.FindInfectionInfoD(.REGNO) '20140704 바코드 재출력시감염정보변경 
@@ -1391,12 +1408,16 @@ Public Class FGJ03
                     If Me.chkBar_cult.Checked Then
                         '-- 배지바코드
                         Dim objBCPrt As New PRTAPP.APP_BC.BCPrinter(Me.Name)
-                        objBCPrt.PrintDo_Micro(alBcNo_cult, "1")
+                        '20210218 jhs 다중으로 뽑을 수 있도록 수정 
+                        'objBCPrt.PrintDo_Micro(alBcNo_cult, "1")
+                        objBCPrt.PrintDo_Micro(alBcNo_cult, Me.ntxtPrtCount.Text, Me.chkMultiBc.Checked)
+                        '------------------------------------------
 
-                    Else
-                        ' 바코드 출력
-                        Call (New BCPrinter(Me.Name)).PrintDo(alBcData, False)
-                    End If
+
+                Else
+                    ' 바코드 출력
+                    Call (New BCPrinter(Me.Name)).PrintDo(alBcData, False)
+                End If
 
                 End If
 
@@ -1872,5 +1893,19 @@ Public Class FGJ03
     Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
         'sbBCPrintTest()
 
+    End Sub
+
+    Private Sub chkMultiBc_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMultiBc.CheckedChanged
+        If Me.chkBar_cult.Checked Then
+        Else
+            Me.chkMultiBc.Checked = False
+        End If
+    End Sub
+
+    Private Sub chkBar_cult_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkBar_cult.CheckedChanged
+        If Me.chkBar_cult.Checked = False Then
+            Me.chkMultiBc.Checked = False
+        Else
+        End If
     End Sub
 End Class

@@ -43,5 +43,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.337 --> 2019/11/20 : 배포
 'Version 3.1.10.338 --> 2020/05/25 : 혈액종양 진단명일때 색표시되도록
 'Version 3.1.10.339 --> 2020/11/24 : 등록번호 프로퍼티 추가
+'Version 3.1.10.340 --> 2021/03/22 : 오류로 인한 재배포
 
-<Assembly: AssemblyVersion("3.1.10.339")> 
+<Assembly: AssemblyVersion("3.1.10.340")> 

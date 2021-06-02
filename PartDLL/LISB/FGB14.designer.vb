@@ -22,83 +22,87 @@ Partial Class FGB14
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB14))
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.btnPatPop = New System.Windows.Forms.Button
-        Me.Label99 = New System.Windows.Forms.Label
-        Me.txtPatNm = New System.Windows.Forms.TextBox
-        Me.txtRegno = New System.Windows.Forms.TextBox
-        Me.lblTitle = New System.Windows.Forms.Label
-        Me.dtpDate1 = New System.Windows.Forms.DateTimePicker
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker
-        Me.cboComCd = New System.Windows.Forms.ComboBox
-        Me.lblComcd = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.pnlSearchGbn = New System.Windows.Forms.Panel
-        Me.rdoCross = New System.Windows.Forms.RadioButton
-        Me.rdoTns = New System.Windows.Forms.RadioButton
-        Me.rdoAll = New System.Windows.Forms.RadioButton
-        Me.rdoPre = New System.Windows.Forms.RadioButton
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.chkJub = New System.Windows.Forms.CheckBox
-        Me.chkOut = New System.Windows.Forms.CheckBox
-        Me.chkBef = New System.Windows.Forms.CheckBox
-        Me.chkAbn = New System.Windows.Forms.CheckBox
-        Me.chkRtn = New System.Windows.Forms.CheckBox
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.btnPrint = New CButtonLib.CButton
-        Me.btnBExcel = New CButtonLib.CButton
-        Me.btnTExcel = New CButtonLib.CButton
-        Me.btnSearch = New CButtonLib.CButton
-        Me.btnExit = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.pnlSList = New System.Windows.Forms.Panel
-        Me.spdSearchList = New AxFPSpreadADO.AxfpSpread
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.pnlDetail = New System.Windows.Forms.Panel
-        Me.spdDetail = New AxFPSpreadADO.AxfpSpread
-        Me.chkCan = New System.Windows.Forms.CheckBox
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.rdoI = New System.Windows.Forms.RadioButton
-        Me.rdoAll2 = New System.Windows.Forms.RadioButton
-        Me.rdoO = New System.Windows.Forms.RadioButton
-        Me.cboDept = New System.Windows.Forms.ComboBox
-        Me.lblDept = New System.Windows.Forms.Label
-        Me.cboWard = New System.Windows.Forms.ComboBox
-        Me.lblWard = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.txtRst_Hb = New System.Windows.Forms.TextBox
-        Me.txtRst_plt1 = New System.Windows.Forms.TextBox
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.txtRst_plt2 = New System.Windows.Forms.TextBox
-        Me.txtRstDay = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.cboAboRh = New System.Windows.Forms.ComboBox
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.btnPatPop = New System.Windows.Forms.Button()
+        Me.Label99 = New System.Windows.Forms.Label()
+        Me.txtPatNm = New System.Windows.Forms.TextBox()
+        Me.txtRegno = New System.Windows.Forms.TextBox()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.dtpDate1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker()
+        Me.cboComCd = New System.Windows.Forms.ComboBox()
+        Me.lblComcd = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlSearchGbn = New System.Windows.Forms.Panel()
+        Me.rdoCross = New System.Windows.Forms.RadioButton()
+        Me.rdoTns = New System.Windows.Forms.RadioButton()
+        Me.rdoAll = New System.Windows.Forms.RadioButton()
+        Me.rdoPre = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.chkJub = New System.Windows.Forms.CheckBox()
+        Me.chkOut = New System.Windows.Forms.CheckBox()
+        Me.chkBef = New System.Windows.Forms.CheckBox()
+        Me.chkAbn = New System.Windows.Forms.CheckBox()
+        Me.chkRtn = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnPrint = New CButtonLib.CButton()
+        Me.btnBExcel = New CButtonLib.CButton()
+        Me.btnTExcel = New CButtonLib.CButton()
+        Me.btnSearch = New CButtonLib.CButton()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.pnlSList = New System.Windows.Forms.Panel()
+        Me.spdSearchList = New AxFPSpreadADO.AxfpSpread()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.pnlDetail = New System.Windows.Forms.Panel()
+        Me.spdDetail = New AxFPSpreadADO.AxfpSpread()
+        Me.chkCan = New System.Windows.Forms.CheckBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.rdoE = New System.Windows.Forms.RadioButton()
+        Me.rdoI = New System.Windows.Forms.RadioButton()
+        Me.rdoAll2 = New System.Windows.Forms.RadioButton()
+        Me.rdoO = New System.Windows.Forms.RadioButton()
+        Me.cboDept = New System.Windows.Forms.ComboBox()
+        Me.lblDept = New System.Windows.Forms.Label()
+        Me.cboWard = New System.Windows.Forms.ComboBox()
+        Me.lblWard = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtRst_Hb = New System.Windows.Forms.TextBox()
+        Me.txtRst_plt1 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtRst_plt2 = New System.Windows.Forms.TextBox()
+        Me.txtRstDay = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cboAboRh = New System.Windows.Forms.ComboBox()
+        Me.chkBldBranchSrh = New System.Windows.Forms.CheckBox()
+        Me.cboBranchComcd = New System.Windows.Forms.ComboBox()
+        Me.lblBranchComcd = New System.Windows.Forms.Label()
         Me.pnlSearchGbn.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSList.SuspendLayout()
@@ -203,7 +207,7 @@ Partial Class FGB14
         Me.cboComCd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboComCd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.cboComCd.FormattingEnabled = True
-        Me.cboComCd.Location = New System.Drawing.Point(728, 2)
+        Me.cboComCd.Location = New System.Drawing.Point(864, 2)
         Me.cboComCd.Margin = New System.Windows.Forms.Padding(1)
         Me.cboComCd.MaxDropDownItems = 20
         Me.cboComCd.Name = "cboComCd"
@@ -216,10 +220,10 @@ Partial Class FGB14
         Me.lblComcd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblComcd.ForeColor = System.Drawing.Color.Black
         Me.lblComcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblComcd.Location = New System.Drawing.Point(647, 2)
+        Me.lblComcd.Location = New System.Drawing.Point(776, 2)
         Me.lblComcd.Margin = New System.Windows.Forms.Padding(1)
         Me.lblComcd.Name = "lblComcd"
-        Me.lblComcd.Size = New System.Drawing.Size(80, 21)
+        Me.lblComcd.Size = New System.Drawing.Size(86, 21)
         Me.lblComcd.TabIndex = 198
         Me.lblComcd.Text = "성분제제"
         Me.lblComcd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -431,12 +435,10 @@ Partial Class FGB14
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint.SideImage = Nothing
-        Me.btnPrint.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrint.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnPrint.Size = New System.Drawing.Size(107, 25)
         Me.btnPrint.TabIndex = 189
         Me.btnPrint.Text = "출   력(F5)"
-        Me.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnPrint.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -474,12 +476,10 @@ Partial Class FGB14
         Me.btnBExcel.Name = "btnBExcel"
         Me.btnBExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnBExcel.SideImage = Nothing
-        Me.btnBExcel.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnBExcel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnBExcel.Size = New System.Drawing.Size(107, 25)
         Me.btnBExcel.TabIndex = 188
         Me.btnBExcel.Text = "아래 Excel"
-        Me.btnBExcel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnBExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnBExcel.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -517,12 +517,10 @@ Partial Class FGB14
         Me.btnTExcel.Name = "btnTExcel"
         Me.btnTExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnTExcel.SideImage = Nothing
-        Me.btnTExcel.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTExcel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnTExcel.Size = New System.Drawing.Size(107, 25)
         Me.btnTExcel.TabIndex = 187
         Me.btnTExcel.Text = "위 Excel"
-        Me.btnTExcel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnTExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnTExcel.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -560,12 +558,10 @@ Partial Class FGB14
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnSearch.SideImage = Nothing
-        Me.btnSearch.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSearch.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnSearch.Size = New System.Drawing.Size(107, 25)
         Me.btnSearch.TabIndex = 186
         Me.btnSearch.Text = "조   회(F6)"
-        Me.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSearch.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -603,12 +599,10 @@ Partial Class FGB14
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(98, 25)
         Me.btnExit.TabIndex = 184
         Me.btnExit.Text = "종료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -646,12 +640,10 @@ Partial Class FGB14
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 183
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -755,20 +747,33 @@ Partial Class FGB14
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.Panel1.Controls.Add(Me.rdoE)
         Me.Panel1.Controls.Add(Me.rdoI)
         Me.Panel1.Controls.Add(Me.rdoAll2)
         Me.Panel1.Controls.Add(Me.rdoO)
         Me.Panel1.ForeColor = System.Drawing.Color.DarkGreen
         Me.Panel1.Location = New System.Drawing.Point(733, 24)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(199, 21)
+        Me.Panel1.Size = New System.Drawing.Size(252, 21)
         Me.Panel1.TabIndex = 242
+        '
+        'rdoE
+        '
+        Me.rdoE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoE.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.rdoE.Location = New System.Drawing.Point(197, 1)
+        Me.rdoE.Name = "rdoE"
+        Me.rdoE.Size = New System.Drawing.Size(46, 18)
+        Me.rdoE.TabIndex = 8
+        Me.rdoE.Tag = "1"
+        Me.rdoE.Text = "응급"
+        Me.rdoE.UseCompatibleTextRendering = True
         '
         'rdoI
         '
         Me.rdoI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoI.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.rdoI.Location = New System.Drawing.Point(140, 1)
+        Me.rdoI.Location = New System.Drawing.Point(135, 1)
         Me.rdoI.Name = "rdoI"
         Me.rdoI.Size = New System.Drawing.Size(46, 18)
         Me.rdoI.TabIndex = 7
@@ -807,7 +812,7 @@ Partial Class FGB14
         Me.cboDept.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboDept.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.cboDept.FormattingEnabled = True
-        Me.cboDept.Location = New System.Drawing.Point(1026, 25)
+        Me.cboDept.Location = New System.Drawing.Point(1070, 25)
         Me.cboDept.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDept.MaxDropDownItems = 20
         Me.cboDept.Name = "cboDept"
@@ -821,7 +826,7 @@ Partial Class FGB14
         Me.lblDept.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblDept.ForeColor = System.Drawing.Color.White
         Me.lblDept.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblDept.Location = New System.Drawing.Point(945, 25)
+        Me.lblDept.Location = New System.Drawing.Point(989, 25)
         Me.lblDept.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDept.Name = "lblDept"
         Me.lblDept.Size = New System.Drawing.Size(80, 21)
@@ -834,7 +839,7 @@ Partial Class FGB14
         Me.cboWard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboWard.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.cboWard.FormattingEnabled = True
-        Me.cboWard.Location = New System.Drawing.Point(1026, 25)
+        Me.cboWard.Location = New System.Drawing.Point(1070, 25)
         Me.cboWard.Margin = New System.Windows.Forms.Padding(1)
         Me.cboWard.MaxDropDownItems = 20
         Me.cboWard.Name = "cboWard"
@@ -847,7 +852,7 @@ Partial Class FGB14
         Me.lblWard.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblWard.ForeColor = System.Drawing.Color.Black
         Me.lblWard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblWard.Location = New System.Drawing.Point(945, 25)
+        Me.lblWard.Location = New System.Drawing.Point(989, 25)
         Me.lblWard.Margin = New System.Windows.Forms.Padding(1)
         Me.lblWard.Name = "lblWard"
         Me.lblWard.Size = New System.Drawing.Size(80, 21)
@@ -967,7 +972,7 @@ Partial Class FGB14
         Me.Label11.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Black
         Me.Label11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label11.Location = New System.Drawing.Point(1057, 2)
+        Me.Label11.Location = New System.Drawing.Point(1186, 2)
         Me.Label11.Margin = New System.Windows.Forms.Padding(1)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(80, 21)
@@ -981,12 +986,51 @@ Partial Class FGB14
         Me.cboAboRh.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.cboAboRh.FormattingEnabled = True
         Me.cboAboRh.Items.AddRange(New Object() {"", "A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"})
-        Me.cboAboRh.Location = New System.Drawing.Point(1138, 2)
+        Me.cboAboRh.Location = New System.Drawing.Point(1267, 2)
         Me.cboAboRh.Margin = New System.Windows.Forms.Padding(1)
         Me.cboAboRh.MaxDropDownItems = 20
         Me.cboAboRh.Name = "cboAboRh"
         Me.cboAboRh.Size = New System.Drawing.Size(92, 20)
         Me.cboAboRh.TabIndex = 257
+        '
+        'chkBldBranchSrh
+        '
+        Me.chkBldBranchSrh.AutoSize = True
+        Me.chkBldBranchSrh.Checked = True
+        Me.chkBldBranchSrh.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkBldBranchSrh.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.chkBldBranchSrh.Location = New System.Drawing.Point(624, 4)
+        Me.chkBldBranchSrh.Name = "chkBldBranchSrh"
+        Me.chkBldBranchSrh.Size = New System.Drawing.Size(149, 16)
+        Me.chkBldBranchSrh.TabIndex = 258
+        Me.chkBldBranchSrh.Text = "묶음 성분제재 조회 "
+        Me.chkBldBranchSrh.UseVisualStyleBackColor = True
+        '
+        'cboBranchComcd
+        '
+        Me.cboBranchComcd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboBranchComcd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.cboBranchComcd.FormattingEnabled = True
+        Me.cboBranchComcd.Location = New System.Drawing.Point(864, 2)
+        Me.cboBranchComcd.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboBranchComcd.MaxDropDownItems = 20
+        Me.cboBranchComcd.Name = "cboBranchComcd"
+        Me.cboBranchComcd.Size = New System.Drawing.Size(297, 20)
+        Me.cboBranchComcd.TabIndex = 259
+        '
+        'lblBranchComcd
+        '
+        Me.lblBranchComcd.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblBranchComcd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblBranchComcd.ForeColor = System.Drawing.Color.Black
+        Me.lblBranchComcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblBranchComcd.Location = New System.Drawing.Point(776, 2)
+        Me.lblBranchComcd.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblBranchComcd.Name = "lblBranchComcd"
+        Me.lblBranchComcd.Size = New System.Drawing.Size(86, 21)
+        Me.lblBranchComcd.TabIndex = 260
+        Me.lblBranchComcd.Text = "묶음 성분제제"
+        Me.lblBranchComcd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FGB14
         '
@@ -994,6 +1038,9 @@ Partial Class FGB14
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1444, 875)
+        Me.Controls.Add(Me.lblBranchComcd)
+        Me.Controls.Add(Me.cboBranchComcd)
+        Me.Controls.Add(Me.chkBldBranchSrh)
         Me.Controls.Add(Me.cboAboRh)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Panel2)
@@ -1110,4 +1157,8 @@ Partial Class FGB14
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents cboAboRh As System.Windows.Forms.ComboBox
+    Friend WithEvents chkBldBranchSrh As System.Windows.Forms.CheckBox
+    Friend WithEvents cboBranchComcd As System.Windows.Forms.ComboBox
+    Friend WithEvents lblBranchComcd As System.Windows.Forms.Label
+    Friend WithEvents rdoE As System.Windows.Forms.RadioButton
 End Class

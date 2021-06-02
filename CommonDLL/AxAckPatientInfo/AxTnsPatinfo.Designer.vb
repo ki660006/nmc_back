@@ -22,46 +22,46 @@ Partial Class AxTnsPatinfo
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AxTnsPatinfo))
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.txtRmk = New System.Windows.Forms.TextBox
-        Me.pnlBldResult = New System.Windows.Forms.Panel
-        Me.spdPatInfo = New AxFPSpreadADO.AxfpSpread
-        Me.btnSebu = New CButtonLib.CButton
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.lblDiagNm = New System.Windows.Forms.Label
-        Me.txtSRmk = New System.Windows.Forms.TextBox
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.lblRmk = New System.Windows.Forms.Label
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.lblPhone = New System.Windows.Forms.Label
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.lblOdate = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.lblEmer = New System.Windows.Forms.Label
-        Me.lblDoctor = New System.Windows.Forms.Label
-        Me.lblWd = New System.Windows.Forms.Label
-        Me.lblSr = New System.Windows.Forms.Label
-        Me.lblIdate = New System.Windows.Forms.Label
-        Me.lblDeptCd = New System.Windows.Forms.Label
-        Me.lblOrdDate = New System.Windows.Forms.Label
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.lblInfInfo = New System.Windows.Forms.Label
-        Me.lblJumino = New System.Windows.Forms.Label
-        Me.lblNation = New System.Windows.Forms.Label
-        Me.lblAbo = New System.Windows.Forms.Label
-        Me.lblWeight = New System.Windows.Forms.Label
-        Me.lblHeight = New System.Windows.Forms.Label
-        Me.lblSexAge = New System.Windows.Forms.Label
-        Me.lblPatNm = New System.Windows.Forms.Label
-        Me.lblRegno = New System.Windows.Forms.Label
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtRmk = New System.Windows.Forms.TextBox()
+        Me.pnlBldResult = New System.Windows.Forms.Panel()
+        Me.spdPatInfo = New AxFPSpreadADO.AxfpSpread()
+        Me.btnSebu = New CButtonLib.CButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblDiagNm = New System.Windows.Forms.Label()
+        Me.txtSRmk = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.lblRmk = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.lblPhone = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblOdate = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblEmer = New System.Windows.Forms.Label()
+        Me.lblDoctor = New System.Windows.Forms.Label()
+        Me.lblWd = New System.Windows.Forms.Label()
+        Me.lblSr = New System.Windows.Forms.Label()
+        Me.lblIdate = New System.Windows.Forms.Label()
+        Me.lblDeptCd = New System.Windows.Forms.Label()
+        Me.lblOrdDate = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.lblInfInfo = New System.Windows.Forms.Label()
+        Me.lblJumino = New System.Windows.Forms.Label()
+        Me.lblNation = New System.Windows.Forms.Label()
+        Me.lblAbo = New System.Windows.Forms.Label()
+        Me.lblWeight = New System.Windows.Forms.Label()
+        Me.lblHeight = New System.Windows.Forms.Label()
+        Me.lblSexAge = New System.Windows.Forms.Label()
+        Me.lblPatNm = New System.Windows.Forms.Label()
+        Me.lblRegno = New System.Windows.Forms.Label()
         Me.cmuLink = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuCopy_regno = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuCopy_regno = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.pnlBldResult.SuspendLayout()
         CType(Me.spdPatInfo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,7 +141,7 @@ Partial Class AxTnsPatinfo
         Me.spdPatInfo.Location = New System.Drawing.Point(0, 0)
         Me.spdPatInfo.Name = "spdPatInfo"
         Me.spdPatInfo.OcxState = CType(resources.GetObject("spdPatInfo.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdPatInfo.Size = New System.Drawing.Size(862, 70)
+        Me.spdPatInfo.Size = New System.Drawing.Size(861, 70)
         Me.spdPatInfo.TabIndex = 0
         '
         'btnSebu
@@ -176,12 +176,10 @@ Partial Class AxTnsPatinfo
         Me.btnSebu.Name = "btnSebu"
         Me.btnSebu.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnSebu.SideImage = Nothing
-        Me.btnSebu.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSebu.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnSebu.Size = New System.Drawing.Size(99, 25)
         Me.btnSebu.TabIndex = 194
         Me.btnSebu.Text = "상세조회"
-        Me.btnSebu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSebu.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSebu.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -568,13 +566,13 @@ Partial Class AxTnsPatinfo
         '
         Me.cmuLink.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy_regno})
         Me.cmuLink.Name = "cmuRstList"
-        Me.cmuLink.Size = New System.Drawing.Size(153, 26)
+        Me.cmuLink.Size = New System.Drawing.Size(151, 26)
         Me.cmuLink.Text = "상황에 맞는 메뉴"
         '
         'mnuCopy_regno
         '
         Me.mnuCopy_regno.Name = "mnuCopy_regno"
-        Me.mnuCopy_regno.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCopy_regno.Size = New System.Drawing.Size(150, 22)
         Me.mnuCopy_regno.Text = "등록번호 복사"
         '
         'AxTnsPatinfo

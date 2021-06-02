@@ -51,5 +51,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.350 --> 2019/11/20 : 배포
 'Version 3.1.10.351 --> 2020/08/05 : LUKHAN >> 미채혈바코드, 검사분야 표시 수정
 'Version 3.1.10.352 --> 2020/11/23 : LUKHAN, SATO 자체응급 바코드 R표시, 크기조정2
+'Version 3.1.10.353 --> 2020/12/10 : LUKHAN 바코드 특정장비 리딩문제로 원복
+'Version 3.1.10.354 --> 2020/12/22 : LUKHAN 바코드 특정장비 리딩문제로 원복
+'Version 3.1.10.355 --> 2021/01/27 : 접수시 바코드 출력되도록 수정 
 
-<Assembly: AssemblyVersion("3.1.10.352")> 
+<Assembly: AssemblyVersion("3.1.10.355")> 

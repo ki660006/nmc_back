@@ -72,5 +72,11 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.370 --> 2020/08/04 : 자체응급 표시
 'Version 3.1.10.371 --> 2020/08/04 : 신종코로나 I/F 과거력 조회 추가
 'Version 3.1.10.372 --> 2020/08/06 : 이미지 일괄등록 전체선택 추가
+'Version 3.1.10.373 --> 2021/03/16 : 검사자간 공유사항, wbc diffcount log 생성 개발 완료 배포 
+'Version 3.1.10.374 --> 2021/04/19 : QC데이터 연동
+'Version 3.1.10.375 --> 2021/04/20 : anchor문제로 재배포
+'Version 3.1.10.376 --> 2021/04/20 : anchor문제로 재배포
+'Version 3.1.10.377 --> 2021/05/17 : 결과 소요일 컬럼 추가 
+'Version 3.1.10.378 --> 2021/05/31 : 담당자 QC데이터 연동 조회 쿼리 수정
 
-<Assembly: AssemblyVersion("3.1.10.372")> 
+<Assembly: AssemblyVersion("3.1.10.378")> 

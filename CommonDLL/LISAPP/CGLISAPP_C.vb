@@ -954,8 +954,8 @@ Namespace APP_C
 
                     Dim sReturn As String = ""
 
-                    'sReturn = ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode)
-                    sReturn = (New WEBSERVER.CGWEB_C).ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode, sPartGbn)
+                    ' sReturn = ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode)
+                    sReturn = (New WEBSERVER.CGWEB_C).ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode, sPartGbn) '
 
                     If sReturn <> "" Then
                         For Each collData As STU_CollectInfo In listcollData

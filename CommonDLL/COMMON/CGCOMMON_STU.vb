@@ -60,7 +60,7 @@ Namespace SVar
         Public COLLDT As String = ""
         Public SPCFLG As String = ""
 
-        Public ERPRTYN As String = "" '<<<20180802 응급 프린트 여부 
+        Public ERPRTYN As String = "" '<<<20180802 자체응급 프린트 여부 
 
     End Class
     Public Class REFLIST
@@ -183,7 +183,7 @@ Namespace SVar
         Public BCCNT As String = ""
         Public CPRTGBN As String = ""
 
-        Public ERPRTYN As String = "" '<<<20180801 응급바코드 추가 
+        Public ERPRTYN As String = "" '<<<20180801 자체응급바코드 추가 
     End Class
 
     Public Class STU_DiagInfo
@@ -364,8 +364,9 @@ Namespace SVar
         Public BCTYPE As String = ""        '-- 출력양식
         Public HREGNO As String = ""        '-- 
         Public BCNO_MB As String = ""       '-- 미생물인 경우
-        Public ERPRTYN As String = ""       '-- 응급프린트 <<<20180802
+        Public ERPRTYN As String = ""       '-- 자체응급프린트 <<<20180802
         Public ABOCHK As String = ""        '-- 혈액형 여부 체크 2019-04-19
+        Public TESTCD As String = ""        '-- 혈액형 여부 체크 2019-04-19
     End Class
 
     Public Class STU_BLDLABEL
@@ -749,5 +750,25 @@ Namespace SVar
         Public TNMD As String = ""
         Public SEQ As String = ""
     End Class
+
+    '20210312 검사결과 등록 할때 --------------------
+    '//// 검사코드 info 로그용 
+    Public Class TESTINFO_LOG
+        Public BCNO As String = ""              '-검사코드 
+        Public TESTCD As String = ""            '-검사코드 
+        Public SPCCD As String = ""             '-검체코드
+        Public TNMD As String = ""              '-검사명
+        Public PARTCD As String = ""            '-검사분야
+        Public SLIPCD As String = ""            '-검사분야
+        Public VIEWRST As String = ""           '-결과값
+        Public MWID As String = ""              '-중간보고자id
+        Public MWDT As String = ""              '-중간보고일시
+        Public FNID As String = ""              '-최종보고자id
+        Public FNDT As String = ""              '-최종보고일시
+
+        Public CHKMW As Boolean = False         '-중간보고 체크박스 체크 여부
+        Public ProcessNum As String = ""         '-1. 중간보고 눌렀을 때 2. 중간보고 등록 후에 
+    End Class
+    '-----------------------------------------------------
 
 End Namespace

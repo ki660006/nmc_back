@@ -8,6 +8,8 @@ Imports COMMON.CommFN
 Imports COMMON.SVar
 Imports COMMON.CommLogin
 Imports COMMON.CommLogin.LOGIN
+Imports LISM.FGM01
+
 
 Public Class FGM02
     Inherits System.Windows.Forms.Form
@@ -434,6 +436,17 @@ Public Class FGM02
                                     .Text = r_dt.Rows(intIx1).Item(intIx2 - 1).ToString.Trim
                                 End If
                         End Select
+
+
+
+                        If r_dt.Columns(intIx2 - 1).ColumnName.ToLower() = "rmkyn" Then
+                            If r_dt.Rows(intIx1).Item(intIx2 - 1).ToString.ToUpper = "Y" Then
+                                .Row = intIx1 + 1
+                                For iX As Integer = 1 To 8
+                                    .Col = iX : .ForeColor = Color.Blue
+                                Next
+                            End If
+                        End If
                     Next
 
                     strBcno = r_dt.Rows(intIx1).Item("bcno").ToString
@@ -456,7 +469,7 @@ Public Class FGM02
         Try
             Dim sTmp As String = ""
 
-            dt = LISAPP.COMM.cdfn.fnGet_Slip_List(dtpDateS.Text, , , True)
+            dt = LISAPP.COMM.CdFn.fnGet_Slip_List(dtpDateS.Text, , , True)
 
             cboSlip.Items.Clear()
             For ix As Integer = 0 To dt.Rows.Count - 1
@@ -479,7 +492,7 @@ Public Class FGM02
 
     Private Sub sbDisplay_WkGrp()
 
-        Dim dt As DataTable = LISAPP.COMM.cdfn.fnGet_WKGrp_List(Ctrl.Get_Code(cboSlip))
+        Dim dt As DataTable = LISAPP.COMM.CdFn.fnGet_WKGrp_List(Ctrl.Get_Code(cboSlip))
 
         cboWkGrp.Items.Clear()
 
@@ -492,7 +505,7 @@ Public Class FGM02
 
     Private Sub sbDisplay_TGrp() ''' 검사그룹조회 
 
-        Dim dt As DataTable = LISAPP.COMM.cdfn.fnGet_TGrp_List(, True)
+        Dim dt As DataTable = LISAPP.COMM.CdFn.fnGet_TGrp_List(, True)
 
         cboTGrp.Items.Clear()
         cboTGrp.Items.Add("[  ] 전체")
@@ -522,7 +535,7 @@ Public Class FGM02
                 If cboQrygbn.Text = "검사그룹" Then sWGrpCd = Ctrl.Get_Code(cboWkGrp)
             End If
 
-            Dim dt As DataTable = LISAPP.COMM.cdfn.fnGet_Spc_List("", sPartCd, sSlipCd, sTGrpCd, sWGrpCd, "", "")
+            Dim dt As DataTable = LISAPP.COMM.CdFn.fnGet_Spc_List("", sPartCd, sSlipCd, sTGrpCd, sWGrpCd, "", "")
 
             Me.cboSpcCd.Items.Clear()
             For ix As Integer = 0 To dt.Rows.Count - 1
@@ -1465,8 +1478,8 @@ Public Class FGM02
         Me.btnQuery.Corners.UpperRight = CType(6, Short)
         Me.btnQuery.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnQuery.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        Me.btnQuery.FocalPoints.CenterPtX = 0.5416667!
-        Me.btnQuery.FocalPoints.CenterPtY = 0.16!
+        Me.btnQuery.FocalPoints.CenterPtX = 0.5104167!
+        Me.btnQuery.FocalPoints.CenterPtY = 0.12!
         Me.btnQuery.FocalPoints.FocusPtX = 0.0!
         Me.btnQuery.FocalPoints.FocusPtY = 0.0!
         DesignerRectTracker2.IsActive = False
@@ -1493,7 +1506,7 @@ Public Class FGM02
         'btnExcel
         '
         Me.btnExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker3.IsActive = True
+        DesignerRectTracker3.IsActive = False
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExcel.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -1707,7 +1720,7 @@ Public Class FGM02
         'btnClear
         '
         Me.btnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker13.IsActive = False
+        DesignerRectTracker13.IsActive = True
         DesignerRectTracker13.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker13.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker13
         CBlendItems7.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -2269,6 +2282,32 @@ Public Class FGM02
 
             spdSpcInfo.ReDraw = True
             sbSet_RstcdInfo(sTestCds.Replace("|", ","), sWkGrpCd)   ' 검사항목별 결과코드 조회
+            Dim rsRstFlg As String = ""
+            Dim rstnullflg As String = ""
+            Dim rstregflg As String = ""
+            Dim rstfnlflg As String = ""
+
+            '20201216 jhs 결과 입력 내용 수정 
+            If chkRstNull.Checked = True Then
+                rstnullflg = "Y"
+            End If
+            If chkRstReg.Checked = True Then
+                rstregflg = "Y"
+            End If
+            If chkRstFn.Checked = True Then
+                rstfnlflg = "Y"
+            End If
+
+            '전체 선택 조건 내용 변경
+            If rstnullflg = "Y" And rstregflg = "Y" And rstfnlflg = "Y" Then
+                rsRstFlg = "A"
+            Else
+                rsRstFlg = "NOT" '조건추가되면 변경
+            End If
+
+
+            sbDisplay_Search_Color(rsRstFlg, spdSpcInfo)
+            '--------------------------------------
 
             DS_ProgressBar.pvisible = False
 
@@ -2278,15 +2317,10 @@ Public Class FGM02
 
 
             With spdSpcInfo
-
-              
-
                 chkSel.Checked = True
                 For intRow As Integer = 1 To .MaxRows
                     .Row = intRow
-
                     .Col = .GetColFromID("chk") : .Text = "1"
-
                 Next
             End With
 
@@ -2310,6 +2344,107 @@ Public Class FGM02
             MsgBox(msFile & sFn & vbCrLf & ex.Message)
         End Try
 
+    End Sub
+    Private Sub sbDisplay_Search_Color(ByVal rsOpt As String, ByVal r_spd As AxFPSpreadADO.AxfpSpread)
+        Dim sFn As String = "sbDisplay_Search_Color"
+
+        '전체인 경우에만 완/미완 색상
+        'If Not rsOpt.Substring(0, 1) = "A" Then
+        '    Return
+        'End If
+
+        'Dim spd As AxFPSpreadADO.AxfpSpread = Me.spdList
+
+        Try
+            With r_spd
+                .ReDraw = False
+
+                For i As Integer = 1 To .MaxRows
+
+                    '<< JJH 검사상태=전체 일때만 타도록 (완/미완 색표시)
+                    If rsOpt.Substring(0, 1) = "A" Then
+                        Dim sRstFlg As String = Ctrl.Get_Code(r_spd, "rstflagyn", i)
+
+                        '미완 --> BackColor 변경
+                        If sRstFlg = "Y" Then
+                            .Col = 1 : .Col2 = 8 '.Col2 = .MaxCols
+                            .Row = i : .Row2 = i
+                            .BlockMode = True : .BackColor = Ctrl.color_LightRed : .BlockMode = False
+                        End If
+                    End If
+
+
+                    '<< JJH Field, MTB, NTM Color 설정   function  -->  fn_get_afbculture_color
+                    'If Ctrl.Get_Code(cboSlip) = "M2" Then
+
+                    'TS-----------------------------------
+                    Dim sColorTS As String = ""
+                    .Row = i : .Row2 = i
+                    .Col = .GetColFromID("colorts") : sColorTS = .Text
+
+                    If sColorTS = "Field" Then
+                        .Row = i : .Row2 = i
+                        .Col = .GetColFromID("bcno") : .Col2 = .GetColFromID("bcno")
+                        .BlockMode = True : .BackColor = Color.Yellow : .BlockMode = False
+                    End If
+
+                    'LC-------------------
+                    Dim sColorLC As String = ""
+                    .Row = i
+                    .Col = .GetColFromID("colorlc") : sColorLC = .Text
+
+                    If sColorLC = "MTB" Then
+                        .Row = i : .Row2 = i
+                        .Col = .GetColFromID("spcnmd") : .Col2 = .GetColFromID("spcnmd")
+                        .BlockMode = True : .BackColor = Color.Orange : .BlockMode = False
+                    End If
+
+                    'TC-------------------
+                    Dim sColorTC As String = ""
+                    .Row = i
+                    .Col = .GetColFromID("colortc") : sColorTC = .Text
+
+                    If sColorTC = "NTM" Then
+                        .Row = i : .Row2 = i
+                        .Col = .GetColFromID("regno") : .Col2 = .GetColFromID("regno")
+                        .BlockMode = True : .BackColor = Color.SkyBlue : .BlockMode = False
+                    End If
+
+                    'Select Case sColor
+
+                    '    Case "Field"
+
+                    '        .Col = 1 : .Col2 = .MaxCols
+                    '        .Row = i : .Row2 = i
+                    '        .BlockMode = True : .BackColor = Color.Yellow : .BlockMode = False
+
+                    '    Case "MTB"
+
+                    '        .Col = 1 : .Col2 = .MaxCols
+                    '        .Row = i : .Row2 = i
+                    '        .BlockMode = True : .BackColor = Color.Orange : .BlockMode = False
+
+                    '    Case "NTM"
+
+                    '        .Col = 1 : .Col2 = .MaxCols
+                    '        .Row = i : .Row2 = i
+                    '        .BlockMode = True : .BackColor = Color.SkyBlue : .BlockMode = False
+
+                    'End Select
+                    'End If
+                    '>>
+
+                Next
+            End With
+
+        Catch ex As Exception
+            Fn.log(msFile + sFn, Err)
+            MsgBox(msFile + sFn + vbCrLf + ex.Message)
+
+        Finally
+            r_spd.ReDraw = True
+
+        End Try
     End Sub
 
     Private Sub spdSpcInfo_KeyUpEvent(ByVal sender As Object, ByVal e As AxFPSpreadADO._DSpreadEvents_KeyUpEvent) Handles spdSpcInfo.KeyUpEvent
@@ -2933,4 +3068,6 @@ Public Class FGM02
         Me.dtpDateE.Value = CDate(Format(DateAdd(DateInterval.Day, -1 * CInt(sDay), Now), "yyyy-MM-dd").ToString + " 23:59:59")
 
     End Sub
+
+
 End Class

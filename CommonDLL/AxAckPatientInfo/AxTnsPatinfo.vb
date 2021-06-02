@@ -183,7 +183,10 @@ Public Class AxTnsPatinfo
                     .Col = i + 1
                     .set_ColWidth(.Col, 11)
                     .Row = 0 : .Text = dt.Rows(i).Item("tnmd").ToString.Trim
-                    .Row = 2 : .Text = dt.Rows(i).Item("fndt").ToString.Trim
+                    '20210420 jhs 접수일시 기준으로 해달라고 하여 변경
+                    '.Row = 2 : .Text = dt.Rows(i).Item("fndt").ToString.Trim
+                    .Row = 2 : .Text = dt.Rows(i).Item("tkdt").ToString.Trim
+                    '-----------------------------------------------------------
                     .Row = 1 : .Text = dt.Rows(i).Item("viewrst").ToString.Trim : .ForeColor = Drawing.Color.Navy : .FontBold = True : .set_RowHeight(1, 11.9)
                     .TypeHAlign = FPSpreadADO.TypeHAlignConstants.TypeHAlignCenter
 

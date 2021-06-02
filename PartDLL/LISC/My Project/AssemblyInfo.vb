@@ -39,5 +39,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.333 --> 2019/08/20 : 병동조회 속도 개선
 'Version 3.1.10.334 --> 2019/11/29 : 11/29배포
 'Version 3.1.10.335 --> 2020/04/13 : 외래채혈화면 tabindex 조정
+'Version 3.1.10.336 --> 2021/03/20 : 외래채혈 주민등록번호 조회시 오류 수정
+'Version 3.1.10.337 --> 2021/03/22 : 외래채혈 환자명으로 조회 시 오류 수정
 
-<Assembly: AssemblyVersion("3.1.10.335")> 
+<Assembly: AssemblyVersion("3.1.10.337")> 
+

@@ -206,6 +206,7 @@ Namespace CommFN
 
         End Sub
 
+
         ' Error 로그
         Public Shared Sub log(ByVal sLog As String, ByVal e As String)
             Dim sFile As String
@@ -229,6 +230,35 @@ Namespace CommFN
             sw.Close()
 
         End Sub
+        '20210312 jhs 검사코드 에 대한 로그 남길때 사용하는 로그 함수 (wbc diffcount에서 사용하고있음 20210312)
+        ' 검사 로그
+        Public Shared Sub log(ByVal rsTestInfoList As ArrayList)
+            Dim sFile As String
+            Dim sDir As String
+
+            sDir = Application.StartupPath & "\TestCdLog"
+
+            If Dir(sDir, FileAttribute.Directory) = "" Then MkDir(sDir)
+
+            sFile = sDir & "\TestDate" & Format(Now, "yyyy-MM-dd") & ".txt"
+            Dim sw As New StreamWriter(sFile, True, System.Text.Encoding.UTF8)
+
+            sw.WriteLine("--------------------------------------------------------------------------")
+            sw.WriteLine(Now())
+            '-----------------------------------------------------------
+            '형식 
+            '검체번호/검사코드/검체코드/분야/결과값
+            '/중간보고자/중간보고일시/최종보고자/최종보고일시/중간보고체크여부/1.저장 전, 2.저장 후
+            '-----------------------------------------------------------
+            For i = 0 To rsTestInfoList.Count - 1
+                Dim testinfo As TESTINFO_LOG = CType(rsTestInfoList(i), TESTINFO_LOG)
+                sw.WriteLine(testinfo.BCNO + "/" + testinfo.TESTCD + "/" + testinfo.SPCCD + "/" + testinfo.PARTCD + testinfo.SLIPCD + "/" + testinfo.VIEWRST + "/" + testinfo.MWID + "/" + testinfo.MWDT + "/" + testinfo.FNID + "/" + testinfo.FNDT + "/" + testinfo.CHKMW.ToString + "/" + testinfo.ProcessNum)
+            Next
+            sw.WriteLine("--------------------------------------------------------------------------")
+            sw.Close()
+
+        End Sub
+        '----------------------------------------------------------------------------------
 
         ' Error 로그 ArrayList
         Public Shared Sub log(ByVal alLog As ArrayList, ByVal e As ErrObject)
@@ -1213,6 +1243,7 @@ Namespace CommFN
 
             End Try
         End Function
+       
 
         Public Shared Function Format_Day8ToDay10(ByVal rsDay As String) As String
             Dim sFn As String = "Function Format_Day8ToDay10"

@@ -95,48 +95,48 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxAckItemSave, Version=3.1.10.313, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AxAckItemSave, Version=3.1.10.314, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\AxAckItemSave\obj\Release\AxAckItemSave.dll</HintPath>
+      <HintPath>..\..\CommonDLL\AxAckItemSave\bin\x86\Release\AxAckItemSave.dll</HintPath>
     </Reference>
-    <Reference Include="AxAckResult, Version=3.1.10.348, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AxAckResult, Version=3.1.10.370, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\AxAckResult\obj\Release\AxAckResult.dll</HintPath>
+      <HintPath>..\..\CommonDLL\AxAckResult\bin\x86\Release\AxAckResult.dll</HintPath>
     </Reference>
-    <Reference Include="AxAckRichTextBox, Version=4.3.10.346, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AxAckRichTextBox, Version=4.3.10.347, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\AxAckRichTextBox\obj\Release\AxAckRichTextBox.dll</HintPath>
+      <HintPath>..\..\CommonDLL\AxAckRichTextBox\bin\x86\Release\AxAckRichTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="AxAckSortSpd, Version=3.1.10.100, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AxAckSortSpd, Version=3.1.10.101, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\AxAckSortSpd\obj\Release\AxAckSortSpd.dll</HintPath>
+      <HintPath>..\..\CommonDLL\AxAckSortSpd\bin\x86\Release\AxAckSortSpd.dll</HintPath>
     </Reference>
     <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AxInterop.FPSpreadADO.dll</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\AxInterop.FPSpreadADO.dll</HintPath>
     </Reference>
-    <Reference Include="cbuttonlib, Version=1.0.3675.34145, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="cbuttonlib" />
+    <Reference Include="DBORA, Version=3.1.10.324, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ACK@LIS\MainExe\Main\bin\cbuttonlib.dll</HintPath>
-    </Reference>
-    <Reference Include="DBORA, Version=3.1.10.322, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CommonDLL\DBORA\bin\Release\DBORA.dll</HintPath>
+      <HintPath>..\..\CommonDLL\DBORA\bin\x86\Release\DBORA.dll</HintPath>
     </Reference>
     <Reference Include="Interop.Excel, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ACK@LIS\MainExe\Main\bin\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Dll&amp;OCX\Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\x86\Debug\Interop.FPSpreadADO.dll</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\Interop.FPSpreadADO.dll</HintPath>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+    <Reference Include="Oracle.DataAccess, Version=2.111.6.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MainExe\Main\bin\Oracle.DataAccess.DLL</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\Oracle.DataAccess.DLL</HintPath>
     </Reference>
-    <Reference Include="RichTextBoxPrint, Version=4.3.10.342, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="RichTextBoxPrint">
+      <HintPath>..\..\CommonDLL\RichTextBoxPrint\bin\x86\Debug\RichTextBoxPrint.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

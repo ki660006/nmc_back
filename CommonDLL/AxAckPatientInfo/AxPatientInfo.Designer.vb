@@ -23,10 +23,16 @@ Partial Class AxPatientInfo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AxPatientInfo))
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.pnlInfo = New System.Windows.Forms.Panel()
         Me.lblOpDt_Label = New System.Windows.Forms.Label()
         Me.lblOpDt = New System.Windows.Forms.Label()
@@ -68,8 +74,14 @@ Partial Class AxPatientInfo
         Me.cmuLink = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuCopy_regno = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDiagNme = New System.Windows.Forms.Label()
+        Me.gbxUniqueComment = New System.Windows.Forms.GroupBox()
+        Me.btnShareCmtDel = New CButtonLib.CButton()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.btnShareCmtAdd = New CButtonLib.CButton()
+        Me.txtShareCmtCont = New System.Windows.Forms.TextBox()
         Me.pnlInfo.SuspendLayout()
         Me.cmuLink.SuspendLayout()
+        Me.gbxUniqueComment.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlInfo
@@ -152,9 +164,9 @@ Partial Class AxPatientInfo
         Me.lblBirthDay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblBirthDay.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblBirthDay.ForeColor = System.Drawing.Color.Black
-        Me.lblBirthDay.Location = New System.Drawing.Point(394, 58)
+        Me.lblBirthDay.Location = New System.Drawing.Point(383, 58)
         Me.lblBirthDay.Name = "lblBirthDay"
-        Me.lblBirthDay.Size = New System.Drawing.Size(88, 26)
+        Me.lblBirthDay.Size = New System.Drawing.Size(99, 26)
         Me.lblBirthDay.TabIndex = 183
         Me.lblBirthDay.Tag = "전화번호"
         Me.lblBirthDay.Text = "010-1234-5678"
@@ -216,12 +228,12 @@ Partial Class AxPatientInfo
         'btnDetailPatInfo
         '
         Me.btnDetailPatInfo.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker3.IsActive = False
-        DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDetailPatInfo.CenterPtTracker = DesignerRectTracker3
-        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
-        Me.btnDetailPatInfo.ColorFillBlend = CBlendItems2
+        DesignerRectTracker5.IsActive = False
+        DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDetailPatInfo.CenterPtTracker = DesignerRectTracker5
+        CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems3.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnDetailPatInfo.ColorFillBlend = CBlendItems3
         Me.btnDetailPatInfo.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnDetailPatInfo.Corners.All = CType(6, Short)
         Me.btnDetailPatInfo.Corners.LowerLeft = CType(6, Short)
@@ -234,9 +246,9 @@ Partial Class AxPatientInfo
         Me.btnDetailPatInfo.FocalPoints.CenterPtY = 0.56!
         Me.btnDetailPatInfo.FocalPoints.FocusPtX = 0.0!
         Me.btnDetailPatInfo.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker4.IsActive = False
-        DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDetailPatInfo.FocusPtTracker = DesignerRectTracker4
+        DesignerRectTracker6.IsActive = False
+        DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDetailPatInfo.FocusPtTracker = DesignerRectTracker6
         Me.btnDetailPatInfo.Image = Nothing
         Me.btnDetailPatInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnDetailPatInfo.ImageIndex = 0
@@ -245,12 +257,10 @@ Partial Class AxPatientInfo
         Me.btnDetailPatInfo.Name = "btnDetailPatInfo"
         Me.btnDetailPatInfo.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnDetailPatInfo.SideImage = Nothing
-        Me.btnDetailPatInfo.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDetailPatInfo.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnDetailPatInfo.Size = New System.Drawing.Size(99, 25)
         Me.btnDetailPatInfo.TabIndex = 175
         Me.btnDetailPatInfo.Text = "상세조회"
-        Me.btnDetailPatInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnDetailPatInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnDetailPatInfo.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -269,7 +279,7 @@ Partial Class AxPatientInfo
         'lblGubun
         '
         Me.lblGubun.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblGubun.BackColor = System.Drawing.Color.White
         Me.lblGubun.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblGubun.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -307,7 +317,7 @@ Partial Class AxPatientInfo
         'lblSogae
         '
         Me.lblSogae.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblSogae.BackColor = System.Drawing.Color.White
         Me.lblSogae.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblSogae.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -321,7 +331,7 @@ Partial Class AxPatientInfo
         'lblVip
         '
         Me.lblVip.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVip.BackColor = System.Drawing.Color.White
         Me.lblVip.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblVip.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -670,17 +680,139 @@ Partial Class AxPatientInfo
         Me.lblDiagNme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblDiagNme.Visible = False
         '
+        'gbxUniqueComment
+        '
+        Me.gbxUniqueComment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtDel)
+        Me.gbxUniqueComment.Controls.Add(Me.Label9)
+        Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtAdd)
+        Me.gbxUniqueComment.Controls.Add(Me.txtShareCmtCont)
+        Me.gbxUniqueComment.Location = New System.Drawing.Point(877, 0)
+        Me.gbxUniqueComment.Name = "gbxUniqueComment"
+        Me.gbxUniqueComment.Size = New System.Drawing.Size(136, 143)
+        Me.gbxUniqueComment.TabIndex = 177
+        Me.gbxUniqueComment.TabStop = False
+        '
+        'btnShareCmtDel
+        '
+        Me.btnShareCmtDel.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnShareCmtDel.BorderColor = System.Drawing.Color.DarkGray
+        DesignerRectTracker7.IsActive = False
+        DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtDel.CenterPtTracker = DesignerRectTracker7
+        CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems4.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnShareCmtDel.ColorFillBlend = CBlendItems4
+        Me.btnShareCmtDel.ColorFillSolid = System.Drawing.SystemColors.Control
+        Me.btnShareCmtDel.Corners.All = CType(6, Short)
+        Me.btnShareCmtDel.Corners.LowerLeft = CType(6, Short)
+        Me.btnShareCmtDel.Corners.LowerRight = CType(6, Short)
+        Me.btnShareCmtDel.Corners.UpperLeft = CType(6, Short)
+        Me.btnShareCmtDel.Corners.UpperRight = CType(6, Short)
+        Me.btnShareCmtDel.FillType = CButtonLib.CButton.eFillType.GradientLinear
+        Me.btnShareCmtDel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        Me.btnShareCmtDel.FocalPoints.CenterPtX = 1.0!
+        Me.btnShareCmtDel.FocalPoints.CenterPtY = 0.0!
+        Me.btnShareCmtDel.FocalPoints.FocusPtX = 0.0!
+        Me.btnShareCmtDel.FocalPoints.FocusPtY = 0.0!
+        DesignerRectTracker8.IsActive = False
+        DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtDel.FocusPtTracker = DesignerRectTracker8
+        Me.btnShareCmtDel.Image = Nothing
+        Me.btnShareCmtDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnShareCmtDel.ImageIndex = 0
+        Me.btnShareCmtDel.ImageSize = New System.Drawing.Size(16, 16)
+        Me.btnShareCmtDel.Location = New System.Drawing.Point(66, 20)
+        Me.btnShareCmtDel.Name = "btnShareCmtDel"
+        Me.btnShareCmtDel.Shape = CButtonLib.CButton.eShape.Rectangle
+        Me.btnShareCmtDel.SideImage = Nothing
+        Me.btnShareCmtDel.SideImageSize = New System.Drawing.Size(48, 48)
+        Me.btnShareCmtDel.Size = New System.Drawing.Size(71, 17)
+        Me.btnShareCmtDel.TabIndex = 177
+        Me.btnShareCmtDel.Text = "삭제"
+        Me.btnShareCmtDel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
+        Me.btnShareCmtDel.TextMargin = New System.Windows.Forms.Padding(0)
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(0, 2)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(63, 35)
+        Me.Label9.TabIndex = 176
+        Me.Label9.Text = "검사자간 공유사항"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btnShareCmtAdd
+        '
+        Me.btnShareCmtAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnShareCmtAdd.BorderColor = System.Drawing.Color.DarkGray
+        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtAdd.CenterPtTracker = DesignerRectTracker1
+        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems1.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnShareCmtAdd.ColorFillBlend = CBlendItems1
+        Me.btnShareCmtAdd.ColorFillSolid = System.Drawing.SystemColors.Control
+        Me.btnShareCmtAdd.Corners.All = CType(6, Short)
+        Me.btnShareCmtAdd.Corners.LowerLeft = CType(6, Short)
+        Me.btnShareCmtAdd.Corners.LowerRight = CType(6, Short)
+        Me.btnShareCmtAdd.Corners.UpperLeft = CType(6, Short)
+        Me.btnShareCmtAdd.Corners.UpperRight = CType(6, Short)
+        Me.btnShareCmtAdd.FillType = CButtonLib.CButton.eFillType.GradientLinear
+        Me.btnShareCmtAdd.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        Me.btnShareCmtAdd.FocalPoints.CenterPtX = 1.0!
+        Me.btnShareCmtAdd.FocalPoints.CenterPtY = 0.0!
+        Me.btnShareCmtAdd.FocalPoints.FocusPtX = 0.0!
+        Me.btnShareCmtAdd.FocalPoints.FocusPtY = 0.0!
+        DesignerRectTracker2.IsActive = False
+        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtAdd.FocusPtTracker = DesignerRectTracker2
+        Me.btnShareCmtAdd.Image = Nothing
+        Me.btnShareCmtAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnShareCmtAdd.ImageIndex = 0
+        Me.btnShareCmtAdd.ImageSize = New System.Drawing.Size(16, 16)
+        Me.btnShareCmtAdd.Location = New System.Drawing.Point(66, 2)
+        Me.btnShareCmtAdd.Name = "btnShareCmtAdd"
+        Me.btnShareCmtAdd.Shape = CButtonLib.CButton.eShape.Rectangle
+        Me.btnShareCmtAdd.SideImage = Nothing
+        Me.btnShareCmtAdd.SideImageSize = New System.Drawing.Size(48, 48)
+        Me.btnShareCmtAdd.Size = New System.Drawing.Size(69, 19)
+        Me.btnShareCmtAdd.TabIndex = 176
+        Me.btnShareCmtAdd.Text = "추가(수정)"
+        Me.btnShareCmtAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
+        Me.btnShareCmtAdd.TextMargin = New System.Windows.Forms.Padding(0)
+        '
+        'txtShareCmtCont
+        '
+        Me.txtShareCmtCont.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtShareCmtCont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtShareCmtCont.Location = New System.Drawing.Point(0, 35)
+        Me.txtShareCmtCont.Multiline = True
+        Me.txtShareCmtCont.Name = "txtShareCmtCont"
+        Me.txtShareCmtCont.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtShareCmtCont.Size = New System.Drawing.Size(136, 106)
+        Me.txtShareCmtCont.TabIndex = 176
+        '
         'AxPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Controls.Add(Me.gbxUniqueComment)
         Me.Controls.Add(Me.pnlInfo)
         Me.Name = "AxPatientInfo"
-        Me.Size = New System.Drawing.Size(877, 143)
+        Me.Size = New System.Drawing.Size(1016, 143)
         Me.pnlInfo.ResumeLayout(False)
         Me.pnlInfo.PerformLayout()
         Me.cmuLink.ResumeLayout(False)
+        Me.gbxUniqueComment.ResumeLayout(False)
+        Me.gbxUniqueComment.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -725,5 +857,10 @@ Partial Class AxPatientInfo
     Friend WithEvents mnuCopy_regno As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblOpDt_Label As System.Windows.Forms.Label
     Friend WithEvents lblOpDt As System.Windows.Forms.Label
+    Friend WithEvents gbxUniqueComment As System.Windows.Forms.GroupBox
+    Friend WithEvents btnShareCmtDel As CButtonLib.CButton
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents btnShareCmtAdd As CButtonLib.CButton
+    Friend WithEvents txtShareCmtCont As System.Windows.Forms.TextBox
 
 End Class

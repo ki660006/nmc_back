@@ -216,13 +216,28 @@ Public Class FGS15
 
                     '.Col = .GetColFromID("orddt") + ix + 1 : .Text = dt.Rows(ix).Item("tnmd").ToString
                     '.Col = .GetColFromID("orddt") + ix + 1 : .ColID = dt.Rows(ix).Item("testcd").ToString
+                    '20210201 JHS 보고자 보고일시 컬럼 추가 로 인한 수정
+                    'If .GetColFromID("tkdt") + ix + 1 > .MaxCols Then
+                    '    .MaxCols += 1
+                    'End If
 
-                    If .GetColFromID("tkdt") + ix + 1 > .MaxCols Then
+
+                    If .GetColFromID("fndt") + ix + 1 > .MaxCols Then
                         .MaxCols += 1
                     End If
 
-                    .Col = .GetColFromID("tkdt") + ix + 1 : .Text = dt.Rows(ix).Item("tnmd").ToString
-                    .Col = .GetColFromID("tkdt") + ix + 1 : .ColID = dt.Rows(ix).Item("testcd").ToString
+                    '.Col = .GetColFromID("tkdt") + ix + 1 : .Text = dt.Rows(ix).Item("tnmd").ToString
+                    '.Col = .GetColFromID("tkdt") + ix + 1 : .ColID = dt.Rows(ix).Item("testcd").ToString
+
+
+                    .Col = .GetColFromID("fndt") + ix + 1 : .Text = dt.Rows(ix).Item("tnmd").ToString
+                    .Col = .GetColFromID("fndt") + ix + 1 : .ColID = dt.Rows(ix).Item("testcd").ToString
+
+                    '----------------------------------------------
+
+
+
+
 
                 End With
             Next
@@ -231,7 +246,10 @@ Public Class FGS15
             Dim strBuf_Nm() As String = Me.txtSelTest.Tag.ToString.Split("^"c)(1).Split("|"c)
 
             'spdList.MaxCols = spdList.GetColFromID("orddt") + 1
-            spdList.MaxCols = spdList.GetColFromID("tkdt") + 1
+            ' spdList.MaxCols = spdList.GetColFromID("tkdt") + 1
+            '20210201 JHS 보고일자 추가로 인한 수정
+            spdList.MaxCols = spdList.GetColFromID("fndt") + 1
+            '----------------------------------------------
 
             For ix As Integer = 0 To strBuf_Cd.Length - 1
                 With spdList
@@ -242,12 +260,22 @@ Public Class FGS15
 
                     '.Col = .GetColFromID("orddt") + ix + 1 : .Text = strBuf_Nm(ix) : .ColID = strBuf_Cd(ix)
                     'If Me.cboTerm.Text <> "" Then .set_ColWidth(.GetColFromID("orddt") + ix + 1, Convert.ToInt32(Me.cboTerm.Text))
-                    If .GetColFromID("tkdt") + ix + 1 > .MaxCols Then
+
+                    '20210201 JHS 보고일자 추가로 인한 수정
+                    'If .GetColFromID("tkdt") + ix + 1 > .MaxCols Then
+                    '    .MaxCols += 1
+                    'End If
+
+                    '.Col = .GetColFromID("tkdt") + ix + 1 : .Text = strBuf_Nm(ix) : .ColID = strBuf_Cd(ix)
+                    'If Me.cboTerm.Text <> "" Then .set_ColWidth(.GetColFromID("tkdt") + ix + 1, Convert.ToInt32(Me.cboTerm.Text))
+
+
+                    If .GetColFromID("fndt") + ix + 1 > .MaxCols Then
                         .MaxCols += 1
                     End If
-
-                    .Col = .GetColFromID("tkdt") + ix + 1 : .Text = strBuf_Nm(ix) : .ColID = strBuf_Cd(ix)
-                    If Me.cboTerm.Text <> "" Then .set_ColWidth(.GetColFromID("tkdt") + ix + 1, Convert.ToInt32(Me.cboTerm.Text))
+                    .Col = .GetColFromID("fndt") + ix + 1 : .Text = strBuf_Nm(ix) : .ColID = strBuf_Cd(ix)
+                    If Me.cboTerm.Text <> "" Then .set_ColWidth(.GetColFromID("fndt") + ix + 1, Convert.ToInt32(Me.cboTerm.Text))
+                    '---------------------------------------------------
 
                 End With
             Next
@@ -359,11 +387,19 @@ Public Class FGS15
                     '    .Col = iCol : .Text = Convert.ToString(iCol - .GetColFromID("orddt"))
                     '    .ColID = Convert.ToString(iCol - .GetColFromID("orddt"))
                     'Next
-                    For iCol As Integer = .GetColFromID("tkdt") + 1 To .MaxCols
+                    '20210201 jhs 보고일시 추가 수정
+                    'For iCol As Integer = .GetColFromID("tkdt") + 1 To .MaxCols
+                    '    .Row = 0
+                    '    .Col = iCol : .Text = Convert.ToString(iCol - .GetColFromID("tkdt"))
+                    '    .ColID = Convert.ToString(iCol - .GetColFromID("tkdt"))
+                    'Next
+
+                    For iCol As Integer = .GetColFromID("fndt") + 1 To .MaxCols
                         .Row = 0
-                        .Col = iCol : .Text = Convert.ToString(iCol - .GetColFromID("tkdt"))
-                        .ColID = Convert.ToString(iCol - .GetColFromID("tkdt"))
+                        .Col = iCol : .Text = Convert.ToString(iCol - .GetColFromID("fndt"))
+                        .ColID = Convert.ToString(iCol - .GetColFromID("fndt"))
                     Next
+                    '----------------------------------------
                 End With
                 If rsBcNo = "" Then
                     sbDisplay_Data_View(dt)
@@ -435,7 +471,10 @@ Public Class FGS15
 
                         iBcNo_Start_Row = .MaxRows
                         'iCol = .GetColFromID("orddt")
-                        iCol = .GetColFromID("tkdt") ' test
+                        'iCol = .GetColFromID("tkdt") 
+                        '20210201 jhs 보고자 보고일시 수정 추가
+                        iCol = .GetColFromID("fndt")
+                        '-----------------------------------------
                     End If
                     sBcNo = r_dt.Rows(ix).Item("bcno").ToString.Trim + r_dt.Rows(ix).Item("partslip").ToString.Trim
 
@@ -456,10 +495,19 @@ Public Class FGS15
                     .Col = .GetColFromID("slipcmt") : .Text = r_dt.Rows(ix).Item("slipcmt").ToString.Trim
                     .Col = .GetColFromID("orddt") : .Text = r_dt.Rows(ix).Item("orddt").ToString.Trim '2018-11-30 처방일자 추가
                     .Col = .GetColFromID("tkdt") : .Text = r_dt.Rows(ix).Item("tkdt").ToString.Trim '2019-03-25 접수일자 추가
+                    '20210201 jhs 보고자 보고일시 수정 추가 
+                    .Col = .GetColFromID("mwid") : .Text = r_dt.Rows(ix).Item("mwid").ToString.Trim
+                    .Col = .GetColFromID("mwdt") : .Text = r_dt.Rows(ix).Item("mwdt").ToString.Trim
+                    .Col = .GetColFromID("fnid") : .Text = r_dt.Rows(ix).Item("fnid").ToString.Trim
+                    .Col = .GetColFromID("fndt") : .Text = r_dt.Rows(ix).Item("fndt").ToString.Trim
+                    '--------------------------------------
 
                     .Row = iRow + 1 : .Row2 = iRow + 2
                     '.Col = .GetColFromID("orddt") + 1 : .Col2 = .MaxCols
-                    .Col = .GetColFromID("tkdt") + 1 : .Col2 = .MaxCols 'test
+                    '.Col = .GetColFromID("tkdt") + 1 : .Col2 = .MaxCols 
+                    '20210201 jhs 보고자 보고일시 수정 추가
+                    .Col = .GetColFromID("fndt") + 1 : .Col2 = .MaxCols
+                    '-----------------------------------------
                     .BlockMode = True
                     .ForeColor = Color.Blue
                     .BlockMode = False
@@ -544,7 +592,10 @@ Public Class FGS15
 
                         iBcNo_Start_Row = .MaxRows
                         'iCol = .GetColFromID("orddt")
-                        iCol = .GetColFromID("tkdt") ' 2019-03-25 접수일자
+                        'iCol = .GetColFromID("tkdt") ' 2019-03-25 접수일자
+                        '20210201 jhs 보고자 보고일시 수정 추가
+                        iCol = .GetColFromID("fndt") '+ 1 : .Col2 = .MaxCols 'test
+                        '-----------------------------------------
                     End If
 
                     sKeyNo = r_dt.Rows(iRow).Item("bcno").ToString.Trim + r_dt.Rows(iRow).Item("partslip").ToString.Trim
@@ -565,6 +616,12 @@ Public Class FGS15
                     .Col = .GetColFromID("slipcmt") : .Text = r_dt.Rows(iRow).Item("slipcmt").ToString.Trim
                     .Col = .GetColFromID("orddt") : .Text = r_dt.Rows(iRow).Item("orddt").ToString.Trim '2018-11-30 처방일자 추가
                     .Col = .GetColFromID("tkdt") : .Text = r_dt.Rows(iRow).Item("tkdt").ToString.Trim '2019-03-25 접수일자 추가
+                    '20210201 jhs 보고자 보고일시 수정 추가 
+                    .Col = .GetColFromID("mwid") : .Text = r_dt.Rows(iRow).Item("mwid").ToString.Trim
+                    .Col = .GetColFromID("mwdt") : .Text = r_dt.Rows(iRow).Item("mwdt").ToString.Trim
+                    .Col = .GetColFromID("fnid") : .Text = r_dt.Rows(iRow).Item("fnid").ToString.Trim
+                    .Col = .GetColFromID("fndt") : .Text = r_dt.Rows(iRow).Item("fndt").ToString.Trim
+                    '--------------------------------------
 
                     iCol = .GetColFromID(r_dt.Rows(iRow).Item("testcd").ToString.Trim)
                     If iCol > 0 Then
@@ -819,7 +876,10 @@ Public Class FGS15
         With spdList
             .MaxRows = 0
             '.MaxCols = .GetColFromID("orddt")
-            .MaxCols = .GetColFromID("tkdt")
+            '.MaxCols = .GetColFromID("tkdt")
+            '20210210 jhs 최종보고 일시 추가 
+            .MaxCols = .GetColFromID("fndt")
+            '---------------------------------
             .MaxCols += 6
         End With
     End Sub

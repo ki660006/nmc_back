@@ -500,85 +500,10 @@ Namespace APP_R
 
         End Function
 
-        '-- 장비별 검사리스트 조회
-        Public Shared Function fnGet_SpcList_Eq(ByVal rsEqCd As String, ByVal rsRstDt As String, _
-                                                ByVal rsEr As String, Optional ByVal rsRegNo As String = "") As DataTable
-            Dim sFn As String = "SectionListSelect(String, String, String,  String, String, String, String) As DataTable"
-            Try
-                Dim sSql As String = ""
-                Dim alParm As New ArrayList
-                Dim strWhere As String = ""
-
-                rsRstDt = rsRstDt.Replace("-", "")
-
-                sSql += "SELECT DISTINCT"
-                sSql += "       '검사장비' qrygbn, r.eqseqno, r.eqrack, r.eqpos, '' workno, j.regno, j.patnm,"
-                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
-                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno, j.statgbn,"
-                sSql += "       CASE WHEN j15.bcno is not null THEN 'Y' ELSE '' END eryn, " '<< JJH 자체응급
-                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) END deptcd,"
-                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn,"
-                sSql += "       MIN(NVL(r.rstflg, '0')) || MAX (NVL (r.rstflg, '0')) rstflg_t,"
-                'sSql += "       f.partcd || f.slipcd partslip,"
-                sSql += "       fn_ack_date_diff(MIN (r.wkdt), MIN(NVL(r.rstdt, s.sysdt)), '3') || '^' || MIN (NVL (f.prptmi, NVL (f.frptmi, ''))) tat,"
-                sSql += "       MAX(NVL(r.hlmark, ' ')) hl, MAX(NVL(r.panicmark, ' ')) pm, MAX(NVL(r.deltamark, ' ')) dm,"
-                sSql += "       MAX(NVL(r.alertmark, ' ')) am, MAX(NVL(r.criticalmark, ' ')) cm,"
-                sSql += "       MAX(NVL(r.eqflag, ' ')) eqflag, MAX(NVL(r.rerunflg, '0')) rerun"
-                sSql += "  FROM lj010m j, lr010m r, lf060m f,"
-                sSql += "       (SELECT TO_CHAR (SYSDATE, 'yyyymmddhh24miss') sysdt FROM DUAL) s"
-
-                sSql += "       , lj015m j15 "
-
-                sSql += " WHERE r.eqcd   = :eqcd"
-                sSql += "   AND r.rstdt >= :dates || '000000'"
-                sSql += "   AND r.rstdt <= :datee || '235959'"
-                sSql += "   AND j.bcno   = r.bcno"
-                sSql += "   AND j.spcflg = '4'"
-                sSql += "   AND j.bcno   = r.bcno"
-
-                alParm.Add(New OracleParameter("eqcd",  OracleDbType.Varchar2, rsEqCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsEqCd))
-                alParm.Add(New OracleParameter("dates",  OracleDbType.Varchar2, rsRstDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRstDt.Replace("-", "")))
-                alParm.Add(New OracleParameter("datee",  OracleDbType.Varchar2, rsRstDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRstDt.Replace("-", "")))
-
-                sSql += "   AND r.testcd  = f.testcd"
-                sSql += "   AND r.spccd   = f.spccd"
-                sSql += "   AND r.tkdt   >= f.usdt"
-                sSql += "   AND r.tkdt   <  f.uedt"
-                sSql += "   AND NVL(r.wkymd, ' ') <> ' '"
-                sSql += "   AND j.spcflg = '4'"
-                sSql += "   AND NVL(f.titleyn, '0') = '0'"
-                sSql += "   AND ("
-                sSql += "        CASE WHEN f.tcdgbn = 'C' THEN NVL (f.reqsub, '0') ELSE '1' END = '1' OR  NVL (r.orgrst, ' ') <> ' '"
-                sSql += "       )"
-
-                sSql += "   AND j.bcno = j15.bcno(+) "
-
-                If rsEr <> "" Then
-                    'sSql += "   AND NVL(j.statgbn, '0') <> '0'"
-                    sSql += "   AND (NVL(j.statgbn, '0') <> '0' or NVL(j15.bcno, 'N') <> 'N')"
-                End If
-
-
-                If rsRegNo <> "" Then
-                    sSql += "   AND j.regno = :regno"
-                    alParm.Add(New OracleParameter("regno",  OracleDbType.Varchar2, rsRegNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegNo))
-                End If
-
-                sSql += " GROUP BY r.eqseqno, r.eqrack, r.eqpos, r.tkdt, j.bcno, j.regno, j.patnm, j.iogbn, j.wardno, j.roomno, j.deptcd, j.statgbn, j15.bcno" ', f.partcd, f.slipcd"
-
-                DbCommand()
-                Return DbExecuteQuery(sSql, alParm)
-
-            Catch ex As Exception
-                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
-            End Try
-        End Function
-
         ' 검사그룹 검사리스트 조회 
         Public Shared Function fnGet_SpcList_TGrp(ByVal rsTGrpCds As String, ByVal rsTkDtS As String, ByVal rsTkDtE As String, _
                                                   ByVal rsEr As String, Optional ByVal rsRegNo As String = "") As DataTable
-            Dim sFn As String = "fnGet_SpcList_TGrp(String, ..., string) As DataTable"
+            Dim sFn As String = "fnGet_SpcList_TGrp(String, ..., string) As DataTable("")"
             Try
 
                 Dim oFn As New Fn
@@ -656,6 +581,93 @@ Namespace APP_R
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             End Try
         End Function
+        '-- 장비별 검사리스트 조회
+        Public Shared Function fnGet_SpcList_Eq(ByVal rsEqCd As String, ByVal rsRstDt As String, _
+                                                ByVal rsEr As String, Optional ByVal rsRegNo As String = "") As DataTable
+            Dim sFn As String = "SectionListSelect(String, String, String,  String, String, String, String) As DataTable"
+            Try
+                Dim sSql As String = ""
+                Dim alParm As New ArrayList
+                Dim strWhere As String = ""
+
+                rsRstDt = rsRstDt.Replace("-", "")
+
+                sSql += "SELECT DISTINCT"
+                sSql += "       '검사장비' qrygbn, r.eqseqno, r.eqrack, r.eqpos, '' workno, j.regno, j.patnm,"
+                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
+                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno, j.statgbn,"
+                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) END deptcd,"
+                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn,"
+                sSql += "       MIN(NVL(r.rstflg, '0')) || MAX (NVL (r.rstflg, '0')) rstflg_t,"
+                'sSql += "       f.partcd || f.slipcd partslip,"
+                sSql += "       fn_ack_date_diff(MIN (r.wkdt), MIN(NVL(r.rstdt, s.sysdt)), '3') || '^' || MIN (NVL (f.prptmi, NVL (f.frptmi, ''))) tat,"
+                sSql += "       MAX(NVL(r.hlmark, ' ')) hl, MAX(NVL(r.panicmark, ' ')) pm, MAX(NVL(r.deltamark, ' ')) dm,"
+                sSql += "       MAX(NVL(r.alertmark, ' ')) am, MAX(NVL(r.criticalmark, ' ')) cm,"
+                sSql += "       MAX(NVL(r.eqflag, ' ')) eqflag, MAX(NVL(r.rerunflg, '0')) rerun"
+                sSql += "  FROM lj010m j, lr010m r, lf060m f,"
+                sSql += "       (SELECT TO_CHAR (SYSDATE, 'yyyymmddhh24miss') sysdt FROM DUAL) s"
+                sSql += " WHERE r.eqcd   = :eqcd"
+                sSql += "   AND r.rstdt >= :dates || '000000'"
+                sSql += "   AND r.rstdt <= :datee || '235959'"
+                sSql += "   AND j.bcno   = r.bcno"
+                sSql += "   AND j.spcflg = '4'"
+                sSql += "   AND j.bcno   = r.bcno"
+
+                alParm.Add(New OracleParameter("eqcd", OracleDbType.Varchar2, rsEqCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsEqCd))
+                alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsRstDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRstDt.Replace("-", "")))
+                alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsRstDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRstDt.Replace("-", "")))
+
+                sSql += "   AND r.testcd  = f.testcd"
+                sSql += "   AND r.spccd   = f.spccd"
+                sSql += "   AND r.tkdt   >= f.usdt"
+                sSql += "   AND r.tkdt   <  f.uedt"
+                sSql += "   AND NVL(r.wkymd, ' ') <> ' '"
+                sSql += "   AND j.spcflg = '4'"
+                sSql += "   AND NVL(f.titleyn, '0') = '0'"
+                sSql += "   AND ("
+                sSql += "        CASE WHEN f.tcdgbn = 'C' THEN NVL (f.reqsub, '0') ELSE '1' END = '1' OR  NVL (r.orgrst, ' ') <> ' '"
+                sSql += "       )"
+
+                If rsEr <> "" Then sSql += "   AND NVL(j.statgbn, '0') <> '0'"
+
+                If rsRegNo <> "" Then
+                    sSql += "   AND j.regno = :regno"
+                    alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegNo))
+                End If
+
+                sSql += " GROUP BY r.eqseqno, r.eqrack, r.eqpos, r.tkdt, j.bcno, j.regno, j.patnm, j.iogbn, j.wardno, j.roomno, j.deptcd, j.statgbn" ', f.partcd, f.slipcd"
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '20210513 jhs QC장비 코드 가져오기 
+        '-- 장비별 검사리스트 조회
+        Public Shared Function fnGet_SpcList_Qceqcd(ByVal rsEqCd As String) As DataTable
+            Dim sFn As String = "SectionListSelect(String) As DataTable"
+            Try
+                Dim sSql As String = ""
+                Dim alParm As New ArrayList
+                Dim strWhere As String = ""
+
+                sSql += " "
+                sSql += "select distinct f7.qceqcd" + vbCrLf
+                sSql += "  from lf070m f7" + vbCrLf
+                sSql += " where f7.eqcd = '" + rsEqCd + "'" + vbCrLf
+                sSql += "   and f7.delflg = '0'" + vbCrLf
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '----------------------------------------------
 
         '-- 검사항목별 검사리스트 조회 
         Public Shared Function fnGet_SpcList_Test(ByVal rsTestCds As String, ByVal rsWkYmd As String, ByVal rsWkGrpCd As String, ByVal rsWkNoS As String, ByVal rsWkNoE As String, ByVal rsRstNullReg As String, ByVal rsTkDtB As String, ByVal rsTkDtE As String, _
@@ -683,28 +695,28 @@ Namespace APP_R
 
                 If rsBcno <> "" Then
                     sSql += " WHERE j.bcno = :bcno"
-                    alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
+                    alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
                 ElseIf rsWkYmd <> "" Then
                     sSql += " WHERE r.wkymd   = :wkymd"
                     sSql += "   AND r.wkgrpcd = :wgrpcd"
                     sSql += "   AND r.wkno   >= :wknos"
                     sSql += "   AND r.wkno   <= :wknoe"
 
-                    alParm.Add(New OracleParameter("wkymd",  OracleDbType.Varchar2, rsWkYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkYmd))
-                    alParm.Add(New OracleParameter("wgrpcd",  OracleDbType.Varchar2, rsWkGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkGrpCd))
-                    alParm.Add(New OracleParameter("wknos",  OracleDbType.Varchar2, rsWkNoS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoS))
-                    alParm.Add(New OracleParameter("wknoe",  OracleDbType.Varchar2, rsWkNoE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoE))
+                    alParm.Add(New OracleParameter("wkymd", OracleDbType.Varchar2, rsWkYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkYmd))
+                    alParm.Add(New OracleParameter("wgrpcd", OracleDbType.Varchar2, rsWkGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkGrpCd))
+                    alParm.Add(New OracleParameter("wknos", OracleDbType.Varchar2, rsWkNoS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoS))
+                    alParm.Add(New OracleParameter("wknoe", OracleDbType.Varchar2, rsWkNoE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoE))
                 Else
                     sSql += " WHERE r.tkdt >= :dates || '0000'"
                     sSql += "   AND r.tkdt <= :datee || '5959'"
 
-                    alParm.Add(New OracleParameter("dates",  OracleDbType.Varchar2, rsTkDtB.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtB))
-                    alParm.Add(New OracleParameter("datee",  OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
+                    alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsTkDtB.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtB))
+                    alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
                 End If
 
                 If rsSpcCd <> "" Then
                     sSql += "   AND j.spccd = :spccd"
-                    alParm.Add(New OracleParameter("spccd",  OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
+                    alParm.Add(New OracleParameter("spccd", OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
 
                 End If
 
@@ -870,9 +882,9 @@ Namespace APP_R
                 sSql += "   AND w.regdt  <  f2.uedt"
                 sSql += " ORDER BY sort1, sort2, testcd"
 
-                alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWLUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLUid))
-                alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWLUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLUid))
+                alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -919,9 +931,9 @@ Namespace APP_R
                 sSql += "   AND w.wlymd   = :wlymd"
                 sSql += "   AND w.wltitle = :wltitle"
 
-                alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
-                alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
+                alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
 
                 sSql += "   AND w.bcno   = j.bcno"
                 sSql += "   AND w.bcno   = r.bcno"
@@ -957,9 +969,9 @@ Namespace APP_R
                         sSql += "                         AND NVL(r.rerunflg, '0') = '1'"
                         sSql += "                     )"
 
-                        alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
-                        alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                        alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                        alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
+                        alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                        alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
                     End If
 
                     If rsN <> "" Then
@@ -972,9 +984,9 @@ Namespace APP_R
                         sSql += "                         AND NVL(r.hlmark, ' ') <> ' '"
                         sSql += "                     )"
 
-                        alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
-                        alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                        alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                        alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
+                        alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                        alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
                     End If
 
                     If rsHL <> "" Then sSql += " 	 AND NVL(r.hlmark, ' ') <> ' '"
@@ -1010,13 +1022,13 @@ Namespace APP_R
                         sSql += "                         AND (panicmark = 'P' OR deltamark = 'D' OR criticalmark = 'C')"
                         sSql += "                     )"
 
-                        alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
-                        alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                        alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                        alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWlUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWlUid))
+                        alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                        alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
                     End If
                 Else
                     sSql += "   AND j.regno = :regno"
-                    alParm.Add(New OracleParameter("regno",  OracleDbType.Varchar2, rsRegNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegNo))
+                    alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegNo))
                 End If
 
                 sSql += " GROUP BY w.wlseq, j.regno, j.patnm, j.bcno, r.tkdt, j.iogbn, j.wardno, j.roomno, j.deptcd, j.statgbn, j15.bcno"
@@ -1069,9 +1081,9 @@ Namespace APP_R
                 sSql += "   AND r.tkdt  <  f3.uedt"
                 sSql += "   AND j.spcflg = '4'"
 
-                alParm.Add(New OracleParameter("wluid",  OracleDbType.Varchar2, rsWLUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLUid))
-                alParm.Add(New OracleParameter("wlymd",  OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
-                alParm.Add(New OracleParameter("wltitle",  OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
+                alParm.Add(New OracleParameter("wluid", OracleDbType.Varchar2, rsWLUid.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLUid))
+                alParm.Add(New OracleParameter("wlymd", OracleDbType.Varchar2, rsWLYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLYmd))
+                alParm.Add(New OracleParameter("wltitle", OracleDbType.Varchar2, rsWLTitle.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWLTitle))
 
                 Select Case rsRstNullReg
                     Case "000"
@@ -1192,7 +1204,7 @@ Namespace APP_R
 
                 Dim al As New ArrayList
 
-                al.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                al.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
 
                 Dim dt As DataTable = DbExecuteQuery(sSql, al)
 
@@ -1323,19 +1335,19 @@ Namespace APP_R
                 sSql += "   AND a.spccd  = d.spccd (+)"
                 sSql += " ORDER BY rstdt DESC, sort1, sort2, testcd"
 
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
 
-                alParm.Add(New OracleParameter("testcd",  OracleDbType.Varchar2, rsTestCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCd))
-                alParm.Add(New OracleParameter("spccd",  OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
+                alParm.Add(New OracleParameter("testcd", OracleDbType.Varchar2, rsTestCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCd))
+                alParm.Add(New OracleParameter("spccd", OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
 
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
 
-                alParm.Add(New OracleParameter("testcd",  OracleDbType.Varchar2, rsTestCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCd))
-                alParm.Add(New OracleParameter("spccd",  OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
+                alParm.Add(New OracleParameter("testcd", OracleDbType.Varchar2, rsTestCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCd))
+                alParm.Add(New OracleParameter("spccd", OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -1554,8 +1566,8 @@ Namespace APP_R
                 sSql += "   AND r.spccd  = f6.spccd"
                 sSql += " ORDER BY sysdt, sort1, sort2, sort3, testcd"
 
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
-                alParm.Add(New OracleParameter("bcno",  OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -2409,13 +2421,13 @@ Namespace APP_R
             m_dbTran = r_dbTran
             COMMON.CommFN.MdiMain.DB_Active_YN = "Y"
         End Sub
-
+       
         Private Function fnGet_Server_DateTime() As String
 
             Dim sFn As String = "Private Function fnGet_Server_DateTime() As string"
 
             Try
-                Dim dbCmd As New oracleCommand
+                Dim dbCmd As New OracleCommand
                 Dim dbDa As OracleDataAdapter
                 Dim dt As New DataTable
 
@@ -2444,6 +2456,8 @@ Namespace APP_R
             End Try
 
         End Function
+
+
 
         Private Function fnImgFile_Get(ByVal rsFileNm As String) As Byte()
             Dim sFn As String = "Public Function fnImgFile_Get(string) As Byte()"
@@ -2496,8 +2510,8 @@ Namespace APP_R
                     .CommandText = sSql
 
                     .Parameters.Clear()
-                    .Parameters.Add("bcno",  OracleDbType.Varchar2).Value = rsBcNo
-                    .Parameters.Add("testcd",  OracleDbType.Varchar2).Value = rsTestCd
+                    .Parameters.Add("bcno", OracleDbType.Varchar2).Value = rsBcNo
+                    .Parameters.Add("testcd", OracleDbType.Varchar2).Value = rsTestCd
 
                     .ExecuteNonQuery()
                 End With
@@ -2516,10 +2530,10 @@ Namespace APP_R
                         .CommandText = sSql
 
                         .Parameters.Clear()
-                        .Parameters.Add("bcno",  OracleDbType.Varchar2, rsBcNo.Length).Value = rsBcNo
-                        .Parameters.Add("testcd",  OracleDbType.Varchar2, rsTestCd.Length).Value = rsTestCd
+                        .Parameters.Add("bcno", OracleDbType.Varchar2, rsBcNo.Length).Value = rsBcNo
+                        .Parameters.Add("testcd", OracleDbType.Varchar2, rsTestCd.Length).Value = rsTestCd
                         .Parameters.Add("rstno", OracleDbType.Int32, (ix + 1).ToString.Length).Value = (ix + 1).ToString
-                        .Parameters.Add("filenm",  OracleDbType.Varchar2, r_al_File(ix).ToString.Length).Value = r_al_File(ix).ToString
+                        .Parameters.Add("filenm", OracleDbType.Varchar2, r_al_File(ix).ToString.Length).Value = r_al_File(ix).ToString
                         .Parameters.Add("filelen", OracleDbType.Int64).Value = btFile.Length
 
                         .ExecuteNonQuery()
@@ -2538,8 +2552,8 @@ Namespace APP_R
 
                         .Parameters.Clear()
                         .Parameters.Add("filebin", OracleDbType.Blob, btFile.Length).Value = btFile
-                        .Parameters.Add("bcno",  OracleDbType.Varchar2, rsBcNo.Length).Value = rsBcNo
-                        .Parameters.Add("testcd",  OracleDbType.Varchar2, rsTestCd.Length).Value = rsTestCd
+                        .Parameters.Add("bcno", OracleDbType.Varchar2, rsBcNo.Length).Value = rsBcNo
+                        .Parameters.Add("testcd", OracleDbType.Varchar2, rsTestCd.Length).Value = rsTestCd
                         .Parameters.Add("rstno", OracleDbType.Int32, 2).Value = (ix + 1).ToString
 
                         iRet += .ExecuteNonQuery()
@@ -2581,58 +2595,58 @@ Namespace APP_R
                 Dim al As New ArrayList
 
 
-                sSql += " SELECT DISTINCT "
-                sSql += "        fn_ack_get_bcno_full(j.bcno) bcno, f.tnmd, j.regno, "
-                sSql += "        j.patnm patnm, r.testcd, "
-                sSql += "        NVL2(s13.bcno, 'O', 'X') imgchk "
-                sSql += "   FROM lf060m f, lj010m j, lrs13m s13, "
-                sSql += "        lf310m f3, "
-                sSql += "        (SELECT bcno, tkdt, testcd, spccd, wkymd, fnid "
-                sSql += "           FROM lr010m "
+                sSql += " SELECT DISTINCT " + vbCrLf
+                sSql += "        fn_ack_get_bcno_full(j.bcno) bcno, f.tnmd, j.regno, " + vbCrLf
+                sSql += "        j.patnm patnm, r.testcd, " + vbCrLf
+                sSql += "        NVL2(s13.bcno, 'O', 'X') imgchk " + vbCrLf
+                sSql += "   FROM lf060m f, lj010m j, lrs13m s13, " + vbCrLf
+                sSql += "        lf310m f3, " + vbCrLf
+                sSql += "        (SELECT bcno, tkdt, testcd, spccd, wkymd, fnid " + vbCrLf
+                sSql += "           FROM lr010m " + vbCrLf
 
                 If gbnTk Then
-                    sSql += "     WHERE tkdt >= :dates "
-                    sSql += "       AND tkdt <= :datee || '235959' "
+                    sSql += "     WHERE tkdt >= :dates " + vbCrLf
+                    sSql += "       AND tkdt <= :datee || '235959' " + vbCrLf
                 Else
-                    sSql += "     WHERE rstdt >= :dates "
-                    sSql += "       AND rstdt <= :datee || '235959' "
+                    sSql += "     WHERE rstdt >= :dates " + vbCrLf
+                    sSql += "       AND rstdt <= :datee || '235959' " + vbCrLf
                 End If
 
                 al.Add(New OracleParameter("dates", OracleDbType.Varchar2, dateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, dateS))
                 al.Add(New OracleParameter("datee", OracleDbType.Varchar2, dateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, dateE))
 
-                sSql += "          AND rstflg = '3' "
-                sSql += "         UNION "
-                sSql += "         SELECT bcno, tkdt, testcd, spccd, wkymd, fnid "
-                sSql += "           FROM lm010m "
+                sSql += "          AND rstflg = '3' " + vbCrLf
+                sSql += "         UNION " + vbCrLf
+                sSql += "         SELECT bcno, tkdt, testcd, spccd, wkymd, fnid " + vbCrLf
+                sSql += "           FROM lm010m " + vbCrLf
 
                 If gbnTk Then
-                    sSql += "     WHERE tkdt >= :dates "
-                    sSql += "       AND tkdt <= :datee || '235959' "
+                    sSql += "     WHERE tkdt >= :dates " + vbCrLf
+                    sSql += "       AND tkdt <= :datee || '235959' " + vbCrLf
                 Else
-                    sSql += "     WHERE rstdt >= :dates "
-                    sSql += "       AND rstdt <= :datee || '235959' "
+                    sSql += "     WHERE rstdt >= :dates " + vbCrLf
+                    sSql += "       AND rstdt <= :datee || '235959' " + vbCrLf
                 End If
 
                 al.Add(New OracleParameter("dates", OracleDbType.Varchar2, dateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, dateS))
                 al.Add(New OracleParameter("datee", OracleDbType.Varchar2, dateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, dateE))
 
-                sSql += "          AND rstflg = '3') r"
-                sSql += "           , lrs10m s10 "
-                sSql += "     WHERE j.bcno = r.bcno "
-                sSql += "       AND f.testcd = r.testcd "
-                sSql += "       AND f.spccd = r.spccd "
-                sSql += "       AND f.usdt  <= r.tkdt "
-                sSql += "       AND f.uedt  >= r.tkdt "
-                sSql += "       AND f.testcd = f3.testcd "
-                sSql += "       AND r.bcno = s10.bcno "
-                sSql += "       AND f.tcdgbn in ('P', 'S') "
-                sSql += "       AND NVL(f.ctgbn, '0') = '1' "
-                sSql += "       AND NVL(f.signrptyn, '0') = '1' "
-                sSql += "       AND j.spcflg = '4' "
-                sSql += "       AND NVL(r.wkymd, ' ') <> ' ' "
-                sSql += "       AND j.bcno = s13.bcno(+) "
-                sSql += "  ORDER BY bcno "
+                sSql += "          AND rstflg = '3') r" + vbCrLf
+                sSql += "           , lrs10m s10 " + vbCrLf
+                sSql += "     WHERE j.bcno = r.bcno " + vbCrLf
+                sSql += "       AND f.testcd = r.testcd " + vbCrLf
+                sSql += "       AND f.spccd = r.spccd " + vbCrLf
+                sSql += "       AND f.usdt  <= r.tkdt " + vbCrLf
+                sSql += "       AND f.uedt  >= r.tkdt " + vbCrLf
+                sSql += "       AND f.testcd = f3.testcd " + vbCrLf
+                sSql += "       AND r.bcno = s10.bcno " + vbCrLf
+                sSql += "       AND f.tcdgbn in ('P', 'S') " + vbCrLf
+                sSql += "       AND NVL(f.ctgbn, '0') = '1' " + vbCrLf
+                sSql += "       AND NVL(f.signrptyn, '0') = '1' " + vbCrLf
+                sSql += "       AND j.spcflg = '4' " + vbCrLf
+                sSql += "       AND NVL(r.wkymd, ' ') <> ' ' " + vbCrLf
+                sSql += "       AND j.bcno = s13.bcno(+) " + vbCrLf
+                sSql += "  ORDER BY bcno " + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, al)
@@ -4305,7 +4319,7 @@ Namespace APP_R
 
                 If roCmtInfo Is Nothing Then
                 Else
-                    
+
                     ''' part slip별 소견일때 
                     If fnEdit_LR040M(roCmtInfo) = False Then  ''' 검체 part slip별 소견 
                         m_dbTran.Rollback()
@@ -4734,6 +4748,7 @@ Namespace APP_R
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             End Try
         End Function ' new 새로생성 박정은
+
 
 
         Private Function fnEdit_LR_Parent(ByVal rsBcNo As String, ByVal rsUsrId As String, ByVal rsDate As String) As Boolean
@@ -5335,6 +5350,7 @@ Namespace APP_R
 
         End Function
 
+
         Private Function fnEdit_LJ010M(ByVal rsBcNo As String) As Integer
             Dim sFn As String = "Private Function fnEdit_LJ010M(String) As Integer"
 
@@ -5704,7 +5720,176 @@ Namespace APP_R
 
         End Function
 
+        '20210315 jhs log남기기 위한 정보 테이블 가져오기 
+        Public Function fnget_LR010M_log(ByVal rsBcNo As String) As DataTable
+            Dim sFn As String = "Private Function fnget_LR010M(String) As DataTable"
+            Try
+                Dim sSql As String = ""
+
+                Dim dbCmd As New OracleCommand
+                Dim dbDa As OracleDataAdapter
+                Dim dt As New DataTable
+
+                Dim sTable As String = "lr010m"
+
+                If PRG_CONST.BCCLS_MicorBio.Contains(rsBcNo.Substring(8, 2)) Then sTable = "lm010m"
+
+                sSql = ""
+                sSql += " selecT r.bcno, r.testcd, r.spccd, f6.tnmd,r.partcd,r.slipcd,r.viewrst,"
+                sSql += "       r.mwid, r.mwdt, fnid,fndt"
+                sSql += "  from lr010m r"
+                sSql += " inner join lf060m f6"
+                sSql += "    on r.testcd = f6.testcd"
+                sSql += " where r.bcno = :bcno"
+                sSql += "   and f6.usdt <= fn_ack_sysdate"
+                sSql += "   and f6.uedt > fn_ack_sysdate"
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+
+                Dim alParm As New ArrayList
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '-----------------------------------------------------------------------
+        '20210304 jhs 검사자간 공유사항 코멘트 인서트 추가
+        Public Function fnReg_shareCmt(ByVal roShareCmtInfo As ArrayList) As Boolean
+            Dim sFn As String = "Public Function fnReg_shareCmt(ArrayList) As Boolean"
+
+            Try
+
+                If roShareCmtInfo Is Nothing Then
+                Else
+                    ''' part slip별 소견일때 
+                    If fnEdit_LRC40M(roShareCmtInfo) = False Then  ''' 검체 part slip별 소견 
+                        m_dbTran.Rollback()
+                        Return False
+                    End If
+                End If
+
+                m_dbTran.Commit()
+                Return True
+
+            Catch ex As Exception
+                m_dbTran.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+                m_dbTran.Dispose() : m_dbTran = Nothing
+                If m_dbCn.State = ConnectionState.Open Then m_dbCn.Close()
+                m_dbCn.Dispose() : m_dbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+            End Try
+
+        End Function
+        Private Function fnEdit_LRC40M(ByVal roShareCmt As ArrayList) As Boolean
+            Dim sFn As String = "Private Function fnEdit_LRC40M(ArrayList, String) As Boolean"
+
+            Try
+                Dim dbCmd As New OracleCommand
+                Dim dt As New DataTable
+
+                Dim sSql As String = ""
+                Dim alSlipCd As New ArrayList
+                Dim bAddFlg As Boolean = False
+
+                dbCmd.Connection = m_dbCn
+                dbCmd.Transaction = m_dbTran
+                dbCmd.CommandType = CommandType.Text
+
+                For ix As Integer = 0 To roShareCmt.Count - 1
+
+                    If CType(roShareCmt(ix), ResultInfo_ShareCmt).SaveFlg = "1" Then
+
+                        If alSlipCd.Contains(CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip) Then
+
+                        Else
+                            bAddFlg = False
+
+                            sSql = ""
+                            sSql += "DELETE lrc40m WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+
+                            With dbCmd
+                                .CommandText = sSql
+
+                                .Parameters.Clear()
+                                .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
+                                .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
+                                .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
+
+                                .ExecuteNonQuery()
+                            End With
+                        End If
+
+                        alSlipCd.Add(CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip)
+
+                        If CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> vbCrLf Or CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> "" Then bAddFlg = True
+
+                        If CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> vbCrLf Or CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> "" Or bAddFlg Then
+                            sSql = ""
+                            sSql += "INSERT INTO lrc40m"
+                            sSql += "          (  bcno,  partcd,  slipcd,  rstseq,  cmt, regdt,           regid,  editid,  editip, editdt )"
+                            sSql += "   VALUES ( :bcno, :partcd, :slipcd, :rstseq, :cmt, fn_ack_sysdate, :regid, :editid, :editip, fn_ack_sysdate )"
+
+
+                            With dbCmd
+                                .CommandText = sSql
+
+                                .Parameters.Clear()
+                                .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
+                                .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
+                                .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
+                                .Parameters.Add("rstseq", OracleDbType.Varchar2).Value = (ix + 1).ToString
+                                .Parameters.Add("cmt", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt
+                                .Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                                .Parameters.Add("editid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                                .Parameters.Add("editip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
+
+                                .ExecuteNonQuery()
+                            End With
+                        End If
+
+
+
+
+
+                    ElseIf CType(roShareCmt(ix), ResultInfo_ShareCmt).SaveFlg = "2" Then
+                        bAddFlg = False
+
+                        sSql = ""
+                        sSql += "DELETE lrc40m WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+
+                        With dbCmd
+                            .CommandText = sSql
+
+                            .Parameters.Clear()
+                            .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
+                            .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
+                            .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
+
+                            .ExecuteNonQuery()
+                        End With
+                    End If
+
+                Next
+
+                Return True
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+
     End Class
+
 
     '-- I/F에서 결과 등록
     Public Class RegFn

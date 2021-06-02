@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports System.Data
+Imports System.Data.OleDb
 Imports Oracle.DataAccess.Client
 
 Imports COMMON.CommFN
@@ -6,6 +8,38 @@ Imports COMMON.CommFN
 Public Class ORADB
     Private Const msFile As String = "File : CGDB_ORADB.vb, Class : ORADB" & vbTab
     Private Shared m_dbCn As OracleConnection
+    Private Shared m_dbCn_QC As OleDb.OleDbConnection 'jhs QC 접속
+
+
+    '20210405 jhs QC DB 변경 Parameter없이 Connection
+    Public shared Function DbConnection_QC()
+        Static iCnt As Integer = 0
+
+        Try
+            If IsNothing(m_dbCn_QC) Then m_dbCn_QC = New OleDb.OleDbConnection
+
+            ' 연결이 끊겼을때 다시 연결한다.
+            If m_dbCn_QC.State = ConnectionState.Closed Then
+                m_dbCn_QC = New OleDb.OleDbConnection
+
+                m_dbCn_QC.ConnectionString = "Provider=" + "SQLOLEDB" + _
+                                            ";Data Source=" + "10.95.25.237,4066" + _
+                                            ";User ID=" + "sa" + _
+                                            ";PassWord=" + "ascak" + _
+                                            ";Initial Catalog=" + "ACKATQCNMC" + _
+                                            ";OLEDB.NET=true"
+                m_dbCn_QC.Open()
+            End If
+
+            iCnt = 0
+            Return m_dbCn_QC
+
+        Catch ex As Exception
+            iCnt += 1
+        End Try
+
+    End Function
+    '------------------------------------------------------------
 
     ' 변경 Parameter없이 Connection
     Public Function DbConnection() As OracleConnection

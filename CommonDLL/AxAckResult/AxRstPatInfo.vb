@@ -494,4 +494,6 @@ Public Class AxRstPatInfo
     Private Sub txtRemark_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemark.KeyDown
         Return
     End Sub
+
+  
 End Class

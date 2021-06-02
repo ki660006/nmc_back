@@ -118,6 +118,18 @@ Namespace CommFN
         Public RstFlg As String = ""
     End Class
 
+    '20210303 JHS 검사자간 공유사항 코멘트
+    Public Class ResultInfo_ShareCmt
+        Public BcNo As String = ""
+        Public PartSlip As String = ""
+        Public TestCd As String = ""
+        Public RstSeq As String = ""
+        Public Cmt As String = ""
+        Public RstFlg As String = ""
+        Public SaveFlg As String = ""
+    End Class
+    '------------------------------
+
     Public Class LIS_CVR_INFO
 
         '-- 2020-05-29 JJH CVR등록

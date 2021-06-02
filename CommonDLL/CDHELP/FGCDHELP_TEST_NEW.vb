@@ -29,6 +29,10 @@ Public Class FGCDHELP_TEST_NEW
 
     Private mTestcd As String = ""
     Private mTordcd As String = ""
+    Private mBeFTordcd As String = ""
+    Private mBeFTestcd As String = ""
+
+    Private mFirstSearch As Boolean
 
 
     Private Const msXML As String = "\XML"
@@ -270,6 +274,7 @@ Public Class FGCDHELP_TEST_NEW
         Dim arry As New ArrayList
 
         Try
+
             Dim sTubeCd As String = ""
 
             Dim dt As New DataTable
@@ -638,6 +643,7 @@ Public Class FGCDHELP_TEST_NEW
 
             If dt.Rows.Count > 0 Then
                 With spdTestInfo
+                    .MaxRows = 0
                     .MaxRows = dt.Rows.Count
                     Dim dt_Ref As DataTable = New DataTable
 
@@ -655,6 +661,7 @@ Public Class FGCDHELP_TEST_NEW
                         .Col = .GetColFromID("edicd") : .Text = dt.Rows(ix).Item("edicd").ToString.Trim
                         .Col = .GetColFromID("tnmd") : .Text = dt.Rows(ix).Item("tnmd").ToString.Trim
                         .Col = .GetColFromID("unit") : .Text = dt.Rows(ix).Item("rstunit").ToString.Trim
+                        .Col = .GetColFromID("rrptst") : .Text = dt.Rows(ix).Item("rrptst").ToString.Trim
                         For ix2 As Integer = 0 To dt_Ref.Rows.Count - 1
                             .Row = ix + 1
                             .Col = .GetColFromID("reftxt")
@@ -694,6 +701,18 @@ Public Class FGCDHELP_TEST_NEW
                                     .Text += dt_Ref.Rows(ix2).Item("refhf").ToString.Trim
                                 End If
                             End If
+                            '20210507 jhs 텍스트에 맞게 높이 너비 조절
+                            Dim rowsize As Double
+                            Dim colsize As Double
+
+                            rowsize = .get_MaxTextRowHeight(ix + 1)
+                            colsize = .get_MaxTextColWidth(.GetColFromID("reftxt"))
+
+                            .set_RowHeight(ix + 1, rowsize)
+                            .set_ColWidth(.GetColFromID("reftxt"), colsize)
+                            '------------------------------------------------
+
+
                         Next
                     Next
                 End With
@@ -833,6 +852,8 @@ Public Class FGCDHELP_TEST_NEW
             Me.Left = MdiMain.Frm.Location.X + (MdiMain.Frm.Width - Me.Width) / 2
             Me.Top = MdiMain.Frm.Location.Y + (MdiMain.Frm.Height - Me.Height) / 2
 
+            mFirstSearch = False
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -843,6 +864,7 @@ Public Class FGCDHELP_TEST_NEW
     Private Sub btnCdHelp_test_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCdHelp_test.Click, btnCdHelp_Tnm.Click
         Dim sFn As String = "Handles btnCdHelp_test.Click"
         Try
+            sbClear_Form()
             Dim pntCtlXY As Point = Fn.CtrlLocationXY(Me)
             Dim pntFrmXY As Point = Fn.CtrlLocationXY(btnCdHelp_test)
 
@@ -850,15 +872,21 @@ Public Class FGCDHELP_TEST_NEW
             Dim alList As New ArrayList
             Dim dt As New DataTable
 
-            If CType(sender, Windows.Forms.Button).Name.ToLower = "btncdhelp_test" Then
-                dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info("")
-            Else
-                dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info(Me.txtTnmd.Text)
-            End If
+            Me.txtTCode.Text = ""
 
-            If CType(sender, Windows.Forms.Button).Name.ToUpper = "BTNCDHELP_TNM" Then
-            Else
-                If Me.txtTCode.Text <> "" Then
+            ' If CType(sender, Windows.Forms.Button).Name.ToLower = "btncdhelp_test" Then
+            dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info("")
+            'Else
+            'dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info(Me.txtTnmd.Text)
+            'End If
+
+
+            'If CType(sender, Windows.Forms.Button).Name.ToUpper = "BTNCDHELP_TNM" Then
+            'Else
+
+            If Me.txtTCode.Text <> "" Then
+                '20210105 JHS 기존되어있는 검사처방코드와 조회시 같으면 돋보기 기능으로 조회 하게 설정
+                If mFirstSearch = False Then
                     Dim a_dr As DataRow()
                     If Me.lblTest.Text.Trim = "처방코드" Then
                         a_dr = dt.Select("tordcd = '" + Me.txtTCode.Text + "'", "")
@@ -867,9 +895,25 @@ Public Class FGCDHELP_TEST_NEW
                     End If
 
                     dt = Fn.ChangeToDataTable(a_dr)
+                Else
+                    If mBeFTordcd = Me.txtTCode.Text And mBeFTestcd = Me.txtTestCd.Text Then
+                        MsgBox("기존코드와 동일합니다")
+                        Return
+                    Else
+                        Dim a_dr As DataRow()
+                        If Me.lblTest.Text.Trim = "처방코드" Then
+                            a_dr = dt.Select("tordcd = '" + Me.txtTCode.Text + "'", "")
+                        Else
+                            a_dr = dt.Select("testcd = '" + Me.txtTCode.Text + "'", "")
+                        End If
 
+                        dt = Fn.ChangeToDataTable(a_dr)
+                    End If
                 End If
+
+                '----------------------------------------------------
             End If
+            'End If
 
             objHelp.FormText = "검사목록"
 
@@ -885,14 +929,31 @@ Public Class FGCDHELP_TEST_NEW
             alList = objHelp.Display_Result(Me, pntFrmXY.X + pntCtlXY.X - Me.btnCdHelp_test.Left, pntFrmXY.Y + pntCtlXY.Y + btnCdHelp_test.Height + 80, dt)
 
             If alList.Count > 0 Then
+
                 Me.txtTestCd.Text = alList.Item(0).ToString.Split("|"c)(1)
-                If Me.txtTCode.Text = "" Then
+
+                '20210105 JHS 기존되어있는 검사처방코드와 조회시 같으면 돋보기 기능으로 조회 하게 설정
+                'If Me.txtTCode.Text = "" Then
+                '   If Me.lblTest.Text.Trim = "검사코드" Then
+                '     Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(1)
+                '   Else
+                '       Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(2)
+                '   End If
+                'End If
+
+                mBeFTestcd = alList.Item(0).ToString.Split("|"c)(1)
+                mBeFTordcd = alList.Item(0).ToString.Split("|"c)(2)
+
+
+                If Me.txtTCode.Text = "" Or mBeFTordcd <> Me.txtTCode.Text Then
                     If Me.lblTest.Text.Trim = "검사코드" Then
                         Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(1)
                     Else
                         Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(2)
                     End If
+                ElseIf mBeFTordcd = Me.txtTCode.Text Then
                 End If
+                '--------------------------------------------------
                 Me.txtTCode.Tag = alList.Item(0).ToString.Split("|"c)(1) + "^" + alList.Item(0).ToString.Split("|"c)(2)
 
                 '<JJH 새로운 항목 조회시
@@ -905,37 +966,57 @@ Public Class FGCDHELP_TEST_NEW
                     Next
 
                 End If
-
                 sbDisplay_Test(Me.txtTestCd.Text)
+
+
+                mFirstSearch = True ' 처음 조회하는 것 확인
             End If
+
+
 
         Catch ex As Exception
             Fn.log(msFile & sFn, Err)
             MsgBox(msFile & sFn & vbCrLf & ex.Message)
         End Try
     End Sub
+   
+
 
     Private Sub cboSpc_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboSpc.SelectedIndexChanged
 
         If Me.cboSpc.Text = "" Then Return
 
+
         sbDisplay_TestSpc(Me.txtTestCd.Text, Me.cboSpc.Text.Split("|"c)(1))
 
 
-        Dim TestInfo As String = Me.txtTestCd.Text + "|" + Me.cboSpc.Text.Split("|"c)(1)
+        Dim TestInfo As String = Me.txtTestCd.Text + "|" + Me.cboSpc.Text.Split("|"c)(1) + "|" + mTordcd
         'Stack1.Push(stck1)
 
-        If Stackseq = 0 Then
-            Stack.Add(TestInfo)
-            Stackseq += 1
-        Else
-            If Stack.Count = Stackseq Then
-                If TestInfo <> Stack.Item(Stackseq - 1).ToString Then
-                    Stack.Add(TestInfo)
-                    Stackseq += 1
+        '20210402 jhs 기존에 항목이 있는지 체크
+        Dim chkAddTest As Boolean = True
+        For i = 0 To Stack.Count - 1
+            If Stack.Item(i).ToString = TestInfo Then
+                chkAddTest = False
+            End If
+        Next
+
+
+
+        If chkAddTest Then ' 추가
+            If Stackseq = 0 Then
+                Stack.Add(TestInfo)
+                Stackseq += 1
+            Else
+                If Stack.Count = Stackseq Then
+                    If TestInfo <> Stack.Item(Stackseq - 1).ToString Then
+                        Stack.Add(TestInfo)
+                        Stackseq += 1
+                    End If
                 End If
             End If
         End If
+        '-----------------------------
 
 
         'Dim test As String = Me.txtTestCd.Text + "|" + Me.cboSpc.Text.Split("|"c)(1)
@@ -953,10 +1034,118 @@ Public Class FGCDHELP_TEST_NEW
 
         Me.txtTCode.Text = Me.txtTCode.Text.ToUpper
 
-        Me.txtTCode.Tag = "" : Me.txtTnmd.Text = ""
-        sbClear_Form()
+        'Me.txtTCode.Tag = "" : Me.txtTnmd.Text = ""
+        'btnCdHelp_test_Click(Me.btnCdHelp_test, Nothing)
 
-        btnCdHelp_test_Click(Me.btnCdHelp_test, Nothing)
+        Dim sFn As String = "Handles btnCdHelp_test.Click"
+        Try
+
+
+            Dim pntCtlXY As Point = Fn.CtrlLocationXY(Me)
+            Dim pntFrmXY As Point = Fn.CtrlLocationXY(btnCdHelp_test)
+
+            Dim objHelp As New CDHELP.FGCDHELP01
+            Dim alList As New ArrayList
+            Dim dt As New DataTable
+
+
+            dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info("")
+            
+            If Me.txtTCode.Text <> "" Then
+                '20210105 JHS 기존되어있는 검사처방코드와 조회시 같으면 돋보기 기능으로 조회 하게 설정
+                If mFirstSearch = False Then
+                    Dim a_dr As DataRow()
+                    If Me.lblTest.Text.Trim = "처방코드" Then
+                        a_dr = dt.Select("tordcd = '" + Me.txtTCode.Text + "'", "")
+                    Else
+                        a_dr = dt.Select("testcd = '" + Me.txtTCode.Text + "'", "")
+                    End If
+
+                    dt = Fn.ChangeToDataTable(a_dr)
+                Else
+                    If mBeFTordcd = Me.txtTCode.Text And mBeFTestcd = Me.txtTestCd.Text Then
+                        MsgBox("기존코드와 동일합니다")
+                        Return
+                    Else
+                        sbClear_Form()
+                        Dim a_dr As DataRow()
+                        If Me.lblTest.Text.Trim = "처방코드" Then
+                            a_dr = dt.Select("tordcd = '" + Me.txtTCode.Text + "'", "")
+                        Else
+                            a_dr = dt.Select("testcd = '" + Me.txtTCode.Text + "'", "")
+                        End If
+
+                        dt = Fn.ChangeToDataTable(a_dr)
+                    End If
+                End If
+                '----------------------------------------------------
+            End If
+
+
+            objHelp.FormText = "검사목록"
+
+            objHelp.MaxRows = 15
+            objHelp.OnRowReturnYN = True
+
+            objHelp.AddField("tnmd", "검사명", 25, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+            objHelp.AddField("testcd", "검사코드", 8, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+            objHelp.AddField("tordcd", "처방코드", 8, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+            objHelp.AddField("tordslipnm", "처방슬립", 8, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+            'objHelp.AddField("slipnmd", "검사분류", 8, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+
+            alList = objHelp.Display_Result(Me, pntFrmXY.X + pntCtlXY.X - Me.btnCdHelp_test.Left, pntFrmXY.Y + pntCtlXY.Y + btnCdHelp_test.Height + 80, dt)
+
+            If alList.Count > 0 Then
+
+                Me.txtTestCd.Text = alList.Item(0).ToString.Split("|"c)(1)
+
+                '20210105 JHS 기존되어있는 검사처방코드와 조회시 같으면 돋보기 기능으로 조회 하게 설정
+                'If Me.txtTCode.Text = "" Then
+                '   If Me.lblTest.Text.Trim = "검사코드" Then
+                '     Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(1)
+                '   Else
+                '       Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(2)
+                '   End If
+                'End If
+
+                mBeFTestcd = alList.Item(0).ToString.Split("|"c)(1)
+                mBeFTordcd = alList.Item(0).ToString.Split("|"c)(2)
+
+
+                If Me.txtTCode.Text = "" Or mBeFTordcd <> Me.txtTCode.Text Then
+                    If Me.lblTest.Text.Trim = "검사코드" Then
+                        Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(1)
+                    Else
+                        Me.txtTCode.Text = alList.Item(0).ToString.Split("|"c)(2)
+                    End If
+                ElseIf mBeFTordcd = Me.txtTCode.Text Then
+                End If
+                '--------------------------------------------------
+                Me.txtTCode.Tag = alList.Item(0).ToString.Split("|"c)(1) + "^" + alList.Item(0).ToString.Split("|"c)(2)
+
+                '<JJH 새로운 항목 조회시
+                If Stack.Count <> Stackseq And Stack.Count > Stackseq Then
+
+                    Dim ix As Integer = Stack.Count - Stackseq
+
+                    For i = 1 To ix
+                        Stack.RemoveAt(Stackseq)
+                    Next
+
+                End If
+                sbDisplay_Test(Me.txtTestCd.Text)
+
+
+                mFirstSearch = True ' 처음 조회하는 것 확인
+            End If
+
+
+
+        Catch ex As Exception
+            Fn.log(msFile & sFn, Err)
+            MsgBox(msFile & sFn & vbCrLf & ex.Message)
+        End Try
+
 
     End Sub
 
@@ -1081,12 +1270,23 @@ Public Class FGCDHELP_TEST_NEW
 
                 Dim Info As String = Stack.Item(Stackseq - 1).ToString
 
+
                 Dim sTestcd As String = Split(Info, "|")(0)
                 Dim sSpccd As String = Split(Info, "|")(1)
+                '20210111 JHS 오류로 추까 
+                Dim sTordcd As String = Split(Info, "|")(2)
+                mBeFTordcd = sTordcd
+                mBeFTestcd = sTestcd
+                '---------------------------
 
                 sbDisplay_TestSpc(sTestcd, sSpccd)
                 Me.txtTestCd.Text = sTestcd
-                Me.txtTCode.Text = sTestcd
+
+                If lblTest.Text = "처방코드" Then
+                    Me.txtTCode.Text = sTordcd
+                ElseIf lblTest.Text = "검사코드" Then
+                    Me.txtTCode.Text = sTestcd
+                End If
                 sbDisplay_Test(sTestcd)
 
 
@@ -1144,16 +1344,22 @@ Public Class FGCDHELP_TEST_NEW
 
                 Dim sTestcd As String = Split(Info, "|")(0)
                 Dim sSpccd As String = Split(Info, "|")(1)
+                '20210111 JHS 오류로 추가 
+                Dim sTordcd As String = Split(Info, "|")(2)
+                mBeFTordcd = sTordcd
+                mBeFTestcd = sTestcd
+                '---------------------------
 
                 sbDisplay_TestSpc(sTestcd, sSpccd)
                 Me.txtTestCd.Text = sTestcd
-                Me.txtTCode.Text = sTestcd
+                If lblTest.Text = "처방코드" Then
+                    Me.txtTCode.Text = sTordcd
+                ElseIf lblTest.Text = "검사코드" Then
+                    Me.txtTCode.Text = sTestcd
+                End If
                 sbDisplay_Test(sTestcd)
 
-
-
-
-            End If
+                End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -1631,41 +1837,41 @@ Public Class DA_CDHELP_TEST_NEW
             Dim dt As New DataTable
             Dim sSql As String = ""
 
-            sSql += "SELECT DISTINCT"
-            sSql += "       f6.spccd, f3.spcnmd,"
-            sSql += "       CASE WHEN f6.spccd = f6.dspccd1 THEN 1"
-            sSql += "            WHEN f6.spccd = f6.dspccd2 THEN 2"
-            sSql += "            WHEN f6.spccd = f6.dspccd3 THEN 3"
-            sSql += "            ELSE  3"
-            sSql += "       END sort1"
-            sSql += "  FROM lf060m f6, lf030m f3"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = f3.spccd"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND f3.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f3.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.ordhide <> '1' "
-            sSql += " UNION "
-            sSql += "SELECT DISTINCT"
-            sSql += "       f6.spccd, f3.spcnmd,"
-            sSql += "       CASE WHEN f6.spccd = f6.dspccd1 THEN 1"
-            sSql += "            WHEN f6.spccd = f6.dspccd2 THEN 2"
-            sSql += "            WHEN f6.spccd = f6.dspccd3 THEN 3"
-            sSql += "            ELSE  3"
-            sSql += "       END sort1"
-            sSql += "  FROM rf060m f6, lf030m f3"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = f3.spccd"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND f3.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f3.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.ordhide <> '1' "
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f6.spccd, f3.spcnmd," + vbCrLf
+            sSql += "       CASE WHEN f6.spccd = f6.dspccd1 THEN 1" + vbCrLf
+            sSql += "            WHEN f6.spccd = f6.dspccd2 THEN 2" + vbCrLf
+            sSql += "            WHEN f6.spccd = f6.dspccd3 THEN 3" + vbCrLf
+            sSql += "            ELSE  3" + vbCrLf
+            sSql += "       END sort1" + vbCrLf
+            sSql += "  FROM lf060m f6, lf030m f3" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = f3.spccd" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND f3.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f3.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.ordhide <> '1' " + vbCrLf
+            sSql += " UNION " + vbCrLf
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f6.spccd, f3.spcnmd," + vbCrLf
+            sSql += "       CASE WHEN f6.spccd = f6.dspccd1 THEN 1" + vbCrLf
+            sSql += "            WHEN f6.spccd = f6.dspccd2 THEN 2" + vbCrLf
+            sSql += "            WHEN f6.spccd = f6.dspccd3 THEN 3" + vbCrLf
+            sSql += "            ELSE  3" + vbCrLf
+            sSql += "       END sort1" + vbCrLf
+            sSql += "  FROM rf060m f6, lf030m f3" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = f3.spccd" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND f3.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f3.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.ordhide <> '1' " + vbCrLf
 
-            sSql += " ORDER BY sort1, spccd"
+            sSql += " ORDER BY sort1, spccd" + vbCrLf
 
             With dbCmd
                 dbCmd.Connection = dbCn
@@ -1855,12 +2061,18 @@ Public Class DA_CDHELP_TEST_NEW
 
             sSql += " SELECT DISTINCT "
             sSql += "        f6.tcdgbn, f6.testcd, f6.tordcd, f6.sugacd,  f6.edicd, f6.tnmd, 1 sort1, f6.dispseqo sort2, 0 sort3, f6.rstunit"
+            '20210517 jhs 결과소요일 추가
+            sSql += "        ,f6.rrptst"
+            '-----------------------------------
             sSql += "   FROM lf060m f6 "
             sSql += "  WHERE f6.testcd = :testcd "
             sSql += "    AND f6.spccd  = :spccd  "
             sSql += "    AND f6.uedt  >= fn_ack_sysdate() "
             sSql += " UNION "
             sSql += " SELECT f6.tcdgbn, f6.testcd, f6.tordcd, f6.sugacd, f6.edicd, f62.tnmd, 2 sort2, f6.dispseqo sort2, f62.seq sort3, f6.rstunit "
+            '20210517 jhs 결과소요일 추가
+            sSql += "        ,f6.rrptst"
+            '-----------------------------------
             sSql += "   FROM lf068m f62 "
             sSql += "        LEFT OUTER JOIN lf060m f6 ON f6.testcd LIKE f62.testcd || '%'"
             sSql += "                                 AND f6.testcd  = f62.testcd "
@@ -1923,29 +2135,29 @@ Public Class DA_CDHELP_TEST_NEW
             Dim dt As New DataTable
             Dim sSql As String = ""
 
-            sSql += "SELECT DISTINCT"
-            sSql += "       f64.infogbn, f64.testinfo, MAX(f6.tnmd) tnmd,"
-            sSql += "       CASE WHEN f64.spccd = '----' THEN 1 ELSE 2 END sort1"
-            sSql += "  FROM lf060m f6"
-            sSql += "       LEFT OUTER JOIN"
-            sSql += "            lf064m f64 ON (f6.testcd = f64.testcd AND f64.spccd IN ('" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "', :spccd))"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += " GROUP BY f64.infogbn, f64.testinfo, f64.spccd"
-            sSql += " UNION "
-            sSql += "SELECT DISTINCT"
-            sSql += "       f64.infogbn, f64.testinfo, MAX(f6.tnmd) tnmd,"
-            sSql += "       CASE WHEN f64.spccd = '" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "' THEN 1 ELSE 2 END sort1"
-            sSql += "  FROM rf060m f6"
-            sSql += "       LEFT OUTER JOIN"
-            sSql += "            rf064m f64 ON (f6.testcd = f64.testcd AND f64.spccd IN ('" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "', :spccd))"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += " GROUP BY f64.infogbn, f64.testinfo, f64.spccd"
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f64.infogbn, f64.testinfo, MAX(f6.tnmd) tnmd," + vbCrLf
+            sSql += "       CASE WHEN f64.spccd = '----' THEN 1 ELSE 2 END sort1" + vbCrLf
+            sSql += "  FROM lf060m f6" + vbCrLf
+            sSql += "       LEFT OUTER JOIN" + vbCrLf
+            sSql += "            lf064m f64 ON (f6.testcd = f64.testcd AND f64.spccd IN ('" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "', :spccd))" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += " GROUP BY f64.infogbn, f64.testinfo, f64.spccd" + vbCrLf
+            sSql += " UNION " + vbCrLf
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f64.infogbn, f64.testinfo, MAX(f6.tnmd) tnmd," + vbCrLf
+            sSql += "       CASE WHEN f64.spccd = '" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "' THEN 1 ELSE 2 END sort1" + vbCrLf
+            sSql += "  FROM rf060m f6" + vbCrLf
+            sSql += "       LEFT OUTER JOIN" + vbCrLf
+            sSql += "            rf064m f64 ON (f6.testcd = f64.testcd AND f64.spccd IN ('" + "".PadLeft(PRG_CONST.Len_SpcCd, "-") + "', :spccd))" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += " GROUP BY f64.infogbn, f64.testinfo, f64.spccd" + vbCrLf
 
-            sSql += " ORDER BY infogbn, sort1"
+            sSql += " ORDER BY infogbn, sort1" + vbCrLf
 
             With dbCmd
                 dbCmd.Connection = dbCn
@@ -1991,33 +2203,33 @@ Public Class DA_CDHELP_TEST_NEW
             Dim dt As New DataTable
             Dim sSql As String = ""
 
-            sSql += "SELECT DISTINCT"
-            sSql += "       f61.ageymd, f61.sage, f61.sages, f61.eage, f61.eages,"
-            sSql += "       f61.reflm, f61.reflms, f61.refhm, f61.refhms,"
-            sSql += "       f61.reflf, f61.reflfs, f61.refhf, f61.refhfs,"
-            sSql += "       f61.reflt, f6.refgbn, f6.descref, f61.refseq, f6.tnmd"
-            sSql += "  FROM lf060m f6, lf061m f61"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = :spccd"
-            sSql += "   AND f6.usdt    = :usdt"
-            sSql += "   AND f6.testcd  = f61.testcd"
-            sSql += "   AND f6.spccd   = f61.spccd"
-            sSql += "   AND f6.usdt    = f61.usdt"
-            sSql += " UNION "
-            sSql += "SELECT DISTINCT"
-            sSql += "       f61.ageymd, f61.sage, f61.sages, f61.eage, f61.eages,"
-            sSql += "       f61.reflm, f61.reflms, f61.refhm, f61.refhms,"
-            sSql += "       f61.reflf, f61.reflfs, f61.refhf, f61.refhfs,"
-            sSql += "       f61.reflt, f6.refgbn, f6.descref, f61.refseq, f6.tnmd"
-            sSql += "  FROM rf060m f6, rf061m f61"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = :spccd"
-            sSql += "   AND f6.usdt    = :usdt"
-            sSql += "   AND f6.testcd  = f61.testcd"
-            sSql += "   AND f6.spccd   = f61.spccd"
-            sSql += "   AND f6.usdt    = f61.usdt"
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f61.ageymd, f61.sage, f61.sages, f61.eage, f61.eages," + vbCrLf
+            sSql += "       f61.reflm, f61.reflms, f61.refhm, f61.refhms," + vbCrLf
+            sSql += "       f61.reflf, f61.reflfs, f61.refhf, f61.refhfs," + vbCrLf
+            sSql += "       f61.reflt, f6.refgbn, f6.descref, f61.refseq, f6.tnmd" + vbCrLf
+            sSql += "  FROM lf060m f6, lf061m f61" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = :spccd" + vbCrLf
+            sSql += "   AND f6.usdt    = :usdt" + vbCrLf
+            sSql += "   AND f6.testcd  = f61.testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = f61.spccd" + vbCrLf
+            sSql += "   AND f6.usdt    = f61.usdt" + vbCrLf
+            sSql += " UNION " + vbCrLf
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       f61.ageymd, f61.sage, f61.sages, f61.eage, f61.eages," + vbCrLf
+            sSql += "       f61.reflm, f61.reflms, f61.refhm, f61.refhms," + vbCrLf
+            sSql += "       f61.reflf, f61.reflfs, f61.refhf, f61.refhfs," + vbCrLf
+            sSql += "       f61.reflt, f6.refgbn, f6.descref, f61.refseq, f6.tnmd" + vbCrLf
+            sSql += "  FROM rf060m f6, rf061m f61" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = :spccd" + vbCrLf
+            sSql += "   AND f6.usdt    = :usdt" + vbCrLf
+            sSql += "   AND f6.testcd  = f61.testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = f61.spccd" + vbCrLf
+            sSql += "   AND f6.usdt    = f61.usdt" + vbCrLf
 
-            sSql += " ORDER BY  refseq"
+            sSql += " ORDER BY  refseq" + vbCrLf
 
             With dbCmd
                 dbCmd.Connection = dbCn
@@ -2029,11 +2241,11 @@ Public Class DA_CDHELP_TEST_NEW
 
                 dbCmd.Parameters.Add("testcd", rsTestCd)
                 dbCmd.Parameters.Add("spccd", rsSpcCd)
-                'dbCmd.Parameters.Add("usdt", rsUsDt)
+                dbCmd.Parameters.Add("usdt", rsUsDt)
 
                 dbCmd.Parameters.Add("testcd", rsTestCd)
                 dbCmd.Parameters.Add("spccd", rsSpcCd)
-                'dbCmd.Parameters.Add("usdt", rsUsDt)
+                dbCmd.Parameters.Add("usdt", rsUsDt)
             End With
             dbDa = New OracleDataAdapter(dbCmd)
 

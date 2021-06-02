@@ -58,7 +58,11 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.380 --> 2020/06/23 : CVR 등록 class 추가
 'Version 3.1.10.382 --> 2020/06/30 : CVR 등록 CLASS 단위추가, 녹십자 자동연동 CLASS 추가
 'Version 3.1.10.382 --> 2020/06/30 : 결과이력 삭제 CLASS 추가
-'Version 3.1.10.383 --> 2020/07/06 : 바이트수 자르는 함수 추가
-'Version 3.1.10.384 --> 2020/07/09 : 바이트수 자르는 함수 추가
+'Version 3.1.10.383 --> 2020/07/06 : 바이트수 자르는 function 추가
+'Version 3.1.10.384 --> 2020/07/09 : 바이트수 자르는 function 추가
+'Version 3.1.10.385 --> 2020/11/30 : 검사의뢰지침 세부검사 항목 저장에 따른 class 추가
+'Version 3.1.10.386 --> 2021/02/22 : 배지바코드 다중출력되도록 수정
+'Version 3.1.10.387 --> 2021/03/16 : 검사자간 공유사항 추가, wbc diff log 생성 로직 추가
+'Version 3.1.10.388 --> 2021/04/19 : QC데이터 연동
 
-<Assembly: AssemblyVersion("3.1.10.384")> 
+<Assembly: AssemblyVersion("3.1.10.388")> 

@@ -1022,6 +1022,42 @@ Public Class APP_F
            Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
         End Try
     End Function
+    '20210105 jhs 묶음 성분제재 데이터 조회 
+    Public Function GetBranchComCdInfo(ByVal rsUsDt As String) As DataTable
+        Dim sFn As String = "Public Function GetComCdInfo(String) As DataTable"
+
+        Try
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            sSql += " "
+            sSql += " Select DISTINCT '[' || a.clsval || '] ' || a.clsdesc comnmd from lf000m a"
+            sSql += " inner join lf120m b"
+            sSql += " on  a.clscd = b.comcd"
+
+            If rsUsDt <> "" Then
+                sSql += "   AND b.usdt <= :usdt"
+                sSql += "   AND b.uedt >  :usdt"
+
+                alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
+                alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
+            Else
+                sSql += "   AND b.usdt <= fn_ack_sysdate"
+                sSql += "   AND b.uedt >  fn_ack_sysdate"
+
+            End If
+
+            sSql += " where a.clsgbn = 'B14' "
+            sSql += " order by comnmd "
+
+            DbCommand()
+            Return DbExecuteQuery(sSql, alParm)
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+        End Try
+    End Function
+    '------------------------------------------------
 
     Public Function GetExLabInfo() As DataTable
         Dim sFn As String = "Public Function GetExLabInfo() As DataTable"

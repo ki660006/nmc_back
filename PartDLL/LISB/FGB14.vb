@@ -62,7 +62,6 @@ Public Class FGB14
 
     Private Sub btnExit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExit.Click
         Me.Close()
-
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -84,7 +83,19 @@ Public Class FGB14
             spdSearchList.MaxRows = 0
             spdDetail.MaxRows = 0
 
-            ls_Comcd = Ctrl.Get_Code(cboComCd)
+            '20210108 jhs 묶음으로 성분제재 조회 될 수 있또록 로직 추가
+            If chkBldBranchSrh.Checked Then
+                Dim ComBranchCd As String = Ctrl.Get_Code(cboBranchComcd)
+                If ComBranchCd = "ALL" Then
+                    ls_Comcd = ComBranchCd
+                Else
+                    ls_Comcd = CGDA_BT.fn_get_BranchComCd_List("", ComBranchCd)
+                End If
+            Else
+                ls_Comcd = Ctrl.Get_Code(cboComCd)
+            End If
+            '-----------------------------------------------------
+
             ls_dept = Ctrl.Get_Code(cboDept)
             ls_ward = Ctrl.Get_Code(cboWard)
 
@@ -92,10 +103,16 @@ Public Class FGB14
             If rdoPre.Checked = True Then ls_TnsGbn = "1"c
             If rdoTns.Checked = True Then ls_TnsGbn = "2"c
             If rdoCross.Checked = True Then ls_TnsGbn = "3"c
+
+            '20210419 jhs iogbn 정리 로직 추가(응급 추가, des(낮병동) 으로 구분 해야함
             If rdoI.Checked Then ls_iogbn = "I"
             If rdoO.Checked Then ls_iogbn = "O"
+            If rdoE.Checked Then ls_iogbn = "E"
+            '------------------------------------------------
 
             ls_regno = txtRegno.Text
+
+
 
             If chkJub.Checked = True And chkBef.Checked = True And chkOut.Checked = True And chkRtn.Checked = True And chkAbn.Checked = True And chkCan.Checked = True Then
                 ls_state = ""
@@ -117,10 +134,19 @@ Public Class FGB14
             End If
 
             Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
+
+            '20210106 jhs 묶음으로 성분제재 출력
+            If chkBldBranchSrh.Checked Then
+                dt = CGDA_BT.fn_TnsSearchList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_TnsGbn, _
+                                      ls_regno, ls_state, ls_dept, ls_ward, ls_iogbn, _
+                                      Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text, chkBldBranchSrh.Checked)
+            Else
+                dt = CGDA_BT.fn_TnsSearchList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_TnsGbn, _
+                                      ls_regno, ls_state, ls_dept, ls_ward, ls_iogbn, _
+                                      Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text)
+            End If
             ' 조회
-            dt = CGDA_BT.fn_TnsSearchList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_TnsGbn, _
-                                          ls_regno, ls_state, ls_dept, ls_ward, ls_iogbn, _
-                                          Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text)
+
 
             Dim sSql As String = ""
             If Me.txtRstDay.Text <> "" And Me.txtRst_plt1.Text.Length + Me.txtRst_plt2.Text.Length > 0 Then
@@ -145,8 +171,13 @@ Public Class FGB14
 
             sb_DisplayDataList(dt)
 
-            dt = CGDA_BT.fn_outComcdList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_dept, ls_ward, ls_iogbn, _
-                                         Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text, Me.cboAboRh.Text)
+            If chkBldBranchSrh.Checked Then
+                dt = CGDA_BT.fn_outComcdList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_dept, ls_ward, ls_iogbn, _
+                                             Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text, Me.cboAboRh.Text, chkBldBranchSrh.Checked)
+            Else
+                dt = CGDA_BT.fn_outComcdList(Format(dtpDate0.Value, "yyyyMMdd"), Format(dtpDate1.Value, "yyyyMMdd"), ls_Comcd, ls_dept, ls_ward, ls_iogbn, _
+                                             Me.txtRstDay.Text, Me.txtRst_Hb.Text, Me.txtRst_plt1.Text, Me.txtRst_plt2.Text, Me.cboAboRh.Text)
+            End If
 
 
             sb_DisplayComcdList(dt)
@@ -265,9 +296,9 @@ Public Class FGB14
     Public Sub sb_SetComboDt()
         ' 콤보 데이터 생성
         Try
-
+            Dim dt As DataTable = Nothing
             ' 성분제제
-            Dim dt As DataTable = mobjDAF.GetComCdInfo("")
+            dt = mobjDAF.GetComCdInfo("")
 
             Me.cboComCd.Items.Clear()
             Me.cboComCd.Items.Add("[ALL] 전체")
@@ -279,6 +310,21 @@ Public Class FGB14
                 End With
             End If
             Me.cboComCd.SelectedIndex = 0
+
+            '20210105 jhs 성분제재 묶음으로 조회ui단 정리
+            dt = mobjDAF.GetBranchComCdInfo("")
+
+            Me.cboBranchComcd.Items.Clear()
+            Me.cboBranchComcd.Items.Add("[ALL] 전체")
+            If dt.Rows.Count > 0 Then
+                With Me.cboBranchComcd
+                    For i As Integer = 0 To dt.Rows.Count - 1
+                        .Items.Add(dt.Rows(i).Item("COMNMD"))
+                    Next
+                End With
+            End If
+            Me.cboBranchComcd.SelectedIndex = 0
+            '---------------------------------------------------
 
             ' 진료과
             dt = OCSAPP.OcsLink.SData.fnGet_DeptList() ' CGDA_BT .fn_GetDeptList()
@@ -308,6 +354,19 @@ Public Class FGB14
             End If
             Me.cboWard.SelectedIndex = 0
 
+            '20210105 jhs 성분제재 묶음으로 조회ui단 정리
+            If chkBldBranchSrh.Checked Then
+                cboBranchComcd.Visible = True
+                lblBranchComcd.Visible = True
+                lblComcd.Visible = False
+                cboComCd.Visible = False
+            Else
+                cboBranchComcd.Visible = False
+                lblBranchComcd.Visible = False
+                lblComcd.Visible = True
+                cboComCd.Visible = True
+            End If
+            '----------------------------------
         Catch ex As Exception
             CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
         End Try
@@ -651,7 +710,25 @@ Public Class FGB14
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
     End Sub
-
+    '20210105 jhs 성분제재 묶음으로 조회
+    Private Sub chkBldBranchSrh_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkBldBranchSrh.CheckedChanged
+        Try
+            If chkBldBranchSrh.Checked Then
+                cboBranchComcd.Visible = True
+                lblBranchComcd.Visible = True
+                lblComcd.Visible = False
+                cboComCd.Visible = False
+            Else
+                cboBranchComcd.Visible = False
+                lblBranchComcd.Visible = False
+                lblComcd.Visible = True
+                cboComCd.Visible = True
+            End If
+        Catch ex As Exception
+            fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+    End Sub
+    '-----------------------------------------------------
 End Class
 
 Public Class FGB14_PrtInfo

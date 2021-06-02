@@ -22,6 +22,7 @@ Partial Class FGB26
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB26))
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
@@ -191,12 +192,10 @@ Partial Class FGB26
         Me.btnExcel.Name = "btnExcel"
         Me.btnExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExcel.SideImage = Nothing
-        Me.btnExcel.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExcel.Size = New System.Drawing.Size(107, 25)
         Me.btnExcel.TabIndex = 188
         Me.btnExcel.Text = "Excel 출력"
-        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExcel.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -234,12 +233,10 @@ Partial Class FGB26
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 186
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -277,12 +274,10 @@ Partial Class FGB26
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(98, 25)
         Me.btnExit.TabIndex = 185
         Me.btnExit.Text = "종료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '

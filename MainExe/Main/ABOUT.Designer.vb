@@ -26,21 +26,21 @@ Partial Class ABOUT
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ABOUT))
-        Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel
-        Me.lblHosp = New System.Windows.Forms.LinkLabel
-        Me.lblOs = New System.Windows.Forms.Label
-        Me.lblIPAddr = New System.Windows.Forms.Label
-        Me.lblPCNm = New System.Windows.Forms.Label
-        Me.lblProductName = New System.Windows.Forms.Label
-        Me.lblVersion = New System.Windows.Forms.Label
-        Me.lblCopyright = New System.Windows.Forms.Label
-        Me.picHosp = New System.Windows.Forms.PictureBox
-        Me.picAck = New System.Windows.Forms.PictureBox
-        Me.lblDescription = New System.Windows.Forms.Label
-        Me.lblMemory = New System.Windows.Forms.Label
-        Me.lblAckAs = New System.Windows.Forms.LinkLabel
-        Me.OKButton = New System.Windows.Forms.Button
-        Me.AxMSComm1 = New AxMSCommLib.AxMSComm
+        Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblHosp = New System.Windows.Forms.LinkLabel()
+        Me.lblOs = New System.Windows.Forms.Label()
+        Me.lblIPAddr = New System.Windows.Forms.Label()
+        Me.lblPCNm = New System.Windows.Forms.Label()
+        Me.lblProductName = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.lblCopyright = New System.Windows.Forms.Label()
+        Me.picHosp = New System.Windows.Forms.PictureBox()
+        Me.picAck = New System.Windows.Forms.PictureBox()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.lblMemory = New System.Windows.Forms.Label()
+        Me.lblAckAs = New System.Windows.Forms.LinkLabel()
+        Me.OKButton = New System.Windows.Forms.Button()
+        Me.AxMSComm1 = New AxMSCommLib.AxMSComm()
         Me.TableLayoutPanel.SuspendLayout()
         CType(Me.picHosp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picAck, System.ComponentModel.ISupportInitialize).BeginInit()

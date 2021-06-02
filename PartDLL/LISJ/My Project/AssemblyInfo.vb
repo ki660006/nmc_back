@@ -53,5 +53,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.351 --> 2020/06/23 : 채혈접수취소, 채혈취소, Reject할때 자체응급 삭제 추가
 'Version 3.1.10.352 --> 2020/06/30 : 위탁검사 녹십자 추가
 'Version 3.1.10.353 --> 2020/11/23 : 바코드 재출력시 자체응급 추가
+'Version 3.1.10.354 --> 2021/01/04 : 위탁검사리스트 채혈시 주의사항 삽입
+'Version 3.1.10.355 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
 
-<Assembly: AssemblyVersion("3.1.10.353")> 
+<Assembly: AssemblyVersion("3.1.10.355")> 
+

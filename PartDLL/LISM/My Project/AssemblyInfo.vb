@@ -64,6 +64,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.365 --> 2020/08/05 : Field, MTB, NTM 이전결과에 따른 색표시 추가
 'Version 3.1.10.366 --> 2020/08/05 : Field, MTB, NTM 이전결과에 따른 색표시 추가
 'Version 3.1.10.367 --> 2020/08/10 : GRAM STAIN 색변경 검사분야 조건 삭제 
+'Version 3.1.10.368 --> 2021/02/16 : 검사항목별 결과저장 및 보고 색 변경
+'Version 3.1.10.370 --> 2021/03/22 : 검사항목별 결과저장 및 보고 색 변경 누적결과 시 색변경도 적용
 
-<Assembly: AssemblyVersion("3.1.10.367")> 
+<Assembly: AssemblyVersion("3.1.10.370")> 
 

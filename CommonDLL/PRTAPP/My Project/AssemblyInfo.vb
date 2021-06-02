@@ -40,5 +40,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.337 --> 2019/04/25 : 환자 혈액형 여부 바코드 표시
 'Version 3.1.10.338 --> 2020/08/04 : 세포면역 배지바코드 출력 추가
 'Version 3.1.10.339 --> 2020/11/23 : 바코드 재출력시 자체응급 R표시
+'Version 3.1.10.340 --> 2020/12/01 : 핵의학 자체응급 컬럼 공백으로 추가
+'Version 3.1.10.341 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
 
-<Assembly: AssemblyVersion("3.1.10.339")> 
+<Assembly: AssemblyVersion("3.1.10.341")> 

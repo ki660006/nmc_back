@@ -180,9 +180,9 @@ Partial Class AxRstInput_m
         Me.gbxComment.Controls.Add(Me.btnHelp_Cmt)
         Me.gbxComment.Controls.Add(Me.lblCmt)
         Me.gbxComment.Controls.Add(Me.txtCmtCont)
-        Me.gbxComment.Location = New System.Drawing.Point(269, 493)
+        Me.gbxComment.Location = New System.Drawing.Point(267, 493)
         Me.gbxComment.Name = "gbxComment"
-        Me.gbxComment.Size = New System.Drawing.Size(708, 98)
+        Me.gbxComment.Size = New System.Drawing.Size(710, 98)
         Me.gbxComment.TabIndex = 150
         Me.gbxComment.TabStop = False
         '
@@ -194,7 +194,7 @@ Partial Class AxRstInput_m
         Me.cboSlip.FormattingEnabled = True
         Me.cboSlip.Location = New System.Drawing.Point(285, 10)
         Me.cboSlip.Name = "cboSlip"
-        Me.cboSlip.Size = New System.Drawing.Size(422, 20)
+        Me.cboSlip.Size = New System.Drawing.Size(424, 20)
         Me.cboSlip.TabIndex = 191
         '
         'txtCmtCd
@@ -306,7 +306,7 @@ Partial Class AxRstInput_m
         Me.txtCmtCont.Multiline = True
         Me.txtCmtCont.Name = "txtCmtCont"
         Me.txtCmtCont.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtCmtCont.Size = New System.Drawing.Size(701, 64)
+        Me.txtCmtCont.Size = New System.Drawing.Size(703, 64)
         Me.txtCmtCont.TabIndex = 0
         '
         'lblpartslipcd

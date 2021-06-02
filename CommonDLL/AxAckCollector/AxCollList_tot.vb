@@ -1340,6 +1340,7 @@ Public Class AxCollList_tot
 
                         al_BcInfo.Add(listCollData)
 
+
                     End If
 
                     If listCollData.Count > 0 Then

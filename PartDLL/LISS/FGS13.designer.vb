@@ -60,6 +60,7 @@ Partial Class FGS13
         Me.spdList = New AxFPSpreadADO.AxfpSpread()
         Me.chkColMove = New System.Windows.Forms.CheckBox()
         Me.grpPrintInfo = New System.Windows.Forms.GroupBox()
+        Me.chkMultiBc = New System.Windows.Forms.CheckBox()
         Me.chkBar_view = New System.Windows.Forms.CheckBox()
         Me.chkBar_cult = New System.Windows.Forms.CheckBox()
         Me.chkPrtWS = New System.Windows.Forms.CheckBox()
@@ -68,6 +69,7 @@ Partial Class FGS13
         Me.lblPrintInfo = New System.Windows.Forms.Label()
         Me.axItemSave = New AxAckItemSave.ITEMSAVE()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkBFtest = New System.Windows.Forms.CheckBox()
         Me.chkTyping = New System.Windows.Forms.CheckBox()
         Me.chkSpcSelect = New System.Windows.Forms.CheckBox()
         Me.txtSelSpc = New System.Windows.Forms.TextBox()
@@ -151,7 +153,7 @@ Partial Class FGS13
         'btnPrint
         '
         Me.btnPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.IsActive = True
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -233,7 +235,7 @@ Partial Class FGS13
         'btnExcel
         '
         Me.btnExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker5.IsActive = True
+        DesignerRectTracker5.IsActive = False
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExcel.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -504,6 +506,7 @@ Partial Class FGS13
         '
         Me.grpPrintInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpPrintInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.grpPrintInfo.Controls.Add(Me.chkMultiBc)
         Me.grpPrintInfo.Controls.Add(Me.chkBar_view)
         Me.grpPrintInfo.Controls.Add(Me.chkBar_cult)
         Me.grpPrintInfo.Controls.Add(Me.chkPrtWS)
@@ -513,12 +516,23 @@ Partial Class FGS13
         Me.grpPrintInfo.Controls.Add(Me.chkTestsFix)
         Me.grpPrintInfo.Controls.Add(Me.lblTerm)
         Me.grpPrintInfo.Controls.Add(Me.cboTerm)
-        Me.grpPrintInfo.Location = New System.Drawing.Point(907, 5)
+        Me.grpPrintInfo.Location = New System.Drawing.Point(907, 3)
         Me.grpPrintInfo.Margin = New System.Windows.Forms.Padding(0)
         Me.grpPrintInfo.Name = "grpPrintInfo"
-        Me.grpPrintInfo.Size = New System.Drawing.Size(190, 109)
+        Me.grpPrintInfo.Size = New System.Drawing.Size(190, 111)
         Me.grpPrintInfo.TabIndex = 130
         Me.grpPrintInfo.TabStop = False
+        '
+        'chkMultiBc
+        '
+        Me.chkMultiBc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkMultiBc.AutoSize = True
+        Me.chkMultiBc.Location = New System.Drawing.Point(105, 9)
+        Me.chkMultiBc.Name = "chkMultiBc"
+        Me.chkMultiBc.Size = New System.Drawing.Size(72, 16)
+        Me.chkMultiBc.TabIndex = 173
+        Me.chkMultiBc.Text = "다중출력"
+        Me.chkMultiBc.UseVisualStyleBackColor = True
         '
         'chkBar_view
         '
@@ -547,7 +561,7 @@ Partial Class FGS13
         '
         Me.chkPrtWS.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkPrtWS.AutoSize = True
-        Me.chkPrtWS.Location = New System.Drawing.Point(105, 45)
+        Me.chkPrtWS.Location = New System.Drawing.Point(105, 44)
         Me.chkPrtWS.Name = "chkPrtWS"
         Me.chkPrtWS.Size = New System.Drawing.Size(78, 16)
         Me.chkPrtWS.TabIndex = 170
@@ -560,7 +574,7 @@ Partial Class FGS13
         Me.chkPrtWL.AutoSize = True
         Me.chkPrtWL.Checked = True
         Me.chkPrtWL.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkPrtWL.Location = New System.Drawing.Point(105, 26)
+        Me.chkPrtWL.Location = New System.Drawing.Point(105, 25)
         Me.chkPrtWL.Name = "chkPrtWL"
         Me.chkPrtWL.Size = New System.Drawing.Size(72, 16)
         Me.chkPrtWL.TabIndex = 169
@@ -571,7 +585,7 @@ Partial Class FGS13
         '
         Me.chkPrtBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkPrtBar.AutoSize = True
-        Me.chkPrtBar.Location = New System.Drawing.Point(8, 26)
+        Me.chkPrtBar.Location = New System.Drawing.Point(8, 27)
         Me.chkPrtBar.Name = "chkPrtBar"
         Me.chkPrtBar.Size = New System.Drawing.Size(60, 16)
         Me.chkPrtBar.TabIndex = 168
@@ -606,6 +620,7 @@ Partial Class FGS13
         '
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.chkBFtest)
         Me.GroupBox6.Controls.Add(Me.chkTyping)
         Me.GroupBox6.Controls.Add(Me.chkSpcSelect)
         Me.GroupBox6.Controls.Add(Me.txtSelSpc)
@@ -639,6 +654,17 @@ Partial Class FGS13
         Me.GroupBox6.Size = New System.Drawing.Size(689, 121)
         Me.GroupBox6.TabIndex = 134
         Me.GroupBox6.TabStop = False
+        '
+        'chkBFtest
+        '
+        Me.chkBFtest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkBFtest.Location = New System.Drawing.Point(253, 105)
+        Me.chkBFtest.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkBFtest.Name = "chkBFtest"
+        Me.chkBFtest.Size = New System.Drawing.Size(109, 15)
+        Me.chkBFtest.TabIndex = 205
+        Me.chkBFtest.Text = "체액검사출력"
+        Me.chkBFtest.Visible = False
         '
         'chkTyping
         '
@@ -710,7 +736,7 @@ Partial Class FGS13
         'chkHistory
         '
         Me.chkHistory.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkHistory.Location = New System.Drawing.Point(230, 105)
+        Me.chkHistory.Location = New System.Drawing.Point(5, 105)
         Me.chkHistory.Margin = New System.Windows.Forms.Padding(0)
         Me.chkHistory.Name = "chkHistory"
         Me.chkHistory.Size = New System.Drawing.Size(124, 15)
@@ -1074,4 +1100,6 @@ Partial Class FGS13
     Friend WithEvents chkSpcSelect As System.Windows.Forms.CheckBox
     Friend WithEvents chkBarInit As System.Windows.Forms.CheckBox
     Friend WithEvents chkTyping As System.Windows.Forms.CheckBox
+    Friend WithEvents chkMultiBc As System.Windows.Forms.CheckBox
+    Friend WithEvents chkBFtest As System.Windows.Forms.CheckBox
 End Class

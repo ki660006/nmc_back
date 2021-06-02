@@ -316,7 +316,7 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtTnmd.Location = New System.Drawing.Point(125, 25)
         Me.txtTnmd.MaxLength = 0
         Me.txtTnmd.Name = "txtTnmd"
-        Me.txtTnmd.Size = New System.Drawing.Size(715, 21)
+        Me.txtTnmd.Size = New System.Drawing.Size(742, 21)
         Me.txtTnmd.TabIndex = 210
         Me.txtTnmd.Tag = "TNMD"
         Me.txtTnmd.Text = "012345678"
@@ -740,12 +740,13 @@ Partial Class FGCDHELP_TEST_NEW
         '
         Me.btnCdHelp_Tnm.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCdHelp_Tnm.Image = CType(resources.GetObject("btnCdHelp_Tnm.Image"), System.Drawing.Image)
-        Me.btnCdHelp_Tnm.Location = New System.Drawing.Point(841, 25)
+        Me.btnCdHelp_Tnm.Location = New System.Drawing.Point(841, 3)
         Me.btnCdHelp_Tnm.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCdHelp_Tnm.Name = "btnCdHelp_Tnm"
         Me.btnCdHelp_Tnm.Size = New System.Drawing.Size(26, 21)
         Me.btnCdHelp_Tnm.TabIndex = 259
         Me.btnCdHelp_Tnm.UseVisualStyleBackColor = True
+        Me.btnCdHelp_Tnm.Visible = False
         '
         'txtOrdSlip
         '

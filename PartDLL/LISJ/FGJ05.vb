@@ -2168,7 +2168,7 @@ Public Class FGJ05
                     sbDisplay_Data(sBcNo_tmp, alList.Count)
                     If rdoGbnOne.Checked = True Then
                         ' 개별접수인경우 자동 접수
-                        'sbReg(sBcNo_tmp)
+                        sbReg(sBcNo_tmp)
                         sbReg_Web(sBcNo_tmp)
                     End If
                 Next

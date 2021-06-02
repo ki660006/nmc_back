@@ -5,8 +5,10 @@ Imports System.Drawing
 Imports COMMON.CommFN
 Imports COMMON.SVar
 Imports COMMON.CommLogin
-Imports common.commlogin.login
+Imports COMMON.CommLogin.LOGIN
 Imports AxAckResult
+Imports System.IO
+Imports DBORA
 
 Public Class FGR03
     Inherits System.Windows.Forms.Form
@@ -110,6 +112,7 @@ Public Class FGR03
     Friend WithEvents btnRst_ocs As System.Windows.Forms.Button
     Friend WithEvents cboQryGbn As System.Windows.Forms.ComboBox
     Friend WithEvents btnQuery_pat As System.Windows.Forms.Button
+    Friend WithEvents chkConQC As System.Windows.Forms.CheckBox
 
     Private m_sf_dri As AxAckResultViewer.SF_Disp_RstInfo
 
@@ -427,6 +430,7 @@ Public Class FGR03
             Dim dt As DataTable = LISAPP.APP_R.RstFn.fnGet_SpcList_Eq(Me.lblEqnm.Tag.ToString, Me.dtpRst.Text.Replace("-", ""), sEr, sRegNo)
 
             Dim dr As DataRow()
+
             Dim sSql As String = ""
 
             Select Case sRstFlg
@@ -460,6 +464,24 @@ Public Class FGR03
             dr = dt.Select(sSql, "tkdt, bcno")
             dt = Fn.ChangeToDataTable(dr)
 
+            '20210406 jhs QC 연동 
+            If chkConQC.Checked = True Then
+                Dim rsEqcd As String = ""
+
+                Dim dt_eqcd As DataTable = LISAPP.APP_R.RstFn.fnGet_SpcList_Qceqcd(Me.lblEqnm.Tag.ToString)
+                If dt_eqcd.Rows.Count > 0 And dt_eqcd.Rows(0).Item(0).ToString.Trim <> "" Then
+                    rsEqcd = "'" + dt_eqcd.Rows(0).Item(0).ToString.Trim + "'"
+
+                    Dim dt_QC As DataTable = fnGet_QC_SpcList_Eq_QC(rsEqcd, Me.dtpRst.Text.Replace("-", ""), sEr, sRegNo)
+                    dt.Merge(dt_QC)
+                    dr = dt.Select("", "tkdt, bcno")
+                    dt = Fn.ChangeToDataTable(dr)
+                Else
+                    MsgBox("QC 장비코드가 조회되지 않았습니다. 관리자 에게 문의 부탁드립니다.")
+                End If
+            End If
+            '-------------------------------
+
             sbDisplay_SpcListVIew(spdList_eq, dt)
             If spdList_eq.MaxRows > 0 Then spdSpcList_ClickEvent(spdList_eq, New AxFPSpreadADO._DSpreadEvents_ClickEvent(2, 1))
 
@@ -470,6 +492,84 @@ Public Class FGR03
 
         End Try
     End Sub
+
+
+    '--20210406 jhs  장비별 검사리스트 QC 데이터 조회 
+    Public Shared Function fnGet_QC_SpcList_Eq_QC(ByVal rsEqCd As String, ByVal rsRstDt As String, _
+                                            ByVal rsEr As String, Optional ByVal rsRegNo As String = "") As DataTable
+        Dim sFn As String = "fnGet_QC_SpcList_Eq_QC() As DataTable"
+        Try
+            Dim oleDbCn As OleDb.OleDbConnection
+            Dim oleDbCmd As New OleDb.OleDbCommand
+
+            oleDbCn = CType(DBORA.ORADB.DbConnection_QC(), OleDb.OleDbConnection)
+
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+            Dim strWhere As String = ""
+
+            rsRstDt = rsRstDt.Replace("-", "")
+
+            sSql += " "
+            sSql += " select    '검사장비' as QRYGBN," + vbCrLf
+            sSql += "           substring(min(r.rstdt), 1, 12) PRTBCNO," + vbCrLf
+            sSql += "           '---' PATNM," + vbCrLf
+            'sSql += "           case when r.bcno is null then 'QC' + r.lcd +'-'+m.MNM else 'QP'+ r.lcd + '-' + m.MNM  end REGNO," + vbCrLf 'ex)QC1-물질명
+            sSql += "            'QC' + r.lcd +'-'+m.MNM as REGNO," + vbCrLf 'ex)QC1-물질명
+            sSql += "           '^' TAT," + vbCrLf
+            '' QC 컨트롤이 끝난다음에 장비에 검체를 걸기때문에  rstdt 를 tkdt로 대체
+            sSql += "           substring(min(r.rstdt), 1, 4) + '-' +substring(min(r.rstdt), 5, 2) + '-' + substring(min(r.rstdt), 7, 2) +' '+ substring(min(r.rstdt), 9, 2)+':'+substring(min(r.rstdt), 11, 2)+':'+substring(min(r.rstdt), 13, 2) TKDT," + vbCrLf
+            sSql += "           case when r.bcno is null then r.rstymd else r.bcno end as BCNO ,  " + vbCrLf
+            sSql += "           substring(min(r.sysdt), 9, 2)+':'+substring(min(r.sysdt), 11, 2)+':'+substring(min(r.sysdt), 13, 2) as systm," + vbCrLf
+            sSql += "           substring(min(r.rstdt), 9, 2)+':'+substring(min(r.rstdt), 11, 2)+':'+substring(min(r.rstdt), 13, 2) as rsttm" + vbCrLf
+            sSql += "   from (((" + vbCrLf
+            sSql += "           qcrst r  with(readpast ,index([PK_QCRST]))" + vbCrLf
+            sSql += "               inner join qcmst q " + vbCrLf
+            sSql += "               on r.eqcd = q.eqcd and r.mcd = q.mcd and r.tcd = q.tcd and r.lcd = q.lcd and q.usdt <= r.sysdt and q.uedt > r.sysdt" + vbCrLf
+            sSql += "               )" + vbCrLf
+            sSql += "               inner join eqmmst m " + vbCrLf
+            sSql += "               on r.eqcd = m.eqcd and r.mcd = m.mcd" + vbCrLf
+            sSql += "               )" + vbCrLf
+            sSql += "               inner join eqlmst l " + vbCrLf
+            sSql += "               on r.eqcd = l.eqcd and r.mcd = l.mcd and r.lcd = l.lcd" + vbCrLf
+            sSql += "               )" + vbCrLf
+            sSql += "   where r.eqcd in (" + rsEqCd + ")" + vbCrLf
+            sSql += "     and r.rstdt >= '" + rsRstDt + "000000' " + vbCrLf
+            sSql += "     and r.rstdt <= '" + rsRstDt + "235959' " + vbCrLf
+            sSql += "     and r.bcno is null " + vbCrLf
+            sSql += "   group by r.eqcd, r.rstymd, m.MNM , r.lcd, r.bcno, r.rstseq, r.rstdt" + vbCrLf
+            sSql += "   order by min(r.sysdt), r.rstymd, r.rstseq" + vbCrLf
+
+
+
+            'er 응급에 대한 내용없어서 지워놈
+            'If rsEr <> "" Then
+            '    'sSql += "   AND NVL(j.statgbn, '0') <> '0'"
+            '    sSql += "   AND (NVL(j.statgbn, '0') <> '0' or NVL(j15.bcno, 'N') <> 'N')" + vbCrLf
+            'End If
+
+            'regno 없어서 지워놈
+            'If rsRegNo <> "" Then
+            '    sSql += "   AND j.regno = :regno" + vbCrLf
+            'End If
+
+
+            With oleDbCmd
+                .Connection = oleDbCn
+                .CommandType = CommandType.Text
+                .CommandText = sSql
+
+                Dim objDAdapter As New OleDb.OleDbDataAdapter(oleDbCmd)
+                objDAdapter.Fill(dt)
+            End With
+
+            Return dt
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+        End Try
+    End Function
+
 
     ' 검사그룹별 조회
     Private Sub sbDisplay_SpcList_T()
@@ -770,132 +870,133 @@ Public Class FGR03
     Friend WithEvents spdList_eq As AxFPSpreadADO.AxfpSpread
     Friend WithEvents cboRerun As System.Windows.Forms.ComboBox
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGR03))
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker15 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems8 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker16 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker17 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems9 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker18 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker19 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems10 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker20 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.spdList = New AxFPSpreadADO.AxfpSpread
-        Me.spdList_eq = New AxFPSpreadADO.AxfpSpread
-        Me.btnBFN = New System.Windows.Forms.Button
-        Me.chkSel_List = New System.Windows.Forms.CheckBox
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox
-        Me.cboQryGbn = New System.Windows.Forms.ComboBox
-        Me.btnToggle = New System.Windows.Forms.Button
-        Me.cboPartSlip = New System.Windows.Forms.ComboBox
-        Me.lblSearch = New System.Windows.Forms.Label
-        Me.txtSearch = New System.Windows.Forms.TextBox
-        Me.Label48 = New System.Windows.Forms.Label
-        Me.tbcJob = New System.Windows.Forms.TabControl
-        Me.TabPage1 = New System.Windows.Forms.TabPage
-        Me.chkSel_Tgrp = New System.Windows.Forms.CheckBox
-        Me.spdTGrp = New AxFPSpreadADO.AxfpSpread
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.dtpTkDtE = New System.Windows.Forms.DateTimePicker
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.dtpTkdtS = New System.Windows.Forms.DateTimePicker
-        Me.TabPage2 = New System.Windows.Forms.TabPage
-        Me.chkJobGbn = New System.Windows.Forms.CheckBox
-        Me.cboWkGrp = New System.Windows.Forms.ComboBox
-        Me.Label46 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.lblWkNo = New System.Windows.Forms.Label
-        Me.txtWkNoE = New System.Windows.Forms.TextBox
-        Me.txtWkNoS = New System.Windows.Forms.TextBox
-        Me.Label43 = New System.Windows.Forms.Label
-        Me.dtpWkDt_e = New System.Windows.Forms.DateTimePicker
-        Me.btnClear_Tcls = New System.Windows.Forms.Button
-        Me.btnHelp_Tcls = New System.Windows.Forms.Button
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.dtpWkDt = New System.Windows.Forms.DateTimePicker
-        Me.lblTNMD = New System.Windows.Forms.Label
-        Me.TabPage3 = New System.Windows.Forms.TabPage
-        Me.lblEqnm = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.spdEq = New AxFPSpreadADO.AxfpSpread
-        Me.Label42 = New System.Windows.Forms.Label
-        Me.dtpRst = New System.Windows.Forms.DateTimePicker
-        Me.TabPage4 = New System.Windows.Forms.TabPage
-        Me.btnQuery_wl = New CButtonLib.CButton
-        Me.cboRstFlg_wl = New System.Windows.Forms.ComboBox
-        Me.dtpWLdte = New System.Windows.Forms.DateTimePicker
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.lblTest_wl = New System.Windows.Forms.Label
-        Me.cboWL = New System.Windows.Forms.ComboBox
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.dtpWLdts = New System.Windows.Forms.DateTimePicker
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.Panel5 = New System.Windows.Forms.Panel
-        Me.btnRst_ocs = New System.Windows.Forms.Button
-        Me.chkMW = New System.Windows.Forms.CheckBox
-        Me.btnRerun = New CButtonLib.CButton
-        Me.btnFN = New CButtonLib.CButton
-        Me.btnReg = New CButtonLib.CButton
-        Me.btnExit = New CButtonLib.CButton
-        Me.cboRerun = New System.Windows.Forms.ComboBox
-        Me.txtID = New System.Windows.Forms.TextBox
-        Me.btnRst_Clear = New CButtonLib.CButton
-        Me.btnMW = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.btnMove = New System.Windows.Forms.Button
-        Me.AxResult = New AxAckResult.AxRstInput
-        Me.btnDown = New System.Windows.Forms.Button
-        Me.btnUp = New System.Windows.Forms.Button
-        Me.sfdSCd = New System.Windows.Forms.SaveFileDialog
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.Panel11 = New System.Windows.Forms.Panel
-        Me.chkER = New System.Windows.Forms.CheckBox
-        Me.Panel10 = New System.Windows.Forms.Panel
-        Me.chkNotRerun = New System.Windows.Forms.CheckBox
-        Me.Panel8 = New System.Windows.Forms.Panel
-        Me.chkHL = New System.Windows.Forms.CheckBox
-        Me.Panel7 = New System.Windows.Forms.Panel
-        Me.chkA = New System.Windows.Forms.CheckBox
-        Me.Panel6 = New System.Windows.Forms.Panel
-        Me.chkReRun = New System.Windows.Forms.CheckBox
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.cboRstFlg = New System.Windows.Forms.ComboBox
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.chkPDC = New System.Windows.Forms.CheckBox
-        Me.Panel4 = New System.Windows.Forms.Panel
-        Me.chkFlag = New System.Windows.Forms.CheckBox
-        Me.Panel9 = New System.Windows.Forms.Panel
-        Me.chkN = New System.Windows.Forms.CheckBox
-        Me.btnQuery = New CButtonLib.CButton
-        Me.chkMoveCol = New System.Windows.Forms.CheckBox
-        Me.AxPatInfo = New AxAckResult.AxRstPatInfo
-        Me.btnHistory = New CButtonLib.CButton
-        Me.btnQuery_pat = New System.Windows.Forms.Button
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker15 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems8 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker16 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker17 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems9 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker18 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker19 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems10 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker20 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.spdList = New AxFPSpreadADO.AxfpSpread()
+        Me.spdList_eq = New AxFPSpreadADO.AxfpSpread()
+        Me.btnBFN = New System.Windows.Forms.Button()
+        Me.chkSel_List = New System.Windows.Forms.CheckBox()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.cboQryGbn = New System.Windows.Forms.ComboBox()
+        Me.btnToggle = New System.Windows.Forms.Button()
+        Me.cboPartSlip = New System.Windows.Forms.ComboBox()
+        Me.lblSearch = New System.Windows.Forms.Label()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.tbcJob = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.chkSel_Tgrp = New System.Windows.Forms.CheckBox()
+        Me.spdTGrp = New AxFPSpreadADO.AxfpSpread()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpTkDtE = New System.Windows.Forms.DateTimePicker()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.dtpTkdtS = New System.Windows.Forms.DateTimePicker()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.chkJobGbn = New System.Windows.Forms.CheckBox()
+        Me.cboWkGrp = New System.Windows.Forms.ComboBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblWkNo = New System.Windows.Forms.Label()
+        Me.txtWkNoE = New System.Windows.Forms.TextBox()
+        Me.txtWkNoS = New System.Windows.Forms.TextBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.dtpWkDt_e = New System.Windows.Forms.DateTimePicker()
+        Me.btnClear_Tcls = New System.Windows.Forms.Button()
+        Me.btnHelp_Tcls = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.dtpWkDt = New System.Windows.Forms.DateTimePicker()
+        Me.lblTNMD = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.lblEqnm = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.spdEq = New AxFPSpreadADO.AxfpSpread()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.dtpRst = New System.Windows.Forms.DateTimePicker()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnQuery_wl = New CButtonLib.CButton()
+        Me.cboRstFlg_wl = New System.Windows.Forms.ComboBox()
+        Me.dtpWLdte = New System.Windows.Forms.DateTimePicker()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblTest_wl = New System.Windows.Forms.Label()
+        Me.cboWL = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.dtpWLdts = New System.Windows.Forms.DateTimePicker()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnRst_ocs = New System.Windows.Forms.Button()
+        Me.chkMW = New System.Windows.Forms.CheckBox()
+        Me.btnRerun = New CButtonLib.CButton()
+        Me.btnFN = New CButtonLib.CButton()
+        Me.btnReg = New CButtonLib.CButton()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.cboRerun = New System.Windows.Forms.ComboBox()
+        Me.txtID = New System.Windows.Forms.TextBox()
+        Me.btnRst_Clear = New CButtonLib.CButton()
+        Me.btnMW = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.btnMove = New System.Windows.Forms.Button()
+        Me.AxResult = New AxAckResult.AxRstInput()
+        Me.btnDown = New System.Windows.Forms.Button()
+        Me.btnUp = New System.Windows.Forms.Button()
+        Me.sfdSCd = New System.Windows.Forms.SaveFileDialog()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.chkER = New System.Windows.Forms.CheckBox()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.chkNotRerun = New System.Windows.Forms.CheckBox()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.chkHL = New System.Windows.Forms.CheckBox()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.chkA = New System.Windows.Forms.CheckBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.chkReRun = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cboRstFlg = New System.Windows.Forms.ComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkPDC = New System.Windows.Forms.CheckBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.chkFlag = New System.Windows.Forms.CheckBox()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.chkN = New System.Windows.Forms.CheckBox()
+        Me.btnQuery = New CButtonLib.CButton()
+        Me.chkMoveCol = New System.Windows.Forms.CheckBox()
+        Me.AxPatInfo = New AxAckResult.AxRstPatInfo()
+        Me.btnHistory = New CButtonLib.CButton()
+        Me.btnQuery_pat = New System.Windows.Forms.Button()
+        Me.chkConQC = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         CType(Me.spdList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.spdList_eq, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1469,12 +1570,10 @@ Public Class FGR03
         Me.btnQuery_wl.Name = "btnQuery_wl"
         Me.btnQuery_wl.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery_wl.SideImage = Nothing
-        Me.btnQuery_wl.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery_wl.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery_wl.Size = New System.Drawing.Size(68, 22)
         Me.btnQuery_wl.TabIndex = 143
         Me.btnQuery_wl.Text = "W/L 조회"
-        Me.btnQuery_wl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery_wl.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery_wl.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1599,7 +1698,7 @@ Public Class FGR03
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(0, 597)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1279, 32)
+        Me.Panel5.Size = New System.Drawing.Size(1276, 32)
         Me.Panel5.TabIndex = 148
         '
         'btnRst_ocs
@@ -1617,7 +1716,7 @@ Public Class FGR03
         '
         Me.chkMW.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkMW.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.chkMW.Location = New System.Drawing.Point(516, 8)
+        Me.chkMW.Location = New System.Drawing.Point(514, 8)
         Me.chkMW.Name = "chkMW"
         Me.chkMW.Size = New System.Drawing.Size(73, 17)
         Me.chkMW.TabIndex = 196
@@ -1655,16 +1754,14 @@ Public Class FGR03
         Me.btnRerun.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnRerun.ImageIndex = 0
         Me.btnRerun.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnRerun.Location = New System.Drawing.Point(692, 3)
+        Me.btnRerun.Location = New System.Drawing.Point(690, 3)
         Me.btnRerun.Name = "btnRerun"
         Me.btnRerun.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnRerun.SideImage = Nothing
-        Me.btnRerun.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRerun.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnRerun.Size = New System.Drawing.Size(96, 25)
         Me.btnRerun.TabIndex = 195
         Me.btnRerun.Text = "재검"
-        Me.btnRerun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnRerun.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnRerun.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1698,16 +1795,14 @@ Public Class FGR03
         Me.btnFN.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnFN.ImageIndex = 0
         Me.btnFN.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnFN.Location = New System.Drawing.Point(789, 3)
+        Me.btnFN.Location = New System.Drawing.Point(787, 3)
         Me.btnFN.Name = "btnFN"
         Me.btnFN.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnFN.SideImage = Nothing
-        Me.btnFN.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFN.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnFN.Size = New System.Drawing.Size(96, 25)
         Me.btnFN.TabIndex = 193
         Me.btnFN.Text = "결과검증(F12)"
-        Me.btnFN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnFN.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnFN.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1732,7 +1827,7 @@ Public Class FGR03
         Me.btnReg.FocalPoints.CenterPtY = 0.0!
         Me.btnReg.FocalPoints.FocusPtX = 0.0!
         Me.btnReg.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker8.IsActive = True
+        DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg.FocusPtTracker = DesignerRectTracker8
         Me.btnReg.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -1741,16 +1836,14 @@ Public Class FGR03
         Me.btnReg.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg.ImageIndex = 0
         Me.btnReg.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg.Location = New System.Drawing.Point(983, 3)
+        Me.btnReg.Location = New System.Drawing.Point(981, 3)
         Me.btnReg.Name = "btnReg"
         Me.btnReg.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg.SideImage = Nothing
-        Me.btnReg.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReg.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnReg.Size = New System.Drawing.Size(96, 25)
         Me.btnReg.TabIndex = 191
         Me.btnReg.Text = "결과저장(F9)"
-        Me.btnReg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnReg.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1784,16 +1877,14 @@ Public Class FGR03
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(1178, 3)
+        Me.btnExit.Location = New System.Drawing.Point(1176, 3)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(93, 25)
         Me.btnExit.TabIndex = 189
         Me.btnExit.Text = "종  료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1846,16 +1937,14 @@ Public Class FGR03
         Me.btnRst_Clear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnRst_Clear.ImageIndex = 0
         Me.btnRst_Clear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnRst_Clear.Location = New System.Drawing.Point(595, 3)
+        Me.btnRst_Clear.Location = New System.Drawing.Point(593, 3)
         Me.btnRst_Clear.Name = "btnRst_Clear"
         Me.btnRst_Clear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnRst_Clear.SideImage = Nothing
-        Me.btnRst_Clear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRst_Clear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnRst_Clear.Size = New System.Drawing.Size(96, 25)
         Me.btnRst_Clear.TabIndex = 194
         Me.btnRst_Clear.Text = "결과소거"
-        Me.btnRst_Clear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnRst_Clear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnRst_Clear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1889,16 +1978,14 @@ Public Class FGR03
         Me.btnMW.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnMW.ImageIndex = 0
         Me.btnMW.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnMW.Location = New System.Drawing.Point(886, 3)
+        Me.btnMW.Location = New System.Drawing.Point(884, 3)
         Me.btnMW.Name = "btnMW"
         Me.btnMW.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnMW.SideImage = Nothing
-        Me.btnMW.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnMW.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnMW.Size = New System.Drawing.Size(96, 25)
         Me.btnMW.TabIndex = 192
         Me.btnMW.Text = "결과확인(F11)"
-        Me.btnMW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnMW.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnMW.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1932,16 +2019,14 @@ Public Class FGR03
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(1080, 3)
+        Me.btnClear.Location = New System.Drawing.Point(1078, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(97, 25)
         Me.btnClear.TabIndex = 190
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1969,7 +2054,7 @@ Public Class FGR03
         Me.AxResult.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.AxResult.Location = New System.Drawing.Point(310, 118)
         Me.AxResult.Name = "AxResult"
-        Me.AxResult.Size = New System.Drawing.Size(968, 477)
+        Me.AxResult.Size = New System.Drawing.Size(965, 477)
         Me.AxResult.TabIndex = 168
         Me.AxResult.UseBloodBank = False
         Me.AxResult.UseDoctor = False
@@ -1979,7 +2064,7 @@ Public Class FGR03
         Me.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDown.Font = New System.Drawing.Font("굴림", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnDown.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnDown.Location = New System.Drawing.Point(1228, 58)
+        Me.btnDown.Location = New System.Drawing.Point(1225, 58)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(49, 55)
         Me.btnDown.TabIndex = 180
@@ -1990,7 +2075,7 @@ Public Class FGR03
         Me.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUp.Font = New System.Drawing.Font("굴림", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnUp.Location = New System.Drawing.Point(1228, 2)
+        Me.btnUp.Location = New System.Drawing.Point(1225, 2)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(49, 55)
         Me.btnUp.TabIndex = 179
@@ -2263,12 +2348,10 @@ Public Class FGR03
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
-        Me.btnQuery.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery.Size = New System.Drawing.Size(68, 22)
         Me.btnQuery.TabIndex = 142
         Me.btnQuery.Text = "조회"
-        Me.btnQuery.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -2289,7 +2372,7 @@ Public Class FGR03
         Me.AxPatInfo.Location = New System.Drawing.Point(309, 1)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(915, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(918, 114)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 188
         '
@@ -2323,23 +2406,21 @@ Public Class FGR03
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(712, 117)
+        Me.btnHistory.Location = New System.Drawing.Point(709, 117)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
-        Me.btnHistory.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnHistory.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnHistory.Size = New System.Drawing.Size(91, 23)
         Me.btnHistory.TabIndex = 195
         Me.btnHistory.Text = "누적결과조회"
-        Me.btnHistory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnHistory.TextMargin = New System.Windows.Forms.Padding(0)
         '
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(1186, 118)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(1183, 118)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(92, 22)
         Me.btnQuery_pat.TabIndex = 219
@@ -2347,11 +2428,22 @@ Public Class FGR03
         Me.btnQuery_pat.Text = "환자진단조회"
         Me.btnQuery_pat.UseVisualStyleBackColor = True
         '
+        'chkConQC
+        '
+        Me.chkConQC.AutoSize = True
+        Me.chkConQC.Location = New System.Drawing.Point(5, 323)
+        Me.chkConQC.Name = "chkConQC"
+        Me.chkConQC.Size = New System.Drawing.Size(66, 16)
+        Me.chkConQC.TabIndex = 220
+        Me.chkConQC.Text = "QC연동"
+        Me.chkConQC.UseVisualStyleBackColor = True
+        '
         'FGR03
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(6, 14)
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1279, 629)
+        Me.ClientSize = New System.Drawing.Size(1276, 629)
+        Me.Controls.Add(Me.chkConQC)
         Me.Controls.Add(Me.btnQuery_pat)
         Me.Controls.Add(Me.tbcJob)
         Me.Controls.Add(Me.btnHistory)
@@ -2529,7 +2621,7 @@ Public Class FGR03
                     Me.AxResult.Focus()
 
                     AxPatInfo.BcNo = sBCNO
-                    
+
 
                     txtSearch.SelectAll()
                     txtSearch.Focus()
@@ -2849,6 +2941,12 @@ Public Class FGR03
                 If Me.lblSearch.Text = "검체번호" Then Me.txtSearch.Text = sBcNo
 
             End With
+
+            '20210406 jhs QC 데이터 제거
+            If sBcNo.Length = 8 Then
+                Return
+            End If
+            '-------------------------
 
             Me.AxPatInfo.BcNo = sBcNo
             Me.AxPatInfo.SlipCd = IIf(Me.tbcJob.SelectedTab.Text = "작업그룹별", Ctrl.Get_Code(cboPartSlip), "").ToString
@@ -3536,7 +3634,7 @@ Public Class FGR03
     End Sub
 
     Private Sub cboPartSlip_wl_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-        
+
     End Sub
 
     Private Sub cboWL_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboWL.SelectedIndexChanged
@@ -3673,3 +3771,5 @@ Public Class FGR03
         End Try
     End Sub
 End Class
+
+

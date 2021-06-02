@@ -22,6 +22,7 @@ Partial Class FGS15
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGS15))
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
@@ -136,12 +137,10 @@ Partial Class FGS15
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint.SideImage = Nothing
-        Me.btnPrint.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrint.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnPrint.Size = New System.Drawing.Size(100, 25)
         Me.btnPrint.TabIndex = 205
         Me.btnPrint.Text = "출  력"
-        Me.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnPrint.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -175,16 +174,14 @@ Partial Class FGS15
         Me.btnQuery.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.ImageIndex = 0
         Me.btnQuery.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQuery.Location = New System.Drawing.Point(480, 5)
+        Me.btnQuery.Location = New System.Drawing.Point(480, 4)
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
-        Me.btnQuery.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery.Size = New System.Drawing.Size(100, 25)
         Me.btnQuery.TabIndex = 201
         Me.btnQuery.Text = "조  회"
-        Me.btnQuery.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -222,12 +219,10 @@ Partial Class FGS15
         Me.btnExcel.Name = "btnExcel"
         Me.btnExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExcel.SideImage = Nothing
-        Me.btnExcel.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExcel.Size = New System.Drawing.Size(100, 25)
         Me.btnExcel.TabIndex = 202
         Me.btnExcel.Text = "To Excel"
-        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExcel.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -265,12 +260,10 @@ Partial Class FGS15
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(100, 25)
         Me.btnClear.TabIndex = 203
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -308,12 +301,10 @@ Partial Class FGS15
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(100, 25)
         Me.btnExit.TabIndex = 204
         Me.btnExit.Text = "종  료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -360,9 +351,9 @@ Partial Class FGS15
         Me.chkTclsFix.AutoSize = True
         Me.chkTclsFix.Checked = True
         Me.chkTclsFix.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkTclsFix.Location = New System.Drawing.Point(10, 56)
+        Me.chkTclsFix.Location = New System.Drawing.Point(8, 56)
         Me.chkTclsFix.Name = "chkTclsFix"
-        Me.chkTclsFix.Size = New System.Drawing.Size(100, 16)
+        Me.chkTclsFix.Size = New System.Drawing.Size(102, 16)
         Me.chkTclsFix.TabIndex = 166
         Me.chkTclsFix.Text = "검사위치 고정"
         Me.chkTclsFix.UseVisualStyleBackColor = True

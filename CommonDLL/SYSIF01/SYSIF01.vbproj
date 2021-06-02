@@ -96,9 +96,9 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+    <Reference Include="Oracle.DataAccess, Version=2.111.6.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MainExe\Main\bin\Oracle.DataAccess.DLL</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\Oracle.DataAccess.DLL</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

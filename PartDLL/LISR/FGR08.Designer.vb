@@ -182,7 +182,7 @@ Partial Class FGR08
         Me.pnlBottom.Location = New System.Drawing.Point(0, 633)
         Me.pnlBottom.Margin = New System.Windows.Forms.Padding(1)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(1033, 34)
+        Me.pnlBottom.Size = New System.Drawing.Size(1277, 34)
         Me.pnlBottom.TabIndex = 0
         '
         'btnRstHis
@@ -338,7 +338,7 @@ Partial Class FGR08
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(929, 4)
+        Me.btnExit.Location = New System.Drawing.Point(1173, 4)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
@@ -379,7 +379,7 @@ Partial Class FGR08
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(832, 4)
+        Me.btnClear.Location = New System.Drawing.Point(1076, 4)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
@@ -420,7 +420,7 @@ Partial Class FGR08
         Me.btnReg_r.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_r.ImageIndex = 0
         Me.btnReg_r.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_r.Location = New System.Drawing.Point(735, 4)
+        Me.btnReg_r.Location = New System.Drawing.Point(979, 4)
         Me.btnReg_r.Name = "btnReg_r"
         Me.btnReg_r.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_r.SideImage = Nothing
@@ -461,7 +461,7 @@ Partial Class FGR08
         Me.btnReg_m.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_m.ImageIndex = 0
         Me.btnReg_m.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_m.Location = New System.Drawing.Point(638, 4)
+        Me.btnReg_m.Location = New System.Drawing.Point(882, 4)
         Me.btnReg_m.Name = "btnReg_m"
         Me.btnReg_m.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_m.SideImage = Nothing
@@ -502,7 +502,7 @@ Partial Class FGR08
         Me.btnReg_F.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_F.ImageIndex = 0
         Me.btnReg_F.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_F.Location = New System.Drawing.Point(541, 4)
+        Me.btnReg_F.Location = New System.Drawing.Point(785, 4)
         Me.btnReg_F.Name = "btnReg_F"
         Me.btnReg_F.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_F.SideImage = Nothing
@@ -543,7 +543,7 @@ Partial Class FGR08
         Me.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint.ImageIndex = 0
         Me.btnPrint.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnPrint.Location = New System.Drawing.Point(444, 4)
+        Me.btnPrint.Location = New System.Drawing.Point(688, 4)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint.SideImage = Nothing
@@ -584,7 +584,7 @@ Partial Class FGR08
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnCancel.Location = New System.Drawing.Point(347, 4)
+        Me.btnCancel.Location = New System.Drawing.Point(591, 4)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnCancel.SideImage = Nothing
@@ -626,7 +626,7 @@ Partial Class FGR08
         Me.btnReg_FnAll.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_FnAll.ImageIndex = 0
         Me.btnReg_FnAll.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_FnAll.Location = New System.Drawing.Point(250, 4)
+        Me.btnReg_FnAll.Location = New System.Drawing.Point(494, 4)
         Me.btnReg_FnAll.Name = "btnReg_FnAll"
         Me.btnReg_FnAll.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_FnAll.SideImage = Nothing
@@ -692,7 +692,7 @@ Partial Class FGR08
         Me.btnPrint_All.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint_All.ImageIndex = 0
         Me.btnPrint_All.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnPrint_All.Location = New System.Drawing.Point(250, 4)
+        Me.btnPrint_All.Location = New System.Drawing.Point(494, 4)
         Me.btnPrint_All.Name = "btnPrint_All"
         Me.btnPrint_All.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint_All.SideImage = Nothing
@@ -734,7 +734,7 @@ Partial Class FGR08
         Me.btnReg_FnBcno.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_FnBcno.ImageIndex = 0
         Me.btnReg_FnBcno.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_FnBcno.Location = New System.Drawing.Point(347, 4)
+        Me.btnReg_FnBcno.Location = New System.Drawing.Point(591, 4)
         Me.btnReg_FnBcno.Name = "btnReg_FnBcno"
         Me.btnReg_FnBcno.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_FnBcno.SideImage = Nothing
@@ -748,7 +748,7 @@ Partial Class FGR08
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(940, 116)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(1183, 114)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(92, 22)
         Me.btnQuery_pat.TabIndex = 218
@@ -998,11 +998,10 @@ Partial Class FGR08
         '
         'btnUp
         '
-        Me.btnUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUp.Font = New System.Drawing.Font("굴림", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnUp.Location = New System.Drawing.Point(986, 7)
+        Me.btnUp.Location = New System.Drawing.Point(1232, 7)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(45, 52)
         Me.btnUp.TabIndex = 181
@@ -1010,11 +1009,10 @@ Partial Class FGR08
         '
         'btnDown
         '
-        Me.btnDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDown.Font = New System.Drawing.Font("굴림", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnDown.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnDown.Location = New System.Drawing.Point(986, 62)
+        Me.btnDown.Location = New System.Drawing.Point(1232, 62)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(45, 52)
         Me.btnDown.TabIndex = 182
@@ -1043,7 +1041,7 @@ Partial Class FGR08
         Me.pnlSpTest.Controls.Add(Me.pnlIMG)
         Me.pnlSpTest.Location = New System.Drawing.Point(312, 139)
         Me.pnlSpTest.Name = "pnlSpTest"
-        Me.pnlSpTest.Size = New System.Drawing.Size(720, 494)
+        Me.pnlSpTest.Size = New System.Drawing.Size(965, 494)
         Me.pnlSpTest.TabIndex = 183
         '
         'btnCmdHelp
@@ -1051,7 +1049,7 @@ Partial Class FGR08
         Me.btnCmdHelp.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCmdHelp.BackColor = System.Drawing.SystemColors.Control
         Me.btnCmdHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCmdHelp.Location = New System.Drawing.Point(680, 21)
+        Me.btnCmdHelp.Location = New System.Drawing.Point(925, 21)
         Me.btnCmdHelp.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCmdHelp.Name = "btnCmdHelp"
         Me.btnCmdHelp.Size = New System.Drawing.Size(36, 21)
@@ -1064,7 +1062,7 @@ Partial Class FGR08
         Me.btnRstAll.AccessibleName = "개별보기(&V)"
         Me.btnRstAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRstAll.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnRstAll.Location = New System.Drawing.Point(601, 28)
+        Me.btnRstAll.Location = New System.Drawing.Point(846, 28)
         Me.btnRstAll.Name = "btnRstAll"
         Me.btnRstAll.Size = New System.Drawing.Size(76, 22)
         Me.btnRstAll.TabIndex = 167
@@ -1075,7 +1073,7 @@ Partial Class FGR08
         Me.btnAddFile.AccessibleName = "개별보기(&V)"
         Me.btnAddFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddFile.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnAddFile.Location = New System.Drawing.Point(536, 28)
+        Me.btnAddFile.Location = New System.Drawing.Point(781, 28)
         Me.btnAddFile.Name = "btnAddFile"
         Me.btnAddFile.Size = New System.Drawing.Size(63, 22)
         Me.btnAddFile.TabIndex = 171
@@ -1087,7 +1085,7 @@ Partial Class FGR08
         Me.cboAddFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cboAddFile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAddFile.FormattingEnabled = True
-        Me.cboAddFile.Location = New System.Drawing.Point(366, 30)
+        Me.cboAddFile.Location = New System.Drawing.Point(611, 30)
         Me.cboAddFile.Margin = New System.Windows.Forms.Padding(1)
         Me.cboAddFile.Name = "cboAddFile"
         Me.cboAddFile.Size = New System.Drawing.Size(165, 20)
@@ -1104,14 +1102,14 @@ Partial Class FGR08
         Me.tbcStSubSeq.Location = New System.Drawing.Point(3, 29)
         Me.tbcStSubSeq.Name = "tbcStSubSeq"
         Me.tbcStSubSeq.SelectedIndex = 0
-        Me.tbcStSubSeq.Size = New System.Drawing.Size(362, 19)
+        Me.tbcStSubSeq.Size = New System.Drawing.Size(607, 19)
         Me.tbcStSubSeq.TabIndex = 29
         '
         'TabPage1
         '
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(354, 0)
+        Me.TabPage1.Size = New System.Drawing.Size(599, 0)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         '
@@ -1120,7 +1118,7 @@ Partial Class FGR08
         Me.btnResetRst.AccessibleName = ""
         Me.btnResetRst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnResetRst.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btnResetRst.Location = New System.Drawing.Point(601, 2)
+        Me.btnResetRst.Location = New System.Drawing.Point(846, 2)
         Me.btnResetRst.Name = "btnResetRst"
         Me.btnResetRst.Size = New System.Drawing.Size(76, 22)
         Me.btnResetRst.TabIndex = 168
@@ -1131,7 +1129,7 @@ Partial Class FGR08
         Me.btnUpDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnUpDown.BackColor = System.Drawing.SystemColors.Control
         Me.btnUpDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpDown.Location = New System.Drawing.Point(680, 0)
+        Me.btnUpDown.Location = New System.Drawing.Point(925, 0)
         Me.btnUpDown.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUpDown.Name = "btnUpDown"
         Me.btnUpDown.Size = New System.Drawing.Size(36, 21)
@@ -1166,7 +1164,7 @@ Partial Class FGR08
         Me.lblRstFlg.BackColor = System.Drawing.Color.White
         Me.lblRstFlg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblRstFlg.ForeColor = System.Drawing.Color.Black
-        Me.lblRstFlg.Location = New System.Drawing.Point(396, 4)
+        Me.lblRstFlg.Location = New System.Drawing.Point(641, 4)
         Me.lblRstFlg.Name = "lblRstFlg"
         Me.lblRstFlg.Size = New System.Drawing.Size(18, 20)
         Me.lblRstFlg.TabIndex = 163
@@ -1179,7 +1177,7 @@ Partial Class FGR08
         Me.lblRstDtUsr.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.lblRstDtUsr.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblRstDtUsr.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.lblRstDtUsr.Location = New System.Drawing.Point(416, 4)
+        Me.lblRstDtUsr.Location = New System.Drawing.Point(661, 4)
         Me.lblRstDtUsr.Name = "lblRstDtUsr"
         Me.lblRstDtUsr.Size = New System.Drawing.Size(183, 20)
         Me.lblRstDtUsr.TabIndex = 164
@@ -1224,7 +1222,7 @@ Partial Class FGR08
         Me.lblTNm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblTNm.Location = New System.Drawing.Point(116, 4)
         Me.lblTNm.Name = "lblTNm"
-        Me.lblTNm.Size = New System.Drawing.Size(279, 20)
+        Me.lblTNm.Size = New System.Drawing.Size(524, 20)
         Me.lblTNm.TabIndex = 27
         Me.lblTNm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -1343,14 +1341,12 @@ Partial Class FGR08
         '
         'AxPatInfo
         '
-        Me.AxPatInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AxPatInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.AxPatInfo.BcNo = ""
         Me.AxPatInfo.Location = New System.Drawing.Point(312, 3)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(675, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(916, 114)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 173
         '
@@ -1374,7 +1370,7 @@ Partial Class FGR08
         Me.txtTestCont.Location = New System.Drawing.Point(313, 117)
         Me.txtTestCont.Name = "txtTestCont"
         Me.txtTestCont.ReadOnly = True
-        Me.txtTestCont.Size = New System.Drawing.Size(628, 21)
+        Me.txtTestCont.Size = New System.Drawing.Size(961, 21)
         Me.txtTestCont.TabIndex = 185
         '
         'txtPartSlip
@@ -1391,7 +1387,7 @@ Partial Class FGR08
         'btnQuery_rst
         '
         Me.btnQuery_rst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_rst.Location = New System.Drawing.Point(847, 116)
+        Me.btnQuery_rst.Location = New System.Drawing.Point(1087, 114)
         Me.btnQuery_rst.Name = "btnQuery_rst"
         Me.btnQuery_rst.Size = New System.Drawing.Size(94, 22)
         Me.btnQuery_rst.TabIndex = 220
@@ -1416,12 +1412,12 @@ Partial Class FGR08
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1033, 667)
+        Me.ClientSize = New System.Drawing.Size(1279, 667)
+        Me.Controls.Add(Me.btnQuery_pat)
         Me.Controls.Add(Me.nCovRst)
         Me.Controls.Add(Me.btnQuery_rst)
         Me.Controls.Add(Me.txtPartSlip)
         Me.Controls.Add(Me.txtTestCont)
-        Me.Controls.Add(Me.btnQuery_pat)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.pnlSpTest)
