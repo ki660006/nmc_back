@@ -3094,7 +3094,7 @@ Namespace APP_BT
 
                         
                         DbCmd.Parameters.Add("rs_retval", OracleDbType.Varchar2)
-                        DbCmd.Parameters("rs_retval").Size = 2000
+                        DbCmd.Parameters("rs_retval").Size = 3000
                         DbCmd.Parameters("rs_retval").Direction = ParameterDirection.Output
                         DbCmd.Parameters("rs_retval").Value = ""
 
@@ -6175,43 +6175,43 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "SELECT b.comnmd"
-                sSql += "     , a.abo || a.rh                                as aborh"
-                sSql += "     , fn_ack_get_bldno_full(a.bldno)                   as bldno"
-                sSql += "     , fn_ack_date_str(a.dondt, 'yyyy-MM-dd hh24:mi')   as dondt"
-                sSql += "     , fn_ack_date_str(a.availdt, 'yyyy-MM-dd hh24:mi') as availdt"
-                sSql += "     , fn_ack_date_str(a.indt, 'yyyy-mm-dd hh24:mi')    as indt"
-                sSql += "     , fn_ack_get_usr_name(a.inid)                      as inid"
-                sSql += "  FROM lb020m a,"
-                sSql += "       lf120m b"
-                sSql += " WHERE a.comcd    = b.comcd"
-                sSql += "   AND a.indt    >= b.usdt"
-                sSql += "   AND a.indt    <  b.uedt"
-                sSql += "   AND a.availdt >= :indt"
-                sSql += "   AND a.indt    <= :indt || '235959'"
-                sSql += "   AND CASE WHEN NVL(a.editdt, fn_ack_sysdate) > :indt || '235959'"
+                sSql += "SELECT b.comnmd" + vbCrLf
+                sSql += "     , a.abo || a.rh                                as aborh" + vbCrLf
+                sSql += "     , fn_ack_get_bldno_full(a.bldno)                   as bldno" + vbCrLf
+                sSql += "     , fn_ack_date_str(a.dondt, 'yyyy-MM-dd hh24:mi')   as dondt" + vbCrLf
+                sSql += "     , fn_ack_date_str(a.availdt, 'yyyy-MM-dd hh24:mi') as availdt" + vbCrLf
+                sSql += "     , fn_ack_date_str(a.indt, 'yyyy-mm-dd hh24:mi')    as indt" + vbCrLf
+                sSql += "     , fn_ack_get_usr_name(a.inid)                      as inid" + vbCrLf
+                sSql += "  FROM lb020m a," + vbCrLf
+                sSql += "       lf120m b" + vbCrLf
+                sSql += " WHERE a.comcd    = b.comcd" + vbCrLf
+                sSql += "   AND a.indt    >= b.usdt" + vbCrLf
+                sSql += "   AND a.indt    <  b.uedt" + vbCrLf
+                sSql += "   AND a.availdt >= :indt" + vbCrLf
+                sSql += "   AND a.indt    <= :indt || '235959'" + vbCrLf
+                sSql += "   AND CASE WHEN NVL(a.editdt, fn_ack_sysdate) > :indt || '235959'" + vbCrLf
 
                 alParm.Add(New OracleParameter("indt",  OracleDbType.Varchar2, rsDate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDate))
                 alParm.Add(New OracleParameter("indt",  OracleDbType.Varchar2, rsDate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDate))
                 alParm.Add(New OracleParameter("indt",  OracleDbType.Varchar2, rsDate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDate))
 
-                sSql += "            THEN '0'"
-                sSql += "            ELSE a.state"
-                sSql += "       END               = '0'"
-                sSql += "   AND a.comcd = :comcd"
+                sSql += "            THEN '0'" + vbCrLf
+                sSql += "            ELSE a.state" + vbCrLf
+                sSql += "       END               = '0'" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
 
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
                 If rsAbo.Length() > 0 Then
-                    sSql += "   AND a.abo   = :abo"
-                    sSql += "   AND a.rh    = :rh"
+                    sSql += "   AND a.abo   = :abo" + vbCrLf
+                    sSql += "   AND a.rh    = :rh" + vbCrLf
 
                     alParm.Add(New OracleParameter("abo",  OracleDbType.Varchar2, rsAbo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsAbo))
                     alParm.Add(New OracleParameter("rh",  OracleDbType.Varchar2, rsRh.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRh))
                 End If
 
 
-                sSql += " ORDER BY a.dondt, a.availdt, a.indt, b.comcd, a.bldno"
+                sSql += " ORDER BY a.dondt, a.availdt, a.indt, b.comcd, a.bldno" + vbCrLf
 
                 DbCommand()
 

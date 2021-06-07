@@ -720,8 +720,8 @@ Public Class PrintResult
             psngPrtY = psngY
 
             With p_spd
-                '20210531 jhs 페이지 넘버 총페이지수 
-                totPages = Math.Round(CDbl(.MaxRows) / 63)
+                '20210531 jhs 페이지 넘버 총페이지수
+                totPages = Math.Ceiling(CDbl(.MaxRows) / 63)
                 '----------------------
                 For i As Integer = piRow_Start To .MaxRows
                     If i = piRow_Start Then

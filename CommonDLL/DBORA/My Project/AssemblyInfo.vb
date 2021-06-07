@@ -34,5 +34,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.323 --> 2018/02/27 : vs2010upgrade
 'Version 3.1.10.324 --> 2019/04/25 : 삼광서버 커넥션 추가
 'Version 3.1.10.325 --> 2020/06/30 : 녹십자서버 커넥션 추가
+'Version 3.1.10.326 --> 2021/06/07 : qc커넥션 오류 수정
+'Version 3.1.10.327 --> 2021/06/07 : qc커넥션 오류 수정(재배포)
 
-<Assembly: AssemblyVersion("3.1.10.325")> 
+<Assembly: AssemblyVersion("3.1.10.327")> 
