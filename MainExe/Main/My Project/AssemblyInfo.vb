@@ -258,7 +258,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.761 --> 2021/05/21 : LISAPP, LISS
 'Version 3.1.10.762 --> 2021/05/31 : LISAPP, LISR
 'Version 3.1.10.763 --> 2021/06/01 : AxAckResultViewer
+'Version 3.1.10.764 --> 2021/06/07 : DBORA, AxAckResultViewer
+'Version 3.1.10.765 --> 2021/06/07 : DBORA, AxAckResultViewer
 
-<Assembly: AssemblyVersion("3.1.10.763")> 
+<Assembly: AssemblyVersion("3.1.10.765")> 
 
 
