@@ -10364,6 +10364,7 @@ Namespace APP_R
                 Dim sRefL As String = m_dt_rst.Rows(riR).Item("refl").ToString().Trim
                 Dim sRefH As String = m_dt_rst.Rows(riR).Item("refh").ToString().Trim
 
+
                 If rsOrgRst.StartsWith("<=") Or rsOrgRst.StartsWith(">=") Then
                     sMark = rsOrgRst.Substring(0, 2).Trim
                     sRst = rsOrgRst.Substring(2).Trim
