@@ -42,5 +42,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.339 --> 2020/11/23 : 바코드 재출력시 자체응급 R표시
 'Version 3.1.10.340 --> 2020/12/01 : 핵의학 자체응급 컬럼 공백으로 추가
 'Version 3.1.10.341 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
+'Version 3.1.10.342 --> 2021/06/15 : 특정검사코드 검사명 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.341")> 
+<Assembly: AssemblyVersion("3.1.10.342")> 

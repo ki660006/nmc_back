@@ -178,5 +178,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.517 --> 2021/05/17 : 장비코드 조회 시 QC장비코드 데이터 연동 되도록 수정 
 'Version 3.1.10.518 --> 2021/05/21 : 체액검사 내용 조회 쿼리 수정
 'Version 3.1.10.519 --> 2021/05/31 : QC데이터 조회 쿼리 수정
+'Version 3.1.10.520 --> 2021/06/15 : 특정검사 바코드 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.519")> 
+<Assembly: AssemblyVersion("3.1.10.520")> 

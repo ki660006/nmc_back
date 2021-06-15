@@ -520,11 +520,14 @@ Namespace APP_BC
 
                     .ERPRTYN = r_listcollData.Item(0).ERPRTYN  '<<<<20180802 응급프린트
 
-                    For ix As Integer = 0 To r_listcollData.Count - 1 '맨 마지막 바코드 출력 갯수로 초기화 됨 수정 필요 
-                        If r_listcollData.Item(ix).BCCNT <> "" Then
-                            .BCCNT = Fn.PadRightH(r_listcollData.Item(ix).BCCNT, 1) 'Fn.PadRightH(fnFind_BcCrossMatchingCheck(r_listcollData.Item(0).BCNO.Trim().Replace("-", "")), 4)
-                        End If
-                    Next
+                    '20210611 jhs 추가 바코드 설정 리스트 맨 처음으로 변경
+                    'For ix As Integer = 0 To r_listcollData.Count - 1 '맨 마지막 바코드 출력 갯수로 초기화 됨 수정 필요 
+                    '    If r_listcollData.Item(ix).BCCNT <> "" Then
+                    '        .BCCNT = Fn.PadRightH(r_listcollData.Item(ix).BCCNT, 1) 'Fn.PadRightH(fnFind_BcCrossMatchingCheck(r_listcollData.Item(0).BCNO.Trim().Replace("-", "")), 4)
+                    '    End If
+                    'Next
+                    .BCCNT = Fn.PadRightH(r_listcollData.Item(0).BCCNT, 1)
+                    '-------------------------------------------------
 
                     Dim sRemark As String = OCSAPP.OcsLink.SData.fnGet_Remark(r_listcollData.Item(0).BCNO)
 

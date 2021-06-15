@@ -54,5 +54,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.353 --> 2020/12/10 : LUKHAN 바코드 특정장비 리딩문제로 원복
 'Version 3.1.10.354 --> 2020/12/22 : LUKHAN 바코드 특정장비 리딩문제로 원복
 'Version 3.1.10.355 --> 2021/01/27 : 접수시 바코드 출력되도록 수정 
+'Version 3.1.10.356 --> 2021/06/15 : 특정검사 검사명 바코드 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.355")> 
+<Assembly: AssemblyVersion("3.1.10.356")> 

@@ -3933,7 +3933,7 @@ Public Class AxCollList_tot
         collData.HEIGHT = Ctrl.Get_Code(spd, "height", riRow, False)
         collData.WEIGHT = Ctrl.Get_Code(spd, "weight", riRow, False)
         collData.STATGBN = Ctrl.Get_Code(spd, "erflg", riRow, False)
-        collData.TCLSCD = Ctrl.Get_Code(spd, "testcd", riRow, False)
+        collData.TCLSCD = Ctrl.Get_Code(spd, "testcd", riRow, False) '검사코드 
         collData.SPCCD = Ctrl.Get_Code(spd, "spccd", riRow, False)
         collData.OWNGBN = Ctrl.Get_Code(spd, "owngbn", riRow, False)
 
