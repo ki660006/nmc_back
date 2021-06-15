@@ -954,7 +954,8 @@ Namespace APP_C
 
                     Dim sReturn As String = ""
 
-                    ' sReturn = ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode)
+
+                    'sReturn = ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode)
                     sReturn = (New WEBSERVER.CGWEB_C).ExecuteDo_One(stu_coll, rbToColl, rbAutoTkMode, sPartGbn) '
 
                     If sReturn <> "" Then

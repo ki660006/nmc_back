@@ -574,9 +574,9 @@ Public Class LUKHAN_DRV
             '<상호 재수정 20150602
             '< 바코드 발행 일시  233
             If rbFirst Then
-                LK_PrintDeviceFont(260 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("MM-dd HH:mm"))
+                LK_PrintDeviceFont(275 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("MM-dd HH:mm"))
             Else
-                LK_PrintDeviceFont(260 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("HH:mm"))
+                LK_PrintDeviceFont(275 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("HH:mm"))
             End If
             '>
 

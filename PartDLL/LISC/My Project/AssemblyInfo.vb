@@ -41,6 +41,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.335 --> 2020/04/13 : 외래채혈화면 tabindex 조정
 'Version 3.1.10.336 --> 2021/03/20 : 외래채혈 주민등록번호 조회시 오류 수정
 'Version 3.1.10.337 --> 2021/03/22 : 외래채혈 환자명으로 조회 시 오류 수정
+'Version 3.1.10.338 --> 2021/06/15 : 특정검사 검사명 음영처리 
 
-<Assembly: AssemblyVersion("3.1.10.337")> 
+<Assembly: AssemblyVersion("3.1.10.338")> 
 

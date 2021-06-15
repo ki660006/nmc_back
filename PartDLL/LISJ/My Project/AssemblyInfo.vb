@@ -55,6 +55,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.353 --> 2020/11/23 : 바코드 재출력시 자체응급 추가
 'Version 3.1.10.354 --> 2021/01/04 : 위탁검사리스트 채혈시 주의사항 삽입
 'Version 3.1.10.355 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
+'Version 3.1.10.356 --> 2021/06/15 : 바코드 특정검사 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.355")> 
+<Assembly: AssemblyVersion("3.1.10.356")> 
 

@@ -260,7 +260,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.763 --> 2021/06/01 : AxAckResultViewer
 'Version 3.1.10.764 --> 2021/06/07 : DBORA, AxAckResultViewer
 'Version 3.1.10.765 --> 2021/06/07 : DBORA, AxAckResultViewer
+'Version 3.1.10.766 --> 2021/06/15 : LISAPP, LISC, LISJ, AXACKCOLLECTOR, COMMON, BCPRPT01, PRTAPP
 
-<Assembly: AssemblyVersion("3.1.10.765")> 
+<Assembly: AssemblyVersion("3.1.10.766")> 
 
 
