@@ -114,5 +114,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.430 --> 2021/04/19 : 체액검사 보고서 출력
 'Version 3.1.10.431 --> 2021/05/17 : 체액검사 보고서 출력
 'Version 3.1.10.432 --> 2021/05/21 : 체액검사 보고서 출력 수정
+'Version 3.1.10.433 --> 2021/06/22 : TAT조회 차일드도 포함 되서 조회 될 수 있도록 구현
 
-<Assembly: AssemblyVersion("3.1.10.432")> 
+<Assembly: AssemblyVersion("3.1.10.433")> 

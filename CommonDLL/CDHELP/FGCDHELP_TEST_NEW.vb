@@ -206,6 +206,7 @@ Public Class FGCDHELP_TEST_NEW
             Me.txtExLabYn.Text = ""
             Me.txtRrptst.Text = ""
             Me.txtTelNo.Text = ""
+            Me.txtResultDays.Text = ""
 
             Me.chkExeDay1.Checked = False : Me.chkExeDay2.Checked = False : Me.chkExeDay3.Checked = False
             Me.chkExeDay4.Checked = False : Me.chkExeDay5.Checked = False : Me.chkExeDay6.Checked = False
@@ -299,6 +300,7 @@ Public Class FGCDHELP_TEST_NEW
                 sTubeCd = dt.Rows(0).Item("tubecd").ToString.Trim
 
                 Me.txtCWarning.Text = dt.Rows(0).Item("cowarning").ToString.Trim
+                Me.txtResultDays.Text = dt.Rows(0).Item("rrptst").ToString.Trim
 
                 Me.txtUsDt.Text = dt.Rows(0).Item("usdt").ToString.Trim
                 Me.txtTnmd.Text = dt.Rows(0).Item("tnmd").ToString.Trim
@@ -1387,36 +1389,37 @@ Public Class FGCDHELP_TEST_NEW
             xlsWkS = CType(xlsWkB.ActiveSheet, Excel.Worksheet)
 
             Dim iCnt As Integer = 0
+            Dim excelHeight As Integer = 14
 
 
             iCnt += 1
 
             If iCnt Mod 5 = 1 Then
                 For ix As Integer = 1 To 5
-                    xlsWkS.Range("B" + (1 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("F" + (1 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("H" + (1 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("K" + (1 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("N" + (1 + 13 * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("B" + (1 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("F" + (1 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("H" + (1 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("K" + (1 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("N" + (1 + excelHeight * (ix - 1)).ToString).Value = ""
 
-                    xlsWkS.Range("B" + (2 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("F" + (2 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("H" + (2 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("L" + (2 + 13 * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("B" + (2 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("F" + (2 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("H" + (2 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("L" + (2 + excelHeight * (ix - 1)).ToString).Value = ""
 
-                    xlsWkS.Range("B" + (3 + 13 * (ix - 1)).ToString).Value = ""
-                    xlsWkS.Range("F" + (3 + 13 * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("B" + (3 + excelHeight * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("F" + (3 + excelHeight * (ix - 1)).ToString).Value = ""
 
-                    xlsWkS.Range("B" + (4 + 13 * (ix - 1)).ToString).Value = ""
+                    xlsWkS.Range("B" + (4 + excelHeight * (ix - 1)).ToString).Value = ""
                 Next
             End If
 
             '-- 1 검사명
-            xlsWkS.Range("B" + (1 + 13 * (iCnt - 1)).ToString).Value = Me.txtTnmd.Text
+            xlsWkS.Range("B" + (1 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtTnmd.Text
 
             '-- 2 처방코드 시행처
-            xlsWkS.Range("A" + (2 + 13 * (iCnt - 1)).ToString).Value = Me.lblTest.Text
-            xlsWkS.Range("B" + (2 + 13 * (iCnt - 1)).ToString).Value = Me.txtTCode.Text
+            xlsWkS.Range("A" + (2 + excelHeight * (iCnt - 1)).ToString).Value = Me.lblTest.Text
+            xlsWkS.Range("B" + (2 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtTCode.Text
 
             If Me.CheckBox3.Checked = "1" Then
 
@@ -1427,30 +1430,30 @@ Public Class FGCDHELP_TEST_NEW
             Enforcement = "[" + IIf(CheckBox3.Checked = "1", "√", "  ") + "]원내" + Space(1) + "[" + IIf(CheckBox2.Checked = "1", "√", "  ") + "]원외" + Space(1) _
                 + "[" + IIf(CheckBox1.Checked = "1", "√", "  ") + "]국가기관 보건환경연구원" + Space(1) + "[" + IIf(CheckBox4.Checked = "1", "√", "  ") + "]국가기관 질병관리본부"
 
-            xlsWkS.Range("F" + (2 + 13 * (iCnt - 1)).ToString).Value = Enforcement
+            xlsWkS.Range("F" + (2 + excelHeight * (iCnt - 1)).ToString).Value = Enforcement
 
 
             '-- 3 의뢰서 동의서 해당없음 내선번호 부서명
             If CheckBox7.Checked = "1" Then '의뢰서
-                xlsWkS.Range("B" + (3 + 13 * (iCnt - 1)).ToString).Value = "[√]의뢰서"
+                xlsWkS.Range("B" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]의뢰서"
             Else
-                xlsWkS.Range("B" + (3 + 13 * (iCnt - 1)).ToString).Value = "[  ]의뢰서"
+                xlsWkS.Range("B" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[  ]의뢰서"
             End If
 
             If CheckBox6.Checked = "1" Then '동의서
-                xlsWkS.Range("C" + (3 + 13 * (iCnt - 1)).ToString).Value = "[√]동의서"
+                xlsWkS.Range("C" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]동의서"
             Else
-                xlsWkS.Range("C" + (3 + 13 * (iCnt - 1)).ToString).Value = "[  ]동의서"
+                xlsWkS.Range("C" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[  ]동의서"
             End If
 
             If CheckBox5.Checked = "1" Then ' 해당없음
-                xlsWkS.Range("D" + (3 + 13 * (iCnt - 1)).ToString).Value = "[√]해당없음"
+                xlsWkS.Range("D" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]해당없음"
             Else
-                xlsWkS.Range("D" + (3 + 13 * (iCnt - 1)).ToString).Value = "[  ]해당없음"
+                xlsWkS.Range("D" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[  ]해당없음"
             End If
 
-            xlsWkS.Range("F" + (3 + 13 * (iCnt - 1)).ToString).Value = Me.txtTelNo.Text
-            xlsWkS.Range("H" + (3 + 13 * (iCnt - 1)).ToString).Value = Me.txtpartnmd.Text
+            xlsWkS.Range("F" + (3 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtTelNo.Text
+            xlsWkS.Range("H" + (3 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtpartnmd.Text
 
 
             '-- 4 검사법 실시요일
@@ -1462,25 +1465,23 @@ Public Class FGCDHELP_TEST_NEW
                 + "[" + IIf(chkExeDay3.Checked = "1", "√", "  ") + "]수" + Space(2) + "[" + IIf(chkExeDay4.Checked = "1", "√", "  ") + "]목" + Space(2) + "[" + IIf(chkExeDay5.Checked = "1", "√", "  ") + "]금" + Space(2) _
                 + "[" + IIf(chkExeDay6.Checked = "1", "√", "  ") + "]토" + Space(2) + "[" + IIf(chkExeDay7.Checked = "1", "√", "  ") + "]일"
 
-            xlsWkS.Range("F" + (4 + 13 * (iCnt - 1)).ToString).Value = ExeDayt
+            xlsWkS.Range("F" + (4 + excelHeight * (iCnt - 1)).ToString).Value = ExeDayt
 
 
-            '-- 5 검사분야
-            xlsWkS.Range("B" + (5 + 13 * (iCnt - 1)).ToString).Value = Me.txtSlipNmd.Text
+            '-- 6 단위 응급중간보고 일반중간보고 응급최종보고 일반최종보고
+            xlsWkS.Range("B" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtSlipNmd.Text '검사분야
+            'xlsWkS.Range("D" + (6 + excelHeight* (iCnt - 1)).ToString).Value = Me.txtrstunit.Text '참고치단위
+            xlsWkS.Range("F" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtERPTAT.Text '"응급중간보고"
+            xlsWkS.Range("G" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtPTAT.Text '"일반중간보고"
+            xlsWkS.Range("H" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtERFTAT.Text '"응급최종보고"
+            xlsWkS.Range("I" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtFTAT.Text '"일반최종보고"
 
 
-            '-- 6 참고치 단위 응급중간보고 일반중간보고 응급최종보고 일반최종보고
-            xlsWkS.Range("B" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtRef.Text
-            xlsWkS.Range("D" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtrstunit.Text '참고치단위
-            xlsWkS.Range("F" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtERPTAT.Text '"응급중간보고"
-            xlsWkS.Range("G" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtPTAT.Text '"일반중간보고"
-            xlsWkS.Range("H" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtERFTAT.Text '"응급최종보고"
-            xlsWkS.Range("I" + (6 + 13 * (iCnt - 1)).ToString).Value = Me.txtFTAT.Text '"일반최종보고"
+            '-- 7  참고치 용기명 검사소요일시 
+            xlsWkS.Range("B" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtRef.Text
+            xlsWkS.Range("F" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtTubeNmd.Text
+            xlsWkS.Range("I" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtResultDays.Text
 
-
-            '-- 7 검체종류 검체용기명
-            xlsWkS.Range("B" + (7 + 13 * (iCnt - 1)).ToString).Value = Split(Me.cboSpc.Text, "|")(0)
-            xlsWkS.Range("F" + (7 + 13 * (iCnt - 1)).ToString).Value = Me.txtTubeNmd.Text
 
 
             '-- 8
@@ -1496,9 +1497,13 @@ Public Class FGCDHELP_TEST_NEW
             'xlsWkS.Shapes.AddPicture(file, 0, 1, 420, 180, 130, 130)
             '>
 
-            '-- 9 검체량 검체단위
-            xlsWkS.Range("B" + (9 + 13 * (iCnt - 1)).ToString).Value = Me.txtVol.Text
-            xlsWkS.Range("D" + (9 + 13 * (iCnt - 1)).ToString).Value = Me.txtspcunit.Text
+            '-- 9 검체종류
+            xlsWkS.Range("B" + (9 + excelHeight * (iCnt - 1)).ToString).Value = Split(Me.cboSpc.Text, "|")(0)
+
+
+            '-- 10 검체량 검체단위
+            xlsWkS.Range("B" + (10 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtVol.Text
+            'xlsWkS.Range("D" + (9 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtspcunit.Text
 
 
             '< 세부검사목록
@@ -1510,19 +1515,21 @@ Public Class FGCDHELP_TEST_NEW
 
                     .Col = .GetColFromID("tnmd") : Dim Tnmd As String = .Text
                     .Col = .GetColFromID("reftxt") : Dim Reftxt As String = .Text
+                    .Col = .GetColFromID("rrptst") : Dim Rrptst As String = .Text
                     .Col = .GetColFromID("unit") : Dim Unit As String = .Text
 
-                    xlsWkS.Range("A" + (11 + 13 * (iCnt - 1)).ToString).RowHeight = IIf(Reftxt = "", 33, 50)
+                    xlsWkS.Range("A" + (12 + excelHeight * (iCnt - 1)).ToString).RowHeight = IIf(Reftxt = "", 33, 50)
 
-                    xlsWkS.Range("B" + (11 + 13 * (iCnt - 1)).ToString).Value = Tnmd '검사명
-                    xlsWkS.Range("F" + (11 + 13 * (iCnt - 1)).ToString).Value = Reftxt '참고치
-                    xlsWkS.Range("I" + (11 + 13 * (iCnt - 1)).ToString).Value = Unit '단위
+                    xlsWkS.Range("B" + (12 + excelHeight * (iCnt - 1)).ToString).Value = Tnmd '검사명
+                    xlsWkS.Range("F" + (12 + excelHeight * (iCnt - 1)).ToString).Value = Reftxt '참고치
+                    xlsWkS.Range("H" + (12 + excelHeight * (iCnt - 1)).ToString).Value = Rrptst '결과소요일
+                    xlsWkS.Range("I" + (12 + excelHeight * (iCnt - 1)).ToString).Value = Unit '단위
 
 
-                    '-- 12 검체 채취 및 의뢰시 주의사항
+                    '-- 14 검체 채취 및 의뢰시 주의사항
 
-                    xlsWkS.Range("B" + (13 + 13 * (iCnt - 1)).ToString).RowHeight = 175
-                    xlsWkS.Range("B" + (13 + 13 * (iCnt - 1)).ToString).Value = Me.txtCWarning.Text
+                    xlsWkS.Range("B" + (14 + excelHeight * (iCnt - 1)).ToString).RowHeight = 175
+                    xlsWkS.Range("B" + (14 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtCWarning.Text
                 Else
                     For i As Integer = 1 To Spdrow
                         'Set_WksBorder(xlsWkS, CStr(11 + i)) '세부검사 row(spread)만큼  row(excel) insert 작업
@@ -1531,32 +1538,35 @@ Public Class FGCDHELP_TEST_NEW
                         .Row = i
                         .Col = .GetColFromID("tnmd") : Dim Tnmd As String = .Text
                         .Col = .GetColFromID("reftxt") : Dim Reftxt As String = .Text
+                        .Col = .GetColFromID("rrptst") : Dim Rrptst As String = .Text
                         .Col = .GetColFromID("unit") : Dim Unit As String = .Text
 
-                        Set_WksBorder(xlsWkS, CStr(11 + i), Reftxt) '세부검사 row(spread)만큼  row(excel) insert 작업
+                        Set_WksBorder(xlsWkS, CStr(12 + i), Reftxt) '세부검사 row(spread)만큼  row(excel) insert 작업
 
-                        xlsWkS.Range("B" + ((10 + i) + 13 * (iCnt - 1)).ToString).WrapText = True
-                        xlsWkS.Range("F" + ((10 + i) + 13 * (iCnt - 1)).ToString).WrapText = True
-                        xlsWkS.Range("I" + ((10 + i) + 13 * (iCnt - 1)).ToString).WrapText = True
+                        xlsWkS.Range("B" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).WrapText = True
+                        xlsWkS.Range("F" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).WrapText = True
+                        xlsWkS.Range("H" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).WrapText = True
+                        xlsWkS.Range("I" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).WrapText = True
 
-                        xlsWkS.Range("B" + ((10 + i) + 13 * (iCnt - 1)).ToString).Value = Tnmd '검사명
-                        xlsWkS.Range("F" + ((10 + i) + 13 * (iCnt - 1)).ToString).Value = Reftxt '참고치
-                        xlsWkS.Range("I" + ((10 + i) + 13 * (iCnt - 1)).ToString).Value = Unit '단위
+                        xlsWkS.Range("B" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).Value = Tnmd '검사명
+                        xlsWkS.Range("F" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).Value = Reftxt '참고치
+                        xlsWkS.Range("H" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).Value = Rrptst '결과소요일
+                        xlsWkS.Range("I" + ((11 + i) + excelHeight * (iCnt - 1)).ToString).Value = Unit '단위
 
 
                     Next
 
-                    xlsWkS.Range("B" + ((11 + Spdrow) + 13 * (iCnt - 1)).ToString).EntireRow.Hidden = True
-                    xlsWkS.Range("B" + ((12 + Spdrow) + 13 * (iCnt - 1)).ToString).EntireRow.Hidden = True
+                    xlsWkS.Range("B" + ((12 + Spdrow) + excelHeight * (iCnt - 1)).ToString).EntireRow.Hidden = True
+                    xlsWkS.Range("B" + ((13 + Spdrow) + excelHeight * (iCnt - 1)).ToString).EntireRow.Hidden = True
 
-                    '-- 12 검체 채취 및 의뢰시 주의사항
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString, "I" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).Merge()
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString, "I" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString, "I" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).Borders.Weight = Excel.XlBorderWeight.xlThin
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString, "I" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+                    '-- 14 검체 채취 및 의뢰시 주의사항
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString, "I" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).Merge()
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString, "I" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString, "I" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).Borders.Weight = Excel.XlBorderWeight.xlThin
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString, "I" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
 
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).RowHeight = 175
-                    xlsWkS.Range("B" + ((13 + Spdrow) + 13 * (iCnt - 1)).ToString).Value = Me.txtCWarning.Text
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).RowHeight = 175
+                    xlsWkS.Range("B" + ((14 + Spdrow) + excelHeight * (iCnt - 1)).ToString).Value = Me.txtCWarning.Text
                 End If
             End With
             '>
@@ -1635,15 +1645,15 @@ Public Class FGCDHELP_TEST_NEW
                 '3줄 50
 
                 '--세부검사목록 병합
-                .Range("A11", "A" + Range).Merge()
-                If Range = "12" Then '-- 첫줄 추가시 병합 해제
-                    .Range("B13").MergeArea.UnMerge()
-                    .Range("B13:I13").UnMerge()
+                .Range("A12", "A" + Range).Merge()
+                If Range = "13" Then '-- 첫줄 추가시 병합 해제
+                    .Range("B14").MergeArea.UnMerge()
+                    .Range("B14:I14").UnMerge()
                 End If
 
                 '--병합
                 .Range("B" + Range + ":E" + Range).Merge()
-                .Range("F" + Range + ":H" + Range).Merge()
+                .Range("F" + Range + ":G" + Range).Merge()
 
                 '------- 테두리
                 '--검사명
@@ -1652,9 +1662,15 @@ Public Class FGCDHELP_TEST_NEW
                 .Range("B" + Range, "E" + Range).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
 
                 '--참고치
-                .Range("F" + Range, "H" + Range).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
-                .Range("F" + Range, "H" + Range).Borders.Weight = Excel.XlBorderWeight.xlThin
-                .Range("F" + Range, "H" + Range).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+                .Range("F" + Range, "G" + Range).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
+                .Range("F" + Range, "G" + Range).Borders.Weight = Excel.XlBorderWeight.xlThin
+                .Range("F" + Range, "G" + Range).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+
+                '--결과소요일
+                .Range("H" + Range, "H" + Range).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
+                .Range("H" + Range, "H" + Range).Borders.Weight = Excel.XlBorderWeight.xlThin
+                .Range("H" + Range, "H" + Range).BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, Excel.XlColorIndex.xlColorIndexAutomatic)
+                .Range("H" + Range, "H" + Range).HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft
 
                 '--단위
                 .Range("I" + Range).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
@@ -1699,49 +1715,50 @@ Public Class DA_CDHELP_TEST_NEW
             Dim dt As New DataTable
             Dim sSql As String = ""
 
-            sSql += "SELECT f6.testcd, MAX(f6.tnmd) tnmd, f6.partcd || f6.slipcd partslip, f6.tordslip,"
-            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm"
-            sSql += "  FROM lf060m f6, lf021m f2, lf100m f10"
-            sSql += " WHERE f6.partcd   = f2.partcd"
-            sSql += "   AND f6.slipcd   = f2.slipcd"
-            sSql += "   AND f6.tordslip = f10.tordslip"
-            sSql += "   AND f6.usdt    <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt    >  fn_ack_sysdate"
-            sSql += "   AND f2.usdt    <= fn_ack_sysdate"
-            sSql += "   AND f2.uedt    >  fn_ack_sysdate"
-            sSql += "   AND f10.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f10.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn  <> 'C'"
+            sSql += "SELECT f6.testcd, MAX(f6.tnmd) tnmd, f6.partcd || f6.slipcd partslip, f6.tordslip," + vbCrLf
+            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm" + vbCrLf
+            sSql += "  FROM lf060m f6, lf021m f2, lf100m f10" + vbCrLf
+            sSql += " WHERE f6.partcd   = f2.partcd" + vbCrLf
+            sSql += "   AND f6.slipcd   = f2.slipcd" + vbCrLf
+            sSql += "   AND f6.tordslip = f10.tordslip" + vbCrLf
+            sSql += "   AND f6.usdt    <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt    >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.usdt    <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.uedt    >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn  <> 'C'" + vbCrLf
             'sSql += "   AND f6.ordhide <> '1' "
 
             If rsTestNm <> "" Then
-                sSql += "   AND f6.tnmd LIKE '%" + rsTestNm + "%'"
+                sSql += "   AND f6.tnmd LIKE '%" + rsTestNm + "%'" + vbCrLf
             End If
 
-            sSql += " GROUP BY f6.testcd, f6.partcd, f6.slipcd, f6.tordslip,"
-            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm"
+            sSql += " GROUP BY f6.testcd, f6.partcd, f6.slipcd, f6.tordslip," + vbCrLf
+            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm" + vbCrLf
 
-            sSql += " UNION "
-            sSql += "SELECT f6.testcd, MAX(f6.tnmd) tnmd, f6.partcd || f6.slipcd partslip, f6.tordslip,"
-            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm"
-            sSql += "  FROM rf060m f6, rf021m f2, lf100m f10"
-            sSql += " WHERE f6.partcd   = f2.partcd"
-            sSql += "   AND f6.slipcd   = f2.slipcd"
-            sSql += "   AND f6.tordslip = f10.tordslip"
-            sSql += "   AND f6.usdt    <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt    >  fn_ack_sysdate"
-            sSql += "   AND f2.usdt    <= fn_ack_sysdate"
-            sSql += "   AND f2.uedt    >  fn_ack_sysdate"
-            sSql += "   AND f10.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f10.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn  <> 'C'"
+            sSql += " UNION " + vbCrLf
+            sSql += "SELECT f6.testcd, MAX(f6.tnmd) tnmd, f6.partcd || f6.slipcd partslip, f6.tordslip," + vbCrLf
+            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm" + vbCrLf
+            sSql += "  FROM rf060m f6, rf021m f2, lf100m f10" + vbCrLf
+            sSql += " WHERE f6.partcd   = f2.partcd" + vbCrLf
+            sSql += "   AND f6.slipcd   = f2.slipcd" + vbCrLf
+            sSql += "   AND f6.tordslip = f10.tordslip" + vbCrLf
+            sSql += "   AND f6.usdt    <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt    >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.usdt    <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.uedt    >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn  <> 'C'" + vbCrLf
 
             If rsTestNm <> "" Then
-                sSql += "   AND f6.tnmd LIKE '%" + rsTestNm + "%'"
+                sSql += "   AND f6.tnmd LIKE '%" + rsTestNm + "%'" + vbCrLf
             End If
 
-            sSql += " GROUP BY f6.testcd, f6.partcd, f6.slipcd, f6.tordslip,"
-            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm"
+            sSql += " GROUP BY f6.testcd, f6.partcd, f6.slipcd, f6.tordslip," + vbCrLf
+            sSql += "       f6.tordcd, f2.slipnmd, f10.tordslipnm" + vbCrLf
+
 
             With dbCmd
                 dbCmd.Connection = dbCn
@@ -1916,71 +1933,71 @@ Public Class DA_CDHELP_TEST_NEW
             Dim dt As New DataTable
             Dim sSql As String = ""
 
-            sSql += "SELECT DISTINCT"
-            sSql += "       fn_ack_date_str(f6.usdt, 'yyyy-mm-dd hh24:mi:ss') usdt,"
-            sSql += "       f6.tnmd, f6.tubecd, f4.tubenmd, f21.slipnmd,"
-            sSql += "       (SELECT exlabnmd FROM lf050m WHERE exlabcd = f6.exlabcd) exlabyn,"
-            sSql += "       f6.rrptst, f2.telno,"
-            sSql += "       f6.exeday, f6.cwarning,"
-            sSql += "       CASE WHEN f6.emergbn IN ('1', '3') THEN '1' ELSE '' END ergbn1,"
-            sSql += "       CASE WHEN f6.emergbn IN ('2', '3') THEN '1' ELSE '' END ergbn2,"
-            sSql += "       f10.tordslipnm, f6.descref,"
-            sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest,"
-            sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi, minspcvol,f2.partnmd , f6.enforcement , f6.request , f6.cowarning"
-            sSql += "       ,f6.rstunit ,f6.spcunit"
-            sSql += "  FROM lf060m f6, lf020m f2, lf021m f21,"
-            sSql += "       lf040m f4, lf100m f10"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = :spccd"
-            sSql += "   AND f6.partcd  = f2.partcd"
-            sSql += "   AND f6.partcd  = f21.partcd"
-            sSql += "   AND f6.slipcd  = f21.slipcd"
-            sSql += "   AND f6.tubecd  = f4.tubecd"
-            sSql += "   AND f6.tordslip = f10.tordslip"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND f2.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f2.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f21.usdt  <= fn_ack_sysdate"
-            sSql += "   AND f21.uedt  >  fn_ack_sysdate"
-            sSql += "   AND f4.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f4.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f10.usdt  <= fn_ack_sysdate"
-            sSql += "   AND f10.uedt  >  fn_ack_sysdate"
-            sSql += " UNION  "
-            sSql += "SELECT DISTINCT"
-            sSql += "       fn_ack_date_str(f6.usdt, 'yyyy-mm-dd hh24:mi:ss') usdt,"
-            sSql += "       f6.tnmd, f6.tubecd, f4.tubenmd, f21.slipnmd,"
-            sSql += "       (SELECT exlabnmd FROM lf050m WHERE exlabcd = f6.exlabcd) exlabyn,"
-            sSql += "       f6.rrptst, f2.telno,"
-            sSql += "       f6.exeday, f6.cwarning,"
-            sSql += "       CASE WHEN f6.emergbn IN ('1', '3') THEN '1' ELSE '' END ergbn1,"
-            sSql += "       CASE WHEN f6.emergbn IN ('2', '3') THEN '1' ELSE '' END ergbn2,"
-            sSql += "       f10.tordslipnm, f6.descref,"
-            sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest,"
-            sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi,minspcvol,f2.partnmd , '' , '' , ''"
-            sSql += "       ,'',''"
-            sSql += "  FROM rf060m f6, rf020m f2, rf021m f21,"
-            sSql += "       lf040m f4, lf100m f10"
-            sSql += " WHERE f6.testcd  = :testcd"
-            sSql += "   AND f6.spccd   = :spccd"
-            sSql += "   AND f6.partcd  = f2.partcd"
-            sSql += "   AND f6.partcd  = f21.partcd"
-            sSql += "   AND f6.slipcd  = f21.slipcd"
-            sSql += "   AND f6.tubecd  = f4.tubecd"
-            sSql += "   AND f6.tordslip = f10.tordslip"
-            sSql += "   AND f6.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f6.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND f2.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f2.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f21.usdt  <= fn_ack_sysdate"
-            sSql += "   AND f21.uedt  >  fn_ack_sysdate"
-            sSql += "   AND f4.usdt   <= fn_ack_sysdate"
-            sSql += "   AND f4.uedt   >  fn_ack_sysdate"
-            sSql += "   AND f10.usdt  <= fn_ack_sysdate"
-            sSql += "   AND f10.uedt  >  fn_ack_sysdate"
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       fn_ack_date_str(f6.usdt, 'yyyy-mm-dd hh24:mi:ss') usdt," + vbCrLf
+            sSql += "       f6.tnmd, f6.tubecd, f4.tubenmd, f21.slipnmd," + vbCrLf
+            sSql += "       (SELECT exlabnmd FROM lf050m WHERE exlabcd = f6.exlabcd) exlabyn," + vbCrLf
+            sSql += "       f6.rrptst, f2.telno," + vbCrLf
+            sSql += "       f6.exeday, f6.cwarning," + vbCrLf
+            sSql += "       CASE WHEN f6.emergbn IN ('1', '3') THEN '1' ELSE '' END ergbn1," + vbCrLf
+            sSql += "       CASE WHEN f6.emergbn IN ('2', '3') THEN '1' ELSE '' END ergbn2," + vbCrLf
+            sSql += "       f10.tordslipnm, f6.descref," + vbCrLf
+            sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest," + vbCrLf
+            sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi, minspcvol,f2.partnmd , f6.enforcement , f6.request , f6.cowarning" + vbCrLf
+            sSql += "       ,f6.rstunit ,f6.spcunit" + vbCrLf
+            sSql += "  FROM lf060m f6, lf020m f2, lf021m f21," + vbCrLf
+            sSql += "       lf040m f4, lf100m f10" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = :spccd" + vbCrLf
+            sSql += "   AND f6.partcd  = f2.partcd" + vbCrLf
+            sSql += "   AND f6.partcd  = f21.partcd" + vbCrLf
+            sSql += "   AND f6.slipcd  = f21.slipcd" + vbCrLf
+            sSql += "   AND f6.tubecd  = f4.tubecd" + vbCrLf
+            sSql += "   AND f6.tordslip = f10.tordslip" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND f2.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f21.usdt  <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f21.uedt  >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f4.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f4.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.usdt  <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.uedt  >  fn_ack_sysdate" + vbCrLf
+            sSql += " UNION  " + vbCrLf
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       fn_ack_date_str(f6.usdt, 'yyyy-mm-dd hh24:mi:ss') usdt," + vbCrLf
+            sSql += "       f6.tnmd, f6.tubecd, f4.tubenmd, f21.slipnmd," + vbCrLf
+            sSql += "       (SELECT exlabnmd FROM lf050m WHERE exlabcd = f6.exlabcd) exlabyn," + vbCrLf
+            sSql += "       f6.rrptst, f2.telno," + vbCrLf
+            sSql += "       f6.exeday, f6.cwarning," + vbCrLf
+            sSql += "       CASE WHEN f6.emergbn IN ('1', '3') THEN '1' ELSE '' END ergbn1," + vbCrLf
+            sSql += "       CASE WHEN f6.emergbn IN ('2', '3') THEN '1' ELSE '' END ergbn2," + vbCrLf
+            sSql += "       f10.tordslipnm, f6.descref," + vbCrLf
+            sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest," + vbCrLf
+            sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi,minspcvol,f2.partnmd , '' , '' , ''" + vbCrLf
+            sSql += "       ,'',''" + vbCrLf
+            sSql += "  FROM rf060m f6, rf020m f2, rf021m f21," + vbCrLf
+            sSql += "       lf040m f4, lf100m f10" + vbCrLf
+            sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
+            sSql += "   AND f6.spccd   = :spccd" + vbCrLf
+            sSql += "   AND f6.partcd  = f2.partcd" + vbCrLf
+            sSql += "   AND f6.partcd  = f21.partcd" + vbCrLf
+            sSql += "   AND f6.slipcd  = f21.slipcd" + vbCrLf
+            sSql += "   AND f6.tubecd  = f4.tubecd" + vbCrLf
+            sSql += "   AND f6.tordslip = f10.tordslip" + vbCrLf
+            sSql += "   AND f6.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND f2.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f2.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f21.usdt  <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f21.uedt  >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f4.usdt   <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f4.uedt   >  fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.usdt  <= fn_ack_sysdate" + vbCrLf
+            sSql += "   AND f10.uedt  >  fn_ack_sysdate" + vbCrLf
 
             With dbCmd
                 dbCmd.Connection = dbCn

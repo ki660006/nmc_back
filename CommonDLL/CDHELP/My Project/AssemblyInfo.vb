@@ -52,5 +52,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.331 --> 2021/04/05 : 검사의뢰지침 돋보기 오류 수정
 'Version 3.1.10.332 --> 2021/04/05 : 검사의뢰지침 돋보기 오류 수정(재배포)
 'Version 3.1.10.333 --> 2021/05/17 : 검사의뢰지침 결과소요일 컬럼 추가 
+'Version 3.1.10.334 --> 2021/06/22 : 검사의뢰지침 출력물 변경, 결과 소요일 용기명 옆에 작성, 검사명 조회시 중간 단어도 조회 될수 있도록 구현
 
-<Assembly: AssemblyVersion("3.1.10.333")> 
+<Assembly: AssemblyVersion("3.1.10.334")> 
