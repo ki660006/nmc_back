@@ -157,7 +157,8 @@ Public Class FGCDHELP01
                 Do
                     Dim sCd As String = Ctrl.Get_Code(spd, iCol, iFindRow)
 
-                    If sCd.StartsWith(rsBuf) Then
+                    'If sCd.StartsWith(rsBuf) Then '20210610 jhs 검색한 문자가 중간에 있는것도 포함하여 찾기 
+                    If sCd.IndexOf(rsBuf) Then
                         Exit Do
                     Else
                         iFindRow = .SearchCol(iCol, iFindRow, .MaxRows, rsBuf, FPSpreadADO.SearchFlagsConstants.SearchFlagsPartialMatch)
@@ -883,7 +884,8 @@ Public Class FGCDHELP01
             Dim dt As New DataTable
 
             If Me.txtCd.Text <> "" Then
-                sFiler = CType(malField(CInt(lblFieldNm.Tag.ToString) - 1), Field_Info).strAlias + " like '" + txtCd.Text + "%'"
+                'sFiler = CType(malField(CInt(lblFieldNm.Tag.ToString) - 1), Field_Info).strAlias + " like '%" + txtCd.Text + "%'"
+                sFiler = CType(malField(CInt(lblFieldNm.Tag.ToString) - 1), Field_Info).strAlias + " like '%" + txtCd.Text + "%'" '20210610 검색한 것 목록이 중간에 있는것도 조회 될 수 있도록 수정
             End If
 
             Dim a_dr As DataRow()

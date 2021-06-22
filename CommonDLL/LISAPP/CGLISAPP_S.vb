@@ -1649,7 +1649,8 @@ Namespace APP_S
 
         Public Shared Function fnGet_Tat_List(ByVal rsTestcd As String, ByVal rsDateS As String, ByVal rsDateE As String, ByVal rsQryGbn As String, _
                                               ByVal rbOverTime As Boolean, Optional ByVal rsSlipCd As String = "", _
-                                              Optional ByVal rsEmerYN As String = "", Optional ByVal rsRegNo As String = "", Optional ByVal rschkTATCont As Boolean = False) As DataTable
+                                              Optional ByVal rsEmerYN As String = "", Optional ByVal rsRegNo As String = "", Optional ByVal rschkTATCont As Boolean = False, _
+                                              Optional ByVal rsIncludeChild As Boolean = False) As DataTable
             Dim sFn As String = "Public Shared Function fnGet_TatList"
 
             Try
@@ -1716,7 +1717,13 @@ Namespace APP_S
                     sSql += "   AND f6.slipcd = f2.slipcd" + vbCrLf
                     sSql += "   AND f2.usdt  <= r.tkdt" + vbCrLf
                     sSql += "   AND f2.uedt  >  r.tkdt" + vbCrLf
-                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    '20210616 jhs 차일드 코드 포함 test 
+                    If rsIncludeChild Then
+                        sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
+                    Else
+                        sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    End If
+                    '------------------------------------------
                     sSql += "   AND NVL(f6.tatyn, '0') = '1'" + vbCrLf
                     If rsTestcd <> "" Then
                         sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") " + vbCrLf
@@ -1794,7 +1801,12 @@ Namespace APP_S
                     sSql += "   AND f6.slipcd = f2.slipcd" + vbCrLf
                     sSql += "   AND f2.usdt  <= r.tkdt" + vbCrLf
                     sSql += "   AND f2.uedt  >  r.tkdt" + vbCrLf
-                    sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    If rsIncludeChild Then
+                        sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
+                    Else
+                        sSql += "   AND ((f6.tcdgbn = 'B' AND NVL(f6.titleyn, '0') = '0') OR f6.tcdgbn IN ('S', 'P'))" + vbCrLf
+                    End If
+                    '------------------------------------------
                     sSql += "   AND NVL(f6.tatyn, '0') = '1'" + vbCrLf
                     If rsTestcd <> "" Then
                         sSql += " AND f6.testcd||f6.spccd in (" + rsTestcd.Replace(" ", "") + ") " + vbCrLf

@@ -249,7 +249,7 @@ Namespace OcsLink
             Try
                 rsOrddt = rsOrddt.Replace("-", "")
 
-                sSql += "pkg_ack_ocs.pkg_get_tns_info                                                  "
+                sSql += "pkg_ack_ocs.pkg_get_tns_info"
 
                 alParm.Add(New OracleParameter("rs_regno", rsRegno))
                 alParm.Add(New OracleParameter("rs_orddt", rsOrddt.Substring(0, 8)))

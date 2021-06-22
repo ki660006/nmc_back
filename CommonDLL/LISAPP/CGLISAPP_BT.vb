@@ -4598,42 +4598,42 @@ Namespace APP_BT
 
                 '2019-12-13 JJH 검사결과가 없어도 검사명은 보이도록
                 sSql = ""
-                sSql += " SELECT DISTINCT "
-                sSql += "        a.testcd, a.spccd, a.tnmd,    "
-                sSql += "        (SELECT viewrst "
-                sSql += "           FROM lr010m  "
-                sSql += "          WHERE regno = b.regno "
-                sSql += "            AND testcd = b.testcd "
-                sSql += "            AND rstdt  = b.fndt   "
-                sSql += "            AND rstflg IN ('2', '3') "
-                sSql += "            AND ROWNUM = 1 ) viewrst, "
-                sSql += "         fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,  "
-                sSql += "         fn_ack_date_str(b.fndt, 'yyyy-mm-dd hh24:mi') fndt,"
-                sSql += "         b.regno, a.dispseq, a.bbgbn,"
-                sSql += "         TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(b.fndt, 'yyyymmddhh24miss'))) months_between"
-                sSql += "    FROM (SELECT f6.tnmd, f4.testcd, f4.spccd, f4.bbgbn,  f4.dispseq"
-                sSql += "            FROM LF140M f4, LF060M f6 "
-                sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142') "
-                sSql += "             AND F4.TESTCD = F6.TESTCD "
-                sSql += "             AND F4.SPCCD  = F6.SPCCD  "
-                sSql += "             AND F6.UEDT  >= FN_ACK_SYSDATE() "
-                sSql += "         ) A "
-                sSql += "    LEFT JOIN "
-                sSql += "         (SELECT r.regno, r.testcd, r.spccd, "
-                sSql += "                 MAX(r.tkdt) as tkdt, MAX(r.rstdt) as fndt "
-                sSql += "            FROM LR010M r, lj010m j, lf140m f"
-                sSql += "           WHERE j.regno = :regno "
+                sSql += " SELECT DISTINCT " + vbCrLf
+                sSql += "        a.testcd, a.spccd, a.tnmd,    " + vbCrLf
+                sSql += "        (SELECT viewrst " + vbCrLf
+                sSql += "           FROM lr010m  " + vbCrLf
+                sSql += "          WHERE regno = b.regno " + vbCrLf
+                sSql += "            AND testcd = b.testcd " + vbCrLf
+                sSql += "            AND rstdt  = b.fndt   " + vbCrLf
+                sSql += "            AND rstflg IN ('2', '3') " + vbCrLf
+                sSql += "            AND ROWNUM = 1 ) viewrst, " + vbCrLf
+                sSql += "         fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,  " + vbCrLf
+                sSql += "         fn_ack_date_str(b.fndt, 'yyyy-mm-dd hh24:mi') fndt," + vbCrLf
+                sSql += "         b.regno, a.dispseq, a.bbgbn," + vbCrLf
+                sSql += "         TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(b.fndt, 'yyyymmddhh24miss'))) months_between" + vbCrLf
+                sSql += "    FROM (SELECT f6.tnmd, f4.testcd, f4.spccd, f4.bbgbn,  f4.dispseq" + vbCrLf
+                sSql += "            FROM LF140M f4, LF060M f6 " + vbCrLf
+                sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142') " + vbCrLf
+                sSql += "             AND F4.TESTCD = F6.TESTCD " + vbCrLf
+                sSql += "             AND F4.SPCCD  = F6.SPCCD  " + vbCrLf
+                sSql += "             AND F6.UEDT  >= FN_ACK_SYSDATE() " + vbCrLf
+                sSql += "         ) A " + vbCrLf
+                sSql += "    LEFT JOIN " + vbCrLf
+                sSql += "         (SELECT r.regno, r.testcd, r.spccd, " + vbCrLf
+                sSql += "                 MAX(r.tkdt) as tkdt, MAX(r.rstdt) as fndt " + vbCrLf
+                sSql += "            FROM LR010M r, lj010m j, lf140m f" + vbCrLf
+                sSql += "           WHERE j.regno = :regno " + vbCrLf
 
                 alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
 
-                sSql += "             AND j.spcflg = '4' "
-                sSql += "             AND r.testcd = f.testcd "
-                sSql += "             AND r.spccd  = f.spccd  "
-                sSql += "             AND r.bcno   = j.bcno   "
-                sSql += "             AND r.rstflg IN ('2', '3')"
-                sSql += "        GROUP BY r.regno, r.testcd, r.spccd "
-                sSql += "         ) B ON a.testcd = b.testcd AND a.spccd = b.spccd"
-                sSql += "    ORDER BY a.dispseq "
+                sSql += "             AND j.spcflg = '4' " + vbCrLf
+                sSql += "             AND r.testcd = f.testcd " + vbCrLf
+                sSql += "             AND r.spccd  = f.spccd  " + vbCrLf
+                sSql += "             AND r.bcno   = j.bcno   " + vbCrLf
+                sSql += "             AND r.rstflg IN ('2', '3')" + vbCrLf
+                sSql += "        GROUP BY r.regno, r.testcd, r.spccd " + vbCrLf
+                sSql += "         ) B ON a.testcd = b.testcd AND a.spccd = b.spccd" + vbCrLf
+                sSql += "    ORDER BY a.dispseq " + vbCrLf
 
 
                 DbCommand()

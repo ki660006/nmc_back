@@ -1054,49 +1054,49 @@ Namespace COMM
                 Dim sSql As String = ""
                 Dim al As New ArrayList
 
-                sSql += "SELECT DISTINCT"
-                sSql += "       '' chk, f6.tnmd, f6.tnmp tnmp, f6.testcd, f6.spccd, RPAD(f6.testcd, 8, ' ') || f6.spccd testspc,"
-                sSql += "       f6.tordcd, f6.tordslip, f6.tcdgbn, f6.partcd || f6.slipcd partslip, NVL(f6.titleyn, '0') titleyn,"
-                sSql += "       NVL(f6.mbttype, '0') mbttype, NVL(f6.poctyn, '0') poctyn,"
-                sSql += "       f3.spcnmd, NVL(f2.dispseq, 999) sort1, NVL(f6.dispseql, 999) sort2"
-                sSql += "  FROM lf060m f6, lf021m f2, lf030m f3"
-                sSql += " WHERE f6.usdt <= fn_ack_sysdate"
-                sSql += "   AND f6.uedt >  fn_ack_sysdate"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       '' chk, f6.tnmd, f6.tnmp tnmp, f6.testcd, f6.spccd, RPAD(f6.testcd, 8, ' ') || f6.spccd testspc," + vbCrLf
+                sSql += "       f6.tordcd, f6.tordslip, f6.tcdgbn, f6.partcd || f6.slipcd partslip, NVL(f6.titleyn, '0') titleyn," + vbCrLf
+                sSql += "       NVL(f6.mbttype, '0') mbttype, NVL(f6.poctyn, '0') poctyn," + vbCrLf
+                sSql += "       f3.spcnmd, NVL(f2.dispseq, 999) sort1, NVL(f6.dispseql, 999) sort2" + vbCrLf
+                sSql += "  FROM lf060m f6, lf021m f2, lf030m f3" + vbCrLf
+                sSql += " WHERE f6.usdt <= fn_ack_sysdate" + vbCrLf
+                sSql += "   AND f6.uedt >  fn_ack_sysdate" + vbCrLf
 
                 If rsTestCd <> "" Then
-                    sSql += "   AND f6.testcd LIKE :testcd || '%'"
+                    sSql += "   AND f6.testcd LIKE :testcd || '%'" + vbCrLf
 
                     al.Add(New OracleParameter("testcd", OracleDbType.Varchar2, rsTestCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCd))
                 End If
 
                 If rsSpcCd <> "" Then
-                    sSql += "   AND f6.spccd = :spccd"
+                    sSql += "   AND f6.spccd = :spccd" + vbCrLf
 
                     al.Add(New OracleParameter("spccd", OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
                 End If
 
                 If rsSlipCd <> "" Then
-                    sSql += "   AND f6.partcd = :partcd"
-                    sSql += "   AND f6.slipcd = :slipcd"
+                    sSql += "   AND f6.partcd = :partcd" + vbCrLf
+                    sSql += "   AND f6.slipcd = :slipcd" + vbCrLf
 
                     al.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(0, 1)))
                     al.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(1, 1)))
                 End If
 
                 If rsTGrpCd <> "" Then
-                    sSql += "   AND (f6.testcd, f6.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)"
+                    sSql += "   AND (f6.testcd, f6.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)" + vbCrLf
 
                     al.Add(New OracleParameter("tgrpcd", OracleDbType.Varchar2, rsTGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTGrpCd))
                 End If
 
-                sSql += "   AND f6.partcd = f2.partcd"
-                sSql += "   AND f6.slipcd = f2.slipcd"
-                sSql += "   AND f2.usdt  <= fn_ack_sysdate"
-                sSql += "   AND f2.uedt   > fn_ack_sysdate"
-                sSql += "   AND f6.spccd  = f3.spccd"
-                sSql += "   AND f3.usdt  <= fn_ack_sysdate"
-                sSql += "   AND f3.uedt   > fn_ack_sysdate"
-                sSql += " ORDER BY sort1, sort2, testspc"
+                sSql += "   AND f6.partcd = f2.partcd" + vbCrLf
+                sSql += "   AND f6.slipcd = f2.slipcd" + vbCrLf
+                sSql += "   AND f2.usdt  <= fn_ack_sysdate" + vbCrLf
+                sSql += "   AND f2.uedt   > fn_ack_sysdate" + vbCrLf
+                sSql += "   AND f6.spccd  = f3.spccd" + vbCrLf
+                sSql += "   AND f3.usdt  <= fn_ack_sysdate" + vbCrLf
+                sSql += "   AND f3.uedt   > fn_ack_sysdate" + vbCrLf
+                sSql += " ORDER BY sort1, sort2, testspc" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, al)

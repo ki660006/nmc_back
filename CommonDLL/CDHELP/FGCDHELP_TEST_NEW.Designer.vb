@@ -114,6 +114,8 @@ Partial Class FGCDHELP_TEST_NEW
         Me.Label30 = New System.Windows.Forms.Label()
         Me.pnlspd = New System.Windows.Forms.Panel()
         Me.pnlCenter = New System.Windows.Forms.Panel()
+        Me.txtResultDays = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.spdTestInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlBottom.SuspendLayout()
@@ -326,7 +328,7 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtTubeNmd.Location = New System.Drawing.Point(460, 170)
         Me.txtTubeNmd.MaxLength = 0
         Me.txtTubeNmd.Name = "txtTubeNmd"
-        Me.txtTubeNmd.Size = New System.Drawing.Size(406, 21)
+        Me.txtTubeNmd.Size = New System.Drawing.Size(159, 21)
         Me.txtTubeNmd.TabIndex = 211
         Me.txtTubeNmd.Tag = "TUBENMD"
         Me.txtTubeNmd.Text = "012345678"
@@ -1138,6 +1140,8 @@ Partial Class FGCDHELP_TEST_NEW
         '
         'pnlCenter
         '
+        Me.pnlCenter.Controls.Add(Me.txtResultDays)
+        Me.pnlCenter.Controls.Add(Me.Label31)
         Me.pnlCenter.Controls.Add(Me.pnlspd)
         Me.pnlCenter.Controls.Add(Me.txtrstunit)
         Me.pnlCenter.Controls.Add(Me.Label30)
@@ -1192,6 +1196,28 @@ Partial Class FGCDHELP_TEST_NEW
         Me.pnlCenter.Name = "pnlCenter"
         Me.pnlCenter.Size = New System.Drawing.Size(872, 772)
         Me.pnlCenter.TabIndex = 294
+        '
+        'txtResultDays
+        '
+        Me.txtResultDays.Location = New System.Drawing.Point(732, 170)
+        Me.txtResultDays.MaxLength = 0
+        Me.txtResultDays.Name = "txtResultDays"
+        Me.txtResultDays.Size = New System.Drawing.Size(135, 21)
+        Me.txtResultDays.TabIndex = 295
+        Me.txtResultDays.Tag = "RESULTDAYS"
+        Me.txtResultDays.Text = "012345678"
+        '
+        'Label31
+        '
+        Me.Label31.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.Label31.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.White
+        Me.Label31.Location = New System.Drawing.Point(620, 168)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(111, 24)
+        Me.Label31.TabIndex = 294
+        Me.Label31.Text = "결과소요일"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FGCDHELP_TEST_NEW
         '
@@ -1327,4 +1353,6 @@ Partial Class FGCDHELP_TEST_NEW
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents pnlspd As System.Windows.Forms.Panel
     Friend WithEvents pnlCenter As System.Windows.Forms.Panel
+    Protected Friend WithEvents txtResultDays As System.Windows.Forms.TextBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
 End Class
