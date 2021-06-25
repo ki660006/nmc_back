@@ -23,16 +23,16 @@ Partial Class AxPatientInfo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AxPatientInfo))
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AxPatientInfo))
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.pnlInfo = New System.Windows.Forms.Panel()
         Me.lblOpDt_Label = New System.Windows.Forms.Label()
         Me.lblOpDt = New System.Windows.Forms.Label()
@@ -228,12 +228,12 @@ Partial Class AxPatientInfo
         'btnDetailPatInfo
         '
         Me.btnDetailPatInfo.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker5.IsActive = False
-        DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDetailPatInfo.CenterPtTracker = DesignerRectTracker5
-        CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
-        Me.btnDetailPatInfo.ColorFillBlend = CBlendItems3
+        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDetailPatInfo.CenterPtTracker = DesignerRectTracker1
+        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems1.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnDetailPatInfo.ColorFillBlend = CBlendItems1
         Me.btnDetailPatInfo.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnDetailPatInfo.Corners.All = CType(6, Short)
         Me.btnDetailPatInfo.Corners.LowerLeft = CType(6, Short)
@@ -246,9 +246,9 @@ Partial Class AxPatientInfo
         Me.btnDetailPatInfo.FocalPoints.CenterPtY = 0.56!
         Me.btnDetailPatInfo.FocalPoints.FocusPtX = 0.0!
         Me.btnDetailPatInfo.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker6.IsActive = False
-        DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDetailPatInfo.FocusPtTracker = DesignerRectTracker6
+        DesignerRectTracker2.IsActive = False
+        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDetailPatInfo.FocusPtTracker = DesignerRectTracker2
         Me.btnDetailPatInfo.Image = Nothing
         Me.btnDetailPatInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnDetailPatInfo.ImageIndex = 0
@@ -698,12 +698,12 @@ Partial Class AxPatientInfo
         '
         Me.btnShareCmtDel.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnShareCmtDel.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker7.IsActive = False
-        DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnShareCmtDel.CenterPtTracker = DesignerRectTracker7
-        CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems4.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
-        Me.btnShareCmtDel.ColorFillBlend = CBlendItems4
+        DesignerRectTracker3.IsActive = False
+        DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtDel.CenterPtTracker = DesignerRectTracker3
+        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems2.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnShareCmtDel.ColorFillBlend = CBlendItems2
         Me.btnShareCmtDel.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnShareCmtDel.Corners.All = CType(6, Short)
         Me.btnShareCmtDel.Corners.LowerLeft = CType(6, Short)
@@ -716,9 +716,9 @@ Partial Class AxPatientInfo
         Me.btnShareCmtDel.FocalPoints.CenterPtY = 0.0!
         Me.btnShareCmtDel.FocalPoints.FocusPtX = 0.0!
         Me.btnShareCmtDel.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker8.IsActive = False
-        DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnShareCmtDel.FocusPtTracker = DesignerRectTracker8
+        DesignerRectTracker4.IsActive = False
+        DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtDel.FocusPtTracker = DesignerRectTracker4
         Me.btnShareCmtDel.Image = Nothing
         Me.btnShareCmtDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnShareCmtDel.ImageIndex = 0
@@ -750,12 +750,12 @@ Partial Class AxPatientInfo
         '
         Me.btnShareCmtAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnShareCmtAdd.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker1.IsActive = False
-        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnShareCmtAdd.CenterPtTracker = DesignerRectTracker1
-        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
-        Me.btnShareCmtAdd.ColorFillBlend = CBlendItems1
+        DesignerRectTracker5.IsActive = False
+        DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtAdd.CenterPtTracker = DesignerRectTracker5
+        CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
+        CBlendItems3.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        Me.btnShareCmtAdd.ColorFillBlend = CBlendItems3
         Me.btnShareCmtAdd.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnShareCmtAdd.Corners.All = CType(6, Short)
         Me.btnShareCmtAdd.Corners.LowerLeft = CType(6, Short)
@@ -768,9 +768,9 @@ Partial Class AxPatientInfo
         Me.btnShareCmtAdd.FocalPoints.CenterPtY = 0.0!
         Me.btnShareCmtAdd.FocalPoints.FocusPtX = 0.0!
         Me.btnShareCmtAdd.FocalPoints.FocusPtY = 0.0!
-        DesignerRectTracker2.IsActive = False
-        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnShareCmtAdd.FocusPtTracker = DesignerRectTracker2
+        DesignerRectTracker6.IsActive = False
+        DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnShareCmtAdd.FocusPtTracker = DesignerRectTracker6
         Me.btnShareCmtAdd.Image = Nothing
         Me.btnShareCmtAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnShareCmtAdd.ImageIndex = 0

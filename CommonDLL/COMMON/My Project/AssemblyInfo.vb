@@ -66,5 +66,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.388 --> 2021/04/19 : QC데이터 연동
 'Version 3.1.10.389 --> 2021/06/15 : 특정검사 바코드 음영처리
 'Version 3.1.10.390 --> 2021/06/22 : TAT차일드 코드 포함하여 조회 될수 있도록 수정
+'Version 3.1.10.391 --> 2021/06/25 : 등록번호 조회시 조회 되지 않는 부분 수정 
 
-<Assembly: AssemblyVersion("3.1.10.390")> 
+<Assembly: AssemblyVersion("3.1.10.391")> 

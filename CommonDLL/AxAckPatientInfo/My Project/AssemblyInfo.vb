@@ -45,5 +45,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.339 --> 2020/11/24 : 등록번호 프로퍼티 추가
 'Version 3.1.10.340 --> 2021/03/22 : 오류로 인한 재배포
 'Version 3.1.10.341 --> 2021/06/22 : 혈액은행 최근검사 결과 최종보고일시 -> 접수 일시로 변경
+'Version 3.1.10.342 --> 2021/06/25 : 등록번호 조회 시 조회 되지 않는 부분 수정 
 
-<Assembly: AssemblyVersion("3.1.10.341")> 
+<Assembly: AssemblyVersion("3.1.10.342")> 

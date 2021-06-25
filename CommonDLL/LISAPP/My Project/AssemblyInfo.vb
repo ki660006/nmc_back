@@ -180,5 +180,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.519 --> 2021/05/31 : QC데이터 조회 쿼리 수정
 'Version 3.1.10.520 --> 2021/06/15 : 특정검사 바코드 음영처리
 'Version 3.1.10.521 --> 2021/06/22 : TAT 차일드 코드 포함하여 조회 되도록 수정
+'Version 3.1.10.522 --> 2021/06/25 : 검사의뢰지침서 검사코드 돋보기 조회 시 검사처방 미사용 조회 안되게 수정, 
 
-<Assembly: AssemblyVersion("3.1.10.521")> 
+<Assembly: AssemblyVersion("3.1.10.522")> 

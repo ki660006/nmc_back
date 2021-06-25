@@ -2491,23 +2491,17 @@ Namespace COMM
             End Try
         End Function
         '20210303 jhs 사용자간 공유사항 코멘트 추가
-        Public Shared Function fnGet_Rst_ShareComment_slip(ByVal rsBcNo As String) As DataTable
+        Public Shared Function fnGet_Rst_ShareComment_slip(ByVal rsRegno As String) As DataTable
             Dim sFn As String = "Public Shared Function fnGet_Rst_Comment_slip(String) As DataTablev"
             Try
                 Dim sSql As String = ""
                 Dim alParm As New ArrayList
 
-                sSql += "SELECT r.bcno, r.partslip, r.slipnmd, fn_ack_get_bcno_ShareCmt_slip(r.bcno, r.partslip) cmtcont, 'S' status"
-                sSql += "  FROM (SELECT DISTINCT a.bcno, a.partcd || a.slipcd partslip, b.slipnmd"
-                sSql += "          FROM lrc40m a, lf021m b"
-                sSql += "         WHERE a.bcno   = :bcno"
-                sSql += "           AND a.partcd = b.partcd"
-                sSql += "           AND a.slipcd = b.slipcd"
-                sSql += "           AND a.regdt >= b.usdt"
-                sSql += "           AND a.regdt <  b.uedt"
-                sSql += "       ) r"
+                sSql += "  SELECT DISTINCT a.regno, fn_ack_get_bcno_ShareCmt_slip(a.regno) cmtcont , 'S' status" + vbCrLf
+                sSql += "          FROM lrc40m a" + vbCrLf
+                sSql += "         WHERE a.regno   = :regno" + vbCrLf
 
-                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -2900,63 +2894,63 @@ Namespace COMM
 
                 If PRG_CONST.BCCLS_MicorBio.Contains(rsBcNo.Substring(8, 2)) Then sTableNm = "lm010m"
 
-                sSql += "SELECT DISTINCT"
-                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt, j.regno, j.sex,"
-                sSql += "       CASE WHEN j.dage <= 31  THEN TO_CHAR(j.dage) || 'd'"
-                sSql += "            WHEN j.dage >  365 THEN TO_CHAR(j.age) ELSE TO_CHAR(TRUNC(j.dage/30)) || 'm' END age,"
-                sSql += "       fn_ack_get_pat_info(j.regno, '', '') patinfo,"
-                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm,"
-                sSql += "       fn_ack_get_dept_abbr(j.iogbn, j.deptcd) deptnm,"
-                sSql += "       fn_ack_get_dept_code(j.iogbn, j.deptcd) deptcd,"
-                sSql += "       j.iogbn, fn_ack_get_ward_abbr(j.wardno) wardno, j.roomno,"
-                sSql += "       fn_ack_date_str(j.entdt, 'yyyy-mm-dd') entdt,"
-                sSql += "       CASE WHEN j.statgbn = '1' THEN 'Y' ELSE j.statgbn END statgbn,"
-                sSql += "       j2.height, j2.weight,"
-                sSql += "       fn_ack_date_str(j1.colldt, 'yyyy-mm-dd hh24:mi:ss') colldt,"
-                sSql += "       fn_ack_date_str(j1.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
-                sSql += "       CASE WHEN j1.rstflg = '3' THEN fn_ack_date_str(j1.rstdt, 'yyyy-mm-dd hh24:mi:ss') ELSE '' END rstdt,"
-                sSql += "       f3.spcnmd, j3.diagnm,"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt, j.regno, j.sex," + vbCrLf
+                sSql += "       CASE WHEN j.dage <= 31  THEN TO_CHAR(j.dage) || 'd'" + vbCrLf
+                sSql += "            WHEN j.dage >  365 THEN TO_CHAR(j.age) ELSE TO_CHAR(TRUNC(j.dage/30)) || 'm' END age," + vbCrLf
+                sSql += "       fn_ack_get_pat_info(j.regno, '', '') patinfo," + vbCrLf
+                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm," + vbCrLf
+                sSql += "       fn_ack_get_dept_abbr(j.iogbn, j.deptcd) deptnm," + vbCrLf
+                sSql += "       fn_ack_get_dept_code(j.iogbn, j.deptcd) deptcd," + vbCrLf
+                sSql += "       j.iogbn, fn_ack_get_ward_abbr(j.wardno) wardno, j.roomno," + vbCrLf
+                sSql += "       fn_ack_date_str(j.entdt, 'yyyy-mm-dd') entdt," + vbCrLf
+                sSql += "       CASE WHEN j.statgbn = '1' THEN 'Y' ELSE j.statgbn END statgbn," + vbCrLf
+                sSql += "       j2.height, j2.weight," + vbCrLf
+                sSql += "       fn_ack_date_str(j1.colldt, 'yyyy-mm-dd hh24:mi:ss') colldt," + vbCrLf
+                sSql += "       fn_ack_date_str(j1.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt," + vbCrLf
+                sSql += "       CASE WHEN j1.rstflg = '3' THEN fn_ack_date_str(j1.rstdt, 'yyyy-mm-dd hh24:mi:ss') ELSE '' END rstdt," + vbCrLf
+                sSql += "       f3.spcnmd, j3.diagnm," + vbCrLf
                 'sSql += "       fn_ack_get_dr_remark(j.bcno) doctorrmk,"
-                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)"
-                sSql += "          FROM lj011m ff"
-                sSql += "         WHERE bcno    = j.bcno"
-                sSql += "           AND spcflg IN ('1', '2', '3', '4')"
-                sSql += "           AND NVL(doctorrmk, ' ') <> ' '"
-                sSql += "       ) doctorrmk,"
-                sSql += "       (SELECT abo || rh FROM lr070m WHERE regno = j.regno) aborh,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
-                sSql += "       CASE WHEN LENGTH(r.workno) = 8 THEN '' ELSE fn_ack_get_bcno_full(r.workno) END workno,"
-                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno,"
-                sSql += "       j.resdt /*fn_ack_get_ocs_resdt_bcno(j.bcno)*/ resdt,"
-                sSql += "       r.tat_mi"
-                sSql += "  FROM lj011m j1, lf030m f3,"
-                sSql += "       (SELECT bcno, MAX(wkymd || NVL(wkgrpcd, '') || NVL(wkno, '')) workno,"
-                sSql += "               fn_ack_date_diff(MIN(NVL(wkdt, tkdt)), MIN(NVL(rstdt, fn_ack_sysdate)), '0') tat_mi"
-                sSql += "          FROM " + sTableNm + ""
-                sSql += "         WHERE bcno LIKE :bcno || '%'"
+                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)" + vbCrLf
+                sSql += "          FROM lj011m ff" + vbCrLf
+                sSql += "         WHERE bcno    = j.bcno" + vbCrLf
+                sSql += "           AND spcflg IN ('1', '2', '3', '4')" + vbCrLf
+                sSql += "           AND NVL(doctorrmk, ' ') <> ' '" + vbCrLf
+                sSql += "       ) doctorrmk," + vbCrLf
+                sSql += "       (SELECT abo || rh FROM lr070m WHERE regno = j.regno) aborh," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno," + vbCrLf
+                sSql += "       CASE WHEN LENGTH(r.workno) = 8 THEN '' ELSE fn_ack_get_bcno_full(r.workno) END workno," + vbCrLf
+                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno," + vbCrLf
+                sSql += "       j.resdt /*fn_ack_get_ocs_resdt_bcno(j.bcno)*/ resdt," + vbCrLf
+                sSql += "       r.tat_mi" + vbCrLf
+                sSql += "  FROM lj011m j1, lf030m f3," + vbCrLf
+                sSql += "       (SELECT bcno, MAX(wkymd || NVL(wkgrpcd, '') || NVL(wkno, '')) workno," + vbCrLf
+                sSql += "               fn_ack_date_diff(MIN(NVL(wkdt, tkdt)), MIN(NVL(rstdt, fn_ack_sysdate)), '0') tat_mi" + vbCrLf
+                sSql += "          FROM " + sTableNm + "" + vbCrLf
+                sSql += "         WHERE bcno LIKE :bcno || '%'" + vbCrLf
 
                 al.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
 
                 If rsSlipCd.Length = 2 Then
-                    sSql += "           AND (testcd, spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd)"
+                    sSql += "           AND (testcd, spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd)" + vbCrLf
                     al.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(0, 1)))
                     al.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd.Substring(1, 1)))
                 ElseIf rsSlipCd.Length = 1 Then
-                    sSql += "           AND (testcd, spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd)"
+                    sSql += "           AND (testcd, spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd)" + vbCrLf
                     al.Add(New OracleParameter("partcd", OracleDbType.Varchar2, rsSlipCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlipCd))
                 End If
 
-                sSql += "         GROUP BY bcno"
-                sSql += "       ) r, lj010m j, lj012m j2, lj013m j3"
-                sSql += " WHERE j.bcno     = :bcno"
-                sSql += "   AND j.bcno     = j1.bcno"
-                sSql += "   AND j.bcno     = r.bcno"
-                sSql += "   AND j.spccd    = f3.spccd"
-                sSql += "   AND j1.colldt >= f3.usdt"
-                sSql += "   AND j1.colldt <  f3.uedt"
-                sSql += "   AND j.spcflg   = '4'"
-                sSql += "   AND j.bcno     = j2.bcno (+)"
-                sSql += "   AND j.bcno     = j3.bcno (+)"
+                sSql += "         GROUP BY bcno" + vbCrLf
+                sSql += "       ) r, lj010m j, lj012m j2, lj013m j3" + vbCrLf
+                sSql += " WHERE j.bcno     = :bcno" + vbCrLf
+                sSql += "   AND j.bcno     = j1.bcno" + vbCrLf
+                sSql += "   AND j.bcno     = r.bcno" + vbCrLf
+                sSql += "   AND j.spccd    = f3.spccd" + vbCrLf
+                sSql += "   AND j1.colldt >= f3.usdt" + vbCrLf
+                sSql += "   AND j1.colldt <  f3.uedt" + vbCrLf
+                sSql += "   AND j.spcflg   = '4'" + vbCrLf
+                sSql += "   AND j.bcno     = j2.bcno (+)" + vbCrLf
+                sSql += "   AND j.bcno     = j3.bcno (+)" + vbCrLf
 
                 al.Add(New OracleParameter("bcno", rsBcNo))
 
