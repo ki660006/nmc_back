@@ -370,6 +370,10 @@
       <Project>{42E0E2F5-F825-462F-9822-937936F7EFBF}</Project>
       <Name>AxAckItemSave</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CommonDLL\AxAckPatientInfo\AxAckPatientInfo.vbproj">
+      <Project>{E94524CD-8C2B-4AE4-AEC2-E299C019F495}</Project>
+      <Name>AxAckPatientInfo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CommonDLL\AxAckResultViewer\AxAckResultViewer.vbproj">
       <Project>{FD1C9028-BC32-4C1D-A372-188200088010}</Project>
       <Name>AxAckResultViewer</Name>

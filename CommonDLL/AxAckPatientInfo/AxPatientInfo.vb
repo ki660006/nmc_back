@@ -420,6 +420,9 @@ Public Class AxPatientInfo
 
     End Sub
 
+
+
+
     '20210408 jhs 검사자간 공유사항 추가
     Private Sub txtShareCmtCont_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
 
@@ -551,6 +554,12 @@ Public Class AxPatientInfo
         Dim a_dr As DataRow()
         Dim chkbool As Boolean = False
         Try
+
+            If lblRegNo.Text = "" Then
+                MsgBox("검체 조회를 먼저 진행해주세요.")
+                Return
+            End If
+
             txtShareCmtCont_LostFocus(Nothing, Nothing)
             a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
 
@@ -561,9 +570,10 @@ Public Class AxPatientInfo
 
                 For ix2 As Integer = 0 To arlBuf.Length - 1
                     Dim objBR As New ResultInfo_ShareCmt
-                    objBR.BcNo = a_dr(ix).Item("bcno").ToString
+                    'objBR.BcNo = a_dr(ix).Item("bcno").ToString
                     objBR.PartSlip = a_dr(ix).Item("partslip").ToString
-                    objBR.TestCd = ""
+                    'objBR.TestCd = ""
+                    objBR.Regno = ""
 
                     objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
                     objBR.Cmt = arlBuf(ix2)
@@ -592,6 +602,12 @@ Public Class AxPatientInfo
         Dim a_dr As DataRow()
         Dim chkbool As Boolean = False
         Try
+
+            If lblRegNo.Text = "" Then
+                MsgBox("검체 조회를 먼저 진행해주세요.")
+                Return
+            End If
+
             txtShareCmtCont_LostFocus(Nothing, Nothing)
             a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
 
@@ -602,9 +618,11 @@ Public Class AxPatientInfo
 
                 For ix2 As Integer = 0 To arlBuf.Length - 1
                     Dim objBR As New ResultInfo_ShareCmt
-                    objBR.BcNo = a_dr(ix).Item("bcno").ToString
+                    'objBR.BcNo = a_dr(ix).Item("bcno").ToString
+                    'objBR.TestCd = ""
+
                     objBR.PartSlip = a_dr(ix).Item("partslip").ToString
-                    objBR.TestCd = ""
+                    objBR.Regno = ""
 
                     objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
                     objBR.Cmt = arlBuf(ix2)

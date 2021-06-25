@@ -120,12 +120,13 @@ Namespace CommFN
 
     '20210303 JHS 검사자간 공유사항 코멘트
     Public Class ResultInfo_ShareCmt
-        Public BcNo As String = ""
-        Public PartSlip As String = ""
-        Public TestCd As String = ""
-        Public RstSeq As String = ""
-        Public Cmt As String = ""
-        Public RstFlg As String = ""
+        'Public BcNo As String = ""          '검체번호
+        Public Regno As String = ""         '등록번호
+        Public PartSlip As String = ""      '분야
+        'Public TestCd As String = ""        '검사코드
+        Public RstSeq As String = ""        '결과 번호 
+        Public Cmt As String = ""           '코멘트
+        'Public RstFlg As String = ""
         Public SaveFlg As String = ""
     End Class
     '------------------------------

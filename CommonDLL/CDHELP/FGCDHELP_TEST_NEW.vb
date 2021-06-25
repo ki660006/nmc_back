@@ -1728,7 +1728,7 @@ Public Class DA_CDHELP_TEST_NEW
             sSql += "   AND f10.usdt   <= fn_ack_sysdate" + vbCrLf
             sSql += "   AND f10.uedt   >  fn_ack_sysdate" + vbCrLf
             sSql += "   AND f6.tcdgbn  <> 'C'" + vbCrLf
-            'sSql += "   AND f6.ordhide <> '1' "
+            sSql += "   AND f6.ordhide <> '1' " + vbCrLf '20210625 선생님 요청으로 인해 롤백
 
             If rsTestNm <> "" Then
                 sSql += "   AND f6.tnmd LIKE '%" + rsTestNm + "%'" + vbCrLf

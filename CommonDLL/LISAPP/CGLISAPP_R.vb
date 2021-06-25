@@ -202,6 +202,7 @@ Namespace APP_R
                 sSql += "       '', SUBSTR(a.bcno, 1, 14) || '-' || SUBSTR(a.bcno, 15, 1) bcno,"
                 sSql += "       a.regno, a.patnm,"
                 sSql += "       fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt"
+                sSql += "  ,b.partcd || b.slipcd partslip "
                 sSql += "  FROM lj010m a, lr010m b"
                 sSql += " WHERE a.regno  = :regno"
                 sSql += "   AND a.bcno   = b.bcno"
@@ -5799,85 +5800,98 @@ Namespace APP_R
                 Dim sSql As String = ""
                 Dim alSlipCd As New ArrayList
                 Dim bAddFlg As Boolean = False
+                Dim bdelFlg As Boolean = False
 
                 dbCmd.Connection = m_dbCn
                 dbCmd.Transaction = m_dbTran
                 dbCmd.CommandType = CommandType.Text
 
+
                 For ix As Integer = 0 To roShareCmt.Count - 1
+                    '--수정 , 입력 로직
 
                     If CType(roShareCmt(ix), ResultInfo_ShareCmt).SaveFlg = "1" Then
 
-                        If alSlipCd.Contains(CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip) Then
+                        If bAddFlg = False Then
+                            bAddFlg = True
 
-                        Else
-                            bAddFlg = False
-
+                            '--히스토리 입력
                             sSql = ""
-                            sSql += "DELETE lrc40m WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+                            sSql += " INSERT INTO lrc40h "
+                            'sSql += "SELECT fn_ack_sysdate, :modid, :modip, r.* FROM lr040m r WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+                            sSql += " select fn_ack_sysdate, :modid, :modip , rstseq, cmt, regdt, regid, regip, regno  from lrc40m where regno = :regno"
+                            With dbCmd
+                                .CommandText = sSql
+                                .Parameters.Clear()
+                                .Parameters.Add("modid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                                .Parameters.Add("modip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
+                                .Parameters.Add("regno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Regno
+                                .ExecuteNonQuery()
+                            End With
+
+                            '--기존내용 삭제
+                            sSql = ""
+                            sSql += "DELETE lrc40m WHERE regno = :regno"
 
                             With dbCmd
                                 .CommandText = sSql
-
                                 .Parameters.Clear()
-                                .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
-                                .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
-                                .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
-
+                                .Parameters.Add("regno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Regno
                                 .ExecuteNonQuery()
                             End With
                         End If
 
-                        alSlipCd.Add(CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip)
 
-                        If CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> vbCrLf Or CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> "" Then bAddFlg = True
-
+                        '--내용 삽입
                         If CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> vbCrLf Or CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt <> "" Or bAddFlg Then
                             sSql = ""
                             sSql += "INSERT INTO lrc40m"
-                            sSql += "          (  bcno,  partcd,  slipcd,  rstseq,  cmt, regdt,           regid,  editid,  editip, editdt )"
-                            sSql += "   VALUES ( :bcno, :partcd, :slipcd, :rstseq, :cmt, fn_ack_sysdate, :regid, :editid, :editip, fn_ack_sysdate )"
-
+                            sSql += "          (  regno,  rstseq,  cmt, regdt,           regid,  regip)" + vbCrLf
+                            sSql += "   VALUES ( :regno, :rstseq, :cmt, fn_ack_sysdate, :regid, :regip)" + vbCrLf
 
                             With dbCmd
                                 .CommandText = sSql
-
                                 .Parameters.Clear()
-                                .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
-                                .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
-                                .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
+                                .Parameters.Add("regno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Regno
                                 .Parameters.Add("rstseq", OracleDbType.Varchar2).Value = (ix + 1).ToString
                                 .Parameters.Add("cmt", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Cmt
                                 .Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
-                                .Parameters.Add("editid", OracleDbType.Varchar2).Value = USER_INFO.USRID
-                                .Parameters.Add("editip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
-
+                                .Parameters.Add("regip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
                                 .ExecuteNonQuery()
                             End With
                         End If
 
-
-
-
-
                     ElseIf CType(roShareCmt(ix), ResultInfo_ShareCmt).SaveFlg = "2" Then
-                        bAddFlg = False
 
-                        sSql = ""
-                        sSql += "DELETE lrc40m WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+                        '--삭제 로직
+                        If bdelFlg = False Then
+                            bdelFlg = True
 
-                        With dbCmd
-                            .CommandText = sSql
+                            '--히스토리 입력
+                            sSql = ""
+                            sSql += " INSERT INTO lrc40h "
+                            'sSql += "SELECT fn_ack_sysdate, :modid, :modip, r.* FROM lr040m r WHERE bcno = :bcno AND partcd = :partcd AND slipcd = :slipcd"
+                            sSql += " select fn_ack_sysdate, :modid, :modip , rstseq, cmt, regdt, regid, regip, regno  from lrc40m where regno = :regno"
+                            With dbCmd
+                                .CommandText = sSql
+                                .Parameters.Clear()
+                                .Parameters.Add("modid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                                .Parameters.Add("modip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
+                                .Parameters.Add("regno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Regno
+                                .ExecuteNonQuery()
+                            End With
 
-                            .Parameters.Clear()
-                            .Parameters.Add("bcno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).BcNo
-                            .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(0, 1)
-                            .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).PartSlip.Substring(1, 1)
+                            sSql = ""
+                            sSql += "DELETE lrc40m WHERE regno = :regno"
 
-                            .ExecuteNonQuery()
-                        End With
+                            With dbCmd
+                                .CommandText = sSql
+                                .Parameters.Clear()
+                                .Parameters.Add("regno", OracleDbType.Varchar2).Value = CType(roShareCmt(ix), ResultInfo_ShareCmt).Regno
+                                .ExecuteNonQuery()
+                            End With
+                        End If
                     End If
-
                 Next
 
                 Return True
