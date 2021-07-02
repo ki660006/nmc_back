@@ -67,5 +67,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.368 --> 2021/02/16 : 검사항목별 결과저장 및 보고 색 변경
 'Version 3.1.10.370 --> 2021/03/22 : 검사항목별 결과저장 및 보고 색 변경 누적결과 시 색변경도 적용
 'Version 3.1.10.371 --> 2021/06/25 : 검사자간 공유사항 항목 추가 
+'Version 3.1.10.372 --> 2021/06/28 : 검사자간 공유사항 항목 추가 (롤백)
 
-<Assembly: AssemblyVersion("3.1.10.371")> 
+<Assembly: AssemblyVersion("3.1.10.372")> 
