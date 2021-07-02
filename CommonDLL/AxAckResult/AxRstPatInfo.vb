@@ -344,12 +344,12 @@ Public Class AxRstPatInfo
                 'Ctrl.Set_ToolTip(Me.txtRemark, Me.txtRemark.Text, m_tooltip)
 
                 '20210408 JHS 검사자간 공유사항 추가
-                Me.txtShareCmtCont.Text = ""
-                dt = LISAPP.COMM.RstFn.fnGet_Rst_ShareComment_slip(dt.Rows(0).Item("regno").ToString())
-                m_dt_ShareCmt_bcno = dt
-                If dt.Rows.Count > 0 Then
-                    sbDisplay_ShareCmt(dt.Rows(0).Item("regno").ToString())
-                End If
+                'Me.txtShareCmtCont.Text = ""
+                'dt = LISAPP.COMM.RstFn.fnGet_Rst_ShareComment_slip(dt.Rows(0).Item("regno").ToString())
+                'm_dt_ShareCmt_bcno = dt
+                'If dt.Rows.Count > 0 Then
+                '    sbDisplay_ShareCmt(dt.Rows(0).Item("regno").ToString())
+                'End If
                 '------------------------------------------
 
                 Return True
@@ -357,6 +357,10 @@ Public Class AxRstPatInfo
         Catch ex As Exception
             MsgBox(sFn + " - " + ex.Message)
         End Try
+
+    End Function
+
+    Public Function fnDisplay_ShareComment(ByVal rsRegNo As String) As String
 
     End Function
 
@@ -505,237 +509,247 @@ Public Class AxRstPatInfo
         Return
     End Sub
 
-    '20210623 jhs 검사자간 공유사항 적용
-    Private Sub btnShareCmtAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShareCmtAdd.Click
-        Dim alShareCmt As New ArrayList
-        Dim a_dr As DataRow()
-        Dim chkbool As Boolean = False
-        Try
+    ''20210623 jhs 검사자간 공유사항 적용
+    'Private Sub btnShareCmtAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShareCmtAdd.Click
+    '    Dim alShareCmt As New ArrayList
+    '    Dim a_dr As DataRow()
+    '    Dim chkbool As Boolean = False
+    '    Dim sRegNo As String
+    '    Dim dt As DataTable
+    '    Try
 
-            If Me.lblRegNo.Text = "" Then
-                MsgBox("조회를 먼저 진행해주세요.")
-                Return
-            End If
-
-
-            txtShareCmtCont_LostFocus(Nothing, Nothing)
-            a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
-
-            For ix As Integer = 0 To a_dr.Length - 1
-                Dim arlBuf() As String
-
-                arlBuf = a_dr(ix).Item("cmtcont").ToString.Replace(Chr(10), "").Split(Chr(13))
-
-                For ix2 As Integer = 0 To arlBuf.Length - 1
-                    Dim objBR As New ResultInfo_ShareCmt
-                    'objBR.BcNo = a_dr(ix).Item("bcno").ToString
-                    'objBR.TestCd = ""
-
-                    'objBR.PartSlip = a_dr(ix).Item("partslip").ToString
-                    objBR.Regno = a_dr(ix).Item("regno").ToString
-
-                    objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
-                    objBR.Cmt = arlBuf(ix2)
-                    objBR.SaveFlg = "1" '추가 플래그
-
-                    alShareCmt.Add(objBR)
-                Next
-            Next
-
-            Dim objRst As New LISAPP.APP_R.AxRstFn
-
-            chkbool = objRst.fnReg_shareCmt(alShareCmt)
-
-            If chkbool Then
-            ElseIf chkbool = False Then
-                MsgBox("검사자간 공유사항 저장 오류")
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-    '20210408 jhs 검사자간 공유사항 추가
-    Private Sub txtShareCmtCont_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+    '        If Me.lblRegNo.Text = "" Then
+    '            MsgBox("조회를 먼저 진행해주세요.")
+    '            Return
+    '        End If
 
 
-        Dim ci As New ShareCMT_INFO
+    '        txtShareCmtCont_LostFocus(Nothing, Nothing)
+    '        a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
 
-        With ci
-            .Regno = Me.lblRegNo.Text
-            .CmtCont = Me.txtShareCmtCont.Text
-        End With
+    '        For ix As Integer = 0 To a_dr.Length - 1
+    '            Dim arlBuf() As String
 
-        sbSet_ShareCmt_BcNo_Edit(ci)
+    '            arlBuf = a_dr(ix).Item("cmtcont").ToString.Replace(Chr(10), "").Split(Chr(13))
 
-    End Sub
-    Private Sub sbSet_ShareCmt_BcNo_Edit(ByVal r_ci As ShareCMT_INFO)
-        Dim sFn As String = "sbSet_Cmt_BcNo_Edit"
+    '            For ix2 As Integer = 0 To arlBuf.Length - 1
+    '                Dim objBR As New ResultInfo_ShareCmt
+    '                'objBR.BcNo = a_dr(ix).Item("bcno").ToString
+    '                'objBR.TestCd = ""
 
-        Try
-            With m_dt_ShareCmt_bcno
-                Dim iRow As Integer = -1
+    '                'objBR.PartSlip = a_dr(ix).Item("partslip").ToString
+    '                objBR.Regno = a_dr(ix).Item("regno").ToString
 
-                For ix As Integer = 0 To .Rows.Count - 1
-                    If .Rows(ix).Item("regno").ToString = r_ci.Regno Then 'And .Rows(ix).Item("partslip").ToString = r_ci.PartSlip
-                        iRow = ix
-                        Exit For
-                    End If
-                Next
 
-                If iRow < 0 Then
-                    sbSet_ShareCmt_BcNo_Add(r_ci)
-                Else
-                    Dim a_fieldinfo() As System.Reflection.FieldInfo = r_ci.GetType().GetFields()
-                    Dim sStatus As String = "S"
+    '                objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
+    '                objBR.Cmt = arlBuf(ix2)
+    '                objBR.SaveFlg = "1" '추가 플래그
 
-                    For ix As Integer = 0 To a_fieldinfo.Length - 1
-                        Dim sFieldName As String = a_fieldinfo(ix).Name.ToLower
-                        Dim sFieldValue As String = a_fieldinfo(ix).GetValue(r_ci).ToString()
+    '                alShareCmt.Add(objBR)
+    '            Next
+    '        Next
 
-                        '수정된 부분이 있는 지 조사하고 있으면 변경
-                        If Not .Rows(iRow).Item(sFieldName).ToString() = sFieldValue Then
-                            .Rows(iRow).Item(sFieldName) = sFieldValue
-                            sStatus = "U"
-                        End If
-                    Next
+    '        Dim objRst As New LISAPP.APP_R.AxRstFn
 
-                    'status
-                    If .Rows(iRow).Item("status").ToString() = "S" Then
-                        .Rows(iRow).Item("status") = sStatus
-                    End If
+    '        chkbool = objRst.fnReg_shareCmt(alShareCmt)
 
-                End If
-            End With
+    '        If chkbool Then
+    '            Me.txtShareCmtCont.Text = ""
+    '            sRegNo = Me.lblRegNo.Text
+    '            dt = LISAPP.COMM.RstFn.fnGet_Rst_ShareComment_slip(sRegNo)
+    '            m_dt_ShareCmt_bcno = dt
+    '            If dt.Rows.Count > 0 Then
+    '                sbDisplay_ShareCmt(dt.Rows(0).Item("regno").ToString())
+    '            End If
+    '        ElseIf chkbool = False Then
+    '            MsgBox("검사자간 공유사항 저장 오류")
+    '        End If
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
+    'End Sub
+    ''20210408 jhs 검사자간 공유사항 추가
+    'Private Sub txtShareCmtCont_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs)
 
-    End Sub
 
-    Private Sub sbSet_ShareCmt_BcNo_Add(ByVal r_ci As ShareCMT_INFO)
-        Dim sFn As String = "sbSet_Cmt_BcNo_Add"
+    '    Dim ci As New ShareCMT_INFO
 
-        Try
-            With m_dt_ShareCmt_bcno
-                'Row 추가
-                Dim dr As DataRow = .NewRow()
+    '    With ci
+    '        .Regno = Me.lblRegNo.Text
+    '        .CmtCont = Me.txtShareCmtCont.Text
+    '    End With
 
-                Dim a_fieldinfo() As System.Reflection.FieldInfo = r_ci.GetType().GetFields()
+    '    sbSet_ShareCmt_BcNo_Edit(ci)
 
-                For j As Integer = 1 To a_fieldinfo.Length
-                    Dim sFieldName As String = a_fieldinfo(j - 1).Name.ToLower
-                    Dim sFieldValue As String = a_fieldinfo(j - 1).GetValue(r_ci).ToString()
+    'End Sub
+    'Private Sub sbSet_ShareCmt_BcNo_Edit(ByVal r_ci As ShareCMT_INFO)
+    '    Dim sFn As String = "sbSet_Cmt_BcNo_Edit"
 
-                    If Not sFieldValue = "" Then
-                        dr.Item(sFieldName) = sFieldValue
-                    End If
-                Next
+    '    Try
+    '        With m_dt_ShareCmt_bcno
+    '            Dim iRow As Integer = -1
 
-                'status
-                dr.Item("status") = "I"
+    '            For ix As Integer = 0 To .Rows.Count - 1
+    '                If .Rows(ix).Item("regno").ToString = r_ci.Regno Then 'And .Rows(ix).Item("partslip").ToString = r_ci.PartSlip
+    '                    iRow = ix
+    '                    Exit For
+    '                End If
+    '            Next
 
-                .Rows.Add(dr)
-            End With
+    '            If iRow < 0 Then
+    '                sbSet_ShareCmt_BcNo_Add(r_ci)
+    '            Else
+    '                Dim a_fieldinfo() As System.Reflection.FieldInfo = r_ci.GetType().GetFields()
+    '                Dim sStatus As String = "S"
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
+    '                For ix As Integer = 0 To a_fieldinfo.Length - 1
+    '                    Dim sFieldName As String = a_fieldinfo(ix).Name.ToLower
+    '                    Dim sFieldValue As String = a_fieldinfo(ix).GetValue(r_ci).ToString()
 
-        End Try
-    End Sub
+    '                    '수정된 부분이 있는 지 조사하고 있으면 변경
+    '                    If Not .Rows(iRow).Item(sFieldName).ToString() = sFieldValue Then
+    '                        .Rows(iRow).Item(sFieldName) = sFieldValue
+    '                        sStatus = "U"
+    '                    End If
+    '                Next
 
-    Private Sub sbDisplay_ShareCmt(ByVal rsRegno As String)
-        Dim sFn As String = "sbDisplay_Cmt_One_slipcd"
+    '                'status
+    '                If .Rows(iRow).Item("status").ToString() = "S" Then
+    '                    .Rows(iRow).Item("status") = sStatus
+    '                End If
 
-        Try
-            Me.txtShareCmtCont.Text = ""
+    '            End If
+    '        End With
 
-            Dim a_dr As DataRow()
-            Dim a_dt As DataTable = New DataTable
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
 
-            'If rsSlipCd = "" Then
-            a_dr = m_dt_ShareCmt_bcno.Select()
-            'Else
-            'a_dr = m_dt_ShareCmt_bcno.Select("bcno = '" + rsBcNo + "' AND partslip = '" + rsSlipCd + "'")
-            'End If
+    'End Sub
 
-            'If rsSlipCd = "" Then
-            '    For ix As Integer = 0 To a_dr.Length - 1
-            '        Me.txtShareCmtCont.Text += "[" + a_dr(ix).Item("slipnmd").ToString.Trim + "]" + vbCrLf
-            '        Me.txtShareCmtCont.Text += a_dr(ix).Item("cmtcont").ToString + vbCrLf
-            '    Next
-            'Else
-            If a_dr.Length > 0 Then
-                Me.txtShareCmtCont.Text = a_dr(0).Item("cmtcont").ToString
-            End If
-            'End If
+    'Private Sub sbSet_ShareCmt_BcNo_Add(ByVal r_ci As ShareCMT_INFO)
+    '    Dim sFn As String = "sbSet_Cmt_BcNo_Add"
 
-            'If rsSlipCd = "" Then
-            '    Me.txtShareCmtCont.ReadOnly = True
-            'Else
-            '    Me.txtShareCmtCont.ReadOnly = False
-            'End If
+    '    Try
+    '        With m_dt_ShareCmt_bcno
+    '            'Row 추가
+    '            Dim dr As DataRow = .NewRow()
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
+    '            Dim a_fieldinfo() As System.Reflection.FieldInfo = r_ci.GetType().GetFields()
 
-    Private Sub btnShareCmtDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShareCmtDel.Click
-        Dim alShareCmt As New ArrayList
-        Dim a_dr As DataRow()
-        Dim chkbool As Boolean = False
-        Try
+    '            For j As Integer = 1 To a_fieldinfo.Length
+    '                Dim sFieldName As String = a_fieldinfo(j - 1).Name.ToLower
+    '                Dim sFieldValue As String = a_fieldinfo(j - 1).GetValue(r_ci).ToString()
 
-            If Me.lblRegNo.Text = "" Then
-                MsgBox("조회를 먼저 진행해주세요.")
-                Return
-            End If
+    '                If Not sFieldValue = "" Then
+    '                    dr.Item(sFieldName) = sFieldValue
+    '                End If
+    '            Next
 
-            txtShareCmtCont_LostFocus(Nothing, Nothing)
-            a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
+    '            'status
+    '            dr.Item("status") = "I"
 
-            For ix As Integer = 0 To a_dr.Length - 1
-                Dim arlBuf() As String
+    '            .Rows.Add(dr)
+    '        End With
 
-                arlBuf = a_dr(ix).Item("cmtcont").ToString.Replace(Chr(10), "").Split(Chr(13))
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
 
-                For ix2 As Integer = 0 To arlBuf.Length - 1
-                    Dim objBR As New ResultInfo_ShareCmt
+    '    End Try
+    'End Sub
 
-                    objBR.Regno = a_dr(ix).Item("regno").ToString
-                    objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
-                    objBR.Cmt = arlBuf(ix2)
-                    objBR.SaveFlg = "2" '삭제플래그
+    'Private Sub sbDisplay_ShareCmt(ByVal rsRegno As String)
+    '    Dim sFn As String = "sbDisplay_Cmt_One_slipcd"
 
-                    alShareCmt.Add(objBR)
-                Next
-            Next
+    '    Try
+    '        Me.txtShareCmtCont.Text = ""
 
-            Dim objRst As New LISAPP.APP_R.AxRstFn
+    '        Dim a_dr As DataRow()
+    '        Dim a_dt As DataTable = New DataTable
 
-            chkbool = objRst.fnReg_shareCmt(alShareCmt)
+    '        'If rsSlipCd = "" Then
+    '        a_dr = m_dt_ShareCmt_bcno.Select()
+    '        'Else
+    '        'a_dr = m_dt_ShareCmt_bcno.Select("bcno = '" + rsBcNo + "' AND partslip = '" + rsSlipCd + "'")
+    '        'End If
 
-            If chkbool Then
-                Me.txtShareCmtCont.Text = ""
-            ElseIf chkbool = False Then
-                MsgBox("검사자간 공유사항 저장 오류")
-            End If
+    '        'If rsSlipCd = "" Then
+    '        '    For ix As Integer = 0 To a_dr.Length - 1
+    '        '        Me.txtShareCmtCont.Text += "[" + a_dr(ix).Item("slipnmd").ToString.Trim + "]" + vbCrLf
+    '        '        Me.txtShareCmtCont.Text += a_dr(ix).Item("cmtcont").ToString + vbCrLf
+    '        '    Next
+    '        'Else
+    '        If a_dr.Length > 0 Then
+    '            Me.txtShareCmtCont.Text = a_dr(0).Item("cmtcont").ToString
+    '        End If
+    '        'End If
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
+    '        'If rsSlipCd = "" Then
+    '        '    Me.txtShareCmtCont.ReadOnly = True
+    '        'Else
+    '        '    Me.txtShareCmtCont.ReadOnly = False
+    '        'End If
 
-        End Try
-    End Sub
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
+    'End Sub
+
+    'Private Sub btnShareCmtDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShareCmtDel.Click
+    '    Dim alShareCmt As New ArrayList
+    '    Dim a_dr As DataRow()
+    '    Dim chkbool As Boolean = False
+    '    Try
+
+    '        If Me.lblRegNo.Text = "" Then
+    '            MsgBox("조회를 먼저 진행해주세요.")
+    '            Return
+    '        End If
+
+    '        txtShareCmtCont_LostFocus(Nothing, Nothing)
+    '        a_dr = m_dt_ShareCmt_bcno.Select() '--"status <> 'S'")
+
+    '        For ix As Integer = 0 To a_dr.Length - 1
+    '            Dim arlBuf() As String
+
+    '            arlBuf = a_dr(ix).Item("cmtcont").ToString.Replace(Chr(10), "").Split(Chr(13))
+
+    '            For ix2 As Integer = 0 To arlBuf.Length - 1
+    '                Dim objBR As New ResultInfo_ShareCmt
+
+    '                objBR.Regno = a_dr(ix).Item("regno").ToString
+    '                objBR.RstSeq = Convert.ToString(ix2).PadLeft(2, "0"c)
+    '                objBR.Cmt = arlBuf(ix2)
+    '                objBR.SaveFlg = "2" '삭제플래그
+
+    '                alShareCmt.Add(objBR)
+    '            Next
+    '        Next
+
+    '        Dim objRst As New LISAPP.APP_R.AxRstFn
+
+    '        chkbool = objRst.fnReg_shareCmt(alShareCmt)
+
+    '        If chkbool Then
+    '            Me.txtShareCmtCont.Text = ""
+    '        ElseIf chkbool = False Then
+    '            MsgBox("검사자간 공유사항 저장 오류")
+    '        End If
+
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    Finally
+
+    '    End Try
+    'End Sub
 End Class
 
 '20210303 jhs 공유자간 정보 객체클래스 추가
-Public Class ShareCMT_INFO
-    'Public BcNo As String = ""
-    Public Regno As String = ""
-    'Public PartSlip As String = ""
-    Public CmtCont As String = ""
-End Class
+'Public Class ShareCMT_INFO
+'    'Public BcNo As String = ""
+'    Public Regno As String = ""
+'    'Public PartSlip As String = ""
+'    Public CmtCont As String = ""
+'End Class
 '----------------------------------

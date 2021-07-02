@@ -1462,7 +1462,7 @@ Public Class FGM01
         Me.pnlFill.Controls.Add(Me.AxPatInfo)
         Me.pnlFill.Location = New System.Drawing.Point(288, 0)
         Me.pnlFill.Name = "pnlFill"
-        Me.pnlFill.Size = New System.Drawing.Size(1121, 598)
+        Me.pnlFill.Size = New System.Drawing.Size(968, 598)
         Me.pnlFill.TabIndex = 0
         '
         'btnAddmic
@@ -1495,7 +1495,7 @@ Public Class FGM01
         Me.btnAddmic.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnAddmic.ImageIndex = 0
         Me.btnAddmic.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnAddmic.Location = New System.Drawing.Point(399, 118)
+        Me.btnAddmic.Location = New System.Drawing.Point(246, 118)
         Me.btnAddmic.Name = "btnAddmic"
         Me.btnAddmic.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnAddmic.SideImage = Nothing
@@ -1509,7 +1509,7 @@ Public Class FGM01
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(1027, 117)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(874, 117)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(93, 22)
         Me.btnQuery_pat.TabIndex = 220
@@ -1547,7 +1547,7 @@ Public Class FGM01
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(553, 117)
+        Me.btnHistory.Location = New System.Drawing.Point(400, 117)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -1563,7 +1563,7 @@ Public Class FGM01
         Me.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDown.Font = New System.Drawing.Font("±¼¸²", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnDown.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnDown.Location = New System.Drawing.Point(1069, 61)
+        Me.btnDown.Location = New System.Drawing.Point(920, 61)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(45, 52)
         Me.btnDown.TabIndex = 174
@@ -1574,7 +1574,7 @@ Public Class FGM01
         Me.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUp.Font = New System.Drawing.Font("±¼¸²", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.btnUp.Location = New System.Drawing.Point(1069, 5)
+        Me.btnUp.Location = New System.Drawing.Point(920, 5)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(45, 52)
         Me.btnUp.TabIndex = 173
@@ -1606,7 +1606,7 @@ Public Class FGM01
         Me.axResult.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.axResult.Location = New System.Drawing.Point(3, 118)
         Me.axResult.Name = "axResult"
-        Me.axResult.Size = New System.Drawing.Size(1117, 477)
+        Me.axResult.Size = New System.Drawing.Size(964, 477)
         Me.axResult.TabIndex = 176
         '
         'AxPatInfo
@@ -1616,7 +1616,7 @@ Public Class FGM01
         Me.AxPatInfo.Location = New System.Drawing.Point(2, 1)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(1067, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(918, 114)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 177
         '
@@ -1636,7 +1636,7 @@ Public Class FGM01
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 597)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1411, 32)
+        Me.Panel1.Size = New System.Drawing.Size(1258, 32)
         Me.Panel1.TabIndex = 3
         '
         'btnReg_err
@@ -1689,7 +1689,7 @@ Public Class FGM01
         Me.btnRst_Clear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnRst_Clear.ImageIndex = 0
         Me.btnRst_Clear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnRst_Clear.Location = New System.Drawing.Point(822, 3)
+        Me.btnRst_Clear.Location = New System.Drawing.Point(669, 3)
         Me.btnRst_Clear.Name = "btnRst_Clear"
         Me.btnRst_Clear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnRst_Clear.SideImage = Nothing
@@ -1730,7 +1730,7 @@ Public Class FGM01
         Me.btnFN.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnFN.ImageIndex = 0
         Me.btnFN.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnFN.Location = New System.Drawing.Point(919, 3)
+        Me.btnFN.Location = New System.Drawing.Point(766, 3)
         Me.btnFN.Name = "btnFN"
         Me.btnFN.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnFN.SideImage = Nothing
@@ -1771,7 +1771,7 @@ Public Class FGM01
         Me.btnMW.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnMW.ImageIndex = 0
         Me.btnMW.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnMW.Location = New System.Drawing.Point(1016, 3)
+        Me.btnMW.Location = New System.Drawing.Point(863, 3)
         Me.btnMW.Name = "btnMW"
         Me.btnMW.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnMW.SideImage = Nothing
@@ -1812,7 +1812,7 @@ Public Class FGM01
         Me.btnReg.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg.ImageIndex = 0
         Me.btnReg.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg.Location = New System.Drawing.Point(1113, 3)
+        Me.btnReg.Location = New System.Drawing.Point(960, 3)
         Me.btnReg.Name = "btnReg"
         Me.btnReg.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg.SideImage = Nothing
@@ -1853,7 +1853,7 @@ Public Class FGM01
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(1210, 3)
+        Me.btnClear.Location = New System.Drawing.Point(1057, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
@@ -1894,7 +1894,7 @@ Public Class FGM01
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(1308, 3)
+        Me.btnExit.Location = New System.Drawing.Point(1155, 3)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
@@ -1964,7 +1964,7 @@ Public Class FGM01
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(6, 14)
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1411, 629)
+        Me.ClientSize = New System.Drawing.Size(1258, 629)
         Me.Controls.Add(Me.btnMove)
         Me.Controls.Add(Me.pnlFill)
         Me.Controls.Add(Me.pnlLeft)

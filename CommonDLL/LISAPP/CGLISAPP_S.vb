@@ -2656,72 +2656,72 @@ Namespace APP_S
                 rsDateS = rsDateS.Replace("-", "")
                 rsDateE = rsDateE.Replace("-", "")
 
-                sSql += "SELECT DISTINCT"
-                sSql += "       j1.colldt, j.regno, j.patnm, j.sex || '/' || j.age sexage,"
-                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) deptcd,"
-                sSql += "       j.iogbn, CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) END deptinfo,"
-                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE '' END wardroom,"
-                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt, j.bcno,"
-                sSql += "       j1.colldt_sort, j1.tubenmd, fn_ack_get_usr_name(j1.collid) collnm, j1.tubecd, j1.collid"
-                sSql += "  FROM lj010m j,"
-                sSql += "       ("
-                sSql += "        SELECT fn_ack_date_str(j.colldt, 'yyyy-mm-dd hh24:mi') colldt, j.bcno, fn_ack_date_str(j.colldt, 'yyyy-mm-dd') colldt_sort,"
-                sSql += "               f4.tubenmd, f4.tubecd, j.collid"
-                sSql += "          FROM lj011m j, lf060m f6, lf040m f4"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       j1.colldt, j.regno, j.patnm, j.sex || '/' || j.age sexage," + vbCrLf
+                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm, FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) deptcd," + vbCrLf
+                sSql += "       j.iogbn, CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) END deptinfo," + vbCrLf
+                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_WARD_ABBR(j.wardno) || '/' || j.roomno ELSE '' END wardroom," + vbCrLf
+                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd hh24:mi') orddt, j.bcno," + vbCrLf
+                sSql += "       j1.colldt_sort, j1.tubenmd, fn_ack_get_usr_name(j1.collid) collnm, j1.tubecd, j1.collid" + vbCrLf
+                sSql += "  FROM lj010m j," + vbCrLf
+                sSql += "       (" + vbCrLf
+                sSql += "        SELECT fn_ack_date_str(j.colldt, 'yyyy-mm-dd hh24:mi') colldt, j.bcno, fn_ack_date_str(j.colldt, 'yyyy-mm-dd') colldt_sort," + vbCrLf
+                sSql += "               f4.tubenmd, f4.tubecd, j.collid" + vbCrLf
+                sSql += "          FROM lj011m j, lf060m f6, lf040m f4" + vbCrLf
                 'sSql += "         WHERE j.colldt >= :dates"
-                sSql += "         WHERE j.colldt >= '" + rsDateS + "' || '000000'" '2019-11-04 JJH 날짜조건 수정 배포전
-                sSql += "           AND j.colldt <= '" + rsDateE + "' || '235959'"
+                sSql += "         WHERE j.colldt >= '" + rsDateS + "' || '000000'" + vbCrLf '2019-11-04 JJH 날짜조건 수정 배포전
+                sSql += "           AND j.colldt <= '" + rsDateE + "' || '235959'" + vbCrLf
 
                 'alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                 'alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
-                sSql += "           AND j.tclscd   = f6.testcd"
-                sSql += " 		    AND j.spccd    = f6.spccd"
-                sSql += " 		    AND f6.usdt   <= j.colldt"
-                sSql += " 		    AND f6.uedt   >  j.colldt"
-                sSql += " 		    AND f6.tubecd  = f4.tubecd"
-                sSql += " 		    AND f4.usdt   <= j.colldt"
-                sSql += " 		    AND f4.uedt   >  j.colldt"
-                sSql += "           AND f4.tubecd > '00'"
+                sSql += "           AND j.tclscd   = f6.testcd" + vbCrLf
+                sSql += " 		    AND j.spccd    = f6.spccd" + vbCrLf
+                sSql += " 		    AND f6.usdt   <= j.colldt" + vbCrLf
+                sSql += " 		    AND f6.uedt   >  j.colldt" + vbCrLf
+                sSql += " 		    AND f6.tubecd  = f4.tubecd" + vbCrLf
+                sSql += " 		    AND f4.usdt   <= j.colldt" + vbCrLf
+                sSql += " 		    AND f4.uedt   >  j.colldt" + vbCrLf
+                sSql += "           AND f4.tubecd > '00'" + vbCrLf
                 If rsCollIds <> "" Then
-                    sSql += "           AND j.collid IN ('" + rsCollIds.Replace(",", "','") + "')"
+                    sSql += "           AND j.collid IN ('" + rsCollIds.Replace(",", "','") + "')" + vbCrLf
                 End If
-                sSql += "         GROUP BY j.colldt, j.bcno, f4.tubenmd, f4.tubecd, j.collid"
-                sSql += "       ) j1"
-                sSql += " WHERE j.bcno = j1.bcno"
+                sSql += "         GROUP BY j.colldt, j.bcno, f4.tubenmd, f4.tubecd, j.collid" + vbCrLf
+                sSql += "       ) j1" + vbCrLf
+                sSql += " WHERE j.bcno = j1.bcno" + vbCrLf
 
                 '>
                 If rsIOGbn = "O" Then
                     ' 외래
-                    sSql += "   AND j.iogbn <> 'I'"
+                    sSql += "   AND j.iogbn <> 'I'" + vbCrLf
                     'alParm.Add(New oracleParameter("iogbn", rsIOGbn))
 
                     If rsDeptWards <> "" Then
                         If rbDetailGbn Then
                             ' 제외
-                            sSql += "   AND j.deptcd NOT IN ('" + rsDeptWards.Replace(",", "','") + "') "
+                            sSql += "   AND j.deptcd NOT IN ('" + rsDeptWards.Replace(",", "','") + "') " + vbCrLf
                         Else
                             ' 포함
-                            sSql += "   AND j.deptcd IN ('" + rsDeptWards.Replace(",", "','") + "') "
+                            sSql += "   AND j.deptcd IN ('" + rsDeptWards.Replace(",", "','") + "') " + vbCrLf
                         End If
                     End If
 
                 ElseIf rsIOGbn = "I" Then
                     ' 입원
-                    sSql += "   AND j.iogbn = :iogbn"
+                    sSql += "   AND j.iogbn = :iogbn" + vbCrLf
                     alParm.Add(New oracleParameter("iogbn", rsIOGbn))
 
                     If rsDeptWards <> "" Then
                         If rbDetailGbn Then
                             ' 제외
-                            sSql += "   AND j.wardno NOT IN ('" + rsDeptWards.Replace(",", "','") + "') "
+                            sSql += "   AND j.wardno NOT IN ('" + rsDeptWards.Replace(",", "','") + "') " + vbCrLf
                         Else
                             ' 포함
-                            sSql += "   AND j.wardno IN ('" + rsDeptWards.Replace(",", "','") + "') "
+                            sSql += "   AND j.wardno IN ('" + rsDeptWards.Replace(",", "','") + "') " + vbCrLf
                         End If
                     End If
                 End If
-                sSql += " ORDER BY colldt, regno, bcno"
+                sSql += " ORDER BY colldt, regno, bcno" + vbCrLf
 
                 DbCommand()
                 'Return DbExecuteQuery(sSql, alParm)

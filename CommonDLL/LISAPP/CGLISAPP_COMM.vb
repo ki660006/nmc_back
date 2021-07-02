@@ -2607,39 +2607,39 @@ Namespace COMM
 
             Try
                 sSql = ""
-                sSql += "SELECT r.regno ,r.testcd , r.spccd ,f3.spcnms,  r.fndt , r.bcno , TO_CHAR(TO_DATE(r.fndt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') fndt2, r.viewrst,"
-                sSql += "       MAX(length(f3.spcnms)) spclen"
-                sSql += "  FROM lm010m r,"
-                sSql += "  ("
-                sSql += "   SELECT regno , testcd , tkdt , bcno "
-                sSql += "     FROM lm010m"
-                sSql += "    WHERE bcno = :bcno"
-                sSql += "      AND testcd = 'LM205'"
-                sSql += "  ) x, lf083m f8 , lf030m f3"
-                sSql += " WHERE r.regno = x.regno"
-                sSql += "   AND r.testcd = x.testcd"
-                sSql += "   AND r.tkdt BETWEEN TO_CHAR(TO_DATE(x.tkdt , 'yyyy-mm-dd hh24:mi:ss') - 7, 'yyyymmddhh24miss') AND x.tkdt"
-                sSql += "   AND r.rstflg = '3'"
-                sSql += "   AND r.bcno NOT IN (:bcno)  "
-                sSql += "   AND r.testcd = f8.testcd"
-                sSql += "   AND f8.spccd = '00000'"
+                sSql += "SELECT r.regno ,r.testcd , r.spccd ,f3.spcnms,  r.fndt , r.bcno , TO_CHAR(TO_DATE(r.fndt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') fndt2, r.viewrst," + vbCrLf
+                sSql += "       MAX(length(f3.spcnms)) spclen" + vbCrLf
+                sSql += "  FROM lm010m r," + vbCrLf
+                sSql += "  (" + vbCrLf
+                sSql += "   SELECT regno , testcd , tkdt , bcno " + vbCrLf
+                sSql += "     FROM lm010m" + vbCrLf
+                sSql += "    WHERE bcno = :bcno" + vbCrLf
+                sSql += "      AND testcd = 'LM205'" + vbCrLf
+                sSql += "  ) x, lf083m f8 , lf030m f3" + vbCrLf
+                sSql += " WHERE r.regno = x.regno" + vbCrLf
+                sSql += "   AND r.testcd = x.testcd" + vbCrLf
+                sSql += "   AND r.tkdt BETWEEN TO_CHAR(TO_DATE(x.tkdt , 'yyyy-mm-dd hh24:mi:ss') - 7, 'yyyymmddhh24miss') AND x.tkdt" + vbCrLf
+                sSql += "   AND r.rstflg = '3'" + vbCrLf
+                sSql += "   AND r.bcno NOT IN (:bcno)  " + vbCrLf
+                sSql += "   AND r.testcd = f8.testcd" + vbCrLf
+                sSql += "   AND f8.spccd = '00000'" + vbCrLf
                 If RsCriticalGbn = True Then
-                    sSql += "   AND rstlvl = 'P'"
-                    sSql += "   AND crtval = 'C' "
+                    sSql += "   AND rstlvl = 'P'" + vbCrLf
+                    sSql += "   AND crtval = 'C' " + vbCrLf
                 End If
-                sSql += "   AND r.viewrst = f8.rstcont"
-                sSql += "   AND r.spccd = f3.spccd"
-                sSql += "   AND f3.usdt <= r.tkdt"
-                sSql += "   ANd f3.uedt > r.tkdt "
-                sSql += "GROUP BY r.regno,"
-                sSql += "         r.testcd,"
-                sSql += "         r.spccd,"
-                sSql += "         f3.spcnms,"
-                sSql += "         r.fndt,"
-                sSql += "         r.bcno,"
-                sSql += "         TO_CHAR (TO_DATE (r.fndt, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd'),"
-                sSql += "         r.viewrst"
-                sSql += "   ORDER BY r.fndt"
+                sSql += "   AND r.viewrst = f8.rstcont" + vbCrLf
+                sSql += "   AND r.spccd = f3.spccd" + vbCrLf
+                sSql += "   AND f3.usdt <= r.tkdt" + vbCrLf
+                sSql += "   ANd f3.uedt > r.tkdt " + vbCrLf
+                sSql += "GROUP BY r.regno," + vbCrLf
+                sSql += "         r.testcd," + vbCrLf
+                sSql += "         r.spccd," + vbCrLf
+                sSql += "         f3.spcnms," + vbCrLf
+                sSql += "         r.fndt," + vbCrLf
+                sSql += "         r.bcno," + vbCrLf
+                sSql += "         TO_CHAR (TO_DATE (r.fndt, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd')," + vbCrLf
+                sSql += "         r.viewrst" + vbCrLf
+                sSql += "   ORDER BY r.fndt" + vbCrLf
 
 
                 alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))

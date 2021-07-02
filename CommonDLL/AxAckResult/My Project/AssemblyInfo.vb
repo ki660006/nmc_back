@@ -85,5 +85,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.389 --> 2021/03/16 : 검사자간 공유사항 추가, wbc diff log 생성 추가
 'Version 3.1.10.390 --> 2021/03/16 : 검사자간 공유사항(롤백)
 'Version 3.1.10.391 --> 2021/05/17 : 결과화면 결과소요일 컬럼 추가
+'Version 3.1.10.392 --> 2021/06/28 : 검사자간 공유사항 재배포
+'Version 3.1.10.393 --> 2021/06/28 : 검사자간 공유사항 재배포(롤백)
 
-<Assembly: AssemblyVersion("3.1.10.391")> 
+<Assembly: AssemblyVersion("3.1.10.393")> 
