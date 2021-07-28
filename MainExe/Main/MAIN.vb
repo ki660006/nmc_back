@@ -1542,7 +1542,7 @@ Public Class MAIN
         Me.btnLock.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLock.BackgroundImage = CType(resources.GetObject("btnLock.BackgroundImage"), System.Drawing.Image)
         Me.btnLock.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.IsActive = True
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLock.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}

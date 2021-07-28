@@ -26,6 +26,8 @@ Public Class FDF30
     Friend WithEvents cboCrossLevel As System.Windows.Forms.ComboBox
     Friend WithEvents txtCLisCd As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtBldCd2 As System.Windows.Forms.TextBox
+    Friend WithEvents lblBldCd2 As System.Windows.Forms.Label
     Friend WithEvents cboOReqItem As System.Windows.Forms.ComboBox
 
     Private Sub sbEditUseDt_Del()
@@ -194,7 +196,10 @@ Public Class FDF30
                 .SetItemTable("PEDGBN", 22, 1, CType(IIf(Me.chkPTGbn.Checked, "1", "0"), String))
                 .SetItemTable("IOGBN", 23, 1, CType(IIf(Me.chkGbnO.Checked And Me.chkGbnI.Checked, "0", IIf(Me.chkGbnO.Checked, "1", "2")), String))
                 .SetItemTable("DSPCCD1", 24, 1, Ctrl.Get_Code(Me.cboDSpcNm1))
-                .SetItemTable("DSPCCD2", 25, 1, "")
+                '20200716 jhs 혈액원 성분제재 수정 시에 초기화 되기 때문에 추가
+                '.SetItemTable("DSPCCD2", 25, 1, "")
+                .SetItemTable("DSPCCD2", 25, 1, Me.txtBldCd2.Text)
+                '--------------------------------------------------------
                 .SetItemTable("PTGBN", 26, 1, "")
                 .SetItemTable("EXEDAY", 27, 1, CType(IIf(chkExeDay1.Checked, "1", "0"), String) _
                                              + CType(IIf(chkExeDay2.Checked, "1", "0"), String) _
@@ -878,100 +883,102 @@ Public Class FDF30
     Friend WithEvents txtSugaCd As System.Windows.Forms.TextBox
     Friend WithEvents rdoNot As System.Windows.Forms.RadioButton
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.tclCom = New System.Windows.Forms.TabControl
-        Me.tbcPage = New System.Windows.Forms.TabPage
-        Me.txtRegNm = New System.Windows.Forms.TextBox
-        Me.txtUEDT = New System.Windows.Forms.TextBox
-        Me.lblUEDT = New System.Windows.Forms.Label
-        Me.txtRegDT = New System.Windows.Forms.TextBox
-        Me.txtUSDT = New System.Windows.Forms.TextBox
-        Me.lblUserNm = New System.Windows.Forms.Label
-        Me.lblRegDT = New System.Windows.Forms.Label
-        Me.lblUSDT = New System.Windows.Forms.Label
-        Me.txtRegID = New System.Windows.Forms.TextBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.cboOReqItem = New System.Windows.Forms.ComboBox
-        Me.txtCLisCd = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.cboCrossLevel = New System.Windows.Forms.ComboBox
-        Me.lblCrossLevel = New System.Windows.Forms.Label
-        Me.chkBagOrdYn = New System.Windows.Forms.CheckBox
-        Me.cboGOrdCd = New System.Windows.Forms.ComboBox
-        Me.lblGOrdCd = New System.Windows.Forms.Label
-        Me.cboComGbn = New System.Windows.Forms.ComboBox
-        Me.lblComGbn = New System.Windows.Forms.Label
-        Me.rdoNot = New System.Windows.Forms.RadioButton
-        Me.lblLine2 = New System.Windows.Forms.Label
-        Me.chkOrdHIde = New System.Windows.Forms.CheckBox
-        Me.chkOReqItem4 = New System.Windows.Forms.CheckBox
-        Me.lblOReqItem = New System.Windows.Forms.Label
-        Me.chkOReqItem3 = New System.Windows.Forms.CheckBox
-        Me.chkOReqItem1 = New System.Windows.Forms.CheckBox
-        Me.chkOReqItem2 = New System.Windows.Forms.CheckBox
-        Me.cboOWarningGbn = New System.Windows.Forms.ComboBox
-        Me.txtOWarning = New System.Windows.Forms.TextBox
-        Me.lblOWarning = New System.Windows.Forms.Label
-        Me.btnExeDay = New System.Windows.Forms.Button
-        Me.chkExeDay7 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay6 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay5 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay4 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay3 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay2 = New System.Windows.Forms.CheckBox
-        Me.chkExeDay1 = New System.Windows.Forms.CheckBox
-        Me.lblExeDay = New System.Windows.Forms.Label
-        Me.lblORGbn = New System.Windows.Forms.Label
-        Me.chkPTGbn = New System.Windows.Forms.CheckBox
-        Me.chkEmerGbn = New System.Windows.Forms.CheckBox
-        Me.txtSugaCd = New System.Windows.Forms.TextBox
-        Me.lblSuga = New System.Windows.Forms.Label
-        Me.lblIOGbn = New System.Windows.Forms.Label
-        Me.cboDSpcNm1 = New System.Windows.Forms.ComboBox
-        Me.lblDSpc = New System.Windows.Forms.Label
-        Me.cboOrdSlip = New System.Windows.Forms.ComboBox
-        Me.lblOrdSlip = New System.Windows.Forms.Label
-        Me.chkGbnI = New System.Windows.Forms.CheckBox
-        Me.chkGbnO = New System.Windows.Forms.CheckBox
-        Me.txtDispseqO = New System.Windows.Forms.TextBox
-        Me.lblDispseqO = New System.Windows.Forms.Label
-        Me.txtTOrdCd = New System.Windows.Forms.TextBox
-        Me.lblTOrdCd = New System.Windows.Forms.Label
-        Me.lblAvailMi = New System.Windows.Forms.Label
-        Me.cboAvailMi = New System.Windows.Forms.ComboBox
-        Me.cboPSComCd = New System.Windows.Forms.ComboBox
-        Me.lblPSComCd = New System.Windows.Forms.Label
-        Me.cboFTCD = New System.Windows.Forms.ComboBox
-        Me.lblFTCD = New System.Windows.Forms.Label
-        Me.txtBldCd = New System.Windows.Forms.TextBox
-        Me.lblBldCd = New System.Windows.Forms.Label
-        Me.rod320 = New System.Windows.Forms.RadioButton
-        Me.rdo400 = New System.Windows.Forms.RadioButton
-        Me.txtDispseqL = New System.Windows.Forms.TextBox
-        Me.lblDispseqL = New System.Windows.Forms.Label
-        Me.lblSeqTMi = New System.Windows.Forms.Label
-        Me.lblBloodVol = New System.Windows.Forms.Label
-        Me.lblLine1 = New System.Windows.Forms.Label
-        Me.lblComNmS = New System.Windows.Forms.Label
-        Me.txtComNmS = New System.Windows.Forms.TextBox
-        Me.lblComNmP = New System.Windows.Forms.Label
-        Me.lblComNmD = New System.Windows.Forms.Label
-        Me.txtComNmD = New System.Windows.Forms.TextBox
-        Me.lblComNm = New System.Windows.Forms.Label
-        Me.txtComNmP = New System.Windows.Forms.TextBox
-        Me.txtComNm = New System.Windows.Forms.TextBox
-        Me.grpTop = New System.Windows.Forms.GroupBox
-        Me.cboSpcCd = New System.Windows.Forms.ComboBox
-        Me.lblSpcCd = New System.Windows.Forms.Label
-        Me.txtComCd = New System.Windows.Forms.TextBox
-        Me.lblComCd = New System.Windows.Forms.Label
-        Me.btnUE = New System.Windows.Forms.Button
-        Me.dtpUSTime = New System.Windows.Forms.DateTimePicker
-        Me.txtUSDay = New System.Windows.Forms.TextBox
-        Me.dtpUSDay = New System.Windows.Forms.DateTimePicker
-        Me.lblUSDayTime = New System.Windows.Forms.Label
+        Me.components = New System.ComponentModel.Container()
+        Me.tclCom = New System.Windows.Forms.TabControl()
+        Me.tbcPage = New System.Windows.Forms.TabPage()
+        Me.txtRegNm = New System.Windows.Forms.TextBox()
+        Me.txtUEDT = New System.Windows.Forms.TextBox()
+        Me.lblUEDT = New System.Windows.Forms.Label()
+        Me.txtRegDT = New System.Windows.Forms.TextBox()
+        Me.txtUSDT = New System.Windows.Forms.TextBox()
+        Me.lblUserNm = New System.Windows.Forms.Label()
+        Me.lblRegDT = New System.Windows.Forms.Label()
+        Me.lblUSDT = New System.Windows.Forms.Label()
+        Me.txtRegID = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cboOReqItem = New System.Windows.Forms.ComboBox()
+        Me.txtCLisCd = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboCrossLevel = New System.Windows.Forms.ComboBox()
+        Me.lblCrossLevel = New System.Windows.Forms.Label()
+        Me.chkBagOrdYn = New System.Windows.Forms.CheckBox()
+        Me.cboGOrdCd = New System.Windows.Forms.ComboBox()
+        Me.lblGOrdCd = New System.Windows.Forms.Label()
+        Me.cboComGbn = New System.Windows.Forms.ComboBox()
+        Me.lblComGbn = New System.Windows.Forms.Label()
+        Me.rdoNot = New System.Windows.Forms.RadioButton()
+        Me.lblLine2 = New System.Windows.Forms.Label()
+        Me.chkOrdHIde = New System.Windows.Forms.CheckBox()
+        Me.chkOReqItem4 = New System.Windows.Forms.CheckBox()
+        Me.lblOReqItem = New System.Windows.Forms.Label()
+        Me.chkOReqItem3 = New System.Windows.Forms.CheckBox()
+        Me.chkOReqItem1 = New System.Windows.Forms.CheckBox()
+        Me.chkOReqItem2 = New System.Windows.Forms.CheckBox()
+        Me.cboOWarningGbn = New System.Windows.Forms.ComboBox()
+        Me.txtOWarning = New System.Windows.Forms.TextBox()
+        Me.lblOWarning = New System.Windows.Forms.Label()
+        Me.btnExeDay = New System.Windows.Forms.Button()
+        Me.chkExeDay7 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay6 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay5 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay4 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay3 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay2 = New System.Windows.Forms.CheckBox()
+        Me.chkExeDay1 = New System.Windows.Forms.CheckBox()
+        Me.lblExeDay = New System.Windows.Forms.Label()
+        Me.lblORGbn = New System.Windows.Forms.Label()
+        Me.chkPTGbn = New System.Windows.Forms.CheckBox()
+        Me.chkEmerGbn = New System.Windows.Forms.CheckBox()
+        Me.txtSugaCd = New System.Windows.Forms.TextBox()
+        Me.lblSuga = New System.Windows.Forms.Label()
+        Me.lblIOGbn = New System.Windows.Forms.Label()
+        Me.cboDSpcNm1 = New System.Windows.Forms.ComboBox()
+        Me.lblDSpc = New System.Windows.Forms.Label()
+        Me.cboOrdSlip = New System.Windows.Forms.ComboBox()
+        Me.lblOrdSlip = New System.Windows.Forms.Label()
+        Me.chkGbnI = New System.Windows.Forms.CheckBox()
+        Me.chkGbnO = New System.Windows.Forms.CheckBox()
+        Me.txtDispseqO = New System.Windows.Forms.TextBox()
+        Me.lblDispseqO = New System.Windows.Forms.Label()
+        Me.txtTOrdCd = New System.Windows.Forms.TextBox()
+        Me.lblTOrdCd = New System.Windows.Forms.Label()
+        Me.lblAvailMi = New System.Windows.Forms.Label()
+        Me.cboAvailMi = New System.Windows.Forms.ComboBox()
+        Me.cboPSComCd = New System.Windows.Forms.ComboBox()
+        Me.lblPSComCd = New System.Windows.Forms.Label()
+        Me.cboFTCD = New System.Windows.Forms.ComboBox()
+        Me.lblFTCD = New System.Windows.Forms.Label()
+        Me.txtBldCd = New System.Windows.Forms.TextBox()
+        Me.lblBldCd = New System.Windows.Forms.Label()
+        Me.rod320 = New System.Windows.Forms.RadioButton()
+        Me.rdo400 = New System.Windows.Forms.RadioButton()
+        Me.txtDispseqL = New System.Windows.Forms.TextBox()
+        Me.lblDispseqL = New System.Windows.Forms.Label()
+        Me.lblSeqTMi = New System.Windows.Forms.Label()
+        Me.lblBloodVol = New System.Windows.Forms.Label()
+        Me.lblLine1 = New System.Windows.Forms.Label()
+        Me.lblComNmS = New System.Windows.Forms.Label()
+        Me.txtComNmS = New System.Windows.Forms.TextBox()
+        Me.lblComNmP = New System.Windows.Forms.Label()
+        Me.lblComNmD = New System.Windows.Forms.Label()
+        Me.txtComNmD = New System.Windows.Forms.TextBox()
+        Me.lblComNm = New System.Windows.Forms.Label()
+        Me.txtComNmP = New System.Windows.Forms.TextBox()
+        Me.txtComNm = New System.Windows.Forms.TextBox()
+        Me.grpTop = New System.Windows.Forms.GroupBox()
+        Me.cboSpcCd = New System.Windows.Forms.ComboBox()
+        Me.lblSpcCd = New System.Windows.Forms.Label()
+        Me.txtComCd = New System.Windows.Forms.TextBox()
+        Me.lblComCd = New System.Windows.Forms.Label()
+        Me.btnUE = New System.Windows.Forms.Button()
+        Me.dtpUSTime = New System.Windows.Forms.DateTimePicker()
+        Me.txtUSDay = New System.Windows.Forms.TextBox()
+        Me.dtpUSDay = New System.Windows.Forms.DateTimePicker()
+        Me.lblUSDayTime = New System.Windows.Forms.Label()
         Me.errpd = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.pnlTop = New System.Windows.Forms.Panel
+        Me.pnlTop = New System.Windows.Forms.Panel()
+        Me.txtBldCd2 = New System.Windows.Forms.TextBox()
+        Me.lblBldCd2 = New System.Windows.Forms.Label()
         Me.tclCom.SuspendLayout()
         Me.tbcPage.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -1139,6 +1146,8 @@ Public Class FDF30
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.txtBldCd2)
+        Me.GroupBox2.Controls.Add(Me.lblBldCd2)
         Me.GroupBox2.Controls.Add(Me.cboOReqItem)
         Me.GroupBox2.Controls.Add(Me.txtCLisCd)
         Me.GroupBox2.Controls.Add(Me.Label1)
@@ -1228,7 +1237,7 @@ Public Class FDF30
         'txtCLisCd
         '
         Me.txtCLisCd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCLisCd.Location = New System.Drawing.Point(515, 250)
+        Me.txtCLisCd.Location = New System.Drawing.Point(515, 227)
         Me.txtCLisCd.MaxLength = 20
         Me.txtCLisCd.Name = "txtCLisCd"
         Me.txtCLisCd.Size = New System.Drawing.Size(103, 21)
@@ -1240,7 +1249,7 @@ Public Class FDF30
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
         Me.Label1.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(375, 250)
+        Me.Label1.Location = New System.Drawing.Point(375, 227)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(139, 21)
         Me.Label1.TabIndex = 152
@@ -2122,6 +2131,28 @@ Public Class FDF30
         Me.pnlTop.Name = "pnlTop"
         Me.pnlTop.Size = New System.Drawing.Size(792, 605)
         Me.pnlTop.TabIndex = 1
+        '
+        'txtBldCd2
+        '
+        Me.txtBldCd2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBldCd2.Location = New System.Drawing.Point(515, 250)
+        Me.txtBldCd2.MaxLength = 20
+        Me.txtBldCd2.Name = "txtBldCd2"
+        Me.txtBldCd2.Size = New System.Drawing.Size(103, 21)
+        Me.txtBldCd2.TabIndex = 156
+        Me.txtBldCd2.Tag = "DSPCCD2"
+        '
+        'lblBldCd2
+        '
+        Me.lblBldCd2.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblBldCd2.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblBldCd2.ForeColor = System.Drawing.Color.White
+        Me.lblBldCd2.Location = New System.Drawing.Point(375, 250)
+        Me.lblBldCd2.Name = "lblBldCd2"
+        Me.lblBldCd2.Size = New System.Drawing.Size(139, 21)
+        Me.lblBldCd2.TabIndex = 157
+        Me.lblBldCd2.Text = "혈액제재코드(혈액원)"
+        Me.lblBldCd2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FDF30
         '

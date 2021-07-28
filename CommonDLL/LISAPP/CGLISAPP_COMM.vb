@@ -2600,7 +2600,7 @@ Namespace COMM
 
         Public Shared Function fnGet_AFB_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable
             '해당 환자의 Xpert PCR 검사 최근 1주일 검사결과 가져오는 쿼리 함수
-            Dim sFn As String = "Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String) As DataTable"
+            Dim sFn As String = "Public Shared Function fnGet_AFB_Comment(ByVal rsBcno As String) As DataTable"
             Dim sSql As String = ""
             Dim dt As New DataTable
             Dim alParm As New ArrayList
@@ -2624,8 +2624,8 @@ Namespace COMM
                 sSql += "   AND r.testcd = f8.testcd" + vbCrLf
                 sSql += "   AND f8.spccd = '00000'" + vbCrLf
                 If RsCriticalGbn = True Then
-                    sSql += "   AND rstlvl = 'P'" + vbCrLf
-                    sSql += "   AND crtval = 'C' " + vbCrLf
+                    sSql += "   AND f8.rstlvl = 'P'" + vbCrLf
+                    sSql += "   AND f8.crtval = 'C' " + vbCrLf
                 End If
                 sSql += "   AND r.viewrst = f8.rstcont" + vbCrLf
                 sSql += "   AND r.spccd = f3.spccd" + vbCrLf
@@ -2651,6 +2651,46 @@ Namespace COMM
                 Throw (New Exception(ex.Message + " @" + sFn, ex))
             End Try
         End Function
+        '20210712 NTM, MTB 검사 Critical 5년안에 ntm, 
+        Public Shared Function fnGet_AFB_NTM_Comment(ByVal rsBcno As String) As DataTable
+            Dim sFn As String = "Public Shared Function fnGet_AFB_NTM_Comment(ByVal rsBcno As String) As DataTable"
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+            Dim alParm As New ArrayList
+
+            Try
+                sSql = ""
+                sSql += "  selecT  CASE WHEN SUM(CASE WHEN SUBSTR (B.ORGRST, 1, 3) = 'Myc' THEN 1 ELSE 0 END) > 0" + vbCrLf
+                sSql += "               THEN 'Y'" + vbCrLf
+                sSql += "               ELSE 'N'" + vbCrLf
+                sSql += "               END AS MTB," + vbCrLf
+                sSql += "          CASE WHEN SUM(CASE WHEN ( (B.TESTCD = 'LM20101' OR B.TESTCD = 'LM20102') AND SUBSTR (B.ORGRST, 1, 3) = 'AFB')" + vbCrLf
+                sSql += "                               OR ( (B.TESTCD = 'LM20302' OR B.TESTCD = 'LM20303') AND SUBSTR (B.ORGRST, 1, 3) = 'Liq')" + vbCrLf
+                sSql += "                             THEN   1" + vbCrLf
+                sSql += "                             ELSE   0 END) > 0" + vbCrLf
+                sSql += "               THEN   'Y'" + vbCrLf
+                sSql += "               ELSE   'N'" + vbCrLf
+                sSql += "                END   AS NTM" + vbCrLf
+                sSql += "   FROM (SELECT   MAX (TKDT) TKDT, REGNO" + vbCrLf
+                sSql += "           FROM(LM010M)" + vbCrLf
+                sSql += "           WHERE   BCNO = :bcno" + vbCrLf
+                sSql += "           GROUP BY   REGNO) A" + vbCrLf
+                sSql += "   , LM010M B" + vbCrLf
+                sSql += "   , lf083m f83" + vbCrLf
+                sSql += "   WHERE A.REGNO = B.REGNO" + vbCrLf
+                sSql += "     AND B.TKDT BETWEEN TO_CHAR (ADD_MONTHS (TO_DATE (fn_ack_sysdate,'YYYY-MM-DD HH24:MI:SS'), - 60 ),'YYYYMMDDHH24MISS') AND  fn_ack_sysdate" + vbCrLf ' 모든 진행준 검사 포함하여 5년 안에 
+                sSql += "     AND B.RSTFLG = '3'" + vbCrLf
+                'sSql += "     and b.testcd in (selecT clsval from lf000m where clsgbn = 'NTM')"
+
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+        End Function
+        '---------------------------------------------
 
         Public Shared Function Fnget_Fkocs(ByVal rsBcno As String, ByVal tclscd As String) As DataTable
             '검사항목에 대한 처방키 가져오기

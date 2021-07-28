@@ -67,5 +67,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.389 --> 2021/06/15 : 특정검사 바코드 음영처리
 'Version 3.1.10.390 --> 2021/06/22 : TAT차일드 코드 포함하여 조회 될수 있도록 수정
 'Version 3.1.10.391 --> 2021/06/25 : 등록번호 조회시 조회 되지 않는 부분 수정 
+'Version 3.1.10.392 --> 2021/07/19 : 미생물결과 NTM, MTB 내용 5년안에 결과값있으면 C가 안나오고 없으면 C가 나오게 구현 
+'Version 3.1.10.393 --> 2021/07/26 : 혈액은행 출고스티커 응급 내용 추가 
 
-<Assembly: AssemblyVersion("3.1.10.391")> 
+<Assembly: AssemblyVersion("3.1.10.393")> 

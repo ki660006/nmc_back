@@ -62,5 +62,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.343 --> 2020/09/03 : 검사마스터에 검체단위 추가
 'Version 3.1.10.344 --> 2020/10/12 : 검사코드관리 검사의뢰서/동의서, 시행처 다중선택 추가
 'Version 3.1.10.345 --> 2020/11/30 : 검사의뢰지침 세부검사 항목 설정 화면 추가개발
+'Version 3.1.10.346 --> 2021/07/19 : 결과코드, 혈액은행 오류수정
 
-<Assembly: AssemblyVersion("3.1.10.345")> 
+<Assembly: AssemblyVersion("3.1.10.346")> 

@@ -3914,6 +3914,7 @@ Namespace APP_S
                 sSql += "  selecT r.bcno, r.testcd,f6.tnmd,substr(r.fndt,1,4) || '-'||substr(r.fndt,5,2) || '-'||substr(r.fndt,7,2) fndt ,r.spccd, f3.spcnm , r.viewrst , j13.diagnm, j13.diagnm_eng , " + vbCrLf
                 sSql += "    j.patnm, j.sex,j.age, j1.fkocs , j1.orddt, j1.regno, substr(r.tkdt,1,4) || '-'||substr(r.tkdt,5,2) || '-'||substr(r.tkdt,7,2) tkdt" + vbCrLf
                 'sSql += "    ,'' --진단명 일시없음" + vbCrLf
+                sSql += "    ,f6.rstunit" + vbCrLf
                 sSql += "   from lr010m r" + vbCrLf
                 sSql += "   inner join lj010m j " + vbCrLf
                 sSql += "       on  r.bcno = j.bcno" + vbCrLf
@@ -3959,16 +3960,17 @@ Namespace APP_S
                 Dim sSql As String = ""
                 Dim al As New ArrayList
 
-                sSql += " selecT r.bcno, r.testcd, f6.tnmd, r.viewrst"
-                sSql += "  from lr010m r"
-                sSql += " inner join lf060m f6"
-                sSql += "    On r.testcd = f6.testcd"
-                sSql += "   and r.tkdt >= f6.usdt"
-                sSql += "   and r.tkdt <= f6.uedt "
-                sSql += " where r.regno  ='" + rsRegno + "'"
-                sSql += "   and f6.testcd ='" + rsTestCd + "'"
-                sSql += "   and f6.spccd = '" + rsSpccd + "'"
-                sSql += "   order by r.bcno desc"
+                sSql += " selecT r.bcno, r.testcd, f6.tnmd, r.viewrst" + vbCrLf
+                sSql += "    ,f6.rstunit" + vbCrLf
+                sSql += "  from lr010m r" + vbCrLf
+                sSql += " inner join lf060m f6" + vbCrLf
+                sSql += "    On r.testcd = f6.testcd" + vbCrLf
+                sSql += "   and r.tkdt >= f6.usdt" + vbCrLf
+                sSql += "   and r.tkdt <= f6.uedt " + vbCrLf
+                sSql += " where r.regno  ='" + rsRegno + "'" + vbCrLf
+                sSql += "   and f6.testcd ='" + rsTestCd + "'" + vbCrLf
+                sSql += "   and f6.spccd = '" + rsSpccd + "'" + vbCrLf
+                sSql += "   order by r.bcno desc" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, al)
@@ -3989,8 +3991,8 @@ Namespace APP_S
                 Dim al As New ArrayList
 
                 sSql += "" + vbCrLf
-                sSql += "  selecT x.bcno ,x.testcd ,x.spccd ,x.tnm , x.viewrst" + vbCrLf
-                sSql += "    from (  select r1.bcno, r1.testcd, r1.spccd, f6.tnm, r1.viewrst " + vbCrLf
+                sSql += "  selecT x.bcno ,x.testcd ,x.spccd ,x.tnm , x.viewrst , x.rstunit" + vbCrLf
+                sSql += "    from (  select r1.bcno, r1.testcd, r1.spccd, f6.tnm, r1.viewrst, f6.rstunit " + vbCrLf
                 sSql += "              from rr010m r1" + vbCrLf
                 sSql += "             inner join rf060m f6" + vbCrLf
                 sSql += "                on r1.testcd = f6.testcd" + vbCrLf

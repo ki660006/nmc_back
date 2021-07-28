@@ -1586,7 +1586,7 @@ Public Class FGM01
         Me.txtBcNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBcNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtBcNo.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtBcNo.Location = New System.Drawing.Point(126, 115)
+        Me.txtBcNo.Location = New System.Drawing.Point(125, 115)
         Me.txtBcNo.MaxLength = 18
         Me.txtBcNo.Name = "txtBcNo"
         Me.txtBcNo.Size = New System.Drawing.Size(117, 21)

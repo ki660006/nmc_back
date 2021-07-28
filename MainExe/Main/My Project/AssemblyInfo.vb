@@ -264,7 +264,11 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.767 --> 2021/06/22 : CDHELP, LISS, LISAPP, COMMON, AxAckPatientInfo
 'Version 3.1.10.768 --> 2021/06/25 : CDHELP, LISM, LISR, LISAPP , COMMON, AxAckPatientInfo, COMMON
 'Version 3.1.10.769 --> 2021/06/28 : LISM, LISR
+'Version 3.1.10.770 --> 2021/07/19 : AxAckResult, LISAPP, COMMON, LISF
+'Version 3.1.10.771 --> 2021/07/26 : AxAckPatinfo, AxAckResultViewer, LISS, LISR, LISAPP, LISB, BCPRT01
+'Version 3.1.10.772 --> 2021/07/26 : COMMON
+'Version 3.1.10.773 --> 2021/07/26 : BCPRT01
 
-<Assembly: AssemblyVersion("3.1.10.769")> 
+<Assembly: AssemblyVersion("3.1.10.773")> 
 
 

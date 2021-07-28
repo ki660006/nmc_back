@@ -2511,31 +2511,31 @@ Namespace APP_T
 
                 sSql = ""
                 If rsSpc = "" Then
-                    sSql += "SELECT CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END testcd, '' spccd,"
-                    sSql += "       MIN(b.tnmd) tnm, '' spcnm,"
+                    sSql += "SELECT CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END testcd, '' spccd," + vbCrLf
+                    sSql += "       MIN(b.tnmd) tnm, '' spcnm," + vbCrLf
                 Else
-                    sSql += "SELECT CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END testcd, a.spccd spccd,"
-                    sSql += "       MIN(b.tnmd) tnm, c.spcnmd spcnm,"
+                    sSql += "SELECT CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END testcd, a.spccd spccd," + vbCrLf
+                    sSql += "       MIN(b.tnmd) tnm, c.spcnmd spcnm," + vbCrLf
                 End If
-                sSql += "       SUM(a.stcnt" + rsAbRst + ") ctotal,"
+                sSql += "       SUM(a.stcnt" + rsAbRst + ") ctotal," + vbCrLf
 
                 For i As Integer = 1 To ra_sDMY.Length
                     Select Case ra_sDMY(0).Replace("-", "").Replace(" ", "").Length
                         Case 8
                             '일별 - 일자
-                            sSql += "       SUM(CASE WHEN a.styymmdd = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString
+                            sSql += "       SUM(CASE WHEN a.styymmdd = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString + vbCrLf
 
                         Case 10
                             '일별 - 순차시간, 일별 - 시간대
-                            sSql += "       SUM(CASE WHEN a.styymmdd || a.sthh = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString
+                            sSql += "       SUM(CASE WHEN a.styymmdd || a.sthh = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString + vbCrLf
 
                         Case 6
                             '월별
-                            sSql += "       SUM(CASE WHEN a.styymm = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString
+                            sSql += "       SUM(CASE WHEN a.styymm = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString + vbCrLf
 
                         Case 4
                             '연별
-                            sSql += "       SUM(CASE WHEN a.styy = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString
+                            sSql += "       SUM(CASE WHEN a.styy = '" + ra_sDMY(i - 1).Replace("-", "").Replace(" ", "") + "' THEN a.stcnt" + rsAbRst + " ELSE 0 END) c" + i.ToString + vbCrLf
 
                     End Select
 
@@ -2546,130 +2546,130 @@ Namespace APP_T
                     End If
                 Next
 
-                sSql += "  FROM " + IIf(bIO Or rbIoGbn_NotC, "lt011m", "lt010m").ToString + " a"
-                sSql += "       INNER JOIN"
+                sSql += "  FROM " + IIf(bIO Or rbIoGbn_NotC, "lt011m", "lt010m").ToString + " a" + vbCrLf
+                sSql += "       INNER JOIN" + vbCrLf
                 sSql += "       ("
-                sSql += "        SELECT testcd, spccd, MIN(tnmd) tnmd, NVL(MIN(samecd), testcd) samecd"
-                sSql += "          FROM lf060m"
-                sSql += "         WHERE usdt <= fn_ack_sysdate"
+                sSql += "        SELECT testcd, spccd, MIN(tnmd) tnmd, NVL(MIN(samecd), testcd) samecd" + vbCrLf
+                sSql += "          FROM lf060m" + vbCrLf
+                sSql += "         WHERE usdt <= fn_ack_sysdate" + vbCrLf
 
                 If rsPart.Length > 0 Then
-                    sSql += "           AND partcd = :partcd"
+                    sSql += "           AND partcd = :partcd" + vbCrLf
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, rsPart.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPart))
                 End If
 
                 If rsSlip.Length > 0 Then
-                    sSql += "           AND partcd = :partcd"
-                    sSql += "           AND slipcd = :slipcd"
+                    sSql += "           AND partcd = :partcd" + vbCrLf
+                    sSql += "           AND slipcd = :slipcd" + vbCrLf
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlip.Substring(0, 1)))
                     alParm.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSlip.Substring(1, 1)))
                 End If
 
                 If rsBcclsCd.Length > 0 Then
-                    sSql += "           AND bcclscd = :bcclscd"
+                    sSql += "           AND bcclscd = :bcclscd" + vbCrLf
                     alParm.Add(New OracleParameter("bcclscd", OracleDbType.Varchar2, rsBcclsCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcclsCd))
                 End If
 
                 If rsMinusExLab.Length > 0 Then
-                    sSql += "           AND NVL(exlabyn, '0') = '0'"
+                    sSql += "           AND NVL(exlabyn, '0') = '0'" + vbCrLf
                 End If
 
                 If rsWkGrp.Length > 0 Then
-                    sSql += "           AND SUBSTR(testcd, 1, 5), spccd IN (SELECT SUBSTR(testcd, 1, 5), spccd FROM lf066m WHERE wkgrpcd = :wgrpcd)"
+                    sSql += "           AND SUBSTR(testcd, 1, 5), spccd IN (SELECT SUBSTR(testcd, 1, 5), spccd FROM lf066m WHERE wkgrpcd = :wgrpcd)" + vbCrLf
                     alParm.Add(New OracleParameter("wgrpcd", OracleDbType.Varchar2, rsWkGrp.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkGrp))
                 End If
 
                 If rsTCdGbn.IndexOf(",") > 0 Then
-                    sSql += "           AND tcdgbn IN (" + rsTCdGbn + ")"
+                    sSql += "           AND tcdgbn IN (" + rsTCdGbn + ")" + vbCrLf
                 ElseIf rsTCdGbn <> "" Then
-                    sSql += "           AND tcdgbn = :tcdgbn"
+                    sSql += "           AND tcdgbn = :tcdgbn" + vbCrLf
                     alParm.Add(New OracleParameter("tcdgbn", OracleDbType.Varchar2, rsTCdGbn.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTCdGbn))
                 End If
-                sSql += "         GROUP BY testcd, spccd"
-                sSql += "       ) b ON a.testcd = b.testcd"
-                sSql += "          AND a.spccd = b.spccd "
+                sSql += "         GROUP BY testcd, spccd" + vbCrLf
+                sSql += "       ) b ON a.testcd = b.testcd" + vbCrLf
+                sSql += "          AND a.spccd = b.spccd " + vbCrLf
                 If rsSpc = "Y" Then
-                    sSql += "       INNER JOIN"
-                    sSql += "       ("
-                    sSql += "        SELECT spccd, min(spcnmd) spcnmd"
-                    sSql += "          FROM lf030m"
-                    sSql += "         GROUP BY spccd"
-                    sSql += "       ) c ON a.spccd = c.spccd"
+                    sSql += "       INNER JOIN" + vbCrLf
+                    sSql += "       (" + vbCrLf
+                    sSql += "        SELECT spccd, min(spcnmd) spcnmd" + vbCrLf
+                    sSql += "          FROM lf030m" + vbCrLf
+                    sSql += "         GROUP BY spccd" + vbCrLf
+                    sSql += "       ) c ON a.spccd = c.spccd" + vbCrLf
                 End If
 
                 Select Case ra_sDMY(0).Replace("-", "").Replace(" ", "").Length
                     Case 8
                         '일별 - 일자
-                        sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' and a.styymmdd <= '" + rsDT2.Replace("-", "") + "'"
+                        sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' and a.styymmdd <= '" + rsDT2.Replace("-", "") + "'" + vbCrLf
 
                     Case 10
                         '일별 - 순차시간, 일별 - 시간대
                         If rsTM1.Length = 0 And rsTM2.Length = 0 Then
                             '순차시간
-                            sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' AND a.styymmdd <= '" + rsDT2.Replace("-", "") + "'"
-                            sSql += "   AND a.styymmdd + a.sthh >= '" + ra_sDMY(0).Replace("-", "").Replace(" ", "") + "'"
-                            sSql += "   AND a.styymmdd + a.sthh <= '" + ra_sDMY(ra_sDMY.Length - 1).Replace("-", "").Replace(" ", "") + "'"
+                            sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' AND a.styymmdd <= '" + rsDT2.Replace("-", "") + "'" + vbCrLf
+                            sSql += "   AND a.styymmdd + a.sthh >= '" + ra_sDMY(0).Replace("-", "").Replace(" ", "") + "'" + vbCrLf
+                            sSql += "   AND a.styymmdd + a.sthh <= '" + ra_sDMY(ra_sDMY.Length - 1).Replace("-", "").Replace(" ", "") + "'" + vbCrLf
                         Else
                             '시간대
-                            sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' AND a.styymmdd <= '" + rsDT2.Replace("-", "") + "'"
-                            sSql += "   AND a.sthh >= '" + rsTM1 + "' and a.sthh <= '" + rsTM2 + "'"
+                            sSql += " WHERE a.styymmdd >= '" + rsDT1.Replace("-", "") + "' AND a.styymmdd <= '" + rsDT2.Replace("-", "") + "'" + vbCrLf
+                            sSql += "   AND a.sthh >= '" + rsTM1 + "' and a.sthh <= '" + rsTM2 + "'" + vbCrLf
                         End If
 
                     Case 6
                         '월별
-                        sSql += " WHERE a.styymm >= '" + rsDT1.Replace("-", "") + "' AND a.styymm <= '" + rsDT2.Replace("-", "") + "'"
+                        sSql += " WHERE a.styymm >= '" + rsDT1.Replace("-", "") + "' AND a.styymm <= '" + rsDT2.Replace("-", "") + "'" + vbCrLf
 
                     Case 4
                         '연별
-                        sSql += " WHERE a.styy >= '" + rsDT1.Replace("-", "") + "' AND a.styy <= '" + rsDT2.Replace("-", "") + "'"
+                        sSql += " WHERE a.styy >= '" + rsDT1.Replace("-", "") + "' AND a.styy <= '" + rsDT2.Replace("-", "") + "'" + vbCrLf
 
                 End Select
 
-                sSql += "   AND a.sttype = :sttype"
+                sSql += "   AND a.sttype = :sttype" + vbCrLf
                 alParm.Add(New OracleParameter("sttype", OracleDbType.Varchar2, rsType.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsType))
 
                 Select Case rsADN
-                    Case "D" : sSql += "   AND a.sthh >= '08' AND a.sthh <= '16'"
-                    Case "N" : sSql += "   AND a.sthh >= '00' AND a.sthh <= '07' AND a.sthh >= '17' AND a.sthh <= '23'"
+                    Case "D" : sSql += "   AND a.sthh >= '08' AND a.sthh <= '16'" + vbCrLf
+                    Case "N" : sSql += "   AND a.sthh >= '00' AND a.sthh <= '07' AND a.sthh >= '17' AND a.sthh <= '23'" + vbCrLf
                 End Select
 
                 If rsIO = "O" Then
-                    sSql += "   AND a.stioflg <> 'I'"
+                    sSql += "   AND a.stioflg <> 'I'" + vbCrLf
                 ElseIf rsIO <> "" Then
-                    sSql += "   AND a.stioflg = '" + rsIO + "'"
+                    sSql += "   AND a.stioflg = '" + rsIO + "'" + vbCrLf
                 End If
 
                 If rsDept <> "" Then
-                    sSql += "   AND a.stdeptcd = '" + rsDept + "'"
+                    sSql += "   AND a.stdeptcd = '" + rsDept + "'" + vbCrLf
                 End If
 
                 If rsWard <> "" Then
-                    sSql += "   AND a.stwardno = '" + rsWard + "'"
+                    sSql += "   AND a.stwardno = '" + rsWard + "'" + vbCrLf
                 End If
 
                 '<20130910 정선영 추가, 바코드 분류 구분 적용
                 If rsBcclsCd.Length > 0 Then
-                    sSql += "   AND   (a.testcd, a.spccd) IN (select testcd, spccd FROM lf060m where bcclscd = :bcclscd)"
+                    sSql += "   AND   (a.testcd, a.spccd) IN (select testcd, spccd FROM lf060m where bcclscd = :bcclscd)" + vbCrLf
                 End If
                 '>
 
                 If rsTGrpCd.Length > 0 Then
-                    sSql += "   AND SUBSTR(a.testcd, 1, 5), a.spccd IN (SELECT SUBSTR(testcd, 1, 5), spccd FROM lf065m WHERE tgrpcd = :tgrpcd)"
+                    sSql += "   AND SUBSTR(a.testcd, 1, 5), a.spccd IN (SELECT SUBSTR(testcd, 1, 5), spccd FROM lf065m WHERE tgrpcd = :tgrpcd)" + vbCrLf
                     alParm.Add(New OracleParameter("tgrpcd", OracleDbType.Varchar2, rsTGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTGrpCd))
                 End If
 
                 If rsTestCds.Length > 0 Then
-                    sSql += "   AND a.testcd IN (" + rsTestCds + ")"
+                    sSql += "   AND a.testcd IN (" + rsTestCds + ")" + vbCrLf
                 End If
 
-                If rbIoGbn_NotC Then sSql += "   AND a.stioflg <> 'C'"
+                If rbIoGbn_NotC Then sSql += "   AND a.stioflg <> 'C'" + vbCrLf
 
                 If rsSpc = "Y" Then
-                    sSql += " GROUP BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END, a.spccd, c.spcnmd"
+                    sSql += " GROUP BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END, a.spccd, c.spcnmd" + vbCrLf
                 Else
-                    sSql += " GROUP BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END"
+                    sSql += " GROUP BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END" + vbCrLf
                 End If
-                sSql += " ORDER BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END, spccd"
+                sSql += " ORDER BY CASE WHEN 'Y' = '" + IIf(rsSame = "Y", "Y", "N").ToString + "' THEN b.samecd ELSE a.testcd END, spccd" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)

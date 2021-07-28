@@ -80,5 +80,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.378 --> 2021/05/31 : 담당자 QC데이터 연동 조회 쿼리 수정
 'Version 3.1.10.379 --> 2021/06/25 : 검사자간 공유사항 항목 추가 
 'Version 3.1.10.380 --> 2021/06/28 : 검사자간 공유사항 항목 추가(롤)
+'Version 3.1.10.381 --> 2021/07/26 : 일일보고서 xpert 겹침 현상 제거 , 참고치 세부검사참조 제거 
 
-<Assembly: AssemblyVersion("3.1.10.380")> 
+<Assembly: AssemblyVersion("3.1.10.381")> 
