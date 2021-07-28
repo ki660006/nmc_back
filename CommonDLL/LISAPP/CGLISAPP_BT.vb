@@ -55,7 +55,8 @@ Namespace APP_BT
                 sSql += "       fn_ack_get_dr_name(b4.doctorcd) drnm,"
                 sSql += "       b43.comnm comnm_ord,"
                 sSql += "       b42.reqqnt, "
-                sSql += "       b43.seq"
+                sSql += "       b43.seq,"
+                sSql += "       b4.tnsgbn"
                 sSql += "  FROM lb040m b4, lb042m b42, lb043m b43, lb020m b2, lf120m f,"
                 sSql += "       (SELECT bldno, testid, testdt, befoutid, befoutdt, outid, outdt, recnm, rst1, rst2, rst3, rst4, comcd_out, tnsjubsuno"
                 sSql += "          FROM lb030m"
@@ -175,6 +176,13 @@ Namespace APP_BT
                                     .FITER = dt.Rows(ix).Item("filter").ToString.Trim
                                     .IR = dt.Rows(ix).Item("filter").ToString.Trim
 
+                                    '20210719 jhs 혈액은행 응급 구분 추가
+                                    If dt.Rows(ix).Item("tnsgbn").ToString.Trim = "3" Then
+                                        .EMER = "Y"
+                                    Else
+                                        .EMER = "N"
+                                    End If
+                                    '-------------------------------------------
                                 End With
 
                                 If iCnt = 0 Then
@@ -253,6 +261,14 @@ Namespace APP_BT
                                 .Hb_RST = dt.Rows(ix).Item("hb_rst").ToString.Trim
 
                                 .BLDNO.Add(dt.Rows(ix).Item("bldno").ToString.Trim)
+
+                                '20210719 jhs 혈액은행 응급 구분 추가
+                                If dt.Rows(ix).Item("tnsgbn").ToString.Trim = "3" Then
+                                    .EMER = "Y"
+                                Else
+                                    .EMER = "N"
+                                End If
+                                '-------------------------------------------
 
                             End With
                         Next
@@ -4613,7 +4629,11 @@ Namespace APP_BT
                 sSql += "         TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(b.fndt, 'yyyymmddhh24miss'))) months_between" + vbCrLf
                 sSql += "    FROM (SELECT f6.tnmd, f4.testcd, f4.spccd, f4.bbgbn,  f4.dispseq" + vbCrLf
                 sSql += "            FROM LF140M f4, LF060M f6 " + vbCrLf
-                sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142') " + vbCrLf
+                '20210721 jhs 하드코딩 되어있는 부분 수정 - 기초마스터 혈액은행 관련 검사 표시순서가 적혀져 있는 것만 최근검사 항목으로 조회 
+                'sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142') " + vbCrLf
+                'sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142','LG126') " + vbCrLf
+                sSql += "           WHERE F4.TESTCD IN (selecT testcd from lf140m where replace(dispseq,' ', '') <> ' ') " + vbCrLf
+                '----------------------------------------------------------------------------------
                 sSql += "             AND F4.TESTCD = F6.TESTCD " + vbCrLf
                 sSql += "             AND F4.SPCCD  = F6.SPCCD  " + vbCrLf
                 sSql += "             AND F6.UEDT  >= FN_ACK_SYSDATE() " + vbCrLf
@@ -5517,51 +5537,52 @@ Namespace APP_BT
                 Dim sSql As String = ""
                 Dim alParm As New ArrayList
 
-                sSql += "SELECT DISTINCT "
-                sSql += "       B2.BLDNO,"
-                sSql += "       FN_ACK_GET_BLDNO_FULL(B2.BLDNO)  AS VBLDNO,"
-                sSql += "       B2.COMCD                         AS COMCD_OUT,"
-                sSql += "       (SELECT COMNMD "
-                sSql += "          FROM LF120M"
-                sSql += "         WHERE COMCD  = B2.COMCD"
-                sSql += "           AND USDT  <= B2.INDT"
-                sSql += "           AND UEDT  >  B2.INDT"
-                sSql += "       )                                AS COMNMD,"
-                sSql += "       F4.COMORDCD,"
-                sSql += "       B2.ABO || B2.RH                  AS ABORH,"
-                sSql += "       B2.ABO,"
-                sSql += "       B2.RH,"
-                sSql += "       FN_ACK_DATE_STR(B2.DONDT,   'YYYY-MM-DD HH24:MI')   AS DONDT,"
-                sSql += "       FN_ACK_DATE_STR(B2.INDT,    'YYYY-MM-DD HH24:MI')   AS INDT,"
-                sSql += "       FN_ACK_DATE_STR(B2.AVAILDT, 'YYYY-MM-DD HH24:MI')   AS AVAILDT,"
-                sSql += "       999                                                 AS SORTKEY,"
-                sSql += "       F4.CROSSLEVEL                                       AS CROSSLEVEL,"
-                sSql += "       B2.CMT,"
-                sSql += "       B4.COMCD                        AS COMCD,"
-                sSql += "       B4.COMNM                        AS COMNM"
-                sSql += "  FROM LB043M B4, LB020M B2, LF120M F4"
-                sSql += " WHERE B4.tnsjubsuno  = :tnsno"
+                sSql += "SELECT DISTINCT " + vbCrLf
+                sSql += "       B2.BLDNO," + vbCrLf
+                sSql += "       FN_ACK_GET_BLDNO_FULL(B2.BLDNO)  AS VBLDNO," + vbCrLf
+                sSql += "       B2.COMCD                         AS COMCD_OUT," + vbCrLf
+                sSql += "       (SELECT COMNMD " + vbCrLf
+                sSql += "          FROM LF120M" + vbCrLf
+                sSql += "         WHERE COMCD  = B2.COMCD" + vbCrLf
+                sSql += "           AND USDT  <= B2.INDT" + vbCrLf
+                sSql += "           AND UEDT  >  B2.INDT" + vbCrLf
+                sSql += "       )                                AS COMNMD," + vbCrLf
+                sSql += "       F4.COMORDCD," + vbCrLf
+                sSql += "       B2.ABO || B2.RH                  AS ABORH," + vbCrLf
+                sSql += "       B2.ABO," + vbCrLf
+                sSql += "       B2.RH," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.DONDT,   'YYYY-MM-DD HH24:MI')   AS DONDT," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.INDT,    'YYYY-MM-DD HH24:MI')   AS INDT," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.AVAILDT, 'YYYY-MM-DD HH24:MI')   AS AVAILDT," + vbCrLf
+                sSql += "       999                                                 AS SORTKEY," + vbCrLf
+                sSql += "       F4.CROSSLEVEL                                       AS CROSSLEVEL," + vbCrLf
+                sSql += "       B2.CMT," + vbCrLf
+                sSql += "       B4.COMCD                        AS COMCD," + vbCrLf
+                sSql += "       B4.COMNM                        AS COMNM," + vbCrLf
+                sSql += "       (selecT tnsgbn from lb040m where tnsjubsuno = '20210719T0010') tnsgbn " + vbCrLf
+                sSql += "  FROM LB043M B4, LB020M B2, LF120M F4" + vbCrLf
+                sSql += " WHERE B4.tnsjubsuno  = :tnsno" + vbCrLf
 
                 If rsErChk = False Then
 
-                    sSql += "   AND B4.COMCD       = F4.COMCD"
+                    sSql += "   AND B4.COMCD       = F4.COMCD" + vbCrLf
 
                 Else
-                    sSql += "   AND B4.COMCD       = F4.COMCD"
-                    sSql += "        AND B4.COMCD IN("
-                    'sSql += "   "
-                    sSql += "   'LB507' , 'LB506' " '<<<20180511 교차미필시 RBC320 추가
-                    sSql += "   )"
+                    sSql += "   AND B4.COMCD       = F4.COMCD" + vbCrLf
+                    sSql += "        AND B4.COMCD IN(" + vbCrLf
+                    'sSql += "   "+vbCrLf 
+                    sSql += "   'LB507' , 'LB506' " + vbCrLf  '<<<20180511 교차미필시 RBC320 추가
+                    sSql += "   )" + vbCrLf
 
                 End If
 
-                sSql += "   AND B4.SPCCD       = F4.SPCCD"
-                sSql += "   AND B2.AVAILDT    >  fn_ack_sysdate"
-                sSql += "   AND B2.STATE        = '0'"
-                sSql += "   AND B2.COMCD       = NVL(F4.PSCOMCD, F4.COMCD)"
-                sSql += "   AND B2.indt       >= F4.USDT"
-                sSql += "   AND B2.indt       <  F4.UEDT"
-                sSql += "   AND B4.STATE       = '1'"
+                sSql += "   AND B4.SPCCD       = F4.SPCCD" + vbCrLf
+                sSql += "   AND B2.AVAILDT    >  fn_ack_sysdate" + vbCrLf
+                sSql += "   AND B2.STATE        = '0'" + vbCrLf
+                sSql += "   AND B2.COMCD       = NVL(F4.PSCOMCD, F4.COMCD)" + vbCrLf
+                sSql += "   AND B2.indt       >= F4.USDT" + vbCrLf
+                sSql += "   AND B2.indt       <  F4.UEDT" + vbCrLf
+                sSql += "   AND B4.STATE       = '1'" + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsno", rsTnsJubsuNo.Replace("-", "")))
 
@@ -5569,8 +5590,8 @@ Namespace APP_BT
                 If rsErChk = False Then
 
                     If rsAbo.Length + rsRh.Length > 0 Then
-                        sSql += "   AND B2.abo     =  :abo"
-                        sSql += "   AND B2.rh      =  :rh"
+                        sSql += "   AND B2.abo     =  :abo" + vbCrLf
+                        sSql += "   AND B2.rh      =  :rh" + vbCrLf
 
                         alParm.Add(New OracleParameter("abo", rsAbo))
                         alParm.Add(New OracleParameter("rh", rsRh))
@@ -5580,15 +5601,15 @@ Namespace APP_BT
 
                     If rsAbo.Length + rsRh.Length > 0 Then
                        
-                        sSql += "   AND (  B2.abo     =  :abo"
-                        sSql += "   AND B2.rh      =  :rh OR B2.abo = 'O' ) "
+                        sSql += "   AND (  B2.abo     =  :abo" + vbCrLf
+                        sSql += "   AND B2.rh      =  :rh OR B2.abo = 'O' ) " + vbCrLf
 
                         alParm.Add(New OracleParameter("abo", rsAbo))
                         alParm.Add(New OracleParameter("rh", rsRh))
                     Else
 
-                        sSql += "   AND B2.abo     =  'O'"
-                        sSql += "   AND B2.rh      IN('+','-')"
+                        sSql += "   AND B2.abo     =  'O'" + vbCrLf
+                        sSql += "   AND B2.rh      IN('+','-')" + vbCrLf
 
                     End If
                     
@@ -5596,7 +5617,7 @@ Namespace APP_BT
 
               
 
-                sSql += " ORDER BY availdt, bldno, comcd"
+                sSql += " ORDER BY availdt, bldno, comcd" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -5678,96 +5699,96 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "select DISTINCT a.tnsjubsuno                                                   "
-                sSql += "     , CASE a.state WHEN '4' THEN '출'                                "
-                sSql += "                    WHEN '5' THEN '반'                                "
-                sSql += "                    WHEN '6' THEN '폐'                                "
-                sSql += "       END                                              as vstate     "
-                sSql += "     , d.comnmd              as comnmd                                "
-                sSql += "     , a.comcd               as comcd                                 "
-                sSql += "     , a.comnm               as comnm                                 "
-                sSql += "     , a.comcd_out           as comcd_out                             "
-                sSql += "     , d.comordcd            "
-                sSql += "     , a.owngbn            "
+                sSql += "select DISTINCT a.tnsjubsuno                                                   " + vbCrLf
+                sSql += "     , CASE a.state WHEN '4' THEN '출'                                " + vbCrLf
+                sSql += "                    WHEN '5' THEN '반'                                " + vbCrLf
+                sSql += "                    WHEN '6' THEN '폐'                                " + vbCrLf
+                sSql += "       END                                              as vstate     " + vbCrLf
+                sSql += "     , d.comnmd              as comnmd                                " + vbCrLf
+                sSql += "     , a.comcd               as comcd                                 " + vbCrLf
+                sSql += "     , a.comnm               as comnm                                 " + vbCrLf
+                sSql += "     , a.comcd_out           as comcd_out                             " + vbCrLf
+                sSql += "     , d.comordcd            " + vbCrLf
+                sSql += "     , a.owngbn            " + vbCrLf
 
                 If rsFilter <> "1"c Then
-                    sSql += "     , fn_ack_get_bldno_full(a.bldno)                       as vbldno     "
-                    sSql += "     , c.abo || c.rh                                    as type                                  "
-                    sSql += "     , b.rst1                                                         "
-                    sSql += "     , b.rst2                                                         "
-                    sSql += "     , b.rst3                                                         "
-                    sSql += "     , b.rst4                                                         "
-                    sSql += "     , b.cmrmk                                                        "
-                    sSql += "     , fn_ack_date_str(b.befoutdt, 'yyyy-MM-dd hh24:mi')    as befoutdt       "
-                    sSql += "     , fn_ack_date_str(b.outdt, 'yyyy-MM-dd hh24:mi')       as outdt          "
-                    sSql += "     , fn_ack_get_usr_name(b.testid)                        as inspector      "
-                    sSql += "     , fn_ack_date_str(c.indt, 'yyyy-MM-dd hh24:mi')        as indt           "
-                    sSql += "     , fn_ack_date_str(c.dondt, 'yyyy-MM-dd hh24:mi')       as dondt          "
-                    sSql += "     , fn_ack_date_str(c.availdt, 'yyyy-MM-dd hh24:mi')     as availdt        "
-                    sSql += "     , fn_ack_get_usr_name(b.outid)                         as outid          "
-                    sSql += "     , b.recnm                                                                "
-                    sSql += "     , CASE b.keepgbn WHEN '0' THEN '출'                                      "
-                    sSql += "                      WHEN '1' THEN '보'                                      "
-                    sSql += "                      WHEN '2' THEN '재'                                      "
-                    sSql += "                      WHEN '3' THEN '반'                                      "
-                    sSql += "                      WHEN '4' THEN '폐'                                      "
-                    sSql += "       END                                              as vkeepgbn           "
-                    sSql += "     , b.keepgbn                                                              "
-                    sSql += "     , CASE b.keepgbn WHEN '1' THEN 0                                       "
-                    sSql += "                      ELSE TRUNC(SYSDATE - TO_DATE(b.outdt, 'yyyymmddhh24miss')) * 24 * 60"
-                    sSql += "       END                                              as elapsdm            "
+                    sSql += "     , fn_ack_get_bldno_full(a.bldno)                       as vbldno     " + vbCrLf
+                    sSql += "     , c.abo || c.rh                                    as type                                   " + vbCrLf
+                    sSql += "     , b.rst1                                                         " + vbCrLf
+                    sSql += "     , b.rst2                                                         " + vbCrLf
+                    sSql += "     , b.rst3                                                         " + vbCrLf
+                    sSql += "     , b.rst4                                                         " + vbCrLf
+                    sSql += "     , b.cmrmk                                                        " + vbCrLf
+                    sSql += "     , fn_ack_date_str(b.befoutdt, 'yyyy-MM-dd hh24:mi')    as befoutdt       " + vbCrLf
+                    sSql += "     , fn_ack_date_str(b.outdt, 'yyyy-MM-dd hh24:mi')       as outdt          " + vbCrLf
+                    sSql += "     , fn_ack_get_usr_name(b.testid)                        as inspector      " + vbCrLf
+                    sSql += "     , fn_ack_date_str(c.indt, 'yyyy-MM-dd hh24:mi')        as indt           " + vbCrLf
+                    sSql += "     , fn_ack_date_str(c.dondt, 'yyyy-MM-dd hh24:mi')       as dondt          " + vbCrLf
+                    sSql += "     , fn_ack_date_str(c.availdt, 'yyyy-MM-dd hh24:mi')     as availdt        " + vbCrLf
+                    sSql += "     , fn_ack_get_usr_name(b.outid)                         as outid          " + vbCrLf
+                    sSql += "     , b.recnm                                                                " + vbCrLf
+                    sSql += "     , CASE b.keepgbn WHEN '0' THEN '출'                                      " + vbCrLf
+                    sSql += "                      WHEN '1' THEN '보'                                      " + vbCrLf
+                    sSql += "                      WHEN '2' THEN '재'                                      " + vbCrLf
+                    sSql += "                      WHEN '3' THEN '반'                                      " + vbCrLf
+                    sSql += "                      WHEN '4' THEN '폐'                                      " + vbCrLf
+                    sSql += "       END                                              as vkeepgbn           " + vbCrLf
+                    sSql += "     , b.keepgbn                                                              " + vbCrLf
+                    sSql += "     , CASE b.keepgbn WHEN '1' THEN 0                                       " + vbCrLf
+                    sSql += "                      ELSE TRUNC(SYSDATE - TO_DATE(b.outdt, 'yyyymmddhh24miss')) * 24 * 60" + vbCrLf
+                    sSql += "       END                                              as elapsdm            " + vbCrLf
 
                 Else
-                    sSql += "     , 'FILTER' as vbldno                                "
-                    sSql += "     , ''           as type                                  "
-                    sSql += "     , '' as rst1                                                         "
-                    sSql += "     , '' as rst2                                                         "
-                    sSql += "     , '' as rst3                                                         "
-                    sSql += "     , '' as rst4                                                         "
-                    sSql += "     , '' as cmrmk                                                        "
-                    sSql += "     , ''    as befoutdt       "
-                    sSql += "     , ''       as outdt          "
-                    sSql += "     , ''                    as inspector      "
-                    sSql += "     , ''        as indt           "
-                    sSql += "     , ''      as dondt          "
-                    sSql += "     , ''    as availdt        "
-                    sSql += "     , ''                      as outid          "
-                    sSql += "     , ''      as recnm                                                  "
-                    sSql += "     , '출'      as vkeepgbn       "
-                    sSql += "     , '9'           keepgbn          "
-                    sSql += "     , '' as elapsdm               "
+                    sSql += "     , 'FILTER' as vbldno                                " + vbCrLf
+                    sSql += "     , ''           as type                                  " + vbCrLf
+                    sSql += "     , '' as rst1                                                         " + vbCrLf
+                    sSql += "     , '' as rst2                                                         " + vbCrLf
+                    sSql += "     , '' as rst3                                                         " + vbCrLf
+                    sSql += "     , '' as rst4                                                         " + vbCrLf
+                    sSql += "     , '' as cmrmk                                                        " + vbCrLf
+                    sSql += "     , ''    as befoutdt       " + vbCrLf
+                    sSql += "     , ''       as outdt          " + vbCrLf
+                    sSql += "     , ''                    as inspector      " + vbCrLf
+                    sSql += "     , ''        as indt           " + vbCrLf
+                    sSql += "     , ''      as dondt          " + vbCrLf
+                    sSql += "     , ''    as availdt        " + vbCrLf
+                    sSql += "     , ''                      as outid          " + vbCrLf
+                    sSql += "     , ''      as recnm                                                  " + vbCrLf
+                    sSql += "     , '출'      as vkeepgbn       " + vbCrLf
+                    sSql += "     , '9'           keepgbn          " + vbCrLf
+                    sSql += "     , '' as elapsdm               " + vbCrLf
                 End If
 
-                sSql += "     , a.state                                                        "
-                sSql += "     , a.bldno                                                        "
-                sSql += "     , d.comnmp                                                       "
-                sSql += "     , a.fkocs || '-' || TO_CHAR(seq) as fkocs                        "
-                sSql += "     , c.cmt "
-                sSql += "  from lb043m a                                                       "
+                sSql += "     , a.state                                                        " + vbCrLf
+                sSql += "     , a.bldno                                                        " + vbCrLf
+                sSql += "     , d.comnmp                                                       " + vbCrLf
+                sSql += "     , a.fkocs || '-' || TO_CHAR(seq) as fkocs                        " + vbCrLf
+                sSql += "     , c.cmt " + vbCrLf
+                sSql += "  from lb043m a                                                       " + vbCrLf
 
                 If rsFilter <> "1"c Then
-                    sSql += "     , lb030m b                                                       "
+                    sSql += "     , lb030m b                                                       " + vbCrLf
                 End If
 
-                sSql += "     , lb020m c                                                       "
-                sSql += "     , lf120m d                                                       "
-                sSql += " where a.tnsjubsuno = :tnsno                                               "
+                sSql += "     , lb020m c                                                       " + vbCrLf
+                sSql += "     , lf120m d                                                       " + vbCrLf
+                sSql += " where a.tnsjubsuno = :tnsno                                               " + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsno",  OracleDbType.Varchar2, rsTnsnum.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTnsnum))
 
                 'sSql += "   and a.state      in ('4', '5', '6')                                "
-                sSql += "   and a.state      = '4'                               "
+                sSql += "   and a.state      = '4'                               " + vbCrLf
 
                 If rsFilter <> "1"c Then
-                    sSql += "   and a.bldno      = b.bldno                                         "
-                    sSql += "   and a.comcd_out  = b.comcd_out                                     "
-                    sSql += "   and a.tnsjubsuno = b.tnsjubsuno                                    "
+                    sSql += "   and a.bldno      = b.bldno                                         " + vbCrLf
+                    sSql += "   and a.comcd_out  = b.comcd_out                                     " + vbCrLf
+                    sSql += "   and a.tnsjubsuno = b.tnsjubsuno                                    " + vbCrLf
                 End If
 
-                sSql += "   and a.bldno      = c.bldno                                         "
-                sSql += "   and a.comcd_out  = c.comcd                                         "
-                sSql += "   and a.comcd_out  = d.comcd                                         "
-                sSql += "   and d.spccd      = :spccd                                               "
+                sSql += "   and a.bldno      = c.bldno                                         " + vbCrLf
+                sSql += "   and a.comcd_out  = c.comcd                                         " + vbCrLf
+                sSql += "   and a.comcd_out  = d.comcd                                         " + vbCrLf
+                sSql += "   and d.spccd      = :spccd                                               " + vbCrLf
 
                 alParm.Add(New OracleParameter("spccd",  OracleDbType.Varchar2, rsTnsnum.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpccd))
 
@@ -5787,98 +5808,98 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "SELECT fn_ack_get_tnsjubsuno_full(a.tnsjubsuno)  tnsjubsuno                "
-                sSql += "     , CASE WHEN a.reqqnt >  NVL(a.outqnt, 0) THEN '미'                            "
-                sSql += "            WHEN a.reqqnt <= NVL(a.outqnt, 0) THEN '완'                           "
-                sSql += "       END as vstate                                                              "
-                sSql += "     , a.comcd                                                                    "
-                sSql += "     , a.comnm as comnmd                                                          "
-                sSql += "     , a.reqqnt                                                                   "
-                sSql += "     , a.jubsudt                                                                  "
-                sSql += "     , a.befoutqnt                                                                "
-                sSql += "     , a.outqnt                                                                   "
-                sSql += "     , a.regno                                                                    "
-                sSql += "     , a.patnm                                                                    "
-                sSql += "     , r.abo                                     "
-                sSql += "     , r.rh                                      "
-                sSql += "     , a.spccd                                                                    "
-                sSql += "     , a.iogbn                                                                    "
-                sSql += "     , a.owngbn                                                                   "
-                sSql += "     , fn_ack_date_str(a.orddt, 'yyyy-mm-dd') order_date                                                               "
-                sSql += "     , a.tnsgbn                                                                   "
-                sSql += "     , a.filter                                                                   "
-                sSql += "     , a.comordcd                                                                 "
-                sSql += "     , a.state"
-                sSql += "  FROM "
+                sSql += "SELECT fn_ack_get_tnsjubsuno_full(a.tnsjubsuno)  tnsjubsuno                " + vbCrLf
+                sSql += "     , CASE WHEN a.reqqnt >  NVL(a.outqnt, 0) THEN '미'                            " + vbCrLf
+                sSql += "            WHEN a.reqqnt <= NVL(a.outqnt, 0) THEN '완'                           " + vbCrLf
+                sSql += "       END as vstate                                                              " + vbCrLf
+                sSql += "     , a.comcd                                                                    " + vbCrLf
+                sSql += "     , a.comnm as comnmd                                                          " + vbCrLf
+                sSql += "     , a.reqqnt                                                                   " + vbCrLf
+                sSql += "     , a.jubsudt                                                                  " + vbCrLf
+                sSql += "     , a.befoutqnt                                                                " + vbCrLf
+                sSql += "     , a.outqnt                                                                   " + vbCrLf
+                sSql += "     , a.regno                                                                    " + vbCrLf
+                sSql += "     , a.patnm                                                                    " + vbCrLf
+                sSql += "     , r.abo                                     " + vbCrLf
+                sSql += "     , r.rh                                      " + vbCrLf
+                sSql += "     , a.spccd                                                                    " + vbCrLf
+                sSql += "     , a.iogbn                                                                    " + vbCrLf
+                sSql += "     , a.owngbn                                                                   " + vbCrLf
+                sSql += "     , fn_ack_date_str(a.orddt, 'yyyy-mm-dd') order_date                                                               " + vbCrLf
+                sSql += "     , a.tnsgbn                                                                   " + vbCrLf
+                sSql += "     , a.filter                                                                   " + vbCrLf
+                sSql += "     , a.comordcd                                                                 " + vbCrLf
+                sSql += "     , a.state" + vbCrLf
+                sSql += "  FROM " + vbCrLf
 
                 If rsBldno.Length() > 0 Then
-                    sSql += "       (SELECT tnsjubsuno, COUNT(tnsjubsuno) cnt"
-                    sSql += "          FROM lb043m"
-                    sSql += "         WHERE bldno = :bldno"
+                    sSql += "       (SELECT tnsjubsuno, COUNT(tnsjubsuno) cnt" + vbCrLf
+                    sSql += "          FROM lb043m" + vbCrLf
+                    sSql += "         WHERE bldno = :bldno" + vbCrLf
 
                     alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
 
-                    sSql += "        GROUP BY tnsjubsuno"
-                    sSql += "       ) b"
-                    sSql += "       INNER JOIN"
+                    sSql += "        GROUP BY tnsjubsuno" + vbCrLf
+                    sSql += "       ) b" + vbCrLf
+                    sSql += "       INNER JOIN" + vbCrLf
                 End If
 
-                sSql += "       (SELECT a.tnsjubsuno                                                       "
-                sSql += "             , b.comcd                                                            "
-                sSql += "             , b.comnm                                                            "
-                sSql += "             , b.spccd                                                            "
-                sSql += "             , a.tnsgbn                                                           "
-                sSql += "             , NVL(b.reqqnt, 0)    as reqqnt                                      "
-                sSql += "             , NVL(b.befoutqnt, 0) as befoutqnt                                   "
-                sSql += "             , NVL(b.outqnt, 0) + NVL(b.rtnqnt, 0) +                              "
-                sSql += "               NVL(b.abnqnt, 0) /*+ NVL(b.cancelqnt, 0)*/ as outqnt                   "
-                sSql += "             , a.regno                                                            "
-                sSql += "             , a.patnm"
-                sSql += "             , fn_ack_date_str(a.jubsudt, 'yyyy-MM-dd hh24:mi') as jubsudt        "
-                sSql += "             , a.iogbn                                                            "
-                sSql += "             , a.owngbn                                                           "
-                sSql += "             , b.filter                                                           "
-                sSql += "             , c.comordcd                                                         "
-                sSql += "             , a.orddt                "
-                sSql += "             , b.state"
-                sSql += "          FROM lb040m a                                                           "
-                sSql += "             , lb042m b                                                           "
-                sSql += "             , lf120m c                                                           "
-                sSql += "         WHERE a.jubsudt BETWEEN :dates"
-                sSql += "                             AND :datee || '235959'"
+                sSql += "       (SELECT a.tnsjubsuno                                                       " + vbCrLf
+                sSql += "             , b.comcd                                                            " + vbCrLf
+                sSql += "             , b.comnm                                                            " + vbCrLf
+                sSql += "             , b.spccd                                                            " + vbCrLf
+                sSql += "             , a.tnsgbn                                                           " + vbCrLf
+                sSql += "             , NVL(b.reqqnt, 0)    as reqqnt                                      " + vbCrLf
+                sSql += "             , NVL(b.befoutqnt, 0) as befoutqnt                                   " + vbCrLf
+                sSql += "             , NVL(b.outqnt, 0) + NVL(b.rtnqnt, 0) +                              " + vbCrLf
+                sSql += "               NVL(b.abnqnt, 0) /*+ NVL(b.cancelqnt, 0)*/ as outqnt                   " + vbCrLf
+                sSql += "             , a.regno                                                            " + vbCrLf
+                sSql += "             , a.patnm"+vbCrLf 
+                sSql += "             , fn_ack_date_str(a.jubsudt, 'yyyy-MM-dd hh24:mi') as jubsudt        " + vbCrLf
+                sSql += "             , a.iogbn                                                            " + vbCrLf
+                sSql += "             , a.owngbn                                                           " + vbCrLf
+                sSql += "             , b.filter                                                           " + vbCrLf
+                sSql += "             , c.comordcd                                                         " + vbCrLf
+                sSql += "             , a.orddt                " + vbCrLf
+                sSql += "             , b.state" + vbCrLf
+                sSql += "          FROM lb040m a                                                           " + vbCrLf
+                sSql += "             , lb042m b                                                           " + vbCrLf
+                sSql += "             , lf120m c                                                           " + vbCrLf
+                sSql += "         WHERE a.jubsudt BETWEEN :dates" + vbCrLf
+                sSql += "                             AND :datee || '235959'" + vbCrLf
 
                 alParm.Add(New OracleParameter("dates",  OracleDbType.Varchar2, rsFdate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsFdate))
                 alParm.Add(New OracleParameter("datee",  OracleDbType.Varchar2, rsTdate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTdate))
 
                 If rsRegno <> "" Then
-                    sSql += "       AND a.regno      = :regno "
+                    sSql += "       AND a.regno      = :regno " + vbCrLf
                     alParm.Add(New OracleParameter("regno",  OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
                 End If
 
                 If rsComcd <> "" And rsComcd <> "ALL" Then
-                    sSql += "       AND b.comcd = :comcd "
+                    sSql += "       AND b.comcd = :comcd " + vbCrLf
                     alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
                 End If
 
 
-                sSql += "           AND a.tnsjubsuno = b.tnsjubsuno                                       "
-                sSql += "           AND b.comcd      = c.comcd                                            "
-                sSql += "           AND b.spccd      = c.spccd "
-                sSql += "           AND NVL(a.delflg, '0') = '0'"
-                sSql += "     ) a      "
+                sSql += "           AND a.tnsjubsuno = b.tnsjubsuno                                       " + vbCrLf
+                sSql += "           AND b.comcd      = c.comcd                                            " + vbCrLf
+                sSql += "           AND b.spccd      = c.spccd " + vbCrLf
+                sSql += "           AND NVL(a.delflg, '0') = '0'" + vbCrLf
+                sSql += "     ) a      " + vbCrLf
                 If rsBldno.Length() > 0 Then
-                    sSql += " ON (a.tnsjubsuno = b.tnsjubsuno) "
+                    sSql += " ON (a.tnsjubsuno = b.tnsjubsuno) " + vbCrLf
                 End If
 
-                sSql += "     LEFT OUTER JOIN"
-                sSql += "         lr070m r ON (a.regno = r.regno)"
+                sSql += "     LEFT OUTER JOIN" + vbCrLf
+                sSql += "         lr070m r ON (a.regno = r.regno)" + vbCrLf
 
                 If rsGbn = "0"c Then
 
                 ElseIf rsGbn = "1"c Then
-                    sSql += " WHERE a.state = '0'"
+                    sSql += " WHERE a.state = '0'" + vbCrLf
                 ElseIf rsGbn = "2"c Then
-                    sSql += " WHERE a.state = '1'"
+                    sSql += " WHERE a.state = '1'" + vbCrLf
                 End If
 
                 sSql += " ORDER BY tnsjubsuno                                                               "
@@ -5898,48 +5919,48 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "SELECT a.tnsjubsuno                                           "
-                sSql += "     , fn_ack_get_bldno_full(a.bldno)                     as vbldno    "
-                sSql += "     , e.comnmd                                               "
-                sSql += "     , d.abo || d.rh                                  as type      "
-                sSql += "     , fn_ack_date_str(c.befoutdt, 'yyyy-MM-dd hh24:mi')  as befoutdt  "
-                sSql += "     , fn_ack_get_usr_name(c.testid)                      as testid    "
-                sSql += "     , fn_ack_date_str(d.indt, 'yyyy-MM-dd hh24:mi')      as indt      "
-                sSql += "     , fn_ack_date_str(d.dondt, 'yyyy-MM-dd hh24:mi')     as dondt     "
-                sSql += "     , fn_ack_date_str(d.availdt, 'yyyy-MM-dd hh24:mi')   as availdt   "
-                sSql += "     , c.comcd_out                                        as comcd_out     "
-                sSql += "     , a.comcd"
-                sSql += "     , a.owngbn                                               "
-                sSql += "     , a.iogbn                                                "
-                sSql += "     , a.fkocs || '-' || TO_CHAR(seq) as fkocs                "
-                sSql += "     , a.bldno                                        as bldno     "
-                sSql += "     , b.filter                                               "
-                sSql += "     , e.comordcd                                     as comordcd    "
-                sSql += "     , '9999999'                                      as sortkey   "
-                sSql += "     , d.cmt "
-                sSql += "  FROM lb040m b1"
-                sSql += "     , lb043m a "
-                sSql += "     , lb042m b                                               "
-                sSql += "     , lb030m c                                               "
-                sSql += "     , lb020m d                                               "
-                sSql += "     , lf120m e                                               "
-                sSql += " WHERE b1.tnsjubsuno = :tnsno                                       "
-                sSql += "   AND b1.tnsjubsuno = b.tnsjubsuno                            "
-                sSql += "   AND b1.tnsjubsuno = a.tnsjubsuno"
+                sSql += "SELECT a.tnsjubsuno                                           " + vbCrLf
+                sSql += "     , fn_ack_get_bldno_full(a.bldno)                     as vbldno    " + vbCrLf
+                sSql += "     , e.comnmd                                               " + vbCrLf
+                sSql += "     , d.abo || d.rh                                  as type      " + vbCrLf
+                sSql += "     , fn_ack_date_str(c.befoutdt, 'yyyy-MM-dd hh24:mi')  as befoutdt  " + vbCrLf
+                sSql += "     , fn_ack_get_usr_name(c.testid)                      as testid    " + vbCrLf
+                sSql += "     , fn_ack_date_str(d.indt, 'yyyy-MM-dd hh24:mi')      as indt      " + vbCrLf
+                sSql += "     , fn_ack_date_str(d.dondt, 'yyyy-MM-dd hh24:mi')     as dondt     " + vbCrLf
+                sSql += "     , fn_ack_date_str(d.availdt, 'yyyy-MM-dd hh24:mi')   as availdt   " + vbCrLf
+                sSql += "     , c.comcd_out                                        as comcd_out     " + vbCrLf
+                sSql += "     , a.comcd" + vbCrLf
+                sSql += "     , a.owngbn                                               " + vbCrLf
+                sSql += "     , a.iogbn                                                " + vbCrLf
+                sSql += "     , a.fkocs || '-' || TO_CHAR(seq) as fkocs                " + vbCrLf
+                sSql += "     , a.bldno                                        as bldno     " + vbCrLf
+                sSql += "     , b.filter                                               " + vbCrLf
+                sSql += "     , e.comordcd                                     as comordcd    " + vbCrLf
+                sSql += "     , '9999999'                                      as sortkey   " + vbCrLf
+                sSql += "     , d.cmt " + vbCrLf
+                sSql += "  FROM lb040m b1" + vbCrLf
+                sSql += "     , lb043m a " + vbCrLf
+                sSql += "     , lb042m b                                               " + vbCrLf
+                sSql += "     , lb030m c                                               " + vbCrLf
+                sSql += "     , lb020m d                                               " + vbCrLf
+                sSql += "     , lf120m e                                               " + vbCrLf
+                sSql += " WHERE b1.tnsjubsuno = :tnsno                                       " + vbCrLf
+                sSql += "   AND b1.tnsjubsuno = b.tnsjubsuno                            " + vbCrLf
+                sSql += "   AND b1.tnsjubsuno = a.tnsjubsuno" + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsno",  OracleDbType.Varchar2, rsTnsNum.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTnsNum))
 
-                sSql += "   AND a.state      = '3'                                     "
-                sSql += "   AND a.bldno      = c.bldno                                 "
-                sSql += "   AND a.comcd_out  = c.comcd_out                             "
-                sSql += "   AND a.tnsjubsuno = c.tnsjubsuno                            "
-                sSql += "   AND a.bldno      = d.bldno                                 "
-                sSql += "   AND a.comcd_out  = d.comcd                                 "
-                sSql += "   AND a.comcd_out  = e.comcd                                 "
-                sSql += "   AND b.spccd      = e.spccd                                 "
-                sSql += "   AND b1.jubsudt  >= e.usdt"
-                sSql += "   AND b1.jubsudt  <  e.uedt"
-                sSql += " ORDER BY vbldno"
+                sSql += "   AND a.state      = '3'                                     " + vbCrLf
+                sSql += "   AND a.bldno      = c.bldno                                 " + vbCrLf
+                sSql += "   AND a.comcd_out  = c.comcd_out                             " + vbCrLf
+                sSql += "   AND a.tnsjubsuno = c.tnsjubsuno                            " + vbCrLf
+                sSql += "   AND a.bldno      = d.bldno                                 " + vbCrLf
+                sSql += "   AND a.comcd_out  = d.comcd                                 " + vbCrLf
+                sSql += "   AND a.comcd_out  = e.comcd                                 " + vbCrLf
+                sSql += "   AND b.spccd      = e.spccd                                 " + vbCrLf
+                sSql += "   AND b1.jubsudt  >= e.usdt" + vbCrLf
+                sSql += "   AND b1.jubsudt  <  e.uedt" + vbCrLf
+                sSql += " ORDER BY vbldno" + vbCrLf
 
 
                 DbCommand()

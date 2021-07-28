@@ -1046,9 +1046,9 @@ Partial Class FGR02
         Me.AxResult.BcNoAll = False
         Me.AxResult.ColHiddenYn = False
         Me.AxResult.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.AxResult.Location = New System.Drawing.Point(295, 119)
+        Me.AxResult.Location = New System.Drawing.Point(295, 115)
         Me.AxResult.Name = "AxResult"
-        Me.AxResult.Size = New System.Drawing.Size(972, 516)
+        Me.AxResult.Size = New System.Drawing.Size(972, 520)
         Me.AxResult.TabIndex = 29
         Me.AxResult.UseBloodBank = False
         Me.AxResult.UseDoctor = False
@@ -1128,7 +1128,7 @@ Partial Class FGR02
         Me.AxPatInfo.Location = New System.Drawing.Point(295, 3)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(917, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(917, 113)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 28
         Me.AxPatInfo.TabStop = False
@@ -1163,7 +1163,7 @@ Partial Class FGR02
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(699, 118)
+        Me.btnHistory.Location = New System.Drawing.Point(706, 114)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -1177,7 +1177,7 @@ Partial Class FGR02
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(1174, 118)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(1175, 139)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(93, 22)
         Me.btnQuery_pat.TabIndex = 219

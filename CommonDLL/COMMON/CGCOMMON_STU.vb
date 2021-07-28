@@ -397,6 +397,8 @@ Namespace SVar
         Public IR As String = ""            '-- IR 
         Public FITER As String = ""         '-- Filter
         Public Hb_RST As String = ""        '-- 
+
+        Public EMER As String = ""        '--  응급 구분
     End Class
 
     Public Class STU_GOODSBCINFO

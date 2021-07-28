@@ -51,5 +51,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.251 --> 2021/06/01 : 일일보고서 출력 시 현재페이지 전체 페이지 수 표시
 'Version 3.1.10.252 --> 2021/06/07 : 일일보고서 출력 시 전체페이지수 0프로표시되어 수정
 'Version 3.1.10.253 --> 2021/06/07 : 일일보고서 출력 시 전체페이지수 0프로표시되어 수정(재배포)
+'Version 3.1.10.254 --> 2021/07/26 : 일일보고서 xpert 겹치는 현상 제거 위해 멀티라인 소스 변경
 
-<Assembly: AssemblyVersion("3.1.10.253")> 
+<Assembly: AssemblyVersion("3.1.10.254")> 

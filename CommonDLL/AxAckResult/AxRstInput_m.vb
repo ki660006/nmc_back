@@ -6492,7 +6492,8 @@ Public Class AxRstInput_m
                     sTxtCritical = LISAPP.COMM.RstFn.fnGet_GraedValue_C(strTclscd, sOrgRst)
 
                     '20200624 JHS 크리티컬 문자내용 적용 
-                    If strTclscd = "LM205" Then 'xpert pcr 검사가 Critical이라도 해당 환자의 1주일전 pcr검사 이력이 Deteted(Critical)일 경우 Normal결과로 판단
+                    ' "LM205" 
+                    If PRG_CONST.AFBC_test(strTclscd) <> "" Then ' "LM205"  xpert pcr 검사가 Critical이라도 해당 환자의 1주일전 pcr검사 이력이 Deteted(Critical)일 경우 Normal결과로 판단
                         Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_Comment(msBcNo, True)
 
                         If dt.Rows.Count > 0 Then
@@ -6501,6 +6502,25 @@ Public Class AxRstInput_m
                             sCriticalMark = sTxtCritical
                             ' If sTxtCritical = "C" Then msXpertC = True Else msXpertC = False
                         End If
+                        '작업중..................................................
+                        ' LM20101, LM20102, LM20301, LM20302, LM20303 액체, 고체배지
+                    ElseIf PRG_CONST.AFBC_NTM_test(strTclscd) <> "" Then '20210702 jhs MTB, NTM 검사
+                        Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_NTM_Comment(msBcNo) ' 5년안에 검사결과값이 있을 때
+                        Dim chkOrgRst As String = Mid(sOrgRst, 1, 3).ToUpper '결과값 앞의 3자리 가져오기
+
+                        If chkOrgRst = "MYC" Then ' 입력결과값이 MTB 검사일 경우
+                            If dt.Rows(0).Item("MTB").ToString.Trim = "Y" Then ' 5년안에 MTB 검사가 있을 경우
+                                sCriticalMark = ""
+                            Else '5년안에  MTB 검사가 없을 경우
+                                sCriticalMark = "C"
+                            End If
+                        ElseIf (chkOrgRst = "LIQ" Or chkOrgRst = "AFB") Then ' 입력 결과값이 NTM검사결과 일경우
+                            If dt.Rows(0).Item("NTM").ToString.Trim = "Y" Then '5년안에 NTM 검사가 있을 경우
+                                sCriticalMark = ""
+                            Else ' 5년안에 NTM검사가 없을 경우
+                                sCriticalMark = "C"
+                            End If
+                        End If
                     ElseIf sTxtCritical = "C" Then
                         sCriticalMark = "C"
                     Else
@@ -6508,7 +6528,7 @@ Public Class AxRstInput_m
                     End If
                     '----------------------------------------------------
 
-                    '??????????????????????? 왜 막았음???
+
                     'If strTclscd = "LM205" Then 'xpert pcr 검사가 Critical이라도 해당 환자의 1주일전 pcr검사 이력이 Deteted(Critical)일 경우 Normal결과로 판단
                     '    Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_Comment(msBcNo, True)
 

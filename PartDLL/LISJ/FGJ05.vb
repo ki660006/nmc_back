@@ -435,7 +435,7 @@ Public Class FGJ05
                                     bUseWkno_old = False
                                 End If
                             End If
-
+                            'procedure = pro_ack_exe_take
                             Dim sRet As String = (New WEBSERVER.CGWEB_J).ExecuteDo_TaKe(sBcNo, Me.txtPassId.Text, IIf(bUseWkno_old, "Y", "N").ToString, "lis")
 
                             If sRet.StartsWith("00") Then

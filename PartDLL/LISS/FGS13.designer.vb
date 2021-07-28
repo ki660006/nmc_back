@@ -101,6 +101,7 @@ Partial Class FGS13
         Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
         Me.cboWkGrp = New System.Windows.Forms.ComboBox()
         Me.cboTGrp = New System.Windows.Forms.ComboBox()
+        Me.chkBFtestToExcel = New System.Windows.Forms.CheckBox()
         Me.pnlBottom.SuspendLayout()
         Me.pnlMid.SuspendLayout()
         CType(Me.spdList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -620,6 +621,7 @@ Partial Class FGS13
         '
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.chkBFtestToExcel)
         Me.GroupBox6.Controls.Add(Me.chkBFtest)
         Me.GroupBox6.Controls.Add(Me.chkTyping)
         Me.GroupBox6.Controls.Add(Me.chkSpcSelect)
@@ -658,10 +660,10 @@ Partial Class FGS13
         'chkBFtest
         '
         Me.chkBFtest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkBFtest.Location = New System.Drawing.Point(253, 105)
+        Me.chkBFtest.Location = New System.Drawing.Point(263, 104)
         Me.chkBFtest.Margin = New System.Windows.Forms.Padding(0)
         Me.chkBFtest.Name = "chkBFtest"
-        Me.chkBFtest.Size = New System.Drawing.Size(109, 15)
+        Me.chkBFtest.Size = New System.Drawing.Size(98, 16)
         Me.chkBFtest.TabIndex = 205
         Me.chkBFtest.Text = "체액검사출력"
         Me.chkBFtest.Visible = False
@@ -669,7 +671,7 @@ Partial Class FGS13
         'chkTyping
         '
         Me.chkTyping.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkTyping.Location = New System.Drawing.Point(363, 106)
+        Me.chkTyping.Location = New System.Drawing.Point(363, 104)
         Me.chkTyping.Margin = New System.Windows.Forms.Padding(0)
         Me.chkTyping.Name = "chkTyping"
         Me.chkTyping.Size = New System.Drawing.Size(95, 16)
@@ -1011,6 +1013,17 @@ Partial Class FGS13
         Me.cboTGrp.Size = New System.Drawing.Size(141, 20)
         Me.cboTGrp.TabIndex = 157
         '
+        'chkBFtestToExcel
+        '
+        Me.chkBFtestToExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkBFtestToExcel.Location = New System.Drawing.Point(148, 104)
+        Me.chkBFtestToExcel.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkBFtestToExcel.Name = "chkBFtestToExcel"
+        Me.chkBFtestToExcel.Size = New System.Drawing.Size(115, 16)
+        Me.chkBFtestToExcel.TabIndex = 206
+        Me.chkBFtestToExcel.Text = "체액검사ToExcel"
+        Me.chkBFtestToExcel.Visible = False
+        '
         'FGS13
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -1102,4 +1115,5 @@ Partial Class FGS13
     Friend WithEvents chkTyping As System.Windows.Forms.CheckBox
     Friend WithEvents chkMultiBc As System.Windows.Forms.CheckBox
     Friend WithEvents chkBFtest As System.Windows.Forms.CheckBox
+    Friend WithEvents chkBFtestToExcel As System.Windows.Forms.CheckBox
 End Class

@@ -388,7 +388,7 @@ Public Class FGB09
             dt = CGDA_BT.fn_StOrderList(sTnsnum)
             sb_DisplayStOutList(dt)
 
-            If sTnsGbn = "3" And spdStOutList.MaxRows = 0 Then Me.chkCMCO.Checked = True
+            If sTnsGbn = "3" And spdStOutList.MaxRows = 0 Then Me.chkCMCO.Checked = True 'tnsgbn = 3 은 응급 교차미필 체크 
 
             Me.txtBldno.Focus()
 
@@ -869,6 +869,9 @@ Public Class FGB09
                     .Col = .GetColFromID("comordcd") : .Text = r_dt.Rows(i).Item("comordcd").ToString
                     .Col = .GetColFromID("comcd_out") : .Text = r_dt.Rows(i).Item("comcd_out").ToString
                     .Col = .GetColFromID("cmt") : .Text = r_dt.Rows(i).Item("cmt").ToString
+                    '20210719 jhs 응급수혈 구분 추가 
+                    .Col = .GetColFromID("tnsGbn") : .Text = r_dt.Rows(i).Item("tnsgbn").ToString
+                    '------------------------------------------
                 Next
             End With
         Catch ex As Exception
@@ -1043,6 +1046,9 @@ Public Class FGB09
             Dim sFilter As String = ""
             Dim sAboType As String = ""
             Dim sRhType As String = ""
+            '20210719 jhs 응급구분 추가
+            Dim sTnsGbn As String = ""
+            '---------------------------------
 
             With Me.spdOrderList
                 .Row = .ActiveRow
@@ -1055,6 +1061,9 @@ Public Class FGB09
                 .Col = .GetColFromID("filter") : sFilter = .Text.Trim
                 .Col = .GetColFromID("abo") : sAboType = .Text.Trim
                 .Col = .GetColFromID("rh") : sRhType = .Text.Trim
+                '20210719 jhs 응급구분 추가
+                .Col = .GetColFromID("tnsGbn") : sTnsGbn = .Text.Trim
+                '---------------------------------
             End With
 
             With Me.spdStOutList
@@ -1075,6 +1084,13 @@ Public Class FGB09
                         stuOut.FILTER = sFilter.Trim
                         stuOut.ABO = Me.AxTnsPatinfo1.AboRh.Replace("-", "").Replace("+", "")
                         stuOut.RH = Me.AxTnsPatinfo1.AboRh.Replace("A", "").Replace("B", "").Replace("O", "")
+                        '20210719 jhs 응급구분 추가
+                        If sTnsGbn = "3" Then
+                            stuOut.EMER = "Y"
+                        Else
+                            stuOut.EMER = "N"
+                        End If
+                        '---------------------------------
 
                         .Col = .GetColFromID("bldno") : stuOut.BLDNO = .Text.Trim
                         .Col = .GetColFromID("comcd") : stuOut.COMCD = .Text.Trim

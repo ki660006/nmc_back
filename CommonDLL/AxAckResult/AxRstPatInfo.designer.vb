@@ -37,10 +37,9 @@ Partial Class AxRstPatInfo
         Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.gbxUniqueComment = New System.Windows.Forms.GroupBox()
         Me.btnShareCmtDel = New CButtonLib.CButton()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.btnShareCmtAdd = New CButtonLib.CButton()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtShareCmtCont = New System.Windows.Forms.TextBox()
         Me.lblGenDr = New System.Windows.Forms.Label()
         Me.lblTat = New System.Windows.Forms.Label()
@@ -86,13 +85,15 @@ Partial Class AxRstPatInfo
         Me.mnuCopy_regno = New System.Windows.Forms.ToolStripMenuItem()
         Me.tipMsg = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
-        Me.gbxUniqueComment.SuspendLayout()
         Me.cmuLink.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.gbxUniqueComment)
+        Me.GroupBox1.Controls.Add(Me.btnShareCmtDel)
+        Me.GroupBox1.Controls.Add(Me.btnShareCmtAdd)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.txtShareCmtCont)
         Me.GroupBox1.Controls.Add(Me.lblGenDr)
         Me.GroupBox1.Controls.Add(Me.lblTat)
         Me.GroupBox1.Controls.Add(Me.lblSpcNmd)
@@ -135,23 +136,9 @@ Partial Class AxRstPatInfo
         Me.GroupBox1.Controls.Add(Me.lblRegNo)
         Me.GroupBox1.Location = New System.Drawing.Point(0, -7)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1060, 121)
+        Me.GroupBox1.Size = New System.Drawing.Size(920, 147)
         Me.GroupBox1.TabIndex = 189
         Me.GroupBox1.TabStop = False
-        '
-        'gbxUniqueComment
-        '
-        Me.gbxUniqueComment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtDel)
-        Me.gbxUniqueComment.Controls.Add(Me.Label4)
-        Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtAdd)
-        Me.gbxUniqueComment.Controls.Add(Me.txtShareCmtCont)
-        Me.gbxUniqueComment.Location = New System.Drawing.Point(918, 7)
-        Me.gbxUniqueComment.Name = "gbxUniqueComment"
-        Me.gbxUniqueComment.Size = New System.Drawing.Size(142, 114)
-        Me.gbxUniqueComment.TabIndex = 190
-        Me.gbxUniqueComment.TabStop = False
         '
         'btnShareCmtDel
         '
@@ -182,28 +169,16 @@ Partial Class AxRstPatInfo
         Me.btnShareCmtDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnShareCmtDel.ImageIndex = 0
         Me.btnShareCmtDel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnShareCmtDel.Location = New System.Drawing.Point(66, 20)
+        Me.btnShareCmtDel.Location = New System.Drawing.Point(848, 119)
         Me.btnShareCmtDel.Name = "btnShareCmtDel"
         Me.btnShareCmtDel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnShareCmtDel.SideImage = Nothing
         Me.btnShareCmtDel.SideImageSize = New System.Drawing.Size(48, 48)
-        Me.btnShareCmtDel.Size = New System.Drawing.Size(76, 17)
+        Me.btnShareCmtDel.Size = New System.Drawing.Size(68, 23)
         Me.btnShareCmtDel.TabIndex = 177
         Me.btnShareCmtDel.Text = "삭제"
         Me.btnShareCmtDel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnShareCmtDel.TextMargin = New System.Windows.Forms.Padding(0)
-        '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
-        Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(0, 2)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(63, 35)
-        Me.Label4.TabIndex = 176
-        Me.Label4.Text = "검사자간 공유사항"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnShareCmtAdd
         '
@@ -234,28 +209,37 @@ Partial Class AxRstPatInfo
         Me.btnShareCmtAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnShareCmtAdd.ImageIndex = 0
         Me.btnShareCmtAdd.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnShareCmtAdd.Location = New System.Drawing.Point(66, 2)
+        Me.btnShareCmtAdd.Location = New System.Drawing.Point(781, 119)
         Me.btnShareCmtAdd.Name = "btnShareCmtAdd"
         Me.btnShareCmtAdd.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnShareCmtAdd.SideImage = Nothing
         Me.btnShareCmtAdd.SideImageSize = New System.Drawing.Size(48, 48)
-        Me.btnShareCmtAdd.Size = New System.Drawing.Size(76, 19)
+        Me.btnShareCmtAdd.Size = New System.Drawing.Size(66, 23)
         Me.btnShareCmtAdd.TabIndex = 176
         Me.btnShareCmtAdd.Text = "추가(수정)"
         Me.btnShareCmtAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnShareCmtAdd.TextMargin = New System.Windows.Forms.Padding(0)
         '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label4.ForeColor = System.Drawing.Color.Black
+        Me.Label4.Location = New System.Drawing.Point(4, 120)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(109, 22)
+        Me.Label4.TabIndex = 176
+        Me.Label4.Text = "검사자간 공유사항"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'txtShareCmtCont
         '
-        Me.txtShareCmtCont.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtShareCmtCont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtShareCmtCont.Location = New System.Drawing.Point(0, 40)
+        Me.txtShareCmtCont.Location = New System.Drawing.Point(115, 119)
         Me.txtShareCmtCont.Multiline = True
         Me.txtShareCmtCont.Name = "txtShareCmtCont"
         Me.txtShareCmtCont.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtShareCmtCont.Size = New System.Drawing.Size(142, 72)
+        Me.txtShareCmtCont.Size = New System.Drawing.Size(662, 23)
         Me.txtShareCmtCont.TabIndex = 176
         '
         'lblGenDr
@@ -348,15 +332,14 @@ Partial Class AxRstPatInfo
         '
         'txtRemark
         '
-        Me.txtRemark.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtRemark.BackColor = System.Drawing.Color.White
-        Me.txtRemark.Location = New System.Drawing.Point(591, 92)
+        Me.txtRemark.Location = New System.Drawing.Point(591, 93)
         Me.txtRemark.Margin = New System.Windows.Forms.Padding(0)
         Me.txtRemark.Multiline = True
         Me.txtRemark.Name = "txtRemark"
         Me.txtRemark.ReadOnly = True
         Me.txtRemark.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.txtRemark.Size = New System.Drawing.Size(186, 26)
+        Me.txtRemark.Size = New System.Drawing.Size(186, 25)
         Me.txtRemark.TabIndex = 223
         '
         'Label19
@@ -867,11 +850,9 @@ Partial Class AxRstPatInfo
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "AxRstPatInfo"
-        Me.Size = New System.Drawing.Size(1061, 114)
+        Me.Size = New System.Drawing.Size(922, 114)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.gbxUniqueComment.ResumeLayout(False)
-        Me.gbxUniqueComment.PerformLayout()
         Me.cmuLink.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -920,7 +901,6 @@ Partial Class AxRstPatInfo
     Friend WithEvents lblTat As System.Windows.Forms.Label
     Friend WithEvents lblGenDr As System.Windows.Forms.Label
     Friend WithEvents tipMsg As System.Windows.Forms.ToolTip
-    Friend WithEvents gbxUniqueComment As System.Windows.Forms.GroupBox
     Friend WithEvents btnShareCmtDel As CButtonLib.CButton
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnShareCmtAdd As CButtonLib.CButton
