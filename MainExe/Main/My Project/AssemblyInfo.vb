@@ -268,7 +268,10 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.771 --> 2021/07/26 : AxAckPatinfo, AxAckResultViewer, LISS, LISR, LISAPP, LISB, BCPRT01
 'Version 3.1.10.772 --> 2021/07/26 : COMMON
 'Version 3.1.10.773 --> 2021/07/26 : BCPRT01
+'Version 3.1.10.774 --> 2021/08/02 : AxAckResult, LISR, LISM
+'Version 3.1.10.775 --> 2021/08/02 : AxAckResult, LISR, LISM(재배포)
+'Version 3.1.10.776 --> 2021/08/02 : AxAckResult(재배포)
 
-<Assembly: AssemblyVersion("3.1.10.773")> 
+<Assembly: AssemblyVersion("3.1.10.776")> 
 
 

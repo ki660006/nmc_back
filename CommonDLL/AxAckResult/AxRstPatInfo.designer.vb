@@ -850,7 +850,7 @@ Partial Class AxRstPatInfo
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "AxRstPatInfo"
-        Me.Size = New System.Drawing.Size(922, 114)
+        Me.Size = New System.Drawing.Size(922, 140)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.cmuLink.ResumeLayout(False)

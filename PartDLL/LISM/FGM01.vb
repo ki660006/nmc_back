@@ -1495,7 +1495,7 @@ Public Class FGM01
         Me.btnAddmic.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnAddmic.ImageIndex = 0
         Me.btnAddmic.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnAddmic.Location = New System.Drawing.Point(246, 118)
+        Me.btnAddmic.Location = New System.Drawing.Point(246, 142)
         Me.btnAddmic.Name = "btnAddmic"
         Me.btnAddmic.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnAddmic.SideImage = Nothing
@@ -1509,7 +1509,7 @@ Public Class FGM01
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(874, 117)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(873, 141)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(93, 22)
         Me.btnQuery_pat.TabIndex = 220
@@ -1547,7 +1547,7 @@ Public Class FGM01
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(400, 117)
+        Me.btnHistory.Location = New System.Drawing.Point(401, 142)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -1586,7 +1586,7 @@ Public Class FGM01
         Me.txtBcNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBcNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtBcNo.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtBcNo.Location = New System.Drawing.Point(125, 115)
+        Me.txtBcNo.Location = New System.Drawing.Point(125, 142)
         Me.txtBcNo.MaxLength = 18
         Me.txtBcNo.Name = "txtBcNo"
         Me.txtBcNo.Size = New System.Drawing.Size(117, 21)
@@ -1604,9 +1604,9 @@ Public Class FGM01
         Me.axResult.BcNoAll = False
         Me.axResult.ColHiddenYn = False
         Me.axResult.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.axResult.Location = New System.Drawing.Point(3, 118)
+        Me.axResult.Location = New System.Drawing.Point(3, 142)
         Me.axResult.Name = "axResult"
-        Me.axResult.Size = New System.Drawing.Size(964, 477)
+        Me.axResult.Size = New System.Drawing.Size(964, 453)
         Me.axResult.TabIndex = 176
         '
         'AxPatInfo
@@ -1616,7 +1616,7 @@ Public Class FGM01
         Me.AxPatInfo.Location = New System.Drawing.Point(2, 1)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(918, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(918, 143)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 177
         '

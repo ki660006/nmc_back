@@ -649,7 +649,7 @@ Partial Class FGR02
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel3.Location = New System.Drawing.Point(0, 640)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1268, 32)
+        Me.Panel3.Size = New System.Drawing.Size(1273, 32)
         Me.Panel3.TabIndex = 162
         '
         'btnReg_aborh
@@ -1046,9 +1046,9 @@ Partial Class FGR02
         Me.AxResult.BcNoAll = False
         Me.AxResult.ColHiddenYn = False
         Me.AxResult.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.AxResult.Location = New System.Drawing.Point(295, 115)
+        Me.AxResult.Location = New System.Drawing.Point(295, 143)
         Me.AxResult.Name = "AxResult"
-        Me.AxResult.Size = New System.Drawing.Size(972, 520)
+        Me.AxResult.Size = New System.Drawing.Size(972, 492)
         Me.AxResult.TabIndex = 29
         Me.AxResult.UseBloodBank = False
         Me.AxResult.UseDoctor = False
@@ -1096,7 +1096,7 @@ Partial Class FGR02
         Me.spdList.Location = New System.Drawing.Point(0, 3)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdList.Size = New System.Drawing.Size(282, 421)
+        Me.spdList.Size = New System.Drawing.Size(282, 434)
         Me.spdList.TabIndex = 25
         '
         'btnDown
@@ -1128,7 +1128,7 @@ Partial Class FGR02
         Me.AxPatInfo.Location = New System.Drawing.Point(295, 3)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(917, 113)
+        Me.AxPatInfo.Size = New System.Drawing.Size(917, 139)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 28
         Me.AxPatInfo.TabStop = False
@@ -1163,7 +1163,7 @@ Partial Class FGR02
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(706, 114)
+        Me.btnHistory.Location = New System.Drawing.Point(702, 142)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -1177,7 +1177,7 @@ Partial Class FGR02
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(1175, 139)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(1173, 142)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(93, 22)
         Me.btnQuery_pat.TabIndex = 219

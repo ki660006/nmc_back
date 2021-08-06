@@ -12254,7 +12254,7 @@ Public Class APP_F_DCOMCD
 
             sSql += "SELECT DISTINCT"
             sSql += "       '' sungbun_code, igrdname sungbun_name"
-            sSql += "  FROM oram1.mdordrtc a
+            sSql += "  FROM oram1.mdordrtc a "
             sSql += " WHERE a.appldate <= SYSDATE"
             sSql += "   AND a.enddate  >= SYSDATE"
             sSql += " ORDER BY a.igrdname"
