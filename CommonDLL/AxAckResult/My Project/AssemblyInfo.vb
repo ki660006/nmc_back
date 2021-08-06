@@ -88,5 +88,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.392 --> 2021/06/28 : 검사자간 공유사항 재배포
 'Version 3.1.10.393 --> 2021/06/28 : 검사자간 공유사항 재배포(롤백)
 'Version 3.1.10.394 --> 2021/07/19 : 미생물결과 NTM, MTB 내용 5년안에 결과값있으면 C가 안나오고 없으면 C가 나오게 구현 
+'Version 3.1.10.395 --> 2021/08/02 : 검사자간 공유사항 재배포
+'Version 3.1.10.396 --> 2021/08/02 : 검사자간 공유사항 재배포
+'Version 3.1.10.397 --> 2021/08/02 : 검사자간 공유사항 재배포
 
-<Assembly: AssemblyVersion("3.1.10.394")> 
+<Assembly: AssemblyVersion("3.1.10.397")> 

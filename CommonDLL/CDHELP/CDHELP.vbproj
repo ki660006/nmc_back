@@ -98,7 +98,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dll&amp;OCX\AxInterop.FPSpreadADO.dll</HintPath>
     </Reference>
-    <Reference Include="cbuttonlib" />
+    <Reference Include="cbuttonlib">
+      <HintPath>..\..\Dll&amp;OCX\cbuttonlib.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -169,6 +171,12 @@
     <Compile Include="FGCDHELP_TEST3.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FGCDHELP_TEST_HELPER.Designer.vb">
+      <DependentUpon>FGCDHELP_TEST_HELPER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGCDHELP_TEST_HELPER.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FGCDHELP_TEST_NEW_S01.Designer.vb">
       <DependentUpon>FGCDHELP_TEST_NEW_S01.vb</DependentUpon>
     </Compile>
@@ -231,6 +239,9 @@
     <EmbeddedResource Include="FGCDHELP_TEST3.resx">
       <DependentUpon>FGCDHELP_TEST3.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FGCDHELP_TEST_HELPER.resx">
+      <DependentUpon>FGCDHELP_TEST_HELPER.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FGCDHELP_TEST_NEW_S01.resx">
       <DependentUpon>FGCDHELP_TEST_NEW_S01.vb</DependentUpon>
     </EmbeddedResource>
@@ -268,15 +279,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="MSDATASRC1">
-      <Guid>{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

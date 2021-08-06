@@ -1091,7 +1091,6 @@ Partial Class FGCDHELP_TEST_NEW
         Me.Label28.TabIndex = 289
         Me.Label28.Text = "단위"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label28.Visible = False
         '
         'txtspcunit
         '
@@ -1103,7 +1102,6 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtspcunit.TabIndex = 290
         Me.txtspcunit.Tag = "SLIPNMD"
         Me.txtspcunit.Text = "012345678"
-        Me.txtspcunit.Visible = False
         '
         'txtrstunit
         '

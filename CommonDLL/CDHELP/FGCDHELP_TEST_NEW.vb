@@ -863,6 +863,7 @@ Public Class FGCDHELP_TEST_NEW
 
     End Sub
 
+
     Private Sub btnCdHelp_test_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCdHelp_test.Click, btnCdHelp_Tnm.Click
         Dim sFn As String = "Handles btnCdHelp_test.Click"
         Try
@@ -870,7 +871,7 @@ Public Class FGCDHELP_TEST_NEW
             Dim pntCtlXY As Point = Fn.CtrlLocationXY(Me)
             Dim pntFrmXY As Point = Fn.CtrlLocationXY(btnCdHelp_test)
 
-            Dim objHelp As New CDHELP.FGCDHELP01
+            Dim objHelp As New CDHELP.FGCDHELP_TEST_HELPER
             Dim alList As New ArrayList
             Dim dt As New DataTable
 
@@ -1046,7 +1047,7 @@ Public Class FGCDHELP_TEST_NEW
             Dim pntCtlXY As Point = Fn.CtrlLocationXY(Me)
             Dim pntFrmXY As Point = Fn.CtrlLocationXY(btnCdHelp_test)
 
-            Dim objHelp As New CDHELP.FGCDHELP01
+            Dim objHelp As New CDHELP.FGCDHELP_TEST_HELPER
             Dim alList As New ArrayList
             Dim dt As New DataTable
 

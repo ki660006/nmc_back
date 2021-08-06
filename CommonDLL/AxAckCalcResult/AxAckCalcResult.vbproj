@@ -103,6 +103,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\..\Dll&amp;OCX\Interop.FPSpreadADO.dll</HintPath>
     </Reference>
+    <Reference Include="MSDATASRC, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC\MSDATASRC\7.0.3300.0__b03f5f7f11d50a3a\MSDATASRC.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.DataAccess, Version=2.111.6.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dll&amp;OCX\Oracle.DataAccess.DLL</HintPath>
@@ -180,15 +185,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="MSDATASRC">
-      <Guid>{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

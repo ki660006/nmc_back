@@ -988,6 +988,30 @@ End Class
 Public Class Ctrl
     Private Const msFile As String = "File : FGCDHELP02.vb, Class : Ctrl" & vbTab
 
+    Public Shared Function Get_Code(ByVal r_cbo As System.Windows.Forms.ComboBox) As String
+        Dim sFn As String = "Function Get_Code"
+
+        Try
+            Dim sCd As String = ""
+
+            If Not r_cbo.SelectedItem Is Nothing Then sCd = r_cbo.SelectedItem.ToString()
+
+            If sCd.IndexOf("[") < 0 Or sCd.IndexOf("]") < 0 Then
+                sCd = ""
+            Else
+                sCd = sCd.Substring(sCd.IndexOf("[") + 1, sCd.IndexOf("]") - (sCd.IndexOf("[") + 1))
+            End If
+
+            Return sCd.Trim
+
+        Catch ex As Exception
+            MsgBox(sFn + " - " + ex.Message + vbCrLf + msFile)
+
+            Return ""
+
+        End Try
+    End Function
+
     Public Shared Function Get_Code(ByVal r_spd As AxFPSpreadADO.AxfpSpread, ByVal riCol As Integer, ByVal riRow As Integer) As String
         Dim sFn As String = "Function Get_Code"
 

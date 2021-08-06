@@ -726,13 +726,15 @@ Public Class LUKHAN_DRV
                 End If
             End If
 
-            '20210719 응급 구분 추가
+            '20210719 응급 구분 추가 '테스트 후 배포 해야함
             If ro_Data.EMER = "Y" Then
-                sXMatcd += " , 응급"
+                sXMatcd = "응급"
+                LK_PrintDeviceFont(165 + riLeftPos, 245 + iTop, 0, 25, 2, 2, 0, sXMatcd)
             Else
+                LK_PrintWindowsFont(165 + riLeftPos, 245 + iTop, 0, 25, 1, 0, 0, "굴림", sXMatcd)
             End If
             '-------------------
-            LK_PrintWindowsFont(165 + riLeftPos, 245 + iTop, 0, 25, 1, 0, 0, "굴림", sXMatcd)
+
 
             '< 7. Filter/IR
             Dim sFiterIr As String = ro_Data.FITER + "/" + ro_Data.IR

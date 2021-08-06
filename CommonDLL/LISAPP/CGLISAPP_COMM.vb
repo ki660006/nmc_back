@@ -1423,7 +1423,7 @@ Namespace COMM
         End Function
         ' 검사분야 조회
         Public Shared Function fnGet_PartSlip_List() As DataTable
-            Dim sFn As String = "Function fnGet_Slip_List() As DataTable"
+            Dim sFn As String = "Function fnGet_PartSlip_List() As DataTable"
             Try
                 Dim sSql As String = ""
                 Dim alParm As New ArrayList

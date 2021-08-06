@@ -1834,15 +1834,15 @@ Public Class TOTRST03
 
                                     If ra_dr(i - 1).Table.Columns(j - 1).ColumnName.ToLower() = "reftxt" Then
                                         Dim sRef As String = ra_dr(i - 1).Item(j - 1).ToString()
-                                        '20210722 jhs 세부검사참조 생략
+                                        '20210802 jhs 세부검사참조 생략
                                         If sRef.IndexOf("~") > -1 Then
-                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부검사참조") Then
+                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
                                                 .Text = ""
                                             Else
                                                 .Text = sRef
                                             End If
                                         Else
-                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부검사참조") Then
+                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
                                                 .Text = ""
                                             Else
                                                 .Text = ra_dr(i - 1).Item(j - 1).ToString()

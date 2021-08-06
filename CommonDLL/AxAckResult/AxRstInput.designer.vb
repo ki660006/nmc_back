@@ -444,7 +444,7 @@ Partial Class AxRstInput
         'axCalcRst
         '
         Me.axCalcRst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.axCalcRst.Location = New System.Drawing.Point(502, 0)
+        Me.axCalcRst.Location = New System.Drawing.Point(500, 0)
         Me.axCalcRst.Name = "axCalcRst"
         Me.axCalcRst.Size = New System.Drawing.Size(113, 22)
         Me.axCalcRst.TabIndex = 166
@@ -656,7 +656,7 @@ Partial Class AxRstInput
         Me.btnReg_Abn.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_Abn.ImageIndex = 0
         Me.btnReg_Abn.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_Abn.Location = New System.Drawing.Point(1073, 0)
+        Me.btnReg_Abn.Location = New System.Drawing.Point(1071, 0)
         Me.btnReg_Abn.Name = "btnReg_Abn"
         Me.btnReg_Abn.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_Abn.SideImage = Nothing
@@ -697,7 +697,7 @@ Partial Class AxRstInput
         Me.btnReg_UnFit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_UnFit.ImageIndex = 0
         Me.btnReg_UnFit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_UnFit.Location = New System.Drawing.Point(878, 0)
+        Me.btnReg_UnFit.Location = New System.Drawing.Point(876, 0)
         Me.btnReg_UnFit.Name = "btnReg_UnFit"
         Me.btnReg_UnFit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_UnFit.SideImage = Nothing
@@ -739,7 +739,7 @@ Partial Class AxRstInput
         Me.btnQryFNModify.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQryFNModify.ImageIndex = 0
         Me.btnQryFNModify.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQryFNModify.Location = New System.Drawing.Point(596, 0)
+        Me.btnQryFNModify.Location = New System.Drawing.Point(594, 0)
         Me.btnQryFNModify.Name = "btnQryFNModify"
         Me.btnQryFNModify.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQryFNModify.SideImage = Nothing
@@ -781,7 +781,7 @@ Partial Class AxRstInput
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(690, 0)
+        Me.btnHistory.Location = New System.Drawing.Point(688, 0)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -823,7 +823,7 @@ Partial Class AxRstInput
         Me.btnKeyPad.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnKeyPad.ImageIndex = 0
         Me.btnKeyPad.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnKeyPad.Location = New System.Drawing.Point(423, 0)
+        Me.btnKeyPad.Location = New System.Drawing.Point(421, 0)
         Me.btnKeyPad.Name = "btnKeyPad"
         Me.btnKeyPad.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnKeyPad.SideImage = Nothing
@@ -865,7 +865,7 @@ Partial Class AxRstInput
         Me.btnExmAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExmAdd.ImageIndex = 0
         Me.btnExmAdd.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExmAdd.Location = New System.Drawing.Point(615, 0)
+        Me.btnExmAdd.Location = New System.Drawing.Point(613, 0)
         Me.btnExmAdd.Name = "btnExmAdd"
         Me.btnExmAdd.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExmAdd.SideImage = Nothing
@@ -942,7 +942,7 @@ Partial Class AxRstInput
         Me.btnReg_tat.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_tat.ImageIndex = 0
         Me.btnReg_tat.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_tat.Location = New System.Drawing.Point(781, 0)
+        Me.btnReg_tat.Location = New System.Drawing.Point(779, 0)
         Me.btnReg_tat.Name = "btnReg_tat"
         Me.btnReg_tat.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_tat.SideImage = Nothing
@@ -983,7 +983,7 @@ Partial Class AxRstInput
         Me.btnBldInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnBldInfo.ImageIndex = 0
         Me.btnBldInfo.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnBldInfo.Location = New System.Drawing.Point(1162, -1)
+        Me.btnBldInfo.Location = New System.Drawing.Point(1160, 0)
         Me.btnBldInfo.Name = "btnBldInfo"
         Me.btnBldInfo.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnBldInfo.SideImage = Nothing
@@ -1024,7 +1024,7 @@ Partial Class AxRstInput
         Me.btnQuery_Abn.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery_Abn.ImageIndex = 0
         Me.btnQuery_Abn.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQuery_Abn.Location = New System.Drawing.Point(984, 0)
+        Me.btnQuery_Abn.Location = New System.Drawing.Point(982, 0)
         Me.btnQuery_Abn.Name = "btnQuery_Abn"
         Me.btnQuery_Abn.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery_Abn.SideImage = Nothing
@@ -1079,7 +1079,7 @@ Partial Class AxRstInput
         '
         Me.btnCVRList.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnCVRList.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker25.IsActive = False
+        DesignerRectTracker25.IsActive = True
         DesignerRectTracker25.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker25.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCVRList.CenterPtTracker = DesignerRectTracker25
         CBlendItems13.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
@@ -1154,32 +1154,32 @@ Partial Class AxRstInput
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ContextMenuStrip = Me.cmuLink
+        Me.Controls.Add(Me.btnBldInfo)
+        Me.Controls.Add(Me.btnQuery_Abn)
+        Me.Controls.Add(Me.axCalcRst)
+        Me.Controls.Add(Me.btnReg_tat)
+        Me.Controls.Add(Me.btnExmAdd)
+        Me.Controls.Add(Me.btnReg_UnFit)
+        Me.Controls.Add(Me.btnHistory)
+        Me.Controls.Add(Me.btnQryFNModify)
+        Me.Controls.Add(Me.btnReg_Abn)
+        Me.Controls.Add(Me.btnKeyPad)
         Me.Controls.Add(Me.lstEx)
         Me.Controls.Add(Me.btnDebug_cmt)
         Me.Controls.Add(Me.gbxComment)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnCVRList)
         Me.Controls.Add(Me.btnCVRsend)
-        Me.Controls.Add(Me.btnQuery_Abn)
-        Me.Controls.Add(Me.axCalcRst)
-        Me.Controls.Add(Me.btnBldInfo)
-        Me.Controls.Add(Me.btnReg_tat)
         Me.Controls.Add(Me.txtBcNo)
         Me.Controls.Add(Me.chkBcnoAll)
         Me.Controls.Add(Me.lblcasegbn)
         Me.Controls.Add(Me.lblpartslipcd)
-        Me.Controls.Add(Me.btnExmAdd)
-        Me.Controls.Add(Me.btnReg_UnFit)
-        Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.txtTestCd)
         Me.Controls.Add(Me.txtOrgRst)
         Me.Controls.Add(Me.chkSelect)
         Me.Controls.Add(Me.pnlCode)
-        Me.Controls.Add(Me.btnQryFNModify)
-        Me.Controls.Add(Me.btnReg_Abn)
         Me.Controls.Add(Me.grpRstInfo)
         Me.Controls.Add(Me.gbxABO)
-        Me.Controls.Add(Me.btnKeyPad)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)

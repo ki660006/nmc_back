@@ -1231,9 +1231,6 @@ Public Class FGR02
         End Try
     End Sub
 
-    Private Sub AxResult_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AxResult.Load
-
-    End Sub
 
     Private Sub Label14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label14.Click
         If Label14.Text = "접수일자" Then

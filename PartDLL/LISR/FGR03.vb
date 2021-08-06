@@ -1727,7 +1727,7 @@ Public Class FGR03
         'btnRerun
         '
         Me.btnRerun.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker3.IsActive = False
+        DesignerRectTracker3.IsActive = True
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnRerun.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -2052,9 +2052,9 @@ Public Class FGR03
         Me.AxResult.BcNoAll = False
         Me.AxResult.ColHiddenYn = False
         Me.AxResult.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.AxResult.Location = New System.Drawing.Point(310, 118)
+        Me.AxResult.Location = New System.Drawing.Point(310, 136)
         Me.AxResult.Name = "AxResult"
-        Me.AxResult.Size = New System.Drawing.Size(967, 477)
+        Me.AxResult.Size = New System.Drawing.Size(967, 459)
         Me.AxResult.TabIndex = 168
         Me.AxResult.UseBloodBank = False
         Me.AxResult.UseDoctor = False
@@ -2372,7 +2372,7 @@ Public Class FGR03
         Me.AxPatInfo.Location = New System.Drawing.Point(309, 1)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(916, 114)
+        Me.AxPatInfo.Size = New System.Drawing.Size(916, 140)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 188
         '
@@ -2406,7 +2406,7 @@ Public Class FGR03
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(711, 117)
+        Me.btnHistory.Location = New System.Drawing.Point(711, 136)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -2420,7 +2420,7 @@ Public Class FGR03
         'btnQuery_pat
         '
         Me.btnQuery_pat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnQuery_pat.Location = New System.Drawing.Point(1185, 118)
+        Me.btnQuery_pat.Location = New System.Drawing.Point(1183, 135)
         Me.btnQuery_pat.Name = "btnQuery_pat"
         Me.btnQuery_pat.Size = New System.Drawing.Size(92, 22)
         Me.btnQuery_pat.TabIndex = 219
