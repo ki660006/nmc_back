@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("b96fe3ee-effb-4028-b4f0-02d803acadd9")> 
+<Assembly: Guid("b96fe3ee-effb-4028-b4f0-02d803acadd9")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -116,5 +116,11 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.432 --> 2021/05/21 : 체액검사 보고서 출력 수정
 'Version 3.1.10.433 --> 2021/06/22 : TAT조회 차일드도 포함 되서 조회 될 수 있도록 구현
 'Version 3.1.10.434 --> 2021/07/26 : 사이토스핀 엑셀화, 사이토스핀 엑셀내용변경, 일일보고서 xpert 겹침 현상 제거 
+'Version 3.1.10.435 --> 2021/08/18 : cytospin 진단명 출력, 엑셀 팝업 저장 가능하도록, 보고서 단위 추가 , 배양균별 색 변경 가능하도록 
+'Version 3.1.10.436 --> 2021/08/23 : cytospin 보고서 수정사항 적용
+'Version 3.1.10.437 --> 2021/09/01 : cytospin 보고서 수정사항 적용, 미생물 병동 내용 변경, 전송 해당 검체는 색 변경, 병원체 조회 조건 변경
+'Version 3.1.10.438 --> 2021/09/02 : 병동구분 삭제 
+'Version 3.1.10.439 --> 2021/09/03 : 병원체 전송내용 있는것 색변경
+'Version 3.1.10.440 --> 2021/09/27 : 위탁검사 등록번호 배포
 
-<Assembly: AssemblyVersion("3.1.10.434")> 
+<Assembly: AssemblyVersion("3.1.10.440")>

@@ -6504,23 +6504,25 @@ Public Class AxRstInput_m
                         End If
                         '작업중..................................................
                         ' LM20101, LM20102, LM20301, LM20302, LM20303 액체, 고체배지
-                    ElseIf PRG_CONST.AFBC_NTM_test(strTclscd) <> "" Then '20210702 jhs MTB, NTM 검사
+                    ElseIf PRG_CONST.AFBC_NTM_test(strTclscd) <> "" Then 'And sTxtCritical = "C" Then '20210702 jhs MTB, NTM 검사
                         Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_NTM_Comment(msBcNo) ' 5년안에 검사결과값이 있을 때
                         Dim chkOrgRst As String = Mid(sOrgRst, 1, 3).ToUpper '결과값 앞의 3자리 가져오기
 
-                        If chkOrgRst = "MYC" Then ' 입력결과값이 MTB 검사일 경우
-                            If dt.Rows(0).Item("MTB").ToString.Trim = "Y" Then ' 5년안에 MTB 검사가 있을 경우
-                                sCriticalMark = ""
-                            Else '5년안에  MTB 검사가 없을 경우
-                                sCriticalMark = "C"
-                            End If
-                        ElseIf (chkOrgRst = "LIQ" Or chkOrgRst = "AFB") Then ' 입력 결과값이 NTM검사결과 일경우
+                        'If chkOrgRst = "MYC" Then ' 입력결과값이 MTB 검사일 경우
+                        '    If dt.Rows(0).Item("MTB").ToString.Trim = "Y" Then ' 5년안에 MTB 검사가 있을 경우
+                        '        sCriticalMark = ""
+                        '    Else '5년안에  MTB 검사가 없을 경우
+                        '        sCriticalMark = "C"
+                        '    End If
+                        'Else
+                        If (chkOrgRst = "LIQ" Or chkOrgRst = "AFB") Then ' 입력 결과값이 NTM검사결과 일경우
                             If dt.Rows(0).Item("NTM").ToString.Trim = "Y" Then '5년안에 NTM 검사가 있을 경우
                                 sCriticalMark = ""
                             Else ' 5년안에 NTM검사가 없을 경우
                                 sCriticalMark = "C"
                             End If
                         End If
+
                     ElseIf sTxtCritical = "C" Then
                         sCriticalMark = "C"
                     Else
@@ -6623,6 +6625,52 @@ Public Class AxRstInput_m
                     If sAlertL = "" Then sAlertL = sAlertH
 
                     If sOrgRst.ToUpper = sAlertL.ToUpper Then sAlertMark = "A"
+                Case "7" '-- 결과코드 
+                    '20210810 jhs 결과코드 추가 
+                    'Alter 문자값 판단 추가(검사마스터에서 Alter 구분 [7] 문자결과(결과코드 설정) 선택, 기초마스터 결과코드에 Alter 설정한 경우 )
+                    Dim sTxtAlter As String = ""
+                    sTxtAlter = LISAPP.COMM.RstFn.fnGet_GraedValue_A(sTestCd, sOrgRst)
+
+                    If sTxtAlter = "A" Then
+                        sAlertMark = "A"
+                    End If
+
+                    ' "LM205" 
+                    If PRG_CONST.AFBC_test(sTestCd) <> "" Then ' "LM205"  xpert pcr 검사가 Critical이라도 해당 환자의 1주일전 pcr검사 이력이 Deteted(Critical)일 경우 Normal결과로 판단
+                        Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_Comment(msBcNo, True)
+
+                        If dt.Rows.Count > 0 Then
+                            Exit Sub
+                        ElseIf dt.Rows.Count <= 0 Then
+                            sAlertMark = sTxtAlter
+                            ' If sTxtCritical = "C" Then msXpertC = True Else msXpertC = False
+                        End If
+                        '작업중..................................................
+                        ' LM20101, LM20102, LM20301, LM20302, LM20303 액체, 고체배지
+                    ElseIf PRG_CONST.AFBC_NTM_test(sTestCd) <> "" Then 'And sTxtAlter = "A" Then '20210702 jhs MTB, NTM 검사
+                        Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_NTM_Comment(msBcNo) ' 5년안에 검사결과값이 있을 때
+                        Dim chkOrgRst As String = Mid(sOrgRst, 1, 3).ToUpper '결과값 앞의 3자리 가져오기
+
+                        If chkOrgRst = "MYC" Then ' 입력결과값이 MTB 검사일 경우
+                            If dt.Rows(0).Item("MTB").ToString.Trim = "Y" Then ' 5년안에 MTB 검사가 있을 경우
+                                sAlertMark = ""
+                            Else '5년안에  MTB 검사가 없을 경우
+                                sAlertMark = "A"
+                            End If
+                            'ElseIf (chkOrgRst = "LIQ" Or chkOrgRst = "AFB") Then ' 입력 결과값이 NTM검사결과 일경우
+                            '    If dt.Rows(0).Item("NTM").ToString.Trim = "Y" Then '5년안에 NTM 검사가 있을 경우
+                            '        sAlertMark = ""
+                            '    Else ' 5년안에 NTM검사가 없을 경우
+                            '        sAlertMark = "A"
+                            '    End If
+                        End If
+                    ElseIf sAlertMark = "A" Then
+                        sAlertMark = "A"
+                    Else
+                        sAlertMark = ""
+                    End If
+                    '----------------------------------------------------
+
             End Select
 
             If sAlertMark = "" And (sAlertGbn = "5" Or sAlertGbn = "A" Or sAlertGbn = "B" Or sAlertGbn = "C") Then
@@ -8274,48 +8322,55 @@ Public Class AxRstInput_m
                             Continue For
                         End If
 
-                        Dim dt As DataTable = LISAPP.COMM.RstFn.Fnget_Fkocs(bcno, tclscd)
-                        Dim fkocs As String = ""
-                        Dim orddt As String = ""
-
-                        If dt.Rows.Count > 0 Then
-                            fkocs = dt.Rows(0).Item("ocs_key").ToString
-                            orddt = dt.Rows(0).Item("orddt").ToString
+                        '20210830 JHS 특정 검사는 cvr등록시에 부모검사 항목명을 가져와 등록
+                        If PRG_CONST.CVR_P_testCd(testcd.Substring(0, 5)) <> "" Then
+                            Dim dt_PTnmd As DataTable = LISAPP.COMM.RstFn.Fnget_tnmd(bcno, tclscd)
+                            tnmd = dt_PTnmd.Rows(0).Item("tnmd").ToString + tnmd
                         End If
+                        '---------------------------------------------------
 
-                        CvrInfo.Orddt = orddt
-                        CvrInfo.Fkocs = fkocs
-                        CvrInfo.Tnmd = tnmd
-                        CvrInfo.Testcd = testcd
-                        CvrInfo.Rst = rst
-                        CvrInfo.RstUnit = rstunit
+                        Dim dt As DataTable = LISAPP.COMM.RstFn.Fnget_Fkocs(bcno, tclscd)
+                            Dim fkocs As String = ""
+                            Dim orddt As String = ""
 
-                        Dim a_dr As DataRow()
-                        a_dr = m_dt_RstUsr.Select("testcd = '" + testcd + "'")
+                            If dt.Rows.Count > 0 Then
+                                fkocs = dt.Rows(0).Item("ocs_key").ToString
+                                orddt = dt.Rows(0).Item("orddt").ToString
+                            End If
 
-                        Dim Rstdt As String = ""
-                        Dim Rstid As String = ""
+                            CvrInfo.Orddt = orddt
+                            CvrInfo.Fkocs = fkocs
+                            CvrInfo.Tnmd = tnmd
+                            CvrInfo.Testcd = testcd
+                            CvrInfo.Rst = rst
+                            CvrInfo.RstUnit = rstunit
 
-                        Select Case rstflg
+                            Dim a_dr As DataRow()
+                            a_dr = m_dt_RstUsr.Select("testcd = '" + testcd + "'")
 
-                            Case "1"
-                                Rstdt = a_dr(0).Item("regdt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
-                                Rstid = a_dr(0).Item("regid").ToString
-                            Case "2"
-                                Rstdt = a_dr(0).Item("mwdt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
-                                Rstid = a_dr(0).Item("mwid").ToString
-                            Case "3"
-                                Rstdt = a_dr(0).Item("fndt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
-                                Rstid = a_dr(0).Item("fnid").ToString
+                            Dim Rstdt As String = ""
+                            Dim Rstid As String = ""
 
-                        End Select
+                            Select Case rstflg
 
-                        CvrInfo.Rstdt = Rstdt
-                        CvrInfo.Rstid = Rstid
+                                Case "1"
+                                    Rstdt = a_dr(0).Item("regdt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
+                                    Rstid = a_dr(0).Item("regid").ToString
+                                Case "2"
+                                    Rstdt = a_dr(0).Item("mwdt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
+                                    Rstid = a_dr(0).Item("mwid").ToString
+                                Case "3"
+                                    Rstdt = a_dr(0).Item("fndt").ToString.Replace("-", "").Replace(":", "").Replace(" ", "")
+                                    Rstid = a_dr(0).Item("fnid").ToString
 
-                        Info_arry.Add(CvrInfo)
+                            End Select
 
-                    End If
+                            CvrInfo.Rstdt = Rstdt
+                            CvrInfo.Rstid = Rstid
+
+                            Info_arry.Add(CvrInfo)
+
+                        End If
 
                 Next
 

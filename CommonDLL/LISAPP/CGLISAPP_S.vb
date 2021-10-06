@@ -1297,6 +1297,9 @@ Namespace APP_S
                 sSql += "        , fn_ack_get_kcdc_regdt_state(r10.bcno) as decla " + vbCrLf
                 sSql += "        , fn_ack_get_bcno_bac_rst (r10.bcno) as bacrst, fn_ack_get_bcno_Anti_rst(r10.bcno) as antirst  "
                 sSql += "        , FN_ACK_GET_KCDC_ERRMSG(r10.bcno) as errmsg " + vbCrLf
+                '20210903 jhs 병원체 신고한 내역 있는지 확인하는 것 추가
+                sSql += "        , (selecT distinct bcno from lr080m where bcno = r10.bcno)  as r80bcno " + vbCrLf
+                '---------------------------------------------------------------
                 sSql += " FROM ( SELECT  r.bcno  ,  min(r.tkdt) tkdt  , max(r.fnid) fnid , max(r.fndt) fndt " + vbCrLf
 
                 If rsBcno <> "" Then
@@ -3652,11 +3655,13 @@ Namespace APP_S
     Public Class WkFn
         Private Const msFile As String = "File : CGRISAPP_S, Class : RISAPP.APP_S.WkFn" + vbTab
 
-        Public Shared Function fnGet_WorkList_WGrp(ByVal rsWkYmd As String, ByVal rsWGrpCd As String, ByVal rsWKNoS As String, ByVal rsWkNoE As String, _
-                                                   ByVal rsSpcCds As String, ByVal rsTestCds As String, ByVal rsRstFlg As String, _
-                                                   ByVal rsBcNo As String, ByVal rbMbtType As Boolean, _
-                                                   Optional ByVal rbMicroBioYn As Boolean = False, _
-                                                   Optional ByVal rbSpcAdd As Boolean = True) As DataTable
+        Public Shared Function fnGet_WorkList_WGrp(ByVal rsWkYmd As String, ByVal rsWGrpCd As String, ByVal rsWKNoS As String, ByVal rsWkNoE As String,
+                                                   ByVal rsSpcCds As String, ByVal rsTestCds As String, ByVal rsRstFlg As String,
+                                                   ByVal rsBcNo As String, ByVal rbMbtType As Boolean,
+                                                   Optional ByVal rbMicroBioYn As Boolean = False,
+                                                   Optional ByVal rbSpcAdd As Boolean = True,
+                                                   Optional ByVal rsWardCds As String = "",
+                                                   Optional ByVal rsWardExcept As Boolean = False) As DataTable
             Dim sFn As String = "fnGet_WorkList_WGrp"
 
             Try
@@ -3666,29 +3671,29 @@ Namespace APP_S
                 If rbMicroBioYn Then sTableNm = "lm010m"
 
                 sSql = ""
-                sSql += "SELECT DISTINCT"
-                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm,"
-                sSql += "       j.sex || '/' || j.age sexage,"
-                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno,"
-                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm,"
-                sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno) ELSE '' END deptinfo,"
-                sSql += "       f3.spcnmp, f3.spcnmd, fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,"
-                sSql += "       j.orddt," '20140128 정선영 추가, 처방일(의뢰일자) 추가
-                sSql += "       r.testcd, f6.tnmd, f6.tnmp, f6.dispseql, fn_ack_get_pat_befviewrst(r.bcno, r.testcd, r.spccd) bfviewrst,"
-                'sSql += "       fn_ack_get_dr_remark(j.bcno) doctorrmk,"
-                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)"
-                sSql += "          FROM lj011m ff"
-                sSql += "         WHERE bcno    = j.bcno"
-                sSql += "           AND spcflg IN ('1', '2', '3', '4')"
-                sSql += "           AND NVL(doctorrmk, ' ') <> ' '"
-                sSql += "       ) doctorrmk,"
-                sSql += "       j3.diagnm, NULL wlseq, r.spccd"
-                sSql += "  FROM " + sTableNm + " r, lf060m f6, lf030m f3, lj010m j, lj013m j3"
-                sSql += " WHERE r.wkymd   = :wkymd"
-                sSql += "   AND r.wkgrpcd = :wgrpcd"
-                sSql += "   AND r.wkno   >= :wknos"
-                sSql += "   AND r.wkno   <= :wknoe"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm," + vbCrLf
+                sSql += "       j.sex || '/' || j.age sexage," + vbCrLf
+                sSql += "       fn_ack_get_bcno_prt(j.bcno) prtbcno," + vbCrLf
+                sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm," + vbCrLf
+                sSql += "       FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || CASE WHEN j.iogbn = 'I' THEN '/' || FN_ACK_GET_WARD_ABBR(j.wardno) ELSE '' END deptinfo," + vbCrLf
+                sSql += "       f3.spcnmp, f3.spcnmd, fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi') tkdt," + vbCrLf
+                sSql += "       j.orddt," + vbCrLf '20140128 정선영 추가, 처방일(의뢰일자) 추가
+                sSql += "       r.testcd, f6.tnmd, f6.tnmp, f6.dispseql, fn_ack_get_pat_befviewrst(r.bcno, r.testcd, r.spccd) bfviewrst," + vbCrLf
+                'sSql += "       fn_ack_get_dr_remark(j.bcno) doctorrmk,"+vbcrlf
+                sSql += "       (SELECT SUBSTR(xmlagg(xmlelement(ff, ',' || ff.doctorrmk)).extract('//text()'), 2)" + vbCrLf
+                sSql += "          FROM lj011m ff" + vbCrLf
+                sSql += "         WHERE bcno    = j.bcno" + vbCrLf
+                sSql += "           AND spcflg IN ('1', '2', '3', '4')" + vbCrLf
+                sSql += "           AND NVL(doctorrmk, ' ') <> ' '" + vbCrLf
+                sSql += "       ) doctorrmk," + vbCrLf
+                sSql += "       j3.diagnm, NULL wlseq, r.spccd, j.deptcd " + vbCrLf
+                sSql += "  FROM " + sTableNm + " r, lf060m f6, lf030m f3, lj010m j, lj013m j3" + vbCrLf
+                sSql += " WHERE r.wkymd   = :wkymd" + vbCrLf
+                sSql += "   AND r.wkgrpcd = :wgrpcd" + vbCrLf
+                sSql += "   AND r.wkno   >= :wknos" + vbCrLf
+                sSql += "   AND r.wkno   <= :wknoe" + vbCrLf
 
                 alParm.Add(New OracleParameter("wkymd", OracleDbType.Varchar2, rsWkYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkYmd))
                 alParm.Add(New OracleParameter("wgrpcd", OracleDbType.Varchar2, rsWGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWGrpCd))
@@ -3696,28 +3701,38 @@ Namespace APP_S
                 alParm.Add(New OracleParameter("wknoe", OracleDbType.Varchar2, rsWkNoE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoE))
 
                 If rsSpcCds <> "" Then
-                    sSql += "   AND j.spccd " + IIf(rbSpcAdd, " IN ", " NOT IN ").ToString + "('" + rsSpcCds.Replace(",", "','") + "')"
+                    sSql += "   AND j.spccd " + IIf(rbSpcAdd, " IN ", " NOT IN ").ToString + "('" + rsSpcCds.Replace(",", "','") + "')" + vbCrLf
                 End If
 
                 If rsTestCds <> "" Then
-                    sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')"
+                    sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')" + vbCrLf
                 End If
 
                 If rsBcNo <> "" Then
-                    sSql += "   AND j.bcno = :bcno"
+                    sSql += "   AND j.bcno = :bcno" + vbCrLf
                     alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcNo))
                 End If
 
-                sSql += "   AND j.bcno   = r.bcno"
-                sSql += "   AND r.testcd = f6.testcd"
-                sSql += "   AND r.spccd  = f6.spccd"
-                sSql += "   AND f6.usdt <= r.tkdt"
-                sSql += "   AND f6.uedt >  r.tkdt"
-                sSql += "   AND r.spccd  = f3.spccd"
-                sSql += "   AND f3.usdt <= r.tkdt"
-                sSql += "   AND f3.uedt >  r.tkdt"
-                sSql += "   AND ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))"
-                sSql += "   AND j.bcno   = j3.bcno (+)"
+                sSql += "   AND j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND r.testcd = f6.testcd" + vbCrLf
+                sSql += "   AND r.spccd  = f6.spccd" + vbCrLf
+                sSql += "   AND f6.usdt <= r.tkdt" + vbCrLf
+                sSql += "   AND f6.uedt >  r.tkdt" + vbCrLf
+                sSql += "   AND r.spccd  = f3.spccd" + vbCrLf
+                sSql += "   AND f3.usdt <= r.tkdt" + vbCrLf
+                sSql += "   AND f3.uedt >  r.tkdt" + vbCrLf
+                '20210810 jhs 병동조건 추가
+                If rsWardCds <> "" Then
+                    If rsWardExcept Then
+                        sSql += "   And j.wardno not IN ('" + rsWardCds.Replace(",", "','") + "')" + vbCrLf
+                    Else
+                        sSql += "   And j.wardno IN ('" + rsWardCds.Replace(",", "','") + "')" + vbCrLf
+                    End If
+
+                End If
+                '-------------------------------------
+                sSql += "   AND ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
+                sSql += "   AND j.bcno   = j3.bcno (+)" + vbCrLf
                 Dim sWhere As String = ""
 
                 If rsRstFlg.Substring(0, 1) = "1" Then sWhere = "NVL(r.rstflg, '0') = '0'"
@@ -3740,11 +3755,13 @@ Namespace APP_S
 
         End Function
 
-        Public Shared Function fnGet_WorkList_TGrp(ByVal rsPartSlip As String, ByVal rsTGrpCd As String, ByVal rsTkDtS As String, ByVal rsTkDtE As String, _
-                                                         ByVal rsSpcCds As String, ByVal rsTestCds As String, ByVal rsRstFlg As String, _
-                                                         ByVal rsBcNo As String, ByVal rbMbtType As Boolean, _
-                                                         Optional ByVal rbMicroBioYn As Boolean = False, _
-                                                         Optional ByVal rbSpcSelect As Boolean = True) As DataTable
+        Public Shared Function fnGet_WorkList_TGrp(ByVal rsPartSlip As String, ByVal rsTGrpCd As String, ByVal rsTkDtS As String, ByVal rsTkDtE As String,
+                                                         ByVal rsSpcCds As String, ByVal rsTestCds As String, ByVal rsRstFlg As String,
+                                                         ByVal rsBcNo As String, ByVal rbMbtType As Boolean,
+                                                         Optional ByVal rbMicroBioYn As Boolean = False,
+                                                         Optional ByVal rbSpcSelect As Boolean = True,
+                                                         Optional ByVal rsWardCds As String = "",
+                                                         Optional ByVal rsWardExcept As Boolean = False) As DataTable
             Dim sFn As String = "fnGet_WorkList_TGrp"
 
             Try
@@ -3770,7 +3787,7 @@ Namespace APP_S
                 sSql += "           AND spcflg IN ('1', '2', '3', '4')" + vbCrLf
                 sSql += "           AND NVL(doctorrmk, ' ') <> ' '" + vbCrLf
                 sSql += "       ) doctorrmk," + vbCrLf
-                sSql += "       j3.diagnm, NULL wlseq, r.spccd" + vbCrLf
+                sSql += "       j3.diagnm, NULL wlseq, r.spccd, j.deptcd " + vbCrLf
                 sSql += "  FROM " + sTableNm + " r, lf060m f6, lf030m f3, lj010m j, lj013m j3" + vbCrLf
                 sSql += " WHERE r.tkdt >= :dates" + vbCrLf
                 sSql += "   AND r.tkdt <= :datee || '5959'" + vbCrLf
@@ -3808,7 +3825,16 @@ Namespace APP_S
                 sSql += "   AND r.spccd  = f3.spccd" + vbCrLf
                 sSql += "   AND f3.usdt <= r.tkdt" + vbCrLf
                 sSql += "   AND f3.uedt >  r.tkdt" + vbCrLf
-                sSql += "   AND ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
+                '20210810 jhs 병동조건 추가
+                If rsWardCds <> "" Then
+                    If rsWardExcept Then
+                        sSql += "   And j.wardno not IN ('" + rsWardCds.Replace(",", "','") + "')" + vbCrLf
+                    Else
+                        sSql += "   And j.wardno IN ('" + rsWardCds.Replace(",", "','") + "')" + vbCrLf
+                    End If
+                End If
+                '-------------------------------------
+                sSql += " And ((f6.tcdgbn = 'B' AND f6.titleyn = '0') OR f6.tcdgbn IN ('S', 'P', 'C'))" + vbCrLf
                 sSql += "   AND j.bcno  = j3.bcno (+)" + vbCrLf
 
                 Dim sWhere As String = ""
@@ -3903,8 +3929,40 @@ Namespace APP_S
 
             End Try
         End Function
+        Public Shared Function fnGet_WorkList_BFtest_diag(ByVal rsBcNo As String, ByVal rsPatno As String) As DataTable
+            Dim sFn As String = "fnGet_WorkList_BFtest"
+
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                '--------------------------------------
+                '환자 진단명 가져오는 기준
+                '1. 환자번호에 해당하는 것
+                '2. main(주)진단명인지 여부 
+                '3. 해당 검체번호의 진료과에 해당하는 것
+                '----------------------------------------
+                sSql += " selecT vw.patno, vw.meddept, fn_ack_date_str(vw.rgsttm, 'yyyy-mm-dd hh24:mi:ss') rgsttm, vw.diagnm_eng, vw.diagnm_han, vw.maindiag" + vbCrLf
+                sSql += "   from VW_ACK_OCS_PAT_DIAG_INFO vw " + vbCrLf
+                sSql += "  where vw.patno = :patno" + vbCrLf
+                sSql += "    And vw.maindiag = 'Y'" + vbCrLf
+                sSql += "    And vw.meddept = (selecT deptcd from lj010m where bcno = :bcno )" + vbCrLf
+                sSql += "  order by rgsttm desc" + vbCrLf
+
+
+                al.Add(New OracleParameter("patno", rsPatno))
+                al.Add(New OracleParameter("bcno", rsBcNo))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, al)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+
+            End Try
+        End Function
         '20210414 jhs 체액검사정보 가져오기
-        Public Shared Function fnGet_WorkList_BFtest(ByVal rsBcNo As String, Optional ByVal rsTestCd As String = "", Optional ByVal rsSpccd As String = "") As DataTable
+        Public Shared Function fnGet_WorkList_BFtest(ByVal rsBcNo As String, Optional ByVal rsTestCd As String = "", Optional ByVal rsChk As Boolean = True, Optional ByVal rsChkOrddt As Boolean = False) As DataTable
             Dim sFn As String = "fnGet_WorkList_BFtest"
 
             Try
@@ -3931,13 +3989,22 @@ Namespace APP_S
                 sSql += "       and r.tkdt <= f3.uedt" + vbCrLf
                 sSql += "   inner join lj013m j13" + vbCrLf
                 sSql += "       on r.bcno = j13.bcno " + vbCrLf
-                sSql += "   where j.regno  = (selecT j1.regno from lj011m j1 where bcno =  :bcno)" + vbCrLf
-                sSql += "     and j1.orddt = (selecT j1.orddt from lj011m j1 where bcno =  :bcno)" + vbCrLf
 
+                If rsChk Then ' 최근 검사결과에서 
+                    sSql += "   where j.regno  = (selecT j1.regno from lj011m j1 where bcno =  :bcno)" + vbCrLf
+                    'sSql += "     and j1.orddt = (selecT j1.orddt from lj011m j1 where bcno =  :bcno)" + vbCrLf
+                    al.Add(New OracleParameter("bcno", rsBcNo))
+                    'al.Add(New OracleParameter("bcno", rsBcNo))
+                    If rsChkOrddt Then
+                        sSql += " and j1.orddt <> (selecT j1.orddt from lj011m j1 where bcno =  :bcno)" + vbCrLf
+                        al.Add(New OracleParameter("bcno", rsBcNo))
+                    End If
+                Else
+                    sSql += "   where j.bcno  = :bcno" + vbCrLf
+                    al.Add(New OracleParameter("bcno", rsBcNo))
+                End If
 
-                al.Add(New OracleParameter("bcno", rsBcNo))
-                al.Add(New OracleParameter("bcno", rsBcNo))
-                If rsTestCd <> "" Then
+                If rsTestCd <> "" Then ' 검사코드 조건 조회 시
                     sSql += "     and r.testcd = :testcd"
                     al.Add(New OracleParameter("testcd", rsTestCd))
                 End If
@@ -3961,7 +4028,8 @@ Namespace APP_S
                 Dim al As New ArrayList
 
                 sSql += " selecT r.bcno, r.testcd, f6.tnmd, r.viewrst" + vbCrLf
-                sSql += "    ,f6.rstunit" + vbCrLf
+                sSql += "       ,substr(r.tkdt, 1, 4) || '-'||substr(r.tkdt,5,2) || '-'||substr(r.tkdt,7,2) tkdt " + vbCrLf
+                sSql += "       ,f6.rstunit" + vbCrLf
                 sSql += "  from lr010m r" + vbCrLf
                 sSql += " inner join lf060m f6" + vbCrLf
                 sSql += "    On r.testcd = f6.testcd" + vbCrLf
@@ -3991,8 +4059,8 @@ Namespace APP_S
                 Dim al As New ArrayList
 
                 sSql += "" + vbCrLf
-                sSql += "  selecT x.bcno ,x.testcd ,x.spccd ,x.tnm , x.viewrst , x.rstunit" + vbCrLf
-                sSql += "    from (  select r1.bcno, r1.testcd, r1.spccd, f6.tnm, r1.viewrst, f6.rstunit " + vbCrLf
+                sSql += "  selecT x.bcno ,x.testcd ,x.spccd ,x.tnm , x.viewrst , x.rstunit, x.tkdt" + vbCrLf
+                sSql += "    from (  select r1.bcno, r1.testcd, r1.spccd, f6.tnm, r1.viewrst, f6.rstunit, substr(r1.tkdt, 1, 4) || '-'||substr(r1.tkdt,5,2) || '-'||substr(r1.tkdt,7,2) tkdt " + vbCrLf
                 sSql += "              from rr010m r1" + vbCrLf
                 sSql += "             inner join rf060m f6" + vbCrLf
                 sSql += "                on r1.testcd = f6.testcd" + vbCrLf
@@ -4004,7 +4072,7 @@ Namespace APP_S
                 sSql += "               and r1.testcd in (" + rsTestCd + ")" + vbCrLf
                 sSql += "             order by r1.bcno desc" + vbCrLf
                 sSql += "          ) x" + vbCrLf
-                sSql += "     where(rownum = 1)" + vbCrLf
+                sSql += "     where rownum = 1 " + vbCrLf
 
 
                 DbCommand()

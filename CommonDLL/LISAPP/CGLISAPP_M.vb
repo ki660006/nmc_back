@@ -772,22 +772,28 @@ Namespace APP_M
                 Dim sSql As String = ""
 
                 sSql = ""
-                sSql += "SELECT bcno, testcd, spccd, baccd, bacseq, ranking, testmtd, bacnmd, bacgencd, incrst, baccmt, status,"
-                sSql += "       baccd oldbaccd, ranking oldranking, incrst oldincrst, baccmt oldbaccmt"
-                sSql += "  FROM ("
-                sSql += "        SELECT rm.bcno, rm.testcd, rm.spccd, rb.baccd, rb.bacseq, rb.testmtd, fb.bacnmd, fb.bacgencd, rb.incrst, rb.baccmt, rb.ranking, 'S' status"
-                sSql += "          FROM lm010m rm, lm012m rb, lf210m fb"
-                sSql += "         WHERE rm.bcno   = :bcno"
-                sSql += "           AND rm.bcno   = rb.bcno AND rm.testcd = rb.testcd and rm.spccd = rb.spccd"
-                sSql += "           AND rb.baccd  = fb.baccd"
-                sSql += "           AND rm.tkdt  >= fb.usdt and rm.tkdt < fb.uedt"
+                sSql += "SELECT bcno, testcd, spccd, baccd, bacseq, ranking, testmtd, bacnmd, bacgencd, incrst, baccmt, status," + vbCrLf
+                sSql += "       baccd oldbaccd, ranking oldranking, incrst oldincrst, baccmt oldbaccmt" + vbCrLf
+                '20210817 jhs 균색 변경으로 인해 추가 
+                sSql += "         , a.BACCOLOR " + vbCrLf
+                '---------------------------------------------
+                sSql += "  FROM (" + vbCrLf
+                sSql += "        SELECT rm.bcno, rm.testcd, rm.spccd, rb.baccd, rb.bacseq, rb.testmtd, fb.bacnmd, fb.bacgencd, rb.incrst, rb.baccmt, rb.ranking, 'S' status" + vbCrLf
+                '20210817 jhs 균색 변경으로 인해 추가 
+                sSql += "         , FB.BACCOLOR " + vbCrLf
+                '---------------------------------------------
+                sSql += "          FROM lm010m rm, lm012m rb, lf210m fb" + vbCrLf
+                sSql += "         WHERE rm.bcno   = :bcno" + vbCrLf
+                sSql += "           AND rm.bcno   = rb.bcno AND rm.testcd = rb.testcd and rm.spccd = rb.spccd" + vbCrLf
+                sSql += "           AND rb.baccd  = fb.baccd" + vbCrLf
+                sSql += "           AND rm.tkdt  >= fb.usdt and rm.tkdt < fb.uedt" + vbCrLf
 
                 If rsTestCds <> "" Then
-                    sSql += "           AND TRIM(rm.testcd) || TRIM(rm.spccd) IN ('" + rsTestCds.Replace(",", "','") + "')"
+                    sSql += "           AND TRIM(rm.testcd) || TRIM(rm.spccd) IN ('" + rsTestCds.Replace(",", "','") + "')" + vbCrLf
                 End If
 
-                sSql += "       ) a"
-                sSql += " ORDER BY a.ranking, a.bacseq, a.baccd, a.testcd"
+                sSql += "       ) a" + vbCrLf
+                sSql += " ORDER BY a.ranking, a.bacseq, a.baccd, a.testcd" + vbCrLf
 
                 Dim al As New ArrayList
 

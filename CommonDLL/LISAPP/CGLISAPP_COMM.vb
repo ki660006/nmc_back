@@ -2516,7 +2516,7 @@ Namespace COMM
             Dim sFn As String = "Private Function fnGet_GraedValue(String, String) As String"
 
             Try
-             
+
                 Dim dt As New DataTable
                 Dim sSql As String = ""
                 Dim sXpertRst As String = ""
@@ -2559,6 +2559,41 @@ Namespace COMM
             End Try
 
         End Function
+        '20210810 jhs alter 결과코드 추가 
+        Public Shared Function fnGet_GraedValue_A(ByVal rsTclsCd As String, ByVal rsRstVal As String) As String
+            Dim sFn As String = "Private Function fnGet_GraedValue(String, String) As String"
+
+            Try
+
+                Dim dt As New DataTable
+                Dim sSql As String = ""
+                Dim sXpertRst As String = ""
+                Dim alParm As New ArrayList
+                Dim sValue As String = ""
+
+                sSql = ""
+                sSql += "SELECT altval FROM lf083m"
+                sSql += " WHERE testcd  = :testcd"
+                sSql += "   AND spccd   = '" + "".PadLeft(PRG_CONST.Len_SpcCd, "0"c) + "'"
+                sSql += "   AND rstcont = :rstcont"
+
+                alParm.Add(New OracleParameter("testcd", OracleDbType.Varchar2, rsTclsCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTclsCd))
+                alParm.Add(New OracleParameter("rstcont", OracleDbType.Varchar2, rsRstVal.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRstVal))
+
+                DbCommand()
+                dt = DbExecuteQuery(sSql, alParm)
+
+                If dt.Rows.Count > 0 Then sValue = dt.Rows(0).Item(0).ToString().Trim
+
+                Return sValue
+
+            Catch ex As Exception
+                Fn.log(msFile + sFn, Err)
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '------------------------------------------------
 
         Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable
             '해당 환자의 Xpert PCR 검사 최근 1주일 검사결과 가져오는 쿼리 함수
@@ -2705,6 +2740,38 @@ Namespace COMM
                 sSql += "  FROM LJ011M "
                 sSql += " WHERE BCNO   = :bcno "
                 sSql += "   AND TCLSCD = :tclscd "
+
+                alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
+                alParm.Add(New OracleParameter("tclscd", OracleDbType.Varchar2, tclscd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, tclscd))
+
+                DbCommand()
+
+                Return DbExecuteQuery(sSql, alParm)
+
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+
+        End Function
+
+        Public Shared Function Fnget_tnmd(ByVal rsBcno As String, ByVal tclscd As String) As DataTable
+            '검사항목에 대한 처방키 가져오기
+            Dim sFn As String = "Public Shared Function Fnget_Fkocs(ByVal rsBcno As String, ByVal tclscd as String) As DataTable"
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+            Dim alParm As New ArrayList
+
+            Try
+                sSql = " "
+                sSql += "selecT m1.bcno, m1.testcd, m1.spccd , f6.tnmd from lm010m m1 " + vbCrLf
+                sSql += " inner join lf060m f6 " + vbCrLf
+                sSql += "    on  m1.testcd = f6.testcd and  m1.spccd = f6.spccd " + vbCrLf
+                sSql += " where m1.bcno = :bcno " + vbCrLf
+                sSql += "   and m1.tkdt >=  f6.usdt " + vbCrLf
+                sSql += "   and m1.tkdt <= f6.uedt " + vbCrLf
+                sSql += "   and m1.testcd = substr(:tclscd,1,5) " + vbCrLf
+
 
                 alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
                 alParm.Add(New OracleParameter("tclscd", OracleDbType.Varchar2, tclscd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, tclscd))

@@ -48,6 +48,8 @@ Public Class FDF10
                     .SetItemTable("rstlvl", 9, i, Ctrl.Get_Code(spd, "rstlvl", i))
                     .SetItemTable("regip", 10, i, USER_INFO.LOCALIP)
                     .SetItemTable("crtval", 11, i, Ctrl.Get_Code(spd, "crtval", i))
+                    '.SetItemTable("altval", 12, i, Ctrl.Get_Code(spd, "altval", i)) '20210810 jhs alter value 도 추가 
+                    .SetItemTable("altval", 12, i, "") '20210908 jhs alter 삭제
                 Next
             End With
 
@@ -624,7 +626,7 @@ Public Class FDF10
         'grpCdInfo1
         '
         Me.grpCdInfo1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grpCdInfo1.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.grpCdInfo1.Controls.Add(Me.lblCRTWarning)
         Me.grpCdInfo1.Controls.Add(Me.btnML)
@@ -644,8 +646,8 @@ Public Class FDF10
         'lblCRTWarning
         '
         Me.lblCRTWarning.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCRTWarning.AutoSize = True
         Me.lblCRTWarning.Location = New System.Drawing.Point(8, 489)
         Me.lblCRTWarning.Name = "lblCRTWarning"

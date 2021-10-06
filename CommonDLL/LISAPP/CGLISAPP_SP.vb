@@ -657,59 +657,59 @@ Public Class APP_SP
             'sSql += " ORDER BY tkdt, workno, bcno"
 
             sSql = ""
-            sSql += "SELECT DISTINCT"
-            sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm patnm,"
-            sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno,"
-            sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt, r.testcd, f.tnmd,"
-            sSql += "       CASE WHEN r.rstflg = '3' THEN 'Y' ELSE 'N' END rstflg, s.spcnmd, f.partcd || f.slipcd partslip"
-            sSql += "  FROM lf060m f, lj010m j, lf030m s,"
-            sSql += "       ("
-            sSql += "  		 SELECT bcno, NVL(rstflg, '0') rstflg, tkdt, testcd, spccd, wkymd, wkgrpcd, wkno"
-            sSql += " 		   FROM lr010m"
-            sSql += "         WHERE tkdt >= :dates"
-            sSql += " 		    AND tkdt <= :datee || '235959'"
-            sSql += "           AND testcd IN (" + rsTestCds + ")"
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, j.regno, j.patnm patnm," + vbCrLf
+            sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno," + vbCrLf
+            sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt, r.testcd, f.tnmd," + vbCrLf
+            sSql += "       CASE WHEN r.rstflg = '3' THEN 'Y' ELSE 'N' END rstflg, s.spcnmd, f.partcd || f.slipcd partslip" + vbCrLf
+            sSql += "  FROM lf060m f, lj010m j, lf030m s," + vbCrLf
+            sSql += "       (" + vbCrLf
+            sSql += "  		 SELECT bcno, NVL(rstflg, '0') rstflg, tkdt, testcd, spccd, wkymd, wkgrpcd, wkno" + vbCrLf
+            sSql += " 		   FROM lr010m" + vbCrLf
+            sSql += "         WHERE tkdt >= :dates" + vbCrLf
+            sSql += " 		    AND tkdt <= :datee || '235959'" + vbCrLf
+            sSql += "           AND testcd IN (" + rsTestCds + ")" + vbCrLf
 
             Select Case rsOpt
                 Case "NF"
-                    sSql += "           AND rstflg = '2'"
+                    sSql += "           AND rstflg = '2'" + vbCrLf
 
                 Case "F"
-                    sSql += "           AND rstflg = '3'"
+                    sSql += "           AND rstflg = '3'" + vbCrLf
                 Case "NR"
-                    sSql += "           AND NVL(rstflg, '0') IN ('0', '1')"
+                    sSql += "           AND NVL(rstflg, '0') IN ('0', '1')" + vbCrLf
                 Case Else
 
             End Select
 
-            sSql += "         UNION "
-            sSql += "  		 SELECT bcno, NVL(rstflg, '0') rstflg, tkdt, testcd, spccd, wkymd, wkgrpcd, wkno"
-            sSql += " 		   FROM lm010m"
-            sSql += "         WHERE tkdt >= :dates"
-            sSql += " 		    AND tkdt <= :datee || '235959'"
-            sSql += "           AND testcd IN (" + rsTestCds + ")"
+            sSql += "         UNION " + vbCrLf
+            sSql += "  		 SELECT bcno, NVL(rstflg, '0') rstflg, tkdt, testcd, spccd, wkymd, wkgrpcd, wkno" + vbCrLf
+            sSql += " 		   FROM lm010m" + vbCrLf
+            sSql += "         WHERE tkdt >= :dates" + vbCrLf
+            sSql += " 		    AND tkdt <= :datee || '235959'" + vbCrLf
+            sSql += "           AND testcd IN (" + rsTestCds + ")" + vbCrLf
 
             Select Case rsOpt
                 Case "NF"
-                    sSql += "           AND rstflg = '2'"
+                    sSql += "           AND rstflg = '2'" + vbCrLf
 
                 Case "F"
-                    sSql += "           AND rstflg = '3'"
+                    sSql += "           AND rstflg = '3'" + vbCrLf
                 Case "NR"
-                    sSql += "           AND NVL(rstflg, '0') IN ('0', '1')"
+                    sSql += "           AND NVL(rstflg, '0') IN ('0', '1')" + vbCrLf
                 Case Else
 
             End Select
 
-            sSql += " 		) r"
-            sSql += " WHERE j.bcno    = r.bcno"
-            sSql += "   AND f.testcd  = r.testcd"
-            sSql += "   AND f.spccd   = r.spccd"
-            sSql += "   AND f.usdt   <= r.tkdt and f.uedt >  r.tkdt"
-            sSql += "   AND s.spccd   = r.spccd"
-            sSql += "   AND s.usdt   <= r.tkdt and s.uedt >  r.tkdt"
-            sSql += "   AND j.spcflg  = '4'"
-            sSql += "   AND NVL(r.wkymd, ' ') <> ' '"
+            sSql += " 		) r" + vbCrLf
+            sSql += " WHERE j.bcno    = r.bcno" + vbCrLf
+            sSql += "   AND f.testcd  = r.testcd" + vbCrLf
+            sSql += "   AND f.spccd   = r.spccd" + vbCrLf
+            sSql += "   AND f.usdt   <= r.tkdt and f.uedt >  r.tkdt" + vbCrLf
+            sSql += "   AND s.spccd   = r.spccd" + vbCrLf
+            sSql += "   AND s.usdt   <= r.tkdt and s.uedt >  r.tkdt" + vbCrLf
+            sSql += "   AND j.spcflg  = '4'" + vbCrLf
+            sSql += "   AND NVL(r.wkymd, ' ') <> ' '" + vbCrLf
 
             al.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsTkDtS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtS))
             al.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
@@ -717,14 +717,14 @@ Public Class APP_SP
             al.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
 
             If rsPartSlip <> "" Then
-                sSql += "   AND f.partcd = :partcd"
-                sSql += "   AND f.slipcd = :slipcd"
+                sSql += "   AND f.partcd = :partcd" + vbCrLf
+                sSql += "   AND f.slipcd = :slipcd" + vbCrLf
 
                 al.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(0, 1)))
                 al.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(1, 1)))
             End If
 
-            sSql += " ORDER BY tkdt, workno, bcno"
+            sSql += " ORDER BY tkdt, workno, bcno" + vbCrLf
 
             DbCommand()
             Return DbExecuteQuery(sSql, al)

@@ -69,6 +69,12 @@ Partial Class FGS13
         Me.lblPrintInfo = New System.Windows.Forms.Label()
         Me.axItemSave = New AxAckItemSave.ITEMSAVE()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chkWardExcept = New System.Windows.Forms.CheckBox()
+        Me.btnClear_ward = New System.Windows.Forms.Button()
+        Me.txtSelWard = New System.Windows.Forms.TextBox()
+        Me.btnHelp_ward = New System.Windows.Forms.Button()
+        Me.lblWard = New System.Windows.Forms.Label()
+        Me.chkBFtestToExcel = New System.Windows.Forms.CheckBox()
         Me.chkBFtest = New System.Windows.Forms.CheckBox()
         Me.chkTyping = New System.Windows.Forms.CheckBox()
         Me.chkSpcSelect = New System.Windows.Forms.CheckBox()
@@ -101,7 +107,6 @@ Partial Class FGS13
         Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
         Me.cboWkGrp = New System.Windows.Forms.ComboBox()
         Me.cboTGrp = New System.Windows.Forms.ComboBox()
-        Me.chkBFtestToExcel = New System.Windows.Forms.CheckBox()
         Me.pnlBottom.SuspendLayout()
         Me.pnlMid.SuspendLayout()
         CType(Me.spdList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -127,7 +132,7 @@ Partial Class FGS13
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBottom.Location = New System.Drawing.Point(0, 596)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(1102, 34)
+        Me.pnlBottom.Size = New System.Drawing.Size(1341, 34)
         Me.pnlBottom.TabIndex = 126
         '
         'chkBarInit
@@ -154,11 +159,11 @@ Partial Class FGS13
         'btnPrint
         '
         Me.btnPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker1.IsActive = True
+        DesignerRectTracker1.IsActive = False
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnPrint.ColorFillBlend = CBlendItems1
         Me.btnPrint.ColorFillSolid = System.Drawing.Color.White
         Me.btnPrint.Corners.All = CType(6, Short)
@@ -170,8 +175,8 @@ Partial Class FGS13
         Me.btnPrint.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnPrint.FocalPoints.CenterPtX = 0.4859813!
         Me.btnPrint.FocalPoints.CenterPtY = 0.16!
-        Me.btnPrint.FocalPoints.FocusPtX = 0.0!
-        Me.btnPrint.FocalPoints.FocusPtY = 0.0!
+        Me.btnPrint.FocalPoints.FocusPtX = 0!
+        Me.btnPrint.FocalPoints.FocusPtY = 0!
         DesignerRectTracker2.IsActive = False
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint.FocusPtTracker = DesignerRectTracker2
@@ -181,7 +186,7 @@ Partial Class FGS13
         Me.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint.ImageIndex = 0
         Me.btnPrint.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnPrint.Location = New System.Drawing.Point(696, 5)
+        Me.btnPrint.Location = New System.Drawing.Point(935, 5)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint.SideImage = Nothing
@@ -199,7 +204,7 @@ Partial Class FGS13
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnQuery.ColorFillBlend = CBlendItems2
         Me.btnQuery.ColorFillSolid = System.Drawing.Color.White
         Me.btnQuery.Corners.All = CType(6, Short)
@@ -211,8 +216,8 @@ Partial Class FGS13
         Me.btnQuery.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnQuery.FocalPoints.CenterPtX = 0.4859813!
         Me.btnQuery.FocalPoints.CenterPtY = 0.16!
-        Me.btnQuery.FocalPoints.FocusPtX = 0.0!
-        Me.btnQuery.FocalPoints.FocusPtY = 0.0!
+        Me.btnQuery.FocalPoints.FocusPtX = 0!
+        Me.btnQuery.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.FocusPtTracker = DesignerRectTracker4
@@ -222,7 +227,7 @@ Partial Class FGS13
         Me.btnQuery.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.ImageIndex = 0
         Me.btnQuery.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQuery.Location = New System.Drawing.Point(595, 5)
+        Me.btnQuery.Location = New System.Drawing.Point(834, 5)
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
@@ -240,7 +245,7 @@ Partial Class FGS13
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExcel.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnExcel.ColorFillBlend = CBlendItems3
         Me.btnExcel.ColorFillSolid = System.Drawing.Color.White
         Me.btnExcel.Corners.All = CType(6, Short)
@@ -251,7 +256,7 @@ Partial Class FGS13
         Me.btnExcel.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnExcel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExcel.FocalPoints.CenterPtX = 0.5!
-        Me.btnExcel.FocalPoints.CenterPtY = 0.0!
+        Me.btnExcel.FocalPoints.CenterPtY = 0!
         Me.btnExcel.FocalPoints.FocusPtX = 0.03738318!
         Me.btnExcel.FocalPoints.FocusPtY = 0.04!
         DesignerRectTracker6.IsActive = False
@@ -263,7 +268,7 @@ Partial Class FGS13
         Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExcel.ImageIndex = 0
         Me.btnExcel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExcel.Location = New System.Drawing.Point(797, 5)
+        Me.btnExcel.Location = New System.Drawing.Point(1036, 5)
         Me.btnExcel.Name = "btnExcel"
         Me.btnExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExcel.SideImage = Nothing
@@ -281,7 +286,7 @@ Partial Class FGS13
         DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker7
         CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems4.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems4.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnClear.ColorFillBlend = CBlendItems4
         Me.btnClear.ColorFillSolid = System.Drawing.Color.White
         Me.btnClear.Corners.All = CType(6, Short)
@@ -293,8 +298,8 @@ Partial Class FGS13
         Me.btnClear.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnClear.FocalPoints.CenterPtX = 0.54!
         Me.btnClear.FocalPoints.CenterPtY = 0.24!
-        Me.btnClear.FocalPoints.FocusPtX = 0.0!
-        Me.btnClear.FocalPoints.FocusPtY = 0.0!
+        Me.btnClear.FocalPoints.FocusPtX = 0!
+        Me.btnClear.FocalPoints.FocusPtY = 0!
         DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.FocusPtTracker = DesignerRectTracker8
@@ -304,7 +309,7 @@ Partial Class FGS13
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(898, 5)
+        Me.btnClear.Location = New System.Drawing.Point(1137, 5)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
@@ -322,7 +327,7 @@ Partial Class FGS13
         DesignerRectTracker9.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker9.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.CenterPtTracker = DesignerRectTracker9
         CBlendItems5.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems5.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems5.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnExit.ColorFillBlend = CBlendItems5
         Me.btnExit.ColorFillSolid = System.Drawing.Color.White
         Me.btnExit.Corners.All = CType(6, Short)
@@ -333,9 +338,9 @@ Partial Class FGS13
         Me.btnExit.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnExit.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExit.FocalPoints.CenterPtX = 0.5!
-        Me.btnExit.FocalPoints.CenterPtY = 0.0!
-        Me.btnExit.FocalPoints.FocusPtX = 0.0!
-        Me.btnExit.FocalPoints.FocusPtY = 0.0!
+        Me.btnExit.FocalPoints.CenterPtY = 0!
+        Me.btnExit.FocalPoints.FocusPtX = 0!
+        Me.btnExit.FocalPoints.FocusPtY = 0!
         DesignerRectTracker10.IsActive = False
         DesignerRectTracker10.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker10.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.FocusPtTracker = DesignerRectTracker10
@@ -345,7 +350,7 @@ Partial Class FGS13
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(999, 5)
+        Me.btnExit.Location = New System.Drawing.Point(1238, 5)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
@@ -397,7 +402,7 @@ Partial Class FGS13
         Me.chkPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkPreview.Checked = True
         Me.chkPreview.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkPreview.Location = New System.Drawing.Point(509, 9)
+        Me.chkPreview.Location = New System.Drawing.Point(748, 9)
         Me.chkPreview.Margin = New System.Windows.Forms.Padding(0)
         Me.chkPreview.Name = "chkPreview"
         Me.chkPreview.Size = New System.Drawing.Size(83, 18)
@@ -459,13 +464,13 @@ Partial Class FGS13
         'pnlMid
         '
         Me.pnlMid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMid.Controls.Add(Me.chkSelChk)
         Me.pnlMid.Controls.Add(Me.spdList)
-        Me.pnlMid.Location = New System.Drawing.Point(3, 117)
+        Me.pnlMid.Location = New System.Drawing.Point(3, 145)
         Me.pnlMid.Name = "pnlMid"
-        Me.pnlMid.Size = New System.Drawing.Size(1094, 478)
+        Me.pnlMid.Size = New System.Drawing.Size(1333, 450)
         Me.pnlMid.TabIndex = 128
         '
         'chkSelChk
@@ -482,20 +487,20 @@ Partial Class FGS13
         'spdList
         '
         Me.spdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdList.DataSource = Nothing
         Me.spdList.Location = New System.Drawing.Point(1, 1)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdList.Size = New System.Drawing.Size(1092, 478)
+        Me.spdList.Size = New System.Drawing.Size(1331, 450)
         Me.spdList.TabIndex = 0
         '
         'chkColMove
         '
         Me.chkColMove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkColMove.AutoSize = True
-        Me.chkColMove.Location = New System.Drawing.Point(1234, 104)
+        Me.chkColMove.Location = New System.Drawing.Point(1473, 104)
         Me.chkColMove.Name = "chkColMove"
         Me.chkColMove.Size = New System.Drawing.Size(108, 16)
         Me.chkColMove.TabIndex = 129
@@ -517,10 +522,10 @@ Partial Class FGS13
         Me.grpPrintInfo.Controls.Add(Me.chkTestsFix)
         Me.grpPrintInfo.Controls.Add(Me.lblTerm)
         Me.grpPrintInfo.Controls.Add(Me.cboTerm)
-        Me.grpPrintInfo.Location = New System.Drawing.Point(907, 3)
+        Me.grpPrintInfo.Location = New System.Drawing.Point(1146, 3)
         Me.grpPrintInfo.Margin = New System.Windows.Forms.Padding(0)
         Me.grpPrintInfo.Name = "grpPrintInfo"
-        Me.grpPrintInfo.Size = New System.Drawing.Size(190, 111)
+        Me.grpPrintInfo.Size = New System.Drawing.Size(190, 138)
         Me.grpPrintInfo.TabIndex = 130
         Me.grpPrintInfo.TabStop = False
         '
@@ -614,13 +619,18 @@ Partial Class FGS13
         Me.axItemSave.Location = New System.Drawing.Point(3, 3)
         Me.axItemSave.Margin = New System.Windows.Forms.Padding(1)
         Me.axItemSave.Name = "axItemSave"
-        Me.axItemSave.Size = New System.Drawing.Size(212, 113)
+        Me.axItemSave.Size = New System.Drawing.Size(212, 138)
         Me.axItemSave.TabIndex = 133
         '
         'GroupBox6
         '
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.chkWardExcept)
+        Me.GroupBox6.Controls.Add(Me.btnClear_ward)
+        Me.GroupBox6.Controls.Add(Me.txtSelWard)
+        Me.GroupBox6.Controls.Add(Me.btnHelp_ward)
+        Me.GroupBox6.Controls.Add(Me.lblWard)
         Me.GroupBox6.Controls.Add(Me.chkBFtestToExcel)
         Me.GroupBox6.Controls.Add(Me.chkBFtest)
         Me.GroupBox6.Controls.Add(Me.chkTyping)
@@ -653,14 +663,83 @@ Partial Class FGS13
         Me.GroupBox6.Location = New System.Drawing.Point(215, -6)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox6.Size = New System.Drawing.Size(689, 121)
+        Me.GroupBox6.Size = New System.Drawing.Size(928, 148)
         Me.GroupBox6.TabIndex = 134
         Me.GroupBox6.TabStop = False
+        '
+        'chkWardExcept
+        '
+        Me.chkWardExcept.Location = New System.Drawing.Point(10, 127)
+        Me.chkWardExcept.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkWardExcept.Name = "chkWardExcept"
+        Me.chkWardExcept.Size = New System.Drawing.Size(78, 17)
+        Me.chkWardExcept.TabIndex = 212
+        Me.chkWardExcept.Text = "병동제외"
+        '
+        'btnClear_ward
+        '
+        Me.btnClear_ward.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClear_ward.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnClear_ward.Location = New System.Drawing.Point(872, 35)
+        Me.btnClear_ward.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnClear_ward.Name = "btnClear_ward"
+        Me.btnClear_ward.Size = New System.Drawing.Size(52, 21)
+        Me.btnClear_ward.TabIndex = 211
+        Me.btnClear_ward.Text = "clear"
+        Me.btnClear_ward.UseVisualStyleBackColor = True
+        '
+        'txtSelWard
+        '
+        Me.txtSelWard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSelWard.BackColor = System.Drawing.Color.Thistle
+        Me.txtSelWard.ForeColor = System.Drawing.Color.Brown
+        Me.txtSelWard.Location = New System.Drawing.Point(115, 35)
+        Me.txtSelWard.Multiline = True
+        Me.txtSelWard.Name = "txtSelWard"
+        Me.txtSelWard.ReadOnly = True
+        Me.txtSelWard.Size = New System.Drawing.Size(756, 21)
+        Me.txtSelWard.TabIndex = 210
+        '
+        'btnHelp_ward
+        '
+        Me.btnHelp_ward.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnHelp_ward.Image = CType(resources.GetObject("btnHelp_ward.Image"), System.Drawing.Image)
+        Me.btnHelp_ward.Location = New System.Drawing.Point(87, 35)
+        Me.btnHelp_ward.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnHelp_ward.Name = "btnHelp_ward"
+        Me.btnHelp_ward.Size = New System.Drawing.Size(26, 21)
+        Me.btnHelp_ward.TabIndex = 209
+        Me.btnHelp_ward.UseVisualStyleBackColor = True
+        '
+        'lblWard
+        '
+        Me.lblWard.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblWard.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblWard.ForeColor = System.Drawing.Color.White
+        Me.lblWard.Location = New System.Drawing.Point(5, 35)
+        Me.lblWard.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblWard.Name = "lblWard"
+        Me.lblWard.Size = New System.Drawing.Size(80, 21)
+        Me.lblWard.TabIndex = 207
+        Me.lblWard.Text = "병동구분"
+        Me.lblWard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'chkBFtestToExcel
+        '
+        Me.chkBFtestToExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkBFtestToExcel.Location = New System.Drawing.Point(387, 128)
+        Me.chkBFtestToExcel.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkBFtestToExcel.Name = "chkBFtestToExcel"
+        Me.chkBFtestToExcel.Size = New System.Drawing.Size(115, 16)
+        Me.chkBFtestToExcel.TabIndex = 206
+        Me.chkBFtestToExcel.Text = "체액검사ToExcel"
+        Me.chkBFtestToExcel.Visible = False
         '
         'chkBFtest
         '
         Me.chkBFtest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkBFtest.Location = New System.Drawing.Point(263, 104)
+        Me.chkBFtest.Location = New System.Drawing.Point(502, 128)
         Me.chkBFtest.Margin = New System.Windows.Forms.Padding(0)
         Me.chkBFtest.Name = "chkBFtest"
         Me.chkBFtest.Size = New System.Drawing.Size(98, 16)
@@ -671,7 +750,7 @@ Partial Class FGS13
         'chkTyping
         '
         Me.chkTyping.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkTyping.Location = New System.Drawing.Point(363, 104)
+        Me.chkTyping.Location = New System.Drawing.Point(602, 128)
         Me.chkTyping.Margin = New System.Windows.Forms.Padding(0)
         Me.chkTyping.Name = "chkTyping"
         Me.chkTyping.Size = New System.Drawing.Size(95, 16)
@@ -681,7 +760,7 @@ Partial Class FGS13
         'chkSpcSelect
         '
         Me.chkSpcSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkSpcSelect.Location = New System.Drawing.Point(461, 105)
+        Me.chkSpcSelect.Location = New System.Drawing.Point(700, 129)
         Me.chkSpcSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.chkSpcSelect.Name = "chkSpcSelect"
         Me.chkSpcSelect.Size = New System.Drawing.Size(110, 15)
@@ -691,21 +770,21 @@ Partial Class FGS13
         'txtSelSpc
         '
         Me.txtSelSpc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSelSpc.BackColor = System.Drawing.Color.Thistle
         Me.txtSelSpc.ForeColor = System.Drawing.Color.Brown
-        Me.txtSelSpc.Location = New System.Drawing.Point(437, 35)
+        Me.txtSelSpc.Location = New System.Drawing.Point(437, 59)
         Me.txtSelSpc.Multiline = True
         Me.txtSelSpc.Name = "txtSelSpc"
         Me.txtSelSpc.ReadOnly = True
-        Me.txtSelSpc.Size = New System.Drawing.Size(195, 21)
+        Me.txtSelSpc.Size = New System.Drawing.Size(434, 21)
         Me.txtSelSpc.TabIndex = 202
         '
         'btnClear_spc
         '
         Me.btnClear_spc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClear_spc.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnClear_spc.Location = New System.Drawing.Point(633, 35)
+        Me.btnClear_spc.Location = New System.Drawing.Point(872, 59)
         Me.btnClear_spc.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClear_spc.Name = "btnClear_spc"
         Me.btnClear_spc.Size = New System.Drawing.Size(52, 21)
@@ -717,7 +796,7 @@ Partial Class FGS13
         '
         Me.btnHelp_spc.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHelp_spc.Image = CType(resources.GetObject("btnHelp_spc.Image"), System.Drawing.Image)
-        Me.btnHelp_spc.Location = New System.Drawing.Point(410, 35)
+        Me.btnHelp_spc.Location = New System.Drawing.Point(410, 59)
         Me.btnHelp_spc.Margin = New System.Windows.Forms.Padding(0)
         Me.btnHelp_spc.Name = "btnHelp_spc"
         Me.btnHelp_spc.Size = New System.Drawing.Size(26, 21)
@@ -727,7 +806,7 @@ Partial Class FGS13
         'chkMbtType
         '
         Me.chkMbtType.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkMbtType.Location = New System.Drawing.Point(576, 105)
+        Me.chkMbtType.Location = New System.Drawing.Point(813, 129)
         Me.chkMbtType.Margin = New System.Windows.Forms.Padding(0)
         Me.chkMbtType.Name = "chkMbtType"
         Me.chkMbtType.Size = New System.Drawing.Size(109, 15)
@@ -738,7 +817,7 @@ Partial Class FGS13
         'chkHistory
         '
         Me.chkHistory.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkHistory.Location = New System.Drawing.Point(5, 105)
+        Me.chkHistory.Location = New System.Drawing.Point(244, 129)
         Me.chkHistory.Margin = New System.Windows.Forms.Padding(0)
         Me.chkHistory.Name = "chkHistory"
         Me.chkHistory.Size = New System.Drawing.Size(124, 15)
@@ -751,7 +830,7 @@ Partial Class FGS13
         Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.Label12.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.Black
-        Me.Label12.Location = New System.Drawing.Point(328, 35)
+        Me.Label12.Location = New System.Drawing.Point(328, 59)
         Me.Label12.Margin = New System.Windows.Forms.Padding(1)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(80, 21)
@@ -763,7 +842,7 @@ Partial Class FGS13
         '
         Me.dtpDateE.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.dtpDateE.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateE.Location = New System.Drawing.Point(206, 35)
+        Me.dtpDateE.Location = New System.Drawing.Point(206, 59)
         Me.dtpDateE.Name = "dtpDateE"
         Me.dtpDateE.Size = New System.Drawing.Size(102, 21)
         Me.dtpDateE.TabIndex = 15
@@ -773,7 +852,7 @@ Partial Class FGS13
         '
         Me.txtBcNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBcNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBcNo.Location = New System.Drawing.Point(575, 80)
+        Me.txtBcNo.Location = New System.Drawing.Point(814, 104)
         Me.txtBcNo.Margin = New System.Windows.Forms.Padding(0)
         Me.txtBcNo.Name = "txtBcNo"
         Me.txtBcNo.Size = New System.Drawing.Size(111, 21)
@@ -784,7 +863,7 @@ Partial Class FGS13
         Me.lblTest.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblTest.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblTest.ForeColor = System.Drawing.Color.Black
-        Me.lblTest.Location = New System.Drawing.Point(5, 58)
+        Me.lblTest.Location = New System.Drawing.Point(5, 82)
         Me.lblTest.Margin = New System.Windows.Forms.Padding(1)
         Me.lblTest.Name = "lblTest"
         Me.lblTest.Size = New System.Drawing.Size(80, 21)
@@ -799,7 +878,7 @@ Partial Class FGS13
         Me.Label8.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.White
         Me.Label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label8.Location = New System.Drawing.Point(574, 58)
+        Me.Label8.Location = New System.Drawing.Point(813, 82)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(112, 21)
         Me.Label8.TabIndex = 83
@@ -809,7 +888,7 @@ Partial Class FGS13
         'lblWk
         '
         Me.lblWk.AutoSize = True
-        Me.lblWk.Location = New System.Drawing.Point(226, 39)
+        Me.lblWk.Location = New System.Drawing.Point(226, 63)
         Me.lblWk.Name = "lblWk"
         Me.lblWk.Size = New System.Drawing.Size(11, 12)
         Me.lblWk.TabIndex = 18
@@ -819,14 +898,14 @@ Partial Class FGS13
         'txtSelTest
         '
         Me.txtSelTest.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSelTest.BackColor = System.Drawing.Color.Thistle
         Me.txtSelTest.ForeColor = System.Drawing.Color.Brown
-        Me.txtSelTest.Location = New System.Drawing.Point(86, 58)
+        Me.txtSelTest.Location = New System.Drawing.Point(86, 82)
         Me.txtSelTest.Multiline = True
         Me.txtSelTest.Name = "txtSelTest"
         Me.txtSelTest.ReadOnly = True
-        Me.txtSelTest.Size = New System.Drawing.Size(486, 43)
+        Me.txtSelTest.Size = New System.Drawing.Size(725, 43)
         Me.txtSelTest.TabIndex = 194
         '
         'Panel3
@@ -838,7 +917,7 @@ Partial Class FGS13
         Me.Panel3.Controls.Add(Me.chkRstReg)
         Me.Panel3.Controls.Add(Me.chkRstNull)
         Me.Panel3.ForeColor = System.Drawing.Color.DarkBlue
-        Me.Panel3.Location = New System.Drawing.Point(452, 12)
+        Me.Panel3.Location = New System.Drawing.Point(691, 12)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(233, 21)
         Me.Panel3.TabIndex = 143
@@ -887,7 +966,7 @@ Partial Class FGS13
         Me.txtWkNoE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtWkNoE.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.txtWkNoE.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.txtWkNoE.Location = New System.Drawing.Point(240, 35)
+        Me.txtWkNoE.Location = New System.Drawing.Point(240, 59)
         Me.txtWkNoE.MaxLength = 4
         Me.txtWkNoE.Name = "txtWkNoE"
         Me.txtWkNoE.Size = New System.Drawing.Size(33, 21)
@@ -910,7 +989,7 @@ Partial Class FGS13
         Me.txtWkNoS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtWkNoS.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.txtWkNoS.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.txtWkNoS.Location = New System.Drawing.Point(190, 35)
+        Me.txtWkNoS.Location = New System.Drawing.Point(190, 59)
         Me.txtWkNoS.MaxLength = 4
         Me.txtWkNoS.Name = "txtWkNoS"
         Me.txtWkNoS.Size = New System.Drawing.Size(33, 21)
@@ -920,7 +999,7 @@ Partial Class FGS13
         'btnClear_test
         '
         Me.btnClear_test.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnClear_test.Location = New System.Drawing.Point(32, 80)
+        Me.btnClear_test.Location = New System.Drawing.Point(32, 104)
         Me.btnClear_test.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClear_test.Name = "btnClear_test"
         Me.btnClear_test.Size = New System.Drawing.Size(52, 21)
@@ -932,7 +1011,7 @@ Partial Class FGS13
         '
         Me.btnHelp_test.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHelp_test.Image = CType(resources.GetObject("btnHelp_test.Image"), System.Drawing.Image)
-        Me.btnHelp_test.Location = New System.Drawing.Point(5, 80)
+        Me.btnHelp_test.Location = New System.Drawing.Point(5, 104)
         Me.btnHelp_test.Margin = New System.Windows.Forms.Padding(0)
         Me.btnHelp_test.Name = "btnHelp_test"
         Me.btnHelp_test.Size = New System.Drawing.Size(26, 21)
@@ -952,7 +1031,7 @@ Partial Class FGS13
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(193, 39)
+        Me.lblDate.Location = New System.Drawing.Point(193, 63)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(11, 12)
         Me.lblDate.TabIndex = 16
@@ -976,7 +1055,7 @@ Partial Class FGS13
         Me.lblTitleDt.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
         Me.lblTitleDt.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblTitleDt.ForeColor = System.Drawing.Color.White
-        Me.lblTitleDt.Location = New System.Drawing.Point(5, 35)
+        Me.lblTitleDt.Location = New System.Drawing.Point(5, 59)
         Me.lblTitleDt.Name = "lblTitleDt"
         Me.lblTitleDt.Size = New System.Drawing.Size(80, 21)
         Me.lblTitleDt.TabIndex = 14
@@ -987,7 +1066,7 @@ Partial Class FGS13
         '
         Me.dtpDateS.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.dtpDateS.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDateS.Location = New System.Drawing.Point(86, 35)
+        Me.dtpDateS.Location = New System.Drawing.Point(86, 59)
         Me.dtpDateS.Name = "dtpDateS"
         Me.dtpDateS.Size = New System.Drawing.Size(102, 21)
         Me.dtpDateS.TabIndex = 13
@@ -1013,23 +1092,12 @@ Partial Class FGS13
         Me.cboTGrp.Size = New System.Drawing.Size(141, 20)
         Me.cboTGrp.TabIndex = 157
         '
-        'chkBFtestToExcel
-        '
-        Me.chkBFtestToExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkBFtestToExcel.Location = New System.Drawing.Point(148, 104)
-        Me.chkBFtestToExcel.Margin = New System.Windows.Forms.Padding(0)
-        Me.chkBFtestToExcel.Name = "chkBFtestToExcel"
-        Me.chkBFtestToExcel.Size = New System.Drawing.Size(115, 16)
-        Me.chkBFtestToExcel.TabIndex = 206
-        Me.chkBFtestToExcel.Text = "체액검사ToExcel"
-        Me.chkBFtestToExcel.Visible = False
-        '
         'FGS13
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1102, 630)
+        Me.ClientSize = New System.Drawing.Size(1341, 630)
         Me.Controls.Add(Me.axItemSave)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.grpPrintInfo)
@@ -1116,4 +1184,9 @@ Partial Class FGS13
     Friend WithEvents chkMultiBc As System.Windows.Forms.CheckBox
     Friend WithEvents chkBFtest As System.Windows.Forms.CheckBox
     Friend WithEvents chkBFtestToExcel As System.Windows.Forms.CheckBox
+    Friend WithEvents lblWard As Windows.Forms.Label
+    Friend WithEvents txtSelWard As Windows.Forms.TextBox
+    Friend WithEvents btnHelp_ward As Windows.Forms.Button
+    Friend WithEvents btnClear_ward As Windows.Forms.Button
+    Friend WithEvents chkWardExcept As Windows.Forms.CheckBox
 End Class

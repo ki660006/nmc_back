@@ -1224,6 +1224,40 @@ Public Class APP_EXLAB
 
     End Function
 
+    Public Shared Function fnGet_Patno(ByVal rsRegno As String) As DataTable
+        Dim sFn As String = "Public fnGet_SpcInfo(String, String) As DataTable"
+
+        Try
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            sSql += " "
+            sSql += " SELECT A.PID,  " '-- 기존환자번호
+            sSql += " (SELECT X.PID"
+            sSql += "    FROM PAM.PMCMPTBS X"
+            sSql += "   WHERE X.PID = A.BINDPID"
+            sSql += "     AND X.INSTCD = A.INSTCD"
+            sSql += "     AND ROWNUM = 1) AS BINDPID,  " '-- 합번된 환자번호
+            sSql += "     NVL((SELECT X.PID FROM PAM.PMCMPTBS X"
+            sSql += "           WHERE X.PID = A.BINDPID"
+            sSql += "             AND X.INSTCD = A.INSTCD"
+            sSql += "             And ROWNUM = 1), A.PID) As PID2   " '-- <<< 환자번호 읽을때에 합번된 환자번호가 있으면 해당번호(BINDPID)를 아니면 PID를 읽도록 NVL처리
+            sSql += "  FROM PAM.PMCMPTBS A"
+            sSql += " WHERE PID = :regno "
+            sSql += "   AND INSTCD = '031' "
+
+            alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
+
+            DbCommand()
+            Return DbExecuteQuery(sSql, alParm)
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+        End Try
+
+    End Function
+
+
     Public Shared Function fnGet_ExLab_ImgYn(ByVal rsTestCd As String, ByVal rsSpcCd As String, ByVal rsTkdt As String) As DataTable
         Dim sFn As String = "Public Shared Function fnGet_ExLab_ImgYn() As DataTable"
         Dim sSql As String = ""

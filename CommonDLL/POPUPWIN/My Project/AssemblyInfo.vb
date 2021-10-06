@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("ec684db8-59ca-47ad-bba5-5f80c1238665")> 
+<Assembly: Guid("ec684db8-59ca-47ad-bba5-5f80c1238665")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -63,5 +63,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.348 --> 2020/10/12 : 코로나 특수보고서 모듈 수정
 'Version 3.1.10.349 --> 2020/10/13 : 코로나 특수보고서 모듈 수정
 'Version 3.1.10.350 --> 2020/10/22 : 코로나 특수보고서 모듈 수정
+'Version 3.1.10.351 --> 2021/09/01 : 코로나 특수보고서 모듈 수정
 
-<Assembly: AssemblyVersion("3.1.10.350")> 
+<Assembly: AssemblyVersion("3.1.10.351")>

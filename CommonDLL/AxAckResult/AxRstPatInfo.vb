@@ -275,7 +275,10 @@ Public Class AxRstPatInfo
                 '    End If
                 'End If
 
+                '20210907 jhs 진단명 잘못나오는 문제 때문에 변경
                 Me.txtDiagNm.Text = dt.Rows(0).Item("diagnm").ToString().Trim   ' 진단명 
+                'Me.txtDiagNm.Text = OCSAPP.OcsLink.Pat.fnGet_DiagNm(Me.lblRegNo.Text, Me.lblOrdDt.Text.Substring(0, 10), Me.lblOrdDt.Text.Substring(0, 10), dt.Rows(0).Item("iogbn").ToString)
+                '-----------------------------------------------------------
 
                 '< JJH 혈액 종양 진단 판단 받았는지 체크
                 Dim LeukemiaYn As String = OCSAPP.OcsLink.Pat.fnGet_Diag_Leukemia_Chk(msRegNo)

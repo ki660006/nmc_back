@@ -33,7 +33,7 @@ Public Class FGCDHELP_TEST_NEW
     Private mBeFTestcd As String = ""
 
     Private mFirstSearch As Boolean
-
+    Private chkStart As Boolean = True
 
     Private Const msXML As String = "\XML"
 
@@ -875,7 +875,13 @@ Public Class FGCDHELP_TEST_NEW
             Dim alList As New ArrayList
             Dim dt As New DataTable
 
-            Me.txtTCode.Text = ""
+            '20210929 jhs 처음은 넘어오는 것을 화면에 표현해 주고 다음은 돋보기 눌렀을 때 초기 화하기 
+            If chkStart Then
+                chkStart = False
+            ElseIf chkStart = False Then
+                Me.txtTCode.Text = ""
+            End If
+            '---------------------------------------------------------------
 
             ' If CType(sender, Windows.Forms.Button).Name.ToLower = "btncdhelp_test" Then
             dt = (New DA_CDHELP_TEST_NEW).fnGet_Help_Info("")
@@ -1386,7 +1392,7 @@ Public Class FGCDHELP_TEST_NEW
 
         Try
             xlsApp = CType(GetObject("", "Excel.Application"), Excel.Application)
-            xlsWkB = xlsApp.Workbooks.Open(Windows.Forms.Application.StartupPath + "\sample.xls") '경로에 해당파일이 있어야함
+            xlsWkB = xlsApp.Workbooks.Open(Windows.Forms.Application.StartupPath + "\SSF\sample.xls") '경로에 해당파일이 있어야함
             xlsWkS = CType(xlsWkB.ActiveSheet, Excel.Worksheet)
 
             Dim iCnt As Integer = 0
@@ -1471,7 +1477,6 @@ Public Class FGCDHELP_TEST_NEW
 
             '-- 6 단위 응급중간보고 일반중간보고 응급최종보고 일반최종보고
             xlsWkS.Range("B" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtSlipNmd.Text '검사분야
-            'xlsWkS.Range("D" + (6 + excelHeight* (iCnt - 1)).ToString).Value = Me.txtrstunit.Text '참고치단위
             xlsWkS.Range("F" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtERPTAT.Text '"응급중간보고"
             xlsWkS.Range("G" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtPTAT.Text '"일반중간보고"
             xlsWkS.Range("H" + (6 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtERFTAT.Text '"응급최종보고"
@@ -1480,6 +1485,7 @@ Public Class FGCDHELP_TEST_NEW
 
             '-- 7  참고치 용기명 검사소요일시 
             xlsWkS.Range("B" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtRef.Text
+            'xlsWkS.Range("D" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtrstunit.Text '참고치단위
             xlsWkS.Range("F" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtTubeNmd.Text
             xlsWkS.Range("I" + (7 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtResultDays.Text
 
@@ -1504,7 +1510,7 @@ Public Class FGCDHELP_TEST_NEW
 
             '-- 10 검체량 검체단위
             xlsWkS.Range("B" + (10 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtVol.Text
-            'xlsWkS.Range("D" + (9 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtspcunit.Text
+            xlsWkS.Range("D" + (10 + excelHeight * (iCnt - 1)).ToString).Value = Me.txtspcunit.Text
 
 
             '< 세부검사목록

@@ -18,6 +18,8 @@ Public Class FDF16
     Friend WithEvents btnGetExcel As System.Windows.Forms.Button
     Friend WithEvents txtRegNm As System.Windows.Forms.TextBox
     Friend WithEvents lblSameCd As System.Windows.Forms.Label
+    Friend WithEvents cboBacColor As ComboBox
+    Friend WithEvents lblBacColor As Label
     Friend WithEvents txtSameCd As System.Windows.Forms.TextBox
 
     Private Sub sbEditUseDt_Edit(ByVal rsUseTag As String, ByVal rsUseDt As String)
@@ -167,6 +169,9 @@ Public Class FDF16
                 .SetItemTable("BACIFCD", 12, 1, Me.txtIFCd.Text)
                 .SetItemTable("BACWNCD", 13, 1, Me.txtWNCd.Text)
                 .SetItemTable("SAMECD", 14, 1, Me.txtSameCd.Text)
+                '20210817 jhs ±Õ »ö Ç¥ÇöÇÏ±â À§ÇØ Ãß°¡
+                .SetItemTable("BACCOLOR", 15, 1, Ctrl.Get_Code(Me.cboBacColor))
+                '------------------------------------------
             End With
 
             fnCollectItemTable_210 = it210
@@ -378,9 +383,14 @@ Public Class FDF16
                                             Exit For
                                         End If
                                     Next
-
+                                    '20210817 »öÇ¥Çö À§ÇØ Ãß°¡
+                                    If dt.Columns(j).ColumnName().ToUpper = "BACCOLOR_01" Then
+                                        iCurIndex = CInt(dt.Rows(i).Item("BACCOLOR_01"))
+                                    End If
+                                    '------------------
                                     CType(cctrl, Windows.Forms.ComboBox).SelectedIndex = iCurIndex
                                 End If
+
 
                             ElseIf TypeOf (cctrl) Is System.Windows.Forms.TextBox Then
                                 cctrl.Text = dt.Rows(i).Item(j).ToString.Trim
@@ -603,47 +613,49 @@ Public Class FDF16
     Friend WithEvents lblBacNm As System.Windows.Forms.Label
     Friend WithEvents cboBacgen As System.Windows.Forms.ComboBox
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage = New System.Windows.Forms.TabPage
-        Me.txtRegNm = New System.Windows.Forms.TextBox
-        Me.grpCd = New System.Windows.Forms.GroupBox
-        Me.btnGetExcel = New System.Windows.Forms.Button
-        Me.txtBacCd = New System.Windows.Forms.TextBox
-        Me.lblBacCd = New System.Windows.Forms.Label
-        Me.btnUE = New System.Windows.Forms.Button
-        Me.dtpUSTime = New System.Windows.Forms.DateTimePicker
-        Me.txtUSDay = New System.Windows.Forms.TextBox
-        Me.dtpUSDay = New System.Windows.Forms.DateTimePicker
-        Me.lblUSDayTime = New System.Windows.Forms.Label
-        Me.txtUEDT = New System.Windows.Forms.TextBox
-        Me.lblUEDT = New System.Windows.Forms.Label
-        Me.txtRegDT = New System.Windows.Forms.TextBox
-        Me.txtUSDT = New System.Windows.Forms.TextBox
-        Me.lblUserNm = New System.Windows.Forms.Label
-        Me.lblRegDT = New System.Windows.Forms.Label
-        Me.lblUSDT = New System.Windows.Forms.Label
-        Me.txtRegID = New System.Windows.Forms.TextBox
-        Me.grpCdInfo1 = New System.Windows.Forms.GroupBox
-        Me.lblSameCd = New System.Windows.Forms.Label
-        Me.txtSameCd = New System.Windows.Forms.TextBox
-        Me.lblWNCd = New System.Windows.Forms.Label
-        Me.lblIFCd = New System.Windows.Forms.Label
-        Me.cboBacgen = New System.Windows.Forms.ComboBox
-        Me.lblBacgen = New System.Windows.Forms.Label
-        Me.lblBacNmS = New System.Windows.Forms.Label
-        Me.txtBacNmS = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.lblBacNmP = New System.Windows.Forms.Label
-        Me.txtBacNmP = New System.Windows.Forms.TextBox
-        Me.lblBacNmD = New System.Windows.Forms.Label
-        Me.txtBacNmD = New System.Windows.Forms.TextBox
-        Me.lblBacNm = New System.Windows.Forms.Label
-        Me.txtBacNm = New System.Windows.Forms.TextBox
-        Me.txtIFCd = New System.Windows.Forms.TextBox
-        Me.txtWNCd = New System.Windows.Forms.TextBox
+        Me.components = New System.ComponentModel.Container()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage = New System.Windows.Forms.TabPage()
+        Me.txtRegNm = New System.Windows.Forms.TextBox()
+        Me.grpCd = New System.Windows.Forms.GroupBox()
+        Me.btnGetExcel = New System.Windows.Forms.Button()
+        Me.txtBacCd = New System.Windows.Forms.TextBox()
+        Me.lblBacCd = New System.Windows.Forms.Label()
+        Me.btnUE = New System.Windows.Forms.Button()
+        Me.dtpUSTime = New System.Windows.Forms.DateTimePicker()
+        Me.txtUSDay = New System.Windows.Forms.TextBox()
+        Me.dtpUSDay = New System.Windows.Forms.DateTimePicker()
+        Me.lblUSDayTime = New System.Windows.Forms.Label()
+        Me.txtUEDT = New System.Windows.Forms.TextBox()
+        Me.lblUEDT = New System.Windows.Forms.Label()
+        Me.txtRegDT = New System.Windows.Forms.TextBox()
+        Me.txtUSDT = New System.Windows.Forms.TextBox()
+        Me.lblUserNm = New System.Windows.Forms.Label()
+        Me.lblRegDT = New System.Windows.Forms.Label()
+        Me.lblUSDT = New System.Windows.Forms.Label()
+        Me.txtRegID = New System.Windows.Forms.TextBox()
+        Me.grpCdInfo1 = New System.Windows.Forms.GroupBox()
+        Me.lblSameCd = New System.Windows.Forms.Label()
+        Me.txtSameCd = New System.Windows.Forms.TextBox()
+        Me.lblWNCd = New System.Windows.Forms.Label()
+        Me.lblIFCd = New System.Windows.Forms.Label()
+        Me.cboBacgen = New System.Windows.Forms.ComboBox()
+        Me.lblBacgen = New System.Windows.Forms.Label()
+        Me.lblBacNmS = New System.Windows.Forms.Label()
+        Me.txtBacNmS = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblBacNmP = New System.Windows.Forms.Label()
+        Me.txtBacNmP = New System.Windows.Forms.TextBox()
+        Me.lblBacNmD = New System.Windows.Forms.Label()
+        Me.txtBacNmD = New System.Windows.Forms.TextBox()
+        Me.lblBacNm = New System.Windows.Forms.Label()
+        Me.txtBacNm = New System.Windows.Forms.TextBox()
+        Me.txtIFCd = New System.Windows.Forms.TextBox()
+        Me.txtWNCd = New System.Windows.Forms.TextBox()
         Me.errpd = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.lblBacColor = New System.Windows.Forms.Label()
+        Me.cboBacColor = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage.SuspendLayout()
@@ -687,9 +699,9 @@ Public Class FDF16
         Me.TabPage.Controls.Add(Me.lblUSDT)
         Me.TabPage.Controls.Add(Me.txtRegID)
         Me.TabPage.Controls.Add(Me.grpCdInfo1)
-        Me.TabPage.Location = New System.Drawing.Point(4, 21)
+        Me.TabPage.Location = New System.Drawing.Point(4, 22)
         Me.TabPage.Name = "TabPage"
-        Me.TabPage.Size = New System.Drawing.Size(780, 576)
+        Me.TabPage.Size = New System.Drawing.Size(780, 575)
         Me.TabPage.TabIndex = 0
         Me.TabPage.Text = "¹è¾ç±ÕÁ¤º¸"
         '
@@ -699,7 +711,7 @@ Public Class FDF16
         Me.txtRegNm.BackColor = System.Drawing.Color.LightGray
         Me.txtRegNm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegNm.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegNm.Location = New System.Drawing.Point(702, 548)
+        Me.txtRegNm.Location = New System.Drawing.Point(702, 547)
         Me.txtRegNm.Name = "txtRegNm"
         Me.txtRegNm.ReadOnly = True
         Me.txtRegNm.Size = New System.Drawing.Size(68, 21)
@@ -825,7 +837,7 @@ Public Class FDF16
         Me.txtUEDT.BackColor = System.Drawing.Color.LightGray
         Me.txtUEDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUEDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtUEDT.Location = New System.Drawing.Point(311, 548)
+        Me.txtUEDT.Location = New System.Drawing.Point(311, 547)
         Me.txtUEDT.Name = "txtUEDT"
         Me.txtUEDT.ReadOnly = True
         Me.txtUEDT.Size = New System.Drawing.Size(100, 21)
@@ -839,7 +851,7 @@ Public Class FDF16
         Me.lblUEDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUEDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUEDT.ForeColor = System.Drawing.Color.Black
-        Me.lblUEDT.Location = New System.Drawing.Point(213, 548)
+        Me.lblUEDT.Location = New System.Drawing.Point(213, 547)
         Me.lblUEDT.Name = "lblUEDT"
         Me.lblUEDT.Size = New System.Drawing.Size(97, 21)
         Me.lblUEDT.TabIndex = 8
@@ -853,7 +865,7 @@ Public Class FDF16
         Me.txtRegDT.BackColor = System.Drawing.Color.LightGray
         Me.txtRegDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegDT.Location = New System.Drawing.Point(510, 548)
+        Me.txtRegDT.Location = New System.Drawing.Point(510, 547)
         Me.txtRegDT.Name = "txtRegDT"
         Me.txtRegDT.ReadOnly = True
         Me.txtRegDT.Size = New System.Drawing.Size(100, 21)
@@ -867,7 +879,7 @@ Public Class FDF16
         Me.txtUSDT.BackColor = System.Drawing.Color.LightGray
         Me.txtUSDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUSDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtUSDT.Location = New System.Drawing.Point(106, 548)
+        Me.txtUSDT.Location = New System.Drawing.Point(106, 547)
         Me.txtUSDT.Name = "txtUSDT"
         Me.txtUSDT.ReadOnly = True
         Me.txtUSDT.Size = New System.Drawing.Size(100, 21)
@@ -881,7 +893,7 @@ Public Class FDF16
         Me.lblUserNm.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUserNm.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUserNm.ForeColor = System.Drawing.Color.Black
-        Me.lblUserNm.Location = New System.Drawing.Point(617, 548)
+        Me.lblUserNm.Location = New System.Drawing.Point(617, 547)
         Me.lblUserNm.Name = "lblUserNm"
         Me.lblUserNm.Size = New System.Drawing.Size(84, 21)
         Me.lblUserNm.TabIndex = 5
@@ -894,7 +906,7 @@ Public Class FDF16
         Me.lblRegDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblRegDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblRegDT.ForeColor = System.Drawing.Color.Black
-        Me.lblRegDT.Location = New System.Drawing.Point(425, 548)
+        Me.lblRegDT.Location = New System.Drawing.Point(425, 547)
         Me.lblRegDT.Name = "lblRegDT"
         Me.lblRegDT.Size = New System.Drawing.Size(84, 21)
         Me.lblRegDT.TabIndex = 4
@@ -907,7 +919,7 @@ Public Class FDF16
         Me.lblUSDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUSDT.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUSDT.ForeColor = System.Drawing.Color.Black
-        Me.lblUSDT.Location = New System.Drawing.Point(8, 548)
+        Me.lblUSDT.Location = New System.Drawing.Point(8, 547)
         Me.lblUSDT.Name = "lblUSDT"
         Me.lblUSDT.Size = New System.Drawing.Size(97, 21)
         Me.lblUSDT.TabIndex = 7
@@ -920,7 +932,7 @@ Public Class FDF16
         Me.txtRegID.BackColor = System.Drawing.Color.LightGray
         Me.txtRegID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegID.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegID.Location = New System.Drawing.Point(702, 548)
+        Me.txtRegID.Location = New System.Drawing.Point(702, 547)
         Me.txtRegID.Name = "txtRegID"
         Me.txtRegID.ReadOnly = True
         Me.txtRegID.Size = New System.Drawing.Size(68, 21)
@@ -931,8 +943,10 @@ Public Class FDF16
         'grpCdInfo1
         '
         Me.grpCdInfo1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grpCdInfo1.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.grpCdInfo1.Controls.Add(Me.cboBacColor)
+        Me.grpCdInfo1.Controls.Add(Me.lblBacColor)
         Me.grpCdInfo1.Controls.Add(Me.lblSameCd)
         Me.grpCdInfo1.Controls.Add(Me.txtSameCd)
         Me.grpCdInfo1.Controls.Add(Me.lblWNCd)
@@ -953,7 +967,7 @@ Public Class FDF16
         Me.grpCdInfo1.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.grpCdInfo1.Location = New System.Drawing.Point(8, 65)
         Me.grpCdInfo1.Name = "grpCdInfo1"
-        Me.grpCdInfo1.Size = New System.Drawing.Size(764, 467)
+        Me.grpCdInfo1.Size = New System.Drawing.Size(764, 466)
         Me.grpCdInfo1.TabIndex = 3
         Me.grpCdInfo1.TabStop = False
         Me.grpCdInfo1.Text = "¹è¾ç±ÕÁ¤º¸"
@@ -1045,7 +1059,6 @@ Public Class FDF16
         Me.txtBacNmS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBacNmS.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.txtBacNmS.Location = New System.Drawing.Point(106, 38)
-        'Me.txtBacNmS.MaxLength = 30
         Me.txtBacNmS.MaxLength = 90
         Me.txtBacNmS.Name = "txtBacNmS"
         Me.txtBacNmS.Size = New System.Drawing.Size(364, 21)
@@ -1124,7 +1137,6 @@ Public Class FDF16
         Me.txtBacNm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBacNm.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.txtBacNm.Location = New System.Drawing.Point(106, 16)
-        '20191230nbm ¹è¾ç±Õ¸í ±æÀÌ¼öÁ¤(60->90)
         Me.txtBacNm.MaxLength = 90
         Me.txtBacNm.Name = "txtBacNm"
         Me.txtBacNm.Size = New System.Drawing.Size(364, 21)
@@ -1157,6 +1169,29 @@ Public Class FDF16
         'errpd
         '
         Me.errpd.ContainerControl = Me
+        '
+        'lblBacColor
+        '
+        Me.lblBacColor.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblBacColor.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblBacColor.ForeColor = System.Drawing.Color.White
+        Me.lblBacColor.Location = New System.Drawing.Point(8, 218)
+        Me.lblBacColor.Name = "lblBacColor"
+        Me.lblBacColor.Size = New System.Drawing.Size(97, 21)
+        Me.lblBacColor.TabIndex = 140
+        Me.lblBacColor.Text = "Ç¥Çö »ö"
+        Me.lblBacColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboBacColor
+        '
+        Me.cboBacColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboBacColor.Items.AddRange(New Object() {"[0] ¾øÀ½", "[1] ³ë¶û", "[2] ÆÄ¶û", "[3] ÁÖÈ²"})
+        Me.cboBacColor.Location = New System.Drawing.Point(106, 219)
+        Me.cboBacColor.MaxDropDownItems = 20
+        Me.cboBacColor.Name = "cboBacColor"
+        Me.cboBacColor.Size = New System.Drawing.Size(76, 20)
+        Me.cboBacColor.TabIndex = 141
+        Me.cboBacColor.Tag = "BACCOLOR_01"
         '
         'FDF16
         '

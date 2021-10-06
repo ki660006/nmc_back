@@ -480,7 +480,23 @@ Namespace CommFN
                                 .Row = i
                                 .Text = r_dt.Rows(i - 1).Item(j - 1).ToString().Trim
                                 .CellTag = r_dt.Rows(i - 1).Item(j - 1).ToString().Trim
+                                '20210817 jhs 색변경으로 인해 추가
+                                If r_dt.Columns(j - 1).ColumnName.ToLower() = "bacnmd" Then
+                                    Select Case r_dt.Rows(i - 1).Item("baccolor").ToString.Trim
+                                        Case "1"
+                                            .BackColor = System.Drawing.Color.Yellow
+                                        Case "2"
+                                            .BackColor = System.Drawing.Color.LightBlue
+                                        Case "3"
+                                            .BackColor = System.Drawing.Color.Orange
+                                        Case Else
+                                            .BackColor = System.Drawing.Color.White
+                                    End Select
+
+                                End If
+                                '-------------------------------------
                             End If
+
                         Next
                     Next
                 End With
@@ -662,6 +678,21 @@ Namespace CommFN
                                 .Row = i
                                 .Text = ra_dr(i - 1).Item(j - 1).ToString().Trim
                                 .CellTag = ra_dr(i - 1).Item(j - 1).ToString().Trim
+                                '20210817 jhs 색변경으로 인해 -추가 실질적으로 반영되는 부분 -미생물 결과저장 및 보고에서 배양균 
+                                If ra_dr(i - 1).Table.Columns(j - 1).ColumnName.ToLower() = "bacnmd" Then
+                                    Select Case ra_dr(i - 1).Table.Rows(i - 1).Item("baccolor").ToString.Trim
+                                        Case "1"
+                                            .BackColor = System.Drawing.Color.Yellow
+                                        Case "2"
+                                            .BackColor = System.Drawing.Color.LightBlue
+                                        Case "3"
+                                            .BackColor = System.Drawing.Color.Orange
+                                        Case Else
+                                            .BackColor = System.Drawing.Color.White
+                                    End Select
+
+                                End If
+                                '-------------------------------------
                             End If
                         Next
                     Next

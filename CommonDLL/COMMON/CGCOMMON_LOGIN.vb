@@ -798,6 +798,25 @@ Namespace CommLogin
         End Function
         '----------------------------------------
 
+
+        '20210702 jhs AFB_NTM Culture 결과코드 설정 여부
+        '-- 적용 검사코드  
+        Public Function CVR_P_testCd(ByVal rsTestcd As String) As String
+            Try
+                Dim dr As DataRow() = m_dt.Select("clsitem = 'CVRP' AND clsval = '" + rsTestcd + "'")
+                Dim alValue As New ArrayList
+
+                If dr.Length > 0 Then
+                    Return dr(0).Item("clscd").ToString.Trim
+                Else
+                    Return ""
+                End If
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Function
+        '----------------------------------------
+
         '-- 검체분류:위탁검체
         Public Function BCCLS_ExLab() As ArrayList
             Try
