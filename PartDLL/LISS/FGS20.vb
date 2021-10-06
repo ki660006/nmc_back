@@ -341,6 +341,12 @@ Public Class FGS20
                             .Col = .GetColFromID("state") : .Text = "전송완료"
                             .BackColor = Color.LightGreen
 
+                            '20210826 jhs 해당검체번호로 전송했을때는 색 주황색으로 
+                            If dt.Rows(ix).Item("r80bcno").ToString.Trim <> "" Then
+                                .BackColor = Color.Orange
+                            End If
+                            '-------------------------------------
+
                             Dim dt_reginfo As DataTable = fn_get_HosRst_Reginfo(dt.Rows(ix).Item("bcno").ToString)
 
                             If dt_reginfo.Rows.Count <= 0 Then
@@ -759,9 +765,15 @@ Public Class FGS20
                         .Col = .GetColFromID("errmsg") : .Text = dt.Rows(ix).Item("errmsg").ToString
                         .Col = .GetColFromID("orgrsts") : .Text = dt.Rows(ix).Item("orgrsts").ToString
 
-                        If dt.Rows(ix).Item("state").ToString = "Y" Then
+                        If dt.Rows(ix).Item("state").ToString = "Y" Or dt.Rows(ix).Item("state").ToString = "Z" Then
                             .Col = .GetColFromID("state") : .Text = "전송완료"
                             .BackColor = Color.LightGreen
+
+                            '20210826 jhs 해당검체번호로 전송했을때는 색 주황색으로 
+                            If dt.Rows(ix).Item("r80bcno").ToString.Trim <> "" Then
+                                .BackColor = Color.Orange
+                            End If
+                            '-------------------------------------
 
                             Dim dt_reginfo As DataTable = fn_get_HosRst_Reginfo(dt.Rows(ix).Item("bcno").ToString)
 

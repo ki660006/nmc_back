@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("56056c38-264b-4505-8df2-597ec2d38dee")> 
+<Assembly: Guid("56056c38-264b-4505-8df2-597ec2d38dee")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -271,7 +271,14 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.774 --> 2021/08/02 : AxAckResult, LISR, LISM
 'Version 3.1.10.775 --> 2021/08/02 : AxAckResult, LISR, LISM(재배포)
 'Version 3.1.10.776 --> 2021/08/02 : AxAckResult(재배포)
+'Version 3.1.10.777 --> 2021/08/18 : LISF. LISS. COMMON, CDHELP, LISAPP, AXACKRESULT, AXACKRESULTVIEWER
+'Version 3.1.10.778 --> 2021/08/23 : LISS, LISAPP, AXACKRESULTVIEWER
+'Version 3.1.10.779 --> 2021/09/01 : LISF, LISS, LIAPP, COMMON,AxAckResult
+'Version 3.1.10.780 --> 2021/09/02 : LISS, AxAckResult
+'Version 3.1.10.781 --> 2021/09/03 : LISS, LISAPP , AxAckResult
+'Version 3.1.10.782 --> 2021/09/08 : LISF, AxAckResult
 
-<Assembly: AssemblyVersion("3.1.10.776")> 
+<Assembly: AssemblyVersion("3.1.10.782")>
+
 
 

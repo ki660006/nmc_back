@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("7a754dad-549a-4992-98f4-daff039710fe")> 
+<Assembly: Guid("7a754dad-549a-4992-98f4-daff039710fe")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -91,5 +91,10 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.395 --> 2021/08/02 : 검사자간 공유사항 재배포
 'Version 3.1.10.396 --> 2021/08/02 : 검사자간 공유사항 재배포
 'Version 3.1.10.397 --> 2021/08/02 : 검사자간 공유사항 재배포
+'Version 3.1.10.398 --> 2021/08/18 : 결과코드 alter 추가 및 적용되도록 수정
+'Version 3.1.10.399 --> 2021/09/01 : CVR 특정 검사는 부모검사코드의 검사명 으로 
+'Version 3.1.10.400 --> 2021/09/02 : CVR 특정 검사는 부모검사코드의 검사명 으로 
+'Version 3.1.10.401 --> 2021/09/03 : alter, critical 초기화되는 부분 수정
+'Version 3.1.10.402 --> 2021/09/08 : 미생물 alter, critical 내용 변경
 
-<Assembly: AssemblyVersion("3.1.10.397")> 
+<Assembly: AssemblyVersion("3.1.10.402")>

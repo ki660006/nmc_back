@@ -5339,17 +5339,17 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "SELECT comnm, "
-                sSql += "       CASE filter WHEN '1' THEN '○' ELSE '' END filter,"
-                sSql += "       CASE ir  WHEN '1' THEN '○' ELSE '' END ir,"
-                sSql += "       NVL(reqqnt, 0)    reqqnt,"
-                sSql += "       NVL(befoutqnt, 0) befoutqnt,"
-                sSql += "       NVL(outqnt, 0)    outqnt,"
-                sSql += "       NVL(rtnqnt, 0)    rtnqnt,"
-                sSql += "       NVL(abnqnt, 0)    abnqnt,"
-                sSql += "       NVL(cancelqnt, 0) cancelqnt"
-                sSql += "  FROM lb042m"
-                sSql += " WHERE tnsjubsuno = :tnsno"
+                sSql += "SELECT comnm, " + vbCrLf
+                sSql += "       CASE filter WHEN '1' THEN '○' ELSE '' END filter," + vbCrLf
+                sSql += "       CASE ir  WHEN '1' THEN '○' ELSE '' END ir," + vbCrLf
+                sSql += "       NVL(reqqnt, 0)    reqqnt," + vbCrLf
+                sSql += "       NVL(befoutqnt, 0) befoutqnt," + vbCrLf
+                sSql += "       NVL(outqnt, 0)    outqnt," + vbCrLf
+                sSql += "       NVL(rtnqnt, 0)    rtnqnt," + vbCrLf
+                sSql += "       NVL(abnqnt, 0)    abnqnt," + vbCrLf
+                sSql += "       NVL(cancelqnt, 0) cancelqnt" + vbCrLf
+                sSql += "  FROM lb042m" + vbCrLf
+                sSql += " WHERE tnsjubsuno = :tnsno" + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsno",  OracleDbType.Varchar2, rsTnsnum.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTnsnum))
 
@@ -5477,50 +5477,50 @@ Namespace APP_BT
                 Dim sSql As String = ""
                 Dim alParm As New ArrayList
 
-                sSql += "SELECT DISTINCT "
-                sSql += "       B2.BLDNO,"
-                sSql += "       FN_ACK_GET_BLDNO_FULL(B2.BLDNO)  AS VBLDNO,"
-                sSql += "       B2.COMCD                         AS COMCD_OUT,"
-                sSql += "       (SELECT COMNMD "
-                sSql += "          FROM LF120M"
-                sSql += "         WHERE COMCD  = B2.COMCD"
-                sSql += "           AND USDT  <= B2.INDT"
-                sSql += "           AND UEDT  >  B2.INDT"
-                sSql += "       )                                AS COMNMD,"
-                sSql += "       F4.COMORDCD,"
-                sSql += "       B2.ABO || B2.RH                  AS ABORH,"
-                sSql += "       B2.ABO,"
-                sSql += "       B2.RH,"
-                sSql += "       FN_ACK_DATE_STR(B2.DONDT,   'YYYY-MM-DD HH24:MI')   AS DONDT,"
-                sSql += "       FN_ACK_DATE_STR(B2.INDT,    'YYYY-MM-DD HH24:MI')   AS INDT,"
-                sSql += "       FN_ACK_DATE_STR(B2.AVAILDT, 'YYYY-MM-DD HH24:MI')   AS AVAILDT,"
-                sSql += "       999                                                 AS SORTKEY,"
-                sSql += "       F4.CROSSLEVEL                                       AS CROSSLEVEL,"
-                sSql += "       B2.CMT,"
-                sSql += "       B4.COMCD                        AS COMCD,"
-                sSql += "       B4.COMNM                        AS COMNM"
-                sSql += "  FROM LB043M B4, LB020M B2, LF120M F4"
-                sSql += " WHERE B4.tnsjubsuno  = :tnsno"
-                sSql += "   AND B4.COMCD       = F4.COMCD"
-                sSql += "   AND B4.SPCCD       = F4.SPCCD"
-                sSql += "   AND B2.AVAILDT    >  fn_ack_sysdate"
-                sSql += "   AND B2.STATE        = '0'"
-                sSql += "   AND B2.COMCD       = NVL(F4.PSCOMCD, F4.COMCD)"
-                sSql += "   AND B2.indt       >= F4.USDT"
-                sSql += "   AND B2.indt       <  F4.UEDT"
-                sSql += "   AND B4.STATE       = '1'"
+                sSql += "SELECT DISTINCT " + vbCrLf
+                sSql += "       B2.BLDNO," + vbCrLf
+                sSql += "       FN_ACK_GET_BLDNO_FULL(B2.BLDNO)  AS VBLDNO," + vbCrLf
+                sSql += "       B2.COMCD                         AS COMCD_OUT," + vbCrLf
+                sSql += "       (SELECT COMNMD " + vbCrLf
+                sSql += "          FROM LF120M" + vbCrLf
+                sSql += "         WHERE COMCD  = B2.COMCD" + vbCrLf
+                sSql += "           AND USDT  <= B2.INDT" + vbCrLf
+                sSql += "           AND UEDT  >  B2.INDT" + vbCrLf
+                sSql += "       )                                AS COMNMD," + vbCrLf
+                sSql += "       F4.COMORDCD," + vbCrLf
+                sSql += "       B2.ABO || B2.RH                  AS ABORH," + vbCrLf
+                sSql += "       B2.ABO," + vbCrLf
+                sSql += "       B2.RH," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.DONDT,   'YYYY-MM-DD HH24:MI')   AS DONDT," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.INDT,    'YYYY-MM-DD HH24:MI')   AS INDT," + vbCrLf
+                sSql += "       FN_ACK_DATE_STR(B2.AVAILDT, 'YYYY-MM-DD HH24:MI')   AS AVAILDT," + vbCrLf
+                sSql += "       999                                                 AS SORTKEY," + vbCrLf
+                sSql += "       F4.CROSSLEVEL                                       AS CROSSLEVEL," + vbCrLf
+                sSql += "       B2.CMT," + vbCrLf
+                sSql += "       B4.COMCD                        AS COMCD," + vbCrLf
+                sSql += "       B4.COMNM                        AS COMNM" + vbCrLf
+                sSql += "  FROM LB043M B4, LB020M B2, LF120M F4" + vbCrLf
+                sSql += " WHERE B4.tnsjubsuno  = :tnsno" + vbCrLf
+                sSql += "   AND B4.COMCD       = F4.COMCD" + vbCrLf
+                sSql += "   AND B4.SPCCD       = F4.SPCCD" + vbCrLf
+                sSql += "   AND B2.AVAILDT    >  fn_ack_sysdate" + vbCrLf
+                sSql += "   AND B2.STATE        = '0'" + vbCrLf
+                sSql += "   AND B2.COMCD       = NVL(F4.PSCOMCD, F4.COMCD)" + vbCrLf
+                sSql += "   AND B2.indt       >= F4.USDT" + vbCrLf
+                sSql += "   AND B2.indt       <  F4.UEDT" + vbCrLf
+                sSql += "   AND B4.STATE       = '1'" + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsno", rsTnsJubsuNo))
 
                 If rsAbo.Length + rsRh.Length > 0 Then
-                    sSql += "   AND B2.abo     =  :abo"
-                    sSql += "   AND B2.rh      =  :rh"
+                    sSql += "   AND B2.abo     =  :abo" + vbCrLf
+                    sSql += "   AND B2.rh      =  :rh" + vbCrLf
 
                     alParm.Add(New OracleParameter("abo", rsAbo))
                     alParm.Add(New OracleParameter("rh", rsRh))
                 End If
 
-                sSql += " ORDER BY availdt, bldno, comcd"
+                sSql += " ORDER BY availdt, bldno, comcd"+vbcrlf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -6345,280 +6345,280 @@ Namespace APP_BT
                 Dim sSql As String = ""
                 Dim alParm As New ArrayList
 
-                sSql = ""
+                sSql = "" + vbCrLf
                 '-- 입고 
-                sSql += "SELECT CASE WHEN NVL(editid, ' ') = ' ' THEN '초입고' ELSE '입고' END state,"
-                sSql += "       fn_ack_date_str(a.indt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "       fn_ack_get_usr_name(a.inid)  worknm,"
-                sSql += "       '' recid, '' recnm, '' tnsgbn, '' regno, '' patnm,"
-                sSql += "       '' vtnsjubsuno, a.abo, a.rh, '' rtnrsncmt,"
-                sSql += "       '0' sort_key"
-                sSql += "  FROM lb020m a"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
+                sSql += "SELECT CASE WHEN NVL(editid, ' ') = ' ' THEN '초입고' ELSE '입고' END state," + vbCrLf
+                sSql += "       fn_ack_date_str(a.indt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "       fn_ack_get_usr_name(a.inid)  worknm," + vbCrLf
+                sSql += "       '' recid, '' recnm, '' tnsgbn, '' regno, '' patnm," + vbCrLf
+                sSql += "       '' vtnsjubsuno, a.abo, a.rh, '' rtnrsncmt," + vbCrLf
+                sSql += "       '0' sort_key" + vbCrLf
+                sSql += "  FROM lb020m a" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
                 '-- 검사중
-                sSql += " UNION "
-                sSql += "SELECT '검사' state,"
-                sSql += "        fn_ack_date_str(b.testdt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "        fn_ack_get_usr_name(b.testid) woknm,"
-                sSql += "        '' recid, '' recnm,"
-                sSql += "        CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'"
-                sSql += "             WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'"
-                sSql += "        END tnsgbn,"
-                sSql += "        b.regno, b.patnm, "
-                sSql += "        fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno,      "
-                sSql += "        a.abo, a.rh, '' rtnrsncmt, "
-                sSql += "        b.sort_key"
-                sSql += "   FROM lb020m a,"
-                sSql += "        (SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key"
-                sSql += "           FROM lb030m x, lb040m y"
-                sSql += "          WHERE x.bldno      = :bldno"
-                sSql += "            AND x.comcd_out  = :comcd"
-                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "            AND NVL(x.testid, ' ') <> ' '"
+                sSql += " UNION " + vbCrLf
+                sSql += "SELECT '검사' state," + vbCrLf
+                sSql += "        fn_ack_date_str(b.testdt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "        fn_ack_get_usr_name(b.testid) woknm," + vbCrLf
+                sSql += "        '' recid, '' recnm," + vbCrLf
+                sSql += "        CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'" + vbCrLf
+                sSql += "             WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'" + vbCrLf
+                sSql += "        END tnsgbn," + vbCrLf
+                sSql += "        b.regno, b.patnm, " + vbCrLf
+                sSql += "        fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno,      " + vbCrLf
+                sSql += "        a.abo, a.rh, '' rtnrsncmt, " + vbCrLf
+                sSql += "        b.sort_key" + vbCrLf
+                sSql += "   FROM lb020m a," + vbCrLf
+                sSql += "        (SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key" + vbCrLf
+                sSql += "           FROM lb030m x, lb040m y" + vbCrLf
+                sSql += "          WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "            AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "            AND NVL(x.testid, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "          UNION"
-                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno,  x.testdt || '1' sort_key"
-                sSql += "           FROM lb031m x, lb040m y"
-                sSql += "          WHERE x.bldno      = :bldno"
-                sSql += "            AND x.comcd_out  = :comcd"
-                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "            AND NVL(x.testid, ' ') <> ' '"
+                sSql += "          UNION" + vbCrLf
+                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno,  x.testdt || '1' sort_key" + vbCrLf
+                sSql += "           FROM lb031m x, lb040m y" + vbCrLf
+                sSql += "          WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "            AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "            AND NVL(x.testid, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "          UNION"
-                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key"
-                sSql += "           FROM lb030h x, lb040m y"
-                sSql += "          WHERE x.bldno      = :bldno"
-                sSql += "            AND x.comcd_out  = :comcd"
-                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "            AND NVL(x.testid, ' ') <> ' '"
+                sSql += "          UNION" + vbCrLf
+                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key" + vbCrLf
+                sSql += "           FROM lb030h x, lb040m y" + vbCrLf
+                sSql += "          WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "            AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "            AND NVL(x.testid, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "          UNION"
-                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key                                                                        "
-                sSql += "           FROM lb031h x, lb040m y"
-                sSql += "          WHERE x.bldno      = :bldno"
-                sSql += "            AND x.comcd_out  = :comcd"
-                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "            AND NVL(x.testid, ' ') <> ' '"
+                sSql += "          UNION" + vbCrLf
+                sSql += "         SELECT x.bldno, x.comcd_out, x.testdt, x.testid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.testdt || '1' sort_key                                                                        " + vbCrLf
+                sSql += "           FROM lb031h x, lb040m y" + vbCrLf
+                sSql += "          WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "            AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "            AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "            AND NVL(x.testid, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "       ) b"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
-                sSql += "   AND a.bldno = b.bldno"
-                sSql += "   AND a.comcd = b.comcd_out"
+                sSql += "       ) b" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
+                sSql += "   AND a.bldno = b.bldno" + vbCrLf
+                sSql += "   AND a.comcd = b.comcd_out" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
                 '-- 가출고
-                sSql += " UNION "
-                sSql += "SELECT '가출고' state,"
-                sSql += "       fn_ack_date_str(b.befoutdt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "       fn_ack_get_usr_name(b.befoutid) worknm,"
-                sSql += "       '' recid, '' recnm,"
-                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'"
-                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'"
-                sSql += "       END tnsgbn,"
-                sSql += "       b.regno, b.patnm,"
-                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno,"
-                sSql += "       a.abo, a.rh, '' rtnrsncmt,"
-                sSql += "       b.sort_key"
-                sSql += "  FROM lb020m a,"
-                sSql += "       (SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key"
-                sSql += "          FROM lb030m x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '"
+                sSql += " UNION " + vbCrLf
+                sSql += "SELECT '가출고' state," + vbCrLf
+                sSql += "       fn_ack_date_str(b.befoutdt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "       fn_ack_get_usr_name(b.befoutid) worknm," + vbCrLf
+                sSql += "       '' recid, '' recnm," + vbCrLf
+                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'" + vbCrLf
+                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'" + vbCrLf
+                sSql += "       END tnsgbn," + vbCrLf
+                sSql += "       b.regno, b.patnm," + vbCrLf
+                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno," + vbCrLf
+                sSql += "       a.abo, a.rh, '' rtnrsncmt," + vbCrLf
+                sSql += "       b.sort_key" + vbCrLf
+                sSql += "  FROM lb020m a," + vbCrLf
+                sSql += "       (SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key" + vbCrLf
+                sSql += "          FROM lb030m x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key"
-                sSql += "          FROM lb031m x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key" + vbCrLf
+                sSql += "          FROM lb031m x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key"
-                sSql += "          FROM lb030h x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key" + vbCrLf
+                sSql += "          FROM lb030h x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key"
-                sSql += "          FROM lb031h x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.befoutdt, x.befoutid, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.befoutdt || '2' sort_key" + vbCrLf
+                sSql += "          FROM lb031h x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.befoutdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "       ) b"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
-                sSql += "   AND a.bldno = b.bldno"
-                sSql += "   AND a.comcd = b.comcd_out"
+                sSql += "       ) b" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
+                sSql += "   AND a.bldno = b.bldno" + vbCrLf
+                sSql += "   AND a.comcd = b.comcd_out" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += " UNION "
-                sSql += "SELECT '출고' state,"
-                sSql += "       fn_ack_date_str(b.outdt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "       fn_ack_get_usr_name(b.outid) worknm,"
-                sSql += "       b.recid recid, b.recnm recnm,"
-                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'"
-                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'"
-                sSql += "       END tnsgbn,"
-                sSql += "       b.regno, b.patnm,"
-                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno,"
-                sSql += "       a.abo, a.rh, '' rtnrsncmt,"
-                sSql += "       b.sort_key"
-                sSql += "  FROM lb020m a,"
-                sSql += "       (SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key"
-                sSql += "          FROM lb030m x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno "
-                sSql += "           AND NVL(x.outdt, ' ') <> ' '"
+                sSql += " UNION " + vbCrLf
+                sSql += "SELECT '출고' state," + vbCrLf
+                sSql += "       fn_ack_date_str(b.outdt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "       fn_ack_get_usr_name(b.outid) worknm," + vbCrLf
+                sSql += "       b.recid recid, b.recnm recnm," + vbCrLf
+                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'" + vbCrLf
+                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'" + vbCrLf
+                sSql += "       END tnsgbn," + vbCrLf
+                sSql += "       b.regno, b.patnm," + vbCrLf
+                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno," + vbCrLf
+                sSql += "       a.abo, a.rh, '' rtnrsncmt," + vbCrLf
+                sSql += "       b.sort_key" + vbCrLf
+                sSql += "  FROM lb020m a," + vbCrLf
+                sSql += "       (SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key" + vbCrLf
+                sSql += "          FROM lb030m x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno " + vbCrLf
+                sSql += "           AND NVL(x.outdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key"
-                sSql += "          FROM lb031m x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.outdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key" + vbCrLf
+                sSql += "          FROM lb031m x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.outdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key"
-                sSql += "          FROM lb030h x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.outdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key" + vbCrLf
+                sSql += "          FROM lb030h x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.outdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key"
-                sSql += "          FROM lb031h x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.outdt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.outdt, x.outid, x.recid, x.recnm, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.outdt || '3' sort_key" + vbCrLf
+                sSql += "          FROM lb031h x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.outdt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "       ) b"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
-                sSql += "   AND a.bldno = b.bldno"
-                sSql += "   AND a.comcd = b.comcd_out"
+                sSql += "       ) b" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
+                sSql += "   AND a.bldno = b.bldno" + vbCrLf
+                sSql += "   AND a.comcd = b.comcd_out" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
                 '-- 반납/폐기                                                             
-                sSql += " UNION "
-                sSql += "SELECT CASE WHEN b.rtnflg = '1' THEN '반납' "
-                sSql += "            WHEN b.rtnflg = '2' THEN '폐기'"
-                sSql += "            ELSE '접수취소'"
-                sSql += "       END state,"
-                sSql += "       fn_ack_date_str(b.rtndt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "       fn_ack_get_usr_name(b.rtnid) worknm,"
-                sSql += "       '' recid, '' recnm,"
-                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'"
-                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'"
-                sSql += "       END as tnsgbn,      "
-                sSql += "       b.regno, b.patnm,"
-                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno,"
-                sSql += "       a.abo, a.rh, b.rtnrsncmt,"
-                sSql += "       b.sort_key"
-                sSql += "  FROM lb020m a,"
-                sSql += "       (SELECT x.bldno, x.comcd_out, x.rtndt, x.rtnid, x.rtnflg, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.rtndt || '4' sort_key, x.rtnrsncmt, x.keepgbn"
-                sSql += "          FROM lb031m x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.rtndt, ' ') <> ' '"
+                sSql += " UNION " + vbCrLf
+                sSql += "SELECT CASE WHEN b.rtnflg = '1' THEN '반납' " + vbCrLf
+                sSql += "            WHEN b.rtnflg = '2' THEN '폐기'" + vbCrLf
+                sSql += "            ELSE '접수취소'" + vbCrLf
+                sSql += "       END state," + vbCrLf
+                sSql += "       fn_ack_date_str(b.rtndt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "       fn_ack_get_usr_name(b.rtnid) worknm," + vbCrLf
+                sSql += "       '' recid, '' recnm," + vbCrLf
+                sSql += "       CASE WHEN b.tnsgbn = '1' THEN '준비' WHEN b.tnsgbn = '2' THEN '수혈'" + vbCrLf
+                sSql += "            WHEN b.tnsgbn = '3' THEN '응급' WHEN b.tnsgbn = '4' THEN 'Irra'" + vbCrLf
+                sSql += "       END as tnsgbn,      " + vbCrLf
+                sSql += "       b.regno, b.patnm," + vbCrLf
+                sSql += "       fn_ack_get_tnsjubsuno_full(b.tnsjubsuno) vtnsjubsuno," + vbCrLf
+                sSql += "       a.abo, a.rh, b.rtnrsncmt," + vbCrLf
+                sSql += "       b.sort_key" + vbCrLf
+                sSql += "  FROM lb020m a," + vbCrLf
+                sSql += "       (SELECT x.bldno, x.comcd_out, x.rtndt, x.rtnid, x.rtnflg, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.rtndt || '4' sort_key, x.rtnrsncmt, x.keepgbn" + vbCrLf
+                sSql += "          FROM lb031m x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.rtndt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "         UNION"
-                sSql += "        SELECT x.bldno, x.comcd_out, x.rtndt, x.rtnid, x.rtnflg, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.rtndt || '4' sort_key, x.rtnrsncmt, x.keepgbn"
-                sSql += "          FROM lb031h x, lb040m y"
-                sSql += "         WHERE x.bldno      = :bldno"
-                sSql += "           AND x.comcd_out  = :comcd"
-                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno"
-                sSql += "           AND NVL(x.rtndt, ' ') <> ' '"
+                sSql += "         UNION" + vbCrLf
+                sSql += "        SELECT x.bldno, x.comcd_out, x.rtndt, x.rtnid, x.rtnflg, y.tnsgbn, y.regno, y.patnm, y.tnsjubsuno, x.rtndt || '4' sort_key, x.rtnrsncmt, x.keepgbn" + vbCrLf
+                sSql += "          FROM lb031h x, lb040m y" + vbCrLf
+                sSql += "         WHERE x.bldno      = :bldno" + vbCrLf
+                sSql += "           AND x.comcd_out  = :comcd" + vbCrLf
+                sSql += "           AND x.tnsjubsuno = y.tnsjubsuno" + vbCrLf
+                sSql += "           AND NVL(x.rtndt, ' ') <> ' '" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
-                sSql += "       ) b"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
-                sSql += "   AND a.bldno = b.bldno"
-                sSql += "   AND a.comcd = b.comcd_out"
+                sSql += "       ) b" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
+                sSql += "   AND a.bldno = b.bldno" + vbCrLf
+                sSql += "   AND a.comcd = b.comcd_out" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
 
                 '-- 자체폐기/교환
-                sSql += " UNION "
-                sSql += "SELECT CASE WHEN b.keepgbn = '5' THEN '자체폐기' ELSE '교환' END state,"
-                sSql += "       fn_ack_date_str(b.rtndt, 'yyyy-MM-dd hh24:mi:ss') workdt,"
-                sSql += "       fn_ack_get_usr_name(b.rtnid) worknm,"  '<20150921 교환자 이름 오류 수정 
-                sSql += "       '' recid, '' recnm, '' tnsgbn, '' regno, '' patnm, '' vtnsjubsuno,"
-                sSql += "       a.abo, a.rh, '' rtnrsncmt,"
-                sSql += "       '9' sort_key"
-                sSql += "  FROM lb020m a, lb031m b"
-                sSql += " WHERE a.bldno = :bldno"
-                sSql += "   AND a.comcd = :comcd"
-                sSql += "  AND a.bldno = b.bldno"
-                sSql += "  AND a.comcd = b.comcd_out"
-                sSql += "  AND NVL(b.tnsjubsuno, ' ') = ' '"
-                sSql += " ORDER BY sort_key DESC, workdt DESC"
+                sSql += " UNION " + vbCrLf
+                sSql += "SELECT CASE WHEN b.keepgbn = '5' THEN '자체폐기' ELSE '교환' END state," + vbCrLf
+                sSql += "       fn_ack_date_str(b.rtndt, 'yyyy-MM-dd hh24:mi:ss') workdt," + vbCrLf
+                sSql += "       fn_ack_get_usr_name(b.rtnid) worknm," + vbCrLf '<20150921 교환자 이름 오류 수정 
+                sSql += "       '' recid, '' recnm, '' tnsgbn, '' regno, '' patnm, '' vtnsjubsuno," + vbCrLf
+                sSql += "       a.abo, a.rh, '' rtnrsncmt," + vbCrLf
+                sSql += "       '9' sort_key" + vbCrLf
+                sSql += "  FROM lb020m a, lb031m b" + vbCrLf
+                sSql += " WHERE a.bldno = :bldno" + vbCrLf
+                sSql += "   AND a.comcd = :comcd" + vbCrLf
+                sSql += "  AND a.bldno = b.bldno" + vbCrLf
+                sSql += "  AND a.comcd = b.comcd_out" + vbCrLf
+                sSql += "  AND NVL(b.tnsjubsuno, ' ') = ' '" + vbCrLf
+                sSql += " ORDER BY sort_key DESC, workdt DESC" + vbCrLf
 
                 alParm.Add(New OracleParameter("bldno",  OracleDbType.Varchar2, rsBldno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
                 alParm.Add(New OracleParameter("comcd",  OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))

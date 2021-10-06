@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("59c8a46c-95f6-4ab2-9a82-ef7fcd47c2d1")> 
+<Assembly: Guid("59c8a46c-95f6-4ab2-9a82-ef7fcd47c2d1")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -183,6 +183,12 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.522 --> 2021/06/25 : 검사의뢰지침서 검사코드 돋보기 조회 시 검사처방 미사용 조회 안되게 수정
 'Version 3.1.10.523 --> 2021/07/19 : 기초마스터 결과코드, 혈액은행 내용 변경, 미생물결과 NTM, MTB 내용 5년안에 결과값있으면 C가 안나오고 없으면 C가 나오게 구현 
 'Version 3.1.10.524 --> 2021/07/26 : NTM, MTB 조회 기간 접수시간 부로 5년전일 부터 현재시간 까지로 변경
+'Version 3.1.10.525 --> 2021/08/18 : alter적용되도록 수정, worklist 병동조회되도록 수정, cytospin 진단명 출력되도록 수정, 배양균별 색 변경 되도록 수정
+'Version 3.1.10.526 --> 2021/08/23 : cytospin 진단명 출력되도록 수정
+'Version 3.1.10.527 --> 2021/09/01 : 미생물 worklist 조회 및 인쇄 병동 선택 하는 내용 변경, 미생물 cvr등록에 대한 로직 변경, cytospin 내용 변경
+'Version 3.1.10.528 --> 2021/09/02 : 병동제외체크박스 생성, 로직 변경
+'Version 3.1.10.529 --> 2021/09/03 : 병원체 내용 전송한것은 색변경되게 수정
+'Version 3.1.10.530 --> 2021/09/27 : 위탁검사 등록번호 변경 배포 
 
-<Assembly: AssemblyVersion("3.1.10.524")> 
+<Assembly: AssemblyVersion("3.1.10.530")>
 

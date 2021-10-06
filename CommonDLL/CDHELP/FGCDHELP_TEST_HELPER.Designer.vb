@@ -42,8 +42,8 @@ Partial Class FGCDHELP_TEST_HELPER
         'spdCdList
         '
         Me.spdCdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdCdList.DataSource = Nothing
         Me.spdCdList.Location = New System.Drawing.Point(3, 3)
         Me.spdCdList.Name = "spdCdList"
@@ -63,8 +63,8 @@ Partial Class FGCDHELP_TEST_HELPER
         'chkSel
         '
         Me.chkSel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkSel.AutoSize = True
         Me.chkSel.Location = New System.Drawing.Point(42, 11)
         Me.chkSel.Name = "chkSel"
@@ -171,8 +171,10 @@ Partial Class FGCDHELP_TEST_HELPER
         Me.ClientSize = New System.Drawing.Size(698, 546)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.KeyPreview = True
         Me.Name = "FGCDHELP_TEST_HELPER"
         Me.Text = "FGCDHELP_TEST_HELPER"
+        Me.TopMost = True
         CType(Me.spdCdList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

@@ -1399,7 +1399,7 @@ Public Class MAIN
         'pnlProgress
         '
         Me.pnlProgress.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlProgress.Controls.Add(Me.pbrMain)
         Me.pnlProgress.Location = New System.Drawing.Point(84, 726)
         Me.pnlProgress.Name = "pnlProgress"
@@ -1457,7 +1457,7 @@ Public Class MAIN
         'tbcMenu
         '
         Me.tbcMenu.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbcMenu.Controls.Add(Me.TabPage1)
         Me.tbcMenu.Font = New System.Drawing.Font("±¼¸²Ã¼", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.tbcMenu.HotTrack = True
@@ -1546,7 +1546,7 @@ Public Class MAIN
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLock.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-        CBlendItems1.iPoint = New Single() {0.0!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 1.0!}
         Me.btnLock.ColorFillBlend = CBlendItems1
         Me.btnLock.ColorFillSolid = System.Drawing.Color.Plum
         Me.btnLock.Corners.All = CType(0, Short)
@@ -1742,7 +1742,7 @@ Public Class MAIN
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnHotList.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-        CBlendItems2.iPoint = New Single() {0.0!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 1.0!}
         Me.btnHotList.ColorFillBlend = CBlendItems2
         Me.btnHotList.ColorFillSolid = System.Drawing.Color.Peru
         Me.btnHotList.Corners.All = CType(0, Short)
@@ -1754,8 +1754,8 @@ Public Class MAIN
         Me.btnHotList.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnHotList.FocalPoints.CenterPtX = 0.04201681!
         Me.btnHotList.FocalPoints.CenterPtY = 0.4545455!
-        Me.btnHotList.FocalPoints.FocusPtX = 0.0!
-        Me.btnHotList.FocalPoints.FocusPtY = 0.0!
+        Me.btnHotList.FocalPoints.FocusPtX = 0!
+        Me.btnHotList.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnHotList.FocusPtTracker = DesignerRectTracker4
@@ -1825,7 +1825,7 @@ Public Class MAIN
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLogout.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-        CBlendItems3.iPoint = New Single() {0.0!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 1.0!}
         Me.btnLogout.ColorFillBlend = CBlendItems3
         Me.btnLogout.ColorFillSolid = System.Drawing.Color.Plum
         Me.btnLogout.Corners.All = CType(0, Short)

@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("98c46088-38b9-47db-ad90-4c384d3c8f00")> 
+<Assembly: Guid("98c46088-38b9-47db-ad90-4c384d3c8f00")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -63,5 +63,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.344 --> 2020/10/12 : 검사코드관리 검사의뢰서/동의서, 시행처 다중선택 추가
 'Version 3.1.10.345 --> 2020/11/30 : 검사의뢰지침 세부검사 항목 설정 화면 추가개발
 'Version 3.1.10.346 --> 2021/07/19 : 결과코드, 혈액은행 오류수정
+'Version 3.1.10.347 --> 2021/08/18 : 결과코드 alter추가 , 배양균 색변경 항목 추가
+'Version 3.1.10.348 --> 2021/09/01 : 결과코드 c안나오는 현상 수정
+'Version 3.1.10.349 --> 2021/09/08 : 결과코드 Alter 삭제
 
-<Assembly: AssemblyVersion("3.1.10.346")> 
+<Assembly: AssemblyVersion("3.1.10.349")>

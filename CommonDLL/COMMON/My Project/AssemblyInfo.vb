@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("8b719866-0cc8-4341-8883-44b476ce7361")> 
+<Assembly: Guid("8b719866-0cc8-4341-8883-44b476ce7361")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -69,5 +69,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.391 --> 2021/06/25 : 등록번호 조회시 조회 되지 않는 부분 수정 
 'Version 3.1.10.392 --> 2021/07/19 : 미생물결과 NTM, MTB 내용 5년안에 결과값있으면 C가 안나오고 없으면 C가 나오게 구현 
 'Version 3.1.10.393 --> 2021/07/26 : 혈액은행 출고스티커 응급 내용 추가 
+'Version 3.1.10.394 --> 2021/08/18 : 배양균 설정 되어있는것 반영하여 색 변경 표시 
+'Version 3.1.10.395 --> 2021/09/01 : CVR 특정 검사는 부모검사코드의 검사명 으로 
 
-<Assembly: AssemblyVersion("3.1.10.393")> 
+<Assembly: AssemblyVersion("3.1.10.395")>
+

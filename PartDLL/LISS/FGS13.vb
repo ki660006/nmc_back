@@ -14,6 +14,8 @@ Public Class FGS13
     Inherits System.Windows.Forms.Form
 
     Private Const msXMLDir As String = "\XML"
+    Private Const msFile As String = "File : FGS13.vb, Class : FGS13" & vbTab '20210810 jhs 병동 추가 
+    Private msDeptOrWard As String = "" '20210810 jhs 병동 추가 
     Private msTestFile As String = Application.StartupPath & msXMLDir & "\FGS13_TEST.XML"
     Private msWkGrpFile As String = Application.StartupPath & msXMLDir & "\FGS13_WKGRP.XML"
     Private msTgrpFile As String = Application.StartupPath & msXMLDir & "\FGS13_TGRP.XML"
@@ -471,6 +473,13 @@ Public Class FGS13
             Dim sDateE As String = ""
             Dim sTestCds As String = ""
             Dim sSpcCds As String = ""
+            Dim sWardCds As String = ""
+
+            '20210810 jhs 부서 조건 추가
+            If Me.txtSelWard.Text <> "" Then
+                sWardCds = Me.txtSelWard.Tag.ToString.Split("^"c)(0).Replace("|", ",")
+            End If
+            '-------------------------------------------
 
             If Me.txtSelTest.Text <> "" Then
                 sTestCds = Me.txtSelTest.Tag.ToString.Split("^"c)(0).Replace("|", ",")
@@ -522,10 +531,10 @@ Public Class FGS13
             End If
 
             Dim dt As New DataTable
-            If sWkYmd <> "" Then
-                dt = fnGet_WorkList_WGrp(sWkYmd, sWGrpCd, sWkNoS, sWkNoE, sSpcCds, sTestCds, sRstFlg, rsBcNo, Me.chkMbtType.Checked, mbMicroBioYn, Not Me.chkSpcSelect.Checked)
+            If sWkYmd <> "" Then 'chkWardExcept
+                dt = fnGet_WorkList_WGrp(sWkYmd, sWGrpCd, sWkNoS, sWkNoE, sSpcCds, sTestCds, sRstFlg, rsBcNo, Me.chkMbtType.Checked, mbMicroBioYn, Not Me.chkSpcSelect.Checked, sWardCds, Me.chkWardExcept.Checked)
             Else
-                dt = fnGet_WorkList_TGrp(sPartSlip, sTGrpCd, sDateS, sDateE, sSpcCds, sTestCds, sRstFlg, rsBcNo, Me.chkMbtType.Checked, mbMicroBioYn, Not Me.chkSpcSelect.Checked)
+                dt = fnGet_WorkList_TGrp(sPartSlip, sTGrpCd, sDateS, sDateE, sSpcCds, sTestCds, sRstFlg, rsBcNo, Me.chkMbtType.Checked, mbMicroBioYn, Not Me.chkSpcSelect.Checked, sWardCds, Me.chkWardExcept.Checked)
             End If
 
             If Me.cboQrygbn.Text <> "검사그룹" Or sTGrpCd = "" Then
@@ -1250,19 +1259,18 @@ Public Class FGS13
             '파일열기 전 초기화
             xlsWkS.Range("H4:H9").Value = ""
             xlsWkS.Range("C13:C14").Value = ""
-            xlsWkS.Range("B25:B30").Value = ""
-            xlsWkS.Range("D15:D31").Value = ""
-            xlsWkS.Range("C25:C34").Value = ""
-            xlsWkS.Range("D35:D37").Value = ""
-            xlsWkS.Range("D41:F51").Value = ""
-            xlsWkS.Range("H41:H51").Value = ""
-            xlsWkS.Range("B56:D56").Value = ""
-            xlsWkS.Range("B54").Value = ""
-            xlsWkS.Range("B58").Value = ""
+            xlsWkS.Range("B25:B34").Value = ""
+            xlsWkS.Range("D15:D34").Value = ""
+            xlsWkS.Range("C25:C39").Value = ""
+            xlsWkS.Range("D40:D42").Value = ""
+            xlsWkS.Range("D46:F54").Value = ""
+            xlsWkS.Range("H46:H54").Value = ""
+            xlsWkS.Range("B56").Value = ""
+            xlsWkS.Range("B58:D58").Value = ""
             xlsWkS.Range("B60").Value = ""
-            xlsWkS.Range("D15").Value = ""
-            xlsWkS.Range("H58:I58").Value = ""
+            xlsWkS.Range("B62").Value = ""
             xlsWkS.Range("H60:I60").Value = ""
+            xlsWkS.Range("H62:I62").Value = ""
 
 
             Dim iCnt As Integer = 0
@@ -1280,8 +1288,10 @@ Public Class FGS13
                 End If
 
                 For iRow As Integer = 1 To .MaxRows
+
                     If Ctrl.Get_Code(Me.spdList, "chk", iRow) = "1" Then
                         iCnt += 1
+
                         Dim dt As DataTable
                         Dim sBcno As String = Ctrl.Get_Code(Me.spdList, "bcno", iRow).Replace("-", "") '의뢰처
                         dt = LISAPP.COMM.RstFn.fnGet_PatInfo(sBcno, "")
@@ -1293,7 +1303,11 @@ Public Class FGS13
                         Dim sSexAge As String = Ctrl.Get_Code(Me.spdList, "sexage", iRow) '성별나이
                         Dim sDept As String = Ctrl.Get_Code(Me.spdList, "deptinfo", iRow) '의뢰처
 
-                        Dim diagnm As String = Ctrl.Get_Code(Me.spdList, "diagnm", iRow)
+
+                        dt = fnGet_WorkList_BFtest_diag(sBcno, sRegNo) '등록번호에 바코드 번호안에있는 진료과에 해당하는 최신 진단명, 진단일시 가져오기 
+                        Dim diagnm As String = dt.Rows(0).Item("diagnm_eng").ToString
+                        Dim rgsttm As String = dt.Rows(0).Item("rgsttm").ToString
+
 
                         xlsWkS.Range("H4").Value = sBcno
                         xlsWkS.Range("H5").Value = sOrddt
@@ -1301,129 +1315,181 @@ Public Class FGS13
                         xlsWkS.Range("H7").Value = sRegNo
                         xlsWkS.Range("H8").Value = sSexAge
                         xlsWkS.Range("H9").Value = sDept
+                        xlsWkS.Range("C13").Value = diagnm ' 진단명
+                        xlsWkS.Range("C14").Value = rgsttm ' 진단일시
 
-                        'Dim msTitle_Time As String = Format(Now, "yyyy-MM-dd HH:mm")
 
-                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "")
-                        xlsWkS.Range("C13").Value = dt.Rows(0).Item("diagnm").ToString
-                        xlsWkS.Range("C32").Value = dt.Rows(0).Item("tkdt").ToString
+                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "", False) ' 지금 출력하는 검체번호의 cytospin 내용 가져오기 
                         xlsWkS.Range("B25").Value = dt.Rows(0).Item("spcnm").ToString
                         xlsWkS.Range("C25").Value = "O"
 
                         'cytospin
-                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "L1778")
+                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "L1778", True, True) ' 이전 결과 중 최근 cytospin 내용 가져오기
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D15").Value = dt.Rows(0).Item("fndt").ToString
+                            xlsWkS.Range("D15").Value = "접수일 : " + dt.Rows(0).Item("tkdt").ToString
                         End If
 
+
+                        '----------------------------------------------
+                        '여기서부턴 검체 종류 내용
+                        Dim rowNum As Integer = 29
+                        Dim rowPlus As Integer = 0
                         '검체종류 중 LDH체액검사 체액
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH524")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D26").Value = "LDH[체액]  " + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[체액] : " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         Else
-                            xlsWkS.Range("D26").Value = "LDH[체액]  " + "x"
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[체액] : " + "x"
+                            rowPlus += 1
                         End If
 
                         '검체종류 중 LDH체액검사 Blood
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LH105", "S01")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D27").Value = "LDH[Blood]  " + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[Blood] : " + dt.Rows(0).Item("viewrst").ToString + "  " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         Else
-                            xlsWkS.Range("D27").Value = "LDH[Blood]  " + "x"
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[Blood] : " + "x"
+                            rowPlus += 1
                         End If
 
-                        '핵의학과 내용
+                        '핵의학과 내용 CEA(RIA)
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_rr(sBcno, "'LR305', 'LR303'")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D28").Value = dt.Rows(0).Item("tnm").ToString + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = dt.Rows(0).Item("tnm").ToString + " : " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         End If
 
-                        'D29 내용 조합하여 한번에 출력 
-                        Dim tempcont As String = ""
-                        'CEA
+                        'CEA(CLICA)
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LC511", "S01")
                         If dt.Rows.Count > 0 Then
-                            tempcont = dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = dt.Rows(0).Item("tnmd").ToString + " : " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         End If
+
                         'CA19-9
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LC512", "S01")
                         If dt.Rows.Count > 0 Then
-                            If tempcont <> "" Then
-                                tempcont += ", " + dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            Else
-                                tempcont = dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            End If
+                            'If tempcont <> "" Then
+                            '    tempcont += ", " + dt.Rows(0).Item("tnmd").ToString + " - " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"                            
+                            'Else
+                            'End If
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = dt.Rows(0).Item("tnmd").ToString + " : " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         End If
+
                         'CA125
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LC513", "S01")
                         If dt.Rows.Count > 0 Then
-                            If tempcont <> "" Then
-                                tempcont += ", " + dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            Else
-                                tempcont = dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            End If
+                            'If tempcont <> "" Then
+                            'tempcont += ", " + dt.Rows(0).Item("tnmd").ToString + " - " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            'Else
+                            'End If
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = dt.Rows(0).Item("tnmd").ToString + " - " + dt.Rows(0).Item("viewrst").ToString + " " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         End If
+
                         'PAS(Blood)
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LH375", "S01")
                         If dt.Rows.Count > 0 Then
-                            If tempcont <> "" Then
-                                tempcont += ", " + dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            Else
-                                tempcont = dt.Rows(0).Item("tnmd").ToString + "-" + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString
-                            End If
+                            'If tempcont <> "" Then
+                            'tempcont += dt.Rows(0).Item("tnmd").ToString + " - " + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            'Else
+                            'End If
+                            xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = dt.Rows(0).Item("tnmd").ToString + " - " + dt.Rows(0).Item("viewrst").ToString + " / " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
+                            rowPlus += 1
                         End If
-                        xlsWkS.Range("D29").Value = tempcont
+                        'xlsWkS.Range("D35").Value = tempcont
 
 
 
-
+                        '----------------------------------------------
+                        '여기서부턴 Count rbc,wbc 내용
                         'RBC count
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH51115")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("C33").Value = dt.Rows(0).Item("viewrst").ToString
+                            xlsWkS.Range("C37").Value = dt.Rows(0).Item("tkdt").ToString
+                            xlsWkS.Range("C38").Value = dt.Rows(0).Item("viewrst").ToString
                         End If
 
                         'WBC count
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH51116")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("C34").Value = dt.Rows(0).Item("viewrst").ToString
+                            xlsWkS.Range("C39").Value = dt.Rows(0).Item("viewrst").ToString
                         End If
 
                         'NewutroPhils
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH51117")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D35").Value = dt.Rows(0).Item("viewrst").ToString + "%"
+                            xlsWkS.Range("D40").Value = dt.Rows(0).Item("viewrst").ToString + "%"
                         End If
 
                         'Lymphocytes
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH51118")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D36").Value = dt.Rows(0).Item("viewrst").ToString + "%"
+                            xlsWkS.Range("D41").Value = dt.Rows(0).Item("viewrst").ToString + "%"
                         End If
 
                         'Other cells
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "LH51119")
                         If dt.Rows.Count > 0 Then
-                            xlsWkS.Range("D37").Value = dt.Rows(0).Item("viewrst").ToString + "%"
+                            xlsWkS.Range("D42").Value = dt.Rows(0).Item("viewrst").ToString + "%"
                         End If
+
+                        xlsWkS.Range("D46").Value = "%"
+                        xlsWkS.Range("D47").Value = "%"
+                        xlsWkS.Range("D48").Value = "%"
+                        xlsWkS.Range("D49").Value = "%"
+                        xlsWkS.Range("D50").Value = "%"
+                        xlsWkS.Range("D51").Value = "%"
+                        xlsWkS.Range("D52").Value = "%"
+                        xlsWkS.Range("D53").Value = "%"
+                        xlsWkS.Range("D54").Value = "%"
+                        'xlsWkS.Range("D55").Value = "%"
+
+                        xlsWkS.Range("H46").Value = "%"
+                        xlsWkS.Range("H47").Value = "%"
+                        xlsWkS.Range("H48").Value = "%"
+                        xlsWkS.Range("H49").Value = "%"
+                        xlsWkS.Range("H50").Value = "%"
+                        xlsWkS.Range("H51").Value = "%"
+                        xlsWkS.Range("H52").Value = "%"
+                        xlsWkS.Range("H53").Value = "%"
+                        xlsWkS.Range("H54").Value = "%"
+                        'xlsWkS.Range("H55").Value = "%"
 
 
                         '20210714 jhs toexcel 기능 만들기
                         If rsExcelChk Then
-                            '폴더 있는지 확인후 없으면 만들기 
-                            Dim filePath = "C:\ACK\CYTOSPIN\" + Replace(DateTime.Now.ToString("yyyy-MM-dd"), "-", "") + "_Excel"
-                            If Directory.Exists(filePath) = False Then
-                                MkDir(filePath)
+
+                            Dim dlg As SaveFileDialog = New SaveFileDialog()
+
+                            dlg.Title = "Cytospin 저장"
+                            dlg.FileName = sRegNo + "_" + sPatnm + "_" + sBcno
+                            dlg.Filter = "Excel File | *.xlsx;*.xlsm"
+
+                            Dim dr As DialogResult = New DialogResult()
+
+                            If dlg.ShowDialog() = DialogResult.OK Then
+                                '폴더 있는지 확인후 없으면 만들기 
+                                'Dim filePath = "C:\ACK\CYTOSPIN\" + Replace(DateTime.Now.ToString("yyyy-MM-dd"), "-", "") + "_Excel"
+                                Dim fileFullName As String = dlg.FileName
+
+                                'If Directory.Exists(fileFullName) = False Then
+                                '    MkDir(fileFullName)
+                                'End If
+
+                                '기존에 파일 있는지 확인 후 삭제 
+                                If File.Exists(fileFullName) = True Then
+                                    File.Delete(fileFullName)
+                                End If
+                                xlsWkS.SaveAs(fileFullName)
+
+                            ElseIf dlg.ShowDialog() = DialogResult.Cancel Then
                             End If
 
-                            '기존에 파일 있는지 확인 후 삭제 
-                            Dim filename As String = filePath + "\" + sBcno + ".xlsx"
-                            If File.Exists(filename) = True Then
-                                File.Delete(filename)
-                            End If
-                            xlsWkS.SaveAs(filename)
-
-                            MsgBox("파일생성 완료 : " + vbCrLf + filename)
+                            'MsgBox("파일생성 완료 : " + vbCrLf + filename)
                         Else
                             xlsWkS.PrintOut()
                         End If
@@ -2431,6 +2497,7 @@ Public Class FGS13
 
         sbDisp_Init()
 
+
         Me.axItemSave.FORMID = IIf(mbMicroBioYn, "M", "R").ToString
         Me.axItemSave.USRID = USER_INFO.USRID
         Me.axItemSave.ITEMGBN = ""
@@ -2441,6 +2508,7 @@ Public Class FGS13
         Me.axItemSave.sbDisplay_ItemList()
 
     End Sub
+
 
     Private Sub btnPrint_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPrint.Click
 
@@ -2736,11 +2804,14 @@ Public Class FGS13
         End If
     End Sub
 
-    Private Sub btnClear_test_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnClear_test.Click, btnClear_spc.Click
+    Private Sub btnClear_test_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnClear_test.Click, btnClear_spc.Click, btnClear_ward.Click
 
         If CType(sender, Windows.Forms.Button).Name = "btnClear_test" Then
             Me.txtSelTest.Text = ""
             Me.txtSelTest.Tag = ""
+        ElseIf CType(sender, Windows.Forms.Button).Name = "btnClear_ward" Then
+            Me.txtSelWard.Text = ""
+            Me.txtSelWard.Tag = ""
         Else
             Me.txtSelSpc.Text = ""
             Me.txtSelSpc.Tag = ""
@@ -2908,6 +2979,66 @@ Public Class FGS13
             chkPrtWS.Checked = False
             chkPrtWL.Checked = True
         End If
+    End Sub
+
+    Private Sub btnHelp_ward_Click(sender As Object, e As EventArgs) Handles btnHelp_ward.Click
+        Try
+
+
+
+
+            Dim pntCtlXY As Point = Fn.CtrlLocationXY(Me)
+            Dim pntFrmXY As Point = Fn.CtrlLocationXY(btnHelp_test)
+
+            Dim objHelp As New CDHELP.FGCDHELP01
+            Dim alList As New ArrayList
+            Dim sPartCd As String = ""
+            Dim sSlipCd As String = ""
+            Dim sTGrpCd As String = ""
+            Dim sWGrpCd As String = ""
+
+
+            Dim dt As DataTable = (New WEBSERVER.CGWEB_C).fnGet_WardList()
+
+            objHelp.FormText = "병동코드"
+
+            objHelp.MaxRows = 15
+            objHelp.Distinct = True
+
+            If Me.txtSelSpc.Text <> "" Then objHelp.KeyCodes = Me.txtSelSpc.Tag.ToString.Split("^"c)(0) + "|"
+
+            objHelp.AddField("''", "", 2, FPSpreadADO.TypeHAlignConstants.TypeHAlignCenter, "CHECKBOX")
+            objHelp.AddField("wardnm", "병동명", 25, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft)
+            objHelp.AddField("wardno", "병동코드", 8, FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft, , , , "Y")
+
+            alList = objHelp.Display_Result(Me, pntFrmXY.X + pntCtlXY.X - Me.btnHelp_test.Left, pntFrmXY.Y + pntCtlXY.Y + btnHelp_test.Height + 80, dt)
+
+            If alList.Count > 0 Then
+
+                Dim sWardNos As String = "", sWardNmds As String = ""
+
+                For ix As Integer = 0 To alList.Count - 1
+                    Dim sWardCd As String = alList.Item(ix).ToString.Split("|"c)(1)
+                    Dim sWardNmd As String = alList.Item(ix).ToString.Split("|"c)(0)
+
+                    If ix > 0 Then
+                        sWardNos += "|" : sWardNmds += "|"
+                    End If
+
+                    sWardNos += sWardCd : sWardNmds += sWardNmd
+                Next
+
+                Me.txtSelWard.Text = sWardNmds.Replace("|", ",")
+                Me.txtSelWard.Tag = sWardNos + "^" + sWardNmds
+            Else
+                Me.txtSelWard.Text = ""
+                Me.txtSelWard.Tag = ""
+            End If
+
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
     End Sub
 End Class
 

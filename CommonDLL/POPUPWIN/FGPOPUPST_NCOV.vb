@@ -82,6 +82,8 @@ Public Class FGPOPUPST_NCOV
                 Me.txtSpcnm.Text = "Upper respiratory tract specimen [Nasopharyngeal swab AND Oropharyngeal swab (NP/OP swab)]"
             ElseIf msTestCd = "LG127" Then
                 Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
+            ElseIf msTestCd = "LG132" Then
+                Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
             Else
                 Me.txtSpcnm.Text = ""
             End If
@@ -257,7 +259,7 @@ Public Class FGPOPUPST_NCOV
 
             Dim specChk As Boolean = False
 
-            If msTestCd = "LG127" Or msTestCd = "LG128" Then specChk = True
+            If msTestCd = "LG127" Or msTestCd = "LG128" Or msTestCd = "LG132" Then specChk = True
 
             iMaxLength = Me.txtTestinfo.Text.Length
 

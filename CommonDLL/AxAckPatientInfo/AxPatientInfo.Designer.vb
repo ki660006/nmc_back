@@ -164,7 +164,7 @@ Partial Class AxPatientInfo
         Me.lblBirthDay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblBirthDay.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblBirthDay.ForeColor = System.Drawing.Color.Black
-        Me.lblBirthDay.Location = New System.Drawing.Point(383, 58)
+        Me.lblBirthDay.Location = New System.Drawing.Point(391, 81)
         Me.lblBirthDay.Name = "lblBirthDay"
         Me.lblBirthDay.Size = New System.Drawing.Size(99, 26)
         Me.lblBirthDay.TabIndex = 183
@@ -232,7 +232,7 @@ Partial Class AxPatientInfo
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnDetailPatInfo.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnDetailPatInfo.ColorFillBlend = CBlendItems1
         Me.btnDetailPatInfo.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnDetailPatInfo.Corners.All = CType(6, Short)
@@ -244,8 +244,8 @@ Partial Class AxPatientInfo
         Me.btnDetailPatInfo.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnDetailPatInfo.FocalPoints.CenterPtX = 0.4848485!
         Me.btnDetailPatInfo.FocalPoints.CenterPtY = 0.56!
-        Me.btnDetailPatInfo.FocalPoints.FocusPtX = 0.0!
-        Me.btnDetailPatInfo.FocalPoints.FocusPtY = 0.0!
+        Me.btnDetailPatInfo.FocalPoints.FocusPtX = 0!
+        Me.btnDetailPatInfo.FocalPoints.FocusPtY = 0!
         DesignerRectTracker2.IsActive = False
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnDetailPatInfo.FocusPtTracker = DesignerRectTracker2
@@ -279,7 +279,7 @@ Partial Class AxPatientInfo
         'lblGubun
         '
         Me.lblGubun.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblGubun.BackColor = System.Drawing.Color.White
         Me.lblGubun.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblGubun.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -317,7 +317,7 @@ Partial Class AxPatientInfo
         'lblSogae
         '
         Me.lblSogae.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblSogae.BackColor = System.Drawing.Color.White
         Me.lblSogae.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblSogae.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -331,7 +331,7 @@ Partial Class AxPatientInfo
         'lblVip
         '
         Me.lblVip.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVip.BackColor = System.Drawing.Color.White
         Me.lblVip.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblVip.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -683,7 +683,7 @@ Partial Class AxPatientInfo
         'gbxUniqueComment
         '
         Me.gbxUniqueComment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtDel)
         Me.gbxUniqueComment.Controls.Add(Me.Label9)
         Me.gbxUniqueComment.Controls.Add(Me.btnShareCmtAdd)
@@ -702,7 +702,7 @@ Partial Class AxPatientInfo
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnShareCmtDel.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnShareCmtDel.ColorFillBlend = CBlendItems2
         Me.btnShareCmtDel.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnShareCmtDel.Corners.All = CType(6, Short)
@@ -713,9 +713,9 @@ Partial Class AxPatientInfo
         Me.btnShareCmtDel.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnShareCmtDel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnShareCmtDel.FocalPoints.CenterPtX = 1.0!
-        Me.btnShareCmtDel.FocalPoints.CenterPtY = 0.0!
-        Me.btnShareCmtDel.FocalPoints.FocusPtX = 0.0!
-        Me.btnShareCmtDel.FocalPoints.FocusPtY = 0.0!
+        Me.btnShareCmtDel.FocalPoints.CenterPtY = 0!
+        Me.btnShareCmtDel.FocalPoints.FocusPtX = 0!
+        Me.btnShareCmtDel.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnShareCmtDel.FocusPtTracker = DesignerRectTracker4
@@ -754,7 +754,7 @@ Partial Class AxPatientInfo
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnShareCmtAdd.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnShareCmtAdd.ColorFillBlend = CBlendItems3
         Me.btnShareCmtAdd.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnShareCmtAdd.Corners.All = CType(6, Short)
@@ -765,9 +765,9 @@ Partial Class AxPatientInfo
         Me.btnShareCmtAdd.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnShareCmtAdd.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnShareCmtAdd.FocalPoints.CenterPtX = 1.0!
-        Me.btnShareCmtAdd.FocalPoints.CenterPtY = 0.0!
-        Me.btnShareCmtAdd.FocalPoints.FocusPtX = 0.0!
-        Me.btnShareCmtAdd.FocalPoints.FocusPtY = 0.0!
+        Me.btnShareCmtAdd.FocalPoints.CenterPtY = 0!
+        Me.btnShareCmtAdd.FocalPoints.FocusPtX = 0!
+        Me.btnShareCmtAdd.FocalPoints.FocusPtY = 0!
         DesignerRectTracker6.IsActive = False
         DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnShareCmtAdd.FocusPtTracker = DesignerRectTracker6
@@ -789,8 +789,8 @@ Partial Class AxPatientInfo
         'txtShareCmtCont
         '
         Me.txtShareCmtCont.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtShareCmtCont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtShareCmtCont.Location = New System.Drawing.Point(0, 35)
         Me.txtShareCmtCont.Multiline = True

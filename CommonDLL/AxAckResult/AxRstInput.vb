@@ -1411,6 +1411,7 @@ Public Class AxRstInput
                             If strIUD = "1" Then
                                 .Row = ix
                                 .Col = .GetColFromID("testcd")
+                                Dim test As String = .Text.Substring(0, 5) 
                                 If .Text.Substring(0, 5) = sTestCd Then
                                     iCnt += 1
                                 Else
@@ -5184,6 +5185,16 @@ Public Class AxRstInput
                     If strAlertL = "" Then strAlertL = strAlertH
 
                     If strORst.ToUpper = strAlertL.ToUpper Then strAlertMark = "A"
+                Case "7" '-- 결과코드 
+                    '20210810 jhs 결과코드 추가 
+                    'Alter 문자값 판단 추가(검사마스터에서 Alter 구분 [7] 문자결과(결과코드 설정) 선택, 기초마스터 결과코드에 Alter 설정한 경우 )
+                    Dim sTxtAlter As String = ""
+                    sTxtAlter = LISAPP.COMM.RstFn.fnGet_GraedValue_A(sTestCd, strORst)
+
+                    If sTxtAlter = "A" Then
+                        strAlertMark = "A"
+                    End If
+                    '----------------------------------------------------
             End Select
 
             If strAlertMark = "" And (strAlertGbn = "5" Or strAlertGbn = "A" Or strAlertGbn = "B" Or strAlertGbn = "C") Then

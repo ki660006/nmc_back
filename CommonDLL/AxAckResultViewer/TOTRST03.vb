@@ -1839,12 +1839,15 @@ Public Class TOTRST03
                                             If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
                                                 .Text = ""
                                             Else
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
                                                 .Text = sRef
                                             End If
                                         Else
                                             If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
                                                 .Text = ""
                                             Else
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
                                                 .Text = ra_dr(i - 1).Item(j - 1).ToString()
                                             End If
                                         End If
@@ -1863,7 +1866,7 @@ Public Class TOTRST03
 
 
                                     Else
-
+                                        Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
                                         .Text = ra_dr(i - 1).Item(j - 1).ToString()
 
 
@@ -2549,9 +2552,12 @@ Public Class TOTRST03
                         End If
                     Else
                         'Negative<CR><LF> --> Negative로 변형된 경우 : 멀티라인은 아니지만 변경된 참고치 표시함
-                        If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf Then
+                        '20210819 jhs 세부검사참조 조건 변경
+                        If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf And sBuf.StartsWith("세부") = False Then
+                            'If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf Then
                             .SetText(.GetColFromID("reftxt"), i, sBuf)
                         End If
+                        '-----------------------------
                     End If
                 Next
             End With

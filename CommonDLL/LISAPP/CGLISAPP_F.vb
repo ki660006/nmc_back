@@ -6662,6 +6662,9 @@ Public Class APP_F_RSTCD
                 sSql += "       fn_ack_date_str(f8.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f8.regid," + vbCrLf
                 sSql += "       fn_ack_get_usr_name(f8.regid) regnm," + vbCrLf
                 sSql += "       NULL moddt, NULL modid, NULL modnm, f8.grade, f8.rstlvl, f8.crtval" + vbCrLf
+                '20210810 jhs alter 추가 
+                sSql += "       , f8.altval" + vbCrLf
+                '------------------------------------
                 sSql += "  FROM (SELECT f8.testcd, MIN(CASE WHEN f6.tcdgbn = 'C' THEN '-- ' || f6.tnmd ELSE f6.tnmd END) tnmd" + vbCrLf
                 sSql += "          FROM lf083m f8, lf060m f6" + vbCrLf
                 sSql += " 		  WHERE f8.testcd = f6.testcd" + vbCrLf
@@ -6678,6 +6681,9 @@ Public Class APP_F_RSTCD
                 sSql += "       fn_ack_date_str(f8.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f8.regid," + vbCrLf
                 sSql += "       fn_ack_get_usr_name(f8.regid) regnm," + vbCrLf
                 sSql += "       NULL moddt, NULL modid, NULL modnm, f8.grade, f8.rstlvl, f8.crtval" + vbCrLf
+                '20210810 jhs alter 추가 
+                sSql += "       , f8.altval" + vbCrLf
+                '------------------------------------
                 sSql += "  FROM (SELECT f8.testcd, MIN(CASE WHEN f6.tcdgbn = 'C' THEN '-- ' || f6.tnmd ELSE f6.tnmd END) tnmd" + vbCrLf
                 sSql += "          FROM lf083m f8, lf060m f6" + vbCrLf
                 sSql += " 		  WHERE f8.testcd  = f6.testcd" + vbCrLf
@@ -6692,6 +6698,9 @@ Public Class APP_F_RSTCD
                 sSql += "       fn_ack_date_str(f8.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f8.regid," + vbCrLf
                 sSql += "       fn_ack_get_usr_name(f8.regid) regnm," + vbCrLf
                 sSql += "       NULL moddt, NULL modid, NULL modnm, f8.grade, f8.rstlvl, f8.crtval" + vbCrLf
+                '20210810 jhs alter 추가 
+                sSql += "       , f8.altval" + vbCrLf
+                '------------------------------------
                 sSql += "  FROM (SELECT f8.testcd, MIN(CASE WHEN f6.tcdgbn = 'C' THEN '-- ' || f6.tnmd ELSE f6.tnmd END) tnmd" + vbCrLf
                 sSql += "          FROM lf083h f8, lf060m f6" + vbCrLf
                 sSql += " 		  WHERE f8.testcd = f6.testcd" + vbCrLf
@@ -11669,37 +11678,37 @@ Public Class APP_F_TEST
             Dim sSql As String = ""
 
             If riMode = 0 Then
-                sSql += "SELECT DISTINCT"
-                sSql += "       RPAD(testcd, 8, ' ') || spccd tcd, tnmd, spcnmd, '[' || tubecd || '] ' || tubenmd tubenmd,"
-                sSql += "       tcdgbn, '[' || tordslip || '] ' || tordslipnm || '(' || LPAD(NVL(dispseqo, '0'), 3, '0') || ')' tordslipnm,"
-                sSql += "       CASE WHEN ordhide = '1' THEN 'X' ELSE '' END ordhide, tordcd, sugacd, dspccd1, tliscd,"
-                sSql += "       '[' || bcclscd || '] ' || bcclsnmd bcclsnmd, '[' || slipcd2 || '] ' || slipnmd slipnmd,"
-                sSql += "       CASE WHEN NVL(exlabyn, '0') = '0' THEN '' ELSE '[' || exlabcd || '] '|| exlabnmd END exlabnmd, titleyn,"
-                sSql += "       fn_ack_date_str(usdt, 'yyyy-mm-dd hh24:mi:ss') usdt, uedt, bcclscd, tordslip, slipcd, testcd, spccd,"
-                sSql += "       dispseql, dispseqo, 0 diffday"
-                sSql += "  FROM vw_ack_lis_test_info"
-                sSql += " WHERE uedt >= fn_ack_sysdate"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       RPAD(testcd, 8, ' ') || spccd tcd, tnmd, spcnmd, '[' || tubecd || '] ' || tubenmd tubenmd," + vbCrLf
+                sSql += "       tcdgbn, '[' || tordslip || '] ' || tordslipnm || '(' || LPAD(NVL(dispseqo, '0'), 3, '0') || ')' tordslipnm," + vbCrLf
+                sSql += "       CASE WHEN ordhide = '1' THEN 'X' ELSE '' END ordhide, tordcd, sugacd, dspccd1, tliscd," + vbCrLf
+                sSql += "       '[' || bcclscd || '] ' || bcclsnmd bcclsnmd, '[' || slipcd2 || '] ' || slipnmd slipnmd," + vbCrLf
+                sSql += "       CASE WHEN NVL(exlabyn, '0') = '0' THEN '' ELSE '[' || exlabcd || '] '|| exlabnmd END exlabnmd, titleyn," + vbCrLf
+                sSql += "       fn_ack_date_str(usdt, 'yyyy-mm-dd hh24:mi:ss') usdt, uedt, bcclscd, tordslip, slipcd, testcd, spccd," + vbCrLf
+                sSql += "       dispseql, dispseqo, 0 diffday" + vbCrLf
+                sSql += "  FROM vw_ack_lis_test_info" + vbCrLf
+                sSql += " WHERE uedt >= fn_ack_sysdate" + vbCrLf
                 If rsSerch <> "" Then
-                    sSql += "   AND  " + rsSerch + ""
+                    sSql += "   AND  " + rsSerch + "" + vbCrLf
                 End If
 
-                sSql += " ORDER BY testcd, spccd, usdt"
+                sSql += " ORDER BY testcd, spccd, usdt" + vbCrLf
             ElseIf riMode = 1 Then
-                sSql += "SELECT DISTINCT"
-                sSql += "       RPAD(testcd, 8, ' ') || spccd tcd, tnmd, spcnmd, '[' || tubecd || '] ' ||  tubenmd tubenmd,"
-                sSql += "       tcdgbn, '[' || tordslip || '] ' ||  tordslipnm || '(' || LPAD(NVL(dispseqo, '0'), 3, '0') || ')' tordslipnm,"
-                sSql += "       CASE WHEN ordhide = '1' THEN 'X' ELSE '' END ordhide, tordcd, sugacd, dspccd1, tliscd,"
-                sSql += "       '[' || bcclscd || '] ' ||  bcclsnmd bcclsnmd, '[' || slipcd2 || '] ' ||  slipnmd slipnmd,"
-                sSql += "       CASE WHEN NVL(exlabyn, '0') = '0' THEN '' ELSE '[' || exlabcd || '] '|| exlabnmd END exlabnmd, titleyn,"
-                sSql += "       fn_ack_date_str(usdt, 'yyyy-mm-dd hh24:mi:ss') usdt, uedt, bcclscd, tordslip, slipcd, testcd, spccd,"
-                sSql += "       dispseql, dispseqo,"
-                sSql += "       CASE WHEN TO_DATE(uedt, 'yyyymmddhh24miss') - SYSDATE < 0 THEN -1 ELSE 0 END diffday"
-                sSql += "  FROM vw_ack_lis_test_info "
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       RPAD(testcd, 8, ' ') || spccd tcd, tnmd, spcnmd, '[' || tubecd || '] ' ||  tubenmd tubenmd," + vbCrLf
+                sSql += "       tcdgbn, '[' || tordslip || '] ' ||  tordslipnm || '(' || LPAD(NVL(dispseqo, '0'), 3, '0') || ')' tordslipnm," + vbCrLf
+                sSql += "       CASE WHEN ordhide = '1' THEN 'X' ELSE '' END ordhide, tordcd, sugacd, dspccd1, tliscd," + vbCrLf
+                sSql += "       '[' || bcclscd || '] ' ||  bcclsnmd bcclsnmd, '[' || slipcd2 || '] ' ||  slipnmd slipnmd," + vbCrLf
+                sSql += "       CASE WHEN NVL(exlabyn, '0') = '0' THEN '' ELSE '[' || exlabcd || '] '|| exlabnmd END exlabnmd, titleyn,"+vbCrLf
+                sSql += "       fn_ack_date_str(usdt, 'yyyy-mm-dd hh24:mi:ss') usdt, uedt, bcclscd, tordslip, slipcd, testcd, spccd," + vbCrLf
+                sSql += "       dispseql, dispseqo," + vbCrLf
+                sSql += "       CASE WHEN TO_DATE(uedt, 'yyyymmddhh24miss') - SYSDATE < 0 THEN -1 ELSE 0 END diffday" + vbCrLf
+                sSql += "  FROM vw_ack_lis_test_info " + vbCrLf
                 If rsSerch <> "" Then
-                    sSql += " WHERE  " + rsSerch + ""
+                    sSql += " WHERE  " + rsSerch + "" + vbCrLf
                 End If
 
-                sSql += " ORDER BY testcd, spccd, usdt"
+                sSql += " ORDER BY testcd, spccd, usdt" + vbCrLf
 
             End If
 
@@ -17252,6 +17261,9 @@ Public Class APP_F_BAC
             sSql += "       fn_ack_date_str(f21.usdt, 'yyyy-mm-dd hh24:mi:ss') usdt, fn_ack_date_str(f21.uedt, 'yyyy-mm-dd hh24:mi:ss') uedt,"
             sSql += "       fn_ack_date_str(f21.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f21.regid,"
             sSql += "       fn_ack_get_usr_name(f21.regid) regnm, f21.samecd"
+            '20210817 jhs 균색표현하기 위해 추가 
+            sSql += "        , nvl(f21.baccolor, 0) baccolor_01 "
+            '-----------------------------------------
             sSql += "  FROM lf210m f21 LEFT OUTER JOIN lf220m f22 ON (f21.bacgencd = f22.bacgencd)"
             sSql += " WHERE f21.baccd = :baccd"
             sSql += "   AND f21.usdt  = :usdt"

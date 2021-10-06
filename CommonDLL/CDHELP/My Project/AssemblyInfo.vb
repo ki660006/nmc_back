@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("3ec08453-b567-4452-9c2b-e2a6612b3438")> 
+<Assembly: Guid("3ec08453-b567-4452-9c2b-e2a6612b3438")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -54,5 +54,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.333 --> 2021/05/17 : 검사의뢰지침 결과소요일 컬럼 추가 
 'Version 3.1.10.334 --> 2021/06/22 : 검사의뢰지침 출력물 변경, 결과 소요일 용기명 옆에 작성, 검사명 조회시 중간 단어도 조회 될수 있도록 구현
 'Version 3.1.10.335 --> 2021/06/25 : 검사의뢰지침 돋보기 조회 리스트 검사미처방 체크 시 검사코드 안보이게 설정
+'Version 3.1.10.336 --> 2021/08/18 : 돋보기 검사코드 리스트 분야별로 조회 될 수 있도록 수정 
 
-<Assembly: AssemblyVersion("3.1.10.335")> 
+<Assembly: AssemblyVersion("3.1.10.336")>

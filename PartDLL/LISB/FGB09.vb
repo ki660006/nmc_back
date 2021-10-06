@@ -1256,7 +1256,7 @@ Public Class FGB09
             lb_Continue = CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "출고 취소 하시겠습니까?")
 
             If lb_Continue = False Then Return
-
+            'pro_ack_exe_tns_out_cancel'
             'lb_ok = (New Out).fnExe_Out_Cancel(lal_Arg, "C"c)
             ' lb_ok = (New WEBSERVER.CGWEB_B).ExecuteDo_Out_cancle(lal_Arg, "C"c)
             If Me.chkCMCO.Checked = False Then
