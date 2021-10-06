@@ -435,7 +435,7 @@ Public Class FGJ05
                                     bUseWkno_old = False
                                 End If
                             End If
-
+                            'procedure = pro_ack_exe_take
                             Dim sRet As String = (New WEBSERVER.CGWEB_J).ExecuteDo_TaKe(sBcNo, Me.txtPassId.Text, IIf(bUseWkno_old, "Y", "N").ToString, "lis")
 
                             If sRet.StartsWith("00") Then
@@ -2168,7 +2168,7 @@ Public Class FGJ05
                     sbDisplay_Data(sBcNo_tmp, alList.Count)
                     If rdoGbnOne.Checked = True Then
                         ' 개별접수인경우 자동 접수
-                        'sbReg(sBcNo_tmp)
+                        sbReg(sBcNo_tmp)
                         sbReg_Web(sBcNo_tmp)
                     End If
                 Next

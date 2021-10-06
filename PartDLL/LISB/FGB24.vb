@@ -33,6 +33,9 @@ Public Class FGB24
                     .Col = .GetColFromID("optm") : .Text = dt.Rows(ix).Item("optm").ToString            '-- 수술시간
                     .Col = .GetColFromID("deptcd") : .Text = dt.Rows(ix).Item("meddept").ToString       '-- 진료과코드
                     .Col = .GetColFromID("opdrnm") : .Text = dt.Rows(ix).Item("opdrnm").ToString        '-- 집도의
+                    '20210106 jhs 주치의 명 컬럼 추가
+                    .Col = .GetColFromID("medispclnm") : .Text = dt.Rows(ix).Item("medispclnm").ToString '-- 주치의
+                    '---------------------------------------
                     .Col = .GetColFromID("iogbn") : .Text = dt.Rows(ix).Item("patsect").ToString        '-- 입외구분
                     .Col = .GetColFromID("regno") : .Text = dt.Rows(ix).Item("patno").ToString          '-- 등록번호
                     .Col = .GetColFromID("patnm") : .Text = dt.Rows(ix).Item("patnm").ToString          '-- 환자명

@@ -4,6 +4,7 @@ Imports COMMON.CommFN
 Imports COMMON.CommLogin.LOGIN
 Imports COMMON.SVar
 Imports DBORA.DbProvider
+Imports System.Drawing
 
 Public Class FGPOPUPST_PBS_NMC
     Inherits System.Windows.Forms.Form
@@ -51,7 +52,7 @@ Public Class FGPOPUPST_PBS_NMC
     Private Sub sbDisplay_Data(ByVal rsBcNo As String, ByVal rsTestCd As String)
 
         Try
-            Dim dt_r As DataTable = DA_ST_PBS_NMC.fnGet_Rst_SubInfo(rsBcNo, rsTestCd, m_dbCn)
+            Dim dt_r As DataTable = DA_ST_PBS_NMC.fnGet_Rst_SubInfo(rsBcNo, rsTestCd, m_dbcn)
 
             Dim alRst_flag As New ArrayList
 
@@ -163,6 +164,7 @@ Public Class FGPOPUPST_PBS_NMC
             'End If
 
             sValues += Space(5) + "□ RED BLOOD CELLS" + vbCrLf
+            'sValues += Space(5) + Label1.Text + vbCrLf
             sValues += Space(15) + Me.txtRbc.Text + vbCrLf + vbCrLf
             sValues += Space(8) + "Other : " + Me.txtOther_r.Text + vbCrLf
 
@@ -186,6 +188,7 @@ Public Class FGPOPUPST_PBS_NMC
 
             sValues += Space(5) + "□ OPINION " + vbCrLf
             sValues += Space(8) + Me.txtOpinion.Text
+
 
         Catch ex As Exception
 

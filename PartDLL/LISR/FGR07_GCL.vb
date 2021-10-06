@@ -2620,7 +2620,7 @@ Public Class FGR07_GCL
             MsgBox("조회된 이미지 결과가 없습니다.")
         End If
 
-        Me.txtPath.Text = "C:\수탁검사\녹십자\image\" ' Application.StartupPath + "\Image\"
+        'Me.txtPath.Text = "C:\수탁검사\녹십자\image\" ' Application.StartupPath + "\Image\"
         'If Dir(Me.txtPath.Text.Trim, FileAttribute.Directory) = "" Then MkDir(Me.txtPath.Text.Trim)
 
         Dim sFiles As String()
@@ -3343,7 +3343,8 @@ CallingConvention:=CallingConvention.StdCall)> _
                         JSDT = dt.Rows(i).Item("REQDTE").ToString : KSEQ = dt.Rows(i).Item("BCNO").ToString
                         HGCD = dt.Rows(i).Item("TESTCD").ToString ' : HGNM = dt.Rows(i).Item("HGNM").ToString
                         KCCD = dt.Rows(i).Item("SPCCD").ToString ': KCNM = dt.Rows(i).Item("KCNM").ToString
-                        CHNO = dt.Rows(i).Item("REGNO").ToString : PTNM = dt.Rows(i).Item("PATNM").ToString
+                        'CHNO = dt.Rows(i).Item("REGNO").ToString
+                        PTNM = dt.Rows(i).Item("PATNM").ToString
                         'JNID = dt.Rows(i).Item("JNID").ToString : SEXX = dt.Rows(i).Item("SEXX").ToString : AGEE = dt.Rows(i).Item("AGEE").ToString
                         'MENM = dt.Rows(i).Item("MENM").ToString : WARD = dt.Rows(i).Item("WARD").ToString : JKNM = dt.Rows(i).Item("JKNM").ToString
                         'REDT = dt.Rows(i).Item("REDT").ToString
@@ -3353,6 +3354,9 @@ CallingConvention:=CallingConvention.StdCall)> _
                         'UDAT = dt.Rows(i).Item("UDAT").ToString : UTIM = dt.Rows(i).Item("UTIM").ToString
                         'LONGRESULT = dt.Rows(i).Item("LONGRESULT").ToString
                         LONGRESULT = ""
+
+                        Dim dt_regno As DataTable = LISAPP.APP_EXLAB.fnGet_Patno(dt.Rows(i).Item("REGNO").ToString)
+                        CHNO = dt_regno.Rows(0).Item("PID2").ToString
 
                         Dim objExLab As New ExLabInfo_SML
 

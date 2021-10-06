@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("8b719866-0cc8-4341-8883-44b476ce7361")> 
+<Assembly: Guid("8b719866-0cc8-4341-8883-44b476ce7361")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -58,7 +58,19 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.380 --> 2020/06/23 : CVR 등록 class 추가
 'Version 3.1.10.382 --> 2020/06/30 : CVR 등록 CLASS 단위추가, 녹십자 자동연동 CLASS 추가
 'Version 3.1.10.382 --> 2020/06/30 : 결과이력 삭제 CLASS 추가
-'Version 3.1.10.383 --> 2020/07/06 : 바이트수 자르는 함수 추가
-'Version 3.1.10.384 --> 2020/07/09 : 바이트수 자르는 함수 추가
+'Version 3.1.10.383 --> 2020/07/06 : 바이트수 자르는 function 추가
+'Version 3.1.10.384 --> 2020/07/09 : 바이트수 자르는 function 추가
+'Version 3.1.10.385 --> 2020/11/30 : 검사의뢰지침 세부검사 항목 저장에 따른 class 추가
+'Version 3.1.10.386 --> 2021/02/22 : 배지바코드 다중출력되도록 수정
+'Version 3.1.10.387 --> 2021/03/16 : 검사자간 공유사항 추가, wbc diff log 생성 로직 추가
+'Version 3.1.10.388 --> 2021/04/19 : QC데이터 연동
+'Version 3.1.10.389 --> 2021/06/15 : 특정검사 바코드 음영처리
+'Version 3.1.10.390 --> 2021/06/22 : TAT차일드 코드 포함하여 조회 될수 있도록 수정
+'Version 3.1.10.391 --> 2021/06/25 : 등록번호 조회시 조회 되지 않는 부분 수정 
+'Version 3.1.10.392 --> 2021/07/19 : 미생물결과 NTM, MTB 내용 5년안에 결과값있으면 C가 안나오고 없으면 C가 나오게 구현 
+'Version 3.1.10.393 --> 2021/07/26 : 혈액은행 출고스티커 응급 내용 추가 
+'Version 3.1.10.394 --> 2021/08/18 : 배양균 설정 되어있는것 반영하여 색 변경 표시 
+'Version 3.1.10.395 --> 2021/09/01 : CVR 특정 검사는 부모검사코드의 검사명 으로 
 
-<Assembly: AssemblyVersion("3.1.10.384")> 
+<Assembly: AssemblyVersion("3.1.10.395")>
+

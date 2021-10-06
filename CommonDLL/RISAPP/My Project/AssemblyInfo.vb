@@ -38,5 +38,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.339 --> 2015/08/27 : WL조회화면 WL순서로 조회 쿼리수정  
 'Version 3.1.10.340 --> 2015/11/19 : lhj 접수 / WL 생성 및 조회 화면에서 검사항목을 제외한 컬럼 클릭 시, 이전 결과, 이전 결과일, 처방 일시 초기화. 
 'Version 3.1.10.341 --> 2018/02/27 : vs2010 
+'Version 3.1.10.342 --> 2021/06/17 : 특정검사 바코드 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.341")> 
+<Assembly: AssemblyVersion("3.1.10.342")> 

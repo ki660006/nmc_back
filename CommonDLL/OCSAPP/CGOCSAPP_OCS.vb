@@ -249,7 +249,7 @@ Namespace OcsLink
             Try
                 rsOrddt = rsOrddt.Replace("-", "")
 
-                sSql += "pkg_ack_ocs.pkg_get_tns_info                                                  "
+                sSql += "pkg_ack_ocs.pkg_get_tns_info"
 
                 alParm.Add(New OracleParameter("rs_regno", rsRegno))
                 alParm.Add(New OracleParameter("rs_orddt", rsOrddt.Substring(0, 8)))
@@ -1170,67 +1170,68 @@ Namespace OcsLink
                 Dim al As New ArrayList
 
                 sSql = ""
-                sSql += " SELECT FSTRGSTDT, ORDER_DATE, BUNHO, PATINFO, DEPTNM, DOCTOR, WARDROOM, GBN, COMGBN, ABORH, ORDNM, comnmd,     "
-                sSql += "        CASE WHEN (PREPPRCPFLAG = 'Y' AND QTY <> '1') THEN QTY ELSE TO_CHAR(COUNT(*)) END QTY, "
-                sSql += "        STATE, ER, HANGMOG_CODE, IN_OUT_GUBUN, FILTYN, IRRADYN, RMK, PREPPRCPFLAG, comcd "
-                sSql += "   FROM (SELECT FN_ACK_DATE_STR(TO_CHAR(C.FSTRGSTDT, 'yyyymmddhh24miss'), 'yyyy-mm-dd hh24:mi:ss') FSTRGSTDT, "
-                sSql += "                FN_ACK_DATE_STR(O.ORDDATE || O.ORDTIME, 'yyyy-mm-dd hh24:mi:ss') ORDER_DATE,"
-                sSql += "                O.PATNO BUNHO,"
-                sSql += "                FN_ACK_GET_PAT_INFO(o.patno, '', '') PATINFO, "
-                sSql += "                FN_ACK_GET_DEPT_NAME (o.iogbn, o.deptcd) DEPTNM, "
-                sSql += "                FN_ACK_GET_DR_NAME (o.orddr) DOCTOR, "
-                sSql += "                CASE WHEN o.iogbn = 'I' THEN FN_ACK_GET_WARD_NAME(o.wardno) || '-' || FN_ACK_GET_ROOM_NAME(o.wardno, o.roomno)"
-                sSql += "                     ELSE '' END wardroom, "
-                sSql += "                CASE WHEN f.comgbn = '1' THEN '준비'"
-                sSql += "                     WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') = 'N' THEN '수혈'"
-                sSql += "                     WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') <> 'N' THEN '교차미필' "
-                sSql += "                     WHEN f.comgbn = '4' THEN 'Irra'"
-                sSql += "                     END gbn,"
-                sSql += "                CASE WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') <> 'N' THEN '3'"
-                sSql += "                     ELSE f.comgbn END comgbn,"
-                sSql += "                (SELECT ABO || RH "
-                sSql += "                   FROM lr070m "
-                sSql += "                  WHERE regno = o.patno) aborh, o.ordnm, "
-                sSql += "                CASE WHEN o.prepprcpflag = 'Y' THEN fn_ack_get_reqbldqty (o.ORDDATE, o.patno, o.ordseqno, o.iogbn)                          "
-                sSql += "                     ELSE TO_CHAR(COUNT(*)) END qty,                                                                                        "
-                sSql += "                (SELECT cdnm FROM com.zbcmcode WHERE CDGRUPID = 'M0011' AND cdid = o.PROCSTAT) state,                                       "
-                sSql += "                CASE WHEN nvl(o.eryn, 'N') = 'N' THEN ' ' ELSE '○' END er,                                                                 "
-                sSql += "                o.ordcd hangmog_code, o.spccd specimen_code, o.iogbn in_out_gubun, o.filtyn, o.irradyn, o.ordtext rmk, o.prepprcpflag,      "
-                sSql += "                f.comcd, f.comnmd"
-                sSql += "           FROM VW_ACK_OCS_ORD_INFO o LEFT OUTER JOIN EMR.MNRMDEEX c                                                                        "
-                sSql += "                                                   ON c.prcpdd = o.orddate                                                                  "
-                sSql += "                                                  AND c.instcd = '031'                                                                      "
-                sSql += "                                                  /*AND c.prcphistno = o.prcphistno*/                                                        "
-                sSql += "                                                  AND c.execprcpuniqno = o.ordseqno                                                         "
-                sSql += "                                                  AND c.prcpno = o.prcpno                                                                   "
-                sSql += "                , lf120m f"
-                sSql += "          WHERE o.instcd = '031'           "
-                sSql += "            AND o.hopedate >= :rsOrdS      "
-                sSql += "            AND o.hopedate <= :rsOrdE      "
+                sSql += " SELECT rgstdt, FSTRGSTDT, ORDER_DATE, BUNHO, PATINFO, DEPTNM, DOCTOR, WARDROOM, GBN, COMGBN, ABORH, ORDNM, comnmd,     " + vbCrLf
+                sSql += "        CASE WHEN (PREPPRCPFLAG = 'Y' AND QTY <> '1') THEN QTY ELSE TO_CHAR(COUNT(*)) END QTY, " + vbCrLf
+                sSql += "        STATE, ER, HANGMOG_CODE, IN_OUT_GUBUN, FILTYN, IRRADYN, RMK, PREPPRCPFLAG, comcd " + vbCrLf
+                sSql += "   FROM (SELECT FN_ACK_DATE_STR(o.rgstdt, 'yyyy-mm-dd hh24:mi:ss') rgstdt,  "
+                sSql += "                FN_ACK_DATE_STR(TO_CHAR(C.FSTRGSTDT, 'yyyymmddhh24miss'), 'yyyy-mm-dd hh24:mi:ss') FSTRGSTDT, " + vbCrLf
+                sSql += "                FN_ACK_DATE_STR(O.ORDDATE || O.ORDTIME, 'yyyy-mm-dd hh24:mi:ss') ORDER_DATE," + vbCrLf
+                sSql += "                O.PATNO BUNHO," + vbCrLf
+                sSql += "                FN_ACK_GET_PAT_INFO(o.patno, '', '') PATINFO, " + vbCrLf
+                sSql += "                FN_ACK_GET_DEPT_NAME (o.iogbn, o.deptcd) DEPTNM, " + vbCrLf
+                sSql += "                FN_ACK_GET_DR_NAME (o.orddr) DOCTOR, " + vbCrLf
+                sSql += "                CASE WHEN o.iogbn = 'I' THEN FN_ACK_GET_WARD_NAME(o.wardno) || '-' || FN_ACK_GET_ROOM_NAME(o.wardno, o.roomno)" + vbCrLf
+                sSql += "                     ELSE '' END wardroom, " + vbCrLf
+                sSql += "                CASE WHEN f.comgbn = '1' THEN '준비'" + vbCrLf
+                sSql += "                     WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') = 'N' THEN '수혈'" + vbCrLf
+                sSql += "                     WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') <> 'N' THEN '교차미필' " + vbCrLf
+                sSql += "                     WHEN f.comgbn = '4' THEN 'Irra'" + vbCrLf
+                sSql += "                     END gbn," + vbCrLf
+                sSql += "                CASE WHEN f.comgbn = '2' AND nvl(o.eryn, 'N') <> 'N' THEN '3'" + vbCrLf
+                sSql += "                     ELSE f.comgbn END comgbn," + vbCrLf
+                sSql += "                (SELECT ABO || RH " + vbCrLf
+                sSql += "                   FROM lr070m " + vbCrLf
+                sSql += "                  WHERE regno = o.patno) aborh, o.ordnm, " + vbCrLf
+                sSql += "                CASE WHEN o.prepprcpflag = 'Y' THEN fn_ack_get_reqbldqty (o.ORDDATE, o.patno, o.ordseqno, o.iogbn)                          " + vbCrLf
+                sSql += "                     ELSE TO_CHAR(COUNT(*)) END qty,                                                                                        " + vbCrLf
+                sSql += "                (SELECT cdnm FROM com.zbcmcode WHERE CDGRUPID = 'M0011' AND cdid = o.PROCSTAT) state,                                       " + vbCrLf
+                sSql += "                CASE WHEN nvl(o.eryn, 'N') = 'N' THEN ' ' ELSE '○' END er,                                                                 " + vbCrLf
+                sSql += "                o.ordcd hangmog_code, o.spccd specimen_code, o.iogbn in_out_gubun, o.filtyn, o.irradyn, o.ordtext rmk, o.prepprcpflag,      " + vbCrLf
+                sSql += "                f.comcd, f.comnmd" + vbCrLf
+                sSql += "           FROM VW_ACK_OCS_ORD_INFO o LEFT OUTER JOIN EMR.MNRMDEEX c                                                                        " + vbCrLf
+                sSql += "                                                   ON c.prcpdd = o.orddate                                                                  " + vbCrLf
+                sSql += "                                                  AND c.instcd = '031'                                                                      " + vbCrLf
+                sSql += "                                                  /*AND c.prcphistno = o.prcphistno*/                                                        " + vbCrLf
+                sSql += "                                                  AND c.execprcpuniqno = o.ordseqno                                                         " + vbCrLf
+                sSql += "                                                  AND c.prcpno = o.prcpno                                                                   " + vbCrLf
+                sSql += "                , lf120m f" + vbCrLf
+                sSql += "          WHERE o.instcd = '031'           " + vbCrLf
+                sSql += "            AND o.hopedate >= :rsOrdS      " + vbCrLf
+                sSql += "            AND o.hopedate <= :rsOrdE      " + vbCrLf
 
                 al.Add(New OracleParameter("rsOrdS", OracleDbType.Varchar2, rsOrdS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsOrdS))
                 al.Add(New OracleParameter("rsOrdE", OracleDbType.Varchar2, rsOrdE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsOrdE))
 
-                sSql += "            AND o.prcpclscd = 'B4'         "
-                sSql += "            AND o.hscttempprcpflag = 'N'   "
-                sSql += "            AND o.prcpauthflag <> '7'      "
-                sSql += "            AND o.prcphistcd = 'O'         "
-                sSql += "            AND o.execprcphistcd = 'O'     "
-                sSql += "            AND nvl(o.discyn, 'N') = 'N'   "
-                sSql += "            AND o.ordcd = f.comordcd       "
-                sSql += "            AND o.spccd = f.spccd          "
+                sSql += "            AND o.prcpclscd = 'B4'         " + vbCrLf
+                sSql += "            AND o.hscttempprcpflag = 'N'   " + vbCrLf
+                sSql += "            AND o.prcpauthflag <> '7'      " + vbCrLf
+                sSql += "            AND o.prcphistcd = 'O'         " + vbCrLf
+                sSql += "            AND o.execprcphistcd = 'O'     " + vbCrLf
+                sSql += "            AND nvl(o.discyn, 'N') = 'N'   " + vbCrLf
+                sSql += "            AND o.ordcd = f.comordcd       " + vbCrLf
+                sSql += "            AND o.spccd = f.spccd          " + vbCrLf
 
                 If rsRegno <> "" Then
                     sSql += "                   AND o.patno         = :regno                                                                                                     " + vbCrLf
                     al.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
                 End If
 
-                sSql += "       GROUP BY C.FSTRGSTDT, O.ORDDATE, O.ORDTIME, O.PATNO, O.DEPTCD, O.ORDDR, O.ORDCD, O.SPCCD, O.IOGBN, O.WARDNO, O.ROOMNO, O.FILTYN, O.IRRADYN, "
-                sSql += "                NVL(O.ERYN, ''), O.ORDTEXT, O.ORDNM, F.COMGBN, O.ERYN, O.PROCSTAT, O.PREPPRCPFLAG, O.ORDSEQNO, f.comcd, f.comnmd "
-                sSql += "         )"
-                sSql += "     GROUP BY FSTRGSTDT, ORDER_DATE, BUNHO, PATINFO, DEPTNM, DOCTOR, WARDROOM, GBN, COMGBN, ABORH, ORDNM, "
-                sSql += "              STATE, ER, HANGMOG_CODE, IN_OUT_GUBUN, FILTYN, IRRADYN, RMK, PREPPRCPFLAG, QTY, comcd, comnmd "
-                sSql += "     ORDER BY ORDER_DATE, BUNHO, HANGMOG_CODE DESC, PREPPRCPFLAG DESC,  FSTRGSTDT "
+                sSql += "       GROUP BY C.FSTRGSTDT, O.ORDDATE, O.ORDTIME, O.PATNO, O.DEPTCD, O.ORDDR, O.ORDCD, O.SPCCD, O.IOGBN, O.WARDNO, O.ROOMNO, O.FILTYN, O.IRRADYN, " + vbCrLf
+                sSql += "                NVL(O.ERYN, ''), O.ORDTEXT, O.ORDNM, F.COMGBN, O.ERYN, O.PROCSTAT, O.PREPPRCPFLAG, O.ORDSEQNO, f.comcd, f.comnmd, o.rgstdt " + vbCrLf
+                sSql += "         )" + vbCrLf
+                sSql += "     GROUP BY FSTRGSTDT, ORDER_DATE, BUNHO, PATINFO, DEPTNM, DOCTOR, WARDROOM, GBN, COMGBN, ABORH, ORDNM, " + vbCrLf
+                sSql += "              STATE, ER, HANGMOG_CODE, IN_OUT_GUBUN, FILTYN, IRRADYN, RMK, PREPPRCPFLAG, QTY, comcd, comnmd, rgstdt " + vbCrLf
+                sSql += "     ORDER BY ORDER_DATE, BUNHO, HANGMOG_CODE DESC, PREPPRCPFLAG DESC,  FSTRGSTDT " + vbCrLf
                 
                 DbCommand()
                 Dim dt As DataTable = DbExecuteQuery(sSql, al)

@@ -1314,7 +1314,7 @@ Public Class FGJ02
                     stu.FKOCSS += CType(al_CancelInto(ix), STU_CANCELINFO).FKOCS
                 Next
 
-
+                'pro_ack_exe_cancel_spc 'pro_ack_exe_cancel_test 'pro_ack_exe_ocs_cancel
                 Dim sRet As String = (New WEBSERVER.CGWEB_J).ExecuteDo_Cancel(stu, "lis")
                 'Dim sRet As String = (New Cancel).ExecuteDo(sJobGbn, al_CancelInto)
 

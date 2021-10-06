@@ -1110,13 +1110,29 @@ Public Class FGABNORMAL
 
                         If sChk = "1" Then
                             If .Text = "LM205" Then
-                                sTestGbn = .Text
-                            End If
-                            sPartSlip = sSlipCd : Exit For
+                                    sTestGbn = .Text
+                                End If
+                                sPartSlip = sSlipCd : Exit For
                         End If
                     Next
                 End With
             End If
+
+            '20201216 JHS 특이결과 등록시 특정 검사 있는지 확인 
+            Dim testcd As String = ""
+            With Me.spdList
+                For iRow As Integer = 1 To .MaxRows
+                    .Row = iRow
+                    .Col = .GetColFromID("chk") : Dim sChk As String = .Text                
+                    .Col = .GetColFromID("testcd")
+                    If sChk = "1" Then
+                        If .Text = "L3117" Then ' 20201216 바꾼 후 조건 
+                            testcd = .Text
+                        End If
+                    End If
+                Next
+            End With
+            '--------------------------------------------
 
             Dim sLisSeq As String = LISAPP.APP_R.AbnFn.fnGet_LIS_SMS_SEQ
 
@@ -1131,7 +1147,11 @@ Public Class FGABNORMAL
                     sSMSMsg = "등록번호[" + Me.lblRegNo.Text + "] 환자이름[" + Me.lblPatNm.Text + "]의 결과를 확인하세요.!!" + vbCrLf + Me.txtCmtCont.Text
                 End If
 
-
+                '20201216 특정 검사일 때는 문자 내용 변경 
+                If testcd = "L3117" Then
+                    sSMSMsg = "등록번호[" + Me.lblRegNo.Text + "] 환자이름[" + Mid(Me.lblPatNm.Text, 1, 1) + "O" + Mid(Me.lblPatNm.Text, Me.lblPatNm.Text.Length, 1) + "]의 결과를 확인하세요.!!"
+                End If
+                '-----------------------------------------
 
                 If oForm.Display_Result(Me, msBcNo, sSMSMsg, sLisSeq) Then
                     Me.Close()

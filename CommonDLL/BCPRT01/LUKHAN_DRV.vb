@@ -58,14 +58,27 @@ Public Class LUKHAN_DRV
                 If CType(ra_PrtData(ix1), STU_BCPRTINFO).REGNO <> "" Then
                     Dim iPrtCnt As Integer = 1
 
-                    If CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "A" Then
+                    '20210127 jhs 접수시 바코드 출력 로직 추가 
+                    If CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT.IndexOf("A") >= 0 Then
                         iPrtCnt = 2
                     ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "B" Then
                         '< CrossMatching 검체
                         iPrtCnt = 3
+                    ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J" Or CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J2" Then
+                        iPrtCnt = 1
                     ElseIf IsNumeric(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT) Then
                         iPrtCnt = Convert.ToInt32(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT)
                     End If
+                    '-----------------------------------------------------------
+
+                    'If CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "A" Then
+                    '    iPrtCnt = 2
+                    'ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "B" Then
+                    '    '< CrossMatching 검체
+                    '    iPrtCnt = 3
+                    'ElseIf IsNumeric(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT) Then
+                    '    iPrtCnt = Convert.ToInt32(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT)
+                    'End If
 
                     For ix2 As Integer = 1 To iPrtCnt
 
@@ -460,6 +473,7 @@ Public Class LUKHAN_DRV
             Dim sTGrpNm As String = ro_Data.TGRPNM
             Dim Abochk As String = ro_Data.ABOCHK
 
+
             '혈액형여부 테스트
             LK_PrintWindowsFont(10 + riLeftPos, 85 + iTop, 0, 50, 0, 0, 0, "굴림", Abochk)
 
@@ -495,7 +509,7 @@ Public Class LUKHAN_DRV
             Else
                 '< 검체명*
                 'LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
-                LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
+                LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
 
                 If ro_Data.BCTYPE = "M" Then
 
@@ -507,7 +521,7 @@ Public Class LUKHAN_DRV
                 Else
 
                     '< 용기명 *
-                    LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", ro_Data.TUBENM)
+                    LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", ro_Data.TUBENM)                           ' 3째줄 VTM 2.5
                     'LK_PrintWindowsFont(90 + riLeftPos, 250 + iTop, 0, 20, 0, 0, 0, "굴림", ro_Data.TUBENM)
 
                     '< 검사그룹 sComment2
@@ -515,21 +529,30 @@ Public Class LUKHAN_DRV
 
                     '< 응급 sEmer 
                     'LK_PrintDeviceFont(355 + riLeftPos, 80 + iTop, 0, 2, 1, 1, 1, ro_Data.EMER) '기존
-                    LK_PrintDeviceFont(355 + riLeftPos, 80 + iTop, 0, 5, 1, 1, 1, ro_Data.EMER) '사용자 요청으로 크기 수정
+                    'LK_PrintDeviceFont(355 + riLeftPos, 80 + iTop, 0, 5, 1, 1, 1, ro_Data.EMER) '사용자 요청으로 크기 수정 
+                    LK_PrintDeviceFont(355 + riLeftPos, 80 + iTop, 0, 4, 1, 1, 1, ro_Data.EMER)
 
+                    '< 계 sKind
+                    'LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 6, 1, 1, 0, ro_Data.BCCLSCD)
+                    LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 3, 1, 1, 0, ro_Data.BCCLSCD)                                    ' 4째줄 G1
                     '< 검사항목명 *
                     'LK_PrintDeviceFont(55 + riLeftPos, 260 + iTop, 0, 1, 1, 1, 0, sTestNms)
-                    '<<<20170912
-                    LK_PrintWindowsFont(55 + riLeftPos, 260 + iTop, 0, 20, 0, 0, 0, "굴림", sTestNms)
-                    'LK_PrintWindowsFont 20170911
-                    '< 계 sKind
-                    'LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 6, 1, 1, 0, ro_Data.BCCLSCD) 'ori
-                    LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 3, 1, 1, 0, ro_Data.BCCLSCD) ' jjh 조정
+
+                    '20210429 jhs 특정검사만 음영 표시
+                    If PRG_CONST.shadow_test(ro_Data.TESTCD) <> "" Then
+                        LK_PrintDeviceFont(55 + riLeftPos, 260 + iTop, 0, 4, 1, 1, 1, " " + sTestNms + " ") '20210429jhs 음영으로 변경' 4째줄    COVID-19 E2(음영)
+                    Else
+                        LK_PrintWindowsFont(55 + riLeftPos, 260 + iTop, 0, 20, 0, 0, 0, "굴림", sTestNms)                             ' 4째줄    COVID-19 E2
+                    End If
+                    '---------------------------
+
 
                     '< 자체응급 sErprt
                     If ro_Data.ERPRTYN <> "" Then
                         'LK_PrintDeviceFont(355 + riLeftPos, 130 + iTop, 0, 3, 1, 1, 1, "E")
-                        LK_PrintDeviceFont(355 + riLeftPos, 130 + iTop, 0, 8, 1, 1, 1, "R")
+                        'LK_PrintDeviceFont(355 + riLeftPos, 130 + iTop, 0, 8, 1, 1, 1, "R") '12-10 배포전 버젼
+                        'LK_PrintDeviceFont(355 + riLeftPos, 130 + iTop, 0, 3, 1, 1, 1, "R") '장비 리딩문제로 크기 원복 배포된 버젼
+                        LK_PrintDeviceFont(355 + riLeftPos, 130 + iTop, 0, 8, 1, 1, 1, "E") '20201222 사용자 요청으로 크기 수정 
                     End If
 
                 End If
@@ -551,9 +574,9 @@ Public Class LUKHAN_DRV
             '<상호 재수정 20150602
             '< 바코드 발행 일시  233
             If rbFirst Then
-                LK_PrintDeviceFont(260 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("MM-dd HH:mm"))
+                LK_PrintDeviceFont(275 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("MM-dd HH:mm"))
             Else
-                LK_PrintDeviceFont(260 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("HH:mm"))
+                LK_PrintDeviceFont(275 + riLeftPos, 260 + iTop, 0, 1, 1, 1, CType(IIf(rbFirst, "0", "1"), Integer), Fn.GetServerDateTime.ToString("HH:mm"))
             End If
             '>
 
@@ -703,7 +726,15 @@ Public Class LUKHAN_DRV
                 End If
             End If
 
-            LK_PrintWindowsFont(165 + riLeftPos, 245 + iTop, 0, 25, 1, 0, 0, "굴림", sXMatcd)
+            '20210719 응급 구분 추가 '테스트 후 배포 해야함
+            If ro_Data.EMER = "Y" Then
+                sXMatcd = "응급"
+                LK_PrintWindowsFont(165 + riLeftPos, 220 + iTop, 0, 50, 1, 0, 0, "굴림", sXMatcd)
+            Else
+                LK_PrintWindowsFont(165 + riLeftPos, 245 + iTop, 0, 25, 1, 0, 0, "굴림", sXMatcd)
+            End If
+            '-------------------
+
 
             '< 7. Filter/IR
             Dim sFiterIr As String = ro_Data.FITER + "/" + ro_Data.IR

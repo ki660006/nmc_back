@@ -115,29 +115,29 @@ Namespace APP_M
                 Dim alParm As New ArrayList
 
                 sSql = ""
-                sSql += "SELECT DISTINCT"
-                sSql += "       j.regno, j.patnm,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
-                sSql += "       fn_ack_get_bcno_full(r.workno) workno,"
-                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
-                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn," '20130910 정선영 추가, remark 표시하기 위해서
-                sSql += "       CASE WHEN j.rstflg = '2' THEN 'Y' ELSE 'N' END rstflg"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       j.regno, j.patnm," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(r.workno) workno," + vbCrLf
+                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt," + vbCrLf
+                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn," '20130910 정선영 추가, remark 표시하기 위해서+vbCrLf 
+                sSql += "       CASE WHEN j.rstflg = '2' THEN 'Y' ELSE 'N' END rstflg" + vbCrLf
 
                 '<< JJH 과거 Field, MTB, NTM 결과에 따른 색표시 fn_get_afbculture_color
                 ' rsTGrpCd = LC, TC    --> MTB, NTM (주황색, 하늘색)
                 ' rsTGrpCd = TS        --> Field    (노란색)
-                sSql += "       , FN_GET_AFBCULTURE_COLOR(j.bcno, '" + rsTGrpCd + "') color "
-                sSql += "  FROM lj010m j,"
-                sSql += "       (SELECT r.bcno, MIN(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno, MIN(r.tkdt) tkdt,"
-                sSql += "               MIN(NVL(r.rstflg, '0')) || MAX(NVL(r.rstflg, '0')) rstflg_t"
-                sSql += "          FROM lm010m r, lf060m f"
+                sSql += "       , FN_GET_AFBCULTURE_COLOR(j.bcno, '" + rsTGrpCd + "') color " + vbCrLf
+                sSql += "  FROM lj010m j," + vbCrLf
+                sSql += "       (SELECT r.bcno, MIN(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno, MIN(r.tkdt) tkdt," + vbCrLf
+                sSql += "               MIN(NVL(r.rstflg, '0')) || MAX(NVL(r.rstflg, '0')) rstflg_t" + vbCrLf
+                sSql += "          FROM lm010m r, lf060m f" + vbCrLf
 
                 If rsMode = 0 Then
-                    sSql += "         WHERE r.tkdt >= :dates"
-                    sSql += "           AND r.tkdt <= :datee || '235959'"
+                    sSql += "         WHERE r.tkdt >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt <= :datee || '235959'" + vbCrLf
                 Else
-                    sSql += "         WHERE r.fndt >= :dates"
-                    sSql += "           AND r.fndt <= :datee || '235959'"
+                    sSql += "         WHERE r.fndt >= :dates" + vbCrLf
+                    sSql += "           AND r.fndt <= :datee || '235959'" + vbCrLf
                 End If
 
 
@@ -145,49 +145,49 @@ Namespace APP_M
                 alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkdtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkdtE))
 
                 If rsTGrpCd <> "" Then
-                    sSql += "           AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)"
-                    sSql += "           AND f.tcdgbn <> 'B'" '20140711 정선영 추가.
+                    sSql += "           AND (r.testcd, r.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)" + vbCrLf
+                    sSql += "           AND f.tcdgbn <> 'B'" + vbCrLf '20140711 정선영 추가.
                     alParm.Add(New OracleParameter("tgrpcd", OracleDbType.Varchar2, rsTGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTGrpCd))
                 Else
-                    sSql += "           AND f.partcd = :partcd"
-                    sSql += "           AND f.slipcd = :slipcd"
+                    sSql += "           AND f.partcd = :partcd" + vbCrLf
+                    sSql += "           AND f.slipcd = :slipcd" + vbCrLf
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(0, 1)))
                     alParm.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(1, 1)))
                 End If
 
-                sSql += "           AND NVL(r.wkymd, ' ') <> ' '"
-                sSql += "           AND r.testcd = f.testcd"
-                sSql += "           AND r.spccd  = f.spccd"
-                sSql += "           AND r.tkdt  >= f.usdt"
-                sSql += "           AND r.tkdt  <  f.uedt"
+                sSql += "           AND NVL(r.wkymd, ' ') <> ' '" + vbCrLf
+                sSql += "           AND r.testcd = f.testcd" + vbCrLf
+                sSql += "           AND r.spccd  = f.spccd" + vbCrLf
+                sSql += "           AND r.tkdt  >= f.usdt" + vbCrLf
+                sSql += "           AND r.tkdt  <  f.uedt" + vbCrLf
                 'sSql += "           AND NVL(f.titleyn, '0') = '0'"
                 'sSql += "           AND (CASE WHEN f.tcdgbn = 'C' THEN NVL(f.reqsub, '0') ELSE '1' END = '1' OR NVL(r.orgrst, ' ') <> ' ')"
                 'sSql += "           AND (CASE WHEN f.tcdgbn = 'C' THEN NVL(f.reqsub, '0') ELSE '1' END = '1' OR NVL(r.orgrst, ' ') <> ' ')"
                 '<20140711 정선영 수정
-                sSql += "                      AND ( (f.tcdgbn IN ('B', 'P') AND nvl(f.titleyn, '0') = '0') OR"
-                sSql += "                            (CASE WHEN f.tcdgbn = 'C' THEN nvl(f.reqsub, '0') ELSE '1' END = '1' OR nvl(r.orgrst, ' ') <> ' ')"
-                sSql += "                          )"
+                sSql += "                      AND ( (f.tcdgbn IN ('B', 'P') AND nvl(f.titleyn, '0') = '0') OR" + vbCrLf
+                sSql += "                            (CASE WHEN f.tcdgbn = 'C' THEN nvl(f.reqsub, '0') ELSE '1' END = '1' OR nvl(r.orgrst, ' ') <> ' ')" + vbCrLf
+                sSql += "                          )" + vbCrLf
                 '>
-                sSql += "         GROUP BY bcno"
-                sSql += "       ) r"
-                sSql += " WHERE j.bcno   = r.bcno"
-                sSql += "   AND j.spcflg = '4'"
+                sSql += "         GROUP BY bcno" + vbCrLf
+                sSql += "       ) r" + vbCrLf
+                sSql += " WHERE j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND j.spcflg = '4'" + vbCrLf
 
                 Select Case rsRstFlg
                     Case "0"
-                        sSql += "   AND r.rstflg_t = '00'"
+                        sSql += "   AND r.rstflg_t = '00'" + vbCrLf
                     Case "1"
-                        sSql += "   AND r.rstflg_t >= '01' AND r.rstflg_t <= '13'"
+                        sSql += "   AND r.rstflg_t >= '01' AND r.rstflg_t <= '13'" + vbCrLf
                     Case "2"
-                        sSql += "   AND r.rstflg_t >= '20' AND r.rstflg_t <= '23'"
+                        sSql += "   AND r.rstflg_t >= '20' AND r.rstflg_t <= '23'" + vbCrLf
                     Case "3"
-                        sSql += "   AND r.rstflg_t >= '3'"
+                        sSql += "   AND r.rstflg_t >= '3'" + vbCrLf
                     Case "4"    '<20141209 미최종보고 수정 
-                        sSql += "   AND r.rstflg_t >= '00' AND r.rstflg_t <= '23'"
+                        sSql += "   AND r.rstflg_t >= '00' AND r.rstflg_t <= '23'" + vbCrLf
                 End Select
 
                 'sSql += " ORDER BY tkdt, workno, bcno"
-                sSql += " ORDER BY  workno, tkdt, bcno"  '<<<20150806 작업번호 우선순위로 수정 
+                sSql += " ORDER BY  workno, tkdt, bcno" + vbCrLf  '<<<20150806 작업번호 우선순위로 수정 
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -208,53 +208,53 @@ Namespace APP_M
                 Dim alParm As New ArrayList
 
                 sSql = ""
-                sSql += "SELECT DISTINCT"
-                sSql += "       j.regno, j.patnm,"
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno,"
-                sSql += "       fn_ack_get_bcno_full(r.workno) workno,"
-                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt,"
-                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn," '20130910 정선영 추가, remark 표시하기 위해서
-                sSql += "       CASE WHEN j.rstflg = '2' THEN 'Y' ELSE 'N' END rstflg"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       j.regno, j.patnm," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(r.workno) workno," + vbCrLf
+                sSql += "       fn_ack_date_str(r.tkdt, 'yyyy-mm-dd hh24:mi:ss') tkdt," + vbCrLf
+                sSql += "       CASE WHEN (SELECT count(*) FROM lj011m WHERE bcno = j.bcno AND NVL(doctorrmk, ' ') <> ' ') > 0 THEN 'Y' ELSE 'N' END rmkyn," + vbCrLf '20130910 정선영 추가, remark 표시하기 위해서
+                sSql += "       CASE WHEN j.rstflg = '2' THEN 'Y' ELSE 'N' END rstflg" + vbCrLf
 
-                sSql += "  FROM lj010m j,"
-                sSql += "       (SELECT r.bcno, MIN(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno, MIN(r.tkdt) tkdt,"
-                sSql += "               MIN(NVL(r.rstflg, '0')) || MAX(NVL(r.rstflg, '0')) rstflg_t"
-                sSql += "          FROM lm010m r, lf060m f"
-                sSql += "         WHERE r.wkymd   = :wkymd"
-                sSql += "           AND r.wkgrpcd = :wgrpcd"
-                sSql += "           AND r.wkno   >= :wknos"
-                sSql += "           AND r.wkno   <= :wknoe"
+                sSql += "  FROM lj010m j," + vbCrLf
+                sSql += "       (SELECT r.bcno, MIN(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno, MIN(r.tkdt) tkdt," + vbCrLf
+                sSql += "               MIN(NVL(r.rstflg, '0')) || MAX(NVL(r.rstflg, '0')) rstflg_t" + vbCrLf
+                sSql += "          FROM lm010m r, lf060m f" + vbCrLf
+                sSql += "         WHERE r.wkymd   = :wkymd" + vbCrLf
+                sSql += "           AND r.wkgrpcd = :wgrpcd" + vbCrLf
+                sSql += "           AND r.wkno   >= :wknos" + vbCrLf
+                sSql += "           AND r.wkno   <= :wknoe" + vbCrLf
 
                 alParm.Add(New OracleParameter("wkymd", OracleDbType.Varchar2, rsWkYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkYmd))
                 alParm.Add(New OracleParameter("wgrpcd", OracleDbType.Varchar2, rsWGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWGrpCd))
                 alParm.Add(New OracleParameter("wknos", OracleDbType.Varchar2, rsWkNoS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoS))
                 alParm.Add(New OracleParameter("wknoe", OracleDbType.Varchar2, rsWkNoE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoE))
 
-                sSql += "           AND r.testcd = f.testcd"
-                sSql += "           AND r.spccd  = f.spccd"
-                sSql += "           AND r.tkdt  >= f.usdt"
-                sSql += "           AND r.tkdt  <  f.uedt"
-                sSql += "           AND NVL(f.titleyn, '0') = '0'"
-                sSql += "           AND (CASE WHEN f.tcdgbn = 'C' THEN NVL(f.reqsub, '0') ELSE '1' END = '1' OR NVL(r.orgrst, ' ') <> ' ')"
-                sSql += "         GROUP BY bcno"
-                sSql += "       ) r"
-                sSql += " WHERE j.bcno   = r.bcno"
-                sSql += "   AND j.spcflg = '4'"
+                sSql += "           AND r.testcd = f.testcd" + vbCrLf
+                sSql += "           AND r.spccd  = f.spccd" + vbCrLf
+                sSql += "           AND r.tkdt  >= f.usdt" + vbCrLf
+                sSql += "           AND r.tkdt  <  f.uedt" + vbCrLf
+                sSql += "           AND NVL(f.titleyn, '0') = '0'" + vbCrLf
+                sSql += "           AND (CASE WHEN f.tcdgbn = 'C' THEN NVL(f.reqsub, '0') ELSE '1' END = '1' OR NVL(r.orgrst, ' ') <> ' ')" + vbCrLf
+                sSql += "         GROUP BY bcno" + vbCrLf
+                sSql += "       ) r" + vbCrLf
+                sSql += " WHERE j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND j.spcflg = '4'" + vbCrLf
 
                 Select Case rsRstFlg
                     Case "0"
-                        sSql += "   AND r.rstflg_t = '00'"
+                        sSql += "   AND r.rstflg_t = '00'" + vbCrLf
                     Case "1"
-                        sSql += "   AND r.rstflg_t >= '01' AND r.rstflg_t <= '13'"
+                        sSql += "   AND r.rstflg_t >= '01' AND r.rstflg_t <= '13'" + vbCrLf
                     Case "2"
-                        sSql += "   AND r.rstflg_t >= '20' AND r.rstflg_t <= '23'"
+                        sSql += "   AND r.rstflg_t >= '20' AND r.rstflg_t <= '23'" + vbCrLf
                     Case "3"
-                        sSql += "   AND r.rstflg_t >= '3'"
+                        sSql += "   AND r.rstflg_t >= '3'" + vbCrLf
                     Case "4"    '<20141209 미최종보고 조회 수정 
-                        sSql += "   AND r.rstflg_t >= '00' AND r.rstflg_t <= '23'"
+                        sSql += "   AND r.rstflg_t >= '00' AND r.rstflg_t <= '23'" + vbCrLf
                 End Select
 
-                sSql += " ORDER BY workno, tkdt, bcno"
+                sSql += " ORDER BY workno, tkdt, bcno" + vbCrLf
 
 
                 DbCommand()
@@ -389,6 +389,7 @@ Namespace APP_M
             End Try
         End Function
 
+
         '-- 검사항목별 검사대상자 조회
         Public Shared Function fnGet_SpcList_Test(ByVal rsTestCds As String, ByVal rsWkYmd As String, ByVal rsWGrpCd As String, ByVal rsWkNoS As String, ByVal rsWkNoE As String, ByVal rsRstNullReg As String, ByVal rsTkDtB As String, ByVal rsTkDtE As String, _
                                                   Optional ByVal rsBcno As String = "", Optional ByVal rsDoubleTest As String = "", _
@@ -401,77 +402,87 @@ Namespace APP_M
 
             Try
                 sSql = ""
-                sSql += "SELECT DISTINCT"
-                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno,"
-                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd') orddt , " '20150921 처방일시 추가 
-                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, f3.spcnmd,"
-                sSql += "       j.regno, j.patnm, j.sex || '/' || j.age sexage,"
-                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || '/' || FN_ACK_GET_WARD_ABBR(j.wardno)"
-                sSql += "            ELSE FN_ACK_GET_DEPT_ABBR (j.iogbn, j.deptcd)"
-                sSql += "       END deptcd,"
-                sSql += "       NVL(f6.dispseql, 999) sort2, r.testcd, r.spccd, f6.tcdgbn, f6.titleyn, f6.plgbn,"
-                sSql += "       r.orgrst, r.rstflg, r.mwid, fn_ack_date_str(r.tkdt, 'yyyymmddhh24miss') tkdt, j.wardno ||'/' || j.roomno wardroom"
-                sSql += "  FROM lj010m j, lm010m r, lf060m f6, lf030m f3"
+                sSql += "SELECT DISTINCT" + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(r.wkymd || NVL(r.wkgrpcd, '') || NVL(r.wkno, '')) workno," + vbCrLf
+                sSql += "       fn_ack_date_str(j.orddt, 'yyyy-mm-dd') orddt , " + vbCrLf '20150921 처방일시 추가 
+                sSql += "       fn_ack_get_bcno_full(j.bcno) bcno, f3.spcnmd," + vbCrLf
+                sSql += "       j.regno, j.patnm, j.sex || '/' || j.age sexage," + vbCrLf
+                sSql += "       CASE WHEN j.iogbn = 'I' THEN FN_ACK_GET_DEPT_ABBR(j.iogbn, j.deptcd) || '/' || FN_ACK_GET_WARD_ABBR(j.wardno)" + vbCrLf
+                sSql += "            ELSE FN_ACK_GET_DEPT_ABBR (j.iogbn, j.deptcd)" + vbCrLf
+                sSql += "       END deptcd," + vbCrLf
+                sSql += "       NVL(f6.dispseql, 999) sort2, r.testcd, r.spccd, f6.tcdgbn, f6.titleyn, f6.plgbn," + vbCrLf
+                sSql += "       r.orgrst, r.rstflg, r.mwid, fn_ack_date_str(r.tkdt, 'yyyymmddhh24miss') tkdt, j.wardno ||'/' || j.roomno wardroom," + vbCrLf
 
+                '20201216 jhs 검사항목별 결과저장 및 보고도 색 변경되게 하기 위한 쿼리 추가
+                sSql += "       CASE WHEN (SELECT   COUNT ( * ) FROM(lj011m) WHERE(bcno = j.bcno)" + vbCrLf
+                sSql += "       AND NVL (doctorrmk, ' ') <> ' ') > 0 THEN 'Y'" + vbCrLf
+                sSql += "       ELSE 'N' End rmkyn," + vbCrLf
+                sSql += "       CASE WHEN j.rstflg = '2' THEN 'Y' ELSE 'N' END rstflagyn," + vbCrLf
+                sSql += "       FN_GET_AFBCULTURE_COLOR (j.bcno, 'TS') colorTS," + vbCrLf
+                sSql += "       FN_GET_AFBCULTURE_COLOR (j.bcno, 'LC') colorLC," + vbCrLf
+                sSql += "       FN_GET_AFBCULTURE_COLOR (j.bcno, 'TC') colorTC" + vbCrLf
+                '----------------------------------------------------------------------------------
+
+                sSql += "  FROM lj010m j, lm010m r, lf060m f6, lf030m f3" + vbCrLf
                 If rsBcno <> "" Then
-                    sSql += " WHERE j.bcno = :bcno"
+                    sSql += " WHERE j.bcno = :bcno" + vbCrLf
                     alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
                 ElseIf rsWkYmd <> "" Then
-                    sSql += " WHERE r.wkymd   = :wkymd"
-                    sSql += "   AND r.wkgrpcd = :wgrpcd"
-                    sSql += "   AND r.wkno   >= :wknos"
-                    sSql += "   AND r.wkno   <= :wknoe"
+                    sSql += " WHERE r.wkymd   = :wkymd" + vbCrLf
+                    sSql += "   AND r.wkgrpcd = :wgrpcd" + vbCrLf
+                    sSql += "   AND r.wkno   >= :wknos" + vbCrLf
+                    sSql += "   AND r.wkno   <= :wknoe" + vbCrLf
 
                     alParm.Add(New OracleParameter("wkymd", OracleDbType.Varchar2, rsWkYmd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkYmd))
                     alParm.Add(New OracleParameter("wgrpcd", OracleDbType.Varchar2, rsWGrpCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWGrpCd))
                     alParm.Add(New OracleParameter("wknos", OracleDbType.Varchar2, rsWkNoS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoS))
                     alParm.Add(New OracleParameter("wknoe", OracleDbType.Varchar2, rsWkNoE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWkNoE))
                 Else
-                    sSql += " WHERE r.tkdt >= :dates || '0000'"
-                    sSql += "   AND r.tkdt <= :datee || '5959'"
+                    sSql += " WHERE r.tkdt >= :dates || '0000'" + vbCrLf
+                    sSql += "   AND r.tkdt <= :datee || '5959'" + vbCrLf
 
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsTkDtB.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtB))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsTkDtE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTkDtE))
                 End If
 
                 If rsSpcCd <> "" Then
-                    sSql += "   AND j.spccd = :spccd"
+                    sSql += "   AND j.spccd = :spccd" + vbCrLf
                     alParm.Add(New OracleParameter("spccd", OracleDbType.Varchar2, rsSpcCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpcCd))
 
                 End If
-                sSql += "   AND NVL(r.wkymd, ' ') <> ' '"
-                sSql += "   AND r.testcd = f6.testcd"
-                sSql += "   AND r.spccd  = f6.spccd"
-                sSql += "   AND r.tkdt  >= f6.usdt"
-                sSql += "   AND r.tkdt  <  f6.uedt"
-                sSql += "   AND j.bcno   = r.bcno"
-                sSql += "   AND j.spccd  = f3.spccd"
-                sSql += "   AND r.tkdt  >= f3.usdt"
-                sSql += "   AND r.tkdt  <  f3.uedt"
-                sSql += "   AND j.spcflg = '4'"
+                sSql += "   AND NVL(r.wkymd, ' ') <> ' '" + vbCrLf
+                sSql += "   AND r.testcd = f6.testcd" + vbCrLf
+                sSql += "   AND r.spccd  = f6.spccd" + vbCrLf
+                sSql += "   AND r.tkdt  >= f6.usdt" + vbCrLf
+                sSql += "   AND r.tkdt  <  f6.uedt" + vbCrLf
+                sSql += "   AND j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND j.spccd  = f3.spccd" + vbCrLf
+                sSql += "   AND r.tkdt  >= f3.usdt" + vbCrLf
+                sSql += "   AND r.tkdt  <  f3.uedt" + vbCrLf
+                sSql += "   AND j.spcflg = '4'" + vbCrLf
 
                 Select Case rsRstNullReg
                     Case "000"
 
                     Case "001"
-                        sSql += "   AND NVL(r.rstflg, '0') = '3'"
+                        sSql += "   AND NVL(r.rstflg, '0') = '3'" + vbCrLf
                     Case "010"
-                        sSql += "   AND NVL(r.rstflg, '0') > '0' AND NVL(r.rstflg, '0') < '3'"
+                        sSql += "   AND NVL(r.rstflg, '0') > '0' AND NVL(r.rstflg, '0') < '3'" + vbCrLf
                     Case "011"
-                        sSql += "   AND NVL(r.rstflg, '0') > '0'"
+                        sSql += "   AND NVL(r.rstflg, '0') > '0'" + vbCrLf
                     Case "100"
-                        sSql += "   AND NVL(r.rstflg, '0') = '0'"
+                        sSql += "   AND NVL(r.rstflg, '0') = '0'" + vbCrLf
                     Case "101"
-                        sSql += "   AND (NVL(r.rstflg, '0') = '0' OR NVL(r.rstflg, '0') = '3')"
+                        sSql += "   AND (NVL(r.rstflg, '0') = '0' OR NVL(r.rstflg, '0') = '3')" + vbCrLf
                     Case "110"
-                        sSql += "   AND (NVL(r.rstflg, '0') = '0' OR NVL(r.rstflg, '0') < '3')"
+                        sSql += "   AND (NVL(r.rstflg, '0') = '0' OR NVL(r.rstflg, '0') < '3')" + vbCrLf
                     Case "111"
 
                 End Select
 
-                If rsTestCds <> "" Then sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')"
+                If rsTestCds <> "" Then sSql += "   AND r.testcd IN ('" + rsTestCds.Replace(",", "','") + "')" + vbCrLf
 
-                sSql += " ORDER BY workno"
+                sSql += " ORDER BY workno" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -761,22 +772,28 @@ Namespace APP_M
                 Dim sSql As String = ""
 
                 sSql = ""
-                sSql += "SELECT bcno, testcd, spccd, baccd, bacseq, ranking, testmtd, bacnmd, bacgencd, incrst, baccmt, status,"
-                sSql += "       baccd oldbaccd, ranking oldranking, incrst oldincrst, baccmt oldbaccmt"
-                sSql += "  FROM ("
-                sSql += "        SELECT rm.bcno, rm.testcd, rm.spccd, rb.baccd, rb.bacseq, rb.testmtd, fb.bacnmd, fb.bacgencd, rb.incrst, rb.baccmt, rb.ranking, 'S' status"
-                sSql += "          FROM lm010m rm, lm012m rb, lf210m fb"
-                sSql += "         WHERE rm.bcno   = :bcno"
-                sSql += "           AND rm.bcno   = rb.bcno AND rm.testcd = rb.testcd and rm.spccd = rb.spccd"
-                sSql += "           AND rb.baccd  = fb.baccd"
-                sSql += "           AND rm.tkdt  >= fb.usdt and rm.tkdt < fb.uedt"
+                sSql += "SELECT bcno, testcd, spccd, baccd, bacseq, ranking, testmtd, bacnmd, bacgencd, incrst, baccmt, status," + vbCrLf
+                sSql += "       baccd oldbaccd, ranking oldranking, incrst oldincrst, baccmt oldbaccmt" + vbCrLf
+                '20210817 jhs 균색 변경으로 인해 추가 
+                sSql += "         , a.BACCOLOR " + vbCrLf
+                '---------------------------------------------
+                sSql += "  FROM (" + vbCrLf
+                sSql += "        SELECT rm.bcno, rm.testcd, rm.spccd, rb.baccd, rb.bacseq, rb.testmtd, fb.bacnmd, fb.bacgencd, rb.incrst, rb.baccmt, rb.ranking, 'S' status" + vbCrLf
+                '20210817 jhs 균색 변경으로 인해 추가 
+                sSql += "         , FB.BACCOLOR " + vbCrLf
+                '---------------------------------------------
+                sSql += "          FROM lm010m rm, lm012m rb, lf210m fb" + vbCrLf
+                sSql += "         WHERE rm.bcno   = :bcno" + vbCrLf
+                sSql += "           AND rm.bcno   = rb.bcno AND rm.testcd = rb.testcd and rm.spccd = rb.spccd" + vbCrLf
+                sSql += "           AND rb.baccd  = fb.baccd" + vbCrLf
+                sSql += "           AND rm.tkdt  >= fb.usdt and rm.tkdt < fb.uedt" + vbCrLf
 
                 If rsTestCds <> "" Then
-                    sSql += "           AND TRIM(rm.testcd) || TRIM(rm.spccd) IN ('" + rsTestCds.Replace(",", "','") + "')"
+                    sSql += "           AND TRIM(rm.testcd) || TRIM(rm.spccd) IN ('" + rsTestCds.Replace(",", "','") + "')" + vbCrLf
                 End If
 
-                sSql += "       ) a"
-                sSql += " ORDER BY a.ranking, a.bacseq, a.baccd, a.testcd"
+                sSql += "       ) a" + vbCrLf
+                sSql += " ORDER BY a.ranking, a.bacseq, a.baccd, a.testcd" + vbCrLf
 
                 Dim al As New ArrayList
 
@@ -4792,7 +4809,16 @@ NEXT_CMT:
                     End If
                 End If
 
-                Dim sSql As String = "pkg_ack_rst.pkg_get_resultinfo_m"
+                '20210202 jhs 속도개선을 위해 환경배양은 나눔
+                'Dim sSql As String = "pkg_ack_rst.pkg_get_resultinfo_m"
+                Dim sSql As String = ""
+
+                If rsBCNo.Substring(8, 2) = "M6" Then
+                    sSql = "pkg_ack_rst.pkg_get_resultinfo_m_m6" '환경배양 속도개선을 위해 프로시저 생성 기존 
+                Else
+                    sSql = "pkg_ack_rst.pkg_get_resultinfo_m"
+                End If
+                '-------------------------
 
                 Dim dbCmd As New OracleCommand
                 Dim objDAdapter As OracleDataAdapter

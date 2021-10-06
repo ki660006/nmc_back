@@ -219,7 +219,7 @@ Public Class FGB06
 
                         If Format(dtBirthDay, "MMdd").ToString > Format(dtSysDate, "MMdd").ToString Then iAge -= 1
                         '>
-
+                       
                         .Col = .GetColFromID("order_date") : .Text = rdt.Rows(i).Item("order_date").ToString.Trim
                         .Col = .GetColFromID("hope_date") : .Text = rdt.Rows(i).Item("hope_date").ToString.Trim
                         .Col = .GetColFromID("bunho") : .Text = rdt.Rows(i).Item("bunho").ToString.Trim
@@ -324,6 +324,7 @@ Public Class FGB06
                         .TypePictPicture = GetImgList.getPlusMinus(enumPlusMinus.Plus)
                         .TypePictCenter = True
 
+               
                         .Col = .GetColFromID("tnsjubsuno") : .Text = rdt.Rows(i).Item("tnsjubsuno").ToString.Trim
                         .Col = .GetColFromID("rmk") : .Text = rdt.Rows(i).Item("rmk").ToString.Trim
                         .Col = .GetColFromID("order_date") : .Text = rdt.Rows(i).Item("order_date").ToString.Trim
@@ -1086,6 +1087,7 @@ Public Class FGB06
                         .Col = .GetColFromID("treesortkey") : .Text = dt.Rows(i).Item("treesortkey").ToString.Trim
                         'End If
 
+                       
                         .Col = .GetColFromID("rmk") : .Text = dt.Rows(i).Item("rmk").ToString.Trim
                         .Col = .GetColFromID("order_date") : .Text = dt.Rows(i).Item("order_date").ToString.Trim : .ForeColor = Color.White
                         '.ColMerge = FPSpreadADO.MergeConstants.MergeAlways

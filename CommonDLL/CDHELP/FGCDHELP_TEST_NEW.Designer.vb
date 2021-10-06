@@ -114,6 +114,8 @@ Partial Class FGCDHELP_TEST_NEW
         Me.Label30 = New System.Windows.Forms.Label()
         Me.pnlspd = New System.Windows.Forms.Panel()
         Me.pnlCenter = New System.Windows.Forms.Panel()
+        Me.txtResultDays = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.spdTestInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlBottom.SuspendLayout()
@@ -149,15 +151,15 @@ Partial Class FGCDHELP_TEST_NEW
         'Label2
         '
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.ForeColor = System.Drawing.Color.Gray
         Me.Label2.Location = New System.Drawing.Point(4, 15)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(870, 9)
         Me.Label2.TabIndex = 194
-        Me.Label2.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" & _
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        Me.Label2.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" &
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         '
         'lblInfo
         '
@@ -316,7 +318,7 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtTnmd.Location = New System.Drawing.Point(125, 25)
         Me.txtTnmd.MaxLength = 0
         Me.txtTnmd.Name = "txtTnmd"
-        Me.txtTnmd.Size = New System.Drawing.Size(715, 21)
+        Me.txtTnmd.Size = New System.Drawing.Size(742, 21)
         Me.txtTnmd.TabIndex = 210
         Me.txtTnmd.Tag = "TNMD"
         Me.txtTnmd.Text = "012345678"
@@ -326,7 +328,7 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtTubeNmd.Location = New System.Drawing.Point(460, 170)
         Me.txtTubeNmd.MaxLength = 0
         Me.txtTubeNmd.Name = "txtTubeNmd"
-        Me.txtTubeNmd.Size = New System.Drawing.Size(406, 21)
+        Me.txtTubeNmd.Size = New System.Drawing.Size(159, 21)
         Me.txtTubeNmd.TabIndex = 211
         Me.txtTubeNmd.Tag = "TUBENMD"
         Me.txtTubeNmd.Text = "012345678"
@@ -740,12 +742,13 @@ Partial Class FGCDHELP_TEST_NEW
         '
         Me.btnCdHelp_Tnm.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCdHelp_Tnm.Image = CType(resources.GetObject("btnCdHelp_Tnm.Image"), System.Drawing.Image)
-        Me.btnCdHelp_Tnm.Location = New System.Drawing.Point(841, 25)
+        Me.btnCdHelp_Tnm.Location = New System.Drawing.Point(841, 3)
         Me.btnCdHelp_Tnm.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCdHelp_Tnm.Name = "btnCdHelp_Tnm"
         Me.btnCdHelp_Tnm.Size = New System.Drawing.Size(26, 21)
         Me.btnCdHelp_Tnm.TabIndex = 259
         Me.btnCdHelp_Tnm.UseVisualStyleBackColor = True
+        Me.btnCdHelp_Tnm.Visible = False
         '
         'txtOrdSlip
         '
@@ -1088,11 +1091,10 @@ Partial Class FGCDHELP_TEST_NEW
         Me.Label28.TabIndex = 289
         Me.Label28.Text = "단위"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Label28.Visible = False
         '
         'txtspcunit
         '
-        Me.txtspcunit.Location = New System.Drawing.Point(276, 280)
+        Me.txtspcunit.Location = New System.Drawing.Point(276, 281)
         Me.txtspcunit.MaxLength = 0
         Me.txtspcunit.Multiline = True
         Me.txtspcunit.Name = "txtspcunit"
@@ -1100,7 +1102,6 @@ Partial Class FGCDHELP_TEST_NEW
         Me.txtspcunit.TabIndex = 290
         Me.txtspcunit.Tag = "SLIPNMD"
         Me.txtspcunit.Text = "012345678"
-        Me.txtspcunit.Visible = False
         '
         'txtrstunit
         '
@@ -1137,6 +1138,8 @@ Partial Class FGCDHELP_TEST_NEW
         '
         'pnlCenter
         '
+        Me.pnlCenter.Controls.Add(Me.txtResultDays)
+        Me.pnlCenter.Controls.Add(Me.Label31)
         Me.pnlCenter.Controls.Add(Me.pnlspd)
         Me.pnlCenter.Controls.Add(Me.txtrstunit)
         Me.pnlCenter.Controls.Add(Me.Label30)
@@ -1191,6 +1194,28 @@ Partial Class FGCDHELP_TEST_NEW
         Me.pnlCenter.Name = "pnlCenter"
         Me.pnlCenter.Size = New System.Drawing.Size(872, 772)
         Me.pnlCenter.TabIndex = 294
+        '
+        'txtResultDays
+        '
+        Me.txtResultDays.Location = New System.Drawing.Point(732, 170)
+        Me.txtResultDays.MaxLength = 0
+        Me.txtResultDays.Name = "txtResultDays"
+        Me.txtResultDays.Size = New System.Drawing.Size(135, 21)
+        Me.txtResultDays.TabIndex = 295
+        Me.txtResultDays.Tag = "RESULTDAYS"
+        Me.txtResultDays.Text = "012345678"
+        '
+        'Label31
+        '
+        Me.Label31.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.Label31.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label31.ForeColor = System.Drawing.Color.White
+        Me.Label31.Location = New System.Drawing.Point(620, 168)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(111, 24)
+        Me.Label31.TabIndex = 294
+        Me.Label31.Text = "결과소요일"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FGCDHELP_TEST_NEW
         '
@@ -1326,4 +1351,6 @@ Partial Class FGCDHELP_TEST_NEW
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents pnlspd As System.Windows.Forms.Panel
     Friend WithEvents pnlCenter As System.Windows.Forms.Panel
+    Protected Friend WithEvents txtResultDays As System.Windows.Forms.TextBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
 End Class

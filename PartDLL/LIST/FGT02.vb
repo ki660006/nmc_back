@@ -731,6 +731,7 @@ Public Class FGT02
     Friend WithEvents rdoYear As System.Windows.Forms.RadioButton
 
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGT02))
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
@@ -1808,12 +1809,10 @@ Public Class FGT02
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnSearch.SideImage = Nothing
-        Me.btnSearch.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSearch.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnSearch.Size = New System.Drawing.Size(107, 25)
         Me.btnSearch.TabIndex = 185
         Me.btnSearch.Text = "검사통계조회"
-        Me.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSearch.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1851,12 +1850,10 @@ Public Class FGT02
         Me.CButton1.Name = "CButton1"
         Me.CButton1.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.CButton1.SideImage = Nothing
-        Me.CButton1.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CButton1.SideImageSize = New System.Drawing.Size(48, 48)
         Me.CButton1.Size = New System.Drawing.Size(107, 25)
         Me.CButton1.TabIndex = 189
         Me.CButton1.Text = "To Excel"
-        Me.CButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.CButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.CButton1.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1894,12 +1891,10 @@ Public Class FGT02
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 190
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1937,12 +1932,10 @@ Public Class FGT02
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(107, 25)
         Me.btnExit.TabIndex = 191
         Me.btnExit.Text = "종  료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1980,12 +1973,10 @@ Public Class FGT02
         Me.btnAnalysis.Name = "btnAnalysis"
         Me.btnAnalysis.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnAnalysis.SideImage = Nothing
-        Me.btnAnalysis.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAnalysis.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnAnalysis.Size = New System.Drawing.Size(127, 25)
         Me.btnAnalysis.TabIndex = 192
         Me.btnAnalysis.Text = "통계 분석/재분석"
-        Me.btnAnalysis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnAnalysis.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnAnalysis.TextMargin = New System.Windows.Forms.Padding(0)
         '

@@ -22,48 +22,48 @@ Partial Class FGR05
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
+        Me.components = New System.ComponentModel.Container()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGR05))
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.btnRst_ocs = New System.Windows.Forms.Button
-        Me.txtID = New System.Windows.Forms.TextBox
-        Me.btnExit = New CButtonLib.CButton
-        Me.btnFN = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.grpQryInfo = New System.Windows.Forms.GroupBox
-        Me.lblDptOrWard = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.cboDptOrWard = New System.Windows.Forms.ComboBox
-        Me.cboTest = New System.Windows.Forms.ComboBox
-        Me.txtPatNm = New System.Windows.Forms.TextBox
-        Me.txtRegNo = New System.Windows.Forms.TextBox
-        Me.lblRegno = New System.Windows.Forms.Label
-        Me.lblDate = New System.Windows.Forms.Label
-        Me.dtpDateE = New System.Windows.Forms.DateTimePicker
-        Me.dtpDateS = New System.Windows.Forms.DateTimePicker
-        Me.lblPatnm = New System.Windows.Forms.Label
-        Me.lblOrdDt = New System.Windows.Forms.Label
-        Me.btnQuery = New CButtonLib.CButton
-        Me.lblLineQry = New System.Windows.Forms.Label
-        Me.AxPatInfo = New AxAckResult.AxRstPatInfo
-        Me.lblLine = New System.Windows.Forms.Label
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.spdList = New AxFPSpreadADO.AxfpSpread
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.cboRstFlg = New System.Windows.Forms.ComboBox
-        Me.axResult = New AxAckResult.AxRstInput_poct
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnRst_ocs = New System.Windows.Forms.Button()
+        Me.txtID = New System.Windows.Forms.TextBox()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.btnFN = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.grpQryInfo = New System.Windows.Forms.GroupBox()
+        Me.lblDptOrWard = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboDptOrWard = New System.Windows.Forms.ComboBox()
+        Me.cboTest = New System.Windows.Forms.ComboBox()
+        Me.txtPatNm = New System.Windows.Forms.TextBox()
+        Me.txtRegNo = New System.Windows.Forms.TextBox()
+        Me.lblRegno = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.dtpDateE = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
+        Me.lblPatnm = New System.Windows.Forms.Label()
+        Me.lblOrdDt = New System.Windows.Forms.Label()
+        Me.btnQuery = New CButtonLib.CButton()
+        Me.lblLineQry = New System.Windows.Forms.Label()
+        Me.AxPatInfo = New AxAckResult.AxRstPatInfo()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.spdList = New AxFPSpreadADO.AxfpSpread()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cboRstFlg = New System.Windows.Forms.ComboBox()
+        Me.axResult = New AxAckResult.AxRstInput_poct()
         Me.Panel3.SuspendLayout()
         Me.grpQryInfo.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -81,7 +81,7 @@ Partial Class FGR05
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel3.Location = New System.Drawing.Point(0, 640)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1094, 32)
+        Me.Panel3.Size = New System.Drawing.Size(1343, 32)
         Me.Panel3.TabIndex = 163
         '
         'btnRst_ocs
@@ -134,16 +134,14 @@ Partial Class FGR05
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(993, 3)
+        Me.btnExit.Location = New System.Drawing.Point(1242, 3)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(93, 25)
         Me.btnExit.TabIndex = 37
         Me.btnExit.Text = "종  료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -177,16 +175,14 @@ Partial Class FGR05
         Me.btnFN.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnFN.ImageIndex = 0
         Me.btnFN.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnFN.Location = New System.Drawing.Point(798, 3)
+        Me.btnFN.Location = New System.Drawing.Point(1047, 3)
         Me.btnFN.Name = "btnFN"
         Me.btnFN.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnFN.SideImage = Nothing
-        Me.btnFN.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFN.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnFN.Size = New System.Drawing.Size(96, 25)
         Me.btnFN.TabIndex = 33
         Me.btnFN.Text = "결과저장(F12)"
-        Me.btnFN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnFN.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnFN.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -220,16 +216,14 @@ Partial Class FGR05
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(895, 3)
+        Me.btnClear.Location = New System.Drawing.Point(1144, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(97, 25)
         Me.btnClear.TabIndex = 36
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -417,12 +411,10 @@ Partial Class FGR05
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
-        Me.btnQuery.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery.Size = New System.Drawing.Size(55, 24)
         Me.btnQuery.TabIndex = 68
         Me.btnQuery.Text = "조회"
-        Me.btnQuery.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -444,7 +436,7 @@ Partial Class FGR05
         Me.AxPatInfo.Location = New System.Drawing.Point(281, 4)
         Me.AxPatInfo.Name = "AxPatInfo"
         Me.AxPatInfo.RegNo = ""
-        Me.AxPatInfo.Size = New System.Drawing.Size(811, 116)
+        Me.AxPatInfo.Size = New System.Drawing.Size(1060, 116)
         Me.AxPatInfo.SlipCd = ""
         Me.AxPatInfo.TabIndex = 166
         Me.AxPatInfo.TabStop = False
@@ -457,7 +449,7 @@ Partial Class FGR05
         Me.lblLine.Location = New System.Drawing.Point(282, 119)
         Me.lblLine.Margin = New System.Windows.Forms.Padding(0)
         Me.lblLine.Name = "lblLine"
-        Me.lblLine.Size = New System.Drawing.Size(820, 10)
+        Me.lblLine.Size = New System.Drawing.Size(1069, 10)
         Me.lblLine.TabIndex = 167
         Me.lblLine.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" & _
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -522,7 +514,7 @@ Partial Class FGR05
         Me.axResult.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.axResult.Location = New System.Drawing.Point(281, 130)
         Me.axResult.Name = "axResult"
-        Me.axResult.Size = New System.Drawing.Size(807, 503)
+        Me.axResult.Size = New System.Drawing.Size(1056, 503)
         Me.axResult.TabIndex = 169
         '
         'FGR05
@@ -530,7 +522,7 @@ Partial Class FGR05
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1094, 672)
+        Me.ClientSize = New System.Drawing.Size(1343, 672)
         Me.Controls.Add(Me.axResult)
         Me.Controls.Add(Me.AxPatInfo)
         Me.Controls.Add(Me.grpQryInfo)

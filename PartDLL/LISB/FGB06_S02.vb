@@ -80,6 +80,9 @@ Public Class FGB06_S02
                         .Col = .GetColFromID("patnm") : .Text = sPatInfo(0).Trim
                         .Col = .GetColFromID("sexage") : .Text = sPatInfo(1).Trim + "/" + iAge.ToString
 
+                        '20210415 jhs 
+                        .Col = .GetColFromID("rgstdt") : .Text = rsDt.Rows(ix).Item("rgstdt").ToString
+                        '----------------------------------
                         .Col = .GetColFromID("orddt") : .Text = rsDt.Rows(ix).Item("order_date").ToString
                         .Col = .GetColFromID("regno") : .Text = rsDt.Rows(ix).Item("bunho").ToString : Regno = .Text
 

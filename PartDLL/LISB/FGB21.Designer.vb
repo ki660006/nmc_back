@@ -22,48 +22,48 @@ Partial Class FGB21
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
+        Me.components = New System.ComponentModel.Container()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB21))
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.btnExecute = New CButtonLib.CButton
-        Me.btnTExcel = New CButtonLib.CButton
-        Me.btnSearch = New CButtonLib.CButton
-        Me.btnExit = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.Label98 = New System.Windows.Forms.Label
-        Me.dtpDate1 = New System.Windows.Forms.DateTimePicker
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker
-        Me.pnlSearchGbn = New System.Windows.Forms.Panel
-        Me.rdoComplete = New System.Windows.Forms.RadioButton
-        Me.rdoUnCom = New System.Windows.Forms.RadioButton
-        Me.Label99 = New System.Windows.Forms.Label
-        Me.cboComCd = New System.Windows.Forms.ComboBox
-        Me.lblComcd = New System.Windows.Forms.Label
-        Me.txtPatNm = New System.Windows.Forms.TextBox
-        Me.lblSGbn = New System.Windows.Forms.Label
-        Me.btnPatPop = New System.Windows.Forms.Button
-        Me.txtRegno = New System.Windows.Forms.TextBox
-        Me.AxTnsPatinfo1 = New AxAckPatientInfo.AxTnsPatinfo
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.pnlList = New System.Windows.Forms.Panel
-        Me.spdList = New AxFPSpreadADO.AxfpSpread
-        Me.Panel1 = New System.Windows.Forms.Panel
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.btnExecute = New CButtonLib.CButton()
+        Me.btnTExcel = New CButtonLib.CButton()
+        Me.btnSearch = New CButtonLib.CButton()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label98 = New System.Windows.Forms.Label()
+        Me.dtpDate1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.dtpDate0 = New System.Windows.Forms.DateTimePicker()
+        Me.pnlSearchGbn = New System.Windows.Forms.Panel()
+        Me.rdoComplete = New System.Windows.Forms.RadioButton()
+        Me.rdoUnCom = New System.Windows.Forms.RadioButton()
+        Me.Label99 = New System.Windows.Forms.Label()
+        Me.cboComCd = New System.Windows.Forms.ComboBox()
+        Me.lblComcd = New System.Windows.Forms.Label()
+        Me.txtPatNm = New System.Windows.Forms.TextBox()
+        Me.lblSGbn = New System.Windows.Forms.Label()
+        Me.btnPatPop = New System.Windows.Forms.Button()
+        Me.txtRegno = New System.Windows.Forms.TextBox()
+        Me.AxTnsPatinfo1 = New AxAckPatientInfo.AxTnsPatinfo()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlList = New System.Windows.Forms.Panel()
+        Me.spdList = New AxFPSpreadADO.AxfpSpread()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3.SuspendLayout()
         Me.pnlSearchGbn.SuspendLayout()
         Me.pnlList.SuspendLayout()
@@ -101,17 +101,15 @@ Partial Class FGB21
         Me.btnExecute.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExecute.ImageIndex = 0
         Me.btnExecute.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExecute.Location = New System.Drawing.Point(946, 2)
+        Me.btnExecute.Location = New System.Drawing.Point(958, 2)
         Me.btnExecute.Name = "btnExecute"
         Me.btnExecute.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExecute.SideImage = Nothing
-        Me.btnExecute.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExecute.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExecute.Size = New System.Drawing.Size(107, 25)
         Me.btnExecute.TabIndex = 188
         Me.btnExecute.Tag = "availdt"
         Me.btnExecute.Text = "저  장(F7)"
-        Me.btnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExecute.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExecute.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -145,16 +143,14 @@ Partial Class FGB21
         Me.btnTExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnTExcel.ImageIndex = 0
         Me.btnTExcel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnTExcel.Location = New System.Drawing.Point(730, 2)
+        Me.btnTExcel.Location = New System.Drawing.Point(742, 2)
         Me.btnTExcel.Name = "btnTExcel"
         Me.btnTExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnTExcel.SideImage = Nothing
-        Me.btnTExcel.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTExcel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnTExcel.Size = New System.Drawing.Size(107, 25)
         Me.btnTExcel.TabIndex = 187
         Me.btnTExcel.Text = "To Excel"
-        Me.btnTExcel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnTExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnTExcel.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -188,16 +184,14 @@ Partial Class FGB21
         Me.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSearch.ImageIndex = 0
         Me.btnSearch.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnSearch.Location = New System.Drawing.Point(838, 2)
+        Me.btnSearch.Location = New System.Drawing.Point(850, 2)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnSearch.SideImage = Nothing
-        Me.btnSearch.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSearch.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnSearch.Size = New System.Drawing.Size(107, 25)
         Me.btnSearch.TabIndex = 186
         Me.btnSearch.Text = "조   회(F6)"
-        Me.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSearch.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -231,16 +225,14 @@ Partial Class FGB21
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(1162, 2)
+        Me.btnExit.Location = New System.Drawing.Point(1174, 2)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(98, 25)
         Me.btnExit.TabIndex = 184
         Me.btnExit.Text = "종료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -274,16 +266,14 @@ Partial Class FGB21
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(1054, 2)
+        Me.btnClear.Location = New System.Drawing.Point(1066, 2)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 183
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -484,7 +474,7 @@ Partial Class FGB21
         Me.AxTnsPatinfo1.Location = New System.Drawing.Point(294, -4)
         Me.AxTnsPatinfo1.Margin = New System.Windows.Forms.Padding(1)
         Me.AxTnsPatinfo1.Name = "AxTnsPatinfo1"
-        Me.AxTnsPatinfo1.Size = New System.Drawing.Size(980, 168)
+        Me.AxTnsPatinfo1.Size = New System.Drawing.Size(992, 168)
         Me.AxTnsPatinfo1.TabIndex = 244
         '
         'Label1
@@ -495,7 +485,7 @@ Partial Class FGB21
         Me.Label1.Location = New System.Drawing.Point(4, 159)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(1272, 9)
+        Me.Label1.Size = New System.Drawing.Size(1284, 9)
         Me.Label1.TabIndex = 245
         Me.Label1.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" & _
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -509,7 +499,7 @@ Partial Class FGB21
         Me.pnlList.Location = New System.Drawing.Point(3, 171)
         Me.pnlList.Margin = New System.Windows.Forms.Padding(1)
         Me.pnlList.Name = "pnlList"
-        Me.pnlList.Size = New System.Drawing.Size(1265, 663)
+        Me.pnlList.Size = New System.Drawing.Size(1277, 663)
         Me.pnlList.TabIndex = 246
         '
         'spdList
@@ -519,7 +509,7 @@ Partial Class FGB21
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdList.Size = New System.Drawing.Size(1265, 663)
+        Me.spdList.Size = New System.Drawing.Size(1277, 663)
         Me.spdList.TabIndex = 0
         '
         'Panel1
@@ -533,7 +523,7 @@ Partial Class FGB21
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 843)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1272, 32)
+        Me.Panel1.Size = New System.Drawing.Size(1284, 32)
         Me.Panel1.TabIndex = 247
         '
         'FGB21
@@ -541,7 +531,7 @@ Partial Class FGB21
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1272, 875)
+        Me.ClientSize = New System.Drawing.Size(1284, 875)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pnlList)
         Me.Controls.Add(Me.Panel3)

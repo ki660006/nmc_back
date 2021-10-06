@@ -23,13 +23,13 @@ Partial Class FGCDHELP01
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGCDHELP01))
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.chkSel = New System.Windows.Forms.CheckBox
-        Me.spdCdList = New AxFPSpreadADO.AxfpSpread
-        Me.lblFieldNm = New System.Windows.Forms.Label
-        Me.btnOK = New System.Windows.Forms.Button
-        Me.btnEsc = New System.Windows.Forms.Button
-        Me.txtCd = New System.Windows.Forms.TextBox
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chkSel = New System.Windows.Forms.CheckBox()
+        Me.spdCdList = New AxFPSpreadADO.AxfpSpread()
+        Me.lblFieldNm = New System.Windows.Forms.Label()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.btnEsc = New System.Windows.Forms.Button()
+        Me.txtCd = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.spdCdList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()

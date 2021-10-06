@@ -143,7 +143,7 @@ Partial Class FGS20
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnWebReq.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnWebReq.ColorFillBlend = CBlendItems1
         Me.btnWebReq.ColorFillSolid = System.Drawing.Color.White
         Me.btnWebReq.Corners.All = CType(6, Short)
@@ -155,8 +155,8 @@ Partial Class FGS20
         Me.btnWebReq.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnWebReq.FocalPoints.CenterPtX = 0.46!
         Me.btnWebReq.FocalPoints.CenterPtY = 0.12!
-        Me.btnWebReq.FocalPoints.FocusPtX = 0.0!
-        Me.btnWebReq.FocalPoints.FocusPtY = 0.0!
+        Me.btnWebReq.FocalPoints.FocusPtX = 0!
+        Me.btnWebReq.FocalPoints.FocusPtY = 0!
         DesignerRectTracker2.IsActive = False
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnWebReq.FocusPtTracker = DesignerRectTracker2
@@ -184,7 +184,7 @@ Partial Class FGS20
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnWebKDCD.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnWebKDCD.ColorFillBlend = CBlendItems2
         Me.btnWebKDCD.ColorFillSolid = System.Drawing.Color.White
         Me.btnWebKDCD.Corners.All = CType(6, Short)
@@ -196,8 +196,8 @@ Partial Class FGS20
         Me.btnWebKDCD.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnWebKDCD.FocalPoints.CenterPtX = 0.46!
         Me.btnWebKDCD.FocalPoints.CenterPtY = 0.12!
-        Me.btnWebKDCD.FocalPoints.FocusPtX = 0.0!
-        Me.btnWebKDCD.FocalPoints.FocusPtY = 0.0!
+        Me.btnWebKDCD.FocalPoints.FocusPtX = 0!
+        Me.btnWebKDCD.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnWebKDCD.FocusPtTracker = DesignerRectTracker4
@@ -274,7 +274,7 @@ Partial Class FGS20
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnregAll.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnregAll.ColorFillBlend = CBlendItems3
         Me.btnregAll.ColorFillSolid = System.Drawing.Color.White
         Me.btnregAll.Corners.All = CType(6, Short)
@@ -286,8 +286,8 @@ Partial Class FGS20
         Me.btnregAll.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnregAll.FocalPoints.CenterPtX = 0.46!
         Me.btnregAll.FocalPoints.CenterPtY = 0.2!
-        Me.btnregAll.FocalPoints.FocusPtX = 0.0!
-        Me.btnregAll.FocalPoints.FocusPtY = 0.0!
+        Me.btnregAll.FocalPoints.FocusPtX = 0!
+        Me.btnregAll.FocalPoints.FocusPtY = 0!
         DesignerRectTracker6.IsActive = False
         DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnregAll.FocusPtTracker = DesignerRectTracker6
@@ -315,7 +315,7 @@ Partial Class FGS20
         DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnRegOne.CenterPtTracker = DesignerRectTracker7
         CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems4.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems4.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnRegOne.ColorFillBlend = CBlendItems4
         Me.btnRegOne.ColorFillSolid = System.Drawing.Color.White
         Me.btnRegOne.Corners.All = CType(6, Short)
@@ -327,8 +327,8 @@ Partial Class FGS20
         Me.btnRegOne.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnRegOne.FocalPoints.CenterPtX = 0.53!
         Me.btnRegOne.FocalPoints.CenterPtY = 0.24!
-        Me.btnRegOne.FocalPoints.FocusPtX = 0.0!
-        Me.btnRegOne.FocalPoints.FocusPtY = 0.0!
+        Me.btnRegOne.FocalPoints.FocusPtX = 0!
+        Me.btnRegOne.FocalPoints.FocusPtY = 0!
         DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnRegOne.FocusPtTracker = DesignerRectTracker8
@@ -356,7 +356,7 @@ Partial Class FGS20
         DesignerRectTracker9.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker9.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.CenterPtTracker = DesignerRectTracker9
         CBlendItems5.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems5.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems5.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnExit.ColorFillBlend = CBlendItems5
         Me.btnExit.ColorFillSolid = System.Drawing.Color.White
         Me.btnExit.Corners.All = CType(6, Short)
@@ -367,9 +367,9 @@ Partial Class FGS20
         Me.btnExit.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnExit.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExit.FocalPoints.CenterPtX = 0.5!
-        Me.btnExit.FocalPoints.CenterPtY = 0.0!
-        Me.btnExit.FocalPoints.FocusPtX = 0.0!
-        Me.btnExit.FocalPoints.FocusPtY = 0.0!
+        Me.btnExit.FocalPoints.CenterPtY = 0!
+        Me.btnExit.FocalPoints.FocusPtX = 0!
+        Me.btnExit.FocalPoints.FocusPtY = 0!
         DesignerRectTracker10.IsActive = False
         DesignerRectTracker10.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker10.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.FocusPtTracker = DesignerRectTracker10
@@ -393,11 +393,11 @@ Partial Class FGS20
         'btnQuery
         '
         Me.btnQuery.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker11.IsActive = True
+        DesignerRectTracker11.IsActive = False
         DesignerRectTracker11.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker11.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.CenterPtTracker = DesignerRectTracker11
         CBlendItems6.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems6.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems6.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnQuery.ColorFillBlend = CBlendItems6
         Me.btnQuery.ColorFillSolid = System.Drawing.Color.White
         Me.btnQuery.Corners.All = CType(6, Short)
@@ -409,8 +409,8 @@ Partial Class FGS20
         Me.btnQuery.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnQuery.FocalPoints.CenterPtX = 0.46!
         Me.btnQuery.FocalPoints.CenterPtY = 0.12!
-        Me.btnQuery.FocalPoints.FocusPtX = 0.0!
-        Me.btnQuery.FocalPoints.FocusPtY = 0.0!
+        Me.btnQuery.FocalPoints.FocusPtX = 0!
+        Me.btnQuery.FocalPoints.FocusPtY = 0!
         DesignerRectTracker12.IsActive = False
         DesignerRectTracker12.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker12.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.FocusPtTracker = DesignerRectTracker12
@@ -438,7 +438,7 @@ Partial Class FGS20
         DesignerRectTracker13.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker13.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker13
         CBlendItems7.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems7.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems7.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnClear.ColorFillBlend = CBlendItems7
         Me.btnClear.ColorFillSolid = System.Drawing.Color.White
         Me.btnClear.Corners.All = CType(6, Short)
@@ -450,8 +450,8 @@ Partial Class FGS20
         Me.btnClear.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnClear.FocalPoints.CenterPtX = 0.51!
         Me.btnClear.FocalPoints.CenterPtY = 0.4!
-        Me.btnClear.FocalPoints.FocusPtX = 0.0!
-        Me.btnClear.FocalPoints.FocusPtY = 0.0!
+        Me.btnClear.FocalPoints.FocusPtX = 0!
+        Me.btnClear.FocalPoints.FocusPtY = 0!
         DesignerRectTracker14.IsActive = False
         DesignerRectTracker14.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker14.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.FocusPtTracker = DesignerRectTracker14
@@ -479,7 +479,7 @@ Partial Class FGS20
         DesignerRectTracker15.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker15.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExcel.CenterPtTracker = DesignerRectTracker15
         CBlendItems8.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems8.iPoint = New Single() {0.0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        CBlendItems8.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
         Me.btnExcel.ColorFillBlend = CBlendItems8
         Me.btnExcel.ColorFillSolid = System.Drawing.Color.White
         Me.btnExcel.Corners.All = CType(6, Short)
@@ -490,7 +490,7 @@ Partial Class FGS20
         Me.btnExcel.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnExcel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExcel.FocalPoints.CenterPtX = 0.5!
-        Me.btnExcel.FocalPoints.CenterPtY = 0.0!
+        Me.btnExcel.FocalPoints.CenterPtY = 0!
         Me.btnExcel.FocalPoints.FocusPtX = 0.03738318!
         Me.btnExcel.FocalPoints.FocusPtY = 0.04!
         DesignerRectTracker16.IsActive = False
@@ -516,7 +516,7 @@ Partial Class FGS20
         'grpTop
         '
         Me.grpTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpTop.Controls.Add(Me.rdoOr)
         Me.grpTop.Controls.Add(Me.rdoAnd)
         Me.grpTop.Controls.Add(Me.Label6)
@@ -904,8 +904,8 @@ Partial Class FGS20
         'pnlMid
         '
         Me.pnlMid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMid.Controls.Add(Me.spdList)
         Me.pnlMid.Controls.Add(Me.spdRefSpccd)
         Me.pnlMid.Controls.Add(Me.txtErrmsg)
@@ -921,8 +921,8 @@ Partial Class FGS20
         'spdList
         '
         Me.spdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdList.DataSource = Nothing
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"
@@ -988,8 +988,8 @@ Partial Class FGS20
         'SplMid
         '
         Me.SplMid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SplMid.Location = New System.Drawing.Point(0, 68)
         Me.SplMid.Name = "SplMid"
         Me.SplMid.Orientation = System.Windows.Forms.Orientation.Horizontal

@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("7148cab7-c374-4409-83b9-991494e43100")> 
+<Assembly: Guid("7148cab7-c374-4409-83b9-991494e43100")>
 '<Assembly: AssemblyFileVersion("1.0.0.0")> 
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
@@ -51,5 +51,15 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.350 --> 2019/11/20 : 배포
 'Version 3.1.10.351 --> 2020/08/05 : LUKHAN >> 미채혈바코드, 검사분야 표시 수정
 'Version 3.1.10.352 --> 2020/11/23 : LUKHAN, SATO 자체응급 바코드 R표시, 크기조정2
+'Version 3.1.10.353 --> 2020/12/10 : LUKHAN 바코드 특정장비 리딩문제로 원복
+'Version 3.1.10.354 --> 2020/12/22 : LUKHAN 바코드 특정장비 리딩문제로 원복
+'Version 3.1.10.355 --> 2021/01/27 : 접수시 바코드 출력되도록 수정 
+'Version 3.1.10.356 --> 2021/06/15 : 특정검사 검사명 바코드 음영처리
+'Version 3.1.10.357 --> 2021/07/26 : 혈액은행 출고시 출력스티커 교차미필 일때는 응급이 붙어서 나오게 구현
+'Version 3.1.10.358 --> 2021/07/26 : 혈액은행 출고시 출력스티커 교차미필 일때는 응급이 붙어서 나오게 구현(재배포)
+'Version 3.1.10.359 --> 2021/08/18 : 혈액은행 출고시 출력스티커 응급 볼드로 적용 되도록 수정
+'Version 3.1.10.360 --> 2021/08/23 : 혈액은행 출고시 출력스티커 응급 위치 변경
+'Version 3.1.10.361 --> 2021/09/27 : 혈액은행 출고시 출력스티커 응급 위치 변경
 
-<Assembly: AssemblyVersion("3.1.10.352")> 
+<Assembly: AssemblyVersion("3.1.10.361")>
+

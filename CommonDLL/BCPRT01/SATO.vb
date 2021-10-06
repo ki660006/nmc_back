@@ -47,7 +47,11 @@ Public Class SATO
                             iPrtCnt = 2
                         ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "B" Then
                             '< CrossMatching 검체
-                            iPrtCnt = 2
+                            iPrtCnt = 2 ' 루칸 카운트 비교 논의 필요 
+                            '20210127 jhs 접수시 바코드 출력 로직 추가 
+                        ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J" Or CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "J2" Then
+                            iPrtCnt = 1
+                            '-----------------------------------------------------
                         ElseIf IsNumeric(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT) Then
                             iPrtCnt = Convert.ToInt32(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT)
                         End If
@@ -653,7 +657,15 @@ Public Class SATO
 
                     '< 검사항목명 
                     'If sTestNms = "" Then sTestNms = "EXAM"
-                    sPrtBuf += Chr(27) + "V" + "0030" + Chr(27) + "H" + (350 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + sTestNms + vbCrLf
+                    '20210429 jhs 특정검사만 음영 표시
+                    If PRG_CONST.shadow_test(ro_Data.TESTCD) <> "" Then
+                        sPrtBuf += Chr(27) + "V" + "0030" + Chr(27) + "H" + (350 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + sTestNms + vbCrLf ' 4째줄    COVID-19 E2(음영)
+                        sPrtBuf += Chr(27) + "V" + "0035" + Chr(27) + "H" + (350 + riLeftPos).ToString("D4") + Chr(27) + "(" + "25" + "," + "25"
+                    Else
+                        sPrtBuf += Chr(27) + "V" + "0030" + Chr(27) + "H" + (350 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + sTestNms + vbCrLf                           ' 4째줄    COVID-19 E2
+                    End If
+                    '---------------------------
+                    'sPrtBuf += Chr(27) + "V" + "0030" + Chr(27) + "H" + (350 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + sTestNms + vbCrLf
                     '< 계 sKind
                     sPrtBuf += Chr(27) + "V" + "0040" + Chr(27) + "H" + (390 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "WB" + "0" + ro_Data.BCCLSCD + vbCrLf
 

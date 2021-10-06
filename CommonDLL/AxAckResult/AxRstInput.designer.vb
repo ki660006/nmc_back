@@ -72,7 +72,6 @@ Partial Class AxRstInput
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lstEx = New System.Windows.Forms.ListBox()
         Me.gbxABO = New System.Windows.Forms.GroupBox()
         Me.lblABO_bf = New System.Windows.Forms.Label()
         Me.lblOABOLabel = New System.Windows.Forms.Label()
@@ -115,11 +114,12 @@ Partial Class AxRstInput
         Me.txtBcNo = New System.Windows.Forms.TextBox()
         Me.btnReg_tat = New CButtonLib.CButton()
         Me.btnBldInfo = New CButtonLib.CButton()
-        Me.btnDebug_cmt = New System.Windows.Forms.Button()
         Me.btnQuery_Abn = New CButtonLib.CButton()
         Me.btnCVRsend = New CButtonLib.CButton()
         Me.btnCVRList = New CButtonLib.CButton()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.lstEx = New System.Windows.Forms.ListBox()
+        Me.btnDebug_cmt = New System.Windows.Forms.Button()
         CType(Me.spdResult, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmuLink.SuspendLayout()
         Me.gbxABO.SuspendLayout()
@@ -138,7 +138,7 @@ Partial Class AxRstInput
         Me.spdResult.Location = New System.Drawing.Point(0, 21)
         Me.spdResult.Name = "spdResult"
         Me.spdResult.OcxState = CType(resources.GetObject("spdResult.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdResult.Size = New System.Drawing.Size(941, 327)
+        Me.spdResult.Size = New System.Drawing.Size(1241, 347)
         Me.spdResult.TabIndex = 0
         '
         'cmuLink
@@ -172,7 +172,7 @@ Partial Class AxRstInput
         Me.Label4.BackColor = System.Drawing.Color.White
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.ForeColor = System.Drawing.Color.Black
-        Me.Label4.Location = New System.Drawing.Point(59, 469)
+        Me.Label4.Location = New System.Drawing.Point(59, 491)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 26)
         Me.Label4.TabIndex = 52
@@ -185,7 +185,7 @@ Partial Class AxRstInput
         Me.Label3.BackColor = System.Drawing.Color.White
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(128, 469)
+        Me.Label3.Location = New System.Drawing.Point(128, 491)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(75, 26)
         Me.Label3.TabIndex = 53
@@ -198,9 +198,9 @@ Partial Class AxRstInput
         Me.Label2.BackColor = System.Drawing.Color.White
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.ForeColor = System.Drawing.Color.DarkGreen
-        Me.Label2.Location = New System.Drawing.Point(202, 469)
+        Me.Label2.Location = New System.Drawing.Point(202, 491)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 26)
+        Me.Label2.Size = New System.Drawing.Size(64, 26)
         Me.Label2.TabIndex = 50
         Me.Label2.Text = " ◆ 완료"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -210,24 +210,12 @@ Partial Class AxRstInput
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label1.Location = New System.Drawing.Point(0, 469)
+        Me.Label1.Location = New System.Drawing.Point(0, 491)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 26)
         Me.Label1.TabIndex = 51
         Me.Label1.Text = "결과범례"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lstEx
-        '
-        Me.lstEx.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstEx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstEx.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lstEx.ItemHeight = 12
-        Me.lstEx.Location = New System.Drawing.Point(271, 469)
-        Me.lstEx.Name = "lstEx"
-        Me.lstEx.Size = New System.Drawing.Size(670, 26)
-        Me.lstEx.TabIndex = 54
         '
         'gbxABO
         '
@@ -236,7 +224,7 @@ Partial Class AxRstInput
         Me.gbxABO.Controls.Add(Me.lblOABOLabel)
         Me.gbxABO.Controls.Add(Me.lblCABOLabel)
         Me.gbxABO.Controls.Add(Me.lblABO)
-        Me.gbxABO.Location = New System.Drawing.Point(772, 344)
+        Me.gbxABO.Location = New System.Drawing.Point(1085, 366)
         Me.gbxABO.Name = "gbxABO"
         Me.gbxABO.Size = New System.Drawing.Size(168, 124)
         Me.gbxABO.TabIndex = 165
@@ -302,9 +290,9 @@ Partial Class AxRstInput
         Me.gbxComment.Controls.Add(Me.btnCmt_Clear)
         Me.gbxComment.Controls.Add(Me.btnHelp_Cmt)
         Me.gbxComment.Controls.Add(Me.txtCmtCont)
-        Me.gbxComment.Location = New System.Drawing.Point(268, 344)
+        Me.gbxComment.Location = New System.Drawing.Point(266, 365)
         Me.gbxComment.Name = "gbxComment"
-        Me.gbxComment.Size = New System.Drawing.Size(673, 124)
+        Me.gbxComment.Size = New System.Drawing.Size(988, 123)
         Me.gbxComment.TabIndex = 150
         Me.gbxComment.TabStop = False
         '
@@ -326,7 +314,7 @@ Partial Class AxRstInput
         Me.cboSlip.FormattingEnabled = True
         Me.cboSlip.Location = New System.Drawing.Point(280, 10)
         Me.cboSlip.Name = "cboSlip"
-        Me.cboSlip.Size = New System.Drawing.Size(390, 20)
+        Me.cboSlip.Size = New System.Drawing.Size(705, 20)
         Me.cboSlip.TabIndex = 174
         '
         'txtCmtCd
@@ -438,7 +426,7 @@ Partial Class AxRstInput
         Me.txtCmtCont.Multiline = True
         Me.txtCmtCont.Name = "txtCmtCont"
         Me.txtCmtCont.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtCmtCont.Size = New System.Drawing.Size(665, 91)
+        Me.txtCmtCont.Size = New System.Drawing.Size(980, 91)
         Me.txtCmtCont.TabIndex = 0
         '
         'lstCode
@@ -449,14 +437,14 @@ Partial Class AxRstInput
         Me.lstCode.ItemHeight = 12
         Me.lstCode.Location = New System.Drawing.Point(2, 0)
         Me.lstCode.Name = "lstCode"
-        Me.lstCode.Size = New System.Drawing.Size(298, 436)
+        Me.lstCode.Size = New System.Drawing.Size(298, 448)
         Me.lstCode.TabIndex = 167
         Me.lstCode.Visible = False
         '
         'axCalcRst
         '
         Me.axCalcRst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.axCalcRst.Location = New System.Drawing.Point(189, 0)
+        Me.axCalcRst.Location = New System.Drawing.Point(500, 0)
         Me.axCalcRst.Name = "axCalcRst"
         Me.axCalcRst.Size = New System.Drawing.Size(113, 22)
         Me.axCalcRst.TabIndex = 166
@@ -477,9 +465,9 @@ Partial Class AxRstInput
         Me.pnlCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCode.Controls.Add(Me.lstCode)
-        Me.pnlCode.Location = New System.Drawing.Point(638, 22)
+        Me.pnlCode.Location = New System.Drawing.Point(951, 22)
         Me.pnlCode.Name = "pnlCode"
-        Me.pnlCode.Size = New System.Drawing.Size(301, 438)
+        Me.pnlCode.Size = New System.Drawing.Size(301, 460)
         Me.pnlCode.TabIndex = 169
         Me.pnlCode.Visible = False
         '
@@ -512,7 +500,7 @@ Partial Class AxRstInput
         Me.grpRstInfo.Controls.Add(Me.lblSampleStatus)
         Me.grpRstInfo.Controls.Add(Me.lblMW)
         Me.grpRstInfo.Controls.Add(Me.lblFN)
-        Me.grpRstInfo.Location = New System.Drawing.Point(2, 343)
+        Me.grpRstInfo.Location = New System.Drawing.Point(2, 365)
         Me.grpRstInfo.Name = "grpRstInfo"
         Me.grpRstInfo.Size = New System.Drawing.Size(264, 124)
         Me.grpRstInfo.TabIndex = 176
@@ -668,7 +656,7 @@ Partial Class AxRstInput
         Me.btnReg_Abn.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_Abn.ImageIndex = 0
         Me.btnReg_Abn.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_Abn.Location = New System.Drawing.Point(760, 0)
+        Me.btnReg_Abn.Location = New System.Drawing.Point(1071, 0)
         Me.btnReg_Abn.Name = "btnReg_Abn"
         Me.btnReg_Abn.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_Abn.SideImage = Nothing
@@ -709,7 +697,7 @@ Partial Class AxRstInput
         Me.btnReg_UnFit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_UnFit.ImageIndex = 0
         Me.btnReg_UnFit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_UnFit.Location = New System.Drawing.Point(565, 0)
+        Me.btnReg_UnFit.Location = New System.Drawing.Point(876, 0)
         Me.btnReg_UnFit.Name = "btnReg_UnFit"
         Me.btnReg_UnFit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_UnFit.SideImage = Nothing
@@ -751,7 +739,7 @@ Partial Class AxRstInput
         Me.btnQryFNModify.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQryFNModify.ImageIndex = 0
         Me.btnQryFNModify.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQryFNModify.Location = New System.Drawing.Point(283, 0)
+        Me.btnQryFNModify.Location = New System.Drawing.Point(594, 0)
         Me.btnQryFNModify.Name = "btnQryFNModify"
         Me.btnQryFNModify.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQryFNModify.SideImage = Nothing
@@ -793,7 +781,7 @@ Partial Class AxRstInput
         Me.btnHistory.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.ImageIndex = 0
         Me.btnHistory.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnHistory.Location = New System.Drawing.Point(377, 0)
+        Me.btnHistory.Location = New System.Drawing.Point(688, 0)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
@@ -835,7 +823,7 @@ Partial Class AxRstInput
         Me.btnKeyPad.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnKeyPad.ImageIndex = 0
         Me.btnKeyPad.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnKeyPad.Location = New System.Drawing.Point(110, 0)
+        Me.btnKeyPad.Location = New System.Drawing.Point(421, 0)
         Me.btnKeyPad.Name = "btnKeyPad"
         Me.btnKeyPad.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnKeyPad.SideImage = Nothing
@@ -877,7 +865,7 @@ Partial Class AxRstInput
         Me.btnExmAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExmAdd.ImageIndex = 0
         Me.btnExmAdd.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExmAdd.Location = New System.Drawing.Point(302, 0)
+        Me.btnExmAdd.Location = New System.Drawing.Point(613, 0)
         Me.btnExmAdd.Name = "btnExmAdd"
         Me.btnExmAdd.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExmAdd.SideImage = Nothing
@@ -954,7 +942,7 @@ Partial Class AxRstInput
         Me.btnReg_tat.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_tat.ImageIndex = 0
         Me.btnReg_tat.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnReg_tat.Location = New System.Drawing.Point(468, 0)
+        Me.btnReg_tat.Location = New System.Drawing.Point(779, 0)
         Me.btnReg_tat.Name = "btnReg_tat"
         Me.btnReg_tat.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_tat.SideImage = Nothing
@@ -995,7 +983,7 @@ Partial Class AxRstInput
         Me.btnBldInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnBldInfo.ImageIndex = 0
         Me.btnBldInfo.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnBldInfo.Location = New System.Drawing.Point(849, -1)
+        Me.btnBldInfo.Location = New System.Drawing.Point(1160, 0)
         Me.btnBldInfo.Name = "btnBldInfo"
         Me.btnBldInfo.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnBldInfo.SideImage = Nothing
@@ -1005,16 +993,6 @@ Partial Class AxRstInput
         Me.btnBldInfo.Text = "과거수혈내역"
         Me.btnBldInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnBldInfo.TextMargin = New System.Windows.Forms.Padding(0)
-        '
-        'btnDebug_cmt
-        '
-        Me.btnDebug_cmt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDebug_cmt.Location = New System.Drawing.Point(830, 469)
-        Me.btnDebug_cmt.Name = "btnDebug_cmt"
-        Me.btnDebug_cmt.Size = New System.Drawing.Size(111, 24)
-        Me.btnDebug_cmt.TabIndex = 192
-        Me.btnDebug_cmt.Text = "소견 Data"
-        Me.btnDebug_cmt.Visible = False
         '
         'btnQuery_Abn
         '
@@ -1046,7 +1024,7 @@ Partial Class AxRstInput
         Me.btnQuery_Abn.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery_Abn.ImageIndex = 0
         Me.btnQuery_Abn.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQuery_Abn.Location = New System.Drawing.Point(671, 0)
+        Me.btnQuery_Abn.Location = New System.Drawing.Point(982, 0)
         Me.btnQuery_Abn.Name = "btnQuery_Abn"
         Me.btnQuery_Abn.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery_Abn.SideImage = Nothing
@@ -1101,7 +1079,7 @@ Partial Class AxRstInput
         '
         Me.btnCVRList.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnCVRList.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker25.IsActive = False
+        DesignerRectTracker25.IsActive = True
         DesignerRectTracker25.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker25.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCVRList.CenterPtTracker = DesignerRectTracker25
         CBlendItems13.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
@@ -1148,46 +1126,68 @@ Partial Class AxRstInput
         Me.Label6.Text = "CVR"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lstEx
+        '
+        Me.lstEx.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstEx.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstEx.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lstEx.ItemHeight = 12
+        Me.lstEx.Location = New System.Drawing.Point(268, 492)
+        Me.lstEx.Name = "lstEx"
+        Me.lstEx.Size = New System.Drawing.Size(978, 26)
+        Me.lstEx.TabIndex = 54
+        '
+        'btnDebug_cmt
+        '
+        Me.btnDebug_cmt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDebug_cmt.Location = New System.Drawing.Point(1073, 493)
+        Me.btnDebug_cmt.Name = "btnDebug_cmt"
+        Me.btnDebug_cmt.Size = New System.Drawing.Size(111, 24)
+        Me.btnDebug_cmt.TabIndex = 197
+        Me.btnDebug_cmt.Text = "소견 Data"
+        Me.btnDebug_cmt.Visible = False
+        '
         'AxRstInput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ContextMenuStrip = Me.cmuLink
+        Me.Controls.Add(Me.btnBldInfo)
+        Me.Controls.Add(Me.btnQuery_Abn)
+        Me.Controls.Add(Me.axCalcRst)
+        Me.Controls.Add(Me.btnReg_tat)
+        Me.Controls.Add(Me.btnExmAdd)
+        Me.Controls.Add(Me.btnReg_UnFit)
+        Me.Controls.Add(Me.btnHistory)
+        Me.Controls.Add(Me.btnQryFNModify)
+        Me.Controls.Add(Me.btnReg_Abn)
+        Me.Controls.Add(Me.btnKeyPad)
+        Me.Controls.Add(Me.lstEx)
+        Me.Controls.Add(Me.btnDebug_cmt)
+        Me.Controls.Add(Me.gbxComment)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnCVRList)
         Me.Controls.Add(Me.btnCVRsend)
-        Me.Controls.Add(Me.btnQuery_Abn)
-        Me.Controls.Add(Me.axCalcRst)
-        Me.Controls.Add(Me.btnDebug_cmt)
-        Me.Controls.Add(Me.btnBldInfo)
-        Me.Controls.Add(Me.btnReg_tat)
         Me.Controls.Add(Me.txtBcNo)
         Me.Controls.Add(Me.chkBcnoAll)
         Me.Controls.Add(Me.lblcasegbn)
         Me.Controls.Add(Me.lblpartslipcd)
-        Me.Controls.Add(Me.btnExmAdd)
-        Me.Controls.Add(Me.btnReg_UnFit)
-        Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.txtTestCd)
         Me.Controls.Add(Me.txtOrgRst)
         Me.Controls.Add(Me.chkSelect)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.pnlCode)
+        Me.Controls.Add(Me.grpRstInfo)
+        Me.Controls.Add(Me.gbxABO)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.lstEx)
         Me.Controls.Add(Me.spdResult)
-        Me.Controls.Add(Me.btnQryFNModify)
-        Me.Controls.Add(Me.btnReg_Abn)
-        Me.Controls.Add(Me.grpRstInfo)
-        Me.Controls.Add(Me.gbxComment)
-        Me.Controls.Add(Me.gbxABO)
-        Me.Controls.Add(Me.btnKeyPad)
         Me.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Name = "AxRstInput"
-        Me.Size = New System.Drawing.Size(941, 495)
+        Me.Size = New System.Drawing.Size(1254, 517)
         CType(Me.spdResult, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmuLink.ResumeLayout(False)
         Me.gbxABO.ResumeLayout(False)
@@ -1204,7 +1204,6 @@ Partial Class AxRstInput
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents lstEx As System.Windows.Forms.ListBox
     Friend WithEvents gbxABO As System.Windows.Forms.GroupBox
     Friend WithEvents lblABO_bf As System.Windows.Forms.Label
     Friend WithEvents lblABO As System.Windows.Forms.Label
@@ -1251,10 +1250,11 @@ Partial Class AxRstInput
     Friend WithEvents btnReg_tat As CButtonLib.CButton
     Friend WithEvents btnBldInfo As CButtonLib.CButton
     Friend WithEvents mnuHelp_rst As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnDebug_cmt As System.Windows.Forms.Button
     Friend WithEvents btnQuery_Abn As CButtonLib.CButton
     Friend WithEvents btnCVRsend As CButtonLib.CButton
     Friend WithEvents btnCVRList As CButtonLib.CButton
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents lstEx As System.Windows.Forms.ListBox
+    Friend WithEvents btnDebug_cmt As System.Windows.Forms.Button
 
 End Class

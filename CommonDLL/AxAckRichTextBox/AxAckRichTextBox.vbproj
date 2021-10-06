@@ -96,18 +96,14 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxAckRichTextBox, Version=3.1.10.219, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ACK@LIS\CommonDLL\AxAckRichTextBox\obj\Debug\AxAckRichTextBox.dll</HintPath>
-    </Reference>
     <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\AxInterop.FPSpreadADO.dll</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\AxInterop.FPSpreadADO.dll</HintPath>
     </Reference>
     <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\x86\Debug\Interop.FPSpreadADO.dll</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\Interop.FPSpreadADO.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

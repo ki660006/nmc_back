@@ -23,36 +23,36 @@ Partial Class FGPOPUPST_PBS_NMC
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGPOPUPST_PBS_NMC))
-        Me.btnClose = New System.Windows.Forms.Button
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.txtRbc = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.txtOther_r = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.txtNrc = New System.Windows.Forms.TextBox
-        Me.txtOther_w = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.txtWbc = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.txtOther_p = New System.Windows.Forms.TextBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.txtPlt = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.txtOpinion = New System.Windows.Forms.TextBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.btnHelp_r = New System.Windows.Forms.Button
-        Me.btnHelp_or = New System.Windows.Forms.Button
-        Me.btnHelp_w = New System.Windows.Forms.Button
-        Me.btnHelp_ow = New System.Windows.Forms.Button
-        Me.btnHelp_p = New System.Windows.Forms.Button
-        Me.btnHelp_op = New System.Windows.Forms.Button
-        Me.btnHelp_opin = New System.Windows.Forms.Button
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtRbc = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtOther_r = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtNrc = New System.Windows.Forms.TextBox()
+        Me.txtOther_w = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtWbc = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtOther_p = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtPlt = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtOpinion = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.btnHelp_r = New System.Windows.Forms.Button()
+        Me.btnHelp_or = New System.Windows.Forms.Button()
+        Me.btnHelp_w = New System.Windows.Forms.Button()
+        Me.btnHelp_ow = New System.Windows.Forms.Button()
+        Me.btnHelp_p = New System.Windows.Forms.Button()
+        Me.btnHelp_op = New System.Windows.Forms.Button()
+        Me.btnHelp_opin = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnClose

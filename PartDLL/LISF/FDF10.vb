@@ -24,6 +24,7 @@ Public Class FDF10
     Friend WithEvents btnCdHelp_test As System.Windows.Forms.Button
     Friend WithEvents txtModNm As System.Windows.Forms.TextBox
     Friend WithEvents txtRegNm As System.Windows.Forms.TextBox
+    Friend WithEvents lblCRTWarning As System.Windows.Forms.Label
     Public gsModID As String = ""
 
     Private Function fnCollectItemTable_64(ByVal rsRegDT As String) As LISAPP.ItemTableCollection
@@ -47,6 +48,8 @@ Public Class FDF10
                     .SetItemTable("rstlvl", 9, i, Ctrl.Get_Code(spd, "rstlvl", i))
                     .SetItemTable("regip", 10, i, USER_INFO.LOCALIP)
                     .SetItemTable("crtval", 11, i, Ctrl.Get_Code(spd, "crtval", i))
+                    '.SetItemTable("altval", 12, i, Ctrl.Get_Code(spd, "altval", i)) '20210810 jhs alter value 도 추가 
+                    .SetItemTable("altval", 12, i, "") '20210908 jhs alter 삭제
                 Next
             End With
 
@@ -129,6 +132,16 @@ Public Class FDF10
         fnValidate = False
 
         Try
+            '20210713 jhs 수정 시에 확인 한번 더 
+            'AFBC NTM 검사 일때 수정 시 확인 팝업창 추가 
+            If PRG_CONST.AFBC_test(Me.txtTestCd.Text) <> "" Or PRG_CONST.AFBC_NTM_test(Me.txtTestCd.Text) <> "" Then
+                If MsgBox(Me.lblCRTWarning.Text, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2) = MsgBoxResult.Yes Then
+                Else
+                    Exit Function
+                End If
+            End If
+            '----------------------------
+
             If Len(Me.txtTestCd.Text.Trim) < 1 Or Len(Me.txtTNmD.Text.Trim) < 1 Then
                 MsgBox("검사코드를 (정확히) 입력하여 주십시요!!", MsgBoxStyle.Critical)
                 Exit Function
@@ -250,6 +263,22 @@ Public Class FDF10
 
             Me.txtModDT.Text = gsModDT
             Me.txtModID.Text = gsModID
+
+            '20210712 jhs AFB,NTM 검사 한번더 확인하고 수정하기 위해 경고 레이블 설정
+            If PRG_CONST.AFBC_test(Me.txtTestCd.Text) <> "" Then
+                Me.lblCRTWarning.Visible = True
+                Me.lblCRTWarning.Text = "지난 5년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
+                Me.lblCRTWarning.ForeColor = Drawing.Color.DarkRed
+            ElseIf PRG_CONST.AFBC_NTM_test(Me.txtTestCd.Text) <> "" Then
+                Me.lblCRTWarning.Visible = True
+                Me.lblCRTWarning.Text = "지난 5년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
+                Me.lblCRTWarning.ForeColor = Drawing.Color.DarkRed
+            Else
+                Me.lblCRTWarning.Visible = False
+                Me.lblCRTWarning.Text = ""
+                Me.lblCRTWarning.ForeColor = Drawing.Color.Black
+            End If
+            '-------------------------------------------------
 
         Catch ex As Exception
             Fn.log(mcFile + sFn, Err)
@@ -385,6 +414,7 @@ Public Class FDF10
         Me.lblRegDT = New System.Windows.Forms.Label()
         Me.txtRegID = New System.Windows.Forms.TextBox()
         Me.grpCdInfo1 = New System.Windows.Forms.GroupBox()
+        Me.lblCRTWarning = New System.Windows.Forms.Label()
         Me.btnML = New System.Windows.Forms.Button()
         Me.txtRstCont = New System.Windows.Forms.TextBox()
         Me.chkML = New System.Windows.Forms.CheckBox()
@@ -417,7 +447,7 @@ Public Class FDF10
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlTop.Name = "pnlTop"
-        Me.pnlTop.Size = New System.Drawing.Size(795, 627)
+        Me.pnlTop.Size = New System.Drawing.Size(795, 715)
         Me.pnlTop.TabIndex = 118
         '
         'tclSpc
@@ -429,7 +459,7 @@ Public Class FDF10
         Me.tclSpc.Location = New System.Drawing.Point(0, 0)
         Me.tclSpc.Name = "tclSpc"
         Me.tclSpc.SelectedIndex = 0
-        Me.tclSpc.Size = New System.Drawing.Size(791, 623)
+        Me.tclSpc.Size = New System.Drawing.Size(791, 711)
         Me.tclSpc.TabIndex = 0
         Me.tclSpc.TabStop = False
         '
@@ -451,7 +481,7 @@ Public Class FDF10
         Me.tbcTpg1.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.tbcTpg1.Location = New System.Drawing.Point(4, 21)
         Me.tbcTpg1.Name = "tbcTpg1"
-        Me.tbcTpg1.Size = New System.Drawing.Size(783, 598)
+        Me.tbcTpg1.Size = New System.Drawing.Size(783, 686)
         Me.tbcTpg1.TabIndex = 0
         Me.tbcTpg1.Text = "결과코드정보"
         '
@@ -461,7 +491,7 @@ Public Class FDF10
         Me.txtModNm.BackColor = System.Drawing.Color.LightGray
         Me.txtModNm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtModNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtModNm.Location = New System.Drawing.Point(300, 563)
+        Me.txtModNm.Location = New System.Drawing.Point(300, 651)
         Me.txtModNm.Name = "txtModNm"
         Me.txtModNm.ReadOnly = True
         Me.txtModNm.Size = New System.Drawing.Size(68, 21)
@@ -475,7 +505,7 @@ Public Class FDF10
         Me.txtModID.BackColor = System.Drawing.Color.LightGray
         Me.txtModID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtModID.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtModID.Location = New System.Drawing.Point(300, 563)
+        Me.txtModID.Location = New System.Drawing.Point(300, 651)
         Me.txtModID.Name = "txtModID"
         Me.txtModID.ReadOnly = True
         Me.txtModID.Size = New System.Drawing.Size(68, 21)
@@ -490,7 +520,7 @@ Public Class FDF10
         Me.txtRegNm.BackColor = System.Drawing.Color.LightGray
         Me.txtRegNm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegNm.Location = New System.Drawing.Point(700, 563)
+        Me.txtRegNm.Location = New System.Drawing.Point(700, 651)
         Me.txtRegNm.Name = "txtRegNm"
         Me.txtRegNm.ReadOnly = True
         Me.txtRegNm.Size = New System.Drawing.Size(68, 21)
@@ -504,7 +534,7 @@ Public Class FDF10
         Me.lblModNm.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblModNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblModNm.ForeColor = System.Drawing.Color.Black
-        Me.lblModNm.Location = New System.Drawing.Point(215, 563)
+        Me.lblModNm.Location = New System.Drawing.Point(215, 651)
         Me.lblModNm.Name = "lblModNm"
         Me.lblModNm.Size = New System.Drawing.Size(84, 21)
         Me.lblModNm.TabIndex = 5
@@ -517,7 +547,7 @@ Public Class FDF10
         Me.txtModDT.BackColor = System.Drawing.Color.LightGray
         Me.txtModDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtModDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtModDT.Location = New System.Drawing.Point(95, 563)
+        Me.txtModDT.Location = New System.Drawing.Point(95, 651)
         Me.txtModDT.Name = "txtModDT"
         Me.txtModDT.ReadOnly = True
         Me.txtModDT.Size = New System.Drawing.Size(100, 21)
@@ -531,7 +561,7 @@ Public Class FDF10
         Me.lblModDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblModDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblModDT.ForeColor = System.Drawing.Color.Black
-        Me.lblModDT.Location = New System.Drawing.Point(10, 563)
+        Me.lblModDT.Location = New System.Drawing.Point(10, 651)
         Me.lblModDT.Name = "lblModDT"
         Me.lblModDT.Size = New System.Drawing.Size(84, 21)
         Me.lblModDT.TabIndex = 3
@@ -544,7 +574,7 @@ Public Class FDF10
         Me.txtRegDT.BackColor = System.Drawing.Color.LightGray
         Me.txtRegDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegDT.Location = New System.Drawing.Point(500, 563)
+        Me.txtRegDT.Location = New System.Drawing.Point(500, 651)
         Me.txtRegDT.Name = "txtRegDT"
         Me.txtRegDT.ReadOnly = True
         Me.txtRegDT.Size = New System.Drawing.Size(100, 21)
@@ -558,7 +588,7 @@ Public Class FDF10
         Me.lblUserNm.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUserNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUserNm.ForeColor = System.Drawing.Color.Black
-        Me.lblUserNm.Location = New System.Drawing.Point(615, 563)
+        Me.lblUserNm.Location = New System.Drawing.Point(615, 651)
         Me.lblUserNm.Name = "lblUserNm"
         Me.lblUserNm.Size = New System.Drawing.Size(84, 21)
         Me.lblUserNm.TabIndex = 0
@@ -571,7 +601,7 @@ Public Class FDF10
         Me.lblRegDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblRegDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblRegDT.ForeColor = System.Drawing.Color.Black
-        Me.lblRegDT.Location = New System.Drawing.Point(415, 563)
+        Me.lblRegDT.Location = New System.Drawing.Point(415, 651)
         Me.lblRegDT.Name = "lblRegDT"
         Me.lblRegDT.Size = New System.Drawing.Size(84, 21)
         Me.lblRegDT.TabIndex = 0
@@ -584,7 +614,7 @@ Public Class FDF10
         Me.txtRegID.BackColor = System.Drawing.Color.LightGray
         Me.txtRegID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegID.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegID.Location = New System.Drawing.Point(700, 563)
+        Me.txtRegID.Location = New System.Drawing.Point(700, 651)
         Me.txtRegID.Name = "txtRegID"
         Me.txtRegID.ReadOnly = True
         Me.txtRegID.Size = New System.Drawing.Size(68, 21)
@@ -596,8 +626,9 @@ Public Class FDF10
         'grpCdInfo1
         '
         Me.grpCdInfo1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grpCdInfo1.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.grpCdInfo1.Controls.Add(Me.lblCRTWarning)
         Me.grpCdInfo1.Controls.Add(Me.btnML)
         Me.grpCdInfo1.Controls.Add(Me.txtRstCont)
         Me.grpCdInfo1.Controls.Add(Me.chkML)
@@ -607,10 +638,22 @@ Public Class FDF10
         Me.grpCdInfo1.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.grpCdInfo1.Location = New System.Drawing.Point(8, 52)
         Me.grpCdInfo1.Name = "grpCdInfo1"
-        Me.grpCdInfo1.Size = New System.Drawing.Size(764, 505)
+        Me.grpCdInfo1.Size = New System.Drawing.Size(764, 593)
         Me.grpCdInfo1.TabIndex = 2
         Me.grpCdInfo1.TabStop = False
         Me.grpCdInfo1.Text = "결과코드정보"
+        '
+        'lblCRTWarning
+        '
+        Me.lblCRTWarning.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblCRTWarning.AutoSize = True
+        Me.lblCRTWarning.Location = New System.Drawing.Point(8, 489)
+        Me.lblCRTWarning.Name = "lblCRTWarning"
+        Me.lblCRTWarning.Size = New System.Drawing.Size(179, 12)
+        Me.lblCRTWarning.TabIndex = 11
+        Me.lblCRTWarning.Text = "ntm, afbstain 검사 일 때 사용"
         '
         'btnML
         '
@@ -748,7 +791,7 @@ Public Class FDF10
         'FDF10
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(6, 14)
-        Me.ClientSize = New System.Drawing.Size(795, 627)
+        Me.ClientSize = New System.Drawing.Size(795, 715)
         Me.Controls.Add(Me.pnlTop)
         Me.Name = "FDF10"
         Me.Text = "[10] 결과코드"

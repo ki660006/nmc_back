@@ -1782,7 +1782,8 @@ Public Class TOTRST03
 
                             Case "viewrst"
                                 '결과 표시 <-- RstFlag, UseViewReportOnly
-                                sbDisplay_Result_ViewResult(ra_dr(i - 1), iLastRow + i)
+
+                                sbDisplay_Result_ViewResult_new(ra_dr(i - 1), iLastRow + i)
 
                             Case "hlmark", "panicmark", "deltamark"
                                 'Mark 표시 및 색상
@@ -1833,12 +1834,24 @@ Public Class TOTRST03
 
                                     If ra_dr(i - 1).Table.Columns(j - 1).ColumnName.ToLower() = "reftxt" Then
                                         Dim sRef As String = ra_dr(i - 1).Item(j - 1).ToString()
-
+                                        '20210802 jhs 세부검사참조 생략
                                         If sRef.IndexOf("~") > -1 Then
-                                            .Text = sRef
+                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
+                                                .Text = ""
+                                            Else
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
+                                                .Text = sRef
+                                            End If
                                         Else
-                                            .Text = ra_dr(i - 1).Item(j - 1).ToString()
+                                            If ra_dr(i - 1).Item(j - 1).ToString().Trim.Replace(" ", "").ToString.StartsWith("세부") Then
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
+                                                .Text = ""
+                                            Else
+                                                Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
+                                                .Text = ra_dr(i - 1).Item(j - 1).ToString()
+                                            End If
                                         End If
+                                        '-------------------------------------
                                         'ElseIf ra_dr(i - 1).Table.Columns(j - 1).ColumnName.ToLower() = "rstunit" Then
 
                                         '    iCol = .GetColFromID(ra_dr(i - 1).Table.Columns(j - 1).ColumnName.ToLower())
@@ -1853,7 +1866,7 @@ Public Class TOTRST03
 
 
                                     Else
-
+                                        Dim test As String = ra_dr(i - 1).Item(j - 1).ToString()
                                         .Text = ra_dr(i - 1).Item(j - 1).ToString()
 
 
@@ -2539,9 +2552,12 @@ Public Class TOTRST03
                         End If
                     Else
                         'Negative<CR><LF> --> Negative로 변형된 경우 : 멀티라인은 아니지만 변경된 참고치 표시함
-                        If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf Then
+                        '20210819 jhs 세부검사참조 조건 변경
+                        If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf And sBuf.StartsWith("세부") = False Then
+                            'If Ctrl.Get_Code_Tag(spd, "reftxt", i) <> sBuf Then
                             .SetText(.GetColFromID("reftxt"), i, sBuf)
                         End If
+                        '-----------------------------
                     End If
                 Next
             End With
@@ -2568,6 +2584,26 @@ Public Class TOTRST03
                     Dim sTestCd As String = Ctrl.Get_Code(spd, "testcd", i)
                     Dim sRowid As String = Ctrl.Get_Code(spd, "rowid", i)
 
+                    '20210719 jhs 결과값이 길면 참고치와 겹쳐져서 멀티라인 구현하기
+                    '멀티 라인일시 공백으로 쪼개서 배열로 담음
+                    Dim test As String() = sBuf.Trim.Replace(Chr(13), " ").Split(" ")
+                    Dim tmpStr As String = ""
+                    sBuf = ""
+
+                    For x As Integer = 0 To test.Length
+                        If x = test.Length Then '맨마지막 은 그냥 합치기
+                            sBuf += "   " + tmpStr
+                        Else ' 중간에 생성되는 문자 정리
+                            If tmpStr.Length >= 16 Then '합치는 도중 15자가 넘으면 더하기 
+                                sBuf += "   " + tmpStr + Chr(13)
+                                tmpStr = ""
+                                tmpStr += test(x) + " "
+                            Else '15이하일때는 문자단위로 계속 합치기 
+                                tmpStr += test(x).Trim + " "
+                            End If
+                        End If
+                    Next
+                    '-------------------------------------
                     .Col = .GetColFromID("tnm")
                     .Row = i
                     Dim sBufCmt As String = ""
@@ -3268,6 +3304,84 @@ Public Class TOTRST03
                 .CellTag = r_dr.Item("viewrst").ToString().Replace(FixedVariable.gsMsg_NoTk, "")
 
                 Dim sViewRst As String = r_dr.Item("viewrst").ToString
+
+                If IsNumeric(sViewRst) And sViewRst.StartsWith(".") Then sViewRst = "0" + sViewRst
+
+                Select Case r_dr.Item("rstflg").ToString()
+                    Case "3", "2"
+                        '중간보고, 최종보고 --> 결과 그대로
+
+                        'If r_dr.Item("bcno").ToString.IndexOf(AppCfg.Const_Sect_MicroBio) > -1 Then
+                        '    If r_dr.Item("viewrst").ToString.IndexOf(FixedVariable.gsRst_Growth) > -1 Then
+                        '        .SetText(.GetColFromID("viewrst"), riRow, "★")
+                        '    ElseIf r_dr.Item("viewrst").ToString.IndexOf(FixedVariable.gsRst_Nogrowth) > -1 Then
+                        '        .SetText(.GetColFromID("viewrst"), riRow, "☆")
+                        '    Else
+                        '        .SetText(.GetColFromID("viewrst"), riRow, strViewRst)
+                        '    End If
+                        'Else
+                        '    .SetText(.GetColFromID("viewrst"), riRow, strViewRst)
+                        'End If
+
+                        .SetText(.GetColFromID("viewrst"), riRow, "".PadRight(3) + sViewRst)
+
+                    Case "1"
+                        '결과저장 --> ViewReportOnly가 True : 검사중 메세지, False : 결과 그대로
+                        If mbViewReportOnly Then
+                            .SetText(.GetColFromID("viewrst"), riRow, "".PadRight(3) + FixedVariable.gsMsg_NoRpt)
+                        Else
+                            'If r_dr.Item("bcno").ToString.IndexOf(AppCfg.Const_Sect_MicroBio) > -1 Then
+                            '    If r_dr.Item("viewrst").ToString.IndexOf(FixedVariable.gsRst_Growth) > -1 Then
+                            '        .SetText(.GetColFromID("viewrst"), riRow, "★")
+                            '    ElseIf r_dr.Item("viewrst").ToString.IndexOf(FixedVariable.gsRst_Nogrowth) > -1 Then
+                            '        .SetText(.GetColFromID("viewrst"), riRow, "☆")
+                            '    Else
+                            '        .SetText(.GetColFromID("viewrst"), riRow, strViewRst)
+                            '    End If
+                            'Else
+                            '    .SetText(.GetColFromID("viewrst"), riRow, strViewRst)
+                            'End If
+                            .SetText(.GetColFromID("viewrst"), riRow, "".PadRight(3) + sViewRst)
+                        End If
+
+                    Case Else
+                        '채혈, 접수인 경우 --> 미접수, 검사중
+                        If r_dr.Item("spcflg").ToString() = "4" Then
+                            If r_dr.Item("tcdgbn").ToString().Equals("B") = False Then
+                                .SetText(.GetColFromID("viewrst"), riRow, "".PadRight(3) + FixedVariable.gsMsg_NoRpt)
+                            End If
+                        Else
+                            .SetText(.GetColFromID("viewrst"), riRow, "".PadRight(3) + FixedVariable.gsMsg_NoTk)
+                        End If
+
+                End Select
+
+                .Row = riRow
+                .Col = .GetColFromID("viewrst")
+                If IsNumeric(sViewRst) Then
+                    .TypeHAlign = FPSpreadADO.TypeHAlignConstants.TypeHAlignCenter
+                Else
+                    .TypeHAlign = FPSpreadADO.TypeHAlignConstants.TypeHAlignLeft
+                End If
+            End With
+
+        Catch ex As Exception
+            sbLog_Exception(ex.Message + " @" + sFn)
+
+        End Try
+    End Sub
+    Private Sub sbDisplay_Result_ViewResult_new(ByVal r_dr As DataRow, ByVal riRow As Integer)
+        Dim sFn As String = "sbDisplay_Result_ViewResult"
+
+        Try
+            With Me.spdRst
+                Dim sViewRst As String = r_dr.Item("viewrst").ToString
+
+
+                '멀티라인을 포함한 원결과를 CellTag에 저장
+                .Col = .GetColFromID("viewrst")
+                .Row = riRow
+                .CellTag = r_dr.Item("viewrst").ToString().Replace(FixedVariable.gsMsg_NoTk, "")
 
                 If IsNumeric(sViewRst) And sViewRst.StartsWith(".") Then sViewRst = "0" + sViewRst
 

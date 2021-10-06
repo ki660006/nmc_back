@@ -49,6 +49,7 @@ Public Class SF_Disp_RstInfo
 
     Private mbAdd_DblClick As Boolean = False
 
+
     Public Sub DisplayInit()
         Dim sFn As String = "DisplayInit"
 
@@ -502,6 +503,11 @@ Public Class PrintResult
     Public mPrtPreview As Boolean  '-- 2007-10-25 YOOEJ ADD
 
     Dim sss As String = ""
+    '20210311 jhs 페이지 넘버
+    Private rowNum As Integer = 1
+    Private totPages As Integer
+    Private nowPage As Integer
+    '--------------------------------------
 
     Public Sub CreatePdialog()
         m_ppdialog = New Windows.Forms.PrintPreviewDialog
@@ -574,6 +580,9 @@ Public Class PrintResult
         Dim sFn As String = "Function Print"
 
         Try
+            '20210531 jhs 페이지 초기화
+            nowPage = 1
+            '-------------------------------
             p_pd = New Drawing.Printing.PrintDocument
 
             If UseCustomPaper Then
@@ -638,6 +647,9 @@ Public Class PrintResult
         Dim sFn As String = "Function PrintPreview"
 
         Try
+            '20210531 jhs 페이지 초기화
+            nowPage = 1
+            '-------------------------------
             p_pd = New Drawing.Printing.PrintDocument
 
             If UseCustomPaper Then
@@ -708,17 +720,36 @@ Public Class PrintResult
             psngPrtY = psngY
 
             With p_spd
+                '20210531 jhs 페이지 넘버 총페이지수
+                totPages = Math.Ceiling(CDbl(.MaxRows) / 63)
+                '----------------------
                 For i As Integer = piRow_Start To .MaxRows
                     If i = piRow_Start Then
                         iNewPage = 0
                     Else
                         ' If psngPrtY + Find_Height_Row(e, i) + Find_Height_Tail(e) > psngY + psngH Then
-                        If psngPrtY + Find_Height_Tail(e) > psngY + psngH Then
+
+                        'If psngPrtY + Find_Height_Tail(e) > psngY + psngH Then
+                        '    iNewPage = -1
+                        '    nowPage += 1
+                        'Else
+                        '    iNewPage = 1
+                        'End If
+
+                        '20210311 jhs 프린트 바텀에 겹쳐져서 넘어가는 현상 해결
+                        If rowNum = 63 Then
                             iNewPage = -1
                         Else
-                            iNewPage = 1
+                            If psngPrtY + Find_Height_Tail(e) > psngY + psngH Then
+                                iNewPage = -1
+                            Else
+                                iNewPage = 1
+                            End If
                         End If
+                        '-----------------------------
+
                     End If
+                    Dim TEST As Double = (i / 64)
 
                     If iNewPage < 1 Then
                         If iNewPage = -1 Then
@@ -730,6 +761,7 @@ Public Class PrintResult
 
                             piRow_Body = 0
 
+                            rowNum = 1
                             Return
                         End If
 
@@ -744,6 +776,8 @@ Public Class PrintResult
 
                     psngPrtY = RenderPage_Body(e, i)
 
+
+                    rowNum += 1
                     'If iNewPage < 1 Then
                     '    psngPrtY = RenderPage_Cols(e)
                     'End If
@@ -751,6 +785,8 @@ Public Class PrintResult
 
                 RenderPage_Tail(e, False)
             End With
+
+            rowNum = 1
 
         Catch ex As Exception
             Fn.log(mc_sFile + sFn, Err)
@@ -1270,6 +1306,14 @@ Public Class PrintResult
                                     psngX, Convert.ToSingle(psngY + psngH - (iLineCnt - i) * fontT.GetHeight(e.Graphics) - fontL.GetHeight(e.Graphics)))
                 End If
             Next
+
+            '20210531 jhs 페이지넘버 표시    (ex) [페이지 / 총페이지] )
+            e.Graphics.DrawString("[ " + nowPage.ToString + " / " + totPages.ToString + " ]", fontT, Drawing.Brushes.Black, psngX + 460, Convert.ToSingle(psngY + psngH) - 10)
+            nowPage += 1
+            If nowPage > totPages Then
+                nowPage = 1
+            End If
+            '--------------------------------
 
         Catch ex As Exception
             Fn.log(mc_sFile + sFn, Err)

@@ -792,6 +792,9 @@ Public Class APP_EXLAB
             sSql += "       , case nvl(f6.cprtcd, ' ') when ' '   then '' "
             sSql += "                                   else 'Y' "
             sSql += "         end as imgyn    "
+            '20210104 jhs 채혈시 주의사항 삽입
+            sSql += "       ,F6.cwarning "
+            '---------------------------------
             sSql += "  FROM lj010m j,  lj011m j1, lr010m r,"
             sSql += "       lf060m f6, lf030m f3,"
             sSql += "       lre11m e1, lre10m e, lre12m e12"
@@ -835,6 +838,9 @@ Public Class APP_EXLAB
             sSql += "       , case nvl(f6.cprtcd, ' ') when ' '   then '' "
             sSql += "                                   else 'Y' "
             sSql += "         end as imgyn    "
+            '20210104 jhs 채혈시 주의사항 삽입
+            sSql += "       ,F6.cwarning "
+            '---------------------------------
             sSql += "  FROM lj010m j,  lj011m j1, lm010m r,"
             sSql += "       lf060m f6, lf030m f3,"
             sSql += "       lre11m e1,"
@@ -891,31 +897,32 @@ Public Class APP_EXLAB
             rsExLabCd = rsExLabCd.Replace("000", "")
 
             sSql = ""
-            sSql += "SELECT DISTINCT"
-            sSql += "       j.bcno, r.testcd, f6.tnmd, r.spccd, f3.spcnmd, j.regno, fn_ack_get_pat_info(j.regno, '', '') patinfo,"
-            sSql += "       j.wardno, j.deptcd, SUBSTR(j1.colldt, 1, 8) colldt, e1.filenm, e1.remark,"
-            sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1,"
-            sSql += "       NVL(f6.dispseqO, 999) sort2, SUBSTR(r.tkdt,1,8) tkdt,"
-            sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm"
-            sSql += "       ,fn_ack_exlab_imgyn(r.testcd, r.spccd, r.tkdt) as imgyn , j.age "
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       j.bcno, r.testcd, f6.tnmd, r.spccd, f3.spcnmd, j.regno, fn_ack_get_pat_info(j.regno, '', '') patinfo," + vbCrLf
+            sSql += "       j.wardno, j.deptcd, SUBSTR(j1.colldt, 1, 8) colldt, e1.filenm, e1.remark," + vbCrLf
+            sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1," + vbCrLf
+            sSql += "       NVL(f6.dispseqO, 999) sort2, SUBSTR(r.tkdt,1,8) tkdt," + vbCrLf
+            sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm" + vbCrLf
+            sSql += "       ,fn_ack_exlab_imgyn(r.testcd, r.spccd, r.tkdt) as imgyn , j.age " + vbCrLf
+            sSql += "       ,F6.cwarning " + vbCrLf
             'sSql += "       , case nvl(f6.cprtcd, ' ') when ' '   then '' "
             'sSql += "                                   else 'Y' "
             'sSql += "         end as imgyn    "
-            sSql += "  FROM lj010m j, lj011m j1, lf060m f6, lf030m f3,"
+            sSql += "  FROM lj010m j, lj011m j1, lf060m f6, lf030m f3," + vbCrLf
             If rbFlagAll Then
-                sSql += "       lr010m r,"
+                sSql += "       lr010m r," + vbCrLf
             Else
-                sSql += "       (SELECT bcno, tclscd, testcd, spccd, tkdt, rstflg FROM lr010m"
-                sSql += "          where tkdt >= :dates"
-                sSql += "            AND tkdt <= :datee || '5959'"
-                sSql += "            AND (bcno, testcd) NOT IN"
-                sSql += "                (SELECT r.bcno, r.testcd FROM lr010m r, lre11m e"
-                sSql += "                  WHERE r.tkdt  >= :dates"
-                sSql += "                    AND r.tkdt  <= :datee || '5959'"
-                sSql += "                    AND r.bcno   = e.bcno"
-                sSql += "                    AND r.testcd = e.testcd"
-                sSql += "                )"
-                sSql += "       ) r,"
+                sSql += "       (SELECT bcno, tclscd, testcd, spccd, tkdt, rstflg FROM lr010m" + vbCrLf
+                sSql += "          where tkdt >= :dates" + vbCrLf
+                sSql += "            AND tkdt <= :datee || '5959'" + vbCrLf
+                sSql += "            AND (bcno, testcd) NOT IN" + vbCrLf
+                sSql += "                (SELECT r.bcno, r.testcd FROM lr010m r, lre11m e" + vbCrLf
+                sSql += "                  WHERE r.tkdt  >= :dates" + vbCrLf
+                sSql += "                    AND r.tkdt  <= :datee || '5959'" + vbCrLf
+                sSql += "                    AND r.bcno   = e.bcno" + vbCrLf
+                sSql += "                    AND r.testcd = e.testcd" + vbCrLf
+                sSql += "                )" + vbCrLf
+                sSql += "       ) r," + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsTkDtS))
                 alParm.Add(New OracleParameter("datee", rsTkDtE))
@@ -924,26 +931,26 @@ Public Class APP_EXLAB
                 alParm.Add(New OracleParameter("datee", rsTkDtE))
             End If
 
-            sSql += "       lre11m e1"
-            sSql += " WHERE r.tkdt    >= :dates"
-            sSql += "   AND r.tkdt    <= :datee || '5959'"
-            sSql += "   AND j.bcno     = j1.bcno"
-            sSql += "   AND j1.bcno    = r.bcno"
-            sSql += "   AND j1.tclscd  = r.tclscd"
-            sSql += "   AND r.testcd   = f6.testcd"
-            sSql += "   AND r.spccd    = f6.spccd"
-            sSql += "   AND r.tkdt    >= f6.usdt"
-            sSql += "   AND r.tkdt    <  f6.uedt"
-            sSql += "   AND f6.exlabyn = '1'"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND r.spccd    = f3.spccd"
-            sSql += "   AND r.tkdt    >= f3.usdt"
-            sSql += "   AND r.tkdt    <  f3.uedt"
-            sSql += "   AND NVL(r.rstflg, '0') IN ('', '0')"
-            sSql += "   AND j.spcflg = '4'"
-            sSql += "   AND j1.spcflg = '4'"
-            sSql += "   AND r.bcno    = e1.bcno (+)"
-            sSql += "   AND r.testcd  = e1.testcd (+)"
+            sSql += "       lre11m e1" + vbCrLf
+            sSql += " WHERE r.tkdt    >= :dates" + vbCrLf
+            sSql += "   AND r.tkdt    <= :datee || '5959'" + vbCrLf
+            sSql += "   AND j.bcno     = j1.bcno" + vbCrLf
+            sSql += "   AND j1.bcno    = r.bcno" + vbCrLf
+            sSql += "   AND j1.tclscd  = r.tclscd" + vbCrLf
+            sSql += "   AND r.testcd   = f6.testcd" + vbCrLf
+            sSql += "   AND r.spccd    = f6.spccd" + vbCrLf
+            sSql += "   AND r.tkdt    >= f6.usdt" + vbCrLf
+            sSql += "   AND r.tkdt    <  f6.uedt" + vbCrLf
+            sSql += "   AND f6.exlabyn = '1'" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND r.spccd    = f3.spccd" + vbCrLf
+            sSql += "   AND r.tkdt    >= f3.usdt" + vbCrLf
+            sSql += "   AND r.tkdt    <  f3.uedt" + vbCrLf
+            sSql += "   AND NVL(r.rstflg, '0') IN ('', '0')" + vbCrLf
+            sSql += "   AND j.spcflg = '4'" + vbCrLf
+            sSql += "   AND j1.spcflg = '4'" + vbCrLf
+            sSql += "   AND r.bcno    = e1.bcno (+)" + vbCrLf
+            sSql += "   AND r.testcd  = e1.testcd (+)" + vbCrLf
             '<삼광 테스트
 
 
@@ -951,41 +958,42 @@ Public Class APP_EXLAB
             alParm.Add(New OracleParameter("datee", rsTkDtE))
 
             If rsBcclsCd <> "" Then
-                sSql += "   and f6.bcclscd = :bcclscd"
+                sSql += "   and f6.bcclscd = :bcclscd" + vbCrLf
                 alParm.Add(New OracleParameter("bcclscd", rsBcclsCd))
             End If
 
             If rsExLabCd <> "" Then
-                sSql += "   and f6.exlabcd = :exlabcd"
+                sSql += "   and f6.exlabcd = :exlabcd" + vbCrLf
                 alParm.Add(New OracleParameter("exlabcd", rsExLabCd))
             End If
 
-            sSql += " UNION "
-            sSql += "SELECT DISTINCT"
-            sSql += "       j.bcno, r.testcd, f6.tnmd, r.spccd, f3.spcnmd, j.regno, fn_ack_get_pat_info(j.regno, '', '') patinfo,"
-            sSql += "       j.wardno, j.deptcd, SUBSTR(j1.colldt, 1, 8) colldt, e1.filenm, e1.remark,"
-            sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1,"
-            sSql += "       NVL (f6.dispseqO, 999) sort2, SUBSTR(r.tkdt,1,8) tkdt,"
-            sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm"
-            sSql += "       ,fn_ack_exlab_imgyn(r.testcd, r.spccd, r.tkdt) as imgyn, j.age "
+            sSql += " UNION " + vbCrLf
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       j.bcno, r.testcd, f6.tnmd, r.spccd, f3.spcnmd, j.regno, fn_ack_get_pat_info(j.regno, '', '') patinfo," + vbCrLf
+            sSql += "       j.wardno, j.deptcd, SUBSTR(j1.colldt, 1, 8) colldt, e1.filenm, e1.remark," + vbCrLf
+            sSql += "       (SELECT dispseq FROM lf021m WHERE partcd = f6.partcd AND slipcd = f6.slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) sort1," + vbCrLf
+            sSql += "       NVL (f6.dispseqO, 999) sort2, SUBSTR(r.tkdt,1,8) tkdt," + vbCrLf
+            sSql += "       fn_ack_get_dr_name(j.doctorcd) doctornm" + vbCrLf
+            sSql += "       ,fn_ack_exlab_imgyn(r.testcd, r.spccd, r.tkdt) as imgyn, j.age " + vbCrLf
+            sSql += "       ,F6.cwarning " + vbCrLf
             'sSql += "       , case nvl(f6.cprtcd, ' ') when ' '   then '' "
             'sSql += "                                   else 'Y' "
             'sSql += "         end as imgyn    "
-            sSql += "  FROM lj010m j, lj011m j1, lf060m f6, lf030m f3,"
+            sSql += "  FROM lj010m j, lj011m j1, lf060m f6, lf030m f3," + vbCrLf
             If rbFlagAll Then
-                sSql += "       lm010m r,"
+                sSql += "       lm010m r," + vbCrLf
             Else
-                sSql += "       (SELECT bcno, tclscd, testcd, spccd, tkdt, rstflg FROM lm010m"
-                sSql += "          where tkdt >= :dates"
-                sSql += "            AND tkdt <= :datee || '5959'"
-                sSql += "            AND (bcno, testcd) NOT IN"
-                sSql += "                (SELECT r.bcno, r.testcd FROM lm010m r, lre11m e"
-                sSql += "                  WHERE r.tkdt  >= :dates"
-                sSql += "                    AND r.tkdt  <= :datee || '5959'"
-                sSql += "                    AND r.bcno   = e.bcno"
-                sSql += "                    AND r.testcd = e.testcd"
-                sSql += "                )"
-                sSql += "       ) r,"
+                sSql += "       (SELECT bcno, tclscd, testcd, spccd, tkdt, rstflg FROM lm010m" + vbCrLf
+                sSql += "          where tkdt >= :dates" + vbCrLf
+                sSql += "            AND tkdt <= :datee || '5959'" + vbCrLf
+                sSql += "            AND (bcno, testcd) NOT IN" + vbCrLf
+                sSql += "                (SELECT r.bcno, r.testcd FROM lm010m r, lre11m e" + vbCrLf
+                sSql += "                  WHERE r.tkdt  >= :dates" + vbCrLf
+                sSql += "                    AND r.tkdt  <= :datee || '5959'" + vbCrLf
+                sSql += "                    AND r.bcno   = e.bcno" + vbCrLf
+                sSql += "                    AND r.testcd = e.testcd" + vbCrLf
+                sSql += "                )" + vbCrLf
+                sSql += "       ) r," + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsTkDtS))
                 alParm.Add(New OracleParameter("datee", rsTkDtE))
@@ -994,26 +1002,26 @@ Public Class APP_EXLAB
                 alParm.Add(New OracleParameter("datee", rsTkDtE))
             End If
 
-            sSql += "       lre11m e1"
-            sSql += " WHERE r.tkdt    >= :dates"
-            sSql += "   AND r.tkdt    <= :datee || '5959'"
-            sSql += "   AND j.bcno     = j1.bcno"
-            sSql += "   AND j1.bcno    = r.bcno"
-            sSql += "   AND j1.tclscd  = r.tclscd"
-            sSql += "   AND r.testcd   = f6.testcd"
-            sSql += "   AND r.spccd    = f6.spccd"
-            sSql += "   AND r.tkdt    >= f6.usdt"
-            sSql += "   AND r.tkdt    <  f6.uedt"
-            sSql += "   AND f6.exlabyn = '1'"
-            sSql += "   AND f6.tcdgbn <> 'C'"
-            sSql += "   AND r.spccd    = f3.spccd"
-            sSql += "   AND r.tkdt    >= f3.usdt"
-            sSql += "   AND r.tkdt    <  f3.uedt"
-            sSql += "   AND NVL(r.rstflg, '0') IN ('', '0')"
-            sSql += "   AND j.spcflg  = '4'"
-            sSql += "   AND j1.spcflg = '4'"
-            sSql += "   AND r.bcno    = e1.bcno (+)"
-            sSql += "   AND r.testcd  = e1.testcd (+)"
+            sSql += "       lre11m e1" + vbCrLf
+            sSql += " WHERE r.tkdt    >= :dates" + vbCrLf
+            sSql += "   AND r.tkdt    <= :datee || '5959'" + vbCrLf
+            sSql += "   AND j.bcno     = j1.bcno" + vbCrLf
+            sSql += "   AND j1.bcno    = r.bcno" + vbCrLf
+            sSql += "   AND j1.tclscd  = r.tclscd" + vbCrLf
+            sSql += "   AND r.testcd   = f6.testcd" + vbCrLf
+            sSql += "   AND r.spccd    = f6.spccd" + vbCrLf
+            sSql += "   AND r.tkdt    >= f6.usdt" + vbCrLf
+            sSql += "   AND r.tkdt    <  f6.uedt" + vbCrLf
+            sSql += "   AND f6.exlabyn = '1'" + vbCrLf
+            sSql += "   AND f6.tcdgbn <> 'C'" + vbCrLf
+            sSql += "   AND r.spccd    = f3.spccd" + vbCrLf
+            sSql += "   AND r.tkdt    >= f3.usdt" + vbCrLf
+            sSql += "   AND r.tkdt    <  f3.uedt" + vbCrLf
+            sSql += "   AND NVL(r.rstflg, '0') IN ('', '0')" + vbCrLf
+            sSql += "   AND j.spcflg  = '4'" + vbCrLf
+            sSql += "   AND j1.spcflg = '4'" + vbCrLf
+            sSql += "   AND r.bcno    = e1.bcno (+)" + vbCrLf
+            sSql += "   AND r.testcd  = e1.testcd (+)" + vbCrLf
             '<삼광 테스트
 
 
@@ -1021,16 +1029,16 @@ Public Class APP_EXLAB
             alParm.Add(New OracleParameter("datee", rsTkDtE))
 
             If rsBcclsCd <> "" Then
-                sSql += "   and f6.bcclscd = :bcclscd"
+                sSql += "   and f6.bcclscd = :bcclscd" + vbCrLf
                 alParm.Add(New OracleParameter("bcclscd", rsBcclsCd))
             End If
 
             If rsExLabCd <> "" Then
-                sSql += "   and f6.exlabcd = :exlabcd"
+                sSql += "   and f6.exlabcd = :exlabcd" + vbCrLf
                 alParm.Add(New OracleParameter("exlabcd", rsExLabCd))
             End If
 
-            sSql += " order by tkdt, bcno, sort1, sort2, testcd"
+            sSql += " order by tkdt, bcno, sort1, sort2, testcd" + vbCrLf
 
             DbCommand()
             Return DbExecuteQuery(sSql, alParm)
@@ -1215,6 +1223,40 @@ Public Class APP_EXLAB
         End Try
 
     End Function
+
+    Public Shared Function fnGet_Patno(ByVal rsRegno As String) As DataTable
+        Dim sFn As String = "Public fnGet_SpcInfo(String, String) As DataTable"
+
+        Try
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            sSql += " "
+            sSql += " SELECT A.PID,  " '-- 기존환자번호
+            sSql += " (SELECT X.PID"
+            sSql += "    FROM PAM.PMCMPTBS X"
+            sSql += "   WHERE X.PID = A.BINDPID"
+            sSql += "     AND X.INSTCD = A.INSTCD"
+            sSql += "     AND ROWNUM = 1) AS BINDPID,  " '-- 합번된 환자번호
+            sSql += "     NVL((SELECT X.PID FROM PAM.PMCMPTBS X"
+            sSql += "           WHERE X.PID = A.BINDPID"
+            sSql += "             AND X.INSTCD = A.INSTCD"
+            sSql += "             And ROWNUM = 1), A.PID) As PID2   " '-- <<< 환자번호 읽을때에 합번된 환자번호가 있으면 해당번호(BINDPID)를 아니면 PID를 읽도록 NVL처리
+            sSql += "  FROM PAM.PMCMPTBS A"
+            sSql += " WHERE PID = :regno "
+            sSql += "   AND INSTCD = '031' "
+
+            alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
+
+            DbCommand()
+            Return DbExecuteQuery(sSql, alParm)
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+        End Try
+
+    End Function
+
 
     Public Shared Function fnGet_ExLab_ImgYn(ByVal rsTestCd As String, ByVal rsSpcCd As String, ByVal rsTkdt As String) As DataTable
         Dim sFn As String = "Public Shared Function fnGet_ExLab_ImgYn() As DataTable"

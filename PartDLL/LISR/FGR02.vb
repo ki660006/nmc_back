@@ -384,19 +384,20 @@ Public Class FGR02
         If Me.txtSearch.Text <> "" Then
             Me.txtSearch_KeyDown(Nothing, New System.Windows.Forms.KeyEventArgs(Keys.Enter))
         End If
-
+        '20210719 jhs 요청으로 인해 중간보고 안보이게 수정 
         If mbBloodBankYN Then
-            Me.btnMW.Text = "중간보고(F11)"
+            '    Me.btnMW.Text = "중간보고(F11)"
 
             Me.btnRerun.Visible = False
 
-            Me.btnReg.Left = Me.btnClear.Left - Me.btnReg.Width - 2
-            Me.btnMW.Left = Me.btnReg.Left - Me.btnMW.Width - 2
-            Me.btnFN.Left = Me.btnMW.Left - Me.btnMW.Width - 2
+            '    Me.btnReg.Left = Me.btnClear.Left - Me.btnReg.Width - 2
+            '    Me.btnMW.Left = Me.btnReg.Left - Me.btnMW.Width - 2
+            '    Me.btnFN.Left = Me.btnMW.Left - Me.btnMW.Width - 2
             Me.btnRst_Clear.Left = Me.btnFN.Left - Me.btnRst_Clear.Width - 2
-
-            Me.btnReg.Visible = True
+            Me.chkMW.Left = Me.btnRst_Clear.Left - Me.chkMW.Width - 2
+            '    Me.btnReg.Visible = True
         End If
+        '--------------------------------------
 
         'Me.txtSearch.Text = ""
         Me.txtSearch.Focus()
@@ -952,7 +953,9 @@ Public Class FGR02
             msTClsFileRSL = Application.StartupPath + msXMLDir + "\FGR02_RstSearchList_B.XML"
 
             Me.Text = Me.Text + "(혈액은행)"
-            Me.chkMW.Visible = False
+            '20210719 jhs 혈액은행 중간보고 없애기 
+            ' Me.chkMW.Visible = False
+            '---------------------------
         End If
 
     End Sub
@@ -1228,9 +1231,6 @@ Public Class FGR02
         End Try
     End Sub
 
-    Private Sub AxResult_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AxResult.Load
-
-    End Sub
 
     Private Sub Label14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label14.Click
         If Label14.Text = "접수일자" Then

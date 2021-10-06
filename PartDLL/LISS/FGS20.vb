@@ -341,6 +341,12 @@ Public Class FGS20
                             .Col = .GetColFromID("state") : .Text = "전송완료"
                             .BackColor = Color.LightGreen
 
+                            '20210826 jhs 해당검체번호로 전송했을때는 색 주황색으로 
+                            If dt.Rows(ix).Item("r80bcno").ToString.Trim <> "" Then
+                                .BackColor = Color.Orange
+                            End If
+                            '-------------------------------------
+
                             Dim dt_reginfo As DataTable = fn_get_HosRst_Reginfo(dt.Rows(ix).Item("bcno").ToString)
 
                             If dt_reginfo.Rows.Count <= 0 Then
@@ -759,9 +765,15 @@ Public Class FGS20
                         .Col = .GetColFromID("errmsg") : .Text = dt.Rows(ix).Item("errmsg").ToString
                         .Col = .GetColFromID("orgrsts") : .Text = dt.Rows(ix).Item("orgrsts").ToString
 
-                        If dt.Rows(ix).Item("state").ToString = "Y" Then
+                        If dt.Rows(ix).Item("state").ToString = "Y" Or dt.Rows(ix).Item("state").ToString = "Z" Then
                             .Col = .GetColFromID("state") : .Text = "전송완료"
                             .BackColor = Color.LightGreen
+
+                            '20210826 jhs 해당검체번호로 전송했을때는 색 주황색으로 
+                            If dt.Rows(ix).Item("r80bcno").ToString.Trim <> "" Then
+                                .BackColor = Color.Orange
+                            End If
+                            '-------------------------------------
 
                             Dim dt_reginfo As DataTable = fn_get_HosRst_Reginfo(dt.Rows(ix).Item("bcno").ToString)
 
@@ -1822,7 +1834,8 @@ Public Class FGS20
     End Sub
     
     Private Sub btnWebKDCD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWebKDCD.Click
-        Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/pthgogan/pthgoganList.vp?"
+        'Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/pthgogan/pthgoganList.vp?"
+        Dim sUrl As String = "https://is.kdca.go.kr/tids/anids/pthgogan/pthgoganList.vp?" '병원체 주소 변경으로 변경
         Dim sOgcr As String = "cn=국립중앙의료원,ou=건강보험,ou=MOHW RA센터,ou=등록기관,ou=licensedCA,o=KICA,c=KR"
 
         sUrl += "&ogcr=" + UTF8EN(sOgcr)
@@ -1996,7 +2009,8 @@ Public Class FGS20
     End Sub
 
     Private Sub btnWebReq_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnWebReq.Click
-        Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp?"
+        'Dim sUrl As String = "https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp?"
+        Dim sUrl As String = "https://is.kdca.go.kr/tids/anids/piacpt/piAcptList.vp?" '병원체 주소 변경으로 변경
         Dim sOgcr As String = "cn=국립중앙의료원,ou=건강보험,ou=MOHW RA센터,ou=등록기관,ou=licensedCA,o=KICA,c=KR"
 
         'https://is.cdc.go.kr/tids/anids/piacpt/piAcptList.vp? +  신고항목 (“&신고항목명 = 신고항목값, ... ”) 

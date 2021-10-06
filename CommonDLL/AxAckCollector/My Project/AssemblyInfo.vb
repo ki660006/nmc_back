@@ -46,5 +46,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.340 --> 2020/05/25 : 혈액종양 진단명일때 색깔 표시
 'Version 3.1.10.341 --> 2020/06/23 : 자체응급 표시
 'Version 3.1.10.342 --> 2020/08/06 : 오른쪽클릭->검사정보 클릭시 검사의뢰지침으로 열리도록 처리
+'Version 3.1.10.343 --> 2021/06/15 : 특정검사 바코드 검사명 음영처리
 
-<Assembly: AssemblyVersion("3.1.10.342")> 
+<Assembly: AssemblyVersion("3.1.10.343")> 

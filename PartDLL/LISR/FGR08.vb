@@ -2097,6 +2097,8 @@ Public Class FGR08
 
                             End If
 
+                            rtb.Font = New System.Drawing.Font("굴림", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+
                     End Select
 
                     If rsExPrg = "VCMT" Then

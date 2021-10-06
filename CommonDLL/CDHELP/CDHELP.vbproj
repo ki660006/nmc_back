@@ -96,29 +96,34 @@
   <ItemGroup>
     <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\COMMON\obj\Release\AxInterop.FPSpreadADO.dll</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\AxInterop.FPSpreadADO.dll</HintPath>
     </Reference>
-    <Reference Include="cbuttonlib, Version=1.0.3675.34145, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MainExe\Main\bin\cbuttonlib.dll</HintPath>
+    <Reference Include="cbuttonlib">
+      <HintPath>..\..\Dll&amp;OCX\cbuttonlib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>obj\Release\Interop.FPSpreadADO.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Dll&amp;OCX\Interop.FPSpreadADO.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Microsoft.Office.Core, Version=2.4.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Dll&amp;OCX\Interop.Microsoft.Office.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="msdatasrc, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office12\msdatasrc.dll</HintPath>
+    <Reference Include="msdatasrc">
+      <HintPath>..\..\Dll&amp;OCX\msdatasrc.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="office, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+    <Reference Include="Oracle.DataAccess, Version=2.111.6.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MainExe\Main\bin\Oracle.DataAccess.DLL</HintPath>
+      <HintPath>..\..\Dll&amp;OCX\Oracle.DataAccess.DLL</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -164,6 +169,12 @@
       <DependentUpon>FGCDHELP_TEST3.vb</DependentUpon>
     </Compile>
     <Compile Include="FGCDHELP_TEST3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGCDHELP_TEST_HELPER.Designer.vb">
+      <DependentUpon>FGCDHELP_TEST_HELPER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGCDHELP_TEST_HELPER.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FGCDHELP_TEST_NEW_S01.Designer.vb">
@@ -228,6 +239,9 @@
     <EmbeddedResource Include="FGCDHELP_TEST3.resx">
       <DependentUpon>FGCDHELP_TEST3.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FGCDHELP_TEST_HELPER.resx">
+      <DependentUpon>FGCDHELP_TEST_HELPER.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FGCDHELP_TEST_NEW_S01.resx">
       <DependentUpon>FGCDHELP_TEST_NEW_S01.vb</DependentUpon>
     </EmbeddedResource>
@@ -265,24 +279,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="MSDATASRC1">
-      <Guid>{7C0FFAB0-CD84-11D0-949A-00A0C91110ED}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

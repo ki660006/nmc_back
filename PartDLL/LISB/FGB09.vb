@@ -388,7 +388,7 @@ Public Class FGB09
             dt = CGDA_BT.fn_StOrderList(sTnsnum)
             sb_DisplayStOutList(dt)
 
-            If sTnsGbn = "3" And spdStOutList.MaxRows = 0 Then Me.chkCMCO.Checked = True
+            If sTnsGbn = "3" And spdStOutList.MaxRows = 0 Then Me.chkCMCO.Checked = True 'tnsgbn = 3 은 응급 교차미필 체크 
 
             Me.txtBldno.Focus()
 
@@ -618,6 +618,16 @@ Public Class FGB09
             '    Return
             'End If
 
+
+            '20210121 jhs 등록번호 조회 하지 않았을 시 조회를 한번이라도 하고 진행하도록 수정 (사용자 요청)
+            If Me.AxTnsPatinfo1.Regno() = "" Then
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "환자 조회를 먼저 해주시기 바랍니다.")
+                Me.txtRegno.Focus()
+                Return
+            End If
+            '----------------------------------
+
+
             ls_Bldno = txtSBldno.Text
 
             If ls_Bldno.Length() = 10 Then
@@ -636,11 +646,13 @@ Public Class FGB09
             '// JJH 환자의 가출고혈액 체크
             If Me.AxTnsPatinfo1.Regno() <> "" Then
                 If CGDA_BT.Bld_Bfout_Chk(ls_Bldno, Me.AxTnsPatinfo1.Regno()) <> "Y" Then
-                    If CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "다른 환자의 혈액입니다 그래도 진행하시겠습니까?") = False Then
-                        Me.txtSBldno.Focus()
-                        Me.txtSBldno.SelectAll()
-                        Return
-                    End If
+                    'If CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "다른 환자의 혈액입니다 그래도 진행하시겠습니까?") = False Then
+                    '//JJH 2020-12-21 아예 진행이 불가능하도록 수정 (사용자 요청)
+                    CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, "다른 환자의 혈액입니다.")
+                    Me.txtSBldno.Focus()
+                    Me.txtSBldno.SelectAll()
+                    Return
+                    'End If
                 End If
             End If
 
@@ -857,6 +869,9 @@ Public Class FGB09
                     .Col = .GetColFromID("comordcd") : .Text = r_dt.Rows(i).Item("comordcd").ToString
                     .Col = .GetColFromID("comcd_out") : .Text = r_dt.Rows(i).Item("comcd_out").ToString
                     .Col = .GetColFromID("cmt") : .Text = r_dt.Rows(i).Item("cmt").ToString
+                    '20210719 jhs 응급수혈 구분 추가 
+                    .Col = .GetColFromID("tnsGbn") : .Text = r_dt.Rows(i).Item("tnsgbn").ToString
+                    '------------------------------------------
                 Next
             End With
         Catch ex As Exception
@@ -1031,6 +1046,9 @@ Public Class FGB09
             Dim sFilter As String = ""
             Dim sAboType As String = ""
             Dim sRhType As String = ""
+            '20210719 jhs 응급구분 추가
+            Dim sTnsGbn As String = ""
+            '---------------------------------
 
             With Me.spdOrderList
                 .Row = .ActiveRow
@@ -1043,6 +1061,9 @@ Public Class FGB09
                 .Col = .GetColFromID("filter") : sFilter = .Text.Trim
                 .Col = .GetColFromID("abo") : sAboType = .Text.Trim
                 .Col = .GetColFromID("rh") : sRhType = .Text.Trim
+                '20210719 jhs 응급구분 추가
+                .Col = .GetColFromID("tnsGbn") : sTnsGbn = .Text.Trim
+                '---------------------------------
             End With
 
             With Me.spdStOutList
@@ -1063,6 +1084,13 @@ Public Class FGB09
                         stuOut.FILTER = sFilter.Trim
                         stuOut.ABO = Me.AxTnsPatinfo1.AboRh.Replace("-", "").Replace("+", "")
                         stuOut.RH = Me.AxTnsPatinfo1.AboRh.Replace("A", "").Replace("B", "").Replace("O", "")
+                        '20210719 jhs 응급구분 추가
+                        If sTnsGbn = "3" Then
+                            stuOut.EMER = "Y"
+                        Else
+                            stuOut.EMER = "N"
+                        End If
+                        '---------------------------------
 
                         .Col = .GetColFromID("bldno") : stuOut.BLDNO = .Text.Trim
                         .Col = .GetColFromID("comcd") : stuOut.COMCD = .Text.Trim
@@ -1228,7 +1256,7 @@ Public Class FGB09
             lb_Continue = CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "출고 취소 하시겠습니까?")
 
             If lb_Continue = False Then Return
-
+            'pro_ack_exe_tns_out_cancel'
             'lb_ok = (New Out).fnExe_Out_Cancel(lal_Arg, "C"c)
             ' lb_ok = (New WEBSERVER.CGWEB_B).ExecuteDo_Out_cancle(lal_Arg, "C"c)
             If Me.chkCMCO.Checked = False Then

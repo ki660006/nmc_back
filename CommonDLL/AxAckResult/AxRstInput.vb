@@ -8,8 +8,10 @@ Imports COMMON.SVar
 Imports LISAPP.APP_BT
 
 Public Class AxRstInput
+    'test위해 삽입
 
     Private moForm As Windows.Forms.Form
+    Private _a_dr As Object
 
     Public Event ChangedBcNo(ByVal BcNo As String)
     Public Event ChangedTestCd(ByVal BcNo As String, ByVal TestCd As String)
@@ -92,7 +94,8 @@ Public Class AxRstInput
                                iCol = .GetColFromID("rstcmt") Or iCol = .GetColFromID("bfviewrst2") Or iCol = .GetColFromID("bffndt2") Or iCol = .GetColFromID("eqnm") Or _
                                iCol = .GetColFromID("testcd") Or iCol = .GetColFromID("spccd") Or iCol = .GetColFromID("tordcd") Or _
                                iCol = .GetColFromID("reftcls") Or iCol = .GetColFromID("eqflag") Or iCol = .GetColFromID("rerunrst") Or _
-                               iCol = .GetColFromID("slipcd") Then
+                               iCol = .GetColFromID("slipcd") Or iCol = .GetColFromID("rrptst") Then
+                            '20210419 jhs rrptst 추가
                         Else
                             .Col = iCol : .ColHidden = True
                         End If
@@ -298,6 +301,15 @@ Public Class AxRstInput
                 Me.gbxABO.Visible = False
                 Me.gbxComment.Width = Me.Width - Me.grpRstInfo.Width
             End If
+        End Set
+    End Property
+
+    Private Property a_dr(ByVal ix As Integer) As Object
+        Get
+            Return _a_dr
+        End Get
+        Set(ByVal value As Object)
+            _a_dr = value
         End Set
     End Property
 
@@ -1060,7 +1072,9 @@ Public Class AxRstInput
         End With
 
         '-- 자동소견변환
-        If mbQueryView = False Then sbGet_CvtCmtInfo(msBcNo, rbTest)
+        'If mbQueryView = False Then sbGet_CvtCmtInfo(msBcNo, rbTest)
+        'JJH 소견 파트별로
+        If mbQueryView = False Then sbGet_CvtCmtInfo_TestCd(msBcNo, rbTest)
 
     End Sub
     ' 결과 체크
@@ -1397,6 +1411,7 @@ Public Class AxRstInput
                             If strIUD = "1" Then
                                 .Row = ix
                                 .Col = .GetColFromID("testcd")
+                                Dim test As String = .Text.Substring(0, 5) 
                                 If .Text.Substring(0, 5) = sTestCd Then
                                     iCnt += 1
                                 Else
@@ -2151,11 +2166,13 @@ Public Class AxRstInput
                 alRst = fnGet_Rst_Erase()
 
                 If alRst.Count > 0 Then
-                    Dim objRst As New LISAPP.APP_R.AxRstFn
 
+                    Dim objRst As New LISAPP.APP_R.AxRstFn
                     Return objRst.fnRsg_RstClear(STU_AUTHORITY.UsrID, alRst)
                 End If
             End If
+
+
 
             Return True
 
@@ -2249,10 +2266,15 @@ Public Class AxRstInput
 
         Dim alRst As New ArrayList
         Dim alCmt As New ArrayList
+        Dim alRstLog As New ArrayList
         Dim srMsg As String = ""
         Dim alCmtPS As String = ""
 
         Try
+            '20210312 JHS WBC DIFFCOUNT 검사 내용 로그로 남기기 
+            alRstLog = fnReg_log_info_before(rsRstflg, "1") ' 저장 전
+            '------------------------------------------------
+
             mbLeveCellGbn = False
 
             sbGet_Alert_Rule()
@@ -2281,7 +2303,8 @@ Public Class AxRstInput
                         End If
                         sBcNo = sBcNo_t
                     Next
-                    sbGet_CvtCmtInfo(sBcNo, False)
+                    'sbGet_CvtCmtInfo(sBcNo, False)
+                    sbGet_CvtCmtInfo_TestCd(sBcNo, False)
                 End With
 
             End If
@@ -2376,8 +2399,25 @@ Public Class AxRstInput
             End If
 
             Dim objRst As New LISAPP.APP_R.AxRstFn
+            Dim chkBool As Boolean = objRst.fnReg(STU_AUTHORITY.UsrID, alRst, alCmt)  ''' 결과등록 
 
-            Return objRst.fnReg(STU_AUTHORITY.UsrID, alRst, alCmt)  ''' 결과등록 
+
+            '20210312 JHS WBC DIFFCOUNT 검사 내용 로그로 남기기
+            If alRstLog.Count > 0 Then
+                Dim alRstLogtotal As New ArrayList
+
+                Dim testinfo As TESTINFO_LOG = CType(alRstLog(0), TESTINFO_LOG)
+                Dim bcnoDt As DataTable = objRst.fnget_LR010M_log(testinfo.BCNO.ToString)
+
+
+                alRstLogtotal = fnReg_log_info_after(bcnoDt, alRstLog, rsRstflg) ' 저장 후
+
+                Fn.log(alRstLogtotal)
+            End If
+            '------------------------------------------------
+
+
+            Return chkBool
 
         Catch ex As Exception
 
@@ -2388,6 +2428,82 @@ Public Class AxRstInput
         End Try
 
     End Function
+    '20210312 jhs wbc diff count 로그 남기기 위해 만든 함수
+    Public Function fnReg_log_info_before(ByVal rsRstflg As String, ByVal ProcessNum As String) As ArrayList
+        Try
+            Dim alTestInfoList As New ArrayList
+            Dim testcd As String = ""
+            With Me.spdResult
+                For ix = 0 To .MaxRows - 1
+                    Dim tmptestinfo_log As New TESTINFO_LOG
+                    .Row = ix
+                    .Col = .GetColFromID("testcd")
+                    Dim test As String = .Text
+                    If test = "LH103" Or test = "LH104" Or test = "LH105" Or test = "LH106" Or test = "LH107" Or test = "LH108" Or test = "LH108" Or test = "LH110" Or test = "LH111" Or test = "LH112" Or test = "LH12101" Or test = "LH12102" Or test = "LH12103" Or test = "LH12104" Or test = "LH12105" Or test = "LH12106" Then
+                        .Col = .GetColFromID("bcno") : tmptestinfo_log.BCNO = .Text
+                        .Col = .GetColFromID("testcd") : tmptestinfo_log.TESTCD = .Text
+                        .Col = .GetColFromID("spccd") : tmptestinfo_log.SPCCD = .Text
+                        .Col = .GetColFromID("tnmd") : tmptestinfo_log.TNMD = .Text
+                        .Col = .GetColFromID("slipcd") : tmptestinfo_log.PARTCD = .Text.Substring(0, 1)
+                        .Col = .GetColFromID("slipcd") : tmptestinfo_log.SLIPCD = .Text.Substring(1, 1)
+                        .Col = .GetColFromID("viewrst") : tmptestinfo_log.VIEWRST = .Text
+                        .Col = .GetColFromID("MWID") : tmptestinfo_log.MWID = .Text
+                        .Col = .GetColFromID("MWDT") : tmptestinfo_log.MWDT = .Text
+                        .Col = .GetColFromID("FNID") : tmptestinfo_log.FNID = .Text
+                        .Col = .GetColFromID("FNDT") : tmptestinfo_log.FNDT = .Text
+                        If rsRstflg = "22" Then
+                            tmptestinfo_log.CHKMW = True
+                        Else
+                            tmptestinfo_log.CHKMW = False
+                        End If
+                        tmptestinfo_log.ProcessNum = ProcessNum
+
+                        alTestInfoList.Add(tmptestinfo_log)
+                    End If
+                Next
+            End With
+
+            Return alTestInfoList
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
+        Finally
+        End Try
+    End Function
+    Public Function fnReg_log_info_after(ByVal dt As DataTable, ByVal alRstLog As ArrayList, ByVal rsRstflg As String) As ArrayList
+        Try
+            With Me.spdResult
+                For ix = 0 To dt.Rows.Count - 1
+                    Dim tmptestinfo_log As New TESTINFO_LOG
+                    .Row = ix
+                    tmptestinfo_log.BCNO = dt.Rows(ix).Item("bcno").ToString
+                    tmptestinfo_log.TESTCD = dt.Rows(ix).Item("testcd").ToString
+                    tmptestinfo_log.SPCCD = dt.Rows(ix).Item("spccd").ToString
+                    tmptestinfo_log.TNMD = dt.Rows(ix).Item("tnmd").ToString
+                    tmptestinfo_log.PARTCD = dt.Rows(ix).Item("partcd").ToString
+                    tmptestinfo_log.SLIPCD = dt.Rows(ix).Item("slipcd").ToString
+                    tmptestinfo_log.VIEWRST = dt.Rows(ix).Item("viewrst").ToString
+                    tmptestinfo_log.MWID = dt.Rows(ix).Item("mwid").ToString
+                    tmptestinfo_log.MWDT = dt.Rows(ix).Item("mwdt").ToString
+                    tmptestinfo_log.FNID = dt.Rows(ix).Item("fnid").ToString
+                    tmptestinfo_log.FNDT = dt.Rows(ix).Item("fndt").ToString
+                    If rsRstflg = "22" Then
+                        tmptestinfo_log.CHKMW = True
+                    Else
+                        tmptestinfo_log.CHKMW = False
+                    End If
+                    tmptestinfo_log.ProcessNum = "2" ' 저장 후 
+
+                    alRstLog.Add(tmptestinfo_log)
+                Next
+            End With
+
+            Return alRstLog
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
+        Finally
+        End Try
+    End Function
+    '-----------------------------------------------------------
 
     Public Function fnReg(ByVal rsRstflg As String, ByVal raRstVal As ArrayList, Optional ByVal rsCfmNm As String = "", Optional ByVal rsCfmSign As String = "") As Boolean
         '-- 검사항목별 결과 저장
@@ -2429,7 +2545,8 @@ Public Class AxRstInput
                     Next
                 End With
 
-                sbGet_CvtCmtInfo(strBcNo, True)
+                'sbGet_CvtCmtInfo(strBcNo, True)
+                sbGet_CvtCmtInfo_TestCd(strBcNo, True)
             End If
 
             Me.txtCmtCont_LostFocus(Nothing, Nothing)
@@ -2496,7 +2613,8 @@ Public Class AxRstInput
                 For ix As Integer = 0 To a_dr.Length - 1
                     Dim arlBuf() As String
 
-                    arlBuf = a_dr(ix).Item("cmt").ToString.Replace(Chr(10), "").Split(Chr(13))
+                    'arlBuf = a_dr(ix).Item("cmt").ToString.Replace(Chr(10), "").Split(Chr(13)) 'ori
+                    arlBuf = a_dr(ix).Item("cmtcont").ToString.Replace(Chr(10), "").Split(Chr(13))
 
                     For ix2 As Integer = 0 To arlBuf.Length - 1
                         Dim objBR As New ResultInfo_Cmt
@@ -3339,6 +3457,11 @@ Public Class AxRstInput
                     .Col = .GetColFromID("viwsub") : .Text = r_dt.Rows(ix - 1).Item("viwsub").ToString().Trim             '86
                     .Col = .GetColFromID("rerunrst") : .Text = r_dt.Rows(ix - 1).Item("rerunrst").ToString().Trim
                     .Col = .GetColFromID("cfmnm") : .Text = r_dt.Rows(ix - 1).Item("cfmnm").ToString().Trim
+                    '20210312 jhs 중간보고 최종보고일시 추가
+                    .Col = .GetColFromID("mwdt") : .Text = r_dt.Rows(ix - 1).Item("mwdt").ToString().Trim
+                    .Col = .GetColFromID("fndt") : .Text = r_dt.Rows(ix - 1).Item("fndt").ToString().Trim
+                    .Col = .GetColFromID("rrptst") : .Text = r_dt.Rows(ix - 1).Item("rrptst").ToString().Trim
+                    '---------------------------------------------
 
                     .Col = .GetColFromID("reftxt") : .Text = r_dt.Rows(ix - 1).Item("reftxt").ToString().Trim
 
@@ -5062,6 +5185,16 @@ Public Class AxRstInput
                     If strAlertL = "" Then strAlertL = strAlertH
 
                     If strORst.ToUpper = strAlertL.ToUpper Then strAlertMark = "A"
+                Case "7" '-- 결과코드 
+                    '20210810 jhs 결과코드 추가 
+                    'Alter 문자값 판단 추가(검사마스터에서 Alter 구분 [7] 문자결과(결과코드 설정) 선택, 기초마스터 결과코드에 Alter 설정한 경우 )
+                    Dim sTxtAlter As String = ""
+                    sTxtAlter = LISAPP.COMM.RstFn.fnGet_GraedValue_A(sTestCd, strORst)
+
+                    If sTxtAlter = "A" Then
+                        strAlertMark = "A"
+                    End If
+                    '----------------------------------------------------
             End Select
 
             If strAlertMark = "" And (strAlertGbn = "5" Or strAlertGbn = "A" Or strAlertGbn = "B" Or strAlertGbn = "C") Then
@@ -5807,6 +5940,7 @@ Public Class AxRstInput
     'End Sub
 
     Private Sub spdResult_TextTipFetch(ByVal sender As Object, ByVal e As AxFPSpreadADO._DSpreadEvents_TextTipFetchEvent) Handles spdResult.TextTipFetch
+
         With spdResult
             Select Case e.col
                 Case .GetColFromID("normal")
@@ -6353,7 +6487,7 @@ Public Class AxRstInput
         End Try
     End Sub
 
-    Private Sub btnDebug_cmt_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnDebug_cmt.Click
+    Private Sub btnDebug_cmt_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim dt As DataTable
         Dim fdebug As New FDEBUG
 
@@ -6502,4 +6636,202 @@ Public Class AxRstInput
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    'JJH 자동소견 >> 기초마스터에 설정된 검사코드의 파트별로 들어가도록 수정   ( 기존 : 왼쪽 조회성 분야 combobox에 따라 들어가다보니 한 검체에 여러 파트가 있을경우 중복으로 들어가는 문제 )
+    Private Sub sbGet_CvtCmtInfo_TestCd(ByVal rsBcNo As String, ByVal rbLisMode As Boolean)
+
+        Try
+            Dim alRst As New ArrayList
+            Dim sBcNo As String = ""
+            Dim sTestCd As String = "", sSpcCd As String = "", sOrgRst As String = "", sViewRst As String = "", sHLmark As String = "", sEqFlag As String = "", sRegNo As String = "",
+                rSlipcd As String = ""
+
+
+            With spdResult
+                For intRow As Integer = 1 To .MaxRows
+                    .Row = intRow
+                    .Col = .GetColFromID("bcno") : sBcNo = .Text.Replace("-", "")
+                    .Col = .GetColFromID("testcd") : sTestCd = .Text
+                    .Col = .GetColFromID("spccd") : sSpcCd = .Text
+                    .Col = .GetColFromID("orgrst") : sOrgRst = .Text
+                    .Col = .GetColFromID("viewrst") : sViewRst = .Text
+                    .Col = .GetColFromID("hlmark") : sHLmark = .Text
+                    .Col = .GetColFromID("eqflag") : sEqFlag = .Text
+                    .Col = .GetColFromID("slipcd") : rSlipcd = .Text
+
+                    If sOrgRst <> "" Then
+                        Dim objRst As New STU_CvtCmtInfo
+
+                        objRst.BcNo = sBcNo
+                        objRst.TestCd = sTestCd
+                        objRst.OrgRst = sOrgRst
+                        objRst.ViewRst = sViewRst
+                        objRst.HlMark = sHLmark
+                        objRst.EqFlag = sEqFlag
+                        objRst.SlipCd = rSlipcd
+
+                        alRst.Add(objRst)
+
+                        Dim alCvtCmt As New ArrayList
+                        alCvtCmt = LISAPP.COMM.CvtCmt.fnCvtCmtInfo(rsBcNo, alRst, rSlipcd, rbLisMode)
+
+                        If alCvtCmt.Count < 1 Then Continue For
+
+                        Dim sCmt$ = ""
+                        Dim sCmt2 As String = ""
+
+                        For intIdx As Integer = 0 To alCvtCmt.Count - 1
+
+                            sCmt += CType(alCvtCmt(intIdx), STU_CvtCmtInfo).CmtCont
+
+                            If CType(alCvtCmt(intIdx), STU_CvtCmtInfo).CmtCont = "" Then
+                                Me.txtCmtCont.Text = Me.txtCmtCont.Text.Replace(CType(alCvtCmt(intIdx), STU_CvtCmtInfo).CmtCont_Base + vbCrLf, "")
+                                Me.txtCmtCont.Text = Me.txtCmtCont.Text.Replace(CType(alCvtCmt(intIdx), STU_CvtCmtInfo).CmtCont_Base, "")
+                            End If
+
+                            '// 검사의 분야를 combobox index 설정
+                            For intSlip As Integer = 0 To Me.cboSlip.Items.Count - 1
+                                If rSlipcd = Ctrl.Get_Code(Me.cboSlip.Items(intSlip).ToString) Then
+                                    Me.cboSlip.SelectedIndex = intSlip
+                                End If
+                            Next
+                        Next
+
+                        '// YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
+                        sCmt2 = Pat_CBC_Rst(sTestCd)
+
+                        Dim alTmp As New ArrayList
+                        Dim sBuf1() As String = Me.txtCmtCont.Text.Replace(Chr(10), "").Split(Chr(13))
+                        Dim sBuf2() As String = sCmt.Replace(Chr(10), "").Split(Chr(13))
+                        Dim sBuf3() As String = sCmt2.Replace(Chr(10), "").Split(Chr(13))
+
+
+                        For ix As Integer = 0 To sBuf1.Length - 1
+                            alTmp.Add(sBuf1(ix).Trim())
+                        Next
+
+
+                        sCmt = ""
+                        sCmt2 = ""
+
+
+                        '결과소견 변경여부 체크
+                        For ix As Integer = 0 To sBuf2.Length - 1
+                            If alTmp.Contains(sBuf2(ix).Trim) = False Then
+                                sCmt += sBuf2(ix) + vbCrLf
+                            End If
+                        Next
+
+                        '결핵균검사 변경여부 체크
+                        For ix As Integer = 0 To sBuf3.Length - 1
+                            If alTmp.Contains(sBuf3(ix).Trim) = False Then
+                                'If sCmt2.Length = 0 Then
+                                '    sCmt2 += sBuf3(ix) + vbCrLf
+                                'Else
+                                '    sCmt2 += sBuf3(ix) + vbCrLf
+                                'End If
+                                sCmt2 += sBuf3(ix) + vbCrLf
+                            End If
+                        Next
+
+                        '결과자동소견 넣기
+                        If sCmt <> "" Then
+                            If Me.txtCmtCont.Text = "" Then
+                                Me.txtCmtCont.Text = sCmt
+                            Else
+                                Me.txtCmtCont.Text += vbCrLf + sCmt
+                            End If
+                        End If
+
+                        '결핵균검사 소견 넣기
+                        If sCmt2 <> "" Then
+                            If Me.txtCmtCont.Text = "" Then
+                                Me.txtCmtCont.Text = sCmt2
+                            Else
+                                Me.txtCmtCont.Text += vbCrLf + sCmt2
+                            End If
+                        End If
+
+
+                        txtCmtCont_LostFocus(Nothing, Nothing)
+
+                    End If
+                Next
+            End With
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message, ex))
+
+        End Try
+    End Sub
+
+    Private Function Pat_CBC_Rst(ByVal sTestcd As String) As String
+
+        Dim sCmt2 As String = ""
+
+        '< 2016-11-22 YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
+        If sTestcd = "LI611" Or sTestcd = "LI612" Or sTestcd = "LI613" Then
+            Dim a_dt As DataTable = New DataTable
+            Dim stestisno611 As String = "", stestisno612 As String = "", stest611rdt As String = "", stest611rst As String = "", stest611rstunit As String = "", _
+            stest612rstunit As String = "", stest612rdt As String = "", stest612rst As String = ""
+
+            'If msRegNoCmt <> "" Then 'LI611, LI612 검사로 판단되면
+            a_dt = LISAPP.COMM.RstFn.fnGet_Pat_Recent_Rst(msRegNo) '환자의 최근 CBC검사 항목 가져오기
+
+            '불러온 이전 결과 없을 경우 "기존의뢰 없음" 표시 
+            If a_dt.Rows.Count = 0 Then
+                If sCmt2 = "" Then
+                    sCmt2 += "4. 과거 일반혈액 검사결과 " '2019-07-10 JJH 3->4 수정
+                    sCmt2 += vbNewLine
+                    sCmt2 += "   검사항목                                   검사시행날짜      실제결과 "
+                    sCmt2 += vbNewLine
+                    sCmt2 += "   WBC Count (CBC)                            기존의뢰 없음"
+                    sCmt2 += vbNewLine
+                    sCmt2 += "   Lymphocyte Count (WBC Differential Count)  기존의뢰 없음"
+                End If
+            Else
+                '-결과 있을 경우 이전 결과 변수 담기
+                For i As Integer = 0 To a_dt.Rows.Count - 1
+                    If a_dt.Rows(i).Item("testcd").ToString.Equals("LH101") Then
+                        stest611rdt = a_dt.Rows(i).Item("rstdtd").ToString
+                        stest611rst = a_dt.Rows(i).Item("viewrst").ToString
+                        stest611rstunit = a_dt.Rows(i).Item("rstunit").ToString
+                    ElseIf a_dt.Rows(i).Item("testcd").ToString.Equals("LH12103") Then
+                        stest612rdt = a_dt.Rows(i).Item("rstdtd").ToString
+                        stest612rst = a_dt.Rows(i).Item("viewrst").ToString
+                        stest612rstunit = a_dt.Rows(i).Item("rstunit").ToString
+                    End If
+                Next
+                '-
+                If stest611rdt = "" Then
+                    stestisno611 = "기존의뢰 없음"
+                ElseIf stest612rdt = "" Then
+                    stestisno612 = "기존의뢰 없음"
+                End If
+                '-자동 소견 양식 만들고 이전 결과 넣어 주기
+                sCmt2 += "4. 과거 일반혈액 검사결과 "  '2019-07-10 JJH 3->4 수정
+                sCmt2 += vbNewLine
+                sCmt2 += "   검사항목                                   검사시행날짜      실제결과 "
+                sCmt2 += vbNewLine
+                If stestisno611 = "" Then
+                    sCmt2 += "   WBC Count (CBC)                            " + stest611rdt + Space(8) + stest611rst + Space(1) + stest611rstunit
+                Else
+                    sCmt2 += "   WBC Count (CBC)                            " + stestisno611
+                End If
+                sCmt2 += vbNewLine
+                If stestisno612 = "" Then
+                    sCmt2 += "   Lymphocyte Count (WBC Differential Count)  " + stest612rdt + Space(8) + stest612rst + Space(1) + stest612rstunit
+                Else
+                    sCmt2 += "   Lymphocyte Count (WBC Differential Count)  " + stestisno612
+                End If
+                '-
+            End If
+
+        End If
+
+        Return sCmt2
+
+    End Function
+
 End Class
+
