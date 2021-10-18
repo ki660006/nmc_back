@@ -1265,7 +1265,6 @@ Public Class FGS13
             xlsWkS.Range("D40:D42").Value = ""
             xlsWkS.Range("D46:F54").Value = ""
             xlsWkS.Range("H46:H54").Value = ""
-            xlsWkS.Range("B56").Value = ""
             xlsWkS.Range("B58:D58").Value = ""
             xlsWkS.Range("B60").Value = ""
             xlsWkS.Range("B62").Value = ""
@@ -1321,6 +1320,7 @@ Public Class FGS13
 
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest(sBcno, "", False) ' 지금 출력하는 검체번호의 cytospin 내용 가져오기 
                         xlsWkS.Range("B25").Value = dt.Rows(0).Item("spcnm").ToString
+                        xlsWkS.Range("B25").Columns.AutoFit()
                         xlsWkS.Range("C25").Value = "O"
 
                         'cytospin
@@ -1345,7 +1345,7 @@ Public Class FGS13
                         End If
 
                         '검체종류 중 LDH체액검사 Blood
-                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LH105", "S01")
+                        dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LC105", "S01")
                         If dt.Rows.Count > 0 Then
                             xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[Blood] : " + dt.Rows(0).Item("viewrst").ToString + "  " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
                             rowPlus += 1

@@ -14,6 +14,9 @@ Public Class FGJ06
     Inherits System.Windows.Forms.Form
 
     Private Const msFile As String = "File : FGJ06.vb, Class : J01" & vbTab
+    '20211015 jhs 현재 검색한 검채 색 다른 것으로 변경으로 인해 소스 변경 
+    Dim bfBcno As String = ""
+    '------------------------------------------------------
 
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents dtpDateE As System.Windows.Forms.DateTimePicker
@@ -912,7 +915,9 @@ Public Class FGJ06
         Me.txtEtc.Text = ""
         Me.txtBcNo.Text = ""
         Me.chkQryAll.Checked = False
-
+        '20211015 jhs 현재 검색한 검채 색 다른 것으로 변경으로 인해 소스 변경 
+        bfBcno = ""
+        '------------------------------------
 #If DEBUG Then
         Me.Button1.Visible = True
 #Else
@@ -1018,6 +1023,9 @@ Public Class FGJ06
                 End If
             End If
 
+            '20211015 jhs 현재 검색한 검채 색 다른 것으로 변경으로 인해 소스 변경 
+            bfBcno = ""
+            '------------------------------------
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -1039,7 +1047,6 @@ Public Class FGJ06
         If e.KeyCode <> Windows.Forms.Keys.Enter Then Return
 
         Try
-
             Me.txtBcNo.Text = Me.txtBcNo.Text.Replace("-", "").Trim
 
             If Me.txtBcNo.Text.Length <> 15 Then
@@ -1054,13 +1061,28 @@ Public Class FGJ06
                         .Row = ix
                         .Col = .GetColFromID("bcno") : Dim sBcNo As String = .Text
 
+                        '20211015 jhs 현재 검색한 검채 색 다른 것으로 변경으로 인해 소스 변경 
+                        'If sBcNo = Me.txtBcNo.Text Then
+                        '    .Row = ix
+                        '    .Col = -1
+                        '    .BackColor = Color.Salmon
+                        'End If
                         If sBcNo = Me.txtBcNo.Text Then
+                            .Row = ix
+                            .Col = -1
+                            '.BackColor = Color.LightGreen
+                            .BackColor = Color.Salmon
+                        ElseIf bfBcno = sBcNo Then
                             .Row = ix
                             .Col = -1
                             .BackColor = Color.LightGreen
                         End If
+                        '------------------------------
                     End With
                 Next
+                '20211015 jhs 현재 검색한 검채 색 다른 것으로 변경으로 인해 소스 변경 
+                bfBcno = Me.txtBcNo.Text
+                '------------------------------
                 Me.txtBcNo.Text = ""
             End If
             Me.txtBcNo.Focus()

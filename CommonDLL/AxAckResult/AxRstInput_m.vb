@@ -3087,6 +3087,7 @@ Public Class AxRstInput_m
                         ri.CfmNm = ""
                         ri.CfmSign = ""
                         ri.CriticalMark = sCritical
+                        ri.AlertMark = sAlert '20211012 jhs alert 추가
 
                         If sRstFlg = "3" Then
                             ri.CfmNm = IIf(rsCfmNm = "", sCfmNm, rsCfmNm).ToString
@@ -8444,4 +8445,5 @@ Friend Class AntiInfo
     Public RefS As String = ""
     Public RptYn As String = ""
 End Class
+
 

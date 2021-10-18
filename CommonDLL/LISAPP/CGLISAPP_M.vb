@@ -2733,7 +2733,7 @@ NEXT_CMT:
                 Dim sCM As String = fnEdit_LR_CM(iR, r_rstinfo_Buf.OrgRst, r_rstinfo_Buf.CriticalMark)
 
                 '7) Alert Mark
-                Dim sAM As String = fnEdit_LR_AM(iR, r_rstinfo_Buf.OrgRst, sViewRst, r_rstinfo_Buf.EqFlag, sPM, sDM)
+                Dim sAM As String = fnEdit_LR_AM(iR, r_rstinfo_Buf.OrgRst, sViewRst, r_rstinfo_Buf.EqFlag, sPM, sDM, r_rstinfo_Buf.AlertMark)
 
                 '2) 번을 이쪽으로 옮김...
                 If fnEdit_LR_ViolateNum(iR, r_rstinfo_Buf.OrgRst) Then sAM = "E"
@@ -2781,8 +2781,8 @@ NEXT_CMT:
             End Try
         End Function
 
-        Private Function fnEdit_LR_AM(ByVal riR As Integer, ByVal rsOrgRst As String, ByVal rsViewRst As String, ByVal rsEqFlag As String, _
-                                        ByVal rsPanicMark As String, ByVal rsDeltaMark As String) As String
+        Private Function fnEdit_LR_AM(ByVal riR As Integer, ByVal rsOrgRst As String, ByVal rsViewRst As String, ByVal rsEqFlag As String,
+                                        ByVal rsPanicMark As String, ByVal rsDeltaMark As String, Optional ByVal rsAlertMark As String = "") As String
             Dim sFn As String = "Private Function fnEdit_LR_AM(Integer, String, String, tring, String, String) As String"
 
             Try
@@ -2832,6 +2832,8 @@ NEXT_CMT:
                             If rsOrgRst.ToUpper = sAlertL.ToUpper Then Return "A"
 
                         End If
+                    Case "7"    '-- 문자값 비고
+                        Return rsAlertMark
                 End Select
 
                 '-- Alert Rule 사용
@@ -2902,7 +2904,7 @@ NEXT_CMT:
                     If m_dt_rst.Rows(riR).Item("a_baccd").ToString.Trim <> "" Then
                         iCnt += 1
                         For ix As Integer = 0 To al_Bac.Count - 1
-                            If m_dt_rst.Rows(riR).Item("testcd").ToString = CType(al_Bac(ix), ResultInfo_Bac).TestCd And _
+                            If m_dt_rst.Rows(riR).Item("testcd").ToString = CType(al_Bac(ix), ResultInfo_Bac).TestCd And
                                m_dt_rst.Rows(riR).Item("a_baccd").ToString.IndexOf(CType(al_Bac(ix), ResultInfo_Bac).BacCd + ",") >= 0 Then iAlert += 1
                         Next
                     End If
