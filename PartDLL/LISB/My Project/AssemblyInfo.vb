@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("19f24d9b-fa7c-4926-9c46-612e69f1c1ef")> 
+<Assembly: Guid("19f24d9b-fa7c-4926-9c46-612e69f1c1ef")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -86,5 +86,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.379 --> 2021/04/19 : 수혈처방조회 처방저장일시 컬럼 추가, 반납폐기율 조회 부서 한줄로 표현
 'Version 3.1.10.380 --> 2021/05/17 : 수혈의뢰 조회 화면 iogbn응급 추가, 입원시 dsc 낮병동 같이 조회, 혈액원 excel데이터 출력 시 구분 될 수 있도록 데이터 수정
 'Version 3.1.10.381 --> 2021/07/26 : 출고스티커 교차미필시 응급 표시 
+'Version 3.1.10.382 --> 2021/10/25 : 불출요청서 혈액번호 일치 하는지 확인하는 로직 구현
+'Version 3.1.10.383 --> 2021/10/25 : 불출요청서 혈액번호 일치 하는지 확인하는 로직 구현(재배포:글자 및 로직 수정)
+'Version 3.1.10.384 --> 2021/10/25 : 불출요청서 혈액번호 일치 하는지 확인하는 로직 구현(롤백)
 
-<Assembly: AssemblyVersion("3.1.10.381")> 
+<Assembly: AssemblyVersion("3.1.10.384")>

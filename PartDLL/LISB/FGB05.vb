@@ -130,88 +130,88 @@ Public Class FGB05
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnExcel As System.Windows.Forms.Button
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB05))
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.txtComment = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
-        Me.spdComList = New AxFPSpreadADO.AxfpSpread
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.lblNewGbn = New System.Windows.Forms.Label
-        Me.Panel5 = New System.Windows.Forms.Panel
-        Me.rdoAuto0 = New System.Windows.Forms.RadioButton
-        Me.rdoAuto1 = New System.Windows.Forms.RadioButton
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.cboRH = New System.Windows.Forms.ComboBox
-        Me.cboBType = New System.Windows.Forms.ComboBox
-        Me.Panel7 = New System.Windows.Forms.Panel
-        Me.rdoBldQnt0 = New System.Windows.Forms.RadioButton
-        Me.rdoBldQnt1 = New System.Windows.Forms.RadioButton
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.Panel6 = New System.Windows.Forms.Panel
-        Me.rdoBld4 = New System.Windows.Forms.RadioButton
-        Me.rdoBld3 = New System.Windows.Forms.RadioButton
-        Me.rdoBld2 = New System.Windows.Forms.RadioButton
-        Me.rdoBld0 = New System.Windows.Forms.RadioButton
-        Me.rdoBld1 = New System.Windows.Forms.RadioButton
-        Me.Label63 = New System.Windows.Forms.Label
-        Me.lblBType = New System.Windows.Forms.Label
-        Me.txtBldQnt = New System.Windows.Forms.TextBox
-        Me.txtBType = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.cboInPlace = New System.Windows.Forms.ComboBox
-        Me.txtBldNo = New System.Windows.Forms.TextBox
-        Me.Label21 = New System.Windows.Forms.Label
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.spdBldInList = New AxFPSpreadADO.AxfpSpread
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.btnExcel = New System.Windows.Forms.Button
-        Me.btnDelete = New System.Windows.Forms.Button
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.lblDateGbn = New System.Windows.Forms.Label
-        Me.dtpDateE = New System.Windows.Forms.DateTimePicker
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.btnSearch = New System.Windows.Forms.Button
-        Me.dtpDateS = New System.Windows.Forms.DateTimePicker
-        Me.Panel4 = New System.Windows.Forms.Panel
-        Me.spdPastList = New AxFPSpreadADO.AxfpSpread
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.dtpDonDt = New System.Windows.Forms.DateTimePicker
-        Me.dtpInDt = New System.Windows.Forms.DateTimePicker
-        Me.Panel3 = New System.Windows.Forms.Panel
-        Me.btnCSV = New CButtonLib.CButton
-        Me.btnBldIn = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.btnExit = New CButtonLib.CButton
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox
-        Me.txtPatnm = New System.Windows.Forms.TextBox
-        Me.txtRegNo = New System.Windows.Forms.TextBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.cboComCd = New System.Windows.Forms.ComboBox
-        Me.lblComcd = New System.Windows.Forms.Label
-        Me.cboTimeS = New System.Windows.Forms.ComboBox
-        Me.cboTimeE = New System.Windows.Forms.ComboBox
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtComment = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.spdComList = New AxFPSpreadADO.AxfpSpread()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblNewGbn = New System.Windows.Forms.Label()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.rdoAuto0 = New System.Windows.Forms.RadioButton()
+        Me.rdoAuto1 = New System.Windows.Forms.RadioButton()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cboRH = New System.Windows.Forms.ComboBox()
+        Me.cboBType = New System.Windows.Forms.ComboBox()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.rdoBldQnt0 = New System.Windows.Forms.RadioButton()
+        Me.rdoBldQnt1 = New System.Windows.Forms.RadioButton()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.rdoBld4 = New System.Windows.Forms.RadioButton()
+        Me.rdoBld3 = New System.Windows.Forms.RadioButton()
+        Me.rdoBld2 = New System.Windows.Forms.RadioButton()
+        Me.rdoBld0 = New System.Windows.Forms.RadioButton()
+        Me.rdoBld1 = New System.Windows.Forms.RadioButton()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.lblBType = New System.Windows.Forms.Label()
+        Me.txtBldQnt = New System.Windows.Forms.TextBox()
+        Me.txtBType = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboInPlace = New System.Windows.Forms.ComboBox()
+        Me.txtBldNo = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.spdBldInList = New AxFPSpreadADO.AxfpSpread()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cboTimeE = New System.Windows.Forms.ComboBox()
+        Me.cboTimeS = New System.Windows.Forms.ComboBox()
+        Me.cboComCd = New System.Windows.Forms.ComboBox()
+        Me.lblComcd = New System.Windows.Forms.Label()
+        Me.btnExcel = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblDateGbn = New System.Windows.Forms.Label()
+        Me.dtpDateE = New System.Windows.Forms.DateTimePicker()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.spdPastList = New AxFPSpreadADO.AxfpSpread()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.dtpDonDt = New System.Windows.Forms.DateTimePicker()
+        Me.dtpInDt = New System.Windows.Forms.DateTimePicker()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnCSV = New CButtonLib.CButton()
+        Me.btnBldIn = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.txtPatnm = New System.Windows.Forms.TextBox()
+        Me.txtRegNo = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.spdComList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -233,7 +233,7 @@ Public Class FGB05
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.txtComment)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Panel2)
@@ -272,7 +272,7 @@ Public Class FGB05
         'Panel2
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.spdComList)
         Me.Panel2.Location = New System.Drawing.Point(8, 12)
@@ -283,8 +283,8 @@ Public Class FGB05
         'spdComList
         '
         Me.spdComList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdComList.DataSource = Nothing
         Me.spdComList.Location = New System.Drawing.Point(0, 0)
         Me.spdComList.Name = "spdComList"
@@ -634,7 +634,7 @@ Public Class FGB05
         'Label12
         '
         Me.Label12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label12.BackColor = System.Drawing.Color.Beige
         Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label12.Font = New System.Drawing.Font("굴림", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -649,7 +649,7 @@ Public Class FGB05
         'Panel1
         '
         Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.spdBldInList)
         Me.Panel1.Location = New System.Drawing.Point(4, 36)
@@ -670,8 +670,8 @@ Public Class FGB05
         'GroupBox3
         '
         Me.GroupBox3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.cboTimeE)
         Me.GroupBox3.Controls.Add(Me.cboTimeS)
         Me.GroupBox3.Controls.Add(Me.cboComCd)
@@ -690,6 +690,50 @@ Public Class FGB05
         Me.GroupBox3.Size = New System.Drawing.Size(878, 566)
         Me.GroupBox3.TabIndex = 138
         Me.GroupBox3.TabStop = False
+        '
+        'cboTimeE
+        '
+        Me.cboTimeE.FormattingEnabled = True
+        Me.cboTimeE.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboTimeE.Location = New System.Drawing.Point(324, 17)
+        Me.cboTimeE.Name = "cboTimeE"
+        Me.cboTimeE.Size = New System.Drawing.Size(41, 20)
+        Me.cboTimeE.TabIndex = 204
+        '
+        'cboTimeS
+        '
+        Me.cboTimeS.FormattingEnabled = True
+        Me.cboTimeS.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboTimeS.Location = New System.Drawing.Point(179, 17)
+        Me.cboTimeS.Name = "cboTimeS"
+        Me.cboTimeS.Size = New System.Drawing.Size(41, 20)
+        Me.cboTimeS.TabIndex = 203
+        '
+        'cboComCd
+        '
+        Me.cboComCd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboComCd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.cboComCd.FormattingEnabled = True
+        Me.cboComCd.Location = New System.Drawing.Point(430, 17)
+        Me.cboComCd.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboComCd.MaxDropDownItems = 20
+        Me.cboComCd.Name = "cboComCd"
+        Me.cboComCd.Size = New System.Drawing.Size(224, 20)
+        Me.cboComCd.TabIndex = 199
+        '
+        'lblComcd
+        '
+        Me.lblComcd.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblComcd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblComcd.ForeColor = System.Drawing.Color.Black
+        Me.lblComcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblComcd.Location = New System.Drawing.Point(366, 17)
+        Me.lblComcd.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblComcd.Name = "lblComcd"
+        Me.lblComcd.Size = New System.Drawing.Size(63, 21)
+        Me.lblComcd.TabIndex = 200
+        Me.lblComcd.Text = "성분제제"
+        Me.lblComcd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnExcel
         '
@@ -716,7 +760,7 @@ Public Class FGB05
         'Label9
         '
         Me.Label9.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label9.Font = New System.Drawing.Font("굴림", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -778,8 +822,8 @@ Public Class FGB05
         'Panel4
         '
         Me.Panel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel4.Controls.Add(Me.spdPastList)
         Me.Panel4.Location = New System.Drawing.Point(4, 72)
@@ -862,7 +906,7 @@ Public Class FGB05
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCSV.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnCSV.ColorFillBlend = CBlendItems1
         Me.btnCSV.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnCSV.Corners.All = CType(6, Short)
@@ -874,8 +918,8 @@ Public Class FGB05
         Me.btnCSV.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnCSV.FocalPoints.CenterPtX = 1.0!
         Me.btnCSV.FocalPoints.CenterPtY = 0.72!
-        Me.btnCSV.FocalPoints.FocusPtX = 0.0!
-        Me.btnCSV.FocalPoints.FocusPtY = 0.0!
+        Me.btnCSV.FocalPoints.FocusPtX = 0!
+        Me.btnCSV.FocalPoints.FocusPtY = 0!
         DesignerRectTracker2.IsActive = False
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCSV.FocusPtTracker = DesignerRectTracker2
@@ -889,12 +933,10 @@ Public Class FGB05
         Me.btnCSV.Name = "btnCSV"
         Me.btnCSV.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnCSV.SideImage = Nothing
-        Me.btnCSV.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCSV.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnCSV.Size = New System.Drawing.Size(107, 25)
         Me.btnCSV.TabIndex = 187
         Me.btnCSV.Text = "CSV 입고"
-        Me.btnCSV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnCSV.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnCSV.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -905,7 +947,7 @@ Public Class FGB05
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnBldIn.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnBldIn.ColorFillBlend = CBlendItems2
         Me.btnBldIn.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnBldIn.Corners.All = CType(6, Short)
@@ -917,8 +959,8 @@ Public Class FGB05
         Me.btnBldIn.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnBldIn.FocalPoints.CenterPtX = 1.0!
         Me.btnBldIn.FocalPoints.CenterPtY = 0.72!
-        Me.btnBldIn.FocalPoints.FocusPtX = 0.0!
-        Me.btnBldIn.FocalPoints.FocusPtY = 0.0!
+        Me.btnBldIn.FocalPoints.FocusPtX = 0!
+        Me.btnBldIn.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnBldIn.FocusPtTracker = DesignerRectTracker4
@@ -932,12 +974,10 @@ Public Class FGB05
         Me.btnBldIn.Name = "btnBldIn"
         Me.btnBldIn.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnBldIn.SideImage = Nothing
-        Me.btnBldIn.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnBldIn.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnBldIn.Size = New System.Drawing.Size(107, 25)
         Me.btnBldIn.TabIndex = 188
         Me.btnBldIn.Text = "입  고(F2)"
-        Me.btnBldIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnBldIn.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnBldIn.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -948,7 +988,7 @@ Public Class FGB05
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnClear.ColorFillBlend = CBlendItems3
         Me.btnClear.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnClear.Corners.All = CType(6, Short)
@@ -960,8 +1000,8 @@ Public Class FGB05
         Me.btnClear.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnClear.FocalPoints.CenterPtX = 1.0!
         Me.btnClear.FocalPoints.CenterPtY = 0.72!
-        Me.btnClear.FocalPoints.FocusPtX = 0.0!
-        Me.btnClear.FocalPoints.FocusPtY = 0.0!
+        Me.btnClear.FocalPoints.FocusPtX = 0!
+        Me.btnClear.FocalPoints.FocusPtY = 0!
         DesignerRectTracker6.IsActive = False
         DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.FocusPtTracker = DesignerRectTracker6
@@ -975,12 +1015,10 @@ Public Class FGB05
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(107, 25)
         Me.btnClear.TabIndex = 186
         Me.btnClear.Text = "화면정리(F4)"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -991,7 +1029,7 @@ Public Class FGB05
         DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.CenterPtTracker = DesignerRectTracker7
         CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems4.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems4.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnExit.ColorFillBlend = CBlendItems4
         Me.btnExit.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnExit.Corners.All = CType(6, Short)
@@ -1003,8 +1041,8 @@ Public Class FGB05
         Me.btnExit.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExit.FocalPoints.CenterPtX = 1.0!
         Me.btnExit.FocalPoints.CenterPtY = 0.76!
-        Me.btnExit.FocalPoints.FocusPtX = 0.0!
-        Me.btnExit.FocalPoints.FocusPtY = 0.0!
+        Me.btnExit.FocalPoints.FocusPtX = 0!
+        Me.btnExit.FocalPoints.FocusPtY = 0!
         DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.FocusPtTracker = DesignerRectTracker8
@@ -1018,12 +1056,10 @@ Public Class FGB05
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(98, 25)
         Me.btnExit.TabIndex = 185
         Me.btnExit.Text = "종료(Esc)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1042,7 +1078,7 @@ Public Class FGB05
         'GroupBox5
         '
         Me.GroupBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.Panel1)
         Me.GroupBox5.Location = New System.Drawing.Point(389, 566)
@@ -1096,50 +1132,6 @@ Public Class FGB05
         Me.Label13.Tag = "0"
         Me.Label13.Text = "등록번호"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'cboComCd
-        '
-        Me.cboComCd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboComCd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.cboComCd.FormattingEnabled = True
-        Me.cboComCd.Location = New System.Drawing.Point(430, 17)
-        Me.cboComCd.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboComCd.MaxDropDownItems = 20
-        Me.cboComCd.Name = "cboComCd"
-        Me.cboComCd.Size = New System.Drawing.Size(224, 20)
-        Me.cboComCd.TabIndex = 199
-        '
-        'lblComcd
-        '
-        Me.lblComcd.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
-        Me.lblComcd.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.lblComcd.ForeColor = System.Drawing.Color.Black
-        Me.lblComcd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblComcd.Location = New System.Drawing.Point(366, 17)
-        Me.lblComcd.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblComcd.Name = "lblComcd"
-        Me.lblComcd.Size = New System.Drawing.Size(63, 21)
-        Me.lblComcd.TabIndex = 200
-        Me.lblComcd.Text = "성분제제"
-        Me.lblComcd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'cboTimeS
-        '
-        Me.cboTimeS.FormattingEnabled = True
-        Me.cboTimeS.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboTimeS.Location = New System.Drawing.Point(179, 17)
-        Me.cboTimeS.Name = "cboTimeS"
-        Me.cboTimeS.Size = New System.Drawing.Size(41, 20)
-        Me.cboTimeS.TabIndex = 203
-        '
-        'cboTimeE
-        '
-        Me.cboTimeE.FormattingEnabled = True
-        Me.cboTimeE.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboTimeE.Location = New System.Drawing.Point(324, 17)
-        Me.cboTimeE.Name = "cboTimeE"
-        Me.cboTimeE.Size = New System.Drawing.Size(41, 20)
-        Me.cboTimeE.TabIndex = 204
         '
         'FGB05
         '

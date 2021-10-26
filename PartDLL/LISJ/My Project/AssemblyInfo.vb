@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)> 
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("90492b35-a2ec-4b81-906a-593ffe864a84")> 
+<Assembly: Guid("90492b35-a2ec-4b81-906a-593ffe864a84")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -56,6 +56,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.354 --> 2021/01/04 : 위탁검사리스트 채혈시 주의사항 삽입
 'Version 3.1.10.355 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
 'Version 3.1.10.356 --> 2021/06/15 : 바코드 특정검사 음영처리
+'Version 3.1.10.357 --> 2021/10/18 : 위탁검사 리스트 접수에서 현재와 과거 번호 색 상이하도록 수정 
 
-<Assembly: AssemblyVersion("3.1.10.356")> 
+<Assembly: AssemblyVersion("3.1.10.357")>
 

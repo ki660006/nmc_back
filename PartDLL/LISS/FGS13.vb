@@ -1347,6 +1347,7 @@ Public Class FGS13
                         '검체종류 중 LDH체액검사 Blood
                         dt = LISAPP.APP_S.WkFn.fnGet_WorkList_BFtest_spc(sRegNo, "LC105", "S01")
                         If dt.Rows.Count > 0 Then
+                            Dim test As String = "LDH[Blood] : " + dt.Rows(0).Item("viewrst").ToString + "  " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
                             xlsWkS.Range("D" + (rowNum + rowPlus).ToString).Value = "LDH[Blood] : " + dt.Rows(0).Item("viewrst").ToString + "  " + dt.Rows(0).Item("rstunit").ToString + " (" + dt.Rows(0).Item("tkdt").ToString + ")"
                             rowPlus += 1
                         Else

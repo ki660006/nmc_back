@@ -189,6 +189,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.528 --> 2021/09/02 : 병동제외체크박스 생성, 로직 변경
 'Version 3.1.10.529 --> 2021/09/03 : 병원체 내용 전송한것은 색변경되게 수정
 'Version 3.1.10.530 --> 2021/09/27 : 위탁검사 등록번호 변경 배포 
+'Version 3.1.10.531 --> 2021/10/18 : 혈액 반납/폐기율 조회 시 내용 및 정렬 순서 변경
 
-<Assembly: AssemblyVersion("3.1.10.530")>
+<Assembly: AssemblyVersion("3.1.10.531")>
 

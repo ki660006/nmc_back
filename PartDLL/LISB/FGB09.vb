@@ -201,7 +201,7 @@ Public Class FGB09
 
             ' 환자정보 디스플레이
             Me.AxTnsPatinfo1.sb_setPatinfo(sRegno, sOrdDt, sTnsnum)
-           
+
 
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
@@ -395,7 +395,7 @@ Public Class FGB09
         Catch ex As Exception
             fn_PopMsg(Me, "E", ex.Message)
         End Try
-        
+
     End Sub
 
     ' 가출고리스트 조회
@@ -686,12 +686,63 @@ Public Class FGB09
     Private Sub txtBldno_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtBldno.Click
         Me.txtBldno.SelectAll()
     End Sub
+    '20211021 jhs 혈액불출요청서 혈액번호 확인
+    Public Function chkTxtBlood() As Boolean
+
+        Try
+            Dim msg As String = ""
+
+            If Me.txtRegno.Text = "" Then
+                msg = "등록번호를 입력해주세요"
+                fn_PopMsg(Me, "E"c, msg)
+                Me.txtRegno.Focus()
+                Me.txtRegno.SelectAll()
+                Return False
+            ElseIf Me.txtRegno.Text <> Me.AxTnsPatinfo1.Regno Then
+                Me.txtRegno.Text = Me.txtRegno.Text.PadLeft(PRG_CONST.Len_RegNo, "0"c)
+                msg = "입력한 등록번호와 조회한 등록번호가 상이합니다." + vbCrLf + "입력 등록번호 : " + Me.txtRegno.Text + vbCrLf + "조회한 등록번호: " + Me.AxTnsPatinfo1.Regno
+                fn_PopMsg(Me, "E"c, msg)
+                Me.txtRequestBlood.Focus()
+                Me.txtRequestBlood.SelectAll()
+                Return False
+            ElseIf Me.txtRequestBlood.Text = "" Then
+                Me.txtRegno.Text = Me.txtRegno.Text.PadLeft(PRG_CONST.Len_RegNo, "0"c)
+                msg = "불출요청서 혈액번호를 작성해 주세요."
+                fn_PopMsg(Me, "E"c, msg)
+                Me.txtRequestBlood.Focus()
+                Me.txtRequestBlood.SelectAll()
+                Return False
+            ElseIf Me.txtBldno.Text = "" Then
+                Me.txtRegno.Text = Me.txtRegno.Text.PadLeft(PRG_CONST.Len_RegNo, "0"c)
+                msg = "혈액번호를 입력해주세요."
+                Me.txtBldno.Focus()
+                Me.txtBldno.SelectAll()
+                fn_PopMsg(Me, "E"c, msg)
+                Return False
+            ElseIf Me.txtRequestBlood.Text <> Me.txtBldno.Text Then
+                Me.txtRegno.Text = Me.txtRegno.Text.PadLeft(PRG_CONST.Len_RegNo, "0"c)
+                msg = "불출 요청서 혈액번호와 출고혈액번호가 상이합니다." + vbCrLf + "불출요청서 혈액번호 : " + Me.txtRequestBlood.Text + vbCrLf + "출고 혈액번호 : " + Me.txtBldno.Text
+                fn_PopMsg(Me, "E"c, msg)
+                Me.txtBldno.Focus()
+                Me.txtBldno.SelectAll()
+                Return False
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+    End Function
+    '-----------------------------------------------
 
     Private Sub txtBldno_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBldno.KeyDown
 
-
         If e.KeyCode <> Keys.Enter Then Return
         If Me.spdOrderList.MaxRows < 1 Then Return
+        '20211021 jhs 혈액불출요청서 혈액번호 확인
+        'If chkTxtBlood() = False Then Return
+        '-----------------------------------------------
 
         Try
             Dim sBldno As String = Me.txtBldno.Text.Trim.Replace("-", "")
@@ -764,6 +815,9 @@ Public Class FGB09
                         .BlockMode = False
 
                         Me.txtBldno.Text = ""
+                        '20211021 jhs 혈액불출요청서 혈액번호 초기화
+                        Me.txtRequestBlood.Text = ""
+                        '------------------------------------
                     End With
 
                     If iMaxRow = miOutChkCnt Then
@@ -936,7 +990,7 @@ Public Class FGB09
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
-        
+
     End Sub
 
     Private Sub btnRecPop_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRecPop.Click
@@ -1376,7 +1430,7 @@ Public Class FGB09
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
-        
+
     End Sub
 
     Private Sub btnReOut_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnReOut.Click
@@ -1449,7 +1503,7 @@ Public Class FGB09
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
-       
+
     End Sub
 
     Public Sub New()
@@ -1603,7 +1657,7 @@ Public Class FGB09
         End Try
     End Sub
 
-   
+
     Private Sub spdOrderList_BeforeUserSort(ByVal sender As System.Object, ByVal e As AxFPSpreadADO._DSpreadEvents_BeforeUserSortEvent) Handles spdOrderList.BeforeUserSort
 
 
@@ -1667,6 +1721,32 @@ Public Class FGB09
 
 
     End Sub
+    '20211021 jhs 혈액불출요청서 혈액번호 확인
+    Private Sub txtRequestBlood_Click(ByVal sender As Object, e As EventArgs) Handles txtRequestBlood.Click
+        Me.txtRequestBlood.SelectAll()
+    End Sub
+
+    Private Sub txtRequestBlood_KeyDown(ByVal sender As Object, e As KeyEventArgs) Handles txtRequestBlood.KeyDown
+        If e.KeyCode <> Keys.Enter Then Return
+
+        Dim sBldno As String = Me.txtRequestBlood.Text
+        If sBldno.Length < 10 Then
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "올바른 혈액번호가 아닙니다.")
+            Return
+        End If
+
+        If Me.txtBldno.Text = "" Then
+            Me.txtBldno.Focus()
+            Me.txtBldno.SelectAll()
+            Return
+        End If
+
+        If Me.txtBldno.Text <> "" And Me.txtRequestBlood.Text <> "" Then
+            txtBldno_KeyDown(sender, e)
+        End If
+
+    End Sub
+    '-------------------------------------
 End Class
 
 Public Class FGB09_PRINT
@@ -1873,7 +1953,7 @@ Public Class FGB09_PRINT
 
     End Sub
 
-    
+
 
 
 
