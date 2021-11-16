@@ -281,8 +281,12 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.784 --> 2021/10/25 : LISB
 'Version 3.1.10.785 --> 2021/10/25 : LISB
 'Version 3.1.10.786 --> 2021/10/25 : LISB
+'Version 3.1.10.787 --> 2021/11/09 : LISC, AxAckCollector, Common, LISAPP, BCPRT01, PRTAPP,
+'Version 3.1.10.788 --> 2021/11/09 : main(재배포)
+'Version 3.1.10.789 --> 2021/11/11 : LISAPP
 
-<Assembly: AssemblyVersion("3.1.10.786")>
+<Assembly: AssemblyVersion("3.1.10.789")>
+
 
 
 

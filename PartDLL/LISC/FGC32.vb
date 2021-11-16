@@ -444,9 +444,10 @@ Public Class FGC32
 
             If rdoIoGbnO.Checked Then sIoGbn = "O"
 
-            al_Return = Me.axCollList.CollectSelOrder_Web(al_NoSunab, Me.Name, Me.axPatInfo.RegNo, sIoGbn, _
-                                                          Me.cboDptOrWard.Text.Split("|"c)(1), Ctrl.Get_Code(Me.cboPartGbn), _
-                                                          Me.dtpDateS.Text, Me.dtpDateE.Text, bToColl, False, CType(IIf(lblBarPrinter.Text.Replace("사용안함", "") = "", False, True), Boolean))
+            al_Return = Me.axCollList.CollectSelOrder_Web(al_NoSunab, Me.Name, Me.axPatInfo.RegNo, sIoGbn,
+                                                          Me.cboDptOrWard.Text.Split("|"c)(1), Ctrl.Get_Code(Me.cboPartGbn),
+                                                          Me.dtpDateS.Text, Me.dtpDateE.Text, bToColl, False, CType(IIf(lblBarPrinter.Text.Replace("사용안함", "") = "", False, True), Boolean),
+                                                         Me.chkPrntNum.Checked, Me.txtPrntNum.Text.ToString)
 
             'If al_NoSunab IsNot Nothing Then
             '    '수납 안된 환자 

@@ -735,7 +735,7 @@ Partial Class FGB09
         '
         'spdOrderList
         '
-        Me.spdOrderList.DataSource = Nothing
+        'Me.spdOrderList.DataSource = Nothing
         Me.spdOrderList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOrderList.Location = New System.Drawing.Point(0, 0)
         Me.spdOrderList.Name = "spdOrderList"
@@ -756,7 +756,7 @@ Partial Class FGB09
         '
         'spdPastTns
         '
-        Me.spdPastTns.DataSource = Nothing
+        'Me.spdPastTns.DataSource = Nothing
         Me.spdPastTns.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdPastTns.Location = New System.Drawing.Point(0, 0)
         Me.spdPastTns.Name = "spdPastTns"
@@ -830,7 +830,7 @@ Partial Class FGB09
         '
         'spdTnsOrd
         '
-        Me.spdTnsOrd.DataSource = Nothing
+        'Me.spdTnsOrd.DataSource = Nothing
         Me.spdTnsOrd.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdTnsOrd.Location = New System.Drawing.Point(0, 0)
         Me.spdTnsOrd.Name = "spdTnsOrd"
@@ -871,7 +871,7 @@ Partial Class FGB09
         '
         'spdOutList
         '
-        Me.spdOutList.DataSource = Nothing
+        'Me.spdOutList.DataSource = Nothing
         Me.spdOutList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOutList.Location = New System.Drawing.Point(0, 0)
         Me.spdOutList.Name = "spdOutList"
@@ -913,7 +913,7 @@ Partial Class FGB09
         '
         'spdStOutList
         '
-        Me.spdStOutList.DataSource = Nothing
+        'Me.spdStOutList.DataSource = Nothing
         Me.spdStOutList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdStOutList.Location = New System.Drawing.Point(0, 0)
         Me.spdStOutList.Name = "spdStOutList"

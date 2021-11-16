@@ -370,9 +370,11 @@ Public Class FGC31
 
             If btnReg.Text.StartsWith("채혈") Then bToColl = True
 
-            al_Return = Me.axCollList.CollectSelOrder_Web(al_NoSunab, Me.Name, Me.axPatInfo.RegNo, "O", sDeptCd, Ctrl.Get_Code(Me.cboPartGbn), _
-                                                          Me.dtpDateS.Text, Me.dtpDateE.Text, bToColl, _
-                                                          Me.chkAutoTk.Checked, CType(IIf(lblBarPrinter.Text.Replace("사용안함", "") = "", False, True), Boolean))
+            al_Return = Me.axCollList.CollectSelOrder_Web(al_NoSunab, Me.Name, Me.axPatInfo.RegNo, "O", sDeptCd, Ctrl.Get_Code(Me.cboPartGbn),
+                                                          Me.dtpDateS.Text, Me.dtpDateE.Text, bToColl,
+                                                          Me.chkAutoTk.Checked, CType(IIf(lblBarPrinter.Text.Replace("사용안함", "") = "", False, True), Boolean),
+                                                          Me.chkPrntNum.Checked, Me.txtPrntNum.Text.ToString)
+
 
             Dim al_bcno_poctyn As New ArrayList
 

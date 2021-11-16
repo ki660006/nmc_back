@@ -259,7 +259,7 @@ Partial Class FGB18
         '
         'spdStored
         '
-        Me.spdStored.DataSource = Nothing
+        'Me.spdStored.DataSource = Nothing
         Me.spdStored.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdStored.Location = New System.Drawing.Point(0, 0)
         Me.spdStored.Margin = New System.Windows.Forms.Padding(1)
@@ -282,7 +282,7 @@ Partial Class FGB18
         '
         'spdStdDetail
         '
-        Me.spdStdDetail.DataSource = Nothing
+        'Me.spdStdDetail.DataSource = Nothing
         Me.spdStdDetail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdStdDetail.Location = New System.Drawing.Point(0, 0)
         Me.spdStdDetail.Name = "spdStdDetail"

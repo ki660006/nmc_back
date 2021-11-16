@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("23288e3e-543a-4ac9-8ba6-095737b56047")> 
+<Assembly: Guid("23288e3e-543a-4ac9-8ba6-095737b56047")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -42,6 +42,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.336 --> 2021/03/20 : 외래채혈 주민등록번호 조회시 오류 수정
 'Version 3.1.10.337 --> 2021/03/22 : 외래채혈 환자명으로 조회 시 오류 수정
 'Version 3.1.10.338 --> 2021/06/15 : 특정검사 검사명 음영처리 
+'Version 3.1.10.339 --> 2021/11/09 : 프린트 장수 추가
 
-<Assembly: AssemblyVersion("3.1.10.338")> 
+<Assembly: AssemblyVersion("3.1.10.339")>
 

@@ -2549,7 +2549,8 @@ Namespace APP_T
                 sSql += "  FROM " + IIf(bIO Or rbIoGbn_NotC, "lt011m", "lt010m").ToString + " a" + vbCrLf
                 sSql += "       INNER JOIN" + vbCrLf
                 sSql += "       ("
-                sSql += "        SELECT testcd, spccd, MIN(tnmd) tnmd, NVL(MIN(samecd), testcd) samecd" + vbCrLf
+                sSql += "        SELECT usdt, uedt, testcd, spccd, MIN(tnmd) tnmd, NVL(MIN(samecd), testcd) samecd" + vbCrLf '20211109 jhs 검사명 접수일시 기준으로 불러 올수 있도록 추가
+                'sSql += "        SELECT testcd, spccd, MIN(tnmd) tnmd, NVL(MIN(samecd), testcd) samecd" + vbCrLf
                 sSql += "          FROM lf060m" + vbCrLf
                 sSql += "         WHERE usdt <= fn_ack_sysdate" + vbCrLf
 
@@ -2585,9 +2586,14 @@ Namespace APP_T
                     sSql += "           AND tcdgbn = :tcdgbn" + vbCrLf
                     alParm.Add(New OracleParameter("tcdgbn", OracleDbType.Varchar2, rsTCdGbn.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTCdGbn))
                 End If
-                sSql += "         GROUP BY testcd, spccd" + vbCrLf
+                'sSql += "         GROUP BY testcd, spccd " + vbCrLf '20211109 jhs 검사명 접수일시 기준으로 불러 올수 있도록 수정
+                sSql += "         GROUP BY testcd, spccd ,  usdt, uedt" + vbCrLf
                 sSql += "       ) b ON a.testcd = b.testcd" + vbCrLf
                 sSql += "          AND a.spccd = b.spccd " + vbCrLf
+                '20211109 jhs 검사명 접수일시 기준으로 불러 올수 있도록 추가
+                sSql += "          And b.usdt <= a.styymmdd || '000000'" + vbCrLf
+                sSql += "          And b.uedt >= a.styymmdd || '000000'" + vbCrLf
+                '-------------------------------------
                 If rsSpc = "Y" Then
                     sSql += "       INNER JOIN" + vbCrLf
                     sSql += "       (" + vbCrLf
@@ -2905,49 +2911,49 @@ Namespace APP_T
                 If rsQryGbn = "" Then
                     '결과단위 TAT
                     sSql = ""
-                    sSql += "SELECT f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd,"
+                    sSql += "SELECT f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd," + vbCrLf
                     If rsRstflg = "2" Then
                         '<<< 20170609 TAT 소수점 제거 
                         '<<< 20170704 TAT 응급추가 
                         'sSql += "       f6.prptmi tmi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss,"
-                        sSql += "       case nvl(j.statgbn, ' ') "
-                        sSql += "            when ' '  then   f6.prptmi "
-                        sSql += "            when 'E'  then   f6.perrptmi "
-                        sSql += "       end     tmi "
-                        sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss,"
+                        sSql += "       case nvl(j.statgbn, ' ') " + vbCrLf
+                        sSql += "            when ' '  then   f6.prptmi " + vbCrLf
+                        sSql += "            when 'E'  then   f6.perrptmi " + vbCrLf
+                        sSql += "       end     tmi " + vbCrLf
+                        sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss," + vbCrLf
                     Else
                         'sSql += "       f6.frptmi tmi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '4')) tat_ss,"
-                        sSql += "       case nvl(j.statgbn, ' ') "
-                        sSql += "            when ' '  then   f6.frptmi "
-                        sSql += "            when 'E'  then   f6.ferrptmi "
-                        sSql += "       end     tmi "
+                        sSql += "       case nvl(j.statgbn, ' ') " + vbCrLf
+                        sSql += "            when ' '  then   f6.frptmi " + vbCrLf
+                        sSql += "            when 'E'  then   f6.ferrptmi " + vbCrLf
+                        sSql += "       end     tmi " + vbCrLf
                         sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.fndt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '4')) tat_ss,"
                     End If
-                    sSql += "       count(*) totcnt"
-                    sSql += "  FROM lf060m f6,"
-                    sSql += "       ("
-                    sSql += "        SELECT    r.bcno, r.tclscd ,r.testcd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"
-                    'sSql += "        SELECT  /*+ index( f ,PK_LF060M ) */  r.bcno, r.tclscd , r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"
-                    sSql += "          FROM lr010m r"
-                    'sSql += "          FROM lr010m r ,  lf060m f"
-                    sSql += "         WHERE r.tkdt >= :dates"
-                    sSql += "           AND r.tkdt <= :datee || '235959'"
+                    sSql += "       count(*) totcnt" + vbCrLf
+                    sSql += "  FROM lf060m f6," + vbCrLf
+                    sSql += "       (" + vbCrLf
+                    sSql += "        SELECT    r.bcno, r.tclscd ,r.testcd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt" + vbCrLf
+                    'sSql += "        SELECT  /*+ index( f ,PK_LF060M ) */  r.bcno, r.tclscd , r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"+vbcrlf
+                    sSql += "          FROM lr010m r" + vbCrLf
+                    'sSql += "          FROM lr010m r ,  lf060m f"+vbcrlf
+                    sSql += "         WHERE r.tkdt >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt <= :datee || '235959'" + vbCrLf
 
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
-                    'sSql += "          AND f.testcd = r.testcd "
-                    'sSql += "          AND f.spccd = r.spccd "
-                    'sSql += "          AND f.usdt <= r.tkdt "
-                    'sSql += "          AND f.uedt > r.tkdt "
-                    'sSql += "          AND f.tcdgbn IN ('B', 'S', 'P') "
+                    'sSql += "          AND f.testcd = r.testcd "+vbcrlf
+                    'sSql += "          AND f.spccd = r.spccd "+vbcrlf
+                    'sSql += "          AND f.usdt <= r.tkdt "+vbcrlf
+                    'sSql += "          AND f.uedt > r.tkdt "+vbcrlf
+                    'sSql += "          AND f.tcdgbn IN ('B', 'S', 'P') "+vbcrlf
 
                     If rbNotPDCA Then
-                        sSql += "           AND NVL(panicmark, ' ') = ' ' AND NVL(deltamark, ' ') = ' ' AND NVL(criticalmark, ' ') = ' ' AND NVL(alertmark, ' ') = ' '"
+                        sSql += "           AND NVL(panicmark, ' ') = ' ' AND NVL(deltamark, ' ') = ' ' AND NVL(criticalmark, ' ') = ' ' AND NVL(alertmark, ' ') = ' '" + vbCrLf
                     End If
 
                     If raTests.Count > 0 Then
-                        sSql += "           AND r.testcd IN ("
+                        sSql += "           AND r.testcd IN (" + vbCrLf
                         For ix As Integer = 0 To raTests.Count - 1
                             If ix > 0 Then
                                 sSql += ", "
@@ -2956,50 +2962,50 @@ Namespace APP_T
 
                             alParm.Add(New OracleParameter("test" + ix.ToString, OracleDbType.Varchar2, raTests.Item(ix).ToString.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, raTests.Item(ix).ToString))
                         Next
-                        sSql += ")"
+                        sSql += ")" + vbCrLf
                     End If
 
                     If rsRstflg = "2" Then
-                        sSql += "           AND NVL(mwdt, ' ') <> ' '"
+                        sSql += "           AND NVL(mwdt, ' ') <> ' '" + vbCrLf
                     Else
-                        sSql += "           AND NVL(fndt, ' ') <> ' '"
+                        sSql += "           AND NVL(fndt, ' ') <> ' '" + vbCrLf
                     End If
 
                     If rbVerity = "1" Then
-                        sSql += "           AND bcno NOT IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.tclscd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno NOT IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.tclscd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
                     ElseIf rbVerity = "2" Then
-                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.tclscd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.tclscd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
                     End If
 
 
-                    sSql += "         UNION ALL"
-                    sSql += "        SELECT   r.bcno, r.tclscd,r.testcd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"
-                    'sSql += "        SELECT  /*+ index( f ,PK_LF060M ) */  r.bcno, r.tclscd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"
-                    sSql += "          FROM lm010m r "
-                    'sSql += "          FROM lm010m r , lf060m f"
-                    sSql += "         WHERE r.tkdt >= :dates"
-                    sSql += "           AND r.tkdt <= :datee || '235959'"
+                    sSql += "         UNION ALL" + vbCrLf
+                    sSql += "        SELECT   r.bcno, r.tclscd,r.testcd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt" + vbCrLf
+                    'sSql += "        SELECT  /*+ index( f ,PK_LF060M ) */  r.bcno, r.tclscd, r.spccd, NVL(wkdt, tkdt) tkdt, NVL(mwdt, fndt) mwdt, fndt"+vbcrlf
+                    sSql += "          FROM lm010m r " + vbCrLf
+                    'sSql += "          FROM lm010m r , lf060m f"+vbcrlf
+                    sSql += "         WHERE r.tkdt >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt <= :datee || '235959'" + vbCrLf
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
-                    'sSql += "          AND f.testcd = r.testcd "
-                    'sSql += "          AND f.spccd = r.spccd "
-                    'sSql += "          AND f.usdt <= r.tkdt "
-                    'sSql += "          AND f.uedt > r.tkdt "
-                    'sSql += "          AND f.tcdgbn IN ('B', 'S', 'P') "
+                    'sSql += "          AND f.testcd = r.testcd "+vbcrlf
+                    'sSql += "          AND f.spccd = r.spccd "+vbcrlf
+                    'sSql += "          AND f.usdt <= r.tkdt "+vbcrlf
+                    'sSql += "          AND f.uedt > r.tkdt "+vbcrlf
+                    'sSql += "          AND f.tcdgbn IN ('B', 'S', 'P') "+vbcrlf
 
                     If rbNotPDCA Then
-                        sSql += "           AND NVL(panicmark, ' ') = ' ' AND NVL(deltamark, ' ') = ' ' AND NVL(criticalmark, ' ') = ' ' AND NVL(alertmark, ' ') = ' '"
+                        sSql += "           AND NVL(panicmark, ' ') = ' ' AND NVL(deltamark, ' ') = ' ' AND NVL(criticalmark, ' ') = ' ' AND NVL(alertmark, ' ') = ' '" + vbCrLf
                     End If
 
                     If raTests.Count > 0 Then
-                        sSql += "           AND r.testcd IN ("
+                        sSql += "           AND r.testcd IN (" + vbCrLf
                         For ix As Integer = 0 To raTests.Count - 1
                             If ix > 0 Then
                                 sSql += ", "
@@ -3013,66 +3019,66 @@ Namespace APP_T
 
 
                     If rsRstflg = "2" Then
-                        sSql += "           AND NVL(mwdt, ' ') <> ' '"
+                        sSql += "           AND NVL(mwdt, ' ') <> ' '" + vbCrLf
                     Else
-                        sSql += "           AND NVL(fndt, ' ') <> ' '"
+                        sSql += "           AND NVL(fndt, ' ') <> ' '" + vbCrLf
                     End If
 
                     If rbVerity = "1" Then
-                        sSql += "           AND bcno NOT IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.tclscd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno NOT IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.tclscd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
                     ElseIf rbVerity = "2" Then
-                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.tclscd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.tclscd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
 
                     End If
 
-                    sSql += "       ) r,"
-                    sSql += "       lj010m j,"
-                    sSql += "       lf030m f3"
+                    sSql += "       ) r," + vbCrLf
+                    sSql += "       lj010m j," + vbCrLf
+                    sSql += "       lf030m f3" + vbCrLf
 
                 Else
                     '처방단위 TAT
-                    sSql = ""
-                    sSql += "SELECT f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd,"
+                    sSql = "" + vbCrLf
+                    sSql += "SELECT f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd," + vbCrLf
                     If rsRstflg = "2" Then
                         '<<< 20170609 TAT 소수점 제거 
                         '<<< 20170704 TAT 응급 구분 
                         'sSql += "       f6.prptmi tmi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss,"
-                        sSql += "       case nvl(j.statgbn , ' ') "
-                        sSql += "            when ' '  then   f6.prptmi "
-                        sSql += "            when 'E'  then   f6.perrptmi "
-                        sSql += "       end     tmi "
-                        sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss,"
+                        sSql += "       case nvl(j.statgbn , ' ') " + vbCrLf
+                        sSql += "            when ' '  then   f6.prptmi " + vbCrLf
+                        sSql += "            when 'E'  then   f6.perrptmi " + vbCrLf
+                        sSql += "       end     tmi " + vbCrLf
+                        sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.mwdt, '4')) tat_ss," + vbCrLf
                     Else
                         'sSql += "       f6.frptmi tmi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '4')) tat_ss"
-                        sSql += "       case nvl(j.statgbn , ' ') "
-                        sSql += "            when ' '  then   f6.frptmi "
-                        sSql += "            when 'E'  then   f6.ferrptmi "
-                        sSql += "       end     tmi "
-                        sSql += "       , trunc(fn_ack_date_diff(r.tkdt, r.fndt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '4')) tat_ss,"
+                        sSql += "       case nvl(j.statgbn , ' ') " + vbCrLf
+                        sSql += "            when ' '  then   f6.frptmi " + vbCrLf
+                        sSql += "            when 'E'  then   f6.ferrptmi " + vbCrLf
+                        sSql += "       end     tmi " + vbCrLf
+                        sSql += "       , trunc(fn_ack_date_+vbcrlfdiff(r.tkdt, r.fndt, '3')) tat_mi, trunc(fn_ack_date_diff(r.tkdt, r.fndt, '4')) tat_ss," + vbCrLf
                     End If
-                    sSql += "       count(*) totcnt"
-                    sSql += "  FROM lf060m f6,"
-                    sSql += "       ("
-                    sSql += "        SELECT j1.bcno, j1.tclscd , j1.spccd, MIN(NVL(r.wkdt, r.tkdt)) tkdt, MAX(NVL(r.mwdt, r.fndt)) mwdt, MAX(r.fndt) fndt" '<<20170912 조회오류수정
-                    sSql += "          FROM lr010m r, lj011m j1"
-                    sSql += "         WHERE r.tkdt >= :dates"
-                    sSql += "           AND r.tkdt <= :datee || '235959'"
+                    sSql += "       count(*) totcnt" + vbCrLf
+                    sSql += "  FROM lf060m f6," + vbCrLf
+                    sSql += "       (" + vbCrLf
+                    sSql += "        SELECT j1.bcno, j1.tclscd , j1.spccd, MIN(NVL(r.wkdt, r.tkdt)) tkdt, MAX(NVL(r.mwdt, r.fndt)) mwdt, MAX(r.fndt) fndt" + vbCrLf '<<20170912 조회오류수정
+                    sSql += "          FROM lr010m r, lj011m j1" + vbCrLf
+                    sSql += "         WHERE r.tkdt >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt <= :datee || '235959'" + vbCrLf
 
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
                     If rbNotPDCA Then
-                        sSql += "           AND NVL(r.panicmark, ' ') = ' ' AND NVL(r.deltamark, ' ') = ' ' AND NVL(r.crticalmark, ' ') = ' ' AND NVL(r.alertmark, ' ') = ' '"
+                        sSql += "           AND NVL(r.panicmark, ' ') = ' ' AND NVL(r.deltamark, ' ') = ' ' AND NVL(r.crticalmark, ' ') = ' ' AND NVL(r.alertmark, ' ') = ' '" + vbCrLf
                     End If
                     If raTests.Count > 0 Then
                         '<<<20170522
-                        sSql += "           AND r.tclscd IN ("
+                        sSql += "           AND r.tclscd IN (" + vbCrLf
                         For ix As Integer = 0 To raTests.Count - 1
                             If ix > 0 Then
                                 sSql += ", "
@@ -3085,39 +3091,39 @@ Namespace APP_T
                     End If
 
                     If rbVerity = "1" Then
-                        sSql += "           AND r.bcno NOT IN (SELECT bcno FROM lr051m"
-                        sSql += "                               WHERE bcno    = r.bcno"
-                        sSql += "                                 AND testcd  = r.testcd"
-                        sSql += "                           )"
+                        sSql += "           AND r.bcno NOT IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                               WHERE bcno    = r.bcno" + vbCrLf
+                        sSql += "                                 AND testcd  = r.testcd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
                     ElseIf rbVerity = "2" Then
-                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.testcd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.testcd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
 
                     End If
 
-                    sSql += "           AND j1.bcno   = r.bcno"
-                    sSql += "           AND j1.tclscd = r.tclscd"
-                    sSql += "           AND j1.spccd  = r.spccd"
-                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')"
-                    sSql += "         GROUP BY j1.bcno, j1.tclscd, j1.spccd"
-                    sSql += "         UNION ALL"
-                    sSql += "        SELECT j1.bcno, j1.tclscd, j1.spccd, MIN(NVL(r.wkdt, r.tkdt)) tkdt, MAX(NVL(r.mwdt, r.fndt)) mwdt, MAX(r.fndt) fndt"
-                    sSql += "          FROM lm010m r, lj011m j1"
-                    sSql += "         WHERE r.tkdt >= :dates"
-                    sSql += "           AND r.tkdt <= :datee || '235959'"
+                    sSql += "           AND j1.bcno   = r.bcno" + vbCrLf
+                    sSql += "           AND j1.tclscd = r.tclscd" + vbCrLf
+                    sSql += "           AND j1.spccd  = r.spccd" + vbCrLf
+                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "         GROUP BY j1.bcno, j1.tclscd, j1.spccd" + vbCrLf
+                    sSql += "         UNION ALL" + vbCrLf
+                    sSql += "        SELECT j1.bcno, j1.tclscd, j1.spccd, MIN(NVL(r.wkdt, r.tkdt)) tkdt, MAX(NVL(r.mwdt, r.fndt)) mwdt, MAX(r.fndt) fndt" + vbCrLf
+                    sSql += "          FROM lm010m r, lj011m j1" + vbCrLf
+                    sSql += "         WHERE r.tkdt >= :dates" + vbCrLf
+                    sSql += "           AND r.tkdt <= :datee || '235959'" + vbCrLf
 
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
                     If rbNotPDCA Then
-                        sSql += "           AND NVL(r.panicmark, ' ') = ' ' AND NVL(r.deltamark, ' ') = ' ' AND NVL(r.crticalmark, ' ') = ' ' AND NVL(r.alertmark, ' ') = ' '"
+                        sSql += "           AND NVL(r.panicmark, ' ') = ' ' AND NVL(r.deltamark, ' ') = ' ' AND NVL(r.crticalmark, ' ') = ' ' AND NVL(r.alertmark, ' ') = ' '" + vbCrLf
                     End If
 
                     If raTests.Count > 0 Then
                         '<<<20170522 testcd->tclscd로 바꿈 배터리가 조회가 안됨 
-                        sSql += "           AND r.tclscd IN ("
+                        sSql += "           AND r.tclscd IN (" + vbCrLf
                         For ix As Integer = 0 To raTests.Count - 1
                             If ix > 0 Then
                                 sSql += ", "
@@ -3130,76 +3136,76 @@ Namespace APP_T
                     End If
 
                     If rbVerity = "1" Then
-                        sSql += "           AND r.bcno NOT IN (SELECT bcno FROM lr051m"
-                        sSql += "                               WHERE bcno    = r.bcno"
-                        sSql += "                                 AND testcd  = r.testcd"
-                        sSql += "                             )"
+                        sSql += "           AND r.bcno NOT IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                               WHERE bcno    = r.bcno" + vbCrLf
+                        sSql += "                                 AND testcd  = r.testcd" + vbCrLf
+                        sSql += "                             )" + vbCrLf
                     ElseIf rbVerity = "2" Then
-                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m"
-                        sSql += "                             WHERE bcno   = r.bcno"
-                        sSql += "                               AND testcd = r.testcd"
-                        sSql += "                           )"
+                        sSql += "           AND bcno IN (SELECT bcno FROM lr051m" + vbCrLf
+                        sSql += "                             WHERE bcno   = r.bcno" + vbCrLf
+                        sSql += "                               AND testcd = r.testcd" + vbCrLf
+                        sSql += "                           )" + vbCrLf
 
                     End If
 
-                    sSql += "           AND j1.BCNO   = r.BCNO"
-                    sSql += "           AND j1.tclscd = r.tclscd"
-                    sSql += "           AND j1.spccd  = r.spccd"
-                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')"
-                    sSql += "         GROUP BY j1.bcno, j1.tclscd, j1.spccd"
-                    sSql += "       ) r,"
-                    sSql += "       lj010M j,"
-                    sSql += "       lf030m f3"
+                    sSql += "           AND j1.BCNO   = r.BCNO" + vbCrLf
+                    sSql += "           AND j1.tclscd = r.tclscd" + vbCrLf
+                    sSql += "           AND j1.spccd  = r.spccd" + vbCrLf
+                    sSql += "           AND (NVL(r.mwdt, ' ') <> ' ' OR NVL(r.fndt, ' ') <> ' ')" + vbCrLf
+                    sSql += "         GROUP BY j1.bcno, j1.tclscd, j1.spccd" + vbCrLf
+                    sSql += "       ) r," + vbCrLf
+                    sSql += "       lj010M j," + vbCrLf
+                    sSql += "       lf030m f3" + vbCrLf
 
                 End If '<<< 검사 / 처방단위 분기 끝 
 
 
-                sSql += " WHERE f6.testcd  = r.tclscd"
-                sSql += "   AND f6.spccd   = r.spccd"
-                sSql += "   AND f6.usdt   <= r.tkdt"
-                sSql += "   AND f6.uedt   >  r.tkdt"
-                sSql += "   AND f6.tcdgbn IN ('B', 'S', 'P')"
-                sSql += "   AND r.bcno     = j.bcno"
-                sSql += "   AND j.spcflg   = '4'"
-                sSql += "   AND f6.spccd   = f3.spccd"
-                sSql += "   AND f3.usdt   <= r.tkdt"
-                sSql += "   AND f3.uedt   >  r.tkdt"
+                sSql += " WHERE f6.testcd  = r.tclscd" + vbCrLf
+                sSql += "   AND f6.spccd   = r.spccd" + vbCrLf
+                sSql += "   AND f6.usdt   <= r.tkdt" + vbCrLf
+                sSql += "   AND f6.uedt   >  r.tkdt" + vbCrLf
+                sSql += "   AND f6.tcdgbn IN ('B', 'S', 'P')" + vbCrLf
+                sSql += "   AND r.bcno     = j.bcno" + vbCrLf
+                sSql += "   AND j.spcflg   = '4'" + vbCrLf
+                sSql += "   AND f6.spccd   = f3.spccd" + vbCrLf
+                sSql += "   AND f3.usdt   <= r.tkdt" + vbCrLf
+                sSql += "   AND f3.uedt   >  r.tkdt" + vbCrLf
                 'sSql += "   AND r.testcd = 'LH101' " 'TEST 20160519
                 If rsPartSlip <> "" Then
-                    sSql += "   AND f6.partcd = :partcd"
-                    sSql += "   AND f6.slipcd = :slipcd"
+                    sSql += "   AND f6.partcd = :partcd" + vbCrLf
+                    sSql += "   AND f6.slipcd = :slipcd" + vbCrLf
 
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(0, 1)))
                     alParm.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(1, 1)))
                 End If
 
                 If rsDeptCd <> "" Then
-                    sSql += "   AND j.deptcd = :deptcd"
+                    sSql += "   AND j.deptcd = :deptcd" + vbCrLf
                     alParm.Add(New OracleParameter("deptcd", OracleDbType.Varchar2, rsDeptCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDeptCd))
                 End If
 
                 If rsIOGbn = "O" Then
-                    sSql += "   AND j.iogbn NOT IN ('I', 'D', 'E')"
+                    sSql += "   AND j.iogbn NOT IN ('I', 'D', 'E')" + vbCrLf
                 ElseIf rsIOGbn <> "" Then
-                    sSql += "   AND j.iogbn IN ('I', 'D', 'E')"
+                    sSql += "   AND j.iogbn IN ('I', 'D', 'E')" + vbCrLf
                 End If
 
                 If rsWardNo <> "" Then
-                    sSql += "   AND j.wardno = :wardno"
+                    sSql += "   AND j.wardno = :wardno" + vbCrLf
                     alParm.Add(New OracleParameter("wardno", OracleDbType.Varchar2, rsWardNo.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWardNo))
                 End If
 
                 If rsEmerYn = "B" Then
-                    sSql += "   AND j.statgbn = 'B'"
+                    sSql += "   AND j.statgbn = 'B'" + vbCrLf
                 ElseIf rsEmerYn = "Y" Then
-                    sSql += "   AND j.statgbn = 'E'"
+                    sSql += "   AND j.statgbn = 'E'" + vbCrLf
                 ElseIf rsEmerYn = "N" Then
-                    sSql += "   AND NVL(j.statgbn, ' ') = ' '"
+                    sSql += "   AND NVL(j.statgbn, ' ') = ' '" + vbCrLf
                 End If
 
                 If rsQryGbn = "" Then
 
-                    sSql += " and r.testcd = (select testcd from lf060m where testcd = r.testcd and spccd = r.spccd  and  usdt <= r.tkdt and uedt > r.tkdt AND tcdgbn IN ('B', 'S', 'P') ) "
+                    sSql += " and r.testcd = (select testcd from lf060m where testcd = r.testcd and spccd = r.spccd  and  usdt <= r.tkdt and uedt > r.tkdt AND tcdgbn IN ('B', 'S', 'P') ) " + vbCrLf
 
                 End If
 
@@ -3207,11 +3213,11 @@ Namespace APP_T
 
 
                 '<<<20170704 tat응급 맞게 추가 함 
-                sSql += " GROUP BY f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd,j.statgbn,"
+                sSql += " GROUP BY f6.dispseql, f6.testcd, f6.tnmd, f6.spccd, f3.spcnmd,j.statgbn," + vbCrLf
                 If rsRstflg = "2" Then
-                    sSql += "        f6.prptmi, r.tkdt, r.mwdt ,f6.perrptmi"
+                    sSql += "        f6.prptmi, r.tkdt, r.mwdt ,f6.perrptmi" + vbCrLf
                 Else
-                    sSql += "        f6.frptmi, r.tkdt, r.fndt ,f6.ferrptmi"
+                    sSql += "        f6.frptmi, r.tkdt, r.fndt ,f6.ferrptmi" + vbCrLf
                 End If
 
                 DbCommand()

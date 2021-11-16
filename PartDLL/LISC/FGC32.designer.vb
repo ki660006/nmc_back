@@ -22,108 +22,111 @@ Partial Class FGC32
     '코드 편집기를 사용하여 수정하지 마십시오.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
+        Me.components = New System.ComponentModel.Container()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGC32))
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker15 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems8 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker16 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker17 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems9 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker18 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker19 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems10 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker20 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker21 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems11 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker22 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker23 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems12 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker24 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker25 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems13 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker26 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker27 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems14 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker28 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim DesignerRectTracker29 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim CBlendItems15 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems
-        Dim DesignerRectTracker30 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker
-        Dim StU_PatInfo1 As COMMON.SVar.STU_PatInfo = New COMMON.SVar.STU_PatInfo
-        Me.grpQryInfo = New System.Windows.Forms.GroupBox
-        Me.btnQuery = New CButtonLib.CButton
-        Me.Panel1 = New System.Windows.Forms.Panel
-        Me.rdoIoGbnO = New System.Windows.Forms.RadioButton
-        Me.rdoIoGbnI = New System.Windows.Forms.RadioButton
-        Me.lblDptOrWard = New System.Windows.Forms.Label
-        Me.cboDptOrWard = New System.Windows.Forms.ComboBox
-        Me.txtPatNm = New System.Windows.Forms.TextBox
-        Me.txtRegNo = New System.Windows.Forms.TextBox
-        Me.lblRegno = New System.Windows.Forms.Label
-        Me.lblDate = New System.Windows.Forms.Label
-        Me.dtpDateE = New System.Windows.Forms.DateTimePicker
-        Me.dtpDateS = New System.Windows.Forms.DateTimePicker
-        Me.pnlCollGbn = New System.Windows.Forms.Panel
-        Me.rdoNoColl = New System.Windows.Forms.RadioButton
-        Me.rdoAll = New System.Windows.Forms.RadioButton
-        Me.rdoColl = New System.Windows.Forms.RadioButton
-        Me.lblPatnm = New System.Windows.Forms.Label
-        Me.lblOrdDt = New System.Windows.Forms.Label
-        Me.lblIoGbn = New System.Windows.Forms.Label
-        Me.lblCollGbn = New System.Windows.Forms.Label
-        Me.lblLineQry = New System.Windows.Forms.Label
-        Me.lblLine = New System.Windows.Forms.Label
-        Me.axPatInfo = New AxAckPatientInfo.AxPatientInfo
-        Me.grpList = New System.Windows.Forms.GroupBox
-        Me.cboPartGbn = New System.Windows.Forms.ComboBox
-        Me.lblPatCount = New System.Windows.Forms.Label
-        Me.spdList = New AxFPSpreadADO.AxfpSpread
-        Me.pnlBottom = New System.Windows.Forms.Panel
-        Me.btnExit = New CButtonLib.CButton
-        Me.btnClear = New CButtonLib.CButton
-        Me.btnQuery_Unfit = New CButtonLib.CButton
-        Me.btnReg_Pat = New CButtonLib.CButton
-        Me.pnlPrintInfo = New System.Windows.Forms.Panel
-        Me.chkBarInit = New System.Windows.Forms.CheckBox
-        Me.lblBarPrinter = New System.Windows.Forms.Label
-        Me.btnPrint_Set = New System.Windows.Forms.Button
-        Me.lblPrint = New System.Windows.Forms.Label
-        Me.btnPrint_Label = New CButtonLib.CButton
-        Me.btnPrint_Doc = New CButtonLib.CButton
-        Me.btnReg = New CButtonLib.CButton
-        Me.btnPrint_BC = New CButtonLib.CButton
-        Me.btnOrdSum = New CButtonLib.CButton
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.btnHistory = New CButtonLib.CButton
-        Me.btnQuery_rst = New CButtonLib.CButton
-        Me.btnCancel_coll = New CButtonLib.CButton
-        Me.lblOrder = New System.Windows.Forms.Label
-        Me.btnReg_Coll = New CButtonLib.CButton
-        Me.chkHopeDay = New System.Windows.Forms.CheckBox
-        Me.axCollBcNos = New AxAckCollector.AxCollBcNos
-        Me.btnReg_rst = New CButtonLib.CButton
-        Me.axCollList = New AxAckCollector.AxCollList_tot
-        Me.lblDptWard = New System.Windows.Forms.Label
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker7 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems4 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker8 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker9 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems5 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker10 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker11 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems6 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker12 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker15 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems8 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker16 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker17 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems9 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker18 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker19 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems10 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker20 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker21 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems11 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker22 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker23 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems12 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker24 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker25 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems13 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker26 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker27 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems14 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker28 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker29 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems15 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker30 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim StU_PatInfo1 As COMMON.SVar.STU_PatInfo = New COMMON.SVar.STU_PatInfo()
+        Me.grpQryInfo = New System.Windows.Forms.GroupBox()
+        Me.btnQuery = New CButtonLib.CButton()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.rdoIoGbnO = New System.Windows.Forms.RadioButton()
+        Me.rdoIoGbnI = New System.Windows.Forms.RadioButton()
+        Me.lblDptOrWard = New System.Windows.Forms.Label()
+        Me.cboDptOrWard = New System.Windows.Forms.ComboBox()
+        Me.txtPatNm = New System.Windows.Forms.TextBox()
+        Me.txtRegNo = New System.Windows.Forms.TextBox()
+        Me.lblRegno = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.dtpDateE = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
+        Me.pnlCollGbn = New System.Windows.Forms.Panel()
+        Me.rdoNoColl = New System.Windows.Forms.RadioButton()
+        Me.rdoAll = New System.Windows.Forms.RadioButton()
+        Me.rdoColl = New System.Windows.Forms.RadioButton()
+        Me.lblPatnm = New System.Windows.Forms.Label()
+        Me.lblOrdDt = New System.Windows.Forms.Label()
+        Me.lblIoGbn = New System.Windows.Forms.Label()
+        Me.lblCollGbn = New System.Windows.Forms.Label()
+        Me.lblLineQry = New System.Windows.Forms.Label()
+        Me.lblLine = New System.Windows.Forms.Label()
+        Me.axPatInfo = New AxAckPatientInfo.AxPatientInfo()
+        Me.grpList = New System.Windows.Forms.GroupBox()
+        Me.cboPartGbn = New System.Windows.Forms.ComboBox()
+        Me.lblPatCount = New System.Windows.Forms.Label()
+        Me.spdList = New AxFPSpreadADO.AxfpSpread()
+        Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.btnExit = New CButtonLib.CButton()
+        Me.btnClear = New CButtonLib.CButton()
+        Me.btnQuery_Unfit = New CButtonLib.CButton()
+        Me.btnReg_Pat = New CButtonLib.CButton()
+        Me.pnlPrintInfo = New System.Windows.Forms.Panel()
+        Me.chkBarInit = New System.Windows.Forms.CheckBox()
+        Me.lblBarPrinter = New System.Windows.Forms.Label()
+        Me.btnPrint_Set = New System.Windows.Forms.Button()
+        Me.lblPrint = New System.Windows.Forms.Label()
+        Me.btnPrint_Label = New CButtonLib.CButton()
+        Me.btnPrint_Doc = New CButtonLib.CButton()
+        Me.btnReg = New CButtonLib.CButton()
+        Me.btnPrint_BC = New CButtonLib.CButton()
+        Me.btnOrdSum = New CButtonLib.CButton()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.btnHistory = New CButtonLib.CButton()
+        Me.btnQuery_rst = New CButtonLib.CButton()
+        Me.btnCancel_coll = New CButtonLib.CButton()
+        Me.lblOrder = New System.Windows.Forms.Label()
+        Me.btnReg_Coll = New CButtonLib.CButton()
+        Me.chkHopeDay = New System.Windows.Forms.CheckBox()
+        Me.axCollBcNos = New AxAckCollector.AxCollBcNos()
+        Me.btnReg_rst = New CButtonLib.CButton()
+        Me.axCollList = New AxAckCollector.AxCollList_tot()
+        Me.lblDptWard = New System.Windows.Forms.Label()
+        Me.chkPrntNum = New System.Windows.Forms.CheckBox()
+        Me.txtPrntNum = New System.Windows.Forms.TextBox()
+        Me.lblPrntNum = New System.Windows.Forms.Label()
         Me.grpQryInfo.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlCollGbn.SuspendLayout()
@@ -165,7 +168,7 @@ Partial Class FGC32
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems1.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems1.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnQuery.ColorFillBlend = CBlendItems1
         Me.btnQuery.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnQuery.Corners.All = CType(6, Short)
@@ -177,8 +180,8 @@ Partial Class FGC32
         Me.btnQuery.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnQuery.FocalPoints.CenterPtX = 1.0!
         Me.btnQuery.FocalPoints.CenterPtY = 1.0!
-        Me.btnQuery.FocalPoints.FocusPtX = 0.0!
-        Me.btnQuery.FocalPoints.FocusPtY = 0.0!
+        Me.btnQuery.FocalPoints.FocusPtX = 0!
+        Me.btnQuery.FocalPoints.FocusPtY = 0!
         DesignerRectTracker2.IsActive = False
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.FocusPtTracker = DesignerRectTracker2
@@ -190,12 +193,10 @@ Partial Class FGC32
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
-        Me.btnQuery.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery.Size = New System.Drawing.Size(48, 42)
         Me.btnQuery.TabIndex = 68
         Me.btnQuery.Text = "조회"
-        Me.btnQuery.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -432,15 +433,15 @@ Partial Class FGC32
         'lblLine
         '
         Me.lblLine.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblLine.ForeColor = System.Drawing.Color.Gray
         Me.lblLine.Location = New System.Drawing.Point(279, 145)
         Me.lblLine.Margin = New System.Windows.Forms.Padding(0)
         Me.lblLine.Name = "lblLine"
         Me.lblLine.Size = New System.Drawing.Size(881, 10)
         Me.lblLine.TabIndex = 70
-        Me.lblLine.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" & _
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        Me.lblLine.Text = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" &
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         '
         'axPatInfo
         '
@@ -455,7 +456,7 @@ Partial Class FGC32
         'grpList
         '
         Me.grpList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grpList.Controls.Add(Me.cboPartGbn)
         Me.grpList.Controls.Add(Me.lblPatCount)
         Me.grpList.Controls.Add(Me.spdList)
@@ -487,8 +488,8 @@ Partial Class FGC32
         'spdList
         '
         Me.spdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdList.DataSource = Nothing
         Me.spdList.Location = New System.Drawing.Point(3, 31)
         Me.spdList.Margin = New System.Windows.Forms.Padding(0)
@@ -500,6 +501,9 @@ Partial Class FGC32
         'pnlBottom
         '
         Me.pnlBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlBottom.Controls.Add(Me.chkPrntNum)
+        Me.pnlBottom.Controls.Add(Me.txtPrntNum)
+        Me.pnlBottom.Controls.Add(Me.lblPrntNum)
         Me.pnlBottom.Controls.Add(Me.btnExit)
         Me.pnlBottom.Controls.Add(Me.btnClear)
         Me.pnlBottom.Controls.Add(Me.btnQuery_Unfit)
@@ -522,7 +526,7 @@ Partial Class FGC32
         DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.CenterPtTracker = DesignerRectTracker3
         CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems2.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems2.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnExit.ColorFillBlend = CBlendItems2
         Me.btnExit.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnExit.Corners.All = CType(6, Short)
@@ -533,9 +537,9 @@ Partial Class FGC32
         Me.btnExit.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnExit.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnExit.FocalPoints.CenterPtX = 0.5!
-        Me.btnExit.FocalPoints.CenterPtY = 0.0!
-        Me.btnExit.FocalPoints.FocusPtX = 0.0!
-        Me.btnExit.FocalPoints.FocusPtY = 0.0!
+        Me.btnExit.FocalPoints.CenterPtY = 0!
+        Me.btnExit.FocalPoints.FocusPtX = 0!
+        Me.btnExit.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
         DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExit.FocusPtTracker = DesignerRectTracker4
@@ -550,12 +554,10 @@ Partial Class FGC32
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
-        Me.btnExit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnExit.Size = New System.Drawing.Size(114, 25)
         Me.btnExit.TabIndex = 223
         Me.btnExit.Text = "종료(ESC)"
-        Me.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -566,7 +568,7 @@ Partial Class FGC32
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems3.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems3.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnClear.ColorFillBlend = CBlendItems3
         Me.btnClear.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnClear.Corners.All = CType(6, Short)
@@ -577,9 +579,9 @@ Partial Class FGC32
         Me.btnClear.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnClear.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnClear.FocalPoints.CenterPtX = 0.5!
-        Me.btnClear.FocalPoints.CenterPtY = 0.0!
-        Me.btnClear.FocalPoints.FocusPtX = 0.0!
-        Me.btnClear.FocalPoints.FocusPtY = 0.0!
+        Me.btnClear.FocalPoints.CenterPtY = 0!
+        Me.btnClear.FocalPoints.FocusPtX = 0!
+        Me.btnClear.FocalPoints.FocusPtY = 0!
         DesignerRectTracker6.IsActive = False
         DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.FocusPtTracker = DesignerRectTracker6
@@ -594,12 +596,10 @@ Partial Class FGC32
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
-        Me.btnClear.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClear.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnClear.Size = New System.Drawing.Size(114, 25)
         Me.btnClear.TabIndex = 222
         Me.btnClear.Text = "화면정리"
-        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnClear.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -610,7 +610,7 @@ Partial Class FGC32
         DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery_Unfit.CenterPtTracker = DesignerRectTracker7
         CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems4.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems4.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnQuery_Unfit.ColorFillBlend = CBlendItems4
         Me.btnQuery_Unfit.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnQuery_Unfit.Corners.All = CType(6, Short)
@@ -621,9 +621,9 @@ Partial Class FGC32
         Me.btnQuery_Unfit.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnQuery_Unfit.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnQuery_Unfit.FocalPoints.CenterPtX = 0.5!
-        Me.btnQuery_Unfit.FocalPoints.CenterPtY = 0.0!
-        Me.btnQuery_Unfit.FocalPoints.FocusPtX = 0.0!
-        Me.btnQuery_Unfit.FocalPoints.FocusPtY = 0.0!
+        Me.btnQuery_Unfit.FocalPoints.CenterPtY = 0!
+        Me.btnQuery_Unfit.FocalPoints.FocusPtX = 0!
+        Me.btnQuery_Unfit.FocalPoints.FocusPtY = 0!
         DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery_Unfit.FocusPtTracker = DesignerRectTracker8
@@ -638,12 +638,10 @@ Partial Class FGC32
         Me.btnQuery_Unfit.Name = "btnQuery_Unfit"
         Me.btnQuery_Unfit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery_Unfit.SideImage = Nothing
-        Me.btnQuery_Unfit.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery_Unfit.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery_Unfit.Size = New System.Drawing.Size(114, 25)
         Me.btnQuery_Unfit.TabIndex = 217
         Me.btnQuery_Unfit.Text = "부적합검체 조회"
-        Me.btnQuery_Unfit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery_Unfit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery_Unfit.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -654,7 +652,7 @@ Partial Class FGC32
         DesignerRectTracker9.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker9.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_Pat.CenterPtTracker = DesignerRectTracker9
         CBlendItems5.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems5.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems5.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnReg_Pat.ColorFillBlend = CBlendItems5
         Me.btnReg_Pat.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnReg_Pat.Corners.All = CType(6, Short)
@@ -665,9 +663,9 @@ Partial Class FGC32
         Me.btnReg_Pat.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnReg_Pat.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnReg_Pat.FocalPoints.CenterPtX = 0.5!
-        Me.btnReg_Pat.FocalPoints.CenterPtY = 0.0!
-        Me.btnReg_Pat.FocalPoints.FocusPtX = 0.0!
-        Me.btnReg_Pat.FocalPoints.FocusPtY = 0.0!
+        Me.btnReg_Pat.FocalPoints.CenterPtY = 0!
+        Me.btnReg_Pat.FocalPoints.FocusPtX = 0!
+        Me.btnReg_Pat.FocalPoints.FocusPtY = 0!
         DesignerRectTracker10.IsActive = False
         DesignerRectTracker10.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker10.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_Pat.FocusPtTracker = DesignerRectTracker10
@@ -682,12 +680,10 @@ Partial Class FGC32
         Me.btnReg_Pat.Name = "btnReg_Pat"
         Me.btnReg_Pat.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_Pat.SideImage = Nothing
-        Me.btnReg_Pat.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReg_Pat.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnReg_Pat.Size = New System.Drawing.Size(114, 25)
         Me.btnReg_Pat.TabIndex = 216
         Me.btnReg_Pat.Text = "특이사항등록"
-        Me.btnReg_Pat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_Pat.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnReg_Pat.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -754,7 +750,7 @@ Partial Class FGC32
         DesignerRectTracker11.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker11.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_Label.CenterPtTracker = DesignerRectTracker11
         CBlendItems6.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems6.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems6.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnPrint_Label.ColorFillBlend = CBlendItems6
         Me.btnPrint_Label.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnPrint_Label.Corners.All = CType(6, Short)
@@ -765,9 +761,9 @@ Partial Class FGC32
         Me.btnPrint_Label.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnPrint_Label.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnPrint_Label.FocalPoints.CenterPtX = 0.5!
-        Me.btnPrint_Label.FocalPoints.CenterPtY = 0.0!
-        Me.btnPrint_Label.FocalPoints.FocusPtX = 0.0!
-        Me.btnPrint_Label.FocalPoints.FocusPtY = 0.0!
+        Me.btnPrint_Label.FocalPoints.CenterPtY = 0!
+        Me.btnPrint_Label.FocalPoints.FocusPtX = 0!
+        Me.btnPrint_Label.FocalPoints.FocusPtY = 0!
         DesignerRectTracker12.IsActive = False
         DesignerRectTracker12.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker12.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_Label.FocusPtTracker = DesignerRectTracker12
@@ -782,12 +778,10 @@ Partial Class FGC32
         Me.btnPrint_Label.Name = "btnPrint_Label"
         Me.btnPrint_Label.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint_Label.SideImage = Nothing
-        Me.btnPrint_Label.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrint_Label.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnPrint_Label.Size = New System.Drawing.Size(114, 25)
         Me.btnPrint_Label.TabIndex = 219
         Me.btnPrint_Label.Text = "라벨출력"
-        Me.btnPrint_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint_Label.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnPrint_Label.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -798,7 +792,7 @@ Partial Class FGC32
         DesignerRectTracker13.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker13.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_Doc.CenterPtTracker = DesignerRectTracker13
         CBlendItems7.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems7.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems7.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnPrint_Doc.ColorFillBlend = CBlendItems7
         Me.btnPrint_Doc.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnPrint_Doc.Corners.All = CType(6, Short)
@@ -809,9 +803,9 @@ Partial Class FGC32
         Me.btnPrint_Doc.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnPrint_Doc.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnPrint_Doc.FocalPoints.CenterPtX = 0.5!
-        Me.btnPrint_Doc.FocalPoints.CenterPtY = 0.0!
-        Me.btnPrint_Doc.FocalPoints.FocusPtX = 0.0!
-        Me.btnPrint_Doc.FocalPoints.FocusPtY = 0.0!
+        Me.btnPrint_Doc.FocalPoints.CenterPtY = 0!
+        Me.btnPrint_Doc.FocalPoints.FocusPtX = 0!
+        Me.btnPrint_Doc.FocalPoints.FocusPtY = 0!
         DesignerRectTracker14.IsActive = False
         DesignerRectTracker14.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker14.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_Doc.FocusPtTracker = DesignerRectTracker14
@@ -826,12 +820,10 @@ Partial Class FGC32
         Me.btnPrint_Doc.Name = "btnPrint_Doc"
         Me.btnPrint_Doc.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint_Doc.SideImage = Nothing
-        Me.btnPrint_Doc.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrint_Doc.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnPrint_Doc.Size = New System.Drawing.Size(114, 25)
         Me.btnPrint_Doc.TabIndex = 218
         Me.btnPrint_Doc.Text = "문서 재출력"
-        Me.btnPrint_Doc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint_Doc.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnPrint_Doc.TextMargin = New System.Windows.Forms.Padding(0)
         Me.btnPrint_Doc.Visible = False
@@ -843,7 +835,7 @@ Partial Class FGC32
         DesignerRectTracker15.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker15.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg.CenterPtTracker = DesignerRectTracker15
         CBlendItems8.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems8.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems8.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnReg.ColorFillBlend = CBlendItems8
         Me.btnReg.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnReg.Corners.All = CType(6, Short)
@@ -854,9 +846,9 @@ Partial Class FGC32
         Me.btnReg.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnReg.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnReg.FocalPoints.CenterPtX = 0.5!
-        Me.btnReg.FocalPoints.CenterPtY = 0.0!
-        Me.btnReg.FocalPoints.FocusPtX = 0.0!
-        Me.btnReg.FocalPoints.FocusPtY = 0.0!
+        Me.btnReg.FocalPoints.CenterPtY = 0!
+        Me.btnReg.FocalPoints.FocusPtX = 0!
+        Me.btnReg.FocalPoints.FocusPtY = 0!
         DesignerRectTracker16.IsActive = False
         DesignerRectTracker16.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker16.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg.FocusPtTracker = DesignerRectTracker16
@@ -870,12 +862,10 @@ Partial Class FGC32
         Me.btnReg.Name = "btnReg"
         Me.btnReg.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg.SideImage = Nothing
-        Me.btnReg.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReg.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnReg.Size = New System.Drawing.Size(114, 25)
         Me.btnReg.TabIndex = 220
         Me.btnReg.Text = "바코드 발행(F2)"
-        Me.btnReg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnReg.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -886,7 +876,7 @@ Partial Class FGC32
         DesignerRectTracker17.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker17.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_BC.CenterPtTracker = DesignerRectTracker17
         CBlendItems9.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems9.iPoint = New Single() {0.0!, 0.2960725!, 0.8912387!, 1.0!}
+        CBlendItems9.iPoint = New Single() {0!, 0.2960725!, 0.8912387!, 1.0!}
         Me.btnPrint_BC.ColorFillBlend = CBlendItems9
         Me.btnPrint_BC.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnPrint_BC.Corners.All = CType(6, Short)
@@ -897,9 +887,9 @@ Partial Class FGC32
         Me.btnPrint_BC.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnPrint_BC.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnPrint_BC.FocalPoints.CenterPtX = 0.5!
-        Me.btnPrint_BC.FocalPoints.CenterPtY = 0.0!
-        Me.btnPrint_BC.FocalPoints.FocusPtX = 0.0!
-        Me.btnPrint_BC.FocalPoints.FocusPtY = 0.0!
+        Me.btnPrint_BC.FocalPoints.CenterPtY = 0!
+        Me.btnPrint_BC.FocalPoints.FocusPtX = 0!
+        Me.btnPrint_BC.FocalPoints.FocusPtY = 0!
         DesignerRectTracker18.IsActive = False
         DesignerRectTracker18.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker18.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnPrint_BC.FocusPtTracker = DesignerRectTracker18
@@ -914,12 +904,10 @@ Partial Class FGC32
         Me.btnPrint_BC.Name = "btnPrint_BC"
         Me.btnPrint_BC.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint_BC.SideImage = Nothing
-        Me.btnPrint_BC.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPrint_BC.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnPrint_BC.Size = New System.Drawing.Size(114, 25)
         Me.btnPrint_BC.TabIndex = 221
         Me.btnPrint_BC.Text = "바코드 재출력"
-        Me.btnPrint_BC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint_BC.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnPrint_BC.TextMargin = New System.Windows.Forms.Padding(0)
         Me.btnPrint_BC.Visible = False
@@ -932,7 +920,7 @@ Partial Class FGC32
         DesignerRectTracker19.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker19.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnOrdSum.CenterPtTracker = DesignerRectTracker19
         CBlendItems10.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems10.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems10.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnOrdSum.ColorFillBlend = CBlendItems10
         Me.btnOrdSum.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnOrdSum.Corners.All = CType(6, Short)
@@ -944,8 +932,8 @@ Partial Class FGC32
         Me.btnOrdSum.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnOrdSum.FocalPoints.CenterPtX = 0.6493506!
         Me.btnOrdSum.FocalPoints.CenterPtY = 0.52!
-        Me.btnOrdSum.FocalPoints.FocusPtX = 0.0!
-        Me.btnOrdSum.FocalPoints.FocusPtY = 0.0!
+        Me.btnOrdSum.FocalPoints.FocusPtX = 0!
+        Me.btnOrdSum.FocalPoints.FocusPtY = 0!
         DesignerRectTracker20.IsActive = False
         DesignerRectTracker20.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker20.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnOrdSum.FocusPtTracker = DesignerRectTracker20
@@ -957,12 +945,10 @@ Partial Class FGC32
         Me.btnOrdSum.Name = "btnOrdSum"
         Me.btnOrdSum.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnOrdSum.SideImage = Nothing
-        Me.btnOrdSum.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnOrdSum.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnOrdSum.Size = New System.Drawing.Size(77, 25)
         Me.btnOrdSum.TabIndex = 79
         Me.btnOrdSum.Text = "검체 병합"
-        Me.btnOrdSum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnOrdSum.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnOrdSum.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -985,7 +971,7 @@ Partial Class FGC32
         DesignerRectTracker21.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker21.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnHistory.CenterPtTracker = DesignerRectTracker21
         CBlendItems11.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems11.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems11.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnHistory.ColorFillBlend = CBlendItems11
         Me.btnHistory.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnHistory.Corners.All = CType(6, Short)
@@ -997,8 +983,8 @@ Partial Class FGC32
         Me.btnHistory.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnHistory.FocalPoints.CenterPtX = 0.4509804!
         Me.btnHistory.FocalPoints.CenterPtY = 0.36!
-        Me.btnHistory.FocalPoints.FocusPtX = 0.0!
-        Me.btnHistory.FocalPoints.FocusPtY = 0.0!
+        Me.btnHistory.FocalPoints.FocusPtX = 0!
+        Me.btnHistory.FocalPoints.FocusPtY = 0!
         DesignerRectTracker22.IsActive = False
         DesignerRectTracker22.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker22.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnHistory.FocusPtTracker = DesignerRectTracker22
@@ -1012,12 +998,10 @@ Partial Class FGC32
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnHistory.SideImage = Nothing
-        Me.btnHistory.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnHistory.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnHistory.Size = New System.Drawing.Size(103, 25)
         Me.btnHistory.TabIndex = 77
         Me.btnHistory.Text = "검체 History"
-        Me.btnHistory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnHistory.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnHistory.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1029,7 +1013,7 @@ Partial Class FGC32
         DesignerRectTracker23.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker23.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery_rst.CenterPtTracker = DesignerRectTracker23
         CBlendItems12.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems12.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems12.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnQuery_rst.ColorFillBlend = CBlendItems12
         Me.btnQuery_rst.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnQuery_rst.Corners.All = CType(6, Short)
@@ -1041,8 +1025,8 @@ Partial Class FGC32
         Me.btnQuery_rst.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnQuery_rst.FocalPoints.CenterPtX = 0.32!
         Me.btnQuery_rst.FocalPoints.CenterPtY = 0.48!
-        Me.btnQuery_rst.FocalPoints.FocusPtX = 0.0!
-        Me.btnQuery_rst.FocalPoints.FocusPtY = 0.0!
+        Me.btnQuery_rst.FocalPoints.FocusPtX = 0!
+        Me.btnQuery_rst.FocalPoints.FocusPtY = 0!
         DesignerRectTracker24.IsActive = False
         DesignerRectTracker24.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker24.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery_rst.FocusPtTracker = DesignerRectTracker24
@@ -1056,12 +1040,10 @@ Partial Class FGC32
         Me.btnQuery_rst.Name = "btnQuery_rst"
         Me.btnQuery_rst.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery_rst.SideImage = Nothing
-        Me.btnQuery_rst.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnQuery_rst.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnQuery_rst.Size = New System.Drawing.Size(75, 25)
         Me.btnQuery_rst.TabIndex = 76
         Me.btnQuery_rst.Text = "결과조회"
-        Me.btnQuery_rst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery_rst.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnQuery_rst.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1073,7 +1055,7 @@ Partial Class FGC32
         DesignerRectTracker25.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker25.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCancel_coll.CenterPtTracker = DesignerRectTracker25
         CBlendItems13.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems13.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems13.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnCancel_coll.ColorFillBlend = CBlendItems13
         Me.btnCancel_coll.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnCancel_coll.Corners.All = CType(6, Short)
@@ -1085,8 +1067,8 @@ Partial Class FGC32
         Me.btnCancel_coll.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnCancel_coll.FocalPoints.CenterPtX = 0.5066667!
         Me.btnCancel_coll.FocalPoints.CenterPtY = 0.68!
-        Me.btnCancel_coll.FocalPoints.FocusPtX = 0.0!
-        Me.btnCancel_coll.FocalPoints.FocusPtY = 0.0!
+        Me.btnCancel_coll.FocalPoints.FocusPtX = 0!
+        Me.btnCancel_coll.FocalPoints.FocusPtY = 0!
         DesignerRectTracker26.IsActive = False
         DesignerRectTracker26.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker26.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnCancel_coll.FocusPtTracker = DesignerRectTracker26
@@ -1100,12 +1082,10 @@ Partial Class FGC32
         Me.btnCancel_coll.Name = "btnCancel_coll"
         Me.btnCancel_coll.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnCancel_coll.SideImage = Nothing
-        Me.btnCancel_coll.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancel_coll.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnCancel_coll.Size = New System.Drawing.Size(75, 25)
         Me.btnCancel_coll.TabIndex = 75
         Me.btnCancel_coll.Text = "채혈취소"
-        Me.btnCancel_coll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnCancel_coll.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnCancel_coll.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1127,7 +1107,7 @@ Partial Class FGC32
         DesignerRectTracker27.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker27.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_Coll.CenterPtTracker = DesignerRectTracker27
         CBlendItems14.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems14.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems14.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnReg_Coll.ColorFillBlend = CBlendItems14
         Me.btnReg_Coll.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnReg_Coll.Corners.All = CType(6, Short)
@@ -1139,8 +1119,8 @@ Partial Class FGC32
         Me.btnReg_Coll.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnReg_Coll.FocalPoints.CenterPtX = 0.6739131!
         Me.btnReg_Coll.FocalPoints.CenterPtY = 0.48!
-        Me.btnReg_Coll.FocalPoints.FocusPtX = 0.0!
-        Me.btnReg_Coll.FocalPoints.FocusPtY = 0.0!
+        Me.btnReg_Coll.FocalPoints.FocusPtX = 0!
+        Me.btnReg_Coll.FocalPoints.FocusPtY = 0!
         DesignerRectTracker28.IsActive = False
         DesignerRectTracker28.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker28.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_Coll.FocusPtTracker = DesignerRectTracker28
@@ -1152,12 +1132,10 @@ Partial Class FGC32
         Me.btnReg_Coll.Name = "btnReg_Coll"
         Me.btnReg_Coll.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_Coll.SideImage = Nothing
-        Me.btnReg_Coll.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReg_Coll.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnReg_Coll.Size = New System.Drawing.Size(92, 25)
         Me.btnReg_Coll.TabIndex = 81
         Me.btnReg_Coll.Text = "채혈일시 등록"
-        Me.btnReg_Coll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_Coll.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnReg_Coll.TextMargin = New System.Windows.Forms.Padding(0)
         '
@@ -1177,7 +1155,7 @@ Partial Class FGC32
         'axCollBcNos
         '
         Me.axCollBcNos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.axCollBcNos.BcPrinterParams = Nothing
         Me.axCollBcNos.Location = New System.Drawing.Point(278, 535)
         Me.axCollBcNos.Margin = New System.Windows.Forms.Padding(0)
@@ -1193,7 +1171,7 @@ Partial Class FGC32
         DesignerRectTracker29.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker29.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_rst.CenterPtTracker = DesignerRectTracker29
         CBlendItems15.iColor = New System.Drawing.Color() {System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer)), System.Drawing.Color.Navy}
-        CBlendItems15.iPoint = New Single() {0.0!, 0.8723404!, 0.9969605!, 1.0!}
+        CBlendItems15.iPoint = New Single() {0!, 0.8723404!, 0.9969605!, 1.0!}
         Me.btnReg_rst.ColorFillBlend = CBlendItems15
         Me.btnReg_rst.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnReg_rst.Corners.All = CType(6, Short)
@@ -1205,8 +1183,8 @@ Partial Class FGC32
         Me.btnReg_rst.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
         Me.btnReg_rst.FocalPoints.CenterPtX = 0.3733333!
         Me.btnReg_rst.FocalPoints.CenterPtY = 0.52!
-        Me.btnReg_rst.FocalPoints.FocusPtX = 0.0!
-        Me.btnReg_rst.FocalPoints.FocusPtY = 0.0!
+        Me.btnReg_rst.FocalPoints.FocusPtX = 0!
+        Me.btnReg_rst.FocalPoints.FocusPtY = 0!
         DesignerRectTracker30.IsActive = False
         DesignerRectTracker30.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker30.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_rst.FocusPtTracker = DesignerRectTracker30
@@ -1220,12 +1198,10 @@ Partial Class FGC32
         Me.btnReg_rst.Name = "btnReg_rst"
         Me.btnReg_rst.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnReg_rst.SideImage = Nothing
-        Me.btnReg_rst.SideImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReg_rst.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnReg_rst.Size = New System.Drawing.Size(75, 25)
         Me.btnReg_rst.TabIndex = 85
         Me.btnReg_rst.Text = "결과등록"
-        Me.btnReg_rst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnReg_rst.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnReg_rst.TextMargin = New System.Windows.Forms.Padding(0)
         Me.btnReg_rst.Visible = False
@@ -1233,8 +1209,8 @@ Partial Class FGC32
         'axCollList
         '
         Me.axCollList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.axCollList.BcPrinterParams = Nothing
         Me.axCollList.CallForm = AxAckCollector.enumCollectCallForm.CollectIn
         Me.axCollList.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -1253,6 +1229,38 @@ Partial Class FGC32
         Me.lblDptWard.TabIndex = 90
         Me.lblDptWard.Text = "Label5"
         Me.lblDptWard.Visible = False
+        '
+        'chkPrntNum
+        '
+        Me.chkPrntNum.AutoSize = True
+        Me.chkPrntNum.Location = New System.Drawing.Point(384, 7)
+        Me.chkPrntNum.Name = "chkPrntNum"
+        Me.chkPrntNum.Size = New System.Drawing.Size(15, 14)
+        Me.chkPrntNum.TabIndex = 228
+        Me.chkPrntNum.UseVisualStyleBackColor = True
+        '
+        'txtPrntNum
+        '
+        Me.txtPrntNum.Location = New System.Drawing.Point(405, 4)
+        Me.txtPrntNum.MaxLength = 6
+        Me.txtPrntNum.Name = "txtPrntNum"
+        Me.txtPrntNum.Size = New System.Drawing.Size(19, 21)
+        Me.txtPrntNum.TabIndex = 227
+        Me.txtPrntNum.Tag = "IDL"
+        Me.txtPrntNum.Text = "0"
+        Me.txtPrntNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblPrntNum
+        '
+        Me.lblPrntNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblPrntNum.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblPrntNum.ForeColor = System.Drawing.Color.Black
+        Me.lblPrntNum.Location = New System.Drawing.Point(329, 4)
+        Me.lblPrntNum.Name = "lblPrntNum"
+        Me.lblPrntNum.Size = New System.Drawing.Size(74, 21)
+        Me.lblPrntNum.TabIndex = 229
+        Me.lblPrntNum.Text = "출력장수"
+        Me.lblPrntNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FGC32
         '
@@ -1288,6 +1296,7 @@ Partial Class FGC32
         Me.grpList.ResumeLayout(False)
         CType(Me.spdList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlBottom.ResumeLayout(False)
+        Me.pnlBottom.PerformLayout()
         Me.pnlPrintInfo.ResumeLayout(False)
         Me.pnlPrintInfo.PerformLayout()
         Me.ResumeLayout(False)
@@ -1357,4 +1366,7 @@ Partial Class FGC32
     Friend WithEvents axCollList As AxAckCollector.AxCollList_tot
     Friend WithEvents lblDptWard As System.Windows.Forms.Label
     Friend WithEvents chkBarInit As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPrntNum As Windows.Forms.CheckBox
+    Protected Friend WithEvents txtPrntNum As Windows.Forms.TextBox
+    Friend WithEvents lblPrntNum As Windows.Forms.Label
 End Class

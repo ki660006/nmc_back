@@ -152,7 +152,7 @@ Partial Class FGB16
         '
         'spdIOList
         '
-        Me.spdIOList.DataSource = Nothing
+        'Me.spdIOList.DataSource = Nothing
         Me.spdIOList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdIOList.Location = New System.Drawing.Point(0, 0)
         Me.spdIOList.Name = "spdIOList"
@@ -345,7 +345,7 @@ Partial Class FGB16
         '
         'spdDetail
         '
-        Me.spdDetail.DataSource = Nothing
+        'Me.spdDetail.DataSource = Nothing
         Me.spdDetail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdDetail.Location = New System.Drawing.Point(0, 0)
         Me.spdDetail.Name = "spdDetail"

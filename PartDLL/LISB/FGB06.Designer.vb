@@ -667,7 +667,7 @@ Partial Class FGB06
         '
         'spdWorkList
         '
-        Me.spdWorkList.DataSource = Nothing
+        'Me.spdWorkList.DataSource = Nothing
         Me.spdWorkList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdWorkList.Location = New System.Drawing.Point(0, 0)
         Me.spdWorkList.Name = "spdWorkList"
@@ -726,7 +726,7 @@ Partial Class FGB06
         '
         'spdKeepList
         '
-        Me.spdKeepList.DataSource = Nothing
+        'Me.spdKeepList.DataSource = Nothing
         Me.spdKeepList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdKeepList.Location = New System.Drawing.Point(0, 0)
         Me.spdKeepList.Name = "spdKeepList"
@@ -746,7 +746,7 @@ Partial Class FGB06
         '
         'spdPastTns
         '
-        Me.spdPastTns.DataSource = Nothing
+        'Me.spdPastTns.DataSource = Nothing
         Me.spdPastTns.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdPastTns.Location = New System.Drawing.Point(0, 0)
         Me.spdPastTns.Name = "spdPastTns"

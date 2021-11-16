@@ -137,6 +137,10 @@ Public Class PPRINT
                         iPrtCnt = Convert.ToInt32(CType(ma_PrtData(ix1), STU_BCPRTINFO).BCCNT)
                     End If
 
+                    If CType(ma_PrtData(ix1), STU_BCPRTINFO).CHKADDPRNT Then
+                        iPrtCnt += CType(ma_PrtData(ix1), STU_BCPRTINFO).PRNTNUM
+                    End If
+
                     For ix2 As Integer = 1 To iPrtCnt
                         Dim bpi As STU_BCPRTINFO = CType(ma_PrtData(ix1), STU_BCPRTINFO)
 

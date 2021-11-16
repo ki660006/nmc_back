@@ -61,7 +61,7 @@ Partial Class FGB05_S01
         '
         'spdList
         '
-        Me.spdList.DataSource = Nothing
+        'Me.spdList.DataSource = Nothing
         Me.spdList.Location = New System.Drawing.Point(6, 10)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)

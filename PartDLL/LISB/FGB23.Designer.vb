@@ -142,7 +142,7 @@ Partial Class FGB23
         '
         'spdDayList
         '
-        Me.spdDayList.DataSource = Nothing
+        ''Me.spdDayList.DataSource = Nothing
         Me.spdDayList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdDayList.Location = New System.Drawing.Point(0, 0)
         Me.spdDayList.Margin = New System.Windows.Forms.Padding(1)
@@ -176,7 +176,7 @@ Partial Class FGB23
         '
         'spdMonthList
         '
-        Me.spdMonthList.DataSource = Nothing
+        'Me.spdMonthList.DataSource = Nothing
         Me.spdMonthList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdMonthList.Location = New System.Drawing.Point(0, 0)
         Me.spdMonthList.Margin = New System.Windows.Forms.Padding(1)
@@ -211,7 +211,7 @@ Partial Class FGB23
         '
         'spdYearList
         '
-        Me.spdYearList.DataSource = Nothing
+        'Me.spdYearList.DataSource = Nothing
         Me.spdYearList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdYearList.Location = New System.Drawing.Point(0, 0)
         Me.spdYearList.Margin = New System.Windows.Forms.Padding(1)
@@ -249,7 +249,7 @@ Partial Class FGB23
         Me.spdMonType.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.spdMonType.DataSource = Nothing
+        ''Me.spdMonType.DataSource = Nothing
         Me.spdMonType.Location = New System.Drawing.Point(0, 0)
         Me.spdMonType.Margin = New System.Windows.Forms.Padding(1)
         Me.spdMonType.Name = "spdMonType"
@@ -286,7 +286,7 @@ Partial Class FGB23
         Me.spdYearType.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.spdYearType.DataSource = Nothing
+        'Me.spdYearType.DataSource = Nothing
         Me.spdYearType.Location = New System.Drawing.Point(0, 0)
         Me.spdYearType.Margin = New System.Windows.Forms.Padding(1)
         Me.spdYearType.Name = "spdYearType"

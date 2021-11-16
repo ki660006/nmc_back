@@ -539,6 +539,10 @@ Namespace APP_BC
                     '20210429 jhs 음영 표시 위해 검사 코드추가
                     .TESTCD = r_listcollData.Item(0).TCLSCD
                     '------------------------------------
+                    '20211104 jhs 바코드 매수 추가여부 및 추가 장수
+                    .CHKADDPRNT = r_listcollData.Item(0).CHKADDPRNT
+                    .PRNTNUM = r_listcollData.Item(0).PRNTNUM
+                    '--------------------------------------
                 End With
 
                 Return bpi

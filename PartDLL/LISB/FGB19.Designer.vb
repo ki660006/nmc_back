@@ -339,7 +339,7 @@ Partial Class FGB19
         '
         'spdTopList
         '
-        Me.spdTopList.DataSource = Nothing
+        'Me.spdTopList.DataSource = Nothing
         Me.spdTopList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdTopList.Location = New System.Drawing.Point(0, 0)
         Me.spdTopList.Margin = New System.Windows.Forms.Padding(1)
@@ -382,7 +382,7 @@ Partial Class FGB19
         '
         'spdDetail
         '
-        Me.spdDetail.DataSource = Nothing
+        'Me.spdDetail.DataSource = Nothing
         Me.spdDetail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdDetail.Location = New System.Drawing.Point(0, 0)
         Me.spdDetail.Margin = New System.Windows.Forms.Padding(1)

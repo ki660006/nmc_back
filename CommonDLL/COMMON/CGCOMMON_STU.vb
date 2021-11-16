@@ -184,6 +184,9 @@ Namespace SVar
         Public CPRTGBN As String = ""
 
         Public ERPRTYN As String = "" '<<<20180801 자체응급바코드 추가 
+
+        Public CHKADDPRNT As Boolean = False   '20211104 jhs 프린트 장수 
+        Public PRNTNUM As String = "0"    '20211104 jhs 프린트 장수 
     End Class
 
     Public Class STU_DiagInfo
@@ -367,6 +370,8 @@ Namespace SVar
         Public ERPRTYN As String = ""       '-- 자체응급프린트 <<<20180802
         Public ABOCHK As String = ""        '-- 혈액형 여부 체크 2019-04-19
         Public TESTCD As String = ""        '-- 혈액형 여부 체크 2019-04-19
+        Public CHKADDPRNT As Boolean = False '--출력매수 더할지 여부
+        Public PRNTNUM As String = ""       '--추가할 출력매수
     End Class
 
     Public Class STU_BLDLABEL

@@ -144,6 +144,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FGCDBLD_TRAN_MGT.Designer.vb">
+      <DependentUpon>FGCDBLD_TRAN_MGT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGCDBLD_TRAN_MGT.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FGCDHELP01.designer.vb">
       <DependentUpon>FGCDHELP01.vb</DependentUpon>
     </Compile>
@@ -224,6 +230,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FGCDBLD_TRAN_Mgt.resx">
+      <DependentUpon>FGCDBLD_TRAN_MGT.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FGCDHELP01.resx">
       <DependentUpon>FGCDHELP01.vb</DependentUpon>
       <SubType>Designer</SubType>

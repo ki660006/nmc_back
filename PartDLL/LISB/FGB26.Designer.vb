@@ -310,7 +310,7 @@ Partial Class FGB26
         Me.SpdListIn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SpdListIn.DataSource = Nothing
+        'Me.SpdListIn.DataSource = Nothing
         Me.SpdListIn.Location = New System.Drawing.Point(3, 3)
         Me.SpdListIn.Name = "SpdListIn"
         Me.SpdListIn.OcxState = CType(resources.GetObject("SpdListIn.OcxState"), System.Windows.Forms.AxHost.State)
@@ -333,7 +333,7 @@ Partial Class FGB26
         Me.SpdListOut.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SpdListOut.DataSource = Nothing
+        'Me.SpdListOut.DataSource = Nothing
         Me.SpdListOut.Location = New System.Drawing.Point(3, 3)
         Me.SpdListOut.Name = "SpdListOut"
         Me.SpdListOut.OcxState = CType(resources.GetObject("SpdListOut.OcxState"), System.Windows.Forms.AxHost.State)

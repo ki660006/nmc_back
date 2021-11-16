@@ -680,7 +680,7 @@ Partial Class FGB14
         '
         'spdSearchList
         '
-        Me.spdSearchList.DataSource = Nothing
+        'Me.spdSearchList.DataSource = Nothing
         Me.spdSearchList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdSearchList.Location = New System.Drawing.Point(0, 0)
         Me.spdSearchList.Margin = New System.Windows.Forms.Padding(1)
@@ -722,7 +722,7 @@ Partial Class FGB14
         '
         'spdDetail
         '
-        Me.spdDetail.DataSource = Nothing
+        ''Me.spdDetail.DataSource = Nothing
         Me.spdDetail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdDetail.Location = New System.Drawing.Point(0, 0)
         Me.spdDetail.Margin = New System.Windows.Forms.Padding(1)

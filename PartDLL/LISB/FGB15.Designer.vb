@@ -377,7 +377,7 @@ Partial Class FGB15
         '
         'spdSList
         '
-        Me.spdSList.DataSource = Nothing
+        'Me.spdSList.DataSource = Nothing 
         Me.spdSList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdSList.Location = New System.Drawing.Point(0, 0)
         Me.spdSList.Name = "spdSList"

@@ -2626,4 +2626,27 @@ Public Class FGB07
 
         End Try
     End Sub
+    '20211102 jhs 수혈의뢰접수 목록 
+    Private Sub btnExeBldTransMana_Click(sender As Object, e As EventArgs) Handles btnExeBldTransMana.Click
+        Dim sFn As String = "Handles btnExeBldTransMana.Click"
+        Dim sTnsjubsuno As String = ""
+
+        With spdOrderList
+            If .MaxRows <= 0 Then '조회 안되어있을 때 
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "수혈의뢰 접수목록에서 수혈의뢰 접수내용을 선택해주세요.")
+                Return
+            End If
+            .Row = .ActiveRow
+            .Col = .GetColFromID("vtnsjubsuno") : sTnsjubsuno = .Text.Replace("-", "")
+        End With
+
+        Dim frmChild As Windows.Forms.Form
+        frmChild = New CDHELP.FGCDBLD_TRAN_MGT(sTnsjubsuno)
+
+        frmChild.WindowState = FormWindowState.Normal
+        frmChild.Activate()
+        frmChild.ShowDialog()
+    End Sub
+    '----------------------------------------------------------
+
 End Class

@@ -22,6 +22,7 @@ Public Class FGFINAL_CMT2
 
     End Function
 
+
     Private Sub sbDisplay_Cmt()
 
         Try

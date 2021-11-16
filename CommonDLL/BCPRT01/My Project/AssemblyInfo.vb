@@ -60,6 +60,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.359 --> 2021/08/18 : 혈액은행 출고시 출력스티커 응급 볼드로 적용 되도록 수정
 'Version 3.1.10.360 --> 2021/08/23 : 혈액은행 출고시 출력스티커 응급 위치 변경
 'Version 3.1.10.361 --> 2021/09/27 : 혈액은행 출고시 출력스티커 응급 위치 변경
+'Version 3.1.10.362 --> 2021/11/09 : 프린트 장수 추가
 
-<Assembly: AssemblyVersion("3.1.10.361")>
+<Assembly: AssemblyVersion("3.1.10.362")>
 

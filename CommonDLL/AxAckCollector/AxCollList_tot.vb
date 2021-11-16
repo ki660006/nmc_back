@@ -1166,15 +1166,16 @@ Public Class AxCollList_tot
         End Try
     End Function
 
-    Public Function CollectSelOrder_Web(ByRef noSunabList As ArrayList, _
-                                        ByVal rsFormName As String, _
-                                        ByVal rsRegNo As String, _
-                                        ByVal rsIoGbn As String, _
-                                        ByVal rsDeptOrWard As String, _
-                                        ByVal rsPartGbn As String, _
-                                        ByVal rsOrdDtS As String, ByVal rsOrdDtE As String, _
-                                        ByVal rbToColl As Boolean, ByVal rbAutoTk As Boolean, _
-                                        ByVal rbNotBcPrt As Boolean) As ArrayList
+    Public Function CollectSelOrder_Web(ByRef noSunabList As ArrayList,
+                                        ByVal rsFormName As String,
+                                        ByVal rsRegNo As String,
+                                        ByVal rsIoGbn As String,
+                                        ByVal rsDeptOrWard As String,
+                                        ByVal rsPartGbn As String,
+                                        ByVal rsOrdDtS As String, ByVal rsOrdDtE As String,
+                                        ByVal rbToColl As Boolean, ByVal rbAutoTk As Boolean,
+                                        ByVal rbNotBcPrt As Boolean,
+                                        Optional ByVal rsBolPrntNum As Boolean = False, Optional ByVal rsPrntNum As String = "0") As ArrayList
         Dim sFn As String = "Public Function CollectSelOrder() As ArrayList"
 
         Dim iCnt As Integer = 0
@@ -1268,7 +1269,8 @@ Public Class AxCollList_tot
                             iRowE = i
 
                             If sChk = "1" And (sSuNabYn = "Y" Or PRG_CONST.DEPT_NOSUNAB.IndexOf(sDeptCd + ",") >= 0) Then
-                                collData = fnFind_collData(i, dtSysDt)
+                                'collData = fnFind_collData(i, dtSysDt) 
+                                collData = fnFind_collData(i, dtSysDt, False, rsBolPrntNum, rsPrntNum) ' 20211104 jhs 프린터 추가
 
                                 If collData IsNot Nothing Then
                                     listCollData.Add(collData)
@@ -1281,7 +1283,8 @@ Public Class AxCollList_tot
                                     End If
                                 End If
                             ElseIf sChk = "1" And (sSuNabYn = "N" Or PRG_CONST.DEPT_NOSUNAB.IndexOf(sDeptCd + ",") >= 0) And sOpenCard = "Y" Then ' 20150909 오픈카드 관련 수정
-                                collData = fnFind_collData(i, dtSysDt)
+                                'collData = fnFind_collData(i, dtSysDt) 
+                                collData = fnFind_collData(i, dtSysDt, False, rsBolPrntNum, rsPrntNum) ' 20211104 jhs 프린터 추가
 
                                 If collData IsNot Nothing Then
                                     listCollData.Add(collData)
@@ -3888,7 +3891,8 @@ Public Class AxCollList_tot
 
     End Sub
 
-    Private Function fnFind_collData(ByVal riRow As Integer, ByVal rdtSysDt As Date, Optional ByVal rbLabel As Boolean = False) As STU_CollectInfo
+    Private Function fnFind_collData(ByVal riRow As Integer, ByVal rdtSysDt As Date, Optional ByVal rbLabel As Boolean = False,
+                                     Optional ByVal rsBolPrntNum As Boolean = False, Optional ByVal rsPrntNum As String = "0") As STU_CollectInfo
         Dim spd As AxFPSpreadADO.AxfpSpread = Me.spdOrdList
 
         Dim collData As New STU_CollectInfo
@@ -4016,6 +4020,13 @@ Public Class AxCollList_tot
         End If
 
         collData.ERPRTYN = Ctrl.Get_Code(spd, "erprtyn", riRow, False) '<<<20180801 응급바코드 추가
+
+        '20211104 jhs 바코드 장수 더하기 위해 추가
+        If rsBolPrntNum Then
+            collData.CHKADDPRNT = rsBolPrntNum
+            collData.PRNTNUM = rsPrntNum
+        End If
+        '---------------------------
 
         Return collData
     End Function

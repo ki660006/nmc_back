@@ -71,6 +71,11 @@ Public Class LUKHAN_DRV
                     End If
                     '-----------------------------------------------------------
 
+                    If CType(ra_PrtData(ix1), STU_BCPRTINFO).CHKADDPRNT Then
+                        iPrtCnt += CType(ra_PrtData(ix1), STU_BCPRTINFO).PRNTNUM
+                    End If
+
+
                     'If CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "A" Then
                     '    iPrtCnt = 2
                     'ElseIf CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT = "B" Then

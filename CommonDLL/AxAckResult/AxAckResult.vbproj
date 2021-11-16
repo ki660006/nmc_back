@@ -94,6 +94,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxAckNumericTextBox">
+      <HintPath>..\AxAckNumericTextBox\obj\Debug\AxAckNumericTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="AxInterop.FPSpreadADO, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dll&amp;OCX\AxInterop.FPSpreadADO.dll</HintPath>

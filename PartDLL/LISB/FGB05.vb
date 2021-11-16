@@ -285,7 +285,7 @@ Public Class FGB05
         Me.spdComList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.spdComList.DataSource = Nothing
+        'Me.spdComList.DataSource = Nothing
         Me.spdComList.Location = New System.Drawing.Point(0, 0)
         Me.spdComList.Name = "spdComList"
         Me.spdComList.OcxState = CType(resources.GetObject("spdComList.OcxState"), System.Windows.Forms.AxHost.State)
@@ -659,7 +659,7 @@ Public Class FGB05
         '
         'spdBldInList
         '
-        Me.spdBldInList.DataSource = Nothing
+        'Me.spdBldInList.DataSource = Nothing
         Me.spdBldInList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdBldInList.Location = New System.Drawing.Point(0, 0)
         Me.spdBldInList.Name = "spdBldInList"
@@ -833,7 +833,7 @@ Public Class FGB05
         '
         'spdPastList
         '
-        Me.spdPastList.DataSource = Nothing
+        'Me.spdPastList.DataSource = Nothing
         Me.spdPastList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdPastList.Location = New System.Drawing.Point(0, 0)
         Me.spdPastList.Name = "spdPastList"

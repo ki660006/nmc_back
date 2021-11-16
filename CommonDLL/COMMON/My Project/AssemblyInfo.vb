@@ -71,6 +71,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.393 --> 2021/07/26 : 혈액은행 출고스티커 응급 내용 추가 
 'Version 3.1.10.394 --> 2021/08/18 : 배양균 설정 되어있는것 반영하여 색 변경 표시 
 'Version 3.1.10.395 --> 2021/09/01 : CVR 특정 검사는 부모검사코드의 검사명 으로 
+'Version 3.1.10.396 --> 2021/11/09 : 프린트 장수 추가
 
-<Assembly: AssemblyVersion("3.1.10.395")>
+<Assembly: AssemblyVersion("3.1.10.396")>
 

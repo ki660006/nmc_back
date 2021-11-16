@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("9bf152cf-ba3b-4f82-844e-a55760c108fc")> 
+<Assembly: Guid("9bf152cf-ba3b-4f82-844e-a55760c108fc")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -43,5 +43,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.340 --> 2020/12/01 : 핵의학 자체응급 컬럼 공백으로 추가
 'Version 3.1.10.341 --> 2021/02/22 : 배지바코드 5장 출력 될 수 있도록 구현
 'Version 3.1.10.342 --> 2021/06/15 : 특정검사코드 검사명 음영처리
+'Version 3.1.10.343 --> 2021/11/09 : 프린트 장수 추가
 
-<Assembly: AssemblyVersion("3.1.10.342")> 
+<Assembly: AssemblyVersion("3.1.10.343")>

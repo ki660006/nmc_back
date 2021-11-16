@@ -793,7 +793,7 @@ Public Class FGB12
         '
         'spdManage
         '
-        Me.spdManage.DataSource = Nothing
+        'Me.spdManage.DataSource = Nothing
         Me.spdManage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdManage.Location = New System.Drawing.Point(0, 0)
         Me.spdManage.Name = "spdManage"

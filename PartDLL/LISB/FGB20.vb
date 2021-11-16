@@ -366,7 +366,7 @@ Public Class FGB20
         '
         'spdData
         '
-        Me.spdData.DataSource = Nothing
+        'Me.spdData.DataSource = Nothing
         Me.spdData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdData.Location = New System.Drawing.Point(0, 0)
         Me.spdData.Name = "spdData"

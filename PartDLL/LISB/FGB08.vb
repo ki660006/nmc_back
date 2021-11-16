@@ -259,7 +259,7 @@ Public Class FGB08
         '
         'spdTransBloodList
         '
-        Me.spdTransBloodList.DataSource = Nothing
+        'Me.spdTransBloodList.DataSource = Nothing
         Me.spdTransBloodList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdTransBloodList.Location = New System.Drawing.Point(0, 0)
         Me.spdTransBloodList.Name = "spdTransBloodList"
@@ -280,7 +280,7 @@ Public Class FGB08
         '
         'spdBefBldList
         '
-        Me.spdBefBldList.DataSource = Nothing
+        'Me.spdBefBldList.DataSource = Nothing
         Me.spdBefBldList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdBefBldList.Location = New System.Drawing.Point(0, 0)
         Me.spdBefBldList.Name = "spdBefBldList"

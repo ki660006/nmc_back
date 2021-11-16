@@ -5237,6 +5237,29 @@ Namespace APP_BT
 
         End Function
 
+        '20211115 jhs 적혈구제제 프로시저 추가
+        ' 적혈구제제 관리 데이터 가져오기
+        Public Shared Function fnGet_trans_mgt(ByVal rsStDt As String, ByVal rsEnDt As String) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mg(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+
+                alParm.Add(New OracleParameter("rs_stdt", rsStDt))
+                alParm.Add(New OracleParameter("rs_endt", rsEnDt))
+
+                DbCommand()
+                Return DbExecuteQuery("pkg_ack_tns.pkg_get_trans_mgt", alParm, False)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '--------------------------------------------
+
         Public Shared Function fn_PreOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String, ByVal rsGbn As String) As DataTable
             ' 수혈 가출고 대기 리스트
             Dim sFn As String = "Public Shared Function fn_PreOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String) As DataTable"
@@ -9210,7 +9233,11 @@ Namespace APP_BT
 
             Try
                 sSql += "SELECT a.joincd                                                                                       " + vbCrLf
-                sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf '20211007 jhs 정렬 추가
+                If rsGroup = "1"c Then
+                    sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf '20211007 jhs 정렬 추가
+                Else
+                    sSql += "       , '' as deptsortgbn   " + vbCrLf
+                End If
 
                 If rsGroup = "1"c Then
                     '  sSql += " , fn_ack_get_dept_abbr(a.iogbn, a.joincd)                 as gbnnm                               "
@@ -9450,18 +9477,23 @@ Namespace APP_BT
 
                 '20211013 jhs 자체폐기 내용 추가
                 If rsGbn = "2"c Then
-                    sSql += "          union all                                                                     " + vbCrLf
-                    sSql += "         Select fn_ack_date_str(a.rtndt, 'yyyyMM')                                 " + vbCrLf
-                    sSql += "         , COUNT(a.bldno)         as qty                                                " + vbCrLf
-                    sSql += "         from( SELECT bldno, comcd_out, comcd, rtndt                                    " + vbCrLf
-                    sSql += "                 From lb031m                                                                    " + vbCrLf
+                    sSql += "          union all                                                                            " + vbCrLf
+                    sSql += "         Select fn_ack_date_str(a.rtndt, 'yyyy')                                               " + vbCrLf
+                    sSql += "         , COUNT(a.bldno)         as qty                                                       " + vbCrLf
+                    sSql += "         from( SELECT bldno, comcd_out, comcd, rtndt                                           " + vbCrLf
+                    sSql += "                 From lb031m                                                                   " + vbCrLf
                     sSql += "                Where rtndt  BETWEEN :dates || '0101000000' AND :datee || '1231235959'         " + vbCrLf
 
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, (Convert.ToInt32(rsYear) - 1).ToString.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, (Convert.ToInt32(rsYear) - 1).ToString))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsYear.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear))
 
-                    sSql += "                And keepgbn = '5'  )   a                                                       " + vbCrLf
-                    sSql += "        GROUP BY fn_ack_date_str(a.rtndt, 'yyyyMM')                                    " + vbCrLf
+                    sSql += "                And keepgbn = '5'                                                                " + vbCrLf
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                                                   " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
+                    sSql += "                                    )   a                                                        " + vbCrLf
+                    sSql += "        GROUP BY fn_ack_date_str(a.rtndt, 'yyyy')                                                " + vbCrLf
                 End If
 
                 sSql += "       ) a LEFT OUTER JOIN                                                  " + vbCrLf
@@ -9491,6 +9523,11 @@ Namespace APP_BT
                     sSql += "       AND a.rtnflg     = '2'                                                                     " + vbCrLf
                 End If
 
+                If rsComcd <> "ALL" Then
+                    sSql += "                   AND a.comcd_out  = :comcd                                                   " + vbCrLf
+                    alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                End If
+
                 sSql += "         GROUP BY fn_ack_date_str(a.outdt, 'yyyy')                                                    " + vbCrLf
                 sSql += "       ) b ON a.years = b.years                                                                       " + vbCrLf
 
@@ -9517,6 +9554,12 @@ Namespace APP_BT
                     sSql += "            Select fn_ack_date_str(rtndt, 'yyyy') as years   ,  count(bldno) qty  from lb031m                    " + vbCrLf
                     sSql += "             where keepgbn = '5'                                                                                 " + vbCrLf
                     sSql += "               And rtndt  BETWEEN :dates || '0101000000' AND :datee || '1231235959'                              " + vbCrLf
+                    alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, (Convert.ToInt32(rsYear) - 1).ToString.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, (Convert.ToInt32(rsYear) - 1).ToString))
+                    alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsYear.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear))
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                                                   " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
                     sSql += "             group by fn_ack_date_str(rtndt, 'yyyy')                                                             " + vbCrLf
                     sSql += "       ) a                                                                                                       " + vbCrLf
                 End If
@@ -9540,7 +9583,11 @@ Namespace APP_BT
 
             Try
                 sSql += "SELECT a.joincd                                                                    " + vbCrLf
-                sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf
+                If rsGroup = "1"c Then
+                    sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf
+                Else
+                    sSql += "       , '' as deptsortgbn   " + vbCrLf
+                End If
 
                 If rsGroup = "1"c Then
                     'sSql += " , fn_ack_get_dept_abbr(a.iogbn, a.joincd)                 as gbnnm            "+vbcrlf
@@ -9805,7 +9852,13 @@ Namespace APP_BT
                     alParm.Add(New OracleParameter("year", OracleDbType.Varchar2, rsYear.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear))
                     alParm.Add(New OracleParameter("years", OracleDbType.Varchar2, rsYear1.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear1))
 
-                    sSql += "                     And keepgbn = '5'  )   a                                          " + vbCrLf
+                    sSql += "                     And keepgbn = '5'  " '20211111 jhs 성분제제 조건 추가
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                                                    " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
+                    '---------------------------
+                    sSql += "                                                   )   a                                          " + vbCrLf
                     sSql += "          GROUP BY fn_ack_date_str(a.rtndt, 'yyyyMM')                                  " + vbCrLf
                 End If
                 '-----------------------------------------------------------------------------
@@ -9851,15 +9904,15 @@ Namespace APP_BT
                     sSql += "  Select '12'                                                        as joincd         " + vbCrLf
                     sSql += "  , ' '                                                              as deptsortgbn    " + vbCrLf
                     sSql += "  , '자체폐기 :'                                                     as gbnnm          " + vbCrLf
-                    sSql += "  , SUM(NVL(0, 0))                                                   as sumall         " + vbCrLf ' 자체폐기 여서 총출고는 0
-                    sSql += "  , SUM(NVL(a.qty, 0))                                               as cnt            " + vbCrLf
+                    sSql += "  , SUM(NVL(a.qty, 0))                                                   as sumall         " + vbCrLf ' 자체폐기 여서 총출고는 0
+                    sSql += "  , SUM(NVL(0, 0))                                               as cnt            " + vbCrLf
                     sSql += "  , ROUND(SUM(NVL(0, 0))  * 1.0 / sum(NVL(a.qty, 0)) * 100, 2)       as per            " + vbCrLf ' 총출고 0이여서 퍼센트도 0
                     sSql += "  , '3'                                                              as sortgbn ,       " + vbCrLf
 
                     For i As Integer = 1 To a_date.Length
 
-                        sSql += "      SUM(CASE WHEN a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(0, 0) ELSE 0 END) as am" + i.ToString + vbCrLf
-                        sSql += "     , SUM(Case When a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(a.qty, 0) ELSE 0 END) as pm" + i.ToString + vbCrLf
+                        sSql += "      SUM(CASE WHEN a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(a.qty, 0) ELSE 0 END) as am" + i.ToString + vbCrLf
+                        sSql += "     , SUM(Case When a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(0, 0) ELSE 0 END) as pm" + i.ToString + vbCrLf
                         sSql += "     , ROUND(SUM(CASE WHEN a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(0, 0) ELSE 0 END) * 1.0 /                       " + vbCrLf
                         sSql += "            CASE WHEN SUM(CASE WHEN a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(0, 0) ELSE 0 END) = 0 THEN 1           " + vbCrLf
                         sSql += "                 ELSE SUM(CASE WHEN a.months = '" + a_date(i - 1).Replace("-", "").Replace(" ", "") + "' THEN NVL(0, 0) ELSE 0 END)                      " + vbCrLf
@@ -9878,6 +9931,12 @@ Namespace APP_BT
                     sSql += "          And rtndt  BETWEEN :year || '01000000' AND :years || '31235959'      " + vbCrLf
                     alParm.Add(New OracleParameter("year", OracleDbType.Varchar2, rsYear.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear))
                     alParm.Add(New OracleParameter("years", OracleDbType.Varchar2, rsYear1.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsYear1))
+                    '20211111 jhs 성분제제 조건 추가
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                                                    " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
+                    '---------------------------
                     sSql += "  group by fn_ack_date_str(rtndt, 'yyyyMM')      " + vbCrLf
                     sSql += "  ) a                       " + vbCrLf
                 End If
@@ -9905,7 +9964,11 @@ Namespace APP_BT
                 Dim sLastDay As String = Format(DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, CDate(rsDate.Substring(0, 6).Insert(4, "-") + "-01"))), "yyyyMMdd").ToString
 
                 sSql += "SELECT a.joincd                                                            " + vbCrLf
-                sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf '20211007 jhs 정렬 추가
+                If rsGroup = "1"c Then
+                    sSql += "       , (SELECt clscd FROM LF000M where  clsval = dept.deptnmd  ) as deptsortgbn   " + vbCrLf '20211007 jhs 정렬 추가
+                Else
+                    sSql += "       , '' as deptsortgbn   " + vbCrLf
+                End If
 
                 If rsGroup = "1"c Then
                     'sSql += " , fn_ack_get_dept_name(a.iogbn, a.joincd)                                    as gbnnm    "+vbcrlf
@@ -10126,7 +10189,12 @@ Namespace APP_BT
                 sSql += "     , SUM(CASE WHEN a.days = '31' THEN NVL(b.qty, 0) ELSE 0 END)             as d31      " + vbCrLf
                 sSql += "  FROM (SELECT fn_ack_date_str(a.outdt, 'DD') as days                              " + vbCrLf
                 sSql += "             , COUNT(a.bldno)         as qty                               " + vbCrLf
-                sSql += "          FROM (SELECT bldno, comcd_out, comcd, outdt          " + vbCrLf
+                '20211111 jhs 추가
+                'If rsGbn = "2" Then
+                'sSql += "             , b.deptcd as joincd                                          " + vbCrLf
+                ' End If
+                '-----------------------
+                sSql += "          FROM (SELECT bldno, comcd_out, comcd, outdt                      " + vbCrLf
                 sSql += "                  FROM lb030m                                              " + vbCrLf
                 sSql += "                 WHERE outdt BETWEEN :dates AND :datee || '235959'                            " + vbCrLf
 
@@ -10162,7 +10230,7 @@ Namespace APP_BT
                 sSql += "           AND a.bldno      = d.bldno                                      " + vbCrLf
                 sSql += "           AND a.comcd_out  = d.comcd                                      " + vbCrLf
                 sSql += "           AND c.state      in ( '4', '6')                                 " + vbCrLf
-                sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD')                            " + vbCrLf
+                sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD')  , b.deptcd                " + vbCrLf
 
                 '20211013 jhs 총합계 자체폐기 내용 추가
                 If rsGbn = "2" Then
@@ -10170,6 +10238,7 @@ Namespace APP_BT
                     sSql += "        union all                                                          " + vbCrLf
                     sSql += "        Select fn_ack_date_str(a.rtndt, 'DD') as days                      " + vbCrLf
                     sSql += "               , COUNT(a.bldno)         as qty                             " + vbCrLf
+                    ' sSql += "               , '9999999999' as joincd                                    " + vbCrLf
                     sSql += "        from ( SELECT bldno, comcd_out, comcd, rtndt                       " + vbCrLf
                     sSql += "                 From lb031m                                               " + vbCrLf
                     sSql += "                Where rtndt BETWEEN :dates And : datee || '235959'         " + vbCrLf
@@ -10177,7 +10246,14 @@ Namespace APP_BT
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDate))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, sLastDay.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, sLastDay))
 
-                    sSql += "                  And keepgbn = '5'  )   a                                 " + vbCrLf
+                    sSql += "                  And keepgbn = '5'                                         " + vbCrLf
+                    '20211111 jhs 성분제제 조건 항목 추가
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                               " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
+                    '-----------------------------
+                    sSql += "                                    )   a                                 " + vbCrLf
                     sSql += "                GROUP BY fn_ack_date_str(a.rtndt, 'DD')                    " + vbCrLf
                 End If
                 '-----------------------------------------------------------------------------------------
@@ -10256,11 +10332,15 @@ Namespace APP_BT
                     sSql += "      selecT fn_ack_date_str(rtndt, 'DD') as days ,  count(bldno) qty  from lb031m " + vbCrLf
                     sSql += "       where keepgbn = '5'" + vbCrLf
                     sSql += "         And rtndt BETWEEN :dates AND :datee || '235959'" + vbCrLf
-                    sSql += "       group by fn_ack_date_str(rtndt, 'DD') " + vbCrLf
-
                     alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDate.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDate))
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, sLastDay.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, sLastDay))
-
+                    '20211111 jhs 성분제제 조건 항목 추가
+                    If rsComcd <> "ALL" Then
+                        sSql += "                   AND comcd_out  = :comcd                               " + vbCrLf
+                        alParm.Add(New OracleParameter("comcd", OracleDbType.Varchar2, rsComcd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsComcd))
+                    End If
+                    '-----------------------------
+                    sSql += "       group by fn_ack_date_str(rtndt, 'DD') " + vbCrLf
                     sSql += "      ) a                 " + vbCrLf
                 End If
                 '-------------------------------------------------------------------------

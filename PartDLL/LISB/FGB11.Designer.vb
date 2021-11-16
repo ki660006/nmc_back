@@ -286,7 +286,7 @@ Partial Class FGB11
         '
         'spdList
         '
-        Me.spdList.DataSource = Nothing
+        'Me.spdList.DataSource = Nothing
         Me.spdList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"

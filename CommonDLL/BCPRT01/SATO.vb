@@ -56,6 +56,10 @@ Public Class SATO
                             iPrtCnt = Convert.ToInt32(CType(ra_PrtData(ix1), STU_BCPRTINFO).BCCNT)
                         End If
 
+                        If CType(ra_PrtData(ix1), STU_BCPRTINFO).CHKADDPRNT Then
+                            iPrtCnt += CType(ra_PrtData(ix1), STU_BCPRTINFO).PRNTNUM
+                        End If
+
                         For ix2 As Integer = 1 To iPrtCnt
                             If rsPrintPort.Trim() = "" Then
                                 Dim objSkt As New TCP01.SendSocket

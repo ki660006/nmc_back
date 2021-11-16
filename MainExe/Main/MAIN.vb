@@ -129,7 +129,7 @@ Public Class MAIN
     Friend WithEvents mnuQ03 As System.Windows.Forms.MenuItem
     Friend WithEvents mnuO_Ncov As System.Windows.Forms.MenuItem
     Friend WithEvents mnuR_exlab_gcl As System.Windows.Forms.MenuItem
-
+    Friend WithEvents mnuB_TnsMgt As MenuItem
     Private LoginPopWin As New LoginPopWin
 
     Private Sub sbKillPreProc_test()
@@ -498,6 +498,7 @@ Public Class MAIN
         Me.mnuB_hr3 = New System.Windows.Forms.MenuItem()
         Me.mnuB_op = New System.Windows.Forms.MenuItem()
         Me.mnuB_IO = New System.Windows.Forms.MenuItem()
+        Me.mnuB_TnsMgt = New System.Windows.Forms.MenuItem()
         Me.mnuM = New System.Windows.Forms.MenuItem()
         Me.mnuM_sample = New System.Windows.Forms.MenuItem()
         Me.mnuM_item = New System.Windows.Forms.MenuItem()
@@ -1049,7 +1050,7 @@ Public Class MAIN
         'mnuB00
         '
         Me.mnuB00.Index = 5
-        Me.mnuB00.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuB015, Me.mnuB_hr0, Me.mnuB_tns_jubsu, Me.mnuB_bef_reg, Me.mnuB_out, Me.mnuB_abn, Me.mnuB_abn_part, Me.mnuB_keep, Me.mnuB_bef_cancel, Me.mnuB_hr1, Me.mnuB_bld_history, Me.mnuB_tns_list, Me.mnuB047, Me.mnuB_abn_list, Me.mnuB_bld_io_st, Me.mnuB049, Me.mnuB_abn_st, Me.mnuB94, Me.mnuB_outabn_dept, Me.mnuB_XMatch_cnt, Me.mnuB048, Me.mnuB_hr2, Me.mnuB_bcno_rst, Me.mnuB_test_rst, Me.mnuB_abo_rst, Me.mnuB_aborh_rst, Me.mnuB_cross_rst, Me.mnuB_aborh_prt, Me.mnuB_hr3, Me.mnuB_op, Me.mnuB_IO})
+        Me.mnuB00.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuB015, Me.mnuB_hr0, Me.mnuB_tns_jubsu, Me.mnuB_bef_reg, Me.mnuB_out, Me.mnuB_abn, Me.mnuB_abn_part, Me.mnuB_keep, Me.mnuB_bef_cancel, Me.mnuB_hr1, Me.mnuB_bld_history, Me.mnuB_tns_list, Me.mnuB047, Me.mnuB_abn_list, Me.mnuB_bld_io_st, Me.mnuB049, Me.mnuB_abn_st, Me.mnuB94, Me.mnuB_outabn_dept, Me.mnuB_XMatch_cnt, Me.mnuB048, Me.mnuB_TnsMgt, Me.mnuB_hr2, Me.mnuB_bcno_rst, Me.mnuB_test_rst, Me.mnuB_abo_rst, Me.mnuB_aborh_rst, Me.mnuB_cross_rst, Me.mnuB_aborh_prt, Me.mnuB_hr3, Me.mnuB_op, Me.mnuB_IO})
         Me.mnuB00.Text = "혈액은행(&B)"
         '
         'mnuB015
@@ -1160,53 +1161,58 @@ Public Class MAIN
         '
         'mnuB_hr2
         '
-        Me.mnuB_hr2.Index = 21
+        Me.mnuB_hr2.Index = 22
         Me.mnuB_hr2.Text = "-"
         '
         'mnuB_bcno_rst
         '
-        Me.mnuB_bcno_rst.Index = 22
+        Me.mnuB_bcno_rst.Index = 23
         Me.mnuB_bcno_rst.Text = "분야별 결과저장 및 보고(T)"
         '
         'mnuB_test_rst
         '
-        Me.mnuB_test_rst.Index = 23
+        Me.mnuB_test_rst.Index = 24
         Me.mnuB_test_rst.Text = "검사항목별 결과저장 및 보고(T)"
         '
         'mnuB_abo_rst
         '
-        Me.mnuB_abo_rst.Index = 24
+        Me.mnuB_abo_rst.Index = 25
         Me.mnuB_abo_rst.Text = "혈액형 결과수정 및 보고(T)"
         '
         'mnuB_aborh_rst
         '
-        Me.mnuB_aborh_rst.Index = 25
+        Me.mnuB_aborh_rst.Index = 26
         Me.mnuB_aborh_rst.Text = "혈액형 2차 결과 등록"
         '
         'mnuB_cross_rst
         '
-        Me.mnuB_cross_rst.Index = 26
+        Me.mnuB_cross_rst.Index = 27
         Me.mnuB_cross_rst.Text = "Cross Matching 결과 수정"
         '
         'mnuB_aborh_prt
         '
-        Me.mnuB_aborh_prt.Index = 27
+        Me.mnuB_aborh_prt.Index = 28
         Me.mnuB_aborh_prt.Text = "혈액형 결과대장"
         '
         'mnuB_hr3
         '
-        Me.mnuB_hr3.Index = 28
+        Me.mnuB_hr3.Index = 29
         Me.mnuB_hr3.Text = "-"
         '
         'mnuB_op
         '
-        Me.mnuB_op.Index = 29
+        Me.mnuB_op.Index = 30
         Me.mnuB_op.Text = "수술환자 확정 조회"
         '
         'mnuB_IO
         '
-        Me.mnuB_IO.Index = 30
+        Me.mnuB_IO.Index = 31
         Me.mnuB_IO.Text = "질병관리본부 입/출고 관리"
+        '
+        'mnuB_TnsMgt
+        '
+        Me.mnuB_TnsMgt.Index = 21
+        Me.mnuB_TnsMgt.Text = "적혈구제제 수혈관리 조회"
         '
         'mnuM
         '
@@ -1542,7 +1548,7 @@ Public Class MAIN
         Me.btnLock.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLock.BackgroundImage = CType(resources.GetObject("btnLock.BackgroundImage"), System.Drawing.Image)
         Me.btnLock.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker1.IsActive = True
+        DesignerRectTracker1.IsActive = False
         DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLock.CenterPtTracker = DesignerRectTracker1
         CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
@@ -1821,7 +1827,7 @@ Public Class MAIN
         Me.btnLogout.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLogout.BackgroundImage = CType(resources.GetObject("btnLogout.BackgroundImage"), System.Drawing.Image)
         Me.btnLogout.BorderColor = System.Drawing.Color.DarkGray
-        DesignerRectTracker5.IsActive = True
+        DesignerRectTracker5.IsActive = False
         DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLogout.CenterPtTracker = DesignerRectTracker5
         CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
@@ -1839,7 +1845,7 @@ Public Class MAIN
         Me.btnLogout.FocalPoints.CenterPtY = 0.5238096!
         Me.btnLogout.FocalPoints.FocusPtX = 0.04166667!
         Me.btnLogout.FocalPoints.FocusPtY = 0.1428571!
-        DesignerRectTracker6.IsActive = True
+        DesignerRectTracker6.IsActive = False
         DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnLogout.FocusPtTracker = DesignerRectTracker6
         Me.btnLogout.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -3216,7 +3222,7 @@ Public Class MAIN
     End Sub
 
     '> 혈액은행
-    Public Sub MenuB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuB015.Click, mnuB_tns_jubsu.Click, mnuB_bef_reg.Click, mnuB_bef_cancel.Click, mnuB_out.Click, mnuB_keep.Click, mnuB_abn.Click, mnuB_abn_part.Click, mnuB_bld_history.Click, mnuB_tns_list.Click, mnuB_bld_io_st.Click, mnuB_abn_st.Click, mnuB_abn_list.Click, mnuB047.Click, mnuB048.Click, mnuB049.Click, mnuB_bcno_rst.Click, mnuB_test_rst.Click, mnuB_abo_rst.Click, mnuB_cross_rst.Click, mnuB_aborh_rst.Click, mnuB94.Click, mnuB_outabn_dept.Click, mnuB_XMatch_cnt.Click, mnuB_op.Click, mnuB_aborh_prt.Click, mnuB_IO.Click
+    Public Sub MenuB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuB015.Click, mnuB_tns_jubsu.Click, mnuB_bef_reg.Click, mnuB_bef_cancel.Click, mnuB_out.Click, mnuB_keep.Click, mnuB_abn.Click, mnuB_abn_part.Click, mnuB_bld_history.Click, mnuB_tns_list.Click, mnuB_bld_io_st.Click, mnuB_abn_st.Click, mnuB_abn_list.Click, mnuB047.Click, mnuB048.Click, mnuB049.Click, mnuB_bcno_rst.Click, mnuB_test_rst.Click, mnuB_abo_rst.Click, mnuB_cross_rst.Click, mnuB_aborh_rst.Click, mnuB94.Click, mnuB_outabn_dept.Click, mnuB_XMatch_cnt.Click, mnuB_op.Click, mnuB_aborh_prt.Click, mnuB_IO.Click, mnuB_TnsMgt.Click
 
         Dim mnuItem As MenuItem = CType(sender, MenuItem)
         Dim sFrmTxt As String = mnuItem.Text
@@ -3350,6 +3356,11 @@ Public Class MAIN
                 Case mnuB_IO.Text
                     '-- 질병관리본부 입출고 조회
                     frmChild = New LISB.FGB26
+
+                    '20211103 jhs 수혈 관리 추가
+                Case mnuB_TnsMgt.Text
+                    '-- 적혈구제제 수혈관리 조회
+                    frmChild = New LISB.FGB27
 
                 Case Else
                     Exit Sub

@@ -485,7 +485,7 @@ Partial Class FGB13
         '
         'spdComList
         '
-        Me.spdComList.DataSource = Nothing
+        ''Me.spdComList.DataSource = Nothing
         Me.spdComList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdComList.Location = New System.Drawing.Point(0, 0)
         Me.spdComList.Margin = New System.Windows.Forms.Padding(1)
@@ -507,7 +507,7 @@ Partial Class FGB13
         '
         'spdBHisList
         '
-        Me.spdBHisList.DataSource = Nothing
+        'Me.spdBHisList.DataSource = Nothing
         Me.spdBHisList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdBHisList.Location = New System.Drawing.Point(0, 0)
         Me.spdBHisList.Name = "spdBHisList"

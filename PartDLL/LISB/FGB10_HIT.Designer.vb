@@ -314,7 +314,7 @@ Partial Class FGB10
         '
         'spdOrderList
         '
-        Me.spdOrderList.DataSource = Nothing
+        'Me.spdOrderList.DataSource = Nothing
         Me.spdOrderList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOrderList.Location = New System.Drawing.Point(0, 0)
         Me.spdOrderList.Margin = New System.Windows.Forms.Padding(1)
@@ -336,7 +336,7 @@ Partial Class FGB10
         '
         'spdRtnList
         '
-        Me.spdRtnList.DataSource = Nothing
+        'Me.spdRtnList.DataSource = Nothing
         Me.spdRtnList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdRtnList.Location = New System.Drawing.Point(0, 0)
         Me.spdRtnList.Margin = New System.Windows.Forms.Padding(1)
@@ -359,7 +359,7 @@ Partial Class FGB10
         '
         'spdOutList
         '
-        Me.spdOutList.DataSource = Nothing
+        'Me.spdOutList.DataSource = Nothing
         Me.spdOutList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOutList.Location = New System.Drawing.Point(0, 0)
         Me.spdOutList.Margin = New System.Windows.Forms.Padding(1)
