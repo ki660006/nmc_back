@@ -286,6 +286,7 @@ Public Class APP_EXLAB
             sSql += "        A.SAMPLENO AS BCNO, A.CSTITEMCD AS TESTCD, A.SAMPLECD AS SPCCD, A.HOSNO AS REGNO, "
             sSql += "        A.PATNM, A.ITEMCD, A.CSTITEMNM AS TNMD, B.LABRES AS RST, A.REQDTE "
             sSql += "   FROM GCRL.UPLOADMST A, GCRL.VIEW_RESULT_NMC B "
+            'sSql += "   FROM GC_NLIS.UPLOADMST A, GC_NLIS.VIEW_RESULT_NMC B " '20211119 jhs 최신 서버 변경 추후 배포 
             sSql += "  WHERE A.REQNO    = B.REQNO "
             sSql += "    AND A.ITEMCD   = B.ITEMCD "
             sSql += "    AND A.CSTCD    = '41666'"
@@ -354,6 +355,8 @@ Public Class APP_EXLAB
 
                 sSql = ""
                 sSql += " INSERT INTO GCRL.UPLOADMST "
+                'sSql += " INSERT INTO GC_NLIS.UPLOADMST " '20211119 jhs 최신 서버 추후 테스트 후 진행 
+
                 sSql += "            ( REQDTE,  CSTCD,  SAMPLENO,  CSTITEMCD,  CSTITEMNM,  HOSNO,  PATNM,  SAMPLECD,  SAMPLENM,  BIRDTE,  SEX,  HOSLOC,  HOSPLC,  SAMDTE,  NO,  SEQ,  DOCNM,  HOSPI_DOWN_YN )"
                 sSql += "    VALUES  (:REQDTE, :CSTCD, :SAMPLENO, :CSTITEMCD, :CSTITEMNM, :HOSNO, :PATNM, :SAMPLECD, :SAMPLENM, :BIRDTE, :SEX, :HOSLOC, :HOSPLC, :SAMDTE, :NO, :SEQ, :DOCNM, :HOSPI_DOWN_YN )"
                 '                      의뢰일  병원코드 검체번호    검사코드    검사명   등록번호 환자명   검체코드    검체명   주민번호  성별   병동    진료과   채취일  순번  순번  의사명  다운로드여부(IMG) 

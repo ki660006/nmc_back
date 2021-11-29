@@ -488,6 +488,7 @@ Public Class MAIN
         Me.mnuB_outabn_dept = New System.Windows.Forms.MenuItem()
         Me.mnuB_XMatch_cnt = New System.Windows.Forms.MenuItem()
         Me.mnuB048 = New System.Windows.Forms.MenuItem()
+        Me.mnuB_TnsMgt = New System.Windows.Forms.MenuItem()
         Me.mnuB_hr2 = New System.Windows.Forms.MenuItem()
         Me.mnuB_bcno_rst = New System.Windows.Forms.MenuItem()
         Me.mnuB_test_rst = New System.Windows.Forms.MenuItem()
@@ -498,7 +499,6 @@ Public Class MAIN
         Me.mnuB_hr3 = New System.Windows.Forms.MenuItem()
         Me.mnuB_op = New System.Windows.Forms.MenuItem()
         Me.mnuB_IO = New System.Windows.Forms.MenuItem()
-        Me.mnuB_TnsMgt = New System.Windows.Forms.MenuItem()
         Me.mnuM = New System.Windows.Forms.MenuItem()
         Me.mnuM_sample = New System.Windows.Forms.MenuItem()
         Me.mnuM_item = New System.Windows.Forms.MenuItem()
@@ -1159,6 +1159,11 @@ Public Class MAIN
         Me.mnuB048.Index = 20
         Me.mnuB048.Text = "혈액 재고량 조회"
         '
+        'mnuB_TnsMgt
+        '
+        Me.mnuB_TnsMgt.Index = 21
+        Me.mnuB_TnsMgt.Text = "적혈구제제 수혈관리 조회"
+        '
         'mnuB_hr2
         '
         Me.mnuB_hr2.Index = 22
@@ -1208,11 +1213,6 @@ Public Class MAIN
         '
         Me.mnuB_IO.Index = 31
         Me.mnuB_IO.Text = "질병관리본부 입/출고 관리"
-        '
-        'mnuB_TnsMgt
-        '
-        Me.mnuB_TnsMgt.Index = 21
-        Me.mnuB_TnsMgt.Text = "적혈구제제 수혈관리 조회"
         '
         'mnuM
         '

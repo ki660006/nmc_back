@@ -188,7 +188,7 @@ Public Class FGB09
 
             btnSearch_Click(Nothing, Nothing)
 
-            Me.txtRegno.Text = "" : Me.txtPatNm.Text = ""
+            Me.txtRegno.Text = "" : Me.txtPatNm.Text = "" '20211125 jhs 배포 하고 변경 예정
 
             If Me.spdOrderList.MaxRows < 1 Then Return
 

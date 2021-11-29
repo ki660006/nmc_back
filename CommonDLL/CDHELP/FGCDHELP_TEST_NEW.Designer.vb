@@ -837,9 +837,9 @@ Partial Class FGCDHELP_TEST_NEW
         'CheckBox5
         '
         Me.CheckBox5.Enabled = False
-        Me.CheckBox5.Location = New System.Drawing.Point(138, 1)
+        Me.CheckBox5.Location = New System.Drawing.Point(151, 1)
         Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(79, 18)
+        Me.CheckBox5.Size = New System.Drawing.Size(75, 18)
         Me.CheckBox5.TabIndex = 237
         Me.CheckBox5.Tag = "EXEDAY3"
         Me.CheckBox5.Text = "해당없음"
@@ -847,9 +847,9 @@ Partial Class FGCDHELP_TEST_NEW
         'CheckBox6
         '
         Me.CheckBox6.Enabled = False
-        Me.CheckBox6.Location = New System.Drawing.Point(70, 1)
+        Me.CheckBox6.Location = New System.Drawing.Point(77, 1)
         Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(65, 18)
+        Me.CheckBox6.Size = New System.Drawing.Size(79, 18)
         Me.CheckBox6.TabIndex = 236
         Me.CheckBox6.Tag = "EXEDAY2"
         Me.CheckBox6.Text = "동의서"
@@ -857,9 +857,9 @@ Partial Class FGCDHELP_TEST_NEW
         'CheckBox7
         '
         Me.CheckBox7.Enabled = False
-        Me.CheckBox7.Location = New System.Drawing.Point(7, 1)
+        Me.CheckBox7.Location = New System.Drawing.Point(0, 1)
         Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.Size = New System.Drawing.Size(66, 18)
+        Me.CheckBox7.Size = New System.Drawing.Size(85, 18)
         Me.CheckBox7.TabIndex = 235
         Me.CheckBox7.Tag = "EXEDAY1"
         Me.CheckBox7.Text = "의뢰서"

@@ -23,13 +23,13 @@ Partial Class FGCDBLD_TRAN_MGT
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGCDBLD_TRAN_MGT))
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim DesignerRectTracker5 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim CBlendItems3 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker6 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -57,6 +57,13 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.lblTnsjubsuno = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cboMgtCmt = New System.Windows.Forms.ComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.chkExcept = New System.Windows.Forms.CheckBox()
+        Me.chkCBC = New System.Windows.Forms.CheckBox()
+        Me.chkALL = New System.Windows.Forms.CheckBox()
+        Me.chkHb10 = New System.Windows.Forms.CheckBox()
         Me.lblDLMCaller = New System.Windows.Forms.Label()
         Me.txtCMCaller = New System.Windows.Forms.TextBox()
         Me.txtDLMCaller = New System.Windows.Forms.TextBox()
@@ -66,12 +73,6 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.btnSave = New CButtonLib.CButton()
-        Me.chkALL = New System.Windows.Forms.CheckBox()
-        Me.chkExcept = New System.Windows.Forms.CheckBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.chkCBC = New System.Windows.Forms.CheckBox()
-        Me.chkHb10 = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnCancel = New CButtonLib.CButton()
         Me.GroupBox3.SuspendLayout()
@@ -418,6 +419,8 @@ Partial Class FGCDBLD_TRAN_MGT
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.cboMgtCmt)
+        Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Controls.Add(Me.lblDLMCaller)
         Me.GroupBox1.Controls.Add(Me.txtCMCaller)
         Me.GroupBox1.Controls.Add(Me.txtDLMCaller)
@@ -429,9 +432,83 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.GroupBox1.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(8, 191)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(423, 269)
+        Me.GroupBox1.Size = New System.Drawing.Size(423, 197)
         Me.GroupBox1.TabIndex = 33
         Me.GroupBox1.TabStop = False
+        '
+        'cboMgtCmt
+        '
+        Me.cboMgtCmt.FormattingEnabled = True
+        Me.cboMgtCmt.Location = New System.Drawing.Point(89, 88)
+        Me.cboMgtCmt.Name = "cboMgtCmt"
+        Me.cboMgtCmt.Size = New System.Drawing.Size(326, 20)
+        Me.cboMgtCmt.TabIndex = 33
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.chkExcept)
+        Me.GroupBox2.Controls.Add(Me.chkCBC)
+        Me.GroupBox2.Controls.Add(Me.chkALL)
+        Me.GroupBox2.Controls.Add(Me.chkHb10)
+        Me.GroupBox2.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 149)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(417, 41)
+        Me.GroupBox2.TabIndex = 33
+        Me.GroupBox2.TabStop = False
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.Label6.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(5, 12)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(80, 24)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "보고상태"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'chkExcept
+        '
+        Me.chkExcept.AutoSize = True
+        Me.chkExcept.Location = New System.Drawing.Point(341, 16)
+        Me.chkExcept.Name = "chkExcept"
+        Me.chkExcept.Size = New System.Drawing.Size(72, 16)
+        Me.chkExcept.TabIndex = 17
+        Me.chkExcept.Text = "제외대상"
+        Me.chkExcept.UseVisualStyleBackColor = True
+        '
+        'chkCBC
+        '
+        Me.chkCBC.AutoSize = True
+        Me.chkCBC.Location = New System.Drawing.Point(177, 15)
+        Me.chkCBC.Name = "chkCBC"
+        Me.chkCBC.Size = New System.Drawing.Size(66, 16)
+        Me.chkCBC.TabIndex = 15
+        Me.chkCBC.Text = "CBC F/U"
+        Me.chkCBC.UseVisualStyleBackColor = True
+        '
+        'chkALL
+        '
+        Me.chkALL.AutoSize = True
+        Me.chkALL.Location = New System.Drawing.Point(256, 16)
+        Me.chkALL.Name = "chkALL"
+        Me.chkALL.Size = New System.Drawing.Size(72, 16)
+        Me.chkALL.TabIndex = 16
+        Me.chkALL.Text = "모두요청"
+        Me.chkALL.UseVisualStyleBackColor = True
+        '
+        'chkHb10
+        '
+        Me.chkHb10.AutoSize = True
+        Me.chkHb10.Location = New System.Drawing.Point(90, 16)
+        Me.chkHb10.Name = "chkHb10"
+        Me.chkHb10.Size = New System.Drawing.Size(78, 16)
+        Me.chkHb10.TabIndex = 14
+        Me.chkHb10.Text = "Hb>10g/dL"
+        Me.chkHb10.UseVisualStyleBackColor = True
         '
         'lblDLMCaller
         '
@@ -439,9 +516,9 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.lblDLMCaller.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDLMCaller.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblDLMCaller.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.lblDLMCaller.Location = New System.Drawing.Point(212, 40)
+        Me.lblDLMCaller.Location = New System.Drawing.Point(272, 40)
         Me.lblDLMCaller.Name = "lblDLMCaller"
-        Me.lblDLMCaller.Size = New System.Drawing.Size(90, 22)
+        Me.lblDLMCaller.Size = New System.Drawing.Size(143, 22)
         Me.lblDLMCaller.TabIndex = 32
         Me.lblDLMCaller.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -449,14 +526,14 @@ Partial Class FGCDBLD_TRAN_MGT
         '
         Me.txtCMCaller.Location = New System.Drawing.Point(89, 64)
         Me.txtCMCaller.Name = "txtCMCaller"
-        Me.txtCMCaller.Size = New System.Drawing.Size(122, 21)
+        Me.txtCMCaller.Size = New System.Drawing.Size(182, 21)
         Me.txtCMCaller.TabIndex = 16
         '
         'txtDLMCaller
         '
         Me.txtDLMCaller.Location = New System.Drawing.Point(89, 40)
         Me.txtDLMCaller.Name = "txtDLMCaller"
-        Me.txtDLMCaller.Size = New System.Drawing.Size(122, 21)
+        Me.txtDLMCaller.Size = New System.Drawing.Size(182, 21)
         Me.txtDLMCaller.TabIndex = 15
         '
         'txtCmtCont
@@ -464,7 +541,7 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.txtCmtCont.Location = New System.Drawing.Point(5, 113)
         Me.txtCmtCont.Multiline = True
         Me.txtCmtCont.Name = "txtCmtCont"
-        Me.txtCmtCont.Size = New System.Drawing.Size(410, 103)
+        Me.txtCmtCont.Size = New System.Drawing.Size(410, 30)
         Me.txtCmtCont.TabIndex = 14
         '
         'Label23
@@ -496,7 +573,7 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.Label32.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.Label32.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Label32.ForeColor = System.Drawing.Color.Black
-        Me.Label32.Location = New System.Drawing.Point(6, 88)
+        Me.Label32.Location = New System.Drawing.Point(6, 86)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(82, 22)
         Me.Label32.TabIndex = 7
@@ -518,12 +595,12 @@ Partial Class FGCDBLD_TRAN_MGT
         'btnSave
         '
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker3.IsActive = False
-        DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnSave.CenterPtTracker = DesignerRectTracker3
-        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems2.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
-        Me.btnSave.ColorFillBlend = CBlendItems2
+        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnSave.CenterPtTracker = DesignerRectTracker1
+        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
+        CBlendItems1.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        Me.btnSave.ColorFillBlend = CBlendItems1
         Me.btnSave.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnSave.Corners.All = CType(6, Short)
         Me.btnSave.Corners.LowerLeft = CType(6, Short)
@@ -536,9 +613,9 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.btnSave.FocalPoints.CenterPtY = 0.28!
         Me.btnSave.FocalPoints.FocusPtX = 0!
         Me.btnSave.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker4.IsActive = False
-        DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnSave.FocusPtTracker = DesignerRectTracker4
+        DesignerRectTracker2.IsActive = False
+        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnSave.FocusPtTracker = DesignerRectTracker2
         Me.btnSave.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Nothing
@@ -556,78 +633,12 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnSave.TextMargin = New System.Windows.Forms.Padding(0)
         '
-        'chkALL
-        '
-        Me.chkALL.AutoSize = True
-        Me.chkALL.Location = New System.Drawing.Point(256, 16)
-        Me.chkALL.Name = "chkALL"
-        Me.chkALL.Size = New System.Drawing.Size(72, 16)
-        Me.chkALL.TabIndex = 16
-        Me.chkALL.Text = "모두요청"
-        Me.chkALL.UseVisualStyleBackColor = True
-        '
-        'chkExcept
-        '
-        Me.chkExcept.AutoSize = True
-        Me.chkExcept.Location = New System.Drawing.Point(341, 16)
-        Me.chkExcept.Name = "chkExcept"
-        Me.chkExcept.Size = New System.Drawing.Size(72, 16)
-        Me.chkExcept.TabIndex = 17
-        Me.chkExcept.Text = "제외대상"
-        Me.chkExcept.UseVisualStyleBackColor = True
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.chkExcept)
-        Me.GroupBox2.Controls.Add(Me.chkCBC)
-        Me.GroupBox2.Controls.Add(Me.chkALL)
-        Me.GroupBox2.Controls.Add(Me.chkHb10)
-        Me.GroupBox2.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(10, 411)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(417, 41)
-        Me.GroupBox2.TabIndex = 33
-        Me.GroupBox2.TabStop = False
-        '
-        'Label6
-        '
-        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.Label6.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(5, 12)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 24)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "보고상태"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'chkCBC
-        '
-        Me.chkCBC.AutoSize = True
-        Me.chkCBC.Location = New System.Drawing.Point(177, 15)
-        Me.chkCBC.Name = "chkCBC"
-        Me.chkCBC.Size = New System.Drawing.Size(66, 16)
-        Me.chkCBC.TabIndex = 15
-        Me.chkCBC.Text = "CBC F/U"
-        Me.chkCBC.UseVisualStyleBackColor = True
-        '
-        'chkHb10
-        '
-        Me.chkHb10.AutoSize = True
-        Me.chkHb10.Location = New System.Drawing.Point(90, 16)
-        Me.chkHb10.Name = "chkHb10"
-        Me.chkHb10.Size = New System.Drawing.Size(78, 16)
-        Me.chkHb10.TabIndex = 14
-        Me.chkHb10.Text = "Hb>10g/dL"
-        Me.chkHb10.UseVisualStyleBackColor = True
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.btnCancel)
         Me.GroupBox4.Controls.Add(Me.btnSave)
         Me.GroupBox4.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 463)
+        Me.GroupBox4.Location = New System.Drawing.Point(8, 394)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(423, 41)
         Me.GroupBox4.TabIndex = 36
@@ -636,12 +647,12 @@ Partial Class FGCDBLD_TRAN_MGT
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker5.IsActive = False
-        DesignerRectTracker5.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker5.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnCancel.CenterPtTracker = DesignerRectTracker5
-        CBlendItems3.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems3.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
-        Me.btnCancel.ColorFillBlend = CBlendItems3
+        DesignerRectTracker3.IsActive = False
+        DesignerRectTracker3.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker3.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnCancel.CenterPtTracker = DesignerRectTracker3
+        CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
+        CBlendItems2.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        Me.btnCancel.ColorFillBlend = CBlendItems2
         Me.btnCancel.ColorFillSolid = System.Drawing.SystemColors.Control
         Me.btnCancel.Corners.All = CType(6, Short)
         Me.btnCancel.Corners.LowerLeft = CType(6, Short)
@@ -654,9 +665,9 @@ Partial Class FGCDBLD_TRAN_MGT
         Me.btnCancel.FocalPoints.CenterPtY = 0.48!
         Me.btnCancel.FocalPoints.FocusPtX = 0!
         Me.btnCancel.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker6.IsActive = False
-        DesignerRectTracker6.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker6.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnCancel.FocusPtTracker = DesignerRectTracker6
+        DesignerRectTracker4.IsActive = False
+        DesignerRectTracker4.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker4.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnCancel.FocusPtTracker = DesignerRectTracker4
         Me.btnCancel.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.Image = Nothing
@@ -678,9 +689,8 @@ Partial Class FGCDBLD_TRAN_MGT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 508)
+        Me.ClientSize = New System.Drawing.Size(440, 442)
         Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox3)
         Me.Name = "FGCDBLD_TRAN_MGT"
@@ -724,7 +734,6 @@ Partial Class FGCDBLD_TRAN_MGT
     Friend WithEvents Label29 As Windows.Forms.Label
     Friend WithEvents Label32 As Windows.Forms.Label
     Friend WithEvents Label41 As Windows.Forms.Label
-    Friend WithEvents txtCmtCont As Windows.Forms.TextBox
     Friend WithEvents lblAge As Windows.Forms.Label
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents btnSave As CButtonLib.CButton
@@ -739,4 +748,6 @@ Partial Class FGCDBLD_TRAN_MGT
     Friend WithEvents txtCMCaller As Windows.Forms.TextBox
     Friend WithEvents txtDLMCaller As Windows.Forms.TextBox
     Friend WithEvents lblDLMCaller As Windows.Forms.Label
+    Friend WithEvents cboMgtCmt As Windows.Forms.ComboBox
+    Friend WithEvents txtCmtCont As Windows.Forms.TextBox
 End Class

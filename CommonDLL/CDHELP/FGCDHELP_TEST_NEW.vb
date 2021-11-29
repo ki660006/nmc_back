@@ -354,6 +354,16 @@ Public Class FGCDHELP_TEST_NEW
                     End If
                 Next
 
+                '20211125 jhs 의뢰서 동의서 추가
+                If dt.Rows(0).Item("reqform").ToString.Trim <> "" Then
+                    Me.CheckBox7.Text = "의뢰서(" + dt.Rows(0).Item("reqform").ToString.Trim + ")"
+                End If
+
+                If dt.Rows(0).Item("agrform").ToString.Trim <> "" Then
+                    Me.CheckBox6.Text = "동의서(" + dt.Rows(0).Item("agrform").ToString.Trim + ")"
+                End If
+                '-----------------------------------------
+
                 ''<< 시행처
                 'If dt.Rows(0).Item("enforcement").ToString = "0" Then '원내
                 '    CheckBox3.Checked = True
@@ -1442,13 +1452,13 @@ Public Class FGCDHELP_TEST_NEW
 
             '-- 3 의뢰서 동의서 해당없음 내선번호 부서명
             If CheckBox7.Checked = "1" Then '의뢰서
-                xlsWkS.Range("B" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]의뢰서"
+                xlsWkS.Range("B" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]" + Me.CheckBox7.Text
             Else
                 xlsWkS.Range("B" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[  ]의뢰서"
             End If
 
             If CheckBox6.Checked = "1" Then '동의서
-                xlsWkS.Range("C" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]동의서"
+                xlsWkS.Range("C" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[√]" + Me.CheckBox6.Text
             Else
                 xlsWkS.Range("C" + (3 + excelHeight * (iCnt - 1)).ToString).Value = "[  ]동의서"
             End If
@@ -1952,6 +1962,9 @@ Public Class DA_CDHELP_TEST_NEW
             sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest," + vbCrLf
             sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi, minspcvol,f2.partnmd , f6.enforcement , f6.request , f6.cowarning" + vbCrLf
             sSql += "       ,f6.rstunit ,f6.spcunit" + vbCrLf
+            '20211125 jhs 의뢰서, 동의서 추가
+            sSql += "       ,f6.reqform ,f6.agrform" + vbCrLf
+            '-------------------------------------------
             sSql += "  FROM lf060m f6, lf020m f2, lf021m f21," + vbCrLf
             sSql += "       lf040m f4, lf100m f10" + vbCrLf
             sSql += " WHERE f6.testcd  = :testcd" + vbCrLf
@@ -1985,6 +1998,7 @@ Public Class DA_CDHELP_TEST_NEW
             sSql += "       fn_ack_get_ref_nmbp_list(f6.testcd, f6.spccd) reftest," + vbCrLf
             sSql += "       f6.tatyn, f6.prptmi, f6.frptmi, f6.erptmi, f6.perrptmi,f6.ferrptmi,minspcvol,f2.partnmd , '' , '' , ''" + vbCrLf
             sSql += "       ,'',''" + vbCrLf
+            sSql += "       ,'' ,''" + vbCrLf
             sSql += "  FROM rf060m f6, rf020m f2, rf021m f21," + vbCrLf
             sSql += "       lf040m f4, lf100m f10" + vbCrLf
             sSql += " WHERE f6.testcd  = :testcd" + vbCrLf

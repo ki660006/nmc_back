@@ -1545,6 +1545,7 @@ Public Class AxRstInput
                 For intRow As Integer = 1 To .MaxRows
                     .Row = intRow
                     .Col = .GetColFromID("iud")
+                    Dim a = .Text
                     If .Text = "1" Then
                         Dim objRst As New ResultInfo_Test
 

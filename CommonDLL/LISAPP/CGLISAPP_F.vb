@@ -11507,7 +11507,11 @@ Public Class APP_F_TEST
             sSql += "SELECT enforcement, "  '시행처구분
             sSql += "       request,     "  '검사의뢰서/동의서 구분
             sSql += "       cowarning,   "  '검체 채취 및 의뢰시 주의사항
-            sSql += "       spcunit      "  '검체단위
+            sSql += "       spcunit,      "  '검체단위
+            '20211125 jhs 의뢰서 동의서 유형 추가
+            sSql += "       reqform,      "  '검체단위
+            sSql += "       agrform      "  '검체단위
+            '----------------------------
             sSql += "  FROM lf060m"
             sSql += " WHERE testcd  = :testcd"
             sSql += "   AND spccd   = :spccd "
@@ -15811,6 +15815,7 @@ Public Class APP_F_COLLTKCD
     Private Const mc_sCmt1 As String = "진단검사"
     Private Const mc_sCmt2 As String = "환자특이사항"
     Private Const mc_sCmt3 As String = "미채혈사유"
+    Private Const mc_sCmt4 As String = "적혈구제제 수혈관리 통화 사유" '20211124 jhs 적혈구제제 수혈관리 통화 사유 추가
     Private Const mc_sCmtA As String = "특이결과"
     Private Const mc_sCmtB As String = "결과수정 사유"
     Private Const mc_sCmtC As String = "TAT 사유"
@@ -15837,19 +15842,23 @@ Public Class APP_F_COLLTKCD
                 sSql += " UNION ALL "
                 sSql += "SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
+                '20211124 jhs 적혈구수혈제제 사유 추가
+                sSql += "SELECT '4' cmtgbncd, '" + mc_sCmt4 + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"
+                '-----------------------
+                sSql += "SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL"
+                sSql += "SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL"
+                sSql += "SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL"
+                sSql += "SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL"
+                sSql += "SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL"
                 sSql += " UNION ALL "
-                sSql += "SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL"
+                sSql += "SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL"
+                sSql += " UNION ALL "
+                sSql += "SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 10 cmtgbnsort FROM DUAL"
             End If
 
             DbCommand()
@@ -15868,83 +15877,91 @@ Public Class APP_F_COLLTKCD
             Dim sSql As String = ""
 
             If riMode = 0 Then
-                sSql += "SELECT cmtgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn"
-                sSql += "  FROM ("
-                sSql += "        SELECT '[' || cmtgbn || '] ' ||  b.cmtgbnnm cmtgbn_01, a.cmtcd, a.cmtcont,"
-                sSql += "               fn_ack_date_str(a.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, a.regid, null diffday, null moddt, null modid, b.cmtgbnsort,CASE WHEN a.delflg='0' THEN 'Y'WHEN a.delflg='1' THEN 'N' END AS USEYN"
-                sSql += "          FROM lf410m a,"
-                sSql += "               ("
+                sSql += "SELECT cmtgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn" + vbCrLf
+                sSql += "  FROM (" + vbCrLf
+                sSql += "        SELECT '[' || cmtgbn || '] ' ||  b.cmtgbnnm cmtgbn_01, a.cmtcd, a.cmtcont," + vbCrLf
+                sSql += "               fn_ack_date_str(a.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, a.regid, null diffday, null moddt, null modid, b.cmtgbnsort,CASE WHEN a.delflg='0' THEN 'Y'WHEN a.delflg='1' THEN 'N' END AS USEYN" + vbCrLf
+                sSql += "          FROM lf410m a," + vbCrLf
+                sSql += "               (" + vbCrLf
                 If rsCmtGbn = "" Then
-                    sSql += "                SELECT '0' cmtgbncd, '" + mc_sCmt0 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL"
-                    sSql += "                SELECT '1' cmtgbncd, '" + mc_sCmt1 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'E' cmtgbncd, '" + mc_sCmtE + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
+                    sSql += "                SELECT '0' cmtgbncd, '" + mc_sCmt0 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL" + vbCrLf
+                    sSql += "                SELECT '1' cmtgbncd, '" + mc_sCmt1 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'E' cmtgbncd, '" + mc_sCmtE + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL" + vbCrLf
                 Else
-                    sSql += "                SELECT '2' cmtgbncd, '" + mc_sCmt2 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL"
+                    sSql += "                SELECT '2' cmtgbncd, '" + mc_sCmt2 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    '20211124 jhs 적혈구수혈제제 사유 추가
+                    sSql += "                SELECT '4' cmtgbncd, '" + mc_sCmt4 + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
                     sSql += "                 UNION ALL "
-                    sSql += "                SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL"
+                    '-----------------------
+                    sSql += "                SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 10 cmtgbnsort FROM DUAL" + vbCrLf
                 End If
-                sSql += "               ) b"
-                sSql += "         WHERE a.cmtgbn = b.cmtgbncd"
-                sSql += "       ) a"
+                sSql += "               ) b" + vbCrLf
+                sSql += "         WHERE a.cmtgbn = b.cmtgbncd" + vbCrLf
+                sSql += "       ) a" + vbCrLf
                 If rsSerch <> "" Then
-                    sSql += " WHERE " + rsSerch + ""
+                    sSql += " WHERE " + rsSerch + "" + vbCrLf
                 End If
-                sSql += " ORDER BY cmtgbnsort, cmtcd"
+                sSql += " ORDER BY cmtgbnsort, cmtcd" + vbCrLf
             ElseIf riMode = 1 Then
-                sSql += "SELECT cmtgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn"
-                sSql += "  FROM ("
-                sSql += "        SELECT '[' || cmtgbn || '] ' ||  b.cmtgbnnm cmtgbn_01, a.cmtcd, a.cmtcont,"
-                sSql += "               fn_ack_date_str(a.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, a.regid, TO_NUMBER(NVL(a.delflg, '0')) * -1 diffday, b.cmtgbnsort,CASE WHEN a.delflg='0' THEN 'Y'WHEN a.delflg='1' THEN 'N' END AS USEYN"
-                sSql += "          FROM lf410m a,"
-                sSql += "               ("
+                sSql += "SELECT cm+vbcrlftgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn"
+                sSql += "  FROM (" + vbCrLf
+                sSql += "        SELECT '[' || cmtgbn || '] ' ||  b.cmtgbnnm cmtgbn_01, a.cmtcd, a.cmtcont," + vbCrLf
+                sSql += "               fn_ack_date_str(a.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, a.regid, TO_NUMBER(NVL(a.delflg, '0')) * -1 diffday, b.cmtgbnsort,CASE WHEN a.delflg='0' THEN 'Y'WHEN a.delflg='1' THEN 'N' END AS USEYN" + vbCrLf
+                sSql += "          FROM lf410m a," + vbCrLf
+                sSql += "               (" + vbCrLf
                 If rsCmtGbn = "" Then
-                    sSql += "                SELECT '0' cmtgbncd, '" + mc_sCmt0 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL"
-                    sSql += "                SELECT '1' cmtgbncd, '" + mc_sCmt1 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'E' cmtgbncd, '" + mc_sCmtE + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
+                    sSql += "                SELECT '0' cmtgbncd, '" + mc_sCmt0 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL" + vbCrLf
+                    sSql += "                SELECT '1' cmtgbncd, '" + mc_sCmt1 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'E' cmtgbncd, '" + mc_sCmtE + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL" + vbCrLf
                 Else
-                    sSql += "                SELECT '2' cmtgbncd, '" + mc_sCmt2 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL"
+                    sSql += "                SELECT '2' cmtgbncd, '" + mc_sCmt2 + "' cmtgbnnm, 1 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    '20211124 jhs 적혈구수혈제제 사유 추가
+                    sSql += "                SELECT '4' cmtgbncd, '" + mc_sCmt4 + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
                     sSql += "                 UNION ALL "
-                    sSql += "                SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL"
-                    sSql += "                 UNION ALL "
-                    sSql += "                SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL"
+                    '-----------------------
+                    sSql += "                SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 5 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'C' cmtgbncd, '" + mc_sCmtC + "' cmtgbnnm, 6 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'D' cmtgbncd, '" + mc_sCmtD + "' cmtgbnnm, 7 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'F' cmtgbncd, '" + mc_sCmtF + "' cmtgbnnm, 8 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'G' cmtgbncd, '" + mc_sCmtG + "' cmtgbnnm, 9 cmtgbnsort FROM DUAL" + vbCrLf
+                    sSql += "                 UNION ALL " + vbCrLf
+                    sSql += "                SELECT 'H' cmtgbncd, '" + mc_sCmtH + "' cmtgbnnm, 10 cmtgbnsort FROM DUAL" + vbCrLf
                 End If
-                sSql += "               ) b"
-                sSql += "         WHERE a.cmtgbn = b.cmtgbncd"
-                sSql += "       ) a"
+                sSql += "               ) b" + vbCrLf
+                sSql += "         WHERE a.cmtgbn = b.cmtgbncd" + vbCrLf
+                sSql += "       ) a" + vbCrLf
                 If rsSerch <> "" Then
-                    sSql += " WHERE " + rsSerch + ""
+                    sSql += " WHERE " + rsSerch + "" + vbCrLf
                 End If
-                sSql += " ORDER BY cmtgbnsort, cmtcd"
+                sSql += " ORDER BY cmtgbnsort, cmtcd" + vbCrLf
             End If
 
             DbCommand()
@@ -15975,6 +15992,10 @@ Public Class APP_F_COLLTKCD
             sSql += "         UNION ALL "
             sSql += "        SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
             sSql += "         UNION ALL "
+            '20211124 jhs 적혈구수혈제제 사유 추가
+            sSql += "        SELECT '4' cmtgbncd, '" + mc_sCmt4 + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
+            sSql += "         UNION ALL "
+            '-----------------------
             sSql += "        SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
             sSql += "         UNION ALL "
             sSql += "        SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"
@@ -16029,6 +16050,10 @@ Public Class APP_F_COLLTKCD
             sSql += "         UNION ALL "
             sSql += "        SELECT '3' cmtgbncd, '" + mc_sCmt3 + "' cmtgbnnm, 2 cmtgbnsort FROM DUAL"
             sSql += "         UNION ALL "
+            '20211124 jhs 적혈구수혈제제 사유 추가
+            sSql += "        SELECT '4' cmtgbncd, '" + mc_sCmt4 + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
+            sSql += "         UNION ALL "
+            '-----------------------
             sSql += "        SELECT 'A' cmtgbncd, '" + mc_sCmtA + "' cmtgbnnm, 3 cmtgbnsort FROM DUAL"
             sSql += "         UNION ALL "
             sSql += "        SELECT 'B' cmtgbncd, '" + mc_sCmtB + "' cmtgbnnm, 4 cmtgbnsort FROM DUAL"

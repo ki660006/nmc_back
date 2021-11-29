@@ -22,11 +22,31 @@ Public Class FGCDBLD_TRAN_MGT
 
     Private Sub FGCDBLD_TRAN_Mgt_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+
+            sbDisplay_cmt()
             Dim dt As DataTable = (New DA_CDHELP_TRAN_MGT).fnGet_Tns_Info(mTnsjubsuno)
             fn_Display_patinfo(dt)
         Catch ex As Exception
         Finally
         End Try
+    End Sub
+
+    Private Sub sbDisplay_cmt()
+
+        Dim sFn As String = "Sub sbDisplay_slip()"
+
+        Try
+            Dim dt As DataTable = (New DA_CDHELP_TRAN_MGT).fnGet_cmtcontlist()
+
+            Me.cboMgtCmt.Items.Clear()
+            For ix As Integer = 0 To dt.Rows.Count - 1
+                Me.cboMgtCmt.Items.Add("[" + dt.Rows(ix).Item("cmtcd").ToString + "] " + dt.Rows(ix).Item("cmtcont").ToString)
+            Next
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+
     End Sub
 
     Public Sub fn_Display_patinfo(ByVal rsDt As DataTable)
@@ -125,6 +145,13 @@ Public Class FGCDBLD_TRAN_MGT
         Finally
         End Try
     End Sub
+
+    Private Sub cboMgtCmt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMgtCmt.SelectedIndexChanged
+
+        If Me.cboMgtCmt.Text <> "" Then
+            Me.txtCmtCont.Text = cboMgtCmt.Text.Substring(cboMgtCmt.Text.IndexOf("]") + 1).Trim + vbCrLf
+        End If
+    End Sub
 End Class
 
 Public Class STU_TRAN_MGT_INFO
@@ -159,10 +186,13 @@ Public Class DA_CDHELP_TRAN_MGT
             Dim sSql As String = ""
             Dim iRet As Integer = 0
 
-            sSql += "  insert into LBC10m (REGDT, TNSJUBSUNO, REGNO, REGID, DLMCALLER,     " + vbCrLf
-            sSql += "                      CMCALLER, CMTCONT, HGYN, CBCYN, ALLYN, ECPTYN)" + vbCrLf
-            sSql += "  values( fn_ack_sysdate(), :tnsjubsuno, :regno, :regid, :dlmcaller,  " + vbCrLf
-            sSql += "          :cmcaller, :cmtcont, :hgyn, :cbcyn, :allyn, :ecptyn)      " + vbCrLf
+            sSql += "  insert into LBC10m (REGDT, TNSJUBSUNO, REGNO, REGID, DLMCALLER,          " + vbCrLf
+            sSql += "                      CMCALLER, CMTCONT, HGYN, CBCYN, ALLYN, ECPTYN, SEQ)  " + vbCrLf '20211125 jhs seq 추가
+            sSql += "  values( fn_ack_sysdate(), :tnsjubsuno, :regno, :regid, :dlmcaller,       " + vbCrLf
+            sSql += "          :cmcaller, :cmtcont, :hgyn, :cbcyn, :allyn, :ecptyn,             " + vbCrLf
+            sSql += "         ,(selecT case when nvl(max(seq),0) = 0 then '1'                   " + vbCrLf
+            sSql += "                       when max(seq) > 0 then to_char(max(seq) + 1) end    " + vbCrLf
+            sSql += "           from lbc10m where tnsjubsuno = :tnsjubsuno) )                   " + vbCrLf
 
             With dbCmd
                 .Connection = m_dbCn
@@ -180,6 +210,7 @@ Public Class DA_CDHELP_TRAN_MGT
                 .Parameters.Add("cbcyn", OracleDbType.Varchar2).Value = objTranMgtIfo.CBC
                 .Parameters.Add("allyn", OracleDbType.Varchar2).Value = objTranMgtIfo.ALL
                 .Parameters.Add("ecptyn", OracleDbType.Varchar2).Value = objTranMgtIfo.EXCEPT
+                .Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = objTranMgtIfo.TNSJUBSUNO
 
                 iRet = .ExecuteNonQuery
 
@@ -260,6 +291,45 @@ Public Class DA_CDHELP_TRAN_MGT
             Dim sSql As String = ""
 
             sSql += " Select FN_ACK_GET_USR_NAME('" + rsUsrId + "') loginusrnm from dual"
+
+            With dbCmd
+                dbCmd.Connection = m_dbCn
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+            End With
+            dbDa = New OracleDataAdapter(dbCmd)
+
+            dt.Reset()
+            dbDa.Fill(dt)
+
+            Return dt
+        Catch ex As Exception
+            Throw (New Exception(ex.Message + " @" + sFn, ex))
+        Finally
+            If m_dbCn.State = ConnectionState.Open Then
+                m_dbCn.Close() : m_dbCn.Dispose()
+            End If
+
+            m_dbCn = Nothing
+        End Try
+
+    End Function
+
+
+    Public Function fnGet_cmtcontlist() As DataTable
+        Dim sFn As String = " fnGet_Help_Info([String]) As DataTable"
+
+        Try
+            m_dbCn = GetDbConnection()
+            Dim dbDa As OracleDataAdapter
+            Dim dbCmd As New OracleCommand
+            Dim dt As New DataTable
+            Dim sSql As String = ""
+
+            sSql += " selecT cmtcd , cmtcont " + vbCrLf
+            sSql += "   from lf410m " + vbCrLf
+            sSql += "  where cmtgbn = '4' " + vbCrLf
+            sSql += "    and delflg = '0' " + vbCrLf
 
             With dbCmd
                 dbCmd.Connection = m_dbCn

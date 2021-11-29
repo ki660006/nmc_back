@@ -863,7 +863,7 @@ Public Class FGR07_GCL
         End Try
     End Sub
     Private Function fnSend_GCLImg_Info(ByVal rsBcno As String, ByVal rsTestcd As String) As Boolean
-        Dim sFn As String = "fnSend_SCLImg_Info() As Boolean"
+        Dim sFn As String = "fnSend_GCLImg_Info() As Boolean"
 
         Dim oraDbCn As OracleConnection
         Dim oraDbTrans As OracleTransaction
@@ -879,6 +879,7 @@ Public Class FGR07_GCL
 
             sSql = ""
             sSql += "UPDATE GCRL.UPLOADMST       "
+            'sSql += "UPDATE GC_NLIS.UPLOADMST       " '20211119 jhs 녹십자 최신서버 변경
             sSql += "   SET HOSPI_DOWN_YN = 'Y'  "
             sSql += " WHERE CSTCD     = '41666'  "
             sSql += "   AND SAMPLENO  = :BCNO    "
@@ -2459,6 +2460,7 @@ Public Class FGR07_GCL
             sSql += "        A.SAMPLENO AS BCNO, A.CSTITEMCD AS TESTCD, A.SAMPLECD AS SPCCD, A.HOSNO AS REGNO, "
             sSql += "        A.PATNM, A.ITEMCD, A.CSTITEMNM AS TNMD, B.IMGFILE, A.REQDTE, B.SEQNO "
             sSql += "   FROM GCRL.UPLOADMST A, GCRL.VIEWIMG_NMC B "
+            ' sSql += "   FROM GC_NLIS.UPLOADMST A, GCRL.VIEWIMG_NMC B "
             sSql += "  WHERE A.REQNO = B.REQNO "
             sSql += "    AND A.ITEMCD = B.ITEMCD"
             sSql += "    AND A.CSTCD = '41666'"

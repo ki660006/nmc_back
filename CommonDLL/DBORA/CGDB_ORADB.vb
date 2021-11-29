@@ -138,6 +138,7 @@ Public Class ORADB
             Dim sCnStr As String = ""
 
             sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = store.gcrl.co.kr)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = orcl))) "
+            'sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = dbex.nlis.gclabs.net)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = NLIS))) " '20211119 최신 서버 변경 추후 배포 
             sCnStr += ";User ID=IUSER_NMC"
             sCnStr += ";Password=IUSER_NMC"
 

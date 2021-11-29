@@ -5260,6 +5260,8 @@ Namespace APP_BT
         End Function
         '--------------------------------------------
 
+
+
         Public Shared Function fn_PreOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String, ByVal rsGbn As String) As DataTable
             ' 수혈 가출고 대기 리스트
             Dim sFn As String = "Public Shared Function fn_PreOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String) As DataTable"
@@ -10446,6 +10448,97 @@ Namespace APP_BT
             COMMON.CommFN.MdiMain.DB_Active_YN = "Y"
         End Sub
 
+        '202111125 jhs 적혈구제제 수정
+        '적혈구제제 수정 함수
+        Public Function fnGet_trans_mgt_upd(ByVal rsArTrans As ArrayList) As Boolean
+            Dim sFn As String = "Public Shared Function fnGet_trans_mgt_upd(ByVal rsTnsNo As String) As Boolean"
+            Dim DbCmd As New OracleCommand
+            Dim lb_rtnValue As Boolean = False
+            Dim sSql As String = ""
+            Dim intRet As Integer
+
+            Dim sTnsjubsuno As String = ""
+            Dim sRegno As String = ""
+            Dim sHgyn As String = ""
+            Dim sAllyn As String = ""
+            Dim sCbcyn As String = ""
+            Dim sEcpyn As String = ""
+            Dim sSeq As String = ""
+            Dim sUpdid As String = ""
+
+            With DbCmd
+                .Connection = m_DbCn
+                .Transaction = m_DbTrans
+            End With
+
+            Try
+                For ix = 0 To rsArTrans.Count - 1
+
+                    With CType(rsArTrans(ix), TnsTranList)
+                        sTnsjubsuno = .TNSJUBSUNO
+                        sRegno = .REGNO
+                        sHgyn = .HGYN
+                        sAllyn = .ALLYN
+                        sCbcyn = .CBCYN
+                        sEcpyn = .ECPYN
+                        sSeq = .SEQ
+                    End With
+
+                    sSql += "update lbc10m set                  " + vbCrLf
+                    sSql += "         hgyn = :hgyn,             " + vbCrLf
+                    sSql += "        cbcyn = :cbcyn,            " + vbCrLf
+                    sSql += "        allyn = :allyn,            " + vbCrLf
+                    sSql += "       ecptyn = :ecptyn,           " + vbCrLf
+                    sSql += "        upddt = fn_ack_sysdate(),  " + vbCrLf
+                    sSql += "        updid = :updid             " + vbCrLf
+                    sSql += "where tnsjubsuno = :tnsjubsuno     " + vbCrLf
+                    sSql += "  and regno      = :regno          " + vbCrLf
+                    sSql += "  And seq        = :seq            " + vbCrLf
+
+                    DbCmd.CommandType = CommandType.Text
+                    DbCmd.CommandText = sSql
+
+                    DbCmd.Parameters.Clear()
+                    DbCmd.Parameters.Add("hgyn", OracleDbType.Varchar2).Value = sHgyn
+                    DbCmd.Parameters.Add("cbcyn", OracleDbType.Varchar2).Value = sCbcyn
+                    DbCmd.Parameters.Add("allyn", OracleDbType.Varchar2).Value = sAllyn
+                    DbCmd.Parameters.Add("ecptyn", OracleDbType.Varchar2).Value = sEcpyn
+                    DbCmd.Parameters.Add("updid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                    DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                    DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                    DbCmd.Parameters.Add("seq", OracleDbType.Varchar2).Value = sSeq
+
+                    intRet = DbCmd.ExecuteNonQuery()
+
+                    If intRet = 0 Then
+                        m_DbTrans.Rollback()
+                        Return False
+                    End If
+
+                Next
+
+                m_DbTrans.Commit()
+
+                lb_rtnValue = True
+
+                Return lb_rtnValue
+
+            Catch ex As Exception
+                m_DbTrans.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+
+                m_DbTrans.Dispose() : m_DbTrans = Nothing
+                If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
+                m_DbCn.Dispose() : m_DbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+
+            End Try
+
+        End Function
+        '------------------------------------
+
         Private Function fnGet_Sysdate() As String
             Dim sFn As String = "Private Function fnGet_Sysdate() As String"
             Dim DbCmd As New OracleCommand
@@ -10506,10 +10599,10 @@ Namespace APP_BT
                 DbCmd.CommandText = sSql
 
                 DbCmd.Parameters.Clear()
-                DbCmd.Parameters.Add("bcno",  OracleDbType.Varchar2).Value = rsKeepNo
-                DbCmd.Parameters.Add("editid",  OracleDbType.Varchar2).Value = USER_INFO.USRID
-                DbCmd.Parameters.Add("editip",  OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
-                DbCmd.Parameters.Add("tnsno",  OracleDbType.Varchar2).Value = rsTnsnum
+                DbCmd.Parameters.Add("bcno", OracleDbType.Varchar2).Value = rsKeepNo
+                DbCmd.Parameters.Add("editid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                DbCmd.Parameters.Add("editip", OracleDbType.Varchar2).Value = USER_INFO.LOCALIP
+                DbCmd.Parameters.Add("tnsno", OracleDbType.Varchar2).Value = rsTnsnum
 
                 iRet = DbCmd.ExecuteNonQuery()
 
@@ -11351,6 +11444,16 @@ Namespace APP_BT
         Public Sub New()
             MyBase.New()
         End Sub
+    End Class
+
+    Public Class TnsTranList
+        Public TNSJUBSUNO As String = ""
+        Public REGNO As String = ""
+        Public HGYN As String = ""
+        Public ALLYN As String = ""
+        Public CBCYN As String = ""
+        Public ECPYN As String = ""
+        Public SEQ As String = ""
     End Class
 
 #End Region
