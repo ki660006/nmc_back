@@ -10450,8 +10450,8 @@ Namespace APP_BT
 
         '202111125 jhs 적혈구제제 수정
         '적혈구제제 수정 함수
-        Public Function fnGet_trans_mgt_upd(ByVal rsArTrans As ArrayList) As Boolean
-            Dim sFn As String = "Public Shared Function fnGet_trans_mgt_upd(ByVal rsTnsNo As String) As Boolean"
+        Public Function fn_trans_mgt_upd(ByVal rsArTrans As TnsTranList) As Boolean
+            Dim sFn As String = "Public Shared Function fn_trans_mgt_upd(ByVal rsTnsNo As String) As Boolean"
             Dim DbCmd As New OracleCommand
             Dim lb_rtnValue As Boolean = False
             Dim sSql As String = ""
@@ -10472,50 +10472,114 @@ Namespace APP_BT
             End With
 
             Try
-                For ix = 0 To rsArTrans.Count - 1
 
-                    With CType(rsArTrans(ix), TnsTranList)
-                        sTnsjubsuno = .TNSJUBSUNO
-                        sRegno = .REGNO
-                        sHgyn = .HGYN
-                        sAllyn = .ALLYN
-                        sCbcyn = .CBCYN
-                        sEcpyn = .ECPYN
-                        sSeq = .SEQ
-                    End With
+                With rsArTrans
+                    sTnsjubsuno = .TNSJUBSUNO
+                    sRegno = .REGNO
+                    sHgyn = .HGYN
+                    sAllyn = .ALLYN
+                    sCbcyn = .CBCYN
+                    sEcpyn = .ECPYN
+                    sSeq = .SEQ
+                End With
 
-                    sSql += "update lbc10m set                  " + vbCrLf
-                    sSql += "         hgyn = :hgyn,             " + vbCrLf
-                    sSql += "        cbcyn = :cbcyn,            " + vbCrLf
-                    sSql += "        allyn = :allyn,            " + vbCrLf
-                    sSql += "       ecptyn = :ecptyn,           " + vbCrLf
-                    sSql += "        upddt = fn_ack_sysdate(),  " + vbCrLf
-                    sSql += "        updid = :updid             " + vbCrLf
-                    sSql += "where tnsjubsuno = :tnsjubsuno     " + vbCrLf
-                    sSql += "  and regno      = :regno          " + vbCrLf
-                    sSql += "  And seq        = :seq            " + vbCrLf
+                sSql += "update lbc10m set                  " + vbCrLf
+                sSql += "         hgyn = :hgyn,             " + vbCrLf
+                sSql += "        cbcyn = :cbcyn,            " + vbCrLf
+                sSql += "        allyn = :allyn,            " + vbCrLf
+                sSql += "       ecptyn = :ecptyn,           " + vbCrLf
+                sSql += "        upddt = fn_ack_sysdate(),  " + vbCrLf
+                sSql += "        updid = :updid             " + vbCrLf
+                sSql += "where tnsjubsuno = :tnsjubsuno     " + vbCrLf
+                sSql += "  and regno      = :regno          " + vbCrLf
+                sSql += "  And seq        = :seq            " + vbCrLf
 
-                    DbCmd.CommandType = CommandType.Text
-                    DbCmd.CommandText = sSql
+                DbCmd.CommandType = CommandType.Text
+                DbCmd.CommandText = sSql
 
-                    DbCmd.Parameters.Clear()
-                    DbCmd.Parameters.Add("hgyn", OracleDbType.Varchar2).Value = sHgyn
-                    DbCmd.Parameters.Add("cbcyn", OracleDbType.Varchar2).Value = sCbcyn
-                    DbCmd.Parameters.Add("allyn", OracleDbType.Varchar2).Value = sAllyn
-                    DbCmd.Parameters.Add("ecptyn", OracleDbType.Varchar2).Value = sEcpyn
-                    DbCmd.Parameters.Add("updid", OracleDbType.Varchar2).Value = USER_INFO.USRID
-                    DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
-                    DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
-                    DbCmd.Parameters.Add("seq", OracleDbType.Varchar2).Value = sSeq
+                DbCmd.Parameters.Clear()
+                DbCmd.Parameters.Add("hgyn", OracleDbType.Varchar2).Value = sHgyn
+                DbCmd.Parameters.Add("cbcyn", OracleDbType.Varchar2).Value = sCbcyn
+                DbCmd.Parameters.Add("allyn", OracleDbType.Varchar2).Value = sAllyn
+                DbCmd.Parameters.Add("ecptyn", OracleDbType.Varchar2).Value = sEcpyn
+                DbCmd.Parameters.Add("updid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("seq", OracleDbType.Varchar2).Value = sSeq
 
-                    intRet = DbCmd.ExecuteNonQuery()
+                intRet = DbCmd.ExecuteNonQuery()
 
-                    If intRet = 0 Then
-                        m_DbTrans.Rollback()
-                        Return False
-                    End If
+                If intRet = 0 Then
+                    m_DbTrans.Rollback()
+                    Return False
+                End If
 
-                Next
+                m_DbTrans.Commit()
+
+                lb_rtnValue = True
+
+                Return lb_rtnValue
+
+            Catch ex As Exception
+                m_DbTrans.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+
+                m_DbTrans.Dispose() : m_DbTrans = Nothing
+                If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
+                m_DbCn.Dispose() : m_DbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+
+            End Try
+
+        End Function
+        '------------------------------------
+        '202111125 jhs 적혈구제제 수정
+        '적혈구제제 삭제 함수
+        Public Function fn_trans_mgt_del(ByVal rsArTrans As TnsTranList) As Boolean
+            Dim sFn As String = "Public Shared Function fnGet_trans_mgt_upd(ByVal rsTnsNo As String) As Boolean"
+            Dim DbCmd As New OracleCommand
+            Dim lb_rtnValue As Boolean = False
+            Dim sSql As String = ""
+            Dim intRet As Integer
+
+            Dim sTnsjubsuno As String = ""
+            Dim sRegno As String = ""
+            Dim sSeq As String = ""
+
+            With DbCmd
+                .Connection = m_DbCn
+                .Transaction = m_DbTrans
+            End With
+
+            Try
+
+                With rsArTrans
+                    sTnsjubsuno = .TNSJUBSUNO
+                    sRegno = .REGNO
+                    sSeq = .SEQ
+                End With
+
+                sSql += "delete lbc10m                   " + vbCrLf
+                sSql += "where tnsjubsuno = :tnsjubsuno     " + vbCrLf
+                sSql += "  and regno      = :regno          " + vbCrLf
+                sSql += "  And seq        = :seq            " + vbCrLf
+
+                DbCmd.CommandType = CommandType.Text
+                DbCmd.CommandText = sSql
+
+                DbCmd.Parameters.Clear()
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("seq", OracleDbType.Varchar2).Value = sSeq
+
+                intRet = DbCmd.ExecuteNonQuery()
+
+                If intRet = 0 Then
+                    m_DbTrans.Rollback()
+                    Return False
+                End If
 
                 m_DbTrans.Commit()
 

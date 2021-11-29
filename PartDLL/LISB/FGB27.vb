@@ -79,7 +79,7 @@ Public Class FGB27
                 Dim Dt_Flag As String = fn_Dt_Flag()
                 Dim a_dr As DataRow()
 
-                a_dr = dt.Select(Dt_Flag, " regdt, regno, seq")
+                a_dr = dt.Select(Dt_Flag, "")
 
                 dt = Fn.ChangeToDataTable(a_dr)
 
@@ -174,20 +174,67 @@ Public Class FGB27
                         tnstran.ECPYN = sEcpyn
                         tnstran.SEQ = sSeq
 
-                        arlUpd.Add(tnstran)
 
-                        chkBool = (New TnsReg).fnGet_trans_mgt_upd(arlUpd)
+                        chkBool = (New TnsReg).fn_trans_mgt_upd(tnstran)
                         If chkBool = False Then
                             fn_PopMsg(Me, "I"c, "수정 중 문제가 발생했습니다. " + vbCrLf + "관리자에게 문의해 주세요.")
                             Exit For
                         End If
                     End If
                 Next
+                If chkSeq = 0 Then
+                    fn_PopMsg(Me, "I"c, "선택한 관리목록이 없습니다. 체크한 후 진행해 주세요.")
+                End If
             End With
 
-            If chkSeq = 0 Then
-                fn_PopMsg(Me, "I"c, "선택한 관리목록이 없습니다. 체크한 후 진행해 주세요.")
-            End If
+            sbDisplay_Data()
+
+        Catch ex As Exception
+            fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnDel_Click(sender As Object, e As EventArgs) Handles btnDel.Click
+        Dim arlDel As New ArrayList
+        Dim chkBool As Boolean = True
+        Dim msgContent As String = "Y나 N이 아닙니다. Y나 N을 입력해주세요."
+        Dim chkSeq As Integer = 0
+        Try
+            With spdTnsTranList
+
+                If fn_PopConfirm(Me, "E"c, "정말 삭제를 하시겠습니까?") Then
+                    For i = 1 To .MaxRows
+                        .Row = i
+                        .Col = .GetColFromID("chk") : Dim strChk As String = .Text
+
+                        If strChk = "1" And chkBool = True Then
+                            chkSeq += 1
+                            .Col = .GetColFromID("tnsjubsuno") : Dim sTnsjubsuno As String = .Text
+                            .Col = .GetColFromID("seq") : Dim sSeq As String = .Text
+                            .Col = .GetColFromID("regno") : Dim sRegno As String = .Text
+
+                            Dim tnstran As TnsTranList = New TnsTranList
+
+                            tnstran.TNSJUBSUNO = sTnsjubsuno
+                            tnstran.REGNO = sRegno
+                            tnstran.SEQ = sSeq
+
+                            chkBool = (New TnsReg).fn_trans_mgt_del(tnstran)
+                            If chkBool = False Then
+                                fn_PopMsg(Me, "I"c, "수정 중 문제가 발생했습니다. " + vbCrLf + "관리자에게 문의해 주세요.")
+                                Exit For
+                            End If
+                        End If
+                    Next
+
+                    If chkSeq = 0 Then
+                        fn_PopMsg(Me, "I"c, "선택한 관리목록이 없습니다. 체크한 후 진행해 주세요.")
+                    End If
+                Else
+                    chkSeq += 1
+                End If
+
+            End With
 
             sbDisplay_Data()
 

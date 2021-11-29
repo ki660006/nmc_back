@@ -164,7 +164,6 @@ Partial Class FGB09
         Me.txtRequestBlood.Name = "txtRequestBlood"
         Me.txtRequestBlood.Size = New System.Drawing.Size(204, 21)
         Me.txtRequestBlood.TabIndex = 189
-        Me.txtRequestBlood.Visible = False
         '
         'lblRequestBlood
         '
@@ -180,7 +179,6 @@ Partial Class FGB09
         Me.lblRequestBlood.TabIndex = 188
         Me.lblRequestBlood.Text = "불출요청서 혈액번호"
         Me.lblRequestBlood.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblRequestBlood.Visible = False
         '
         'txtSBldno
         '

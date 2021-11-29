@@ -194,7 +194,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.533 --> 2021/11/11 : 혈액 반납/폐기율 조회 갯수 안맞는 것 쿼리 수정 
 'Version 3.1.10.534 --> 2021/11/22 : 적혈구 제제 관리 화면 쿼리 추가
 'Version 3.1.10.535 --> 2021/11/29 : 적혈구제제 수혈관리 팝업창 정보 조회 쿼리 수정, 수혈관리 조회 쿼리 수정
+'Version 3.1.10.536 --> 2021/11/29 : 적혈구제제 수혈관리 삭제 기능 추가
 
-<Assembly: AssemblyVersion("3.1.10.535")>
+<Assembly: AssemblyVersion("3.1.10.536")>
 
 

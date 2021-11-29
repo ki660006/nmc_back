@@ -91,5 +91,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.384 --> 2021/10/25 : 불출요청서 혈액번호 일치 하는지 확인하는 로직 구현(롤백)    
 'Version 3.1.10.385 --> 2021/11/22 : 적혈구 제제 관리 화면 추가
 'Version 3.1.10.386 --> 2021/11/29 : 적혈구제제 관리, 조회 화면 수정기능 및 스프레드 내용 변경
+'Version 3.1.10.387 --> 2021/11/29 : 적혈구제제 관리 오류 수정, 조회 화면 삭제 기능 추가 
 
-<Assembly: AssemblyVersion("3.1.10.386")>
+<Assembly: AssemblyVersion("3.1.10.387")>

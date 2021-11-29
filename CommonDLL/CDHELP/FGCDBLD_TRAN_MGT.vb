@@ -189,7 +189,7 @@ Public Class DA_CDHELP_TRAN_MGT
             sSql += "  insert into LBC10m (REGDT, TNSJUBSUNO, REGNO, REGID, DLMCALLER,          " + vbCrLf
             sSql += "                      CMCALLER, CMTCONT, HGYN, CBCYN, ALLYN, ECPTYN, SEQ)  " + vbCrLf '20211125 jhs seq 추가
             sSql += "  values( fn_ack_sysdate(), :tnsjubsuno, :regno, :regid, :dlmcaller,       " + vbCrLf
-            sSql += "          :cmcaller, :cmtcont, :hgyn, :cbcyn, :allyn, :ecptyn,             " + vbCrLf
+            sSql += "          :cmcaller, :cmtcont, :hgyn, :cbcyn, :allyn, :ecptyn             " + vbCrLf
             sSql += "         ,(selecT case when nvl(max(seq),0) = 0 then '1'                   " + vbCrLf
             sSql += "                       when max(seq) > 0 then to_char(max(seq) + 1) end    " + vbCrLf
             sSql += "           from lbc10m where tnsjubsuno = :tnsjubsuno) )                   " + vbCrLf
