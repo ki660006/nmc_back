@@ -282,14 +282,14 @@ Public Class APP_EXLAB
             Dim sSql As String = ""
 
             sSql = ""
-            sSql += " SELECT A.REQNO, "  ' 녹십자 key
-            sSql += "        A.SAMPLENO AS BCNO, A.CSTITEMCD AS TESTCD, A.SAMPLECD AS SPCCD, A.HOSNO AS REGNO, "
-            sSql += "        A.PATNM, A.ITEMCD, A.CSTITEMNM AS TNMD, B.LABRES AS RST, A.REQDTE "
-            sSql += "   FROM GCRL.UPLOADMST A, GCRL.VIEW_RESULT_NMC B "
-            'sSql += "   FROM GC_NLIS.UPLOADMST A, GC_NLIS.VIEW_RESULT_NMC B " '20211119 jhs 최신 서버 변경 추후 배포 
-            sSql += "  WHERE A.REQNO    = B.REQNO "
-            sSql += "    AND A.ITEMCD   = B.ITEMCD "
-            sSql += "    AND A.CSTCD    = '41666'"
+            sSql += " SELECT A.REQNO, " + vbCrLf ' 녹십자 key
+            sSql += "        A.SAMPLENO AS BCNO, A.CSTITEMCD AS TESTCD, A.SAMPLECD AS SPCCD, A.HOSNO AS REGNO, " + vbCrLf
+            sSql += "        A.PATNM, A.ITEMCD, A.CSTITEMNM AS TNMD, B.LABRES AS RST, A.REQDTE " + vbCrLf
+            sSql += "   FROM GCRL.UPLOADMST A, GCRL.VIEW_RESULT_NMC B " + vbCrLf ' 21년 12월 현재사용하고 있는 서버
+            'sSql += "   FROM GC_NLIS.UPLOADMST A, GC_NLIS.VIEW_RESULT_NMC B " '22년 jhs 최신 서버 변경 추후 배포  ' GCLTEST
+            sSql += "  WHERE A.REQNO    = B.REQNO " + vbCrLf
+            sSql += "    AND A.ITEMCD   = B.ITEMCD " + vbCrLf
+            sSql += "    AND A.CSTCD    = '41666'" + vbCrLf
             sSql += "    AND B.IMAGE_YN = 'N' "  '이미지결과 제외
 
             If RsDateGbn = "1" Then '접수일자

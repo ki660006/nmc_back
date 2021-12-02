@@ -10465,6 +10465,7 @@ Namespace APP_BT
             Dim sEcpyn As String = ""
             Dim sSeq As String = ""
             Dim sUpdid As String = ""
+            Dim sCmcaller As String = ""
 
             With DbCmd
                 .Connection = m_DbCn
@@ -10480,6 +10481,7 @@ Namespace APP_BT
                     sAllyn = .ALLYN
                     sCbcyn = .CBCYN
                     sEcpyn = .ECPYN
+                    sCmcaller = .CMCALLER
                     sSeq = .SEQ
                 End With
 
@@ -10489,7 +10491,8 @@ Namespace APP_BT
                 sSql += "        allyn = :allyn,            " + vbCrLf
                 sSql += "       ecptyn = :ecptyn,           " + vbCrLf
                 sSql += "        upddt = fn_ack_sysdate(),  " + vbCrLf
-                sSql += "        updid = :updid             " + vbCrLf
+                sSql += "        updid = :updid  ,           " + vbCrLf
+                sSql += "     cmcaller = :cmcaller          " + vbCrLf
                 sSql += "where tnsjubsuno = :tnsjubsuno     " + vbCrLf
                 sSql += "  and regno      = :regno          " + vbCrLf
                 sSql += "  And seq        = :seq            " + vbCrLf
@@ -10503,6 +10506,7 @@ Namespace APP_BT
                 DbCmd.Parameters.Add("allyn", OracleDbType.Varchar2).Value = sAllyn
                 DbCmd.Parameters.Add("ecptyn", OracleDbType.Varchar2).Value = sEcpyn
                 DbCmd.Parameters.Add("updid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                DbCmd.Parameters.Add("cmcaller", OracleDbType.Varchar2).Value = sCmcaller
                 DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
                 DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
                 DbCmd.Parameters.Add("seq", OracleDbType.Varchar2).Value = sSeq
@@ -11518,6 +11522,7 @@ Namespace APP_BT
         Public CBCYN As String = ""
         Public ECPYN As String = ""
         Public SEQ As String = ""
+        Public CMCALLER As String = ""
     End Class
 
 #End Region

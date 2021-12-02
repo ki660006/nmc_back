@@ -24,6 +24,9 @@ Partial Class FGB27
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB27))
+        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
+        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
+        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim DesignerRectTracker3 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems2 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker4 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
@@ -42,9 +45,6 @@ Partial Class FGB27
         Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
-        Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Me.spdTnsTranList = New AxFPSpreadADO.AxfpSpread()
         Me.pnlSpdList = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -60,13 +60,13 @@ Partial Class FGB27
         Me.lblTitleDt = New System.Windows.Forms.Label()
         Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
         Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.btnDel = New CButtonLib.CButton()
         Me.btnUpd = New CButtonLib.CButton()
         Me.btnPrint = New CButtonLib.CButton()
         Me.btnQuery = New CButtonLib.CButton()
         Me.btnExcel = New CButtonLib.CButton()
         Me.btnClear = New CButtonLib.CButton()
         Me.btnExit = New CButtonLib.CButton()
-        Me.btnDel = New CButtonLib.CButton()
         CType(Me.spdTnsTranList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSpdList.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -253,6 +253,47 @@ Partial Class FGB27
         Me.pnlBottom.Name = "pnlBottom"
         Me.pnlBottom.Size = New System.Drawing.Size(1467, 34)
         Me.pnlBottom.TabIndex = 136
+        '
+        'btnDel
+        '
+        Me.btnDel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DesignerRectTracker1.IsActive = False
+        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDel.CenterPtTracker = DesignerRectTracker1
+        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
+        CBlendItems1.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
+        Me.btnDel.ColorFillBlend = CBlendItems1
+        Me.btnDel.ColorFillSolid = System.Drawing.Color.White
+        Me.btnDel.Corners.All = CType(6, Short)
+        Me.btnDel.Corners.LowerLeft = CType(6, Short)
+        Me.btnDel.Corners.LowerRight = CType(6, Short)
+        Me.btnDel.Corners.UpperLeft = CType(6, Short)
+        Me.btnDel.Corners.UpperRight = CType(6, Short)
+        Me.btnDel.FillType = CButtonLib.CButton.eFillType.GradientLinear
+        Me.btnDel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        Me.btnDel.FocalPoints.CenterPtX = 0.4859813!
+        Me.btnDel.FocalPoints.CenterPtY = 0.16!
+        Me.btnDel.FocalPoints.FocusPtX = 0!
+        Me.btnDel.FocalPoints.FocusPtY = 0!
+        DesignerRectTracker2.IsActive = False
+        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
+        Me.btnDel.FocusPtTracker = DesignerRectTracker2
+        Me.btnDel.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.btnDel.ForeColor = System.Drawing.Color.White
+        Me.btnDel.Image = Nothing
+        Me.btnDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnDel.ImageIndex = 0
+        Me.btnDel.ImageSize = New System.Drawing.Size(16, 16)
+        Me.btnDel.Location = New System.Drawing.Point(1162, 4)
+        Me.btnDel.Name = "btnDel"
+        Me.btnDel.Shape = CButtonLib.CButton.eShape.Rectangle
+        Me.btnDel.SideImage = Nothing
+        Me.btnDel.SideImageSize = New System.Drawing.Size(48, 48)
+        Me.btnDel.Size = New System.Drawing.Size(100, 25)
+        Me.btnDel.TabIndex = 202
+        Me.btnDel.Text = "삭 제"
+        Me.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
+        Me.btnDel.TextMargin = New System.Windows.Forms.Padding(0)
         '
         'btnUpd
         '
@@ -501,47 +542,6 @@ Partial Class FGB27
         Me.btnExit.Text = "종  료(Esc)"
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
-        '
-        'btnDel
-        '
-        Me.btnDel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker1.IsActive = False
-        DesignerRectTracker1.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker1.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDel.CenterPtTracker = DesignerRectTracker1
-        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
-        CBlendItems1.iPoint = New Single() {0!, 0.1510574!, 0.3444109!, 0.9305136!, 1.0!}
-        Me.btnDel.ColorFillBlend = CBlendItems1
-        Me.btnDel.ColorFillSolid = System.Drawing.Color.White
-        Me.btnDel.Corners.All = CType(6, Short)
-        Me.btnDel.Corners.LowerLeft = CType(6, Short)
-        Me.btnDel.Corners.LowerRight = CType(6, Short)
-        Me.btnDel.Corners.UpperLeft = CType(6, Short)
-        Me.btnDel.Corners.UpperRight = CType(6, Short)
-        Me.btnDel.FillType = CButtonLib.CButton.eFillType.GradientLinear
-        Me.btnDel.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        Me.btnDel.FocalPoints.CenterPtX = 0.4859813!
-        Me.btnDel.FocalPoints.CenterPtY = 0.16!
-        Me.btnDel.FocalPoints.FocusPtX = 0!
-        Me.btnDel.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker2.IsActive = False
-        DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
-        Me.btnDel.FocusPtTracker = DesignerRectTracker2
-        Me.btnDel.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.btnDel.ForeColor = System.Drawing.Color.White
-        Me.btnDel.Image = Nothing
-        Me.btnDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btnDel.ImageIndex = 0
-        Me.btnDel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnDel.Location = New System.Drawing.Point(1162, 4)
-        Me.btnDel.Name = "btnDel"
-        Me.btnDel.Shape = CButtonLib.CButton.eShape.Rectangle
-        Me.btnDel.SideImage = Nothing
-        Me.btnDel.SideImageSize = New System.Drawing.Size(48, 48)
-        Me.btnDel.Size = New System.Drawing.Size(100, 25)
-        Me.btnDel.TabIndex = 202
-        Me.btnDel.Text = "삭 제"
-        Me.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
-        Me.btnDel.TextMargin = New System.Windows.Forms.Padding(0)
         '
         'FGB27
         '

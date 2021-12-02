@@ -151,6 +151,7 @@ Public Class FGB27
                         .Col = .GetColFromID("allyn") : Dim sAllyn As String = .Text.ToUpper().Trim
                         .Col = .GetColFromID("cbcyn") : Dim sCbcyn As String = .Text.ToUpper().Trim
                         .Col = .GetColFromID("ecptyn") : Dim sEcpyn As String = .Text.ToUpper().Trim
+                        .Col = .GetColFromID("cmcaller") : Dim sCmcaller As String = .Text.Trim
                         .Col = .GetColFromID("seq") : Dim sSeq As String = .Text
                         .Col = .GetColFromID("regno") : Dim sRegno As String = .Text
 
@@ -173,6 +174,7 @@ Public Class FGB27
                         tnstran.CBCYN = sCbcyn
                         tnstran.ECPYN = sEcpyn
                         tnstran.SEQ = sSeq
+                        tnstran.CMCALLER = sCmcaller
 
 
                         chkBool = (New TnsReg).fn_trans_mgt_upd(tnstran)

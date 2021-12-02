@@ -188,7 +188,7 @@ Public Class FGB09
 
             btnSearch_Click(Nothing, Nothing)
 
-            'Me.txtRegno.Text = "" : Me.txtPatNm.Text = "" '20211125 jhs 배포 하고 변경 예정
+            Me.txtRegno.Text = "" : Me.txtPatNm.Text = "" '20211125 jhs 배포 하고 변경 예정
 
             If Me.spdOrderList.MaxRows < 1 Then Return
 
@@ -741,7 +741,7 @@ Public Class FGB09
         If e.KeyCode <> Keys.Enter Then Return
         If Me.spdOrderList.MaxRows < 1 Then Return
         '20211021 jhs 혈액불출요청서 혈액번호 확인
-        If chkTxtBlood() = False Then Return
+        'If chkTxtBlood() = False Then Return
         '-----------------------------------------------
 
         Try

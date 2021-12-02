@@ -137,8 +137,12 @@ Public Class ORADB
 
             Dim sCnStr As String = ""
 
-            sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = store.gcrl.co.kr)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = orcl))) "
-            'sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = dbex.nlis.gclabs.net)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = NLIS))) " '20211119 최신 서버 변경 추후 배포 
+            '12월 현재 운영서버 
+            sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = store.gcrl.co.kr)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = orcl))) " ' 21 12월 사용하고 있는 서버 
+            '실제 운영서버 될 주소 
+            'sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = dbex.nlis.gclabs.net)(PORT = 1526))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = NLIS))) " '22년 실제 사용할 운영서버 
+            '실제 운영서버 되기 전 테스트 서버 
+            'sCnStr += ";Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = dbex.stg.gclabs.net )(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = NLIST))) "  ' 22년 운영 테스트 서버
             sCnStr += ";User ID=IUSER_NMC"
             sCnStr += ";Password=IUSER_NMC"
 
