@@ -2580,17 +2580,30 @@ Namespace APP_S
                         al.Add(New OracleParameter("tgrpcd", rsTGrpCd))
 
                     ElseIf rsSlipCd <> "" Then
-                        sSql += "   AND ((j1.tclscd, j1.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
-                        sSql += "        (rr.testcd, rr.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
-                        sSql += "        (rm.testcd, rm.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) "
-                        sSql += "       )"
 
-                        al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
-                        al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
-                        al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
-                        al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
-                        al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
-                        al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                        If rsSlipCd.Length = 1 Then
+                            sSql += "   AND ((j1.tclscd, j1.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
+                            sSql += "        (rr.testcd, rr.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
+                            sSql += "        (rm.testcd, rm.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) "
+                            sSql += "       )"
+
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                        Else
+                            sSql += "   AND ((j1.tclscd, j1.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
+                            sSql += "        (rr.testcd, rr.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) OR"
+                            sSql += "        (rm.testcd, rm.spccd) IN (SELECT testcd, spccd FROM lf060m WHERE partcd = :partcd AND slipcd = :slipcd AND usdt <= j.bcprtdt AND uedt > j.bcprtdt) "
+                            sSql += "       )"
+
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                        End If
+
                     End If
 
 
@@ -2616,17 +2629,32 @@ Namespace APP_S
                         sSql += "   AND (j1.tclscd, j1.spccd) IN (SELECT testcd, spccd FROM lf065m WHERE tgrpcd = :tgrpcd)"
                         al.Add(New OracleParameter("tgrpcd", rsTGrpCd))
                     ElseIf rsSlipCd <> "" Then
-                        sSql += "   AND (j1.tclscd, j1.spccd) IN "
-                        sSql += "       (SELECT testcd, spccd"
-                        sSql += "          FROM lf060m"
-                        sSql += "         WHERE partcd  = :partcd"
-                        sSql += "           AND slipcd  = :slipcd"
-                        sSql += "           AND usdt   <= j.bcprtdt"
-                        sSql += "           AND uedt   >  j.bcprtdt"
-                        sSql += "       )"
 
-                        al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
-                        al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                        If rsSlipCd.Length = 1 Then
+                            sSql += "   AND (j1.tclscd, j1.spccd) IN "
+                            sSql += "       (SELECT testcd, spccd"
+                            sSql += "          FROM lf060m"
+                            sSql += "         WHERE partcd  = :partcd"
+                            sSql += "           AND usdt   <= j.bcprtdt"
+                            sSql += "           AND uedt   >  j.bcprtdt"
+                            sSql += "       )"
+
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                        Else
+                            sSql += "   AND (j1.tclscd, j1.spccd) IN "
+                            sSql += "       (SELECT testcd, spccd"
+                            sSql += "          FROM lf060m"
+                            sSql += "         WHERE partcd  = :partcd"
+                            sSql += "           AND slipcd  = :slipcd"
+                            sSql += "           AND usdt   <= j.bcprtdt"
+                            sSql += "           AND uedt   >  j.bcprtdt"
+                            sSql += "       )"
+
+                            al.Add(New OracleParameter("partcd", rsSlipCd.Substring(0, 1)))
+                            al.Add(New OracleParameter("slipcd", rsSlipCd.Substring(1, 1)))
+                        End If
+
+
                     End If
 
                     If rsSpcCd <> "" Then
