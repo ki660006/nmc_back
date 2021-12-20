@@ -103,7 +103,7 @@ Partial Class AxCollList_tot
         'Panel5
         '
         Me.Panel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.Label2)
         Me.Panel5.Controls.Add(Me.lblOrdFlgP)
@@ -506,8 +506,8 @@ Partial Class AxCollList_tot
         'spdOrdList
         '
         Me.spdOrdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.spdOrdList.ContextMenuStrip = Me.cmuLink
         Me.spdOrdList.DataSource = Nothing
         Me.spdOrdList.Location = New System.Drawing.Point(0, 0)
@@ -519,7 +519,7 @@ Partial Class AxCollList_tot
         'lstMsg
         '
         Me.lstMsg.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstMsg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstMsg.FormattingEnabled = True
         Me.lstMsg.ItemHeight = 12

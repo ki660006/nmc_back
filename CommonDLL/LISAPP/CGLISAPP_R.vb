@@ -12727,14 +12727,11 @@ Namespace APP_R
                 With dbCmd
                     .CommandText = sSql
 
-
-
                     .Parameters.Clear()
                     .Parameters.Add("rstrtf", OracleDbType.Clob).Value = rsRTF_ARR
                     .Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_sampinfo_Buf.BCNo
                     .Parameters.Add("testcd", OracleDbType.Varchar2).Value = r_rstinfo_Buf.TestCd
                     .Parameters.Add("migymd", OracleDbType.Varchar2).Value = rnSeq
-
 
                     iRet += .ExecuteNonQuery()
                 End With

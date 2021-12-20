@@ -438,7 +438,7 @@ Public Class CGWEB_C
             Dim wbRep As Net.WebResponse
 
 #If DEBUG Then
-            sURL += PRG_CONST.SERVERIP_DEV 
+            sURL += PRG_CONST.SERVERIP_DEV
 #Else
             sURL += PRG_CONST.SERVERIP 
 #End If
@@ -514,7 +514,7 @@ Public Class CGWEB_C
             Dim wbRep As Net.WebResponse
 
 #If DEBUG Then
-            sURL += PRG_CONST.SERVERIP_DEV 
+            sURL += PRG_CONST.SERVERIP_DEV
 #Else
             sURL += PRG_CONST.SERVERIP 
 #End If
@@ -587,7 +587,7 @@ Public Class CGWEB_C
             Dim wbRep As Net.WebResponse
 
 #If DEBUG Then
-            sURL += PRG_CONST.SERVERIP_DEV 
+            sURL += PRG_CONST.SERVERIP_DEV
 #Else
             sURL += PRG_CONST.SERVERIP 
 #End If
@@ -675,7 +675,7 @@ Public Class CGWEB_C
             sURL += "&regno=" + r_stu.REGNO
             sURL += "&owngbn=" + r_stu.OWNGBN
 
-            
+
 
 
             For ix As Integer = 0 To r_stu.FKOCS.Split(","c).Length - 1

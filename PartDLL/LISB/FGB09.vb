@@ -1177,7 +1177,6 @@ Public Class FGB09
                 bOk = (New WEBSERVER.CGWEB_B).ExecuteDo_Out(alOutList)
             Else
                 ' 교차미필 혈액출고시
-
                 bOk = (New LISAPP.APP_BT.Out).fnExe_Out_NotCross(alOutList, "E"c)
             End If
 

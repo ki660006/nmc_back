@@ -130,6 +130,8 @@ Public Class MAIN
     Friend WithEvents mnuO_Ncov As System.Windows.Forms.MenuItem
     Friend WithEvents mnuR_exlab_gcl As System.Windows.Forms.MenuItem
     Friend WithEvents mnuB_TnsMgt As MenuItem
+    Friend WithEvents mnuB_BldTatInput As MenuItem
+    Friend WithEvents mnuB_BLDTAT As MenuItem
     Private LoginPopWin As New LoginPopWin
 
     Private Sub sbKillPreProc_test()
@@ -489,6 +491,8 @@ Public Class MAIN
         Me.mnuB_XMatch_cnt = New System.Windows.Forms.MenuItem()
         Me.mnuB048 = New System.Windows.Forms.MenuItem()
         Me.mnuB_TnsMgt = New System.Windows.Forms.MenuItem()
+        Me.mnuB_BldTatInput = New System.Windows.Forms.MenuItem()
+        Me.mnuB_BLDTAT = New System.Windows.Forms.MenuItem()
         Me.mnuB_hr2 = New System.Windows.Forms.MenuItem()
         Me.mnuB_bcno_rst = New System.Windows.Forms.MenuItem()
         Me.mnuB_test_rst = New System.Windows.Forms.MenuItem()
@@ -1050,7 +1054,7 @@ Public Class MAIN
         'mnuB00
         '
         Me.mnuB00.Index = 5
-        Me.mnuB00.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuB015, Me.mnuB_hr0, Me.mnuB_tns_jubsu, Me.mnuB_bef_reg, Me.mnuB_out, Me.mnuB_abn, Me.mnuB_abn_part, Me.mnuB_keep, Me.mnuB_bef_cancel, Me.mnuB_hr1, Me.mnuB_bld_history, Me.mnuB_tns_list, Me.mnuB047, Me.mnuB_abn_list, Me.mnuB_bld_io_st, Me.mnuB049, Me.mnuB_abn_st, Me.mnuB94, Me.mnuB_outabn_dept, Me.mnuB_XMatch_cnt, Me.mnuB048, Me.mnuB_TnsMgt, Me.mnuB_hr2, Me.mnuB_bcno_rst, Me.mnuB_test_rst, Me.mnuB_abo_rst, Me.mnuB_aborh_rst, Me.mnuB_cross_rst, Me.mnuB_aborh_prt, Me.mnuB_hr3, Me.mnuB_op, Me.mnuB_IO})
+        Me.mnuB00.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuB015, Me.mnuB_hr0, Me.mnuB_tns_jubsu, Me.mnuB_bef_reg, Me.mnuB_out, Me.mnuB_abn, Me.mnuB_abn_part, Me.mnuB_keep, Me.mnuB_bef_cancel, Me.mnuB_hr1, Me.mnuB_bld_history, Me.mnuB_tns_list, Me.mnuB047, Me.mnuB_abn_list, Me.mnuB_bld_io_st, Me.mnuB049, Me.mnuB_abn_st, Me.mnuB94, Me.mnuB_outabn_dept, Me.mnuB_XMatch_cnt, Me.mnuB048, Me.mnuB_TnsMgt, Me.mnuB_BldTatInput, Me.mnuB_BLDTAT, Me.mnuB_hr2, Me.mnuB_bcno_rst, Me.mnuB_test_rst, Me.mnuB_abo_rst, Me.mnuB_aborh_rst, Me.mnuB_cross_rst, Me.mnuB_aborh_prt, Me.mnuB_hr3, Me.mnuB_op, Me.mnuB_IO})
         Me.mnuB00.Text = "혈액은행(&B)"
         '
         'mnuB015
@@ -1164,54 +1168,64 @@ Public Class MAIN
         Me.mnuB_TnsMgt.Index = 21
         Me.mnuB_TnsMgt.Text = "적혈구제제 수혈관리 조회"
         '
+        'mnuB_BldTatInput
+        '
+        Me.mnuB_BldTatInput.Index = 22
+        Me.mnuB_BldTatInput.Text = "혈액 TAT 병실/이형수혈 입력"
+        '
+        'mnuB_BLDTAT
+        '
+        Me.mnuB_BLDTAT.Index = 23
+        Me.mnuB_BLDTAT.Text = "혈액 TAT 조회"
+        '
         'mnuB_hr2
         '
-        Me.mnuB_hr2.Index = 22
+        Me.mnuB_hr2.Index = 24
         Me.mnuB_hr2.Text = "-"
         '
         'mnuB_bcno_rst
         '
-        Me.mnuB_bcno_rst.Index = 23
+        Me.mnuB_bcno_rst.Index = 25
         Me.mnuB_bcno_rst.Text = "분야별 결과저장 및 보고(T)"
         '
         'mnuB_test_rst
         '
-        Me.mnuB_test_rst.Index = 24
+        Me.mnuB_test_rst.Index = 26
         Me.mnuB_test_rst.Text = "검사항목별 결과저장 및 보고(T)"
         '
         'mnuB_abo_rst
         '
-        Me.mnuB_abo_rst.Index = 25
+        Me.mnuB_abo_rst.Index = 27
         Me.mnuB_abo_rst.Text = "혈액형 결과수정 및 보고(T)"
         '
         'mnuB_aborh_rst
         '
-        Me.mnuB_aborh_rst.Index = 26
+        Me.mnuB_aborh_rst.Index = 28
         Me.mnuB_aborh_rst.Text = "혈액형 2차 결과 등록"
         '
         'mnuB_cross_rst
         '
-        Me.mnuB_cross_rst.Index = 27
+        Me.mnuB_cross_rst.Index = 29
         Me.mnuB_cross_rst.Text = "Cross Matching 결과 수정"
         '
         'mnuB_aborh_prt
         '
-        Me.mnuB_aborh_prt.Index = 28
+        Me.mnuB_aborh_prt.Index = 30
         Me.mnuB_aborh_prt.Text = "혈액형 결과대장"
         '
         'mnuB_hr3
         '
-        Me.mnuB_hr3.Index = 29
+        Me.mnuB_hr3.Index = 31
         Me.mnuB_hr3.Text = "-"
         '
         'mnuB_op
         '
-        Me.mnuB_op.Index = 30
+        Me.mnuB_op.Index = 32
         Me.mnuB_op.Text = "수술환자 확정 조회"
         '
         'mnuB_IO
         '
-        Me.mnuB_IO.Index = 31
+        Me.mnuB_IO.Index = 33
         Me.mnuB_IO.Text = "질병관리본부 입/출고 관리"
         '
         'mnuM
@@ -3222,7 +3236,7 @@ Public Class MAIN
     End Sub
 
     '> 혈액은행
-    Public Sub MenuB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuB015.Click, mnuB_tns_jubsu.Click, mnuB_bef_reg.Click, mnuB_bef_cancel.Click, mnuB_out.Click, mnuB_keep.Click, mnuB_abn.Click, mnuB_abn_part.Click, mnuB_bld_history.Click, mnuB_tns_list.Click, mnuB_bld_io_st.Click, mnuB_abn_st.Click, mnuB_abn_list.Click, mnuB047.Click, mnuB048.Click, mnuB049.Click, mnuB_bcno_rst.Click, mnuB_test_rst.Click, mnuB_abo_rst.Click, mnuB_cross_rst.Click, mnuB_aborh_rst.Click, mnuB94.Click, mnuB_outabn_dept.Click, mnuB_XMatch_cnt.Click, mnuB_op.Click, mnuB_aborh_prt.Click, mnuB_IO.Click, mnuB_TnsMgt.Click
+    Public Sub MenuB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuB015.Click, mnuB_tns_jubsu.Click, mnuB_bef_reg.Click, mnuB_bef_cancel.Click, mnuB_out.Click, mnuB_keep.Click, mnuB_abn.Click, mnuB_abn_part.Click, mnuB_bld_history.Click, mnuB_tns_list.Click, mnuB_bld_io_st.Click, mnuB_abn_st.Click, mnuB_abn_list.Click, mnuB047.Click, mnuB048.Click, mnuB049.Click, mnuB_bcno_rst.Click, mnuB_test_rst.Click, mnuB_abo_rst.Click, mnuB_cross_rst.Click, mnuB_aborh_rst.Click, mnuB94.Click, mnuB_outabn_dept.Click, mnuB_XMatch_cnt.Click, mnuB_op.Click, mnuB_aborh_prt.Click, mnuB_IO.Click, mnuB_TnsMgt.Click, mnuB_BldTatInput.Click, mnuB_BLDTAT.Click
 
         Dim mnuItem As MenuItem = CType(sender, MenuItem)
         Dim sFrmTxt As String = mnuItem.Text
@@ -3357,11 +3371,17 @@ Public Class MAIN
                     '-- 질병관리본부 입출고 조회
                     frmChild = New LISB.FGB26
 
-                    '20211103 jhs 수혈 관리 추가
                 Case mnuB_TnsMgt.Text
                     '-- 적혈구제제 수혈관리 조회
                     frmChild = New LISB.FGB27
 
+                Case mnuB_BldTatInput.Text
+                    '-- 혈액 TAT 병실/이형수혈 입력
+                    frmChild = New LISB.FGB28
+
+                Case mnuB_BLDTAT.Text
+                    '-- 혈액 TAT 조회
+                    frmChild = New LISB.FGB29
                 Case Else
                     Exit Sub
 

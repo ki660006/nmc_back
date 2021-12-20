@@ -114,7 +114,7 @@ Public Class CGWEB_B
                 sURL += "&owngbn=" + CType(r_al_OutInfo(ix), STU_TnsJubsu).OWNGBN
                 sURL += "&fkocs=" + CType(r_al_OutInfo(ix), STU_TnsJubsu).FKOCS.Split("-"c)(0)
                 sURL += "&regno=" + CType(r_al_OutInfo(ix), STU_TnsJubsu).REGNO
-                
+
                 sURL += "&usrid=" + IIf(USER_INFO.USRID.IndexOf("ACK") >= 0, "410276", USER_INFO.USRID).ToString
                 sURL += "&usrip=" + USER_INFO.LOCALIP
                 sURL += "&rs_retval="

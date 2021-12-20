@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FGB27
+Partial Class FGB28
     Inherits System.Windows.Forms.Form
 
     'Form은 Dispose를 재정의하여 구성 요소 목록을 정리합니다.
@@ -23,7 +23,7 @@ Partial Class FGB27
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB27))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGB28))
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker2 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
@@ -45,20 +45,19 @@ Partial Class FGB27
         Dim DesignerRectTracker13 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems7 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
         Dim DesignerRectTracker14 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
-        Me.spdTnsTranList = New AxFPSpreadADO.AxfpSpread()
-        Me.pnlSpdList = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rdoExc = New System.Windows.Forms.RadioButton()
-        Me.rdoALL = New System.Windows.Forms.RadioButton()
-        Me.rdoCBC = New System.Windows.Forms.RadioButton()
-        Me.rdoHB = New System.Windows.Forms.RadioButton()
+        Me.txtTnsjubsuno = New System.Windows.Forms.TextBox()
+        Me.lblTnsjubsuno = New System.Windows.Forms.Label()
+        Me.txtRegno = New System.Windows.Forms.TextBox()
+        Me.lblRegno = New System.Windows.Forms.Label()
         Me.dtpDateE = New System.Windows.Forms.DateTimePicker()
         Me.lblWk = New System.Windows.Forms.Label()
         Me.txtWkNoE = New System.Windows.Forms.TextBox()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblTitleDt = New System.Windows.Forms.Label()
         Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
+        Me.pnlBody = New System.Windows.Forms.Panel()
+        Me.spdList = New AxFPSpreadADO.AxfpSpread()
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.btnDel = New CButtonLib.CButton()
         Me.btnUpd = New CButtonLib.CButton()
@@ -67,110 +66,71 @@ Partial Class FGB27
         Me.btnExcel = New CButtonLib.CButton()
         Me.btnClear = New CButtonLib.CButton()
         Me.btnExit = New CButtonLib.CButton()
-        CType(Me.spdTnsTranList, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlSpdList.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.pnlBody.SuspendLayout()
+        CType(Me.spdList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlBottom.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'spdTnsTranList
-        '
-        'Me.spdTnsTranList.DataSource = Nothing
-        Me.spdTnsTranList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.spdTnsTranList.Location = New System.Drawing.Point(0, 0)
-        Me.spdTnsTranList.Name = "spdTnsTranList"
-        Me.spdTnsTranList.OcxState = CType(resources.GetObject("spdTnsTranList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdTnsTranList.Size = New System.Drawing.Size(1259, 486)
-        Me.spdTnsTranList.TabIndex = 0
-        '
-        'pnlSpdList
-        '
-        Me.pnlSpdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlSpdList.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.pnlSpdList.Controls.Add(Me.spdTnsTranList)
-        Me.pnlSpdList.Location = New System.Drawing.Point(5, 59)
-        Me.pnlSpdList.Name = "pnlSpdList"
-        Me.pnlSpdList.Size = New System.Drawing.Size(1259, 486)
-        Me.pnlSpdList.TabIndex = 0
         '
         'GroupBox6
         '
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.GroupBox6.Controls.Add(Me.GroupBox1)
+        Me.GroupBox6.Controls.Add(Me.txtTnsjubsuno)
+        Me.GroupBox6.Controls.Add(Me.lblTnsjubsuno)
+        Me.GroupBox6.Controls.Add(Me.txtRegno)
+        Me.GroupBox6.Controls.Add(Me.lblRegno)
         Me.GroupBox6.Controls.Add(Me.dtpDateE)
         Me.GroupBox6.Controls.Add(Me.lblWk)
         Me.GroupBox6.Controls.Add(Me.txtWkNoE)
         Me.GroupBox6.Controls.Add(Me.lblDate)
         Me.GroupBox6.Controls.Add(Me.lblTitleDt)
         Me.GroupBox6.Controls.Add(Me.dtpDateS)
-        Me.GroupBox6.Location = New System.Drawing.Point(5, 6)
+        Me.GroupBox6.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox6.Size = New System.Drawing.Size(1260, 47)
-        Me.GroupBox6.TabIndex = 135
+        Me.GroupBox6.Size = New System.Drawing.Size(1189, 47)
+        Me.GroupBox6.TabIndex = 136
         Me.GroupBox6.TabStop = False
         '
-        'GroupBox1
+        'txtTnsjubsuno
         '
-        Me.GroupBox1.Controls.Add(Me.rdoExc)
-        Me.GroupBox1.Controls.Add(Me.rdoALL)
-        Me.GroupBox1.Controls.Add(Me.rdoCBC)
-        Me.GroupBox1.Controls.Add(Me.rdoHB)
-        Me.GroupBox1.Location = New System.Drawing.Point(314, 11)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(330, 30)
-        Me.GroupBox1.TabIndex = 218
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "보고상태"
+        Me.txtTnsjubsuno.Location = New System.Drawing.Point(577, 19)
+        Me.txtTnsjubsuno.Name = "txtTnsjubsuno"
+        Me.txtTnsjubsuno.Size = New System.Drawing.Size(100, 21)
+        Me.txtTnsjubsuno.TabIndex = 222
         '
-        'rdoExc
+        'lblTnsjubsuno
         '
-        Me.rdoExc.AutoSize = True
-        Me.rdoExc.Location = New System.Drawing.Point(252, 10)
-        Me.rdoExc.Name = "rdoExc"
-        Me.rdoExc.Size = New System.Drawing.Size(71, 16)
-        Me.rdoExc.TabIndex = 220
-        Me.rdoExc.TabStop = True
-        Me.rdoExc.Text = "제외대상"
-        Me.rdoExc.UseVisualStyleBackColor = True
+        Me.lblTnsjubsuno.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblTnsjubsuno.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblTnsjubsuno.ForeColor = System.Drawing.Color.White
+        Me.lblTnsjubsuno.Location = New System.Drawing.Point(496, 19)
+        Me.lblTnsjubsuno.Name = "lblTnsjubsuno"
+        Me.lblTnsjubsuno.Size = New System.Drawing.Size(80, 21)
+        Me.lblTnsjubsuno.TabIndex = 221
+        Me.lblTnsjubsuno.Text = "접수번호"
+        Me.lblTnsjubsuno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'rdoALL
+        'txtRegno
         '
-        Me.rdoALL.AutoSize = True
-        Me.rdoALL.Location = New System.Drawing.Point(96, 10)
-        Me.rdoALL.Name = "rdoALL"
-        Me.rdoALL.Size = New System.Drawing.Size(71, 16)
-        Me.rdoALL.TabIndex = 219
-        Me.rdoALL.TabStop = True
-        Me.rdoALL.Text = "모두요청"
-        Me.rdoALL.UseVisualStyleBackColor = True
+        Me.txtRegno.Location = New System.Drawing.Point(394, 19)
+        Me.txtRegno.Name = "txtRegno"
+        Me.txtRegno.Size = New System.Drawing.Size(100, 21)
+        Me.txtRegno.TabIndex = 220
         '
-        'rdoCBC
+        'lblRegno
         '
-        Me.rdoCBC.AutoSize = True
-        Me.rdoCBC.Location = New System.Drawing.Point(173, 10)
-        Me.rdoCBC.Name = "rdoCBC"
-        Me.rdoCBC.Size = New System.Drawing.Size(74, 16)
-        Me.rdoCBC.TabIndex = 218
-        Me.rdoCBC.TabStop = True
-        Me.rdoCBC.Text = "CBC F/U"
-        Me.rdoCBC.UseVisualStyleBackColor = True
-        '
-        'rdoHB
-        '
-        Me.rdoHB.AutoSize = True
-        Me.rdoHB.Location = New System.Drawing.Point(6, 11)
-        Me.rdoHB.Name = "rdoHB"
-        Me.rdoHB.Size = New System.Drawing.Size(85, 16)
-        Me.rdoHB.TabIndex = 217
-        Me.rdoHB.TabStop = True
-        Me.rdoHB.Text = "Hb>10g/dL"
-        Me.rdoHB.UseVisualStyleBackColor = True
+        Me.lblRegno.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblRegno.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblRegno.ForeColor = System.Drawing.Color.White
+        Me.lblRegno.Location = New System.Drawing.Point(313, 19)
+        Me.lblRegno.Name = "lblRegno"
+        Me.lblRegno.Size = New System.Drawing.Size(80, 21)
+        Me.lblRegno.TabIndex = 219
+        Me.lblRegno.Text = "등록번호"
+        Me.lblRegno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dtpDateE
         '
@@ -236,8 +196,31 @@ Partial Class FGB27
         Me.dtpDateS.TabIndex = 13
         Me.dtpDateS.Value = New Date(2003, 4, 28, 13, 20, 23, 312)
         '
+        'pnlBody
+        '
+        Me.pnlBody.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlBody.Controls.Add(Me.spdList)
+        Me.pnlBody.Location = New System.Drawing.Point(3, 56)
+        Me.pnlBody.Name = "pnlBody"
+        Me.pnlBody.Size = New System.Drawing.Size(1189, 510)
+        Me.pnlBody.TabIndex = 138
+        '
+        'spdList
+        '
+        'Me.spdList.DataSource = Nothing
+        Me.spdList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.spdList.Location = New System.Drawing.Point(0, 0)
+        Me.spdList.Name = "spdList"
+        Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.spdList.Size = New System.Drawing.Size(1189, 510)
+        Me.spdList.TabIndex = 0
+        '
         'pnlBottom
         '
+        Me.pnlBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.pnlBottom.Controls.Add(Me.btnDel)
         Me.pnlBottom.Controls.Add(Me.btnUpd)
@@ -246,11 +229,10 @@ Partial Class FGB27
         Me.pnlBottom.Controls.Add(Me.btnExcel)
         Me.pnlBottom.Controls.Add(Me.btnClear)
         Me.pnlBottom.Controls.Add(Me.btnExit)
-        Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlBottom.Location = New System.Drawing.Point(0, 551)
+        Me.pnlBottom.Location = New System.Drawing.Point(3, 570)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(1268, 34)
-        Me.pnlBottom.TabIndex = 136
+        Me.pnlBottom.Size = New System.Drawing.Size(1189, 36)
+        Me.pnlBottom.TabIndex = 137
         '
         'btnDel
         '
@@ -282,13 +264,13 @@ Partial Class FGB27
         Me.btnDel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnDel.ImageIndex = 0
         Me.btnDel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnDel.Location = New System.Drawing.Point(963, 4)
+        Me.btnDel.Location = New System.Drawing.Point(884, 5)
         Me.btnDel.Name = "btnDel"
         Me.btnDel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnDel.SideImage = Nothing
         Me.btnDel.SideImageSize = New System.Drawing.Size(48, 48)
         Me.btnDel.Size = New System.Drawing.Size(100, 25)
-        Me.btnDel.TabIndex = 202
+        Me.btnDel.TabIndex = 203
         Me.btnDel.Text = "삭 제"
         Me.btnDel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnDel.TextMargin = New System.Windows.Forms.Padding(0)
@@ -323,7 +305,7 @@ Partial Class FGB27
         Me.btnUpd.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnUpd.ImageIndex = 0
         Me.btnUpd.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnUpd.Location = New System.Drawing.Point(862, 4)
+        Me.btnUpd.Location = New System.Drawing.Point(783, 5)
         Me.btnUpd.Name = "btnUpd"
         Me.btnUpd.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnUpd.SideImage = Nothing
@@ -364,7 +346,7 @@ Partial Class FGB27
         Me.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnPrint.ImageIndex = 0
         Me.btnPrint.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnPrint.Location = New System.Drawing.Point(448, 5)
+        Me.btnPrint.Location = New System.Drawing.Point(299, 7)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnPrint.SideImage = Nothing
@@ -406,7 +388,7 @@ Partial Class FGB27
         Me.btnQuery.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnQuery.ImageIndex = 0
         Me.btnQuery.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnQuery.Location = New System.Drawing.Point(761, 4)
+        Me.btnQuery.Location = New System.Drawing.Point(682, 5)
         Me.btnQuery.Name = "btnQuery"
         Me.btnQuery.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnQuery.SideImage = Nothing
@@ -447,7 +429,7 @@ Partial Class FGB27
         Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExcel.ImageIndex = 0
         Me.btnExcel.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExcel.Location = New System.Drawing.Point(549, 5)
+        Me.btnExcel.Location = New System.Drawing.Point(400, 7)
         Me.btnExcel.Name = "btnExcel"
         Me.btnExcel.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExcel.SideImage = Nothing
@@ -489,7 +471,7 @@ Partial Class FGB27
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnClear.ImageIndex = 0
         Me.btnClear.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnClear.Location = New System.Drawing.Point(1064, 4)
+        Me.btnClear.Location = New System.Drawing.Point(985, 5)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnClear.SideImage = Nothing
@@ -530,7 +512,7 @@ Partial Class FGB27
         Me.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnExit.ImageIndex = 0
         Me.btnExit.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnExit.Location = New System.Drawing.Point(1165, 4)
+        Me.btnExit.Location = New System.Drawing.Point(1086, 5)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnExit.SideImage = Nothing
@@ -541,30 +523,26 @@ Partial Class FGB27
         Me.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnExit.TextMargin = New System.Windows.Forms.Padding(0)
         '
-        'FGB27
+        'FGB28
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1268, 585)
+        Me.ClientSize = New System.Drawing.Size(1194, 608)
         Me.Controls.Add(Me.pnlBottom)
+        Me.Controls.Add(Me.pnlBody)
         Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.pnlSpdList)
-        Me.Name = "FGB27"
-        Me.Text = " 적혈구제제 수혈관리 조회"
-        CType(Me.spdTnsTranList, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlSpdList.ResumeLayout(False)
+        Me.Name = "FGB28"
+        Me.Text = "혈액 TAT 병실/이형수혈 입력(베타)"
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.pnlBody.ResumeLayout(False)
+        CType(Me.spdList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlBottom.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents spdTnsTranList As AxFPSpreadADO.AxfpSpread
-    Friend WithEvents pnlSpdList As Windows.Forms.Panel
     Friend WithEvents GroupBox6 As Windows.Forms.GroupBox
     Friend WithEvents dtpDateE As Windows.Forms.DateTimePicker
     Friend WithEvents lblWk As Windows.Forms.Label
@@ -572,17 +550,18 @@ Partial Class FGB27
     Friend WithEvents lblDate As Windows.Forms.Label
     Friend WithEvents lblTitleDt As Windows.Forms.Label
     Friend WithEvents dtpDateS As Windows.Forms.DateTimePicker
+    Friend WithEvents pnlBody As Windows.Forms.Panel
     Friend WithEvents pnlBottom As Windows.Forms.Panel
+    Friend WithEvents btnUpd As CButtonLib.CButton
+    Friend WithEvents btnPrint As CButtonLib.CButton
     Friend WithEvents btnQuery As CButtonLib.CButton
     Friend WithEvents btnExcel As CButtonLib.CButton
     Friend WithEvents btnClear As CButtonLib.CButton
     Friend WithEvents btnExit As CButtonLib.CButton
-    Friend WithEvents btnPrint As CButtonLib.CButton
-    Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
-    Friend WithEvents rdoExc As Windows.Forms.RadioButton
-    Friend WithEvents rdoALL As Windows.Forms.RadioButton
-    Friend WithEvents rdoCBC As Windows.Forms.RadioButton
-    Friend WithEvents rdoHB As Windows.Forms.RadioButton
-    Friend WithEvents btnUpd As CButtonLib.CButton
+    Friend WithEvents lblRegno As Windows.Forms.Label
+    Friend WithEvents txtTnsjubsuno As Windows.Forms.TextBox
+    Friend WithEvents lblTnsjubsuno As Windows.Forms.Label
+    Friend WithEvents txtRegno As Windows.Forms.TextBox
+    Public WithEvents spdList As AxFPSpreadADO.AxfpSpread
     Friend WithEvents btnDel As CButtonLib.CButton
 End Class

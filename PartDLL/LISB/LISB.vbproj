@@ -349,6 +349,18 @@
     <Compile Include="FGB27.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FGB28.Designer.vb">
+      <DependentUpon>FGB28.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGB28.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGB29.Designer.vb">
+      <DependentUpon>FGB29.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FGB29.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -498,6 +510,12 @@
     <EmbeddedResource Include="FGB27.resx">
       <DependentUpon>FGB27.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FGB28.resx">
+      <DependentUpon>FGB28.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGB29.resx">
+      <DependentUpon>FGB29.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -520,23 +538,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxFPSpreadADO">
-      <Guid>{F856EC8B-F03C-4515-BDC6-64CBD617566A}</Guid>
-      <VersionMajor>7</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="FPSpreadADO">
-      <Guid>{F856EC8B-F03C-4515-BDC6-64CBD617566A}</Guid>
-      <VersionMajor>7</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>

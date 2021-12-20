@@ -5260,6 +5260,165 @@ Namespace APP_BT
         End Function
         '--------------------------------------------
 
+        '20211203 jhs 혈액tat 입력 
+        ' 혈액tat 입력 데이터 가져오기
+        Public Shared Function fnGet_BloodTat_Input(ByVal rsStDt As String, ByVal rsEnDt As String, ByVal rsRegno As String, ByVal rsTnsjubsuno As String) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mg(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += "selecT b4.tnsjubsuno, fn_ack_date_str(b4.jubsudt, 'yyyy-MM-dd hh24:mi:ss') jubsudt, b4.regno ,b4.patnm , b4.sex || '/' || b4.age sexage " + vbCrLf
+                sSql += "     , fn_ack_get_dr_name(b4.doctorcd) drnm " + vbCrLf
+                sSql += "     , FN_ACK_GET_ROOM_NAME(b4.wardno,  b4.roomno) roomno " + vbCrLf
+                sSql += "     , fn_ack_get_dept_name(b4.iogbn, b4.deptcd)  deptnm " + vbCrLf
+                sSql += "     ,  CASE WHEN b4.tnsgbn = '1' THEN 'P' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '2' THEN 'T' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '3' THEN 'E' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '4' THEN 'I' end   tnsgbn " + vbCrLf
+                sSql += "      , b42.comcd , f12.comnmd " + vbCrLf
+                sSql += "      , nvl(bc2.gwa, FN_ACK_GET_ROOM_NAME(b4.wardno, b4.roomno)) seletedRoomno " + vbCrLf
+                sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn" + vbCrLf '추후 이형수혈 
+                sSql += "      , b42.befoutqnt , b42.reqqnt , b42.outqnt , b42.rtnqnt , b42.abnqnt , r7.abo  ||  r7.rh aborh " + vbCrLf
+                sSql += "   from lb040m b4 " + vbCrLf
+                sSql += "  inner join lb042m b42 " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = b42.tnsjubsuno " + vbCrLf
+                sSql += "  inner join lf120m f12 " + vbCrLf
+                sSql += "     on b42.comcd = f12.comcd  " + vbCrLf
+                sSql += "  inner join lr070m r7  " + vbCrLf
+                sSql += "     on b4.regno = r7.regno  " + vbCrLf
+                sSql += "   left outer join lbc20m bc2  " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = bc2.tnsjubsuno " + vbCrLf
+                sSql += "  where b4.jubsudt BETWEEN :datas AND :datee || '235959'  " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                If rsRegno <> "" Then
+                    sSql += "       AND b4.regno      = :regno" + vbCrLf
+                    alParm.Add(New OracleParameter("regno", rsRegno))
+                End If
+
+                If rsTnsjubsuno <> "" Then
+                    sSql += "       AND b4.tnsjubsuno = :tnsjubsuno" + vbCrLf
+                    alParm.Add(New OracleParameter("tnsjubsuno", rsTnsjubsuno))
+                End If
+
+                sSql += " ORDER BY tnsjubsuno        " + vbCrLf
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '--------------------------------------------
+
+        '20211203 jhs 혈액tat 입력 
+        ' 혈액tat 입력 병동/병실 과 가져오기
+        Public Shared Function fnGet_BloodTat_Input_Gwa(Optional ByVal rsGwa As String = "") As DataTable
+            Dim sFn As String = "Public Function fnGet_CollTK_Cancel_ContInfo(String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += "SELECT clsgbn, clsval"
+                sSql += "  FROM lf000m"
+                sSql += " WHERE clsgbn ='BDT'"
+                If rsGwa <> "" Then
+                    sSql += " and clsval  = :gwa"
+                    alParm.Add(New OracleParameter("gwa", rsGwa))
+                End If
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        Public Shared Function fnGet_BloodTat_Input_tns(ByVal rsTnsjubsuno As String, ByVal rsRegno As String) As DataTable
+            Dim sFn As String = "Public Function fnGet_CollTK_Cancel_ContInfo(String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += " "
+                sSql += " Select tnsjubsuno from lbc20m    " + vbCrLf
+                sSql += "  where tnsjubsuno = :tnsjubsuno  " + vbCrLf
+                sSql += "    And regno      = :regno       " + vbCrLf
+
+                alParm.Add(New OracleParameter("tnsjubsuno", OracleDbType.Varchar2, rsTnsjubsuno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTnsjubsuno))
+                alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '--------------------------------------------
+
+        '20211203 jhs 혈액tat 조회
+        ' 혈액tat 입력 데이터 가져오기
+        Public Shared Function fnGet_BloodTat(ByVal rsStDt As String, ByVal rsEnDt As String, ByVal rsRegno As String, ByVal rsTnsjubsuno As String) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mg(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += "selecT b4.tnsjubsuno, fn_ack_date_str(b4.jubsudt, 'yyyy-MM-dd hh24:mi:ss') jubsudt, b4.regno ,b4.patnm , b4.sex || '/' || b4.age sexage " + vbCrLf
+                sSql += "     , fn_ack_get_dr_name(b4.doctorcd) drnm " + vbCrLf
+                'sSql += "     , FN_ACK_GET_ROOM_NAME(b4.wardno,  b4.roomno) roomno " + vbCrLf
+                sSql += "     , fn_ack_get_dept_name(b4.iogbn, b4.deptcd)  deptnm " + vbCrLf
+                sSql += "     ,  CASE WHEN b4.tnsgbn = '1' THEN 'P' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '2' THEN 'T' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '3' THEN 'E' " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '4' THEN 'I' end   tnsgbn " + vbCrLf
+                sSql += "      , b42.comcd , f12.comnmd " + vbCrLf
+                sSql += "      , nvl(bc2.gwa, FN_ACK_GET_ROOM_NAME(b4.wardno, b4.roomno)) roomno " + vbCrLf
+                sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn" + vbCrLf '추후 이형수혈 
+                sSql += "      , b42.befoutqnt , b42.reqqnt , b42.outqnt , b42.rtnqnt , b42.abnqnt , r7.abo  ||  r7.rh aborh " + vbCrLf
+                sSql += "   from lb040m b4 " + vbCrLf
+                sSql += "  inner join lb042m b42 " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = b42.tnsjubsuno " + vbCrLf
+                sSql += "  inner join lf120m f12 " + vbCrLf
+                sSql += "     on b42.comcd = f12.comcd  " + vbCrLf
+                sSql += "  inner join lr070m r7  " + vbCrLf
+                sSql += "     on b4.regno = r7.regno  " + vbCrLf
+                sSql += "   left outer join lbc20m bc2  " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = bc2.tnsjubsuno " + vbCrLf
+                sSql += "  where b4.jubsudt BETWEEN :datas AND :datee || '235959'  " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                If rsRegno <> "" Then
+                    sSql += "       AND b4.regno      = :regno" + vbCrLf
+                    alParm.Add(New OracleParameter("regno", rsRegno))
+                End If
+
+                If rsTnsjubsuno <> "" Then
+                    sSql += "       AND b4.tnsjubsuno = :tnsjubsuno" + vbCrLf
+                    alParm.Add(New OracleParameter("tnsjubsuno", rsTnsjubsuno))
+                End If
+
+                sSql += " ORDER BY tnsjubsuno        " + vbCrLf
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '--------------------------------------------
 
 
         Public Shared Function fn_PreOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String, ByVal rsGbn As String) As DataTable
@@ -10606,6 +10765,155 @@ Namespace APP_BT
 
         End Function
         '------------------------------------
+        '202111125 jhs 적혈구제제 수정
+        '혈액 TAT 병실/이형수혈 입력 
+        Public Function fn_BldTat_Input_Upd(ByVal rsBldTatInput As BldTatInput) As Boolean
+            Dim sFn As String = "Public Shared Function fn_BldTat_Input_Upd(ByVal rsTnsNo As String) As Boolean"
+            Dim DbCmd As New OracleCommand
+            Dim lb_rtnValue As Boolean = False
+            Dim sSql As String = ""
+            Dim intRet As Integer
+
+            Dim sTnsjubsuno As String = ""
+            Dim sRegno As String = ""
+            Dim sGwa As String = ""
+            Dim sVarYN As String = ""
+
+            With DbCmd
+                .Connection = m_DbCn
+                .Transaction = m_DbTrans
+            End With
+
+            Try
+                With rsBldTatInput
+                    sTnsjubsuno = .TNSJUBSUNO
+                    sRegno = .REGNO
+                    sGwa = .GWA
+                    sVarYN = .VARYN
+                End With
+
+                sSql = ""
+                sSql += "delete lbc20m where tnsjubsuno = :tnsjubsuno and regno = :regno " + vbCrLf
+
+                DbCmd.CommandType = CommandType.Text
+                DbCmd.CommandText = sSql
+
+                DbCmd.Parameters.Clear()
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+
+                intRet = DbCmd.ExecuteNonQuery()
+
+                sSql = ""
+                sSql += "insert into lbc20m (tnsjubsuno, regno, regdt, regid, gwa, varyn)" + vbCrLf
+                sSql += "            values (:tnsjubsuno,:regno, fn_ack_sysdate(), :regid, :gwa, :varyn) " + vbCrLf
+
+                DbCmd.CommandType = CommandType.Text
+                DbCmd.CommandText = sSql
+
+                DbCmd.Parameters.Clear()
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                DbCmd.Parameters.Add("gwa", OracleDbType.Varchar2).Value = sGwa
+                DbCmd.Parameters.Add("varyn", OracleDbType.Varchar2).Value = sVarYN
+
+                intRet = DbCmd.ExecuteNonQuery()
+
+                If intRet = 0 Then
+                    m_DbTrans.Rollback()
+                    Return False
+                End If
+
+                m_DbTrans.Commit()
+
+                lb_rtnValue = True
+
+
+                Return lb_rtnValue
+
+            Catch ex As Exception
+                m_DbTrans.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+
+                m_DbTrans.Dispose() : m_DbTrans = Nothing
+                If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
+                m_DbCn.Dispose() : m_DbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+
+            End Try
+
+        End Function
+        '혈액 TAT 병실/이형수혈 입력 
+        Public Function fn_BldTat_Input_Del(ByVal rsBldTatInput As BldTatInput) As Boolean
+            Dim sFn As String = "Public Shared Function fn_BldTat_Input_Del(ByVal rsTnsNo As String) As Boolean"
+            Dim dt As DataTable
+            Dim alParm As New ArrayList
+            Dim DbCmd As New OracleCommand
+            Dim lb_rtnValue As Boolean = False
+            Dim sSql As String = ""
+            Dim intRet As Integer
+
+            Dim sTnsjubsuno As String = ""
+            Dim sRegno As String = ""
+            Dim sGwa As String = ""
+            Dim sVarYN As String = ""
+
+            With DbCmd
+                .Connection = m_DbCn
+                .Transaction = m_DbTrans
+            End With
+
+            Try
+                With rsBldTatInput
+                    sTnsjubsuno = .TNSJUBSUNO
+                    sRegno = .REGNO
+                    sGwa = .GWA
+                    sVarYN = .VARYN
+                End With
+
+                sSql = ""
+                sSql += "delete lbc20m " + vbCrLf
+                sSql += " where tnsjubsuno = :tnsjubsuno " + vbCrLf
+                sSql += "   and regno      = :regno " + vbCrLf
+
+                DbCmd.CommandType = CommandType.Text
+                DbCmd.CommandText = sSql
+
+                DbCmd.Parameters.Clear()
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+
+                intRet = DbCmd.ExecuteNonQuery()
+
+                If intRet = 0 Then
+                    m_DbTrans.Rollback()
+                    Return False
+                End If
+
+                m_DbTrans.Commit()
+
+                lb_rtnValue = True
+
+                Return lb_rtnValue
+
+            Catch ex As Exception
+                m_DbTrans.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+
+                m_DbTrans.Dispose() : m_DbTrans = Nothing
+                If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
+                m_DbCn.Dispose() : m_DbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+
+            End Try
+
+        End Function
+        '------------------------------------
 
         Private Function fnGet_Sysdate() As String
             Dim sFn As String = "Private Function fnGet_Sysdate() As String"
@@ -11525,6 +11833,12 @@ Namespace APP_BT
         Public CMCALLER As String = ""
     End Class
 
+    Public Class BldTatInput
+        Public TNSJUBSUNO As String = ""
+        Public REGNO As String = ""
+        Public GWA As String = ""
+        Public VARYN As String = ""
+    End Class
 #End Region
 
 

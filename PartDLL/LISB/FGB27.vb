@@ -134,7 +134,6 @@ Public Class FGB27
     End Function
 
     Private Sub btnUpd_Click(sender As Object, e As EventArgs) Handles btnUpd.Click
-        Dim arlUpd As New ArrayList
         Dim chkBool As Boolean = True
         Dim msgContent As String = "Y나 N이 아닙니다. Y나 N을 입력해주세요."
         Dim chkSeq As Integer = 0
@@ -243,6 +242,14 @@ Public Class FGB27
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
+    End Sub
+
+    Private Sub FGB27_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Windows.Forms.Keys.F4 Then
+            btnClear_Click(Nothing, Nothing)
+        ElseIf e.KeyCode = Windows.Forms.Keys.Escape Then
+            btnExit_Click(Nothing, Nothing)
+        End If
     End Sub
 End Class
 

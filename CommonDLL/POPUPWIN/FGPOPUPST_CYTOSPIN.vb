@@ -595,11 +595,11 @@ Public Class DA_ST_CYTOSPIN
             Dim sSql As String = ""
 
             sSql = ""
-            sSql += "SELECT CLSVAL"
-            sSql += "  FROM LF000M "
-            sSql += " WHERE CLSGBN = 'NCOV' "
-            sSql += "   AND CLSCD LIKE :clscd || '%' " 'C = 코멘트 I = 개요 S = 검체
-            sSql += "   AND CLSDESC LIKE :testcd || '%'"
+            sSql += " SELECT CLSVAL                       "
+            sSql += "   FROM LF000M                       "
+            sSql += "  WHERE CLSGBN = 'NCOV'              "
+            sSql += "    AND CLSCD LIKE :clscd || '%'     " 'C = 코멘트 I = 개요 S = 검체
+            sSql += "    AND CLSDESC LIKE :testcd || '%'  "
 
             dbCmd.Connection = dbCn
             dbCmd.CommandType = CommandType.Text

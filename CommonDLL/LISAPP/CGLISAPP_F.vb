@@ -22411,7 +22411,13 @@ Public Class APP_F_COMCD
             sSql += "       fn_ack_date_str(usdt,  'yyyy-mm-dd hh24:mi:ss') usdt, fn_ack_date_str(uedt, 'yyyy-mm-dd hh24:mi:ss') uedt," + vbCrLf
             sSql += "       fn_ack_date_str(regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, regid, '[' || comgbn || ']' COMGBN_01," + vbCrLf
             sSql += "       '[' || gordcd || ']' gordcd_01, bagordyn, fn_ack_get_usr_name(regid) regnm," + vbCrLf
-            sSql += "       comliscd" + vbCrLf
+            sSql += "       comliscd, tatyn," + vbCrLf
+            '20211209 jhs tat 내용 설정 
+            sSql += "       INMLTMIBEFOUT , ':M' INMLTMIBEFOUT_01  , IEMTMIBEFOUT , ':M' IEMTMIBEFOUT_01 , IEMTMIVARBEFOUT , ':M' IEMTMIVARBEFOUT_01 , " + vbCrLf
+            sSql += "       INMLTMIOUT    , ':M' INMLTMIOUT_01     , IEMTMIOUT    , ':M' IEMTMIOUT_01    , IEMTMIVAROUT    , ':M' IEMTMIVAROUT_01    , " + vbCrLf
+            sSql += "       ONMLTMIBEFOUT , ':M' ONMLTMIBEFOUT_01  , OEMTMIBEFOUT , ':M' OEMTMIBEFOUT_01 , OEMTMIVARBEFOUT , ':M' OEMTMIVARBEFOUT_01 , " + vbCrLf
+            sSql += "       ONMLTMIOUT    , ':M' ONMLTMIOUT_01     , OEMTMIOUT    , ':M' OEMTMIOUT_01    , OEMTMIVAROUT    , ':M' OEMTMIVAROUT_01      " + vbCrLf
+            '-------------------------------------
             sSql += "  FROM lf120m" + vbCrLf
             sSql += " WHERE comcd = :comcd" + vbCrLf
             sSql += "   AND spccd = :spccd" + vbCrLf
