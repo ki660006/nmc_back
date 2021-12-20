@@ -58,5 +58,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.337 --> 2021/11/22 : 적혈구 제제 관리 화면 추가
 'Version 3.1.10.338 --> 2021/11/29 : 적혈구제제 관리 화면 통화내용 코드화, 동의서, 의뢰서 종류 텍스트 박스 추가
 'Version 3.1.10.339 --> 2021/11/29 : 적혈구제제 관리 화면 저장 오류 수정
+'Version 3.1.10.340 --> 2021/12/20 : 검사의뢰지침서 분야가 모두 나오지 않는 문제 해결 
 
-<Assembly: AssemblyVersion("3.1.10.339")>
+<Assembly: AssemblyVersion("3.1.10.340")>

@@ -913,7 +913,8 @@ Public Class FGCDHELP_TEST_HELPER
     Private Sub sbDisplay_part()
 
         Try
-            Dim dt As DataTable = DA_CD_HELPER.fnGet_Part_List(, IIf(mbBloodBankYN, "3", "0").ToString)
+            'Dim dt As DataTable = DA_CD_HELPER.fnGet_Part_List(, IIf(mbBloodBankYN, "3", "0").ToString)
+            Dim dt As DataTable = DA_CD_HELPER.fnGet_Part_List()
 
             Me.cboPartSlip.Items.Clear()
             For ix As Integer = 0 To dt.Rows.Count - 1
@@ -932,7 +933,8 @@ Public Class FGCDHELP_TEST_HELPER
         Try
             Dim time As String = DateTime.Now.ToString("yyyy-MM-dd-HH24-mm-ss")
 
-            Dim dt As DataTable = DA_CD_HELPER.fnGet_Slip_List(time.Replace("-", ""), False, mbBloodBankYN)
+            'Dim dt As DataTable = DA_CD_HELPER.fnGet_Slip_List(time.Replace("-", ""), False, mbBloodBankYN)
+            Dim dt As DataTable = DA_CD_HELPER.fnGet_Slip_List(time.Replace("-", ""))
 
             Me.cboPartSlip.Items.Clear()
             For ix As Integer = 0 To dt.Rows.Count - 1
@@ -1211,11 +1213,7 @@ Public Class DA_CD_HELPER
     End Function
 
     ' 검사분야 조회
-    Public Shared Function fnGet_Slip_List(Optional ByVal rsUsDt As String = "", Optional ByVal rbAll As Boolean = True, _
-                                           Optional ByVal rbBloodBank As Boolean = False, _
-                                           Optional ByVal rbMicroBioYn As Boolean = False, _
-                                           Optional ByVal rbGeneralVerifyYn As Boolean = False, _
-                                           Optional ByVal rbCtTest As Boolean = False) As DataTable
+    Public Shared Function fnGet_Slip_List(Optional ByVal rsUsDt As String = "", Optional ByVal rbAll As Boolean = True) As DataTable
         Dim sFn As String = "Function fnGet_Slip_List() As DataTable"
         Try
             Dim sSql As String = ""
@@ -1224,60 +1222,23 @@ Public Class DA_CD_HELPER
             rsUsDt = rsUsDt.Replace("-", "").Replace(":", "").Replace(" ", "")
             If rsUsDt.Length = 8 Then rsUsDt += "000000"
 
-            sSql += "SELECT DISTINCT"
-            sSql += "       partcd || slipcd slipcd, slipnmd, dispseq"
-            sSql += "  FROM lf021m"
+            sSql += "SELECT DISTINCT" + vbCrLf
+            sSql += "       partcd || slipcd slipcd, slipnmd, dispseq" + vbCrLf
+            sSql += "  FROM lf021m" + vbCrLf
 
             If rsUsDt = "" Then
-                sSql += " WHERE usdt <= fn_ack_sysdate"
-                sSql += "   AND uedt >  fn_ack_sysdate"
+                sSql += " WHERE usdt <= fn_ack_sysdate" + vbCrLf
+                sSql += "   AND uedt >  fn_ack_sysdate" + vbCrLf
             Else
-                sSql += " WHERE usdt <= :usdt"
-                sSql += "   AND uedt >  :usdt"
+                sSql += " WHERE usdt <= :usdt" + vbCrLf
+                sSql += "   AND uedt >  :usdt" + vbCrLf
 
                 alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
                 alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
             End If
 
-            If rbAll And rbBloodBank Then
-                sSql += "   AND partcd IN (SELECT partcd FROM lf020m WHERE partgbn IN ('0', '1', '3'))"
-            ElseIf rbAll = False And rbBloodBank = False Then
-                sSql += "   AND partcd IN (SELECT partcd FROM lf020m WHERE partgbn = '0')"
-            ElseIf rbBloodBank Then
-                sSql += "   AND partcd IN (SELECT partcd FROM lf020m WHERE partgbn = '3')"
-            ElseIf rbMicroBioYn Then
-                sSql += "   AND partcd IN (SELECT f6.partcd FROM lf060m f6, lf010m f1"
-                sSql += "                   WHERE f6.bcclscd  = f1.bcclscd"
-                sSql += "                     AND f1.bcclsgbn = '2'"
-                If rsUsDt = "" Then
-                    sSql += "                     AND f6.usdt <= fn_ack_sysdate"
-                    sSql += "                     AND f6.uedt >  fn_ack_sysdate"
-                    sSql += "                     AND f1.usdt <= fn_ack_sysdate"
-                    sSql += "                     AND f1.uedt >  fn_ack_sysdate"
-                Else
-                    sSql += "                     AND f6.usdt <= :usdt"
-                    sSql += "                     AND f6.uedt >  :usdt"
-                    sSql += "                     AND f1.usdt <= :usdt"
-                    sSql += "                     AND f1.uedt >  :usdt"
-
-                    alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
-                    alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
-                    alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
-                    alParm.Add(New OracleParameter("usdt", OracleDbType.Varchar2, rsUsDt.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsUsDt))
-                End If
-
-                sSql += "                 )"
-            ElseIf rbGeneralVerifyYn Then
-                sSql += "   AND partcd IN (SELECT partcd FROM lf020m  WHERE partgbn = '1')"
-            End If
-
-            If rbCtTest Then
-                sSql += "   AND (partcd, slipcd) IN (SELECT partcd, slipcd FROM lf060m  WHERE NVL(ctgbn, '0') = '1')"
-            End If
-
-            'sSql += "   AND partcd <> 'Z'"
-
-            sSql += " ORDER BY dispseq, slipcd"
+            sSql += "   AND partcd IN (SELECT partcd FROM lf020m WHERE partgbn IN ('0', '1', '2', '3'))" + vbCrLf
+            sSql += " ORDER BY dispseq, slipcd" + vbCrLf
 
             DbCommand()
             Return DbExecuteQuery(sSql, alParm)
