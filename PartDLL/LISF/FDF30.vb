@@ -28,6 +28,46 @@ Public Class FDF30
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtBldCd2 As System.Windows.Forms.TextBox
     Friend WithEvents lblBldCd2 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lblFErRptMi As Label
+    Friend WithEvents lblPErRptMi As Label
+    Friend WithEvents cboIEMTMIOUT As ComboBox
+    Friend WithEvents txtIEMTMIOUT As TextBox
+    Friend WithEvents cboIEMTMIBEFOUT As ComboBox
+    Friend WithEvents txtIEMTMIBEFOUT As TextBox
+    Friend WithEvents lblFRptMi As Label
+    Friend WithEvents lblPRptMi As Label
+    Friend WithEvents cboINMLTMIOUT As ComboBox
+    Friend WithEvents txtINMLTMIOUT As TextBox
+    Friend WithEvents cboINMLTMIBEFOUT As ComboBox
+    Friend WithEvents chkTatYN As CheckBox
+    Friend WithEvents txtINMLTMIBEFOUT As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents cboOEMTMIVAROUT As ComboBox
+    Friend WithEvents txtOEMTMIVAROUT As TextBox
+    Friend WithEvents cboOEMTMIVARBEFOUT As ComboBox
+    Friend WithEvents txtOEMTMIVARBEFOUT As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents cboOEMTMIOUT As ComboBox
+    Friend WithEvents txtOEMTMIOUT As TextBox
+    Friend WithEvents cboOEMTMIBEFOUT As ComboBox
+    Friend WithEvents txtOEMTMIBEFOUT As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cboONMLTMIOUT As ComboBox
+    Friend WithEvents txtONMLTMIOUT As TextBox
+    Friend WithEvents cboONMLTMIBEFOUT As ComboBox
+    Friend WithEvents txtONMLTMIBEFOUT As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents cboIEMTMIVAROUT As ComboBox
+    Friend WithEvents txtIEMTMIVAROUT As TextBox
+    Friend WithEvents cboIEMTMIVARBEFOUT As ComboBox
+    Friend WithEvents txtIEMTMIVARBEFOUT As TextBox
     Friend WithEvents cboOReqItem As System.Windows.Forms.ComboBox
 
     Private Sub sbEditUseDt_Del()
@@ -232,12 +272,46 @@ Public Class FDF30
                 .SetItemTable("COMLISCD", 37, 1, Me.txtCLisCd.Text)
                 .SetItemTable("REGIP", 38, 1, USER_INFO.LOCALIP)
 
+                ' 20211209 jhs l
+                .SetItemTable("INMLTMIBEFOUT", 39, 1, fn_cboTatCal(Me.cboINMLTMIBEFOUT.SelectedIndex, CInt(IIf(Me.txtINMLTMIBEFOUT.Text.Trim = "", "0", Me.txtINMLTMIBEFOUT.Text))))
+                .SetItemTable("IEMTMIBEFOUT", 40, 1, fn_cboTatCal(Me.cboIEMTMIBEFOUT.SelectedIndex, CInt(IIf(Me.txtIEMTMIBEFOUT.Text.Trim = "", "0", Me.txtIEMTMIBEFOUT.Text))))
+                .SetItemTable("IEMTMIVARBEFOUT", 41, 1, fn_cboTatCal(Me.cboIEMTMIVARBEFOUT.SelectedIndex, CInt(IIf(Me.txtIEMTMIVARBEFOUT.Text.Trim = "", "0", Me.txtIEMTMIVARBEFOUT.Text))))
+                .SetItemTable("INMLTMIOUT", 42, 1, fn_cboTatCal(Me.cboINMLTMIOUT.SelectedIndex, CInt(IIf(Me.txtINMLTMIOUT.Text.Trim = "", "0", Me.txtINMLTMIOUT.Text))))
+                .SetItemTable("IEMTMIOUT", 43, 1, fn_cboTatCal(Me.cboIEMTMIOUT.SelectedIndex, CInt(IIf(Me.txtIEMTMIOUT.Text.Trim = "", "0", Me.txtIEMTMIOUT.Text))))
+                .SetItemTable("IEMTMIVAROUT", 44, 1, fn_cboTatCal(Me.cboIEMTMIVAROUT.SelectedIndex, CInt(IIf(Me.txtIEMTMIVAROUT.Text.Trim = "", "0", Me.txtIEMTMIVAROUT.Text))))
+                .SetItemTable("ONMLTMIBEFOUT", 45, 1, fn_cboTatCal(Me.cboONMLTMIBEFOUT.SelectedIndex, CInt(IIf(Me.txtONMLTMIBEFOUT.Text.Trim = "", "0", Me.txtONMLTMIBEFOUT.Text))))
+                .SetItemTable("OEMTMIBEFOUT", 46, 1, fn_cboTatCal(Me.cboOEMTMIBEFOUT.SelectedIndex, CInt(IIf(Me.txtOEMTMIBEFOUT.Text.Trim = "", "0", Me.txtOEMTMIBEFOUT.Text))))
+                .SetItemTable("OEMTMIVARBEFOUT", 47, 1, fn_cboTatCal(Me.cboOEMTMIVARBEFOUT.SelectedIndex, CInt(IIf(Me.txtOEMTMIVARBEFOUT.Text.Trim = "", "0", Me.txtOEMTMIVARBEFOUT.Text))))
+                .SetItemTable("ONMLTMIOUT", 48, 1, fn_cboTatCal(Me.cboONMLTMIOUT.SelectedIndex, CInt(IIf(Me.txtONMLTMIOUT.Text.Trim = "", "0", Me.txtONMLTMIOUT.Text))))
+                .SetItemTable("OEMTMIOUT", 49, 1, fn_cboTatCal(Me.cboOEMTMIOUT.SelectedIndex, CInt(IIf(Me.txtOEMTMIOUT.Text.Trim = "", "0", Me.txtOEMTMIOUT.Text))))
+                .SetItemTable("OEMTMIVAROUT", 50, 1, fn_cboTatCal(Me.cboOEMTMIVAROUT.SelectedIndex, CInt(IIf(Me.txtOEMTMIVAROUT.Text.Trim = "", "0", Me.txtOEMTMIVAROUT.Text))))
+                '--------------------------------
             End With
 
             fnCollectItemTable_120 = it120
         Catch ex As Exception
             Fn.log(mcFile + sFn, Err)
             MsgBox(mcFile + sFn + vbCrLf + ex.Message)
+        End Try
+    End Function
+    Public Function fn_cboTatCal(ByVal rsIndex As Integer, ByVal rsTxtNum As Integer) As String
+        Dim sFn As String = "Private Function fn_cboTatCal(ByVal asRegDT As String) As String"
+        Dim rsReVal As String = ""
+        Try
+            Select Case rsIndex
+                Case -1, 0
+                    rsReVal = CType(CInt(rsTxtNum), String)
+                Case 1
+                    rsReVal = CType(CInt(rsTxtNum) * 60, String)
+                Case 2
+                    rsReVal = CType(CInt(rsTxtNum) * 60 * 24, String)
+            End Select
+
+            Return rsReVal
+        Catch ex As Exception
+            Fn.log(mcFile + sFn, Err)
+            MsgBox(mcFile + sFn + vbCrLf + ex.Message)
+            Return ""
         End Try
     End Function
 
@@ -248,7 +322,7 @@ Public Class FDF30
             Dim dt As DataTable = mobjDAF.GetRecentComCdInfo(rsComCd, rsSpcCd, rsUsDt)
 
             If dt.Rows.Count > 0 Then
-                Return "시작일시가 " + dt.Rows(0).Item(0).ToString() + "인 동일 성분제제 코드가 존재합니다." + vbCrLf + vbCrLf + _
+                Return "시작일시가 " + dt.Rows(0).Item(0).ToString() + "인 동일 성분제제 코드가 존재합니다." + vbCrLf + vbCrLf +
                        "시작일시를 재조정 하십시요!!"
             Else
                 Return ""
@@ -296,7 +370,7 @@ Public Class FDF30
 
             it120 = fnCollectItemTable_120(sRegDT)
 
-            If mobjDAF.TransComCdInfo(it120, iRegType120, _
+            If mobjDAF.TransComCdInfo(it120, iRegType120,
                                       Me.txtComCd.Text, Ctrl.Get_Code(Me.cboSpcCd), Me.txtUSDay.Text.Replace("-", "") + Format(dtpUSTime.Value, "HHmmss").ToString, USER_INFO.USRID) Then
                 fnReg = True
             Else
@@ -592,7 +666,7 @@ Public Class FDF30
                     actrl.Items.Add(dt.Rows(i).Item("comnmd"))
                 Next
             End With
-            
+
         Catch ex As Exception
             Fn.log(mcFile + sFn, Err)
             MsgBox(mcFile + sFn + vbCrLf + ex.Message)
@@ -615,7 +689,7 @@ Public Class FDF30
                     actrl.Items.Add(dt.Rows(i).Item("FTNM"))
                 Next
             End With
-            
+
         Catch ex As Exception
             Fn.log(mcFile + sFn, Err)
             MsgBox(mcFile + sFn + vbCrLf + ex.Message)
@@ -896,6 +970,8 @@ Public Class FDF30
         Me.lblUSDT = New System.Windows.Forms.Label()
         Me.txtRegID = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtBldCd2 = New System.Windows.Forms.TextBox()
+        Me.lblBldCd2 = New System.Windows.Forms.Label()
         Me.cboOReqItem = New System.Windows.Forms.ComboBox()
         Me.txtCLisCd = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -977,8 +1053,46 @@ Public Class FDF30
         Me.lblUSDayTime = New System.Windows.Forms.Label()
         Me.errpd = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.pnlTop = New System.Windows.Forms.Panel()
-        Me.txtBldCd2 = New System.Windows.Forms.TextBox()
-        Me.lblBldCd2 = New System.Windows.Forms.Label()
+        Me.lblFErRptMi = New System.Windows.Forms.Label()
+        Me.lblPErRptMi = New System.Windows.Forms.Label()
+        Me.cboIEMTMIOUT = New System.Windows.Forms.ComboBox()
+        Me.txtIEMTMIOUT = New System.Windows.Forms.TextBox()
+        Me.cboIEMTMIBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.txtIEMTMIBEFOUT = New System.Windows.Forms.TextBox()
+        Me.lblFRptMi = New System.Windows.Forms.Label()
+        Me.lblPRptMi = New System.Windows.Forms.Label()
+        Me.cboINMLTMIOUT = New System.Windows.Forms.ComboBox()
+        Me.txtINMLTMIOUT = New System.Windows.Forms.TextBox()
+        Me.cboINMLTMIBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.chkTatYN = New System.Windows.Forms.CheckBox()
+        Me.txtINMLTMIBEFOUT = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cboIEMTMIVAROUT = New System.Windows.Forms.ComboBox()
+        Me.txtIEMTMIVAROUT = New System.Windows.Forms.TextBox()
+        Me.cboIEMTMIVARBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.txtIEMTMIVARBEFOUT = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cboOEMTMIVAROUT = New System.Windows.Forms.ComboBox()
+        Me.txtOEMTMIVAROUT = New System.Windows.Forms.TextBox()
+        Me.cboOEMTMIVARBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.txtOEMTMIVARBEFOUT = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cboOEMTMIOUT = New System.Windows.Forms.ComboBox()
+        Me.txtOEMTMIOUT = New System.Windows.Forms.TextBox()
+        Me.cboOEMTMIBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.txtOEMTMIBEFOUT = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cboONMLTMIOUT = New System.Windows.Forms.ComboBox()
+        Me.txtONMLTMIOUT = New System.Windows.Forms.TextBox()
+        Me.cboONMLTMIBEFOUT = New System.Windows.Forms.ComboBox()
+        Me.txtONMLTMIBEFOUT = New System.Windows.Forms.TextBox()
         Me.tclCom.SuspendLayout()
         Me.tbcPage.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -995,7 +1109,7 @@ Public Class FDF30
         Me.tclCom.Location = New System.Drawing.Point(0, 0)
         Me.tclCom.Name = "tclCom"
         Me.tclCom.SelectedIndex = 0
-        Me.tclCom.Size = New System.Drawing.Size(788, 601)
+        Me.tclCom.Size = New System.Drawing.Size(788, 722)
         Me.tclCom.TabIndex = 0
         '
         'tbcPage
@@ -1014,7 +1128,7 @@ Public Class FDF30
         Me.tbcPage.Controls.Add(Me.grpTop)
         Me.tbcPage.Location = New System.Drawing.Point(4, 22)
         Me.tbcPage.Name = "tbcPage"
-        Me.tbcPage.Size = New System.Drawing.Size(780, 575)
+        Me.tbcPage.Size = New System.Drawing.Size(780, 696)
         Me.tbcPage.TabIndex = 0
         Me.tbcPage.Text = "성분제제정보"
         '
@@ -1024,7 +1138,7 @@ Public Class FDF30
         Me.txtRegNm.BackColor = System.Drawing.Color.LightGray
         Me.txtRegNm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegNm.Location = New System.Drawing.Point(705, 545)
+        Me.txtRegNm.Location = New System.Drawing.Point(705, 666)
         Me.txtRegNm.Name = "txtRegNm"
         Me.txtRegNm.ReadOnly = True
         Me.txtRegNm.Size = New System.Drawing.Size(68, 21)
@@ -1038,7 +1152,7 @@ Public Class FDF30
         Me.txtUEDT.BackColor = System.Drawing.Color.LightGray
         Me.txtUEDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUEDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtUEDT.Location = New System.Drawing.Point(317, 544)
+        Me.txtUEDT.Location = New System.Drawing.Point(317, 665)
         Me.txtUEDT.Name = "txtUEDT"
         Me.txtUEDT.ReadOnly = True
         Me.txtUEDT.Size = New System.Drawing.Size(100, 21)
@@ -1052,7 +1166,7 @@ Public Class FDF30
         Me.lblUEDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUEDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUEDT.ForeColor = System.Drawing.Color.Black
-        Me.lblUEDT.Location = New System.Drawing.Point(219, 544)
+        Me.lblUEDT.Location = New System.Drawing.Point(219, 665)
         Me.lblUEDT.Name = "lblUEDT"
         Me.lblUEDT.Size = New System.Drawing.Size(97, 21)
         Me.lblUEDT.TabIndex = 16
@@ -1066,7 +1180,7 @@ Public Class FDF30
         Me.txtRegDT.BackColor = System.Drawing.Color.LightGray
         Me.txtRegDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegDT.Location = New System.Drawing.Point(513, 544)
+        Me.txtRegDT.Location = New System.Drawing.Point(513, 665)
         Me.txtRegDT.Name = "txtRegDT"
         Me.txtRegDT.ReadOnly = True
         Me.txtRegDT.Size = New System.Drawing.Size(100, 21)
@@ -1080,7 +1194,7 @@ Public Class FDF30
         Me.txtUSDT.BackColor = System.Drawing.Color.LightGray
         Me.txtUSDT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUSDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtUSDT.Location = New System.Drawing.Point(109, 544)
+        Me.txtUSDT.Location = New System.Drawing.Point(109, 665)
         Me.txtUSDT.Name = "txtUSDT"
         Me.txtUSDT.ReadOnly = True
         Me.txtUSDT.Size = New System.Drawing.Size(100, 21)
@@ -1094,7 +1208,7 @@ Public Class FDF30
         Me.lblUserNm.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUserNm.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUserNm.ForeColor = System.Drawing.Color.Black
-        Me.lblUserNm.Location = New System.Drawing.Point(619, 545)
+        Me.lblUserNm.Location = New System.Drawing.Point(619, 666)
         Me.lblUserNm.Name = "lblUserNm"
         Me.lblUserNm.Size = New System.Drawing.Size(85, 21)
         Me.lblUserNm.TabIndex = 13
@@ -1107,7 +1221,7 @@ Public Class FDF30
         Me.lblRegDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblRegDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblRegDT.ForeColor = System.Drawing.Color.Black
-        Me.lblRegDT.Location = New System.Drawing.Point(427, 544)
+        Me.lblRegDT.Location = New System.Drawing.Point(427, 665)
         Me.lblRegDT.Name = "lblRegDT"
         Me.lblRegDT.Size = New System.Drawing.Size(85, 21)
         Me.lblRegDT.TabIndex = 12
@@ -1120,7 +1234,7 @@ Public Class FDF30
         Me.lblUSDT.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
         Me.lblUSDT.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.lblUSDT.ForeColor = System.Drawing.Color.Black
-        Me.lblUSDT.Location = New System.Drawing.Point(11, 544)
+        Me.lblUSDT.Location = New System.Drawing.Point(11, 665)
         Me.lblUSDT.Name = "lblUSDT"
         Me.lblUSDT.Size = New System.Drawing.Size(97, 21)
         Me.lblUSDT.TabIndex = 15
@@ -1133,7 +1247,7 @@ Public Class FDF30
         Me.txtRegID.BackColor = System.Drawing.Color.LightGray
         Me.txtRegID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRegID.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.txtRegID.Location = New System.Drawing.Point(705, 545)
+        Me.txtRegID.Location = New System.Drawing.Point(705, 666)
         Me.txtRegID.Name = "txtRegID"
         Me.txtRegID.ReadOnly = True
         Me.txtRegID.Size = New System.Drawing.Size(68, 21)
@@ -1144,8 +1258,48 @@ Public Class FDF30
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.cboOEMTMIVAROUT)
+        Me.GroupBox2.Controls.Add(Me.txtOEMTMIVAROUT)
+        Me.GroupBox2.Controls.Add(Me.cboOEMTMIVARBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.txtOEMTMIVARBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.cboOEMTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.txtOEMTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.cboOEMTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.txtOEMTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.Label12)
+        Me.GroupBox2.Controls.Add(Me.cboONMLTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.txtONMLTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.cboONMLTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.txtONMLTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.cboIEMTMIVAROUT)
+        Me.GroupBox2.Controls.Add(Me.txtIEMTMIVAROUT)
+        Me.GroupBox2.Controls.Add(Me.cboIEMTMIVARBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.txtIEMTMIVARBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.lblFErRptMi)
+        Me.GroupBox2.Controls.Add(Me.lblPErRptMi)
+        Me.GroupBox2.Controls.Add(Me.cboIEMTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.txtIEMTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.cboIEMTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.txtIEMTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.lblFRptMi)
+        Me.GroupBox2.Controls.Add(Me.lblPRptMi)
+        Me.GroupBox2.Controls.Add(Me.cboINMLTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.txtINMLTMIOUT)
+        Me.GroupBox2.Controls.Add(Me.cboINMLTMIBEFOUT)
+        Me.GroupBox2.Controls.Add(Me.chkTatYN)
+        Me.GroupBox2.Controls.Add(Me.txtINMLTMIBEFOUT)
         Me.GroupBox2.Controls.Add(Me.txtBldCd2)
         Me.GroupBox2.Controls.Add(Me.lblBldCd2)
         Me.GroupBox2.Controls.Add(Me.cboOReqItem)
@@ -1219,10 +1373,32 @@ Public Class FDF30
         Me.GroupBox2.Controls.Add(Me.txtComNm)
         Me.GroupBox2.Location = New System.Drawing.Point(7, 92)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(768, 433)
+        Me.GroupBox2.Size = New System.Drawing.Size(768, 554)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "성분제제정보"
+        '
+        'txtBldCd2
+        '
+        Me.txtBldCd2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBldCd2.Location = New System.Drawing.Point(515, 250)
+        Me.txtBldCd2.MaxLength = 20
+        Me.txtBldCd2.Name = "txtBldCd2"
+        Me.txtBldCd2.Size = New System.Drawing.Size(103, 21)
+        Me.txtBldCd2.TabIndex = 156
+        Me.txtBldCd2.Tag = "DSPCCD2"
+        '
+        'lblBldCd2
+        '
+        Me.lblBldCd2.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.lblBldCd2.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblBldCd2.ForeColor = System.Drawing.Color.White
+        Me.lblBldCd2.Location = New System.Drawing.Point(375, 250)
+        Me.lblBldCd2.Name = "lblBldCd2"
+        Me.lblBldCd2.Size = New System.Drawing.Size(139, 21)
+        Me.lblBldCd2.TabIndex = 157
+        Me.lblBldCd2.Text = "혈액제재코드(혈액원)"
+        Me.lblBldCd2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cboOReqItem
         '
@@ -2129,35 +2305,464 @@ Public Class FDF30
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlTop.Name = "pnlTop"
-        Me.pnlTop.Size = New System.Drawing.Size(792, 605)
+        Me.pnlTop.Size = New System.Drawing.Size(792, 726)
         Me.pnlTop.TabIndex = 1
         '
-        'txtBldCd2
+        'lblFErRptMi
         '
-        Me.txtBldCd2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBldCd2.Location = New System.Drawing.Point(515, 250)
-        Me.txtBldCd2.MaxLength = 20
-        Me.txtBldCd2.Name = "txtBldCd2"
-        Me.txtBldCd2.Size = New System.Drawing.Size(103, 21)
-        Me.txtBldCd2.TabIndex = 156
-        Me.txtBldCd2.Tag = "DSPCCD2"
+        Me.lblFErRptMi.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblFErRptMi.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblFErRptMi.ForeColor = System.Drawing.Color.Black
+        Me.lblFErRptMi.Location = New System.Drawing.Point(371, 414)
+        Me.lblFErRptMi.Name = "lblFErRptMi"
+        Me.lblFErRptMi.Size = New System.Drawing.Size(129, 21)
+        Me.lblFErRptMi.TabIndex = 266
+        Me.lblFErRptMi.Text = "출고시간(응급)"
+        Me.lblFErRptMi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblBldCd2
+        'lblPErRptMi
         '
-        Me.lblBldCd2.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
-        Me.lblBldCd2.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
-        Me.lblBldCd2.ForeColor = System.Drawing.Color.White
-        Me.lblBldCd2.Location = New System.Drawing.Point(375, 250)
-        Me.lblBldCd2.Name = "lblBldCd2"
-        Me.lblBldCd2.Size = New System.Drawing.Size(139, 21)
-        Me.lblBldCd2.TabIndex = 157
-        Me.lblBldCd2.Text = "혈액제재코드(혈액원)"
-        Me.lblBldCd2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblPErRptMi.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblPErRptMi.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblPErRptMi.ForeColor = System.Drawing.Color.Black
+        Me.lblPErRptMi.Location = New System.Drawing.Point(123, 414)
+        Me.lblPErRptMi.Name = "lblPErRptMi"
+        Me.lblPErRptMi.Size = New System.Drawing.Size(138, 21)
+        Me.lblPErRptMi.TabIndex = 267
+        Me.lblPErRptMi.Text = "가출고시간(응급)"
+        Me.lblPErRptMi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboIEMTMIOUT
+        '
+        Me.cboIEMTMIOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboIEMTMIOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboIEMTMIOUT.Location = New System.Drawing.Point(543, 414)
+        Me.cboIEMTMIOUT.Name = "cboIEMTMIOUT"
+        Me.cboIEMTMIOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboIEMTMIOUT.TabIndex = 271
+        Me.cboIEMTMIOUT.Tag = "IEMTMIOUT_01"
+        '
+        'txtIEMTMIOUT
+        '
+        Me.txtIEMTMIOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIEMTMIOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtIEMTMIOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtIEMTMIOUT.Location = New System.Drawing.Point(502, 415)
+        Me.txtIEMTMIOUT.MaxLength = 5
+        Me.txtIEMTMIOUT.Name = "txtIEMTMIOUT"
+        Me.txtIEMTMIOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtIEMTMIOUT.TabIndex = 270
+        Me.txtIEMTMIOUT.Tag = "IEMTMIOUT"
+        '
+        'cboIEMTMIBEFOUT
+        '
+        Me.cboIEMTMIBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboIEMTMIBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboIEMTMIBEFOUT.Location = New System.Drawing.Point(304, 415)
+        Me.cboIEMTMIBEFOUT.Name = "cboIEMTMIBEFOUT"
+        Me.cboIEMTMIBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboIEMTMIBEFOUT.TabIndex = 269
+        Me.cboIEMTMIBEFOUT.Tag = "IEMTMIBEFOUT_01"
+        '
+        'txtIEMTMIBEFOUT
+        '
+        Me.txtIEMTMIBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIEMTMIBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtIEMTMIBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtIEMTMIBEFOUT.Location = New System.Drawing.Point(263, 414)
+        Me.txtIEMTMIBEFOUT.MaxLength = 5
+        Me.txtIEMTMIBEFOUT.Name = "txtIEMTMIBEFOUT"
+        Me.txtIEMTMIBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtIEMTMIBEFOUT.TabIndex = 268
+        Me.txtIEMTMIBEFOUT.Tag = "IEMTMIBEFOUT"
+        '
+        'lblFRptMi
+        '
+        Me.lblFRptMi.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblFRptMi.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblFRptMi.ForeColor = System.Drawing.Color.Black
+        Me.lblFRptMi.Location = New System.Drawing.Point(371, 392)
+        Me.lblFRptMi.Name = "lblFRptMi"
+        Me.lblFRptMi.Size = New System.Drawing.Size(129, 21)
+        Me.lblFRptMi.TabIndex = 259
+        Me.lblFRptMi.Text = "출고시간"
+        Me.lblFRptMi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblPRptMi
+        '
+        Me.lblPRptMi.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.lblPRptMi.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblPRptMi.ForeColor = System.Drawing.Color.Black
+        Me.lblPRptMi.Location = New System.Drawing.Point(123, 392)
+        Me.lblPRptMi.Name = "lblPRptMi"
+        Me.lblPRptMi.Size = New System.Drawing.Size(138, 21)
+        Me.lblPRptMi.TabIndex = 260
+        Me.lblPRptMi.Text = "가출고시간"
+        Me.lblPRptMi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboINMLTMIOUT
+        '
+        Me.cboINMLTMIOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboINMLTMIOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboINMLTMIOUT.Location = New System.Drawing.Point(543, 392)
+        Me.cboINMLTMIOUT.Name = "cboINMLTMIOUT"
+        Me.cboINMLTMIOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboINMLTMIOUT.TabIndex = 265
+        Me.cboINMLTMIOUT.Tag = "INMLTMIOUT_01"
+        '
+        'txtINMLTMIOUT
+        '
+        Me.txtINMLTMIOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtINMLTMIOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtINMLTMIOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtINMLTMIOUT.Location = New System.Drawing.Point(502, 392)
+        Me.txtINMLTMIOUT.MaxLength = 5
+        Me.txtINMLTMIOUT.Name = "txtINMLTMIOUT"
+        Me.txtINMLTMIOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtINMLTMIOUT.TabIndex = 264
+        Me.txtINMLTMIOUT.Tag = "INMLTMIOUT"
+        '
+        'cboINMLTMIBEFOUT
+        '
+        Me.cboINMLTMIBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboINMLTMIBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboINMLTMIBEFOUT.Location = New System.Drawing.Point(304, 393)
+        Me.cboINMLTMIBEFOUT.Name = "cboINMLTMIBEFOUT"
+        Me.cboINMLTMIBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboINMLTMIBEFOUT.TabIndex = 263
+        Me.cboINMLTMIBEFOUT.Tag = "INMLTMIBEFOUT_01"
+        '
+        'chkTatYN
+        '
+        Me.chkTatYN.BackColor = System.Drawing.Color.Transparent
+        Me.chkTatYN.Location = New System.Drawing.Point(609, 393)
+        Me.chkTatYN.Name = "chkTatYN"
+        Me.chkTatYN.Size = New System.Drawing.Size(111, 20)
+        Me.chkTatYN.TabIndex = 261
+        Me.chkTatYN.Tag = "TATYN"
+        Me.chkTatYN.Text = "TAT 체크 적용"
+        Me.chkTatYN.UseVisualStyleBackColor = False
+        '
+        'txtINMLTMIBEFOUT
+        '
+        Me.txtINMLTMIBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtINMLTMIBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtINMLTMIBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtINMLTMIBEFOUT.Location = New System.Drawing.Point(263, 392)
+        Me.txtINMLTMIBEFOUT.MaxLength = 5
+        Me.txtINMLTMIBEFOUT.Name = "txtINMLTMIBEFOUT"
+        Me.txtINMLTMIBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtINMLTMIBEFOUT.TabIndex = 262
+        Me.txtINMLTMIBEFOUT.Tag = "INMLTMIBEFOUT"
+        '
+        'Label2
+        '
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label2.Location = New System.Drawing.Point(6, 386)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(756, 2)
+        Me.Label2.TabIndex = 272
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.Label3.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(8, 391)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(111, 21)
+        Me.Label3.TabIndex = 273
+        Me.Label3.Text = "병동"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(165, Byte), Integer))
+        Me.Label4.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.White
+        Me.Label4.Location = New System.Drawing.Point(8, 457)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(111, 21)
+        Me.Label4.TabIndex = 274
+        Me.Label4.Text = "외래"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label5.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(371, 436)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(129, 21)
+        Me.Label5.TabIndex = 275
+        Me.Label5.Text = "출고시간(응급)(이형)"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label6.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.Location = New System.Drawing.Point(123, 436)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(138, 21)
+        Me.Label6.TabIndex = 276
+        Me.Label6.Text = "가출고시간(응급)(이형)"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboIEMTMIVAROUT
+        '
+        Me.cboIEMTMIVAROUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboIEMTMIVAROUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboIEMTMIVAROUT.Location = New System.Drawing.Point(543, 436)
+        Me.cboIEMTMIVAROUT.Name = "cboIEMTMIVAROUT"
+        Me.cboIEMTMIVAROUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboIEMTMIVAROUT.TabIndex = 280
+        Me.cboIEMTMIVAROUT.Tag = "IEMTMIVAROUT_01"
+        '
+        'txtIEMTMIVAROUT
+        '
+        Me.txtIEMTMIVAROUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIEMTMIVAROUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtIEMTMIVAROUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtIEMTMIVAROUT.Location = New System.Drawing.Point(502, 437)
+        Me.txtIEMTMIVAROUT.MaxLength = 5
+        Me.txtIEMTMIVAROUT.Name = "txtIEMTMIVAROUT"
+        Me.txtIEMTMIVAROUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtIEMTMIVAROUT.TabIndex = 279
+        Me.txtIEMTMIVAROUT.Tag = "IEMTMIVAROUT"
+        '
+        'cboIEMTMIVARBEFOUT
+        '
+        Me.cboIEMTMIVARBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboIEMTMIVARBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboIEMTMIVARBEFOUT.Location = New System.Drawing.Point(304, 437)
+        Me.cboIEMTMIVARBEFOUT.Name = "cboIEMTMIVARBEFOUT"
+        Me.cboIEMTMIVARBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboIEMTMIVARBEFOUT.TabIndex = 278
+        Me.cboIEMTMIVARBEFOUT.Tag = "IEMTMIVARBEFOUT_01"
+        '
+        'txtIEMTMIVARBEFOUT
+        '
+        Me.txtIEMTMIVARBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIEMTMIVARBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtIEMTMIVARBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtIEMTMIVARBEFOUT.Location = New System.Drawing.Point(263, 436)
+        Me.txtIEMTMIVARBEFOUT.MaxLength = 5
+        Me.txtIEMTMIVARBEFOUT.Name = "txtIEMTMIVARBEFOUT"
+        Me.txtIEMTMIVARBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtIEMTMIVARBEFOUT.TabIndex = 277
+        Me.txtIEMTMIVARBEFOUT.Tag = "IEMTMIVARBEFOUT"
+        '
+        'Label7
+        '
+        Me.Label7.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label7.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Black
+        Me.Label7.Location = New System.Drawing.Point(371, 503)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(129, 21)
+        Me.Label7.TabIndex = 293
+        Me.Label7.Text = "출고시간(응급)(이형)"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label8.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.Location = New System.Drawing.Point(123, 503)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(138, 21)
+        Me.Label8.TabIndex = 294
+        Me.Label8.Text = "가출고시간(응급)(이형)"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboOEMTMIVAROUT
+        '
+        Me.cboOEMTMIVAROUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOEMTMIVAROUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboOEMTMIVAROUT.Location = New System.Drawing.Point(543, 503)
+        Me.cboOEMTMIVAROUT.Name = "cboOEMTMIVAROUT"
+        Me.cboOEMTMIVAROUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboOEMTMIVAROUT.TabIndex = 298
+        Me.cboOEMTMIVAROUT.Tag = "OEMTMIVAROUT_01"
+        '
+        'txtOEMTMIVAROUT
+        '
+        Me.txtOEMTMIVAROUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOEMTMIVAROUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtOEMTMIVAROUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtOEMTMIVAROUT.Location = New System.Drawing.Point(502, 504)
+        Me.txtOEMTMIVAROUT.MaxLength = 5
+        Me.txtOEMTMIVAROUT.Name = "txtOEMTMIVAROUT"
+        Me.txtOEMTMIVAROUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtOEMTMIVAROUT.TabIndex = 297
+        Me.txtOEMTMIVAROUT.Tag = "OEMTMIVAROUT"
+        '
+        'cboOEMTMIVARBEFOUT
+        '
+        Me.cboOEMTMIVARBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOEMTMIVARBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboOEMTMIVARBEFOUT.Location = New System.Drawing.Point(304, 504)
+        Me.cboOEMTMIVARBEFOUT.Name = "cboOEMTMIVARBEFOUT"
+        Me.cboOEMTMIVARBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboOEMTMIVARBEFOUT.TabIndex = 296
+        Me.cboOEMTMIVARBEFOUT.Tag = "OEMTMIVARBEFOUT_01"
+        '
+        'txtOEMTMIVARBEFOUT
+        '
+        Me.txtOEMTMIVARBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOEMTMIVARBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtOEMTMIVARBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtOEMTMIVARBEFOUT.Location = New System.Drawing.Point(263, 503)
+        Me.txtOEMTMIVARBEFOUT.MaxLength = 5
+        Me.txtOEMTMIVARBEFOUT.Name = "txtOEMTMIVARBEFOUT"
+        Me.txtOEMTMIVARBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtOEMTMIVARBEFOUT.TabIndex = 295
+        Me.txtOEMTMIVARBEFOUT.Tag = "OEMTMIVARBEFOUT"
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label9.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(371, 481)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(129, 21)
+        Me.Label9.TabIndex = 287
+        Me.Label9.Text = "출고시간(응급)"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label10
+        '
+        Me.Label10.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label10.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(123, 481)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(138, 21)
+        Me.Label10.TabIndex = 288
+        Me.Label10.Text = "가출고시간(응급)"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboOEMTMIOUT
+        '
+        Me.cboOEMTMIOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOEMTMIOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboOEMTMIOUT.Location = New System.Drawing.Point(543, 481)
+        Me.cboOEMTMIOUT.Name = "cboOEMTMIOUT"
+        Me.cboOEMTMIOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboOEMTMIOUT.TabIndex = 292
+        Me.cboOEMTMIOUT.Tag = "OEMTMIOUT_01"
+        '
+        'txtOEMTMIOUT
+        '
+        Me.txtOEMTMIOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOEMTMIOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtOEMTMIOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtOEMTMIOUT.Location = New System.Drawing.Point(502, 482)
+        Me.txtOEMTMIOUT.MaxLength = 5
+        Me.txtOEMTMIOUT.Name = "txtOEMTMIOUT"
+        Me.txtOEMTMIOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtOEMTMIOUT.TabIndex = 291
+        Me.txtOEMTMIOUT.Tag = "OEMTMIOUT"
+        '
+        'cboOEMTMIBEFOUT
+        '
+        Me.cboOEMTMIBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOEMTMIBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboOEMTMIBEFOUT.Location = New System.Drawing.Point(304, 482)
+        Me.cboOEMTMIBEFOUT.Name = "cboOEMTMIBEFOUT"
+        Me.cboOEMTMIBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboOEMTMIBEFOUT.TabIndex = 290
+        Me.cboOEMTMIBEFOUT.Tag = "OEMTMIBEFOUT_01"
+        '
+        'txtOEMTMIBEFOUT
+        '
+        Me.txtOEMTMIBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOEMTMIBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtOEMTMIBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtOEMTMIBEFOUT.Location = New System.Drawing.Point(263, 481)
+        Me.txtOEMTMIBEFOUT.MaxLength = 5
+        Me.txtOEMTMIBEFOUT.Name = "txtOEMTMIBEFOUT"
+        Me.txtOEMTMIBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtOEMTMIBEFOUT.TabIndex = 289
+        Me.txtOEMTMIBEFOUT.Tag = "OEMTMIBEFOUT"
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label11.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.Black
+        Me.Label11.Location = New System.Drawing.Point(371, 459)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(129, 21)
+        Me.Label11.TabIndex = 281
+        Me.Label11.Text = "출고시간"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label12
+        '
+        Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(165, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.Label12.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.Black
+        Me.Label12.Location = New System.Drawing.Point(123, 459)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(138, 21)
+        Me.Label12.TabIndex = 282
+        Me.Label12.Text = "가출고시간"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboONMLTMIOUT
+        '
+        Me.cboONMLTMIOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboONMLTMIOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboONMLTMIOUT.Location = New System.Drawing.Point(543, 459)
+        Me.cboONMLTMIOUT.Name = "cboONMLTMIOUT"
+        Me.cboONMLTMIOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboONMLTMIOUT.TabIndex = 286
+        Me.cboONMLTMIOUT.Tag = "ONMLTMIOUT_01"
+        '
+        'txtONMLTMIOUT
+        '
+        Me.txtONMLTMIOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtONMLTMIOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtONMLTMIOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtONMLTMIOUT.Location = New System.Drawing.Point(502, 459)
+        Me.txtONMLTMIOUT.MaxLength = 5
+        Me.txtONMLTMIOUT.Name = "txtONMLTMIOUT"
+        Me.txtONMLTMIOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtONMLTMIOUT.TabIndex = 285
+        Me.txtONMLTMIOUT.Tag = "ONMLTMIOUT"
+        '
+        'cboONMLTMIBEFOUT
+        '
+        Me.cboONMLTMIBEFOUT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboONMLTMIBEFOUT.Items.AddRange(New Object() {"분:M", "시간:H", "일:D"})
+        Me.cboONMLTMIBEFOUT.Location = New System.Drawing.Point(304, 460)
+        Me.cboONMLTMIBEFOUT.Name = "cboONMLTMIBEFOUT"
+        Me.cboONMLTMIBEFOUT.Size = New System.Drawing.Size(64, 20)
+        Me.cboONMLTMIBEFOUT.TabIndex = 284
+        Me.cboONMLTMIBEFOUT.Tag = "ONMLTMIBEFOUT_01"
+        '
+        'txtONMLTMIBEFOUT
+        '
+        Me.txtONMLTMIBEFOUT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtONMLTMIBEFOUT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtONMLTMIBEFOUT.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.txtONMLTMIBEFOUT.Location = New System.Drawing.Point(263, 459)
+        Me.txtONMLTMIBEFOUT.MaxLength = 5
+        Me.txtONMLTMIBEFOUT.Name = "txtONMLTMIBEFOUT"
+        Me.txtONMLTMIBEFOUT.Size = New System.Drawing.Size(40, 21)
+        Me.txtONMLTMIBEFOUT.TabIndex = 283
+        Me.txtONMLTMIBEFOUT.Tag = "ONMLTMIBEFOUT"
         '
         'FDF30
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(6, 14)
-        Me.ClientSize = New System.Drawing.Size(792, 605)
+        Me.ClientSize = New System.Drawing.Size(792, 726)
         Me.Controls.Add(Me.pnlTop)
         Me.Font = New System.Drawing.Font("굴림", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.Name = "FDF30"

@@ -67,5 +67,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.348 --> 2021/09/01 : 결과코드 c안나오는 현상 수정
 'Version 3.1.10.349 --> 2021/09/08 : 결과코드 Alter 삭제
 'Version 3.1.10.350 --> 2021/11/29 : 수혈제제 관리 코드화, 기초마스터 동의서 의뢰서 종류 텍스트 박스 추가 
+'Version 3.1.10.351 --> 2021/12/20 : 혈액 성분제제 TAT 관련 내용 추가(베타)
 
-<Assembly: AssemblyVersion("3.1.10.350")>
+<Assembly: AssemblyVersion("3.1.10.351")>
