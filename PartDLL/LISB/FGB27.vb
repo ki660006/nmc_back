@@ -51,13 +51,13 @@ Public Class FGB27
         Dim sReturn As String = ""
 
         'radio button 조건
-        If Me.rdoHB.Checked Then
+        If Me.chkHB.Checked Then
             sReturn = "hgyn = 'Y'"
-        ElseIf Me.rdoCBC.Checked Then
+        ElseIf Me.chkALL.Checked Then
             sReturn = "cbcyn = 'Y'"
-        ElseIf Me.rdoALL.Checked Then
+        ElseIf Me.chkALL.Checked Then
             sReturn = "allyn = 'Y'"
-        ElseIf Me.rdoExc.Checked Then
+        ElseIf Me.chkExc.Checked Then
             sReturn = "ecptyn = 'Y'"
         End If
 
@@ -251,6 +251,32 @@ Public Class FGB27
             btnExit_Click(Nothing, Nothing)
         End If
     End Sub
+
+    Private Sub rdo_Checked_gbx_rboRprtStat(sender As Object, e As EventArgs) Handles chkHB.Click, chkCBC.Click, chkExc.Click, chkALL.Click
+        Dim selRdoBtn As CheckBox = CType(sender, CheckBox)
+
+        Dim sRdoTxt As String = selRdoBtn.Text
+        Select Case sRdoTxt
+            Case "Hb>10g/dL"
+                chkALL.Checked = False
+                chkCBC.Checked = False
+                chkExc.Checked = False
+            Case "모두요청"
+                chkHB.Checked = False
+                chkCBC.Checked = False
+                chkExc.Checked = False
+            Case "CBC F/U"
+                chkHB.Checked = False
+                chkALL.Checked = False
+                chkExc.Checked = False
+            Case "제외대상"
+                chkHB.Checked = False
+                chkALL.Checked = False
+                chkCBC.Checked = False
+        End Select
+
+    End Sub
+
 End Class
 
 
