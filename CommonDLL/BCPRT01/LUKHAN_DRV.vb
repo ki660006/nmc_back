@@ -512,11 +512,19 @@ Public Class LUKHAN_DRV
                 If sTestNms.Length > 12 Then sTestNms = sTestNms.Substring(0, 12)
                 LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 4, 1, 1, 1, " " + sTestNms + " ")
             Else
+                '20210103 jhs 미생물 배지바코드 글자 크기 변경
                 '< 검체명*
                 'LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
-                LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
+                'LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
+                '------------------------------------------------
 
                 If ro_Data.BCTYPE = "M" Then
+
+                    '20210103 jhs 미생물 배지바코드 글자 크기 변경
+                    '< 검체명*
+                    'LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
+                    LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 30, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
+                    '------------------------------
 
                     '< 검사그룹 sComment21123
                     LK_PrintWindowsFont(220 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sTGrpNm)
@@ -524,6 +532,12 @@ Public Class LUKHAN_DRV
                     '< 미생물 검체번호
                     LK_PrintDeviceFont(15 + riLeftPos, 250 + iTop, 0, 4, 1, 1, 0, ro_Data.BCNO_MB)
                 Else
+
+                    '20210103 jhs 미생물 배지바코드  글자 크기 변경
+                    '< 검체명*
+                    'LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
+                    LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
+                    '-------------------------------------
 
                     '< 용기명 *
                     LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", ro_Data.TUBENM)                           ' 3째줄 VTM 2.5

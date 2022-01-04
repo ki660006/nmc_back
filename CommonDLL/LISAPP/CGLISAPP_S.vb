@@ -1685,7 +1685,9 @@ Namespace APP_S
                     sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi," + vbCrLf
                     '>>> 20170511 TAT에서 소수점이 계산된 TAT는 오버타임으로 계산되서 소수점 버림 
                     '20210202 JHS 휴일 tat 계산
-                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '1') tat1_mi_exp_holi," + vbCrLf
+                    'sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '1') tat1_mi_exp_holi," + vbCrLf
+                    sSql += "       trunc(fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '3')) tat1_mi_exp_holi, " + vbCrLf
+                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '1') tat1_exp_holi,            " + vbCrLf
                     '----------------------------------------------------
                     sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi," + vbCrLf
                     sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi," + vbCrLf
@@ -1761,7 +1763,8 @@ Namespace APP_S
                     sSql += "       trunc(fn_ack_date_diff(NVL(r.wkdt, r.tkdt), r.fndt, '3')) tat2_mi," + vbCrLf
                     '>>> 20170511
                     '20210202 JHS 휴일 tat 계산
-                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, '1') tat1_mi_exp_holi," + vbCrLf
+                    sSql += "       trunc(fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '3')) tat1_mi_exp_holi, " + vbCrLf
+                    sSql += "       fn_ack_date_diff_excep_holi(NVL(r.wkdt, r.tkdt), r.fndt, r.testcd, r.spccd, '1') tat1_exp_holi,            " + vbCrLf
                     '----------------------------------------------------
                     sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.perrptmi, f6.prptmi) ELSE f6.prptmi END prptmi," + vbCrLf
                     sSql += "       CASE WHEN j.statgbn IN ('Y',  'E') THEN NVL(f6.ferrptmi, f6.frptmi) ELSE f6.frptmi END frptmi," + vbCrLf
