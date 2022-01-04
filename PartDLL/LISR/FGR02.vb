@@ -928,9 +928,6 @@ Public Class FGR02
             .Action = FPSpreadADO.ActionConstants.ActionGotoCell
             .ReDraw = True
         End With
-        'test입니다.
-        'test21입니다.
-        'test3입니다.
 
 
     End Sub
