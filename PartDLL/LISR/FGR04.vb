@@ -11,6 +11,7 @@ Imports common.commlogin.login
 
 Public Class FGR04
     Inherits System.Windows.Forms.Form
+    Private moForm As Windows.Forms.Form
 
     Private Const msFile As String = "File : FGR04.vb, Class : FGR04" & vbTab
 
@@ -2266,6 +2267,42 @@ Public Class FGR04
                 .Action = FPSpreadADO.ActionConstants.ActionDeleteRow
                 .MaxRows -= 1
             End With
+        Else
+            '20210105 jhs 검사항목별에도 이미지 파일 보이도록 설정
+            With spdSpcInfo
+
+                moForm = Application.OpenForms(0)
+                Dim sTestcd As String
+                Dim sSpccd As String
+                Dim sBcno As String
+                Dim sTCdGbn As String
+
+                .Row = e.row
+                .Col = e.col
+
+                sTestcd = .ColID
+                .Col = .GetColFromID("spccd") : sSpccd = .Text
+                .Col = .GetColFromID("bcno") : sBcno = Replace(Replace(.Text, "-", ""), " ", "")
+
+                'Dim sSpRstYn As String = LISAPP.COMM.RstFn.fnGet_SpRst_yn(IIf(Me.txtBcNo.Text = "", sBcno, Me.txtBcNo.Text).ToString.Replace("-", ""), sTestcd.Substring(0, 5))
+                'Dim sFormGbn As String = LISAPP.COMM.RstFn.fnGet_ManualDiff_FormGbn(sTestcd.Substring(0, 5), sSpccd)
+
+                .Row = e.row
+                .Col = e.col
+                If .Text.Trim = "{null}" Then
+                    Dim strst As New AxAckResultViewer.STRST01
+                    strst.SpecialTestName = sTestcd
+                    strst.BcNo = sBcno
+                    strst.TestCd = sTestcd
+
+
+                    strst.Left = CType(moForm.Left + (moForm.Width - strst.Width) / 2, Integer)
+                    strst.Top = moForm.Top + Ctrl.menuHeight
+
+                    strst.ShowDialog(moForm)
+                End If
+            End With
+            '---------------------------------------------------
         End If
 
     End Sub

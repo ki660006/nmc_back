@@ -3981,6 +3981,8 @@ Public Class AxRstInput
 
             If sSpRstYn <> "" Then mnuSpRst.Visible = True
             If sFormGbn <> "" Then mnuKeypad.Visible = True
+            .Col = .GetColFromID("tnmd") : Dim test As String = .Text
+
 
             If (e.col = .GetColFromID("orgrst") Or e.col = .GetColFromID("tnmd")) And e.row > 0 Then
                 .Row = e.row
