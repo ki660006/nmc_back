@@ -2284,7 +2284,7 @@ Public Class FGR04
                 .Col = .GetColFromID("spccd") : sSpccd = .Text
                 .Col = .GetColFromID("bcno") : sBcno = Replace(Replace(.Text, "-", ""), " ", "")
 
-                'Dim sSpRstYn As String = LISAPP.COMM.RstFn.fnGet_SpRst_yn(IIf(Me.txtBcNo.Text = "", sBcno, Me.txtBcNo.Text).ToString.Replace("-", ""), sTestcd.Substring(0, 5))
+                'Dim sSpRstYn As String = LISAPP.COM¤ÓM.RstFn.fnGet_SpRst_yn(IIf(Me.txtBcNo.Text = "", sBcno, Me.txtBcNo.Text).ToString.Replace("-", ""), sTestcd.Substring(0, 5))
                 'Dim sFormGbn As String = LISAPP.COMM.RstFn.fnGet_ManualDiff_FormGbn(sTestcd.Substring(0, 5), sSpccd)
 
                 .Row = e.row
