@@ -5024,6 +5024,8 @@ Public Class AxRstInput
                             strCriticalMark = sTxtCritical
                             If sTxtCritical = "C" Then msXpertC = True Else msXpertC = False
                         End If
+                    ElseIf strTclscd = "LB151" Or strTclscd = "LB11201" Or strTclscd = "LB11202" Then
+                        strCriticalMark = sTxtCritical
                     Else
                         '임시막음
                         'Return sTxtCritical
