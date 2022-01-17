@@ -289,8 +289,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.792 --> 2021/11/29 : LCDHELP, LISB , LISAPP
 'Version 3.1.10.793 --> 2021/11/29 : LISB
 'Version 3.1.10.794 --> 2021/12/20 : LISB, LISAPP, LISF, CDHELP
+'Version 3.1.10.795 --> 2022/01/17 : LISR, LISAPP, LISB, LISS
 
-<Assembly: AssemblyVersion("3.1.10.794")>
+<Assembly: AssemblyVersion("3.1.10.795")>
 
 
 

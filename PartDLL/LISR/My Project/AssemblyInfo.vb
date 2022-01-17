@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("0157fe20-1fbc-4253-9fe5-ec50e13f1976")> 
+<Assembly: Guid("0157fe20-1fbc-4253-9fe5-ec50e13f1976")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -83,5 +83,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.381 --> 2021/07/26 : 일일보고서 xpert 겹침 현상 제거 , 참고치 세부검사참조 제거 
 'Version 3.1.10.382 --> 2021/08/02 : 검사자간 공유사항 항목 추가
 'Version 3.1.10.383 --> 2021/08/02 : 검사자간 공유사항 항목 추가(재배포)
+'Version 3.1.10.384 --> 2022/01/17 : 검사자간 공유사항 항목 추가(재배포)
 
-<Assembly: AssemblyVersion("3.1.10.383")> 
+<Assembly: AssemblyVersion("3.1.10.384")>

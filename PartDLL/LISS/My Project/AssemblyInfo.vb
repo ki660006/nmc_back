@@ -123,5 +123,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.439 --> 2021/09/03 : 병원체 전송내용 있는것 색변경
 'Version 3.1.10.440 --> 2021/09/27 : 위탁검사 등록번호 배포
 'Version 3.1.10.441 --> 2021/10/18 : 출력내용 변경
+'Version 3.1.10.442 --> 2022/01/17 : 휴일tat 오버시 빨간색으로 표시
 
-<Assembly: AssemblyVersion("3.1.10.441")>
+<Assembly: AssemblyVersion("3.1.10.442")>
