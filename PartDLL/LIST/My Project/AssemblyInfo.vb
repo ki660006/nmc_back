@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(False)>
 
 '이 프로젝트가 COM에 노출되는 경우 다음 GUID는 typelib의 ID를 나타냅니다.
-<Assembly: Guid("e7604d1f-f9d8-4d90-aaff-ff51733b46e3")> 
+<Assembly: Guid("e7604d1f-f9d8-4d90-aaff-ff51733b46e3")>
 
 ' 어셈블리의 버전 정보는 다음 네 가지 값으로 구성됩니다.
 '
@@ -57,5 +57,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.363 --> 2020/06/23 : TAT관리 중간보고/최종보고 구분 추가
 'Version 3.1.10.364 --> 2020/08/04 : 미생물 결핵통계 수정
 'Version 3.1.10.365 --> 2020/08/06 : 미생물 결핵통계 검체 전체->선택시 저장된 설정 불러와서 체크
+'Version 3.1.10.366 --> 2022/01/20 : 검체통계 조회에서 toexcel 안되는 문제 수정
 
-<Assembly: AssemblyVersion("3.1.10.365")> 
+<Assembly: AssemblyVersion("3.1.10.366")>
