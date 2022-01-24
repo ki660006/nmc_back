@@ -584,8 +584,69 @@ Namespace APP_C
             End Try
 
         End Function
+        '20220121 jhs 검상항목 모조리 불러오기 
+        Public Shared Function Fn_Chk_testcd(ByVal rsTordCd As String, ByVal rsSpccd As String) As String
+            Dim sFn As String = ""
+            Dim dt As DataTable
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                sSql = ""
+                sSql += " select NVL((SELECT SUBSTR(XMLAGG(XMLELEMENT(FF, ',' || FF.TESTCD) ORDER BY FF.TESTCD).EXTRACT('//text()'), 2)  " + vbCrLf
+                sSql += "               From LF062M ff                                                                                   " + vbCrLf
+                sSql += "              WHERE TCLSCD = F6.TESTCD                                                                          " + vbCrLf
+                sSql += "                AND SPCCD  = F6.SPCCD), F6.TESTCD) dtestcd from lf060m f6                                       " + vbCrLf
+                sSql += " where tordcd = :rsTordCd                                                                                       " + vbCrLf
+                sSql += "   and spccd  = :rsSpcCd                                                                                        " + vbCrLf
+
+                al.Add(New OracleParameter("rsTordCd", OracleDbType.Varchar2, rsTordCd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTordCd))
+                al.Add(New OracleParameter("rsTordCd", OracleDbType.Varchar2, rsSpccd.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsSpccd))
+
+                DbCommand()
+                dt = DbExecuteQuery(sSql, al)
+                If dt.Rows.Count > 0 Then
+                    Return dt.Rows(0).Item(0).ToString().Trim()
+                Else
+                    Return ""
+                End If
 
 
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '------------------------------------------------------------------------------
+        '20220121 jhs 검사항목 하나로 통합 
+        Public Shared Function Fn_Combine_TestCd(ByVal rsTestCds As String) As String
+            Dim sFn As String = ""
+            Dim dt As DataTable
+            Try
+                Dim sSql As String = ""
+                Dim al As New ArrayList
+
+                sSql = ""
+                sSql = "Select SUBSTR(XMLAGG(XMLELEMENT(b, ',' || b.split_result) ORDER BY b.split_result).EXTRACT('//text()'), 2)          " + vbCrLf
+                sSql += "      from ( Select distinct regexp_substr(a.langlist, '[^,]+',1 ,level) as split_result                           " + vbCrLf
+                sSql += "               from (select :rsTestCds as langlist from dual) a                                                    " + vbCrLf
+                sSql += "            connect by level <= length(regexp_replace(a.langlist,'[^,]+','')) + 1) b                               " + vbCrLf
+
+                al.Add(New OracleParameter("rsTordCd", OracleDbType.Varchar2, rsTestCds.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTestCds))
+
+                DbCommand()
+                dt = DbExecuteQuery(sSql, al)
+                If dt.Rows.Count > 0 Then
+                    Return dt.Rows(0).Item(0).ToString().Trim()
+                Else
+                    Return ""
+                End If
+
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '------------------------------------------------------------------------------
         '< add yjlee 
         Public Shared Function FindInfectionInfoD(ByVal rsRegNo As String) As String
             Dim sFn As String = "FindInfectionInfoD"

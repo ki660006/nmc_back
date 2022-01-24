@@ -11,6 +11,8 @@ Imports LISAPP.APP_C
 Imports OCSAPP.OcsLink.Ord
 Imports WEBSERVER
 Imports LISAPP.APP_BT
+Imports CDHELP.FGCDHELPFN
+
 
 Public Class AxCollList_tot
     Inherits System.Windows.Forms.UserControl
@@ -1342,8 +1344,6 @@ Public Class AxCollList_tot
                         End If
 
                         al_BcInfo.Add(listCollData)
-
-
                     End If
 
                     If listCollData.Count > 0 Then
@@ -1409,6 +1409,11 @@ Public Class AxCollList_tot
             End If
 
             If al_BcInfo.Count < 1 Then Return Nothing
+            '20220121 jhs 중복처방 존재하는지 확인 로직 구현
+            Dim msgContent As String = CollectSelOrder_chk_Dpl_Ord(al_BcInfo)
+
+            If fn_PopConfirm(moForm, "E"c, "중복검사 " + msgContent + "가 존재합니다." + vbCrLf + "계속 진행 하시겠습니까?") = False Then Return Nothing
+            '--------------------------------------
 
             With (New LISAPP.APP_C.CollReg_Web)
                 al_return = .ExecuteDo(al_BcInfo, stu_diagData, rsFormName, "", rbToColl, rbAutoTk, True)
@@ -1421,9 +1426,63 @@ Public Class AxCollList_tot
         Catch ex As Exception
             sbLog_Msg("오류", sFn + " : " + ex.Message)
             Return Nothing
-
         End Try
     End Function
+    '20220121 jhs 중복처방 존재하는지 확인 로직 구현l
+    Public Function CollectSelOrder_chk_Dpl_Ord(ByVal rsCollList As ArrayList) As String
+        Dim sFn As String = "Public Function CollectSelOrder_chk_Dpl_Ord() As ArrayList"
+        Dim sTestCdsStr As String = ""
+        Dim rsTestCd As String = ""
+        Dim rsSpcCd As String = ""
+        Dim totalDuplTestCd As String = ""
+        Dim alTestCds As New List(Of String)
+        Dim alTempTestCds As List(Of String)
+
+        Try
+
+            For i = 0 To rsCollList.Count - 1
+                Dim tempObj As List(Of STU_CollectInfo) = CType(rsCollList(i), List(Of STU_CollectInfo))
+                rsTestCd = tempObj(0).TORDCD
+                rsSpcCd = tempObj(0).SPCCD
+                Dim tempStr As String = LISAPP.APP_C.Collfn.Fn_Chk_testcd(rsTestCd, rsSpcCd)
+                sTestCdsStr += "," + tempStr
+                alTestCds.Insert(i, tempStr)
+            Next
+
+            For i = 0 To alTestCds.Count - 1
+                alTempTestCds = alTestCds.ToList
+                alTempTestCds.RemoveAt(i)
+                Dim sEcptTestCds As String = ""
+
+                For z = 0 To alTempTestCds.Count - 1
+                    sEcptTestCds += "," + alTempTestCds(z)
+                Next
+
+                Dim slEcptTestCds() As String = Mid(sEcptTestCds.Replace(",,", ","), 2, sEcptTestCds.Length).Split(","c)
+                Dim slSelTestCds() As String = alTestCds(i).ToString.Replace(",,", ",").Split(","c)
+
+                For x = 0 To slSelTestCds.Count - 1
+                    For j = 0 To slEcptTestCds.Count - 1
+                        If slSelTestCds(x) = slEcptTestCds(j) Then
+                            totalDuplTestCd += "," + slSelTestCds(x)
+                        End If
+                    Next
+                Next
+            Next
+
+            totalDuplTestCd = LISAPP.APP_C.Collfn.Fn_Combine_TestCd(totalDuplTestCd)
+
+            If totalDuplTestCd.Length > 0 Then
+                Return Mid(totalDuplTestCd, 1, totalDuplTestCd.Length - 1)
+            Else
+                Return ""
+            End If
+
+        Catch ex As Exception
+            sbLog_Msg("오류", sFn + " : " + ex.Message)
+        End Try
+    End Function
+    '---------------------------------------------------------
 
     Public Function CollectSelOrder_Batch(ByVal rsFormName As String, ByVal rsIoGbn As String, ByVal rsDptOrWard As String, _
                                           ByVal rbToColl As Boolean, ByVal rbToTk As Boolean, ByVal rbNotBcPrt As Boolean) As ArrayList
@@ -3490,8 +3549,6 @@ Public Class AxCollList_tot
                         .Col = .GetColFromID("chkbc") : .Row = i : .CellType = FPSpreadADO.CellTypeConstants.CellTypeStaticText : .Text = ""
                     End If
 
-
-
                     'bckey
                     .SetText(.GetColFromID("bckey"), i, sBcKeyC)
 
@@ -3540,11 +3597,9 @@ Public Class AxCollList_tot
 
         Catch ex As Exception
             sbLog_Msg("오류", sFn + " : " + ex.Message)
-
         Finally
             mbSkip = False
             Me.spdOrdList.ReDraw = True
-
         End Try
     End Sub
 
