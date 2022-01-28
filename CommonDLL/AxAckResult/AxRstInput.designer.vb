@@ -85,6 +85,7 @@ Partial Class AxRstInput
         Me.btnCmt_Clear = New CButtonLib.CButton()
         Me.btnHelp_Cmt = New CButtonLib.CButton()
         Me.txtCmtCont = New System.Windows.Forms.TextBox()
+        Me.NumericTextBox1 = New AxAckNumericTextBox.NumericTextBox()
         Me.lstCode = New System.Windows.Forms.ListBox()
         Me.axCalcRst = New AxAckCalcResult.AxCalcResult()
         Me.chkSelect = New System.Windows.Forms.CheckBox()
@@ -120,7 +121,6 @@ Partial Class AxRstInput
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lstEx = New System.Windows.Forms.ListBox()
         Me.btnDebug_cmt = New System.Windows.Forms.Button()
-        Me.NumericTextBox1 = New AxAckNumericTextBox.NumericTextBox()
         CType(Me.spdResult, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmuLink.SuspendLayout()
         Me.gbxABO.SuspendLayout()
@@ -284,7 +284,6 @@ Partial Class AxRstInput
         '
         Me.gbxComment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.gbxComment.Controls.Add(Me.NumericTextBox1)
         Me.gbxComment.Controls.Add(Me.cboBcNos)
         Me.gbxComment.Controls.Add(Me.cboSlip)
         Me.gbxComment.Controls.Add(Me.txtCmtCd)
@@ -292,6 +291,7 @@ Partial Class AxRstInput
         Me.gbxComment.Controls.Add(Me.btnCmt_Clear)
         Me.gbxComment.Controls.Add(Me.btnHelp_Cmt)
         Me.gbxComment.Controls.Add(Me.txtCmtCont)
+        Me.gbxComment.Controls.Add(Me.NumericTextBox1)
         Me.gbxComment.Location = New System.Drawing.Point(266, 365)
         Me.gbxComment.Name = "gbxComment"
         Me.gbxComment.Size = New System.Drawing.Size(988, 123)
@@ -431,6 +431,14 @@ Partial Class AxRstInput
         Me.txtCmtCont.Size = New System.Drawing.Size(980, 91)
         Me.txtCmtCont.TabIndex = 0
         '
+        'NumericTextBox1
+        '
+        Me.NumericTextBox1.Location = New System.Drawing.Point(530, 88)
+        Me.NumericTextBox1.Name = "NumericTextBox1"
+        Me.NumericTextBox1.Size = New System.Drawing.Size(100, 21)
+        Me.NumericTextBox1.TabIndex = 176
+        Me.NumericTextBox1.Text = "999.99"
+        '
         'lstCode
         '
         Me.lstCode.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -446,7 +454,7 @@ Partial Class AxRstInput
         'axCalcRst
         '
         Me.axCalcRst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.axCalcRst.Location = New System.Drawing.Point(500, 0)
+        Me.axCalcRst.Location = New System.Drawing.Point(501, 0)
         Me.axCalcRst.Name = "axCalcRst"
         Me.axCalcRst.Size = New System.Drawing.Size(113, 22)
         Me.axCalcRst.TabIndex = 166
@@ -692,7 +700,7 @@ Partial Class AxRstInput
         Me.btnReg_UnFit.FocalPoints.CenterPtY = 0!
         Me.btnReg_UnFit.FocalPoints.FocusPtX = 0!
         Me.btnReg_UnFit.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker8.IsActive = False
+        DesignerRectTracker8.IsActive = True
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnReg_UnFit.FocusPtTracker = DesignerRectTracker8
         Me.btnReg_UnFit.Image = Nothing
@@ -776,7 +784,7 @@ Partial Class AxRstInput
         Me.btnHistory.FocalPoints.CenterPtY = 0!
         Me.btnHistory.FocalPoints.FocusPtX = 0!
         Me.btnHistory.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker12.IsActive = False
+        DesignerRectTracker12.IsActive = True
         DesignerRectTracker12.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker12.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnHistory.FocusPtTracker = DesignerRectTracker12
         Me.btnHistory.Image = Nothing
@@ -825,7 +833,7 @@ Partial Class AxRstInput
         Me.btnKeyPad.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnKeyPad.ImageIndex = 0
         Me.btnKeyPad.ImageSize = New System.Drawing.Size(16, 16)
-        Me.btnKeyPad.Location = New System.Drawing.Point(421, 0)
+        Me.btnKeyPad.Location = New System.Drawing.Point(444, 0)
         Me.btnKeyPad.Name = "btnKeyPad"
         Me.btnKeyPad.Shape = CButtonLib.CButton.eShape.Rectangle
         Me.btnKeyPad.SideImage = Nothing
@@ -860,7 +868,7 @@ Partial Class AxRstInput
         Me.btnExmAdd.FocalPoints.CenterPtY = 0!
         Me.btnExmAdd.FocalPoints.FocusPtX = 0!
         Me.btnExmAdd.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker16.IsActive = False
+        DesignerRectTracker16.IsActive = True
         DesignerRectTracker16.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker16.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnExmAdd.FocusPtTracker = DesignerRectTracker16
         Me.btnExmAdd.Image = Nothing
@@ -1150,29 +1158,22 @@ Partial Class AxRstInput
         Me.btnDebug_cmt.Text = "소견 Data"
         Me.btnDebug_cmt.Visible = False
         '
-        'NumericTextBox1
-        '
-        Me.NumericTextBox1.Location = New System.Drawing.Point(530, 88)
-        Me.NumericTextBox1.Name = "NumericTextBox1"
-        Me.NumericTextBox1.Size = New System.Drawing.Size(100, 21)
-        Me.NumericTextBox1.TabIndex = 176
-        '
         'AxRstInput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ContextMenuStrip = Me.cmuLink
+        Me.Controls.Add(Me.axCalcRst)
+        Me.Controls.Add(Me.btnKeyPad)
         Me.Controls.Add(Me.btnBldInfo)
         Me.Controls.Add(Me.btnQuery_Abn)
-        Me.Controls.Add(Me.axCalcRst)
         Me.Controls.Add(Me.btnReg_tat)
         Me.Controls.Add(Me.btnExmAdd)
         Me.Controls.Add(Me.btnReg_UnFit)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.btnQryFNModify)
         Me.Controls.Add(Me.btnReg_Abn)
-        Me.Controls.Add(Me.btnKeyPad)
         Me.Controls.Add(Me.lstEx)
         Me.Controls.Add(Me.btnDebug_cmt)
         Me.Controls.Add(Me.gbxComment)

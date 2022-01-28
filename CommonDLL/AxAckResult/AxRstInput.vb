@@ -6,6 +6,7 @@ Imports COMMON.CommLogin
 Imports COMMON.CommLogin.LOGIN
 Imports COMMON.SVar
 Imports LISAPP.APP_BT
+Imports CDHELP.FGCDHELPFN
 
 Public Class AxRstInput
     'test위해 삽입
@@ -2275,6 +2276,14 @@ Public Class AxRstInput
             '20210312 JHS WBC DIFFCOUNT 검사 내용 로그로 남기기 
             alRstLog = fnReg_log_info_before(rsRstflg, "1") ' 저장 전
             '------------------------------------------------
+            '20220127 jhs WBC diffCount 100인지 확인하는 로직 구현
+            Dim chk_WEBCount As Integer = fnChk_WBCCount()
+            If chk_WEBCount <> 100 Then
+                If fn_PopConfirm(moForm, "E"c, "WBC Count의 합이 100이 아닙니다." + vbCrLf + "현재 Count : " + chk_WEBCount.ToString + vbCrLf + "계속진행 하시겠습니까?") <> True Then
+                    Return False
+                End If
+            End If
+            '-------------------------------------------
 
             mbLeveCellGbn = False
 
@@ -2470,6 +2479,35 @@ Public Class AxRstInput
         Finally
         End Try
     End Function
+    '20220127 jhs WBCCount 100인지 체크하는 함수
+    Public Function fnChk_WBCCount() As Integer
+        'WBCCount 가 딱 100인지 체크하는 함수
+        Try
+            Dim sChkCount As Integer = 0
+            With Me.spdResult
+                For ix = 0 To .MaxRows - 1
+                    Dim tmptestinfo_log As New TESTINFO_LOG
+                    .Row = ix
+                    .Col = .GetColFromID("testcd")
+                    Dim test As String = .Text
+                    If test.StartsWith("LH121") Then
+                        .Col = .GetColFromID("viewrst")
+                        Dim rsSpdNum As Integer
+                        If Int32.TryParse(.Text, rsSpdNum) Then
+                            sChkCount += rsSpdNum
+                        End If
+                    End If
+                Next
+            End With
+
+            Return sChkCount
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Information)
+        Finally
+        End Try
+    End Function
+    '--------------------------------------------------
     Public Function fnReg_log_info_after(ByVal dt As DataTable, ByVal alRstLog As ArrayList, ByVal rsRstflg As String) As ArrayList
         Try
             With Me.spdResult
@@ -4171,7 +4209,6 @@ Public Class AxRstInput
                             sbGet_Calc_Rst(iRow) '-- 결과 계산
 
                             If mbBloodBank Then
-
                                 If sRst <> "" And (sTestCd = msBlood_ABO_C Or sTestCd = msBlood_ABO_S Or sTestCd = msBlood_Rh) Then sbDisplay_Blood_Alert()
                             End If
                         Else
