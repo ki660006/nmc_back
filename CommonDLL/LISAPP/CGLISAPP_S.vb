@@ -1931,56 +1931,56 @@ Namespace APP_S
                 Dim alParm As New ArrayList
 
                 sSql = ""
-                sSql += "SELECT nvl(r.cmtcd, '기타소견') as cmtcd, fn_ack_date_str(j.tkdt, 'yyyy-mm-dd') regdt, count(*) cnt, MAX(r.cmtcont) cmtcont"
-                sSql += "  FROM lr010m j, lr051m r, lj010m j1,"        '미생물은 빼고
-                sSql += "       (SELECT testcd ,spccd, prptmi, frptmi, perrptmi, ferrptmi FROM lf060m"
-                sSql += "         WHERE NVL(tatyn, '0') = '1'"
-                sSql += "           AND ((tcdgbn = 'B' AND NVL(titleyn, '0') = '0') OR tcdgbn IN ('S', 'P'))"
+                sSql += "SELECT nvl(r.cmtcd, '기타소견') as cmtcd, fn_ack_date_str(j.tkdt, 'yyyy-mm-dd') regdt, count(*) cnt, MAX(r.cmtcont) cmtcont" + vbCrLf
+                sSql += "  FROM lr010m j, lr051m r, lj010m j1," + vbCrLf  '미생물은 빼고
+                sSql += "       (SELECT testcd ,spccd, prptmi, frptmi, perrptmi, ferrptmi FROM lf060m" + vbCrLf
+                sSql += "         WHERE NVL(tatyn, '0') = '1'" + vbCrLf
+                sSql += "           AND ((tcdgbn = 'B' AND NVL(titleyn, '0') = '0') OR tcdgbn IN ('S', 'P'))" + vbCrLf
 
                 If rsPartSlip <> "" Then
 
-                    sSql += "           AND partcd = :partcd"
+                    sSql += "           AND partcd = :partcd" + vbCrLf
                     alParm.Add(New OracleParameter("partcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(0, 1)))
 
                     If rsPartSlip.Length = 2 Then
-                        sSql += "           AND slipcd = :slipcd"
+                        sSql += "           AND slipcd = :slipcd" + vbCrLf
                         alParm.Add(New OracleParameter("slipcd", OracleDbType.Varchar2, 1, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip.Substring(1, 1)))
                     End If
 
-                    sSql += "             AND usdt  <= fn_ack_sysdate"
-                    sSql += "             AND uedt  >  fn_ack_sysdate"
+                    sSql += "             AND usdt  <= fn_ack_sysdate" + vbCrLf
+                    sSql += "             AND uedt  >  fn_ack_sysdate" + vbCrLf
                 End If
-                sSql += "         GROUP BY testcd, spccd, prptmi, frptmi, perrptmi, ferrptmi "
-                sSql += "       ) f"
-                sSql += " WHERE j.tkdt  >= :dates || '000000'"
-                sSql += "   AND j.tkdt  <= :datee || '235959'"
-                sSql += "   AND j.bcno   = r.bcno"
-                sSql += "   AND j.bcno   = j1.bcno"
-                sSql += "   AND j.spccd  = f.spccd"
-                sSql += "   AND j.spccd  = j1.spccd"
-                sSql += "   AND j.testcd = r.testcd"
+                sSql += "         GROUP BY testcd, spccd, prptmi, frptmi, perrptmi, ferrptmi " + vbCrLf
+                sSql += "       ) f" + vbCrLf
+                sSql += " WHERE j.tkdt  >= :dates || '000000'" + vbCrLf
+                sSql += "   AND j.tkdt  <= :datee || '235959'" + vbCrLf
+                sSql += "   AND j.bcno   = r.bcno" + vbCrLf
+                sSql += "   AND j.bcno   = j1.bcno" + vbCrLf
+                sSql += "   AND j.spccd  = f.spccd" + vbCrLf
+                sSql += "   AND j.spccd  = j1.spccd" + vbCrLf
+                sSql += "   AND j.testcd = r.testcd" + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDateS.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateS))
                 alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDateE.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDateE))
 
-                sSql += "   AND r.testcd = f.testcd"
+                sSql += "   AND r.testcd = f.testcd" + vbCrLf
 
                 If rsEmerYN = "Y" Then
-                    sSql += "   AND NVL(j1.statgbn, ' ') <> ' '"
+                    sSql += "   AND NVL(j1.statgbn, ' ') <> ' '" + vbCrLf
                 ElseIf rsEmerYN = "N" Then
-                    sSql += "   AND NVL(j1.statgbn, ' ') = ' '"
+                    sSql += "   AND NVL(j1.statgbn, ' ') = ' '" + vbCrLf
                 End If
 
                 If rbOverTime Then
                     'sSql += "   AND (fn_ack_date_diff(j.tkdt, j.mwdt, '3') > f.prptmi OR fn_ack_date_diff(j.tkdt, j.fndt, '3') > f.frptmi)"
                     '<20130718 정선영 수정, 일반/응급 tat 구분 
-                    sSql += "   AND (TRUNC(fn_ack_date_diff(j.tkdt, j.mwdt, '3')) > CASE WHEN j1.statgbn IN ('Y',  'E') THEN NVL(f.perrptmi, f.prptmi) ELSE f.prptmi END OR"
-                    sSql += "        TRUNC(fn_ack_date_diff(j.tkdt, j.fndt, '3')) > CASE WHEN j1.statgbn IN ('Y',  'E') THEN NVL(f.ferrptmi, f.frptmi) ELSE f.frptmi END"
-                    sSql += "       )"
+                    sSql += "   AND (TRUNC(fn_ack_date_diff(j.tkdt, j.mwdt, '3')) > CASE WHEN j1.statgbn IN ('Y',  'E') THEN NVL(f.perrptmi, f.prptmi) ELSE f.prptmi END OR" + vbCrLf
+                    sSql += "        TRUNC(fn_ack_date_diff(j.tkdt, j.fndt, '3')) > CASE WHEN j1.statgbn IN ('Y',  'E') THEN NVL(f.ferrptmi, f.frptmi) ELSE f.frptmi END" + vbCrLf
+                    sSql += "       )" + vbCrLf
                 End If
 
-                sSql += " GROUP BY nvl(r.cmtcd, '기타소견'), fn_ack_date_str (j.tkdt, 'yyyy-mm-dd')"
-                sSql += " ORDER BY nvl(r.cmtcd, '기타소견')"
+                sSql += " GROUP BY nvl(r.cmtcd, '기타소견'), fn_ack_date_str (j.tkdt, 'yyyy-mm-dd')" + vbCrLf
+                sSql += " ORDER BY nvl(r.cmtcd, '기타소견')" + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
