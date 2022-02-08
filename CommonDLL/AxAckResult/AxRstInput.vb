@@ -53,6 +53,8 @@ Public Class AxRstInput
 
     Private mbQueryView As Boolean = False
 
+    Private msWbcCount As Boolean = False
+
     Private mbColHiddenYn As Boolean
     Private mbCodeEscKey As Boolean = False
     Private sBuf3() As String
@@ -2278,7 +2280,7 @@ Public Class AxRstInput
             '------------------------------------------------
             '20220127 jhs WBC diffCount 100인지 확인하는 로직 구현
             Dim chk_WEBCount As Integer = fnChk_WBCCount()
-            If chk_WEBCount <> 100 Then
+            If chk_WEBCount <> 100 And msWbcCount Then
                 If fn_PopConfirm(moForm, "E"c, "WBC Count의 합이 100이 아닙니다." + vbCrLf + "현재 Count : " + chk_WEBCount.ToString + vbCrLf + "계속진행 하시겠습니까?") <> True Then
                     Return False
                 End If
@@ -2435,6 +2437,7 @@ Public Class AxRstInput
             Return False
         Finally
             mbLeveCellGbn = True
+            msWbcCount = False
         End Try
 
     End Function
@@ -2491,6 +2494,7 @@ Public Class AxRstInput
                     .Col = .GetColFromID("testcd")
                     Dim test As String = .Text
                     If test.StartsWith("LH121") Then
+                        msWbcCount = True
                         .Col = .GetColFromID("viewrst")
                         Dim rsSpdNum As Integer
                         If Int32.TryParse(.Text, rsSpdNum) Then

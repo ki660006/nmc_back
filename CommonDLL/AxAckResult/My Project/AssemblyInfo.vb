@@ -97,5 +97,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.401 --> 2021/09/03 : alter, critical 초기화되는 부분 수정
 'Version 3.1.10.402 --> 2021/09/08 : 미생물 alter, critical 내용 변경
 'Version 3.1.10.403 --> 2021/10/18 : 미생물 alter 내용 최종보고 시 반영 되지 않는 문제 수정 
+'Version 3.1.10.404 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정
+'Version 3.1.10.405 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정(재배포)
 
-<Assembly: AssemblyVersion("3.1.10.403")>
+<Assembly: AssemblyVersion("3.1.10.405")>
