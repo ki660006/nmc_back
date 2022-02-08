@@ -1410,9 +1410,9 @@ Public Class AxCollList_tot
 
             If al_BcInfo.Count < 1 Then Return Nothing
             '20220121 jhs 중복처방 존재하는지 확인 로직 구현
-            Dim msgContent As String = CollectSelOrder_chk_Dpl_Ord(al_BcInfo)
+            'Dim msgContent As String = CollectSelOrder_chk_Dpl_Ord(al_BcInfo)
 
-            If fn_PopConfirm(moForm, "E"c, "중복검사 " + msgContent + "가 존재합니다." + vbCrLf + "계속 진행 하시겠습니까?") = False Then Return Nothing
+            'If fn_PopConfirm(moForm, "E"c, "중복검사 " + msgContent + "가 존재합니다." + vbCrLf + "계속 진행 하시겠습니까?") = False Then Return Nothing
             '--------------------------------------
 
             With (New LISAPP.APP_C.CollReg_Web)

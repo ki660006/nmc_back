@@ -95,5 +95,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.388 --> 2021/11/29 : 적혈구제제 관리 오류 수정, 조회 화면 삭제 기능 추가(재배포)
 'Version 3.1.10.389 --> 2021/12/20 : 혈액 TAT 수혈구분 화면 추가, 혈액TAT 조회 화면 추가
 'Version 3.1.10.390 --> 2022/01/17 : 적혈구제제 관련 내용 수정 
+'Version 3.1.10.391 --> 2022/02/08 : 혈액 TAT 조회 및 오버타임 기능 추가
 
-<Assembly: AssemblyVersion("3.1.10.390")>
+<Assembly: AssemblyVersion("3.1.10.391")>

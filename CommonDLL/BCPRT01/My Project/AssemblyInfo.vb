@@ -61,6 +61,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.360 --> 2021/08/23 : 혈액은행 출고시 출력스티커 응급 위치 변경
 'Version 3.1.10.361 --> 2021/09/27 : 혈액은행 출고시 출력스티커 응급 위치 변경
 'Version 3.1.10.362 --> 2021/11/09 : 프린트 장수 추가
+'Version 3.1.10.363 --> 2022/02/08 : 코로나선별 진료소 내용 한글로 출력
 
-<Assembly: AssemblyVersion("3.1.10.362")>
+<Assembly: AssemblyVersion("3.1.10.363")>
 

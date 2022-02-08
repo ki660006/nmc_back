@@ -99,5 +99,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.403 --> 2021/10/18 : 미생물 alter 내용 최종보고 시 반영 되지 않는 문제 수정 
 'Version 3.1.10.404 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정
 'Version 3.1.10.405 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정(재배포)
+'Version 3.1.10.406 --> 2022/02/08 : wbcCount 100개인지 확인 
 
-<Assembly: AssemblyVersion("3.1.10.405")>
+<Assembly: AssemblyVersion("3.1.10.406")>

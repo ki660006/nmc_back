@@ -578,7 +578,12 @@ Public Class SATO
             End If
 
             ''< 진료과/병동/병실
-            sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            '20220207 jhs 코로나선별진료소는 한글로 변경
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            End If
 
             '< 성별/나이 
             sPrtBuf += Chr(27) + "V" + "0120" + Chr(27) + "H" + (80 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + ro_Data.SEXAGE + vbCrLf
@@ -798,7 +803,14 @@ Public Class SATO
             End If
 
             ''< 진료과/병동/병실
-            sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            '20220207 jhs 코로나선별진료소는 한글로 변경
+            'sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            End If
+
 
             '< 성별/나이 
             sPrtBuf += Chr(27) + "V" + "0120" + Chr(27) + "H" + (80 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + ro_Data.SEXAGE + vbCrLf
@@ -943,7 +955,13 @@ Public Class SATO
 
             ''< 진료과/병동/병실
             'sPrtBuf += Chr(27) + "V" + "0155" + Chr(27) + "H" + (310 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + "0" + ro_Data.DEPTWARD + vbCrLf
-            sPrtBuf += Chr(27) + "V" + "0105" + Chr(27) + "H" + (140 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            '20220207 jhs 코로나선별진료소는 한글로 변경
+            'sPrtBuf += Chr(27) + "V" + "0105" + Chr(27) + "H" + (140 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0105" + Chr(27) + "H" + (140 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0105" + Chr(27) + "H" + (140 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            End If
 
             ''< 환자명 
             sPrtBuf += Chr(27) + "V" + "0160" + Chr(27) + "H" + (210 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "M" + fnGet_Hangle_Font_3(ro_Data.PATNM) '+ vbCrLf
@@ -1026,7 +1044,13 @@ Public Class SATO
 
             ''< 진료과/병동/병실  
             'sPrtBuf = sPrtBuf + "A180,68,0,3,1,1,N," + Chr(34) + ro_Data.DEPTWARD + Chr(34) + vbCrLf
-            sPrtBuf += Chr(27) + "V" + "0490" + Chr(27) + "H" + (510).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            '20220207 jhs 코로나선별진료소는 한글로 변경
+            'sPrtBuf += Chr(27) + "V" + "0490" + Chr(27) + "H" + (510).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0490" + Chr(27) + "H" + (510).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0490" + Chr(27) + "H" + (510).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            End If
 
             ''< 성별/나이 
             'sPrtBuf = sPrtBuf + "A530,68,0,3,1,1,N," + Chr(34) + ro_Data.SEXAGE + Chr(34) + vbCrLf

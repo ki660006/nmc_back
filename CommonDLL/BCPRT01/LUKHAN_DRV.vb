@@ -523,7 +523,7 @@ Public Class LUKHAN_DRV
                     '20210103 jhs 미생물 배지바코드 글자 크기 변경
                     '< 검체명*
                     'LK_PrintWindowsFont(12 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)
-                    LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 30, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
+                    LK_PrintWindowsFont(90 + riLeftPos, 220 + iTop, 0, 20, 0, 0, 0, "굴림", sSpcNm)                                       ' 3째줄            NP swab
                     '------------------------------
 
                     '< 검사그룹 sComment21123

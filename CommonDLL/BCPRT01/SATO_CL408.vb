@@ -487,7 +487,14 @@ Public Class SATO_CL408
             End If
 
             ''< 진료과/병동/병실
-            sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (90 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + "0" + ro_Data.DEPTWARD.Replace("호", "") + vbCrLf
+            '20220207 jhs 코로나선별진료소 한글 폰트 문제로 로직 추가
+            'sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (90 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + "0" + ro_Data.DEPTWARD.Replace("호", "") + vbCrLf
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0100" + Chr(27) + "H" + (120 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "S" + ro_Data.DEPTWARD.Replace("호", "").Replace("중환자병실", "") + vbCrLf
+            End If
+            '---------------------------------
 
             '< 성별/나이 
             sPrtBuf += Chr(27) + "V" + "0120" + Chr(27) + "H" + (80 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "S" + ro_Data.SEXAGE + vbCrLf
@@ -668,7 +675,14 @@ Public Class SATO_CL408
             sPrtBuf += Chr(27) + "V" + "0150" + Chr(27) + "H" + (360 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "WB" + "0" + ro_Data.REGNO + vbCrLf
 
             ''< 진료과/병동/병실
-            sPrtBuf += Chr(27) + "V" + "0110" + Chr(27) + "H" + (70 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + "0" + ro_Data.DEPTWARD + vbCrLf
+            '20220207 jhs 코로나선별진료소 한글 폰트 문제로 로직 추가
+            'sPrtBuf += Chr(27) + "V" + "0110" + Chr(27) + "H" + (70 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + "0" + ro_Data.DEPTWARD + vbCrLf
+            If ro_Data.DEPTWARD.StartsWith("코로나") Then
+                sPrtBuf += Chr(27) + "V" + "0110" + Chr(27) + "H" + (70 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + "0" + fnGet_Hangle_Font_3(ro_Data.DEPTWARD) + vbCrLf
+            Else
+                sPrtBuf += Chr(27) + "V" + "0110" + Chr(27) + "H" + (70 + riLeftPos).ToString("D4") + Chr(27) + "L0101" + Chr(27) + "M" + "0" + ro_Data.DEPTWARD + vbCrLf
+            End If
+
 
             ''< 환자명 
             sPrtBuf += Chr(27) + "V" + "0165" + Chr(27) + "H" + (190 + riLeftPos).ToString("D4") + Chr(27) + "L0102" + Chr(27) + "M" + fnGet_Hangle_Font_1(ro_Data.PATNM) '+ vbCrLf
