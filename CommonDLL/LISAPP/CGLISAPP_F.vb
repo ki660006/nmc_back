@@ -15920,7 +15920,7 @@ Public Class APP_F_COLLTKCD
                 End If
                 sSql += " ORDER BY cmtgbnsort, cmtcd" + vbCrLf
             ElseIf riMode = 1 Then
-                sSql += "SELECT cm+vbcrlftgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn"
+                sSql += "SELECT cmtgbn_01, cmtcd, cmtcont, regdt, regid, diffday, cmtgbnsort, useyn"
                 sSql += "  FROM (" + vbCrLf
                 sSql += "        SELECT '[' || cmtgbn || '] ' ||  b.cmtgbnnm cmtgbn_01, a.cmtcd, a.cmtcont," + vbCrLf
                 sSql += "               fn_ack_date_str(a.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, a.regid, TO_NUMBER(NVL(a.delflg, '0')) * -1 diffday, b.cmtgbnsort,CASE WHEN a.delflg='0' THEN 'Y'WHEN a.delflg='1' THEN 'N' END AS USEYN" + vbCrLf
