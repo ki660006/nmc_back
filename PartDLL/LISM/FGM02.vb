@@ -705,7 +705,6 @@ Public Class FGM02
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents chkRstFn As System.Windows.Forms.CheckBox
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FGM02))
         Dim DesignerRectTracker1 As CButtonLib.DesignerRectTracker = New CButtonLib.DesignerRectTracker()
         Dim CBlendItems1 As CButtonLib.cBlendItems = New CButtonLib.cBlendItems()
@@ -763,7 +762,7 @@ Public Class FGM02
         Me.dtpDateS = New System.Windows.Forms.DateTimePicker()
         Me.cboWkGrp = New System.Windows.Forms.ComboBox()
         Me.pnlRstInfo = New System.Windows.Forms.Panel()
-        Me.cmuAction = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.cmuAction = New System.Windows.Forms.ContextMenuStrip()
         Me.mnuDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkSel = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -788,7 +787,7 @@ Public Class FGM02
         Me.btnFN = New CButtonLib.CButton()
         Me.btnMW = New CButtonLib.CButton()
         Me.btnClear = New CButtonLib.CButton()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cboDate = New System.Windows.Forms.ComboBox()
         Me.cboSpcCd = New System.Windows.Forms.ComboBox()
