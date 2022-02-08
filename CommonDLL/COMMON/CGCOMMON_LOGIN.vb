@@ -1161,6 +1161,41 @@ Namespace CommLogin
                 Return "Y"
             End Try
         End Function
+        '20220204 jhs RBC 혈액제재 코드 확인
+        '-- RBC 혈액제재
+        Public Function RBC_YN(ByVal rsComCd As String) As String
+            Try
+                Dim dr As DataRow() = m_dt.Select("clsitem = 'GRBC' AND clsval = '" + rsComCd + "'")
+                Dim alValue As New ArrayList
+
+                If dr.Length > 0 Then
+                    Return dr(0).Item("clsdesc").ToString.Trim
+                Else
+                    Return ""
+                End If
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Function
+        '----------------------------------------
+        '20220204 jhs 혈액제재 코드 확인
+        '-- 나머지 혈액제재
+        Public Function OTHER_COM_YN(ByVal rsComCd As String) As String
+            Try
+                Dim dr As DataRow() = m_dt.Select("clsitem in ( 'GFFP', 'GCRY', 'GPLT', 'GIRR' ,'GWB', 'GCRY','GPLT')" +
+                                                  " AND clsval = '" + rsComCd + "'")
+                Dim alValue As New ArrayList
+
+                If dr.Length > 0 Then
+                    Return dr(0).Item("clsdesc").ToString.Trim
+                Else
+                    Return ""
+                End If
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Function
+        '----------------------------------------
 
         Public Function BCPRTNM_Transfusion() As String
             Return "Transfusion"
