@@ -44,7 +44,6 @@ Public Class FGB27
         m_endt = dtpDateE.Text.Replace("-", "").Replace(" ", "")
 
         sbDisplay_Data()
-
     End Sub
 
     Private Function fn_Dt_Flag() As String
@@ -114,6 +113,38 @@ Public Class FGB27
                     Next
                     m_tnsjubsuno = tempTnsjubsuno '한 로우전 수혈접수번호 넣기 
                     m_seq = tempSeq
+                Next
+            End With
+
+            sbDisplay_TnsTotal()
+
+        Catch ex As Exception
+            Throw (New Exception(ex.Message, ex))
+        End Try
+    End Sub
+    Private Sub sbDisplay_TnsTotal()
+        Try
+            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_total(m_stdt, m_endt)
+
+            With Me.spdTnsTotal
+                .MaxRows = 0
+                .MaxRows = 4
+                For i = 1 To .MaxRows
+                    .Row = i
+                    Select Case i
+                        Case 1
+                            .Col = .GetColFromID("rprttype") : .Text = "Hg>10 g/dL"
+                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("hgyn").ToString()
+                        Case 2
+                            .Col = .GetColFromID("rprttype") : .Text = "CBC F/U"
+                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("cbcyn").ToString()
+                        Case 3
+                            .Col = .GetColFromID("rprttype") : .Text = "모두요청"
+                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("allyn").ToString()
+                        Case 4
+                            .Col = .GetColFromID("rprttype") : .Text = "제외 대상"
+                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("ecptyn").ToString()
+                    End Select
                 Next
             End With
         Catch ex As Exception
@@ -277,6 +308,34 @@ Public Class FGB27
 
     End Sub
 
+    Private Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click
+        Try
+            With spdTnsTranList
+                .ReDraw = False
+
+                .Row = 1
+                .MaxRows += 1
+                .Action = FPSpreadADO.ActionConstants.ActionInsertRow
+
+                For intCol As Integer = 1 To .MaxCols
+                    .Row = 0 : .Col = intCol : Dim strTmp As String = .Text
+                    .Row = 1 : .Col = intCol : .Text = strTmp
+                Next
+
+                If spdTnsTranList.MaxRows < 1 Then MsgBox("조회후 출력이 가능합니다.", MsgBoxStyle.Information, Me.Text)
+                If spdTnsTranList.ExportToExcel("TnsTranList.xls", "TnsTranList", "") Then Process.Start("TnsTranList.xls")
+
+                .Row = 1
+                .Action = FPSpreadADO.ActionConstants.ActionDeleteRow
+                .MaxRows -= 1
+
+                .ReDraw = True
+            End With
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 End Class
 
 

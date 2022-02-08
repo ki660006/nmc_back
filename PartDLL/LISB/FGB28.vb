@@ -12,9 +12,13 @@ Public Class FGB28
     Private m_stdt As String = ""
     Private m_endt As String = ""
     Private msGwaList As String = ""
+    Private msSuHyulList As String = ""
+    Private m_tnsjubsuno As String = ""
+    Private m_Bldno As String = ""
     Private Sub FGB28_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         sbGet_Data_LisCmt()
+        sbGet_Data_ListSuHyul()
         sbDisp_Init()
     End Sub
     Public Sub sbDisp_Init()
@@ -59,11 +63,29 @@ Public Class FGB28
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
     End Sub
+    Private Sub sbGet_Data_ListSuHyul()
+        Dim sFn As String = "Private Sub sbGet_Data_LisCmt"
+        Try
+            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat_Input_SuHyul()
+
+            If dt.Rows.Count > 0 Then
+                Dim sCmt As String = "".PadLeft(6, " "c) + Chr(9)
+                For iCnt As Integer = 0 To dt.Rows.Count - 1
+                    sCmt += dt.Rows(iCnt).Item("clsval").ToString().Trim() + Chr(9)
+                Next
+
+                msSuHyulList = sCmt
+            End If
+
+        Catch ex As Exception
+            fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+    End Sub
     Private Sub sbDisplay_Data()
         Try
             Dim dt As DataTable = CGDA_BT.fnGet_BloodTat_Input(m_stdt, m_endt, Me.txtRegno.Text, Me.txtTnsjubsuno.Text)
             Dim tempTnsjubsuno As String = ""
-            Dim tempSeq As String = ""
+            Dim tempBldno As String = ""
 
             With Me.spdList
                 .MaxRows = 0
@@ -72,10 +94,12 @@ Public Class FGB28
 
                 .ReDraw = False
                 .MaxRows = dt.Rows.Count
+                m_tnsjubsuno = ""
+                m_Bldno = ""
                 For i As Integer = 1 To dt.Rows.Count
+                    tempTnsjubsuno = dt.Rows(i - 1).Item("tnsjubsuno").ToString() ' 현재 로우 수혈접수번호 넣기
                     For j As Integer = 1 To dt.Columns.Count
-                        Dim iCol As Integer
-                        iCol = .GetColFromID(dt.Columns(j - 1).ColumnName.ToLower())
+                        Dim iCol As Integer = .GetColFromID(dt.Columns(j - 1).ColumnName.ToLower())
 
                         If iCol > 0 Then
                             .Col = iCol
@@ -90,18 +114,38 @@ Public Class FGB28
 
                                 .TypeComboBoxList = tempList
                                 .Text = dt.Rows(i - 1).Item("seletedRoomno").ToString()
+                            ElseIf dt.Columns(j - 1).ColumnName.ToLower() = "vartnsgbn" Then
+                                .TypeComboBoxList = msSuHyulList
+                                .Text = dt.Rows(i - 1).Item("vartnsgbn").ToString()
                             Else
                                 .Row = i
                                 .Text = dt.Rows(i - 1).Item(j - 1).ToString()
+                                If m_tnsjubsuno = tempTnsjubsuno Then ' 현재접수번호와 이전접수번호 비교 및 현재접수번호여도 시퀀스 체크 
+                                    If sbDisp_column(dt.Columns(j - 1).ColumnName.ToLower()) = False Then '특정 컬럼은 무조건 보여야하는 조건
+                                        .ForeColor = Color.White
+                                    End If
+                                End If
                             End If
                         End If
                     Next
+                    m_tnsjubsuno = tempTnsjubsuno '한 로우전 수혈접수번호 넣기 
                 Next
             End With
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
         End Try
     End Sub
+    Private Function sbDisp_column(ByVal rsColNm As String) As Boolean
+        Try
+            If rsColNm = "bldno" Or rsColNm = "vartnsgbn" Then
+                Return True
+            End If
+
+            Return False
+        Catch ex As Exception
+            Throw (New Exception(ex.Message, ex))
+        End Try
+    End Function
 
     Private Function fn_Dt_Flag() As String
         Dim sReturn As String = ""
@@ -151,6 +195,7 @@ Public Class FGB28
                         .Col = .GetColFromID("tnsjubsuno") : Dim sTnsjubsuno As String = .Text
                         .Col = .GetColFromID("regno") : Dim sRegno As String = .Text
                         .Col = .GetColFromID("roomno") : Dim sGwa As String = .Text
+                        .Col = .GetColFromID("bldno") : Dim sBldno As String = .Text.Replace("-", "")
                         .Col = .GetColFromID("vartnsgbn") : Dim sVartnsgbn As String = IIf(.Text.Trim <> "", "Y", "").ToString
 
                         Dim rsbldTatInput As BldTatInput = New BldTatInput
@@ -158,12 +203,13 @@ Public Class FGB28
                         rsbldTatInput.TNSJUBSUNO = sTnsjubsuno
                         rsbldTatInput.REGNO = sRegno
                         rsbldTatInput.GWA = sGwa
+                        rsbldTatInput.BLDNO = sBldno
                         rsbldTatInput.VARYN = sVartnsgbn
 
                         If rsGbn = "1" Then
                             chkBool = (New TnsReg).fn_BldTat_Input_Upd(rsbldTatInput)
                         ElseIf rsGbn = "2" Then
-                            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat_Input_tns(sTnsjubsuno, sRegno)
+                            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat_Input_tns(sTnsjubsuno, sRegno, sBldno)
                             If dt.Rows.Count > 0 Then
                                 chkBool = (New TnsReg).fn_BldTat_Input_Del(rsbldTatInput)
                             End If

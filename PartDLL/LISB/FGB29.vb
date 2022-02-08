@@ -1,9 +1,13 @@
 ﻿Imports System.Windows.Forms
 Imports COMMON.CommFN
+Imports COMMON.CommLogin.STU_CONST
 Imports COMMON.CommLogin.LOGIN
+Imports LISAPP.APP_BT
 Imports CDHELP.FGCDHELPFN
 
 Public Class FGB29
+    Public Shared PRG_CONST As New COMMON.CommLogin.STU_CONST
+
     Private mbQuery As Boolean = False
     Private mbEscape As Boolean = False
 
@@ -70,229 +74,212 @@ Public Class FGB29
         End Try
 
     End Sub
+    ' overTime계산
+    Private Function fn_chk_bldTAT(ByVal rsVaryn As String, ByVal rsComcd As String, ByVal rsTnsgbn As String, ByVal rsIogbn As String, ByVal rsBldAboType As String,
+                                   ByVal rsPatAboType As String, ByVal rsTAT_mi As String) As Boolean
+        Try
+            Dim chk_YN As Boolean = False
+            Dim chk_Over_Tat As Integer = 0
+
+            If PRG_CONST.RBC_YN(rsComcd) <> "" Then ' NOTE : RBC 일 때
+                If rsIogbn = "O" Then ' NOTE : 외래
+                    chk_YN = True
+                    chk_Over_Tat = 60
+                Else                  ' NOTE : 병동
+                    If rsTnsgbn = "응급" Then
+                        chk_YN = True
+                        chk_Over_Tat = 30
+                    Else
+                        If rsVaryn = "Y" Then ' NOTE : 이형 수혈 일 경우
+                            chk_Over_Tat = 5
+                        Else                  ' NOTE : 이형 수혈 아닐 경우
+                            chk_Over_Tat = 30
+                        End If
+                    End If
+                End If
+
+            Else ' NOTE : RBC 성분제재 아닐 때 
+
+                Dim chk_Other As String = PRG_CONST.OTHER_COM_YN(rsComcd)
+                Select Case chk_Other
+                    Case "FFP"
+                        chk_YN = True
+                        chk_Over_Tat = 60
+                    Case "PLT", "CRYO"       ' TODO : 기준 필요 아직 미정
+                    Case "IRRA"
+                        chk_YN = True
+                        chk_Over_Tat = 240
+                End Select
+            End If
+
+            If chk_YN Then
+                Return If(CInt(rsTAT_mi) > chk_Over_Tat, True, False)
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        Finally
+            COMMON.CommFN.MdiMain.DB_Active_YN = ""
+        End Try
+
+    End Function
 
     Private Sub sbQuery()
+        Dim sRegno As String = ""       '등록번호
+        Dim sPatnm As String = ""       '환자성명
+        Dim sSexage As String = ""      '성별/나이
+        Dim sDeptnm As String = ""      '부서명
+        Dim sDoctornm As String = ""    '의뢰의사
+        Dim sWs As String = ""          '병동/병실
+        Dim sVaryn As String = ""       '이형수혈구분
+        Dim sIogbn As String = ""       '외래구분
+        Dim sPataborh As String = ""    '환자abo
+        Dim sTnsjubsuno As String = ""  '접수번호
+        Dim sBldno As String = ""       '혈액번호
+        Dim sBldaborh As String = ""    '혈액abo
+        Dim sComcd_out As String = ""   '출고성분제재
+        Dim sComnm As String = ""       '성분제재명
+        Dim sTnsgbn As String = ""      '처방구분
+        Dim sState As String = ""       '실시구분
+        Dim sOrddt As String = ""       '처방일시
+        Dim sCrosstkdt As String = ""   '보관검체에 대한 접수일시
+        Dim sFstrgstdt As String = ""   '혈액불출요청일시
+        Dim sBefoutdt As String = ""    '가출고일시
+        Dim sOutdt As String = ""       '출고일시
+        Dim sB1 As String = ""          '접수/불출요청일시 중 큰것 ~ 가출고 시간 차
+        Dim sB2 As String = ""          '가출고 ~ 출고 시간 차
+        Dim sBtat1 As String = ""       '접수/불출요청일시 중 큰것 ~ 가출고 시간 차
+        Dim sBtat2 As String = ""       '접수/불출요청일시 중 큰것 ~ 출고 시간 차
+        Dim sBtat1_mi As String = ""    '접수/불출요청일시 중 큰것 ~ 가출고 시간 차_type_minute
+        Dim sBtat2_mi As String = ""    '접수/불출요청일시 중 큰것 ~ 출고 시간 차_type_minute
 
-        'Dim dt2 As New DataTable
-        'Dim strKey As String = ""
-        'Dim strOldKey As String = ""
+        Try
+            Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
 
-        'Dim intGrpNo As Integer = 0
-        'Dim spdBackColor As New Drawing.Color
+            DS_StatusBar.setTextStatusBar(" ▷▶▷ TAT 데이타 조회중... -> 데이타량에 따라 다소 시간이 걸리므로 잠시만 기다려 주십시오.")
 
-        'Dim sngTAT1_MI As Single = 0
-        'Dim sngTAT2_MI As Single = 0
-        'Dim sngPRPTMI As Single = 0
-        'Dim sngFRPTMI As Single = 0
-        'Dim sngTAT1_MI_exp_holi As Single = 0
+            '    Dim sEmerYN As String = ""
 
-        'Dim sTestCds As String = ""
+            '    If chkEmer.Checked And chkNotEmer.Checked Then
+            '        sEmerYN = ""
+            '    ElseIf chkEmer.Checked Then
+            '        sEmerYN = "Y"
+            '    ElseIf chkNotEmer.Checked Then
+            '        sEmerYN = "N"
+            '    End If
 
-        'Try
-        '    Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
+            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat(Me.dtpDate0.Text.Replace("-", ""), Me.dtpDate1.Text.Replace("-", ""))
 
-        '    DS_StatusBar.setTextStatusBar(" ▷▶▷ TAT 데이타 조회중... -> 데이타량에 따라 다소 시간이 걸리므로 잠시만 기다려 주십시오.")
+            '    Dim sSelect As String = ""
 
-        '    Dim sEmerYN As String = ""
+            '    If Me.rdoBaseTkDt.Checked Then
+            '        sSortBy = "tkdt, bcno, sort_slip, sort_test, testcd"
+            '    Else
+            '        sSortBy = "sort_slip, slipcd, tkdt, sort_test, testcd"
+            '    End If
 
-        '    If chkEmer.Checked And chkNotEmer.Checked Then
-        '        sEmerYN = ""
-        '    ElseIf chkEmer.Checked Then
-        '        sEmerYN = "Y"
-        '    ElseIf chkNotEmer.Checked Then
-        '        sEmerYN = "N"
-        '    End If
+            '    a_dr = dt.Select(sSelect, sSortBy)
 
-        '    sTestCds = Ctrl.Get_Code_Tag(Me.txtSelTest)
+            '    dt = Fn.ChangeToDataTable(a_dr)
 
-        '    If sTestCds.Length > 0 Then
-        '        sTestCds = "'" + sTestCds.Replace(",", "','") + "'"
-        '    End If
+            '    If dt.Rows.Count > 0 Then
+            '        mbQuery = True
+            '        pnlMainBtn.Enabled = False
 
-        '    Dim dt_Cmt As New DataTable
-        '    Dim objCollTkCd As New LISAPP.APP_F_COLLTKCD
+            '        Dim bldFlag As Boolean = False
 
-        '    dt_Cmt = objCollTkCd.fnGet_CollTK_Cancel_ContInfo("C")
-        '    Dim dt As DataTable = fnGet_Tat_List(sTestCds, Me.dtpDate0.Text.Replace("-", ""), Me.dtpDate1.Text.Replace("-", ""),
-        '                                         IIf(Me.rdoBaseTst.Checked, "", "ORDER").ToString(),
-        '                                         Me.chkOVT.Checked, Ctrl.Get_Code(Me.cboSlip), sEmerYN, Me.txtRegNo.Text, Me.chkTATCont.Checked,
-        '                                         Me.chkIncludeChild.Checked)
+            If dt.Rows.Count > 0 Then
+                With spdList
+                    .ReDraw = False
+                    .MaxRows = dt.Rows.Count
+                    For ix As Integer = 0 To dt.Rows.Count - 1
+                        Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
+                        Application.DoEvents()
 
-        '    Dim sSelect As String = ""
+                        ' 중간 취소
+                        If mbEscape = True Then Exit For
+                        DS_StatusBar.setTextStatusBar(" ▷▶▷ TAT 리스트 표시중... [" & (ix + 1).ToString & "/" & dt.Rows.Count.ToString & "] ->  표시 취소는 Esc Key를 눌러 주십시오.")
 
-        '    If Me.txtPatnm.Text <> "" Then sSelect = "patnm LIKE '" + Me.txtPatnm.Text.Trim() + "%'"
+                        .Row = ix + 1
+                        sRegno = dt.Rows(ix).Item("regno").ToString.Trim
+                        sPatnm = dt.Rows(ix).Item("patnm").ToString.Trim
+                        sSexage = dt.Rows(ix).Item("sexage").ToString.Trim
+                        sDeptnm = dt.Rows(ix).Item("deptnm").ToString.Trim
+                        sDoctornm = dt.Rows(ix).Item("doctornm").ToString.Trim
+                        sWs = dt.Rows(ix).Item("ws").ToString.Trim
+                        sVaryn = dt.Rows(ix).Item("varyn").ToString.Trim
+                        sIogbn = dt.Rows(ix).Item("iogbn").ToString.Trim
+                        sPataborh = dt.Rows(ix).Item("pataborh").ToString.Trim
+                        sTnsjubsuno = dt.Rows(ix).Item("tnsjubsuno").ToString.Trim
+                        sBldno = dt.Rows(ix).Item("bldno").ToString.Trim
+                        sBldaborh = dt.Rows(ix).Item("bldaborh").ToString.Trim
+                        sComcd_out = dt.Rows(ix).Item("comcd_out").ToString.Trim
+                        sComnm = dt.Rows(ix).Item("comnm").ToString.Trim
+                        sTnsgbn = dt.Rows(ix).Item("tnsgbn").ToString.Trim
+                        sState = dt.Rows(ix).Item("state").ToString.Trim
+                        sOrddt = dt.Rows(ix).Item("orddt").ToString.Trim
+                        sCrosstkdt = dt.Rows(ix).Item("crosstkdt").ToString.Trim
+                        sFstrgstdt = dt.Rows(ix).Item("fstrgstdt").ToString.Trim
+                        sBefoutdt = dt.Rows(ix).Item("befoutdt").ToString.Trim
+                        sOutdt = dt.Rows(ix).Item("outdt").ToString.Trim
+                        sB1 = dt.Rows(ix).Item("b1").ToString.Trim
+                        sB2 = dt.Rows(ix).Item("b2").ToString.Trim
+                        sBtat1 = dt.Rows(ix).Item("btat1").ToString.Trim
+                        sBtat2 = dt.Rows(ix).Item("btat2").ToString.Trim
+                        sBtat1_mi = dt.Rows(ix).Item("btat1_mi").ToString.Trim
+                        sBtat2_mi = dt.Rows(ix).Item("btat2_mi").ToString.Trim
 
-        '    If Me.txtRegNo.Text <> "" Then sSelect += IIf(sSelect = "", "", " AND ").ToString + " regno = '" + Me.txtRegNo.Text + "'"
+                        .Col = .GetColFromID("regno") : .Text = sRegno
+                        .Col = .GetColFromID("patnm") : .Text = sPatnm
+                        .Col = .GetColFromID("sexage") : .Text = sSexage
+                        .Col = .GetColFromID("deptnm") : .Text = sDeptnm
+                        .Col = .GetColFromID("doctornm") : .Text = sDoctornm
+                        .Col = .GetColFromID("ws") : .Text = sWs
+                        .Col = .GetColFromID("varyn") : .Text = sVaryn
+                        .Col = .GetColFromID("pataborh") : .Text = sPataborh
+                        .Col = .GetColFromID("tnsjubsuno") : .Text = sTnsjubsuno
+                        .Col = .GetColFromID("bldno") : .Text = sBldno
+                        .Col = .GetColFromID("bldaborh") : .Text = sBldaborh
+                        .Col = .GetColFromID("comcd_out") : .Text = sComcd_out
+                        .Col = .GetColFromID("comnm") : .Text = sComnm
+                        .Col = .GetColFromID("tnsgbn") : .Text = sTnsgbn
+                        .Col = .GetColFromID("state") : .Text = sState
+                        .Col = .GetColFromID("orddt") : .Text = sOrddt
+                        .Col = .GetColFromID("crosstkdt") : .Text = sCrosstkdt
+                        .Col = .GetColFromID("fstrgstdt") : .Text = sFstrgstdt
+                        .Col = .GetColFromID("befoutdt") : .Text = sBefoutdt
+                        .Col = .GetColFromID("outdt") : .Text = sOutdt
+                        .Col = .GetColFromID("b1") : .Text = sB1
+                        .Col = .GetColFromID("b2") : .Text = sB2
+                        .Col = .GetColFromID("btat1") : .Text = sBtat1 : If fn_chk_bldTAT(sVaryn, sComcd_out, sTnsgbn, sIogbn, sPataborh, sBldaborh, sBtat1_mi) Then .BackColor = System.Drawing.Color.Red : .FontBold = True
+                        .Col = .GetColFromID("btat2") : .Text = sBtat2 : If fn_chk_bldTAT(sVaryn, sComcd_out, sTnsgbn, sIogbn, sPataborh, sBldaborh, sBtat2_mi) Then .BackColor = System.Drawing.Color.Red : .FontBold = True
 
-        '    If Me.rdoIogbnI.Checked Then
-        '        sSelect += IIf(sSelect = "", "", " AND ").ToString + "iogbn IN ('I', 'D', 'E')"
-        '        If Me.txtDeptWard.Text <> "" Then sSelect += IIf(sSelect = "", "", " AND ").ToString + "wardno IN ('" + Me.txtDeptWard.Tag.ToString.Replace(",", "','").ToString + "')"
-        '    ElseIf Me.rdoIogbnO.Checked Then
-        '        sSelect += IIf(sSelect = "", "", " AND ").ToString + "iogbn NOT IN ('I', 'D', 'E')"
-        '        If Me.txtDeptWard.Text <> "" Then sSelect += IIf(sSelect = "", "", " AND ").ToString + "deptcd IN ('" + Me.txtDeptWard.Tag.ToString.Replace(",", "','").ToString + "')"
-        '    End If
-
-        '    If Me.chkTATCont.Checked Then
-        '        sSelect += IIf(sSelect = "", "", " AND ").ToString + "TRIM(cmtcont) <> '[]'"
-        '    End If
-        '    '< add freety 2007/01/23 : 정렬기준 접수일시와 검체번호로 분리
-        '    Dim sSortBy As String = ""
-        '    Dim a_dr() As DataRow
-
-        '    If Me.rdoBaseTkDt.Checked Then
-        '        sSortBy = "tkdt, bcno, sort_slip, sort_test, testcd"
-        '    Else
-        '        sSortBy = "sort_slip, slipcd, tkdt, sort_test, testcd"
-        '    End If
-
-        '    a_dr = dt.Select(sSelect, sSortBy)
-
-        '    dt = Fn.ChangeToDataTable(a_dr)
-        '    '>
-
-        '    If dt.Rows.Count > 0 Then
-        '        mbQuery = True
-        '        pnlMainBtn.Enabled = False
-
-        '        Dim bldFlag As Boolean = False
-
-        '        With spdList
-        '            .MaxRows = 0
-        '            For ix As Integer = 0 To dt.Rows.Count - 1
-        '                Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
-        '                Application.DoEvents()
-
-        '                ' 중간 취소
-        '                If mbEscape = True Then Exit For
-        '                DS_StatusBar.setTextStatusBar(" ▷▶▷ TAT 리스트 표시중... [" & (ix + 1).ToString & "/" & dt.Rows.Count.ToString & "] ->  표시 취소는 Esc Key를 눌러 주십시오.")
-
-        '                .MaxRows += 1 : .Row = .MaxRows
-        '                strKey = dt.Rows(ix).Item("bcno").ToString.Trim
-        '                If strKey <> strOldKey Then
-        '                    If strOldKey <> "" Then Fn.DrawBorderLineTop(spdList, .MaxRows)
-        '                    .Col = .GetColFromID("regno") : .Text = dt.Rows(ix).Item("regno").ToString.Trim
-        '                    .Col = .GetColFromID("patnm") : .Text = dt.Rows(ix).Item("patnm").ToString.Trim
-        '                    .Col = .GetColFromID("sexage") : .Text = dt.Rows(ix).Item("sa").ToString.Trim
-        '                    .Col = .GetColFromID("deptnm") : .Text = dt.Rows(ix).Item("deptcd").ToString.Trim
-        '                    .Col = .GetColFromID("doctornm") : .Text = dt.Rows(ix).Item("doctornm").ToString.Trim
-        '                    .Col = .GetColFromID("wardroom") : .Text = dt.Rows(ix).Item("ws").ToString.Trim
-        '                    .Col = .GetColFromID("spcnmd") : .Text = dt.Rows(ix).Item("spcnmd").ToString.Trim
-        '                    .Col = .GetColFromID("bcno") : .Text = Fn.BCNO_View(strKey, True)
+                    Next
+                End With
+            Else
+                Me.spdList.MaxRows = 0
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "해당 데이타가 없습니다.")
+            End If
 
 
-        '                    intGrpNo += 1
-        '                    If intGrpNo Mod 2 = 1 Then
-        '                        spdBackColor = System.Drawing.Color.White
-        '                    Else
-        '                        spdBackColor = System.Drawing.Color.FromArgb(255, 251, 244)
-        '                    End If
 
-        '                    strOldKey = strKey
-        '                End If
 
-        '                '배경색 설정
-        '                .Row = ix + 1 : .Row2 = ix + 1
-        '                .Col = 1 : .Col2 = .MaxCols
-        '                .BlockMode = True
-        '                .BackColor = spdBackColor
-        '                .BlockMode = False
 
-        '                .Row = .MaxRows
-        '                .Col = .GetColFromID("tnmd") : .Text = dt.Rows(ix).Item("tnmd").ToString.Trim
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
 
-        '                .Col = .GetColFromID("statgbn")
-        '                If dt.Rows(ix).Item("statgbn").ToString.Trim <> "" Then  '기존 If dt.Rows(ix).Item("statgbn").ToString.Trim <> "Y" Then
-        '                    .ForeColor = System.Drawing.Color.Red : .FontBold = True
-        '                    .Text = "Y"
-        '                    .set_RowHeight(.Row, 12.27)
-        '                Else
-        '                    .Text = ""
-        '                End If
-
-        '                .Col = .GetColFromID("tkdt") : .Text = dt.Rows(ix).Item("tkdt").ToString.Trim
-        '                .ForeColor = System.Drawing.Color.FromArgb(0, 0, 0)
-        '                If intGrpNo Mod 2 = 1 Then
-        '                    .BackColor = System.Drawing.Color.FromArgb(244, 244, 244)
-        '                Else
-        '                    .BackColor = System.Drawing.Color.FromArgb(238, 238, 238)
-        '                End If
-
-        '                .Col = .GetColFromID("t1") : .Text = dt.Rows(ix).Item("t1").ToString.Trim
-        '                .Col = .GetColFromID("t2") : .Text = dt.Rows(ix).Item("t2").ToString.Trim
-
-        '                .ForeColor = System.Drawing.Color.FromArgb(0, 64, 0)
-        '                If intGrpNo Mod 2 = 1 Then
-        '                    .BackColor = System.Drawing.Color.FromArgb(234, 255, 234)
-        '                Else
-        '                    .BackColor = System.Drawing.Color.FromArgb(234, 249, 228)
-        '                End If
-
-        '                .Col = .GetColFromID("fndt") : .Text = dt.Rows(ix).Item("fndt").ToString.Trim
-        '                .ForeColor = System.Drawing.Color.FromArgb(0, 0, 94)
-        '                If intGrpNo Mod 2 = 1 Then
-        '                    .BackColor = System.Drawing.Color.FromArgb(234, 234, 255)
-        '                Else
-        '                    .BackColor = System.Drawing.Color.FromArgb(234, 228, 249)
-        '                End If
-
-        '                sngTAT1_MI = CSng(IIf(dt.Rows(ix).Item("tat1_mi").ToString.Trim = "", 0, dt.Rows(ix).Item("tat1_mi").ToString.Trim))
-        '                sngTAT2_MI = CSng(IIf(dt.Rows(ix).Item("tat2_mi").ToString.Trim = "", 0, dt.Rows(ix).Item("tat2_mi").ToString.Trim))
-        '                sngPRPTMI = CSng(IIf(dt.Rows(ix).Item("prptmi").ToString.Trim = "", 0, dt.Rows(ix).Item("prptmi").ToString.Trim))
-        '                sngFRPTMI = CSng(IIf(dt.Rows(ix).Item("frptmi").ToString.Trim = "", 0, dt.Rows(ix).Item("frptmi").ToString.Trim))
-
-        '                .Col = .GetColFromID("tat1") : .Text = dt.Rows(ix).Item("tat1").ToString.Trim
-        '                '<<<20170511 TAT시간에 걸린것 이 소수점이 있을경우 오버타임으로 계산되는것 막기 위해 소수점은버림 추가 
-        '                If Math.Truncate(sngTAT1_MI) > sngPRPTMI And sngPRPTMI > 0 Then
-        '                    .ForeColor = System.Drawing.Color.Red
-        '                    .BackColor = System.Drawing.Color.FromArgb(255, 202, 202)
-
-        '                    .Col = .GetColFromID("ovt1") : .Text = (Fix(sngTAT1_MI - sngPRPTMI)).ToString
-        '                End If
-
-        '                .Col = .GetColFromID("tat3") : .Text = dt.Rows(ix).Item("tat3").ToString.Trim
-        '                '<<<20170511 TAT시간에 걸린것 이 소수점이 있을경우 오버타임으로 계산되는것 막기 위해 소수점은버림 추가 
-        '                If Math.Truncate(sngTAT2_MI) > sngFRPTMI And sngFRPTMI > 0 Then
-        '                    .ForeColor = System.Drawing.Color.Red
-        '                    .BackColor = System.Drawing.Color.FromArgb(255, 202, 202)
-
-        '                    .Col = .GetColFromID("ovt2") : .Text = (Fix(sngTAT2_MI - sngFRPTMI)).ToString
-        '                End If
-
-        '                .Col = .GetColFromID("testcd") : .Text = dt.Rows(ix).Item("testcd").ToString.Trim
-        '                .Col = .GetColFromID("spccd") : .Text = dt.Rows(ix).Item("spccd").ToString.Trim
-        '                .Col = .GetColFromID("rstnm") : .Text = dt.Rows(ix).Item("rstnm").ToString.Trim
-
-        '                .Col = .GetColFromID("tat1_mi") : .Text = sngTAT1_MI.ToString
-        '                .Col = .GetColFromID("tat2_mi") : .Text = sngTAT2_MI.ToString
-        '                .Col = .GetColFromID("prptmi") : .Text = sngPRPTMI.ToString
-        '                .Col = .GetColFromID("frptmi") : .Text = sngFRPTMI.ToString
-        '                .Col = .GetColFromID("partcd") : .Text = dt.Rows(ix).Item("slipcd").ToString.Trim
-
-        '            Next
-        '        End With
-
-        '        Debug.WriteLine(dt2.Rows.Count)
-
-        '    Else
-        '        Me.spdList.MaxRows = 0
-        '        CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "해당 데이타가 없습니다.")
-        '    End If
-
-        'Catch ex As Exception
-        '    CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
-
-        'Finally
-        '    DS_StatusBar.setTextStatusBar("")
-        '    Cursor.Current = System.Windows.Forms.Cursors.Default
-
-        '    If mbEscape = True Then
-        '        CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "리스트 표시를 중단 했습니다.")
-        '    End If
-
-        '    mbQuery = False
-        '    mbEscape = False
-        '    pnlMainBtn.Enabled = True
-        'End Try
+        Finally
+            DS_StatusBar.setTextStatusBar("")
+            Cursor.Current = System.Windows.Forms.Cursors.Default
+            If mbEscape = True Then
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "리스트 표시를 중단 했습니다.")
+            End If
+            mbQuery = False
+            mbEscape = False
+            pnlMainBtn.Enabled = True
+        End Try
 
     End Sub
 

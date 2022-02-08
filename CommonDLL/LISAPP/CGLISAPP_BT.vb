@@ -4614,46 +4614,49 @@ Namespace APP_BT
 
                 '2019-12-13 JJH 검사결과가 없어도 검사명은 보이도록
                 sSql = ""
-                sSql += " SELECT DISTINCT " + vbCrLf
-                sSql += "        a.testcd, a.spccd, a.tnmd,    " + vbCrLf
-                sSql += "        (SELECT viewrst " + vbCrLf
-                sSql += "           FROM lr010m  " + vbCrLf
-                sSql += "          WHERE regno = b.regno " + vbCrLf
-                sSql += "            AND testcd = b.testcd " + vbCrLf
-                sSql += "            AND rstdt  = b.fndt   " + vbCrLf
-                sSql += "            AND rstflg IN ('2', '3') " + vbCrLf
-                sSql += "            AND ROWNUM = 1 ) viewrst, " + vbCrLf
-                sSql += "         fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,  " + vbCrLf
-                sSql += "         fn_ack_date_str(b.fndt, 'yyyy-mm-dd hh24:mi') fndt," + vbCrLf
-                sSql += "         b.regno, a.dispseq, a.bbgbn," + vbCrLf
-                sSql += "         TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE(b.fndt, 'yyyymmddhh24miss'))) months_between" + vbCrLf
-                sSql += "    FROM (SELECT f6.tnmd, f4.testcd, f4.spccd, f4.bbgbn,  f4.dispseq" + vbCrLf
-                sSql += "            FROM LF140M f4, LF060M f6 " + vbCrLf
+                sSql += " SELECT DISTINCT                                                                                    " + vbCrLf
+                sSql += "        a.testcd, a.spccd, a.tnmd,                                                                  " + vbCrLf
+                sSql += "        (SELECT viewrst                                                                             " + vbCrLf
+                sSql += "           FROM lr010m                                                                              " + vbCrLf
+                sSql += "          WHERE regno = b.regno                                                                     " + vbCrLf
+                sSql += "            AND testcd = b.testcd                                                                   " + vbCrLf
+                sSql += "            AND rstdt  = (select max(rstdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd )                                                                     " + vbCrLf
+                sSql += "            AND rstflg IN ('2', '3')                                                                " + vbCrLf
+                sSql += "            AND ROWNUM = 1 ) viewrst,                                                               " + vbCrLf
+                'sSql += "         fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,                                        " + vbCrLf
+                sSql += "         fn_ack_date_str((select max(tkdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd ), 'yyyy-mm-dd hh24:mi') tkdt,                                        " + vbCrLf
+                'sSql += "         fn_ack_date_str(b.fndt, 'yyyy-mm-dd hh24:mi') fndt,                                        " + vbCrLf
+                sSql += "         fn_ack_date_str((select max(rstdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd ), 'yyyy-mm-dd hh24:mi') fndt,                                        " + vbCrLf
+                sSql += "         b.regno, a.dispseq, a.bbgbn,                                                               " + vbCrLf
+                sSql += "         TO_CHAR(MONTHS_BETWEEN(SYSDATE, TO_DATE((select max(rstdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd ), 'yyyymmddhh24miss'))) months_between       " + vbCrLf
+                sSql += "    FROM (SELECT f6.tnmd, f4.testcd, f4.spccd, f4.bbgbn,  f4.dispseq                                " + vbCrLf
+                sSql += "            FROM LF140M f4, LF060M f6                                                               " + vbCrLf
                 '20210721 jhs 하드코딩 되어있는 부분 수정 - 기초마스터 혈액은행 관련 검사 표시순서가 적혀져 있는 것만 최근검사 항목으로 조회 
                 'sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142') " + vbCrLf
                 'sSql += "           WHERE F4.TESTCD IN ('LH103','LH109','LH21103','LH212','LB110','LB112','LB151','LB142','LG126') " + vbCrLf
-                sSql += "           WHERE F4.TESTCD IN (selecT testcd from lf140m where replace(dispseq,' ', '') <> ' ') " + vbCrLf
+                sSql += "           WHERE F4.TESTCD IN (selecT testcd from lf140m where replace(dispseq,' ', '') <> ' ')     " + vbCrLf
                 '----------------------------------------------------------------------------------
-                sSql += "             AND F4.TESTCD = F6.TESTCD " + vbCrLf
-                sSql += "             AND F4.SPCCD  = F6.SPCCD  " + vbCrLf
-                sSql += "             AND F6.UEDT  >= FN_ACK_SYSDATE() " + vbCrLf
-                sSql += "         ) A " + vbCrLf
-                sSql += "    LEFT JOIN " + vbCrLf
-                sSql += "         (SELECT r.regno, r.testcd, r.spccd, " + vbCrLf
-                sSql += "                 MAX(r.tkdt) as tkdt, MAX(r.rstdt) as fndt " + vbCrLf
-                sSql += "            FROM LR010M r, lj010m j, lf140m f" + vbCrLf
-                sSql += "           WHERE j.regno = :regno " + vbCrLf
+                sSql += "             AND F4.TESTCD = F6.TESTCD                                                              " + vbCrLf
+                sSql += "             AND F4.SPCCD  = F6.SPCCD                                                               " + vbCrLf
+                sSql += "             AND F6.UEDT  >= FN_ACK_SYSDATE()                                                       " + vbCrLf
+                sSql += "         ) A                                                                                        " + vbCrLf
+                sSql += "    LEFT JOIN                                                                                       " + vbCrLf
+                sSql += "         (SELECT r.regno, r.testcd, r.spccd,                                                        " + vbCrLf
+                sSql += "                        max(r.bcno) lastbcno                                                           " + vbCrLf
+                'sSql += "                 MAX(r.tkdt) as tkdt, MAX(r.rstdt) as fndt                                          " + vbCrLf
+                sSql += "            FROM LR010M r, lj010m j, lf140m f                                                       " + vbCrLf
+                sSql += "           WHERE j.regno = :regno                                                                   " + vbCrLf
 
                 alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
 
-                sSql += "             AND j.spcflg = '4' " + vbCrLf
-                sSql += "             AND r.testcd = f.testcd " + vbCrLf
-                sSql += "             AND r.spccd  = f.spccd  " + vbCrLf
-                sSql += "             AND r.bcno   = j.bcno   " + vbCrLf
-                sSql += "             AND r.rstflg IN ('2', '3')" + vbCrLf
-                sSql += "        GROUP BY r.regno, r.testcd, r.spccd " + vbCrLf
-                sSql += "         ) B ON a.testcd = b.testcd AND a.spccd = b.spccd" + vbCrLf
-                sSql += "    ORDER BY a.dispseq " + vbCrLf
+                sSql += "             AND j.spcflg = '4'                                                                     " + vbCrLf
+                sSql += "             AND r.testcd = f.testcd                                                                " + vbCrLf
+                sSql += "             AND r.spccd  = f.spccd                                                                 " + vbCrLf
+                sSql += "             AND r.bcno   = j.bcno                                                                  " + vbCrLf
+                sSql += "             AND r.rstflg IN ('2', '3')                                                             " + vbCrLf
+                sSql += "        GROUP BY r.regno, r.testcd, r.spccd                                                         " + vbCrLf
+                sSql += "         ) B ON a.testcd = b.testcd AND a.spccd = b.spccd                                           " + vbCrLf
+                sSql += "    ORDER BY a.dispseq                                                                              " + vbCrLf
 
 
                 DbCommand()
@@ -5258,6 +5261,129 @@ Namespace APP_BT
             End Try
 
         End Function
+        '20220124 jhs 혈액 TAT  쿼리 
+        ' 적혈구제제 관리 데이터 가져오기
+        Public Shared Function fnGet_BloodTat(ByVal rsStDt As String, ByVal rsEnDt As String) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mg(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+
+            Try
+                sSql = " "
+                sSql += " selecT b4.tnsjubsuno, b4.regno, b4.patnm, b4.sex || '/' || b4.age sexage                          " + vbCrLf
+                sSql += " , nvl(bc2.gwa, fn_ack_get_dept_name(b4.iogbn, b4.deptcd)) deptnm                                  " + vbCrLf '이형수혈에서 데이터 변경 없으면 그냥 접수한 진료과로 표시
+                sSql += " , b4.iogbn ,  bc2.varyn                                                                           " + vbCrLf ' 이형수혈 여부
+                sSql += " , b3.comcd_out, b43.spccd                                                                         " + vbCrLf
+                sSql += " , FN_ACK_GET_WARD_ABBR(b4.wardno) || '/' || b4.roomno ws                                          " + vbCrLf
+                sSql += " , fn_ack_get_dr_name(b4.doctorcd) doctornm                                                        " + vbCrLf
+                sSql += " , case when b4.tnsgbn = '1' then '준비'                                                           " + vbCrLf
+                sSql += "        when b4.tnsgbn = '2' then '수혈'                                                           " + vbCrLf
+                sSql += "        when b4.tnsgbn = '3' then '응급'                                                           " + vbCrLf
+                sSql += "        when b4.tnsgbn = '4' then 'Irra'                                                           " + vbCrLf
+                sSql += "        else '' end tnsgbn                                                                         " + vbCrLf
+                sSql += " , case when b43.state = '1' then '접수'                                                           " + vbCrLf
+                sSql += "        when b43.state = '2' then '검사중'                                                         " + vbCrLf
+                sSql += "        when b43.state = '3' then '가출고'                                                         " + vbCrLf
+                sSql += "        when b43.state = '4' then '출고'                                                           " + vbCrLf
+                sSql += "        when b43.state = '5' then '반납'                                                           " + vbCrLf
+                sSql += "        when b43.state = '6' then '폐기'                                                           " + vbCrLf
+                sSql += "        else '' end state                                                                          " + vbCrLf
+                sSql += " ,  fn_ack_get_bldno_full(b43.bldno) bldno                                                         " + vbCrLf
+                sSql += " , b43.comnm, b43.abo || b43.rh  bldaborh                                                          " + vbCrLf
+                sSql += " ,  r7.abo || r7.rh pataborh                                                                       " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b4.orddt, 'yyyy-mm-dd hh24:mi') orddt                                          " + vbCrLf
+                sSql += " ,  fn_ack_date_str(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'), 'yyyy-mm-dd hh24:mi') FSTRGSTDT " + vbCrLf
+                sSql += " ,  fn_ack_date_str_bld_gt(b4.regno,nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss'))) crosstkdt " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b4.jubsudt, 'yyyy-mm-dd hh24:mi') jubsudt                                      " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b3.befoutdt, 'yyyy-mm-dd hh24:mi') befoutdt                                    " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b3.outdt, 'yyyy-mm-dd hh24:mi') outdt                                          " + vbCrLf
+                sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '1')  b1             " + vbCrLf
+                sSql += " ,  fn_ack_date_diff(b3.befoutdt, b3.outdt, '1') b2                                                                                                                                                                            " + vbCrLf
+                sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '1')  btat1          " + vbCrLf
+                sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.outdt   , '1')  btat2          " + vbCrLf
+                sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '3')  btat1_mi       " + vbCrLf
+                sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.outdt   , '3')  btat2_mi       " + vbCrLf
+                sSql += "  from lb040m b4                                                                                " + vbCrLf
+                sSql += " inner join lb043m b43                                                                          " + vbCrLf
+                sSql += "    on b4.tnsjubsuno = b43.tnsjubsuno                                                           " + vbCrLf
+                sSql += " inner join lb030m b3                                                                           " + vbCrLf
+                sSql += "    on b4.tnsjubsuno = B3.TNSJUBSUNO and b43.bldno = b3.bldno                                   " + vbCrLf
+                sSql += " inner join (selecT o.patno, O.orddate, o.ordseqno, C.FSTRGSTDT                                 " + vbCrLf
+                sSql += "               from VW_ACK_OCS_ORD_INFO o LEFT OUTER JOIN EMR.MNRMDEEX c                        " + vbCrLf
+                sSql += "                                   ON c.prcpdd = o.orddate                                      " + vbCrLf
+                sSql += "                                   And c.instcd = '031'                                         " + vbCrLf
+                sSql += "                                   /*AND c.prcphistno = o.prcphistno*/                          " + vbCrLf
+                sSql += "                                   And c.execprcpuniqno = o.ordseqno                            " + vbCrLf
+                sSql += "                                   AND c.prcpno = o.prcpno                                      " + vbCrLf
+                sSql += "               WHERE o.instcd = '031'                                                           " + vbCrLf
+                sSql += "               --AND o.hopedate >= '20211107'                                                   " + vbCrLf
+                sSql += "               --And o.hopedate <= '20211108'                                                   " + vbCrLf
+                sSql += "               AND o.prcpclscd = 'B4'                                                           " + vbCrLf
+                sSql += "               And o.hscttempprcpflag = 'N'                                                     " + vbCrLf
+                sSql += "               AND o.execprcphistcd = 'O'                                                       " + vbCrLf
+                sSql += "               And nvl(o.discyn, 'N') = 'N') vw_ord                                             " + vbCrLf
+                sSql += "    on b43.regno = vw_ord.patno                                                                 " + vbCrLf
+                sSql += "   and substr(b43.fkocs, 12,8) = vw_ord.orddate                                                 " + vbCrLf
+                sSql += "   and substr(b43.fkocs, 21,9) = vw_ord.ordseqno                                                " + vbCrLf
+                sSql += " inner join lr070m r7                                                                           " + vbCrLf
+                sSql += "    on r7.regno = b4.regno                                                                      " + vbCrLf
+                'sSql += " inner join lr010m r1                                                                           " + vbCrLf
+                'sSql += "    on b4.bcno_keep = r1.bcno                                                                   " + vbCrLf
+                'sSql += "   And r1.testcd In ('LB141', 'LB142')                                                          " + vbCrLf
+                sSql += "  left join lbc20m bc2                                                                          " + vbCrLf '이형수혈 체크 테이블 
+                sSql += "   on B43.TNSJUBSUNO = bc2.tnsjubsuno and b43.bldno = bc2.bldno                                 " + vbCrLf
+                sSql += " where b4.jubsudt >= :dates                                                                     " + vbCrLf
+                sSql += "   And b4.jubsudt <= :datee || '235995'                                                         " + vbCrLf
+                sSql += " order by b4.tnsjubsuno , b3.bldno                                                              " + vbCrLf
+
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '---------------------------------------------------------
+
+        Public Shared Function fnGet_trans_mgt_total(ByVal rsStDt As String, ByVal rsEnDt As String) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mgt_total(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql = " "
+                sSql += " select sum(hgyn) hgyn,                                           " + vbCrLf
+                sSql += "        sum(cbcyn) cbcyn,                                         " + vbCrLf
+                sSql += "        sum(allyn) allyn,                                         " + vbCrLf
+                sSql += "        sum(ecptyn) ecptyn                                        " + vbCrLf
+                sSql += "   from (selecT case when hgyn   = 'Y' then 1 else 0 end hgyn,    " + vbCrLf
+                sSql += "                case when cbcyn  = 'Y' then 1 else 0 end cbcyn,   " + vbCrLf
+                sSql += "                case when allyn  = 'Y' then 1 else 0 end allyn,   " + vbCrLf
+                sSql += "                case when ecptyn = 'Y' then 1 else 0 end ecptyn   " + vbCrLf
+                sSql += "          from lbc10m                                             " + vbCrLf
+                sSql += "         where 1=1                                                " + vbCrLf
+                sSql += "           and regdt >= :datas                                    " + vbCrLf
+                sSql += "           and regdt <= :datee || '235959')                       " + vbCrLf
+
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
         '--------------------------------------------
 
         '20211203 jhs 혈액tat 입력 
@@ -5269,43 +5395,49 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "selecT b4.tnsjubsuno, fn_ack_date_str(b4.jubsudt, 'yyyy-MM-dd hh24:mi:ss') jubsudt, b4.regno ,b4.patnm , b4.sex || '/' || b4.age sexage " + vbCrLf
-                sSql += "     , fn_ack_get_dr_name(b4.doctorcd) drnm " + vbCrLf
-                sSql += "     , FN_ACK_GET_ROOM_NAME(b4.wardno,  b4.roomno) roomno " + vbCrLf
-                sSql += "     , fn_ack_get_dept_name(b4.iogbn, b4.deptcd)  deptnm " + vbCrLf
-                sSql += "     ,  CASE WHEN b4.tnsgbn = '1' THEN 'P' " + vbCrLf
-                sSql += "             WHEN b4.tnsgbn = '2' THEN 'T' " + vbCrLf
-                sSql += "             WHEN b4.tnsgbn = '3' THEN 'E' " + vbCrLf
-                sSql += "             WHEN b4.tnsgbn = '4' THEN 'I' end   tnsgbn " + vbCrLf
-                sSql += "      , b42.comcd , f12.comnmd " + vbCrLf
-                sSql += "      , nvl(bc2.gwa, FN_ACK_GET_ROOM_NAME(b4.wardno, b4.roomno)) seletedRoomno " + vbCrLf
-                sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn" + vbCrLf '추후 이형수혈 
-                sSql += "      , b42.befoutqnt , b42.reqqnt , b42.outqnt , b42.rtnqnt , b42.abnqnt , r7.abo  ||  r7.rh aborh " + vbCrLf
-                sSql += "   from lb040m b4 " + vbCrLf
-                sSql += "  inner join lb042m b42 " + vbCrLf
-                sSql += "     on b4.tnsjubsuno = b42.tnsjubsuno " + vbCrLf
-                sSql += "  inner join lf120m f12 " + vbCrLf
-                sSql += "     on b42.comcd = f12.comcd  " + vbCrLf
-                sSql += "  inner join lr070m r7  " + vbCrLf
-                sSql += "     on b4.regno = r7.regno  " + vbCrLf
-                sSql += "   left outer join lbc20m bc2  " + vbCrLf
-                sSql += "     on b4.tnsjubsuno = bc2.tnsjubsuno " + vbCrLf
-                sSql += "  where b4.jubsudt BETWEEN :datas AND :datee || '235959'  " + vbCrLf
+                sSql = " "
+                sSql += "selecT b4.tnsjubsuno, fn_ack_date_str(b4.jubsudt, 'yyyy-MM-dd hh24:mi:ss') jubsudt  " + vbCrLf
+                sSql += "     , b4.regno ,b4.patnm , b4.sex || '/' || b4.age sexage                          " + vbCrLf
+                sSql += "     , fn_ack_get_dr_name(b4.doctorcd) drnm                                         " + vbCrLf
+                sSql += "     , FN_ACK_GET_ROOM_NAME(b4.wardno,  b4.roomno) roomno                           " + vbCrLf
+                sSql += "     , fn_ack_get_dept_name(b4.iogbn, b4.deptcd)  deptnm                            " + vbCrLf
+                sSql += "     ,  CASE WHEN b4.tnsgbn = '1' THEN 'P'                                          " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '2' THEN 'T'                                          " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '3' THEN 'E'                                          " + vbCrLf
+                sSql += "             WHEN b4.tnsgbn = '4' THEN 'I' end   tnsgbn                             " + vbCrLf
+                sSql += "      , b42.comcd , f12.comnmd                                                      " + vbCrLf
+                sSql += "      , nvl(bc2.gwa, FN_ACK_GET_ROOM_NAME(b4.wardno, b4.roomno)) seletedRoomno      " + vbCrLf
+                sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn   " + vbCrLf '추후 이형수혈 
+                sSql += "      , b42.befoutqnt , b42.reqqnt , b42.outqnt , b42.rtnqnt                        " + vbCrLf
+                sSql += "      , b42.abnqnt , r7.abo  ||  r7.rh aborh                                        " + vbCrLf
+                sSql += "      , fn_ack_get_bldno_full(b3.bldno) bldno                                       " + vbCrLf
+                sSql += "   from lb040m b4                                                                   " + vbCrLf
+                sSql += "  inner join lb042m b42                                                             " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = b42.tnsjubsuno                                              " + vbCrLf
+                sSql += "  inner Join lb030m b3                                                              " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = b3.tnsjubsuno                                               " + vbCrLf
+                sSql += "  inner join lf120m f12                                                             " + vbCrLf
+                sSql += "     on b42.comcd = f12.comcd                                                       " + vbCrLf
+                sSql += "  inner join lr070m r7                                                              " + vbCrLf
+                sSql += "     on b4.regno = r7.regno                                                         " + vbCrLf
+                sSql += "   left outer join lbc20m bc2                                                       " + vbCrLf
+                sSql += "     on b4.tnsjubsuno = bc2.tnsjubsuno  and b3.bldno = bc2.bldno                    " + vbCrLf
+                sSql += "  where b4.jubsudt BETWEEN :datas AND :datee || '235959'                            " + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
                 alParm.Add(New OracleParameter("datee", rsEnDt))
 
                 If rsRegno <> "" Then
-                    sSql += "       AND b4.regno      = :regno" + vbCrLf
+                    sSql += "       AND b4.regno      = :regno                                               " + vbCrLf
                     alParm.Add(New OracleParameter("regno", rsRegno))
                 End If
 
                 If rsTnsjubsuno <> "" Then
-                    sSql += "       AND b4.tnsjubsuno = :tnsjubsuno" + vbCrLf
+                    sSql += "       AND b4.tnsjubsuno = :tnsjubsuno                                          " + vbCrLf
                     alParm.Add(New OracleParameter("tnsjubsuno", rsTnsjubsuno))
                 End If
 
-                sSql += " ORDER BY tnsjubsuno        " + vbCrLf
+                sSql += " ORDER BY tnsjubsuno                                                                " + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -5340,7 +5472,25 @@ Namespace APP_BT
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             End Try
         End Function
-        Public Shared Function fnGet_BloodTat_Input_tns(ByVal rsTnsjubsuno As String, ByVal rsRegno As String) As DataTable
+        '20211203 jhs 혈액tat 입력 
+        ' 혈액tat 입력 병동/병실 과 가져오기
+        Public Shared Function fnGet_BloodTat_Input_SuHyul(Optional ByVal rsGwa As String = "") As DataTable
+            Dim sFn As String = "Public Function fnGet_CollTK_Cancel_ContInfo(String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += "SELECT clsgbn, clsval"
+                sSql += "  FROM lf000m"
+                sSql += " WHERE clsgbn ='SH'"
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        Public Shared Function fnGet_BloodTat_Input_tns(ByVal rsTnsjubsuno As String, ByVal rsRegno As String, ByVal rsBldno As String) As DataTable
             Dim sFn As String = "Public Function fnGet_CollTK_Cancel_ContInfo(String) As DataTable"
             Dim sSql As String = ""
             Dim alParm As New ArrayList
@@ -5350,9 +5500,11 @@ Namespace APP_BT
                 sSql += " Select tnsjubsuno from lbc20m    " + vbCrLf
                 sSql += "  where tnsjubsuno = :tnsjubsuno  " + vbCrLf
                 sSql += "    And regno      = :regno       " + vbCrLf
+                sSql += "    And bldno      = :bldno       " + vbCrLf
 
                 alParm.Add(New OracleParameter("tnsjubsuno", OracleDbType.Varchar2, rsTnsjubsuno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsTnsjubsuno))
                 alParm.Add(New OracleParameter("regno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRegno))
+                alParm.Add(New OracleParameter("bldno", OracleDbType.Varchar2, rsRegno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBldno))
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -10777,6 +10929,7 @@ Namespace APP_BT
             Dim sTnsjubsuno As String = ""
             Dim sRegno As String = ""
             Dim sGwa As String = ""
+            Dim sBldno As String = ""
             Dim sVarYN As String = ""
 
             With DbCmd
@@ -10789,11 +10942,15 @@ Namespace APP_BT
                     sTnsjubsuno = .TNSJUBSUNO
                     sRegno = .REGNO
                     sGwa = .GWA
+                    sBldno = .BLDNO
                     sVarYN = .VARYN
                 End With
 
                 sSql = ""
-                sSql += "delete lbc20m where tnsjubsuno = :tnsjubsuno and regno = :regno " + vbCrLf
+                sSql += "delete lbc20m                  " + vbCrLf
+                sSql += "where tnsjubsuno = :tnsjubsuno " + vbCrLf
+                sSql += "  and regno = :regno           " + vbCrLf
+                sSql += "  and bldno = :bldno           " + vbCrLf
 
                 DbCmd.CommandType = CommandType.Text
                 DbCmd.CommandText = sSql
@@ -10801,12 +10958,13 @@ Namespace APP_BT
                 DbCmd.Parameters.Clear()
                 DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
                 DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = sBldno
 
                 intRet = DbCmd.ExecuteNonQuery()
 
                 sSql = ""
-                sSql += "insert into lbc20m (tnsjubsuno, regno, regdt, regid, gwa, varyn)" + vbCrLf
-                sSql += "            values (:tnsjubsuno,:regno, fn_ack_sysdate(), :regid, :gwa, :varyn) " + vbCrLf
+                sSql += "insert into lbc20m ( tnsjubsuno, regno, regdt           ,  regid,  gwa,  varyn,  bldno)" + vbCrLf
+                sSql += "            values (:tnsjubsuno,:regno, fn_ack_sysdate(), :regid, :gwa, :varyn, :bldno) " + vbCrLf
 
                 DbCmd.CommandType = CommandType.Text
                 DbCmd.CommandText = sSql
@@ -10817,6 +10975,7 @@ Namespace APP_BT
                 DbCmd.Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
                 DbCmd.Parameters.Add("gwa", OracleDbType.Varchar2).Value = sGwa
                 DbCmd.Parameters.Add("varyn", OracleDbType.Varchar2).Value = sVarYN
+                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = sBldno
 
                 intRet = DbCmd.ExecuteNonQuery()
 
@@ -10826,25 +10985,19 @@ Namespace APP_BT
                 End If
 
                 m_DbTrans.Commit()
-
                 lb_rtnValue = True
-
-
                 Return lb_rtnValue
 
             Catch ex As Exception
                 m_DbTrans.Rollback()
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             Finally
-
                 m_DbTrans.Dispose() : m_DbTrans = Nothing
                 If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
                 m_DbCn.Dispose() : m_DbCn = Nothing
 
                 COMMON.CommFN.MdiMain.DB_Active_YN = ""
-
             End Try
-
         End Function
         '혈액 TAT 병실/이형수혈 입력 
         Public Function fn_BldTat_Input_Del(ByVal rsBldTatInput As BldTatInput) As Boolean
@@ -10859,6 +11012,7 @@ Namespace APP_BT
             Dim sTnsjubsuno As String = ""
             Dim sRegno As String = ""
             Dim sGwa As String = ""
+            Dim sBldno As String = ""
             Dim sVarYN As String = ""
 
             With DbCmd
@@ -10871,6 +11025,7 @@ Namespace APP_BT
                     sTnsjubsuno = .TNSJUBSUNO
                     sRegno = .REGNO
                     sGwa = .GWA
+                    sBldno = .BLDNO
                     sVarYN = .VARYN
                 End With
 
@@ -10878,6 +11033,7 @@ Namespace APP_BT
                 sSql += "delete lbc20m " + vbCrLf
                 sSql += " where tnsjubsuno = :tnsjubsuno " + vbCrLf
                 sSql += "   and regno      = :regno " + vbCrLf
+                sSql += "   and bldno      = :bldno " + vbCrLf
 
                 DbCmd.CommandType = CommandType.Text
                 DbCmd.CommandText = sSql
@@ -10885,6 +11041,7 @@ Namespace APP_BT
                 DbCmd.Parameters.Clear()
                 DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
                 DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = sBldno
 
                 intRet = DbCmd.ExecuteNonQuery()
 
@@ -10894,24 +11051,17 @@ Namespace APP_BT
                 End If
 
                 m_DbTrans.Commit()
-
                 lb_rtnValue = True
-
                 Return lb_rtnValue
-
             Catch ex As Exception
                 m_DbTrans.Rollback()
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             Finally
-
                 m_DbTrans.Dispose() : m_DbTrans = Nothing
                 If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
                 m_DbCn.Dispose() : m_DbCn = Nothing
-
                 COMMON.CommFN.MdiMain.DB_Active_YN = ""
-
             End Try
-
         End Function
         '------------------------------------
 
@@ -11837,6 +11987,7 @@ Namespace APP_BT
         Public TNSJUBSUNO As String = ""
         Public REGNO As String = ""
         Public GWA As String = ""
+        Public BLDNO As String = ""
         Public VARYN As String = ""
     End Class
 #End Region

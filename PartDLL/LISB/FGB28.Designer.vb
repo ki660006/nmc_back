@@ -204,17 +204,17 @@ Partial Class FGB28
         Me.pnlBody.Controls.Add(Me.spdList)
         Me.pnlBody.Location = New System.Drawing.Point(3, 56)
         Me.pnlBody.Name = "pnlBody"
-        Me.pnlBody.Size = New System.Drawing.Size(1189, 510)
+        Me.pnlBody.Size = New System.Drawing.Size(1189, 513)
         Me.pnlBody.TabIndex = 138
         '
         'spdList
         '
-        'Me.spdList.DataSource = Nothing
+        Me.spdList.DataSource = Nothing
         Me.spdList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdList.Size = New System.Drawing.Size(1189, 510)
+        Me.spdList.Size = New System.Drawing.Size(1189, 513)
         Me.spdList.TabIndex = 0
         '
         'pnlBottom
@@ -292,8 +292,8 @@ Partial Class FGB28
         Me.btnUpd.Corners.UpperRight = CType(6, Short)
         Me.btnUpd.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnUpd.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        Me.btnUpd.FocalPoints.CenterPtX = 0.4859813!
-        Me.btnUpd.FocalPoints.CenterPtY = 0.16!
+        Me.btnUpd.FocalPoints.CenterPtX = 0.5!
+        Me.btnUpd.FocalPoints.CenterPtY = 0.24!
         Me.btnUpd.FocalPoints.FocusPtX = 0!
         Me.btnUpd.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False

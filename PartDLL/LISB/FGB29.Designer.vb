@@ -200,6 +200,7 @@ Partial Class FGB29
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(195, 25)
         Me.Panel2.TabIndex = 90
+        Me.Panel2.Visible = False
         '
         'chkNotEmer
         '
@@ -303,7 +304,7 @@ Partial Class FGB29
         Me.spdList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        'Me.spdList.DataSource = Nothing
+        Me.spdList.DataSource = Nothing
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
@@ -476,7 +477,7 @@ Partial Class FGB29
         Me.btnClear.FocalPoints.CenterPtY = 0!
         Me.btnClear.FocalPoints.FocusPtX = 0!
         Me.btnClear.FocalPoints.FocusPtY = 0!
-        DesignerRectTracker8.IsActive = True
+        DesignerRectTracker8.IsActive = False
         DesignerRectTracker8.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker8.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.FocusPtTracker = DesignerRectTracker8
         Me.btnClear.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
