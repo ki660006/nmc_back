@@ -2279,7 +2279,7 @@ Public Class AxRstInput
             alRstLog = fnReg_log_info_before(rsRstflg, "1") ' 저장 전
             '------------------------------------------------
             '20220127 jhs WBC diffCount 100인지 확인하는 로직 구현
-            Dim chk_WEBCount As Integer = fnChk_WBCCount()
+            Dim chk_WEBCount As Double = fnChk_WBCCount()
             If chk_WEBCount <> 100 And msWbcCount Then
                 If fn_PopConfirm(moForm, "E"c, "WBC Count의 합이 100이 아닙니다." + vbCrLf + "현재 Count : " + chk_WEBCount.ToString + vbCrLf + "계속진행 하시겠습니까?") <> True Then
                     Return False
@@ -2483,10 +2483,10 @@ Public Class AxRstInput
         End Try
     End Function
     '20220127 jhs WBCCount 100인지 체크하는 함수
-    Public Function fnChk_WBCCount() As Integer
+    Public Function fnChk_WBCCount() As Double
         'WBCCount 가 딱 100인지 체크하는 함수
         Try
-            Dim sChkCount As Integer = 0
+            Dim sChkCount As Double = 0
             With Me.spdResult
                 For ix = 0 To .MaxRows - 1
                     Dim tmptestinfo_log As New TESTINFO_LOG
@@ -2496,8 +2496,8 @@ Public Class AxRstInput
                     If test.StartsWith("LH121") Then
                         msWbcCount = True
                         .Col = .GetColFromID("viewrst")
-                        Dim rsSpdNum As Integer
-                        If Int32.TryParse(.Text, rsSpdNum) Then
+                        Dim rsSpdNum As Double
+                        If Double.TryParse(.Text, rsSpdNum) Then
                             sChkCount += rsSpdNum
                         End If
                     End If

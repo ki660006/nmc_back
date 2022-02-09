@@ -100,5 +100,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.404 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정
 'Version 3.1.10.405 --> 2022/01/17 : 크리티컬 밸류 결과코드 적용되도록 수정(재배포)
 'Version 3.1.10.406 --> 2022/02/08 : wbcCount 100개인지 확인 
+'Version 3.1.10.407 --> 2022/02/09 : wbcCount 소수점 있어 변수 타입 변경
 
-<Assembly: AssemblyVersion("3.1.10.406")>
+<Assembly: AssemblyVersion("3.1.10.407")>
+
