@@ -2428,7 +2428,6 @@ Public Class AxRstInput
             End If
             '------------------------------------------------
 
-
             Return chkBool
 
         Catch ex As Exception
@@ -2492,7 +2491,7 @@ Public Class AxRstInput
                     Dim tmptestinfo_log As New TESTINFO_LOG
                     .Row = ix
                     .Col = .GetColFromID("testcd")
-                    Dim test As String = .Text
+                        Dim test As String = .Text
                     If test.StartsWith("LH121") Then
                         msWbcCount = True
                         .Col = .GetColFromID("viewrst")
@@ -2504,7 +2503,7 @@ Public Class AxRstInput
                 Next
             End With
 
-            Return sChkCount
+            Return Math.Round(sChkCount, 3)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Information)
@@ -5065,11 +5064,11 @@ Public Class AxRstInput
                             strCriticalMark = sTxtCritical
                             If sTxtCritical = "C" Then msXpertC = True Else msXpertC = False
                         End If
-                    ElseIf strTclscd = "LB151" Or strTclscd = "LB11201" Or strTclscd = "LB11202" Then
-                        strCriticalMark = sTxtCritical
+                        'ElseIf strTclscd = "LB151" Or strTclscd = "LB11201" Or strTclscd = "LB11202" Then
+                        '    strCriticalMark = sTxtCritical
                     Else
-                        '임시막음
-                        'Return sTxtCritical
+                        '20220223 jhs 문제 없는 것 같아 풀어서 배포
+                        strCriticalMark = sTxtCritical
                     End If
 
 
@@ -6760,13 +6759,20 @@ Public Class AxRstInput
                         sCmt = ""
                         sCmt2 = ""
 
-
+                        '20220323 원본
                         '결과소견 변경여부 체크
                         For ix As Integer = 0 To sBuf2.Length - 1
                             If alTmp.Contains(sBuf2(ix).Trim) = False Then
                                 sCmt += sBuf2(ix) + vbCrLf
+                            ElseIf sBuf2(ix) = " " Then '2022.03.24 JJH 소견 엔터값 추가
+                                sCmt += vbCrLf
                             End If
                         Next
+
+                        '2022.03.24 JJH 소견 엔터값 추가
+                        If sCmt.Replace(vbCrLf, "") = "" Then
+                            sCmt = ""
+                        End If
 
                         '결핵균검사 변경여부 체크
                         For ix As Integer = 0 To sBuf3.Length - 1
