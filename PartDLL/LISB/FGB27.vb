@@ -15,6 +15,10 @@ Public Class FGB27
     Dim m_endt As String = ""
     Dim m_tnsjubsuno As String = ""
     Dim m_seq As String = ""
+
+    Dim m_spdSort_tns As FPSpreadADO.SortKeyOrderConstants = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderDescending
+    Dim m_spd_col As Integer = 0
+
     Private Sub FGB27_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         sbDisp_Init()
@@ -86,9 +90,15 @@ Public Class FGB27
                 .MaxRows = dt.Rows.Count
                 m_tnsjubsuno = ""
                 m_seq = ""
+
+                Dim tnsno As Integer = 0
+                Dim tnsnoChk As Boolean = False
+
                 For i As Integer = 1 To dt.Rows.Count
                     tempTnsjubsuno = dt.Rows(i - 1).Item("tnsjubsuno").ToString() ' 현재 로우 수혈접수번호 넣기
                     tempSeq = dt.Rows(i - 1).Item("seq").ToString() ' 현재 로우 수혈접수번호 넣기
+                    tnsnoChk = False
+
                     For j As Integer = 1 To dt.Columns.Count
                         Dim iCol As Integer
                         iCol = .GetColFromID(dt.Columns(j - 1).ColumnName.ToLower())
@@ -98,19 +108,33 @@ Public Class FGB27
                             If m_tnsjubsuno = tempTnsjubsuno And m_seq = tempSeq Then ' 현재접수번호와 이전접수번호 비교 및 현재접수번호여도 시퀀스 체크 
                                 .Row = i
                                 .Text = dt.Rows(i - 1).Item(j - 1).ToString()
+
                                 If sbDisp_column(dt.Columns(j - 1).ColumnName.ToLower()) = False Then '특정 컬럼은 무조건 보여야하는 조건
                                     .ForeColor = Color.White
                                 End If
+
+                                tnsnoChk = True
+
                             Else
                                 .Row = i
                                 If dt.Columns(j - 1).ColumnName.ToLower() = "chk" Then ' 체크박스 넣는 부분
                                     .CellType = FPSpreadADO.CellTypeConstants.CellTypeCheckBox
+                                    .TypeHAlign = FPSpreadADO.TypeHAlignConstants.TypeHAlignCenter
                                 Else ' 글자 넣는 부분
                                     .Text = dt.Rows(i - 1).Item(j - 1).ToString()
                                 End If
                             End If
                         End If
                     Next
+
+                    If tnsnoChk Then
+                        tnsno += 1
+                    Else
+                        tnsno = 1
+                    End If
+                    .Col = .GetColFromID("tnsno")
+                    .Text = tnsno.ToString()
+
                     m_tnsjubsuno = tempTnsjubsuno '한 로우전 수혈접수번호 넣기 
                     m_seq = tempSeq
                 Next
@@ -403,6 +427,77 @@ Public Class FGB27
         Catch ex As Exception
 
         End Try
+
+    End Sub
+
+    Private Sub spdTnsTranList_ClickEvent(sender As Object, e As AxFPSpreadADO._DSpreadEvents_ClickEvent) Handles spdTnsTranList.ClickEvent
+
+        If e.row = 0 And (e.col = spdTnsTranList.GetColFromID("tnsjubsuno") Or e.col = spdTnsTranList.GetColFromID("regno") Or e.col = spdTnsTranList.GetColFromID("patnm")) Then
+            With spdTnsTranList
+
+                If m_spd_col = e.col Then
+                    If m_spdSort_tns = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending Then
+                        m_spdSort_tns = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderDescending
+                    Else
+                        m_spdSort_tns = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending
+                    End If
+                Else
+                    m_spdSort_tns = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending
+                End If
+
+                If e.col = .GetColFromID("tnsjubsuno") Then  ' 접수번호
+
+                    .BlockMode = True
+                    .Col = -1
+                    .Row = -1
+                    .Col2 = -1
+                    .Row = -1
+                    .SortBy = 0
+                    .set_SortKey(1, e.col)
+                    .set_SortKey(2, .GetColFromID("seq"))
+                    .set_SortKey(3, .GetColFromID("tnsno"))
+                    .set_SortKeyOrder(1, m_spdSort_tns)
+                    .set_SortKeyOrder(2, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .set_SortKeyOrder(3, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .Action = FPSpreadADO.ActionConstants.ActionSort
+                    .BlockMode = False
+
+                ElseIf e.col = .GetColFromID("regno") Then ' 등록번호
+
+                    .BlockMode = True
+                    .Col = -1
+                    .Row = -1
+                    .SortBy = 0
+                    .set_SortKey(1, e.col)
+                    .set_SortKey(2, .GetColFromID("tnsjubsuno"))
+                    .set_SortKey(3, .GetColFromID("tnsno"))
+                    .set_SortKeyOrder(1, m_spdSort_tns)
+                    .set_SortKeyOrder(2, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .set_SortKeyOrder(3, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .Action = FPSpreadADO.ActionConstants.ActionSort
+                    .BlockMode = False
+
+                ElseIf e.col = .GetColFromID("patnm") Then ' 환자명
+
+                    .BlockMode = True
+                    .Col = -1
+                    .Row = -1
+                    .SortBy = 0
+                    .set_SortKey(1, e.col)
+                    .set_SortKey(2, .GetColFromID("tnsjubsuno"))
+                    .set_SortKey(3, .GetColFromID("tnsno"))
+                    .set_SortKeyOrder(1, m_spdSort_tns)
+                    .set_SortKeyOrder(2, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .set_SortKeyOrder(3, FPSpreadADO.SortKeyOrderConstants.SortKeyOrderAscending)
+                    .Action = FPSpreadADO.ActionConstants.ActionSort
+                    .BlockMode = False
+
+                End If
+
+                m_spd_col = e.col
+
+            End With
+        End If
 
     End Sub
 End Class
