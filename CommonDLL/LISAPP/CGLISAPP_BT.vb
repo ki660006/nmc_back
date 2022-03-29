@@ -5384,6 +5384,81 @@ Namespace APP_BT
             End Try
 
         End Function
+
+        Public Shared Function fnGet_trans_mgt_total_new(ByVal rsStDt As String, ByVal rsEnDt As String, ByVal rsDMYDiff As String()) As DataTable
+            ' 수혈 가출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_trans_mgt_total(ByVal rsTnsNo As String) As DataTable"
+            Dim sSql As String = ""
+            Dim alParm As New ArrayList
+
+            Try
+                sSql += "select                                                 " + vbCrLf
+                sSql += "       flag, sum(cnt) as total,                        " + vbCrLf
+
+                For ix As Integer = 0 To rsDMYDiff.Length - 1
+                    sSql += " sum(decode(regdate, '" + rsDMYDiff(ix).Replace("-", "").ToString + "', cnt, 0)) as C" + rsDMYDiff(ix).Replace("-", "").ToString() + ", " + vbCrLf
+                Next
+
+                sSql += "       seq                                                                 " + vbCrLf
+
+                sSql += "  from ( select 'Hg>10 g/dL' as flag, 1 seq,                               " + vbCrLf
+                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
+                sSql += "                sum(case when hgyn = 'Y' then 1 else 0 end) cnt            " + vbCrLf
+                sSql += "           from lbc10m                                                     " + vbCrLf
+                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
+                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                sSql += "         union all                                                         " + vbCrLf
+
+                sSql += "         select 'CBC F/U' as flag, 2 seq,                                  " + vbCrLf
+                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
+                sSql += "                sum(case when cbcyn = 'Y' then 1 else 0 end) cnt           " + vbCrLf
+                sSql += "           from lbc10m                                                     " + vbCrLf
+                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
+                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                sSql += "         union all                                                         " + vbCrLf
+
+                sSql += "         select '모두요청' as flag, 3 seq,                                 " + vbCrLf
+                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
+                sSql += "                sum(case when allyn = 'Y' then 1 else 0 end) cnt           " + vbCrLf
+                sSql += "           from lbc10m                                                     " + vbCrLf
+                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
+                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                sSql += "         union all                                                         " + vbCrLf
+
+                sSql += "         select '제외 대상' as flag, 4 seq,                                " + vbCrLf
+                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
+                sSql += "                sum(case when ecptyn = 'Y' then 1 else 0 end) cnt          " + vbCrLf
+                sSql += "           from lbc10m                                                     " + vbCrLf
+                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
+                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+
+                alParm.Add(New OracleParameter("dates", rsStDt))
+                alParm.Add(New OracleParameter("datee", rsEnDt))
+
+                sSql += "        )                                                                  " + vbCrLf
+                sSql += " group by flag, seq                                                        " + vbCrLf
+                sSql += " order by seq                                                              "
+
+                DbCommand()
+                Return DbExecuteQuery(sSql, alParm)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
         '--------------------------------------------
 
         '20211203 jhs 혈액tat 입력 

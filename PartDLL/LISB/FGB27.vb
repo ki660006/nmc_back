@@ -124,31 +124,100 @@ Public Class FGB27
     End Sub
     Private Sub sbDisplay_TnsTotal()
         Try
-            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_total(m_stdt, m_endt)
+            Dim sDT1 As String = Me.dtpDateS.Value.ToString("yyyy-MM-dd")
+            Dim sDT2 As String = Me.dtpDateE.Value.ToString("yyyy-MM-dd")
+            Dim IDMYDiff As Integer = 0
+            Dim a_sDMY As String() = Nothing
+
+            IDMYDiff = CInt(DateDiff(DateInterval.Day, CDate(sDT1), CDate(sDT2)))
+
+            ReDim a_sDMY(IDMYDiff)
+
+            For i As Integer = 1 To IDMYDiff + 1
+                a_sDMY(i - 1) = DateAdd(DateInterval.Day, i - 1, CDate(sDT1)).ToShortDateString
+            Next
+
+            '스프레드 날짜별 세팅
+            spdTnsTotal_spdSetting(a_sDMY)
+
+            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_total_new(m_stdt, m_endt, a_sDMY)
 
             With Me.spdTnsTotal
-                .MaxRows = 0
-                .MaxRows = 4
-                For i = 1 To .MaxRows
-                    .Row = i
-                    Select Case i
-                        Case 1
-                            .Col = .GetColFromID("rprttype") : .Text = "Hg>10 g/dL"
-                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("hgyn").ToString()
-                        Case 2
-                            .Col = .GetColFromID("rprttype") : .Text = "CBC F/U"
-                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("cbcyn").ToString()
-                        Case 3
-                            .Col = .GetColFromID("rprttype") : .Text = "모두요청"
-                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("allyn").ToString()
-                        Case 4
-                            .Col = .GetColFromID("rprttype") : .Text = "제외 대상"
-                            .Col = .GetColFromID("total") : .Text = dt.Rows(0).Item("ecptyn").ToString()
-                    End Select
+                .MaxRows = dt.Rows.Count
+
+                Dim total_sum As Integer = 0
+
+                For ix As Integer = 0 To dt.Rows.Count - 1
+
+                    .Row = ix + 1
+
+                    .Col = .GetColFromID("rprttype")
+                    .Text = dt.Rows(ix).Item("flag").ToString()
+
+                    .Col = .GetColFromID("total")
+                    .Text = dt.Rows(ix).Item("total").ToString()
+                    total_sum += CInt(.Text)
+
+                    For ix2 As Integer = 0 To a_sDMY.Length - 1
+                        .Col = .GetColFromID("C" + a_sDMY(ix2).Replace("-", "").ToString())
+                        .Text = dt.Rows(ix).Item("C" + a_sDMY(ix2).Replace("-", "").ToString()).ToString()
+                    Next
+
                 Next
+
+                '총 Total
+                .MaxRows += 1
+                .Row = .MaxRows
+
+                .Col = .GetColFromID("rprttype")
+                .Text = "Total"
+
+                .Col = .GetColFromID("total")
+                .Text = total_sum.ToString()
+
+                '날짜별 Total
+                For ix As Integer = 0 To a_sDMY.Length - 1
+
+                    total_sum = 0
+
+                    For ix2 As Integer = 0 To dt.Rows.Count - 1
+                        .Row = ix2 + 1
+                        .Col = .GetColFromID("C" + a_sDMY(ix).Replace("-", "").ToString())
+                        total_sum += CInt(.Text)
+                    Next
+
+                    .Row = .MaxRows
+                    .Col = .GetColFromID("C" + a_sDMY(ix).Replace("-", "").ToString())
+                    .Text = total_sum.ToString()
+                Next
+
             End With
+
         Catch ex As Exception
-            Throw (New Exception(ex.Message, ex))
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+    End Sub
+
+    Private Sub spdTnsTotal_spdSetting(ByVal ra_sDMY As String())
+        Try
+
+            With spdTnsTotal
+                .ReDraw = False
+
+                .MaxCols = ra_sDMY.Length + 2
+                .Col = 2 : .Col2 = .MaxCols : .Row = -1 : .Row2 = -1
+                .BlockMode = True : .CellType = FPSpreadADO.CellTypeConstants.CellTypeNumber : .TypeNumberDecPlaces = 0 : .Lock = True : .BlockMode = False
+
+                For i As Integer = 0 To ra_sDMY.Length - 1
+                    .Col = 3 + i : .Row = 0 : .Text = ra_sDMY(i) : .ColID = "C" + ra_sDMY(i).Replace("-", "").ToString() : .set_ColWidth(.GetColFromID("C" + ra_sDMY(i).Replace("-", "").ToString()), 9)
+                Next
+
+                .ReDraw = True
+            End With
+
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
         End Try
     End Sub
 
