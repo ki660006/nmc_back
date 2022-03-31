@@ -106,6 +106,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.410 --> 2022/03/24 : 자동소견 엔터값 처리 수정
 'Version 3.1.10.411 --> 2022/03/24 : 자동소견 엔터값 처리 수정
 'Version 3.1.10.412 --> 2022/03/24 : 자동소견 엔터값 처리 수정
+'Version 3.1.10.413 --> 2022/03/31 : IGRA 장비 결과 자동소견 검사코드 추가
 
-<Assembly: AssemblyVersion("3.1.10.412")>
+<Assembly: AssemblyVersion("3.1.10.413")>
 

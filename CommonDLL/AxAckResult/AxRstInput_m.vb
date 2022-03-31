@@ -6503,10 +6503,10 @@ Public Class AxRstInput_m
                             sCriticalMark = sTxtCritical
                             ' If sTxtCritical = "C" Then msXpertC = True Else msXpertC = False
                         End If
-                        '작업중..................................................
+
                         ' LM20101, LM20102, LM20301, LM20302, LM20303 액체, 고체배지
                     ElseIf PRG_CONST.AFBC_NTM_test(strTclscd) <> "" Then 'And sTxtCritical = "C" Then '20210702 jhs MTB, NTM 검사
-                        Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_NTM_Comment(msBcNo) ' 5년안에 검사결과값이 있을 때
+                        Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_NTM_Comment(msBcNo) ' 5년안에 검사결과값이 있을 때 ->  20220315 jhs 3년안으로 변경
                         Dim chkOrgRst As String = Mid(sOrgRst, 1, 3).ToUpper '결과값 앞의 3자리 가져오기
 
                         'If chkOrgRst = "MYC" Then ' 입력결과값이 MTB 검사일 경우

@@ -6822,9 +6822,9 @@ Public Class AxRstInput
         Dim sCmt2 As String = ""
 
         '< 2016-11-22 YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
-        If sTestcd = "LI611" Or sTestcd = "LI612" Or sTestcd = "LI613" Then
+        If sTestcd = "LI611" Or sTestcd = "LI612" Or sTestcd = "LI613" Or sTestcd = "LI620" Then
             Dim a_dt As DataTable = New DataTable
-            Dim stestisno611 As String = "", stestisno612 As String = "", stest611rdt As String = "", stest611rst As String = "", stest611rstunit As String = "", _
+            Dim stestisno611 As String = "", stestisno612 As String = "", stest611rdt As String = "", stest611rst As String = "", stest611rstunit As String = "",
             stest612rstunit As String = "", stest612rdt As String = "", stest612rst As String = ""
 
             'If msRegNoCmt <> "" Then 'LI611, LI612 검사로 판단되면
