@@ -2713,8 +2713,11 @@ Namespace COMM
                 sSql += "   , LM010M B" + vbCrLf
                 sSql += "   , lf083m f83" + vbCrLf
                 sSql += "   WHERE A.REGNO = B.REGNO" + vbCrLf
-                sSql += "     AND B.TKDT BETWEEN TO_CHAR (ADD_MONTHS (TO_DATE (fn_ack_sysdate,'YYYY-MM-DD HH24:MI:SS'), - 60 ),'YYYYMMDDHH24MISS') AND  fn_ack_sysdate" + vbCrLf ' 모든 진행준 검사 포함하여 5년 안에 
+                'sSql += "     AND B.TKDT BETWEEN TO_CHAR (ADD_MONTHS (TO_DATE (fn_ack_sysdate,'YYYY-MM-DD HH24:MI:SS'), - 60 ),'YYYYMMDDHH24MISS') AND  fn_ack_sysdate" + vbCrLf ' 모든 진행준 검사 포함하여 5년 안에
+                '20220315 jhs 3년으로 변경
+                sSql += "     AND B.TKDT BETWEEN TO_CHAR (ADD_MONTHS (TO_DATE (fn_ack_sysdate,'YYYY-MM-DD HH24:MI:SS'), - 36 ),'YYYYMMDDHH24MISS') AND  fn_ack_sysdate" + vbCrLf ' 모든 진행준 검사 포함하여 5년 안에 
                 sSql += "     AND B.RSTFLG = '3'" + vbCrLf
+                '------------------------------
                 'sSql += "     and b.testcd in (selecT clsval from lf000m where clsgbn = 'NTM')"
 
                 alParm.Add(New OracleParameter("bcno", OracleDbType.Varchar2, rsBcno.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsBcno))
