@@ -687,7 +687,23 @@ Public Class FGB06
     ' 과거수혈내역조회
     Private Sub sb_DisplayPastList(ByVal r_dt As DataTable)
         Dim sFn As String = "Private Sub sb_DisplayPastList(ByVal rDt As DataTable)"
-        If r_dt.Rows.Count < 1 Then Return
+
+        '< 2022.04.05 JJH 과거수혈경력 없을때 백그라운드 표시
+        If r_dt.Rows.Count < 1 Then
+
+            With Me.spdPastTns
+                .ReDraw = False
+                .MaxRows = 1
+                .Row = .MaxRows
+                For ix As Integer = 1 To .MaxCols
+                    .Col = ix
+                    .BackColor = Color.Green
+                Next
+                .ReDraw = True
+            End With
+
+            Return
+        End If
 
         Try
             With Me.spdPastTns
@@ -706,6 +722,7 @@ Public Class FGB06
                     .Col = .GetColFromID("abnqnt") : .Text = r_dt.Rows(ix).Item("abnqnt").ToString.Trim
                     .Col = .GetColFromID("cancelqnt") : .Text = r_dt.Rows(ix).Item("cancelqnt").ToString.Trim
                 Next
+
             End With
         Catch ex As Exception
             fn_PopMsg(Me, "E"c, ex.Message)
