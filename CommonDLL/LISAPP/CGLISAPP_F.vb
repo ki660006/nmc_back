@@ -19131,22 +19131,22 @@ Public Class APP_F_SPTEST
         Try
             Dim sSql As String = ""
 
-            sSql += "SELECT f31.testcd, f31.stsubseq, f60.tnmd, f31.strsttxtr, f31.strsttxtm, f31.strsttxtf,"
-            sSql += "       f31.stsubcnt, f31.stsubnm, f31.stsubtype, f31.imgtype, f31.imgsizew, f31.imgsizeh,"
-            sSql += "       f31.stsubrtf, f31.stsubexprg, f31.stsubfirst,"
-            sSql += "       fn_ack_date_str(f31.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f31.regid,"
-            sSql += "       fn_ack_get_usr_name(f31.regid) regnm, null modnm "
-            sSql += "  FROM (SELECT f31.testcd, MIN(f60.tnmd) tnmd"
-            sSql += "          FROM lf310m f31, lf060m f60"
-            sSql += " 		  WHERE f31.testcd = f60.testcd"
-            sSql += "		    AND f60.usdt  <= fn_ack_sysdate"
-            sSql += "		    AND f60.uedt  >  fn_ack_sysdate"
-            sSql += " 		    AND f31.testcd = :testcd"
-            sSql += " 		  GROUP BY f31.testcd"
-            sSql += "       ) f60,"
-            sSql += " 	    lf310m f31"
-            sSql += " WHERE f31.testcd   = f60.testcd"
-            sSql += " ORDER BY f31.testcd, f31.stsubseq"
+            sSql += "SELECT f31.testcd, f31.stsubseq, f60.tnmd, f31.strsttxtr, f31.strsttxtm, f31.strsttxtf," + vbCrLf
+            sSql += "       f31.stsubcnt, f31.stsubnm, f31.stsubtype, f31.imgtype, f31.imgsizew, f31.imgsizeh," + vbCrLf
+            sSql += "       f31.stsubrtf, f31.stsubexprg, f31.stsubfirst," + vbCrLf
+            sSql += "       fn_ack_date_str(f31.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt, f31.regid," + vbCrLf
+            sSql += "       fn_ack_get_usr_name(f31.regid) regnm, null modnm " + vbCrLf
+            sSql += "  FROM (SELECT f31.testcd, MIN(f60.tnmd) tnmd" + vbCrLf
+            sSql += "          FROM lf310m f31, lf060m f60" + vbCrLf
+            sSql += " 		  WHERE f31.testcd = f60.testcd" + vbCrLf
+            sSql += "		    AND f60.usdt  <= fn_ack_sysdate" + vbCrLf
+            sSql += "		    AND f60.uedt  >  fn_ack_sysdate" + vbCrLf
+            sSql += " 		    AND f31.testcd = :testcd" + vbCrLf
+            sSql += " 		  GROUP BY f31.testcd" + vbCrLf
+            sSql += "       ) f60," + vbCrLf
+            sSql += " 	    lf310m f31" + vbCrLf
+            sSql += " WHERE f31.testcd   = f60.testcd" + vbCrLf
+            sSql += " ORDER BY f31.testcd, f31.stsubseq" + vbCrLf
 
             Dim alParm As New ArrayList
 

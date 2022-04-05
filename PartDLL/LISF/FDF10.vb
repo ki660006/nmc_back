@@ -267,11 +267,11 @@ Public Class FDF10
             '20210712 jhs AFB,NTM 검사 한번더 확인하고 수정하기 위해 경고 레이블 설정
             If PRG_CONST.AFBC_test(Me.txtTestCd.Text) <> "" Then
                 Me.lblCRTWarning.Visible = True
-                Me.lblCRTWarning.Text = "지난 5년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
+                Me.lblCRTWarning.Text = "지난 3년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
                 Me.lblCRTWarning.ForeColor = Drawing.Color.DarkRed
             ElseIf PRG_CONST.AFBC_NTM_test(Me.txtTestCd.Text) <> "" Then
                 Me.lblCRTWarning.Visible = True
-                Me.lblCRTWarning.Text = "지난 5년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
+                Me.lblCRTWarning.Text = "지난 3년간 NTM, MTB 결과로 보고된 경우 최초 1회만 critical value report 표시되는 코드입니다."
                 Me.lblCRTWarning.ForeColor = Drawing.Color.DarkRed
             Else
                 Me.lblCRTWarning.Visible = False

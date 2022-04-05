@@ -78,9 +78,9 @@ Public Class FGPOPUPST_NCOV
             '############# 검체유형 디폴트
             If msTestCd = "LG119" Or msTestCd = "LG121" Then
                 Me.txtSpcnm.Text = "Lower respiratory tract specimen (Sputum)"
-            ElseIf msTestCd = "LG120" Or msTestCd = "LG122" Or msTestCd = "LG123" Or msTestCd = "LG125" Or msTestCd = "LG128" Or msTestCd = "LG129" Then
+            ElseIf msTestCd = "LG120" Or msTestCd = "LG122" Or msTestCd = "LG123" Or msTestCd = "LG125" Or msTestCd = "LG128" Or msTestCd = "LG129" Or msTestCd = "LG134" Or msTestCd = "LG135" Then
                 Me.txtSpcnm.Text = "Upper respiratory tract specimen [Nasopharyngeal swab AND Oropharyngeal swab (NP/OP swab)]"
-            ElseIf msTestCd = "LG127" Then
+            ElseIf msTestCd = "LG127" Or msTestCd = "LG133" Then
                 Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
             ElseIf msTestCd = "LG132" Then
                 Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
@@ -361,9 +361,11 @@ Public Class FGPOPUPST_NCOV
                         strBuf = strCmt.Split(Chr(13))
                         For ix As Integer = 0 To strBuf.Length - 1
                             If ix = 0 Then
-                                sValues += Space(8) + "(1) " + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                'sValues += Space(8) + "(1)" + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                '20220310 wdw 수정 
+                                sValues += Space(18) + "" + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             Else
-                                sValues += Space(12) + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                sValues += Space(18) + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             End If
                         Next
                     End If
@@ -373,9 +375,10 @@ Public Class FGPOPUPST_NCOV
                         strBuf = strCmt2.Split(Chr(13))
                         For ix As Integer = 0 To strBuf.Length - 1
                             If ix = 0 Then
-                                sValues += Space(8) + IIf(strCmt = "", "(1) ", "(2) ").ToString + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                'sValues += Space(8) + IIf(strCmt = "", "(1) ", "(2) ").ToString + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                sValues += Space(18) + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             Else
-                                sValues += Space(12) + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                sValues += Space(18) + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             End If
                         Next
                     End If
@@ -385,9 +388,10 @@ Public Class FGPOPUPST_NCOV
                         strBuf = strCmt3.Split(Chr(13))
                         For ix As Integer = 0 To strBuf.Length - 1
                             If ix = 0 Then
-                                sValues += Space(8) + IIf(strCmt2 = "", IIf(strCmt = "", "(1) ", "(2) ").ToString, IIf(strCmt = "", "(2) ", "(3) ").ToString).ToString + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                'sValues += Space(8) + IIf(strCmt2 = "", IIf(strCmt = "", "(1) ", "(2) ").ToString, IIf(strCmt = "", "(2) ", "(3) ").ToString).ToString + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                sValues += Space(18) + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             Else
-                                sValues += Space(12) + strBuf(ix).Replace(vbLf, "") + vbCrLf
+                                sValues += Space(18) + strBuf(ix).Replace(vbLf, "") + vbCrLf
                             End If
                         Next
                     End If
@@ -430,12 +434,17 @@ Public Class FGPOPUPST_NCOV
 
             '>
 
-            sValues += vbCrLf
+            sValues += vbCrLf 
             'sValues += Space(5) + Me.lblTest.Text
             sValues += Space(5) + Me.lblTest.Text
             If specChk Then sValues += vbCrLf
 
+            '20220309 jhs 밑으로 내려쓰기가 되지 않는 문제  (배포되지않음)
             strBuf = txtTestinfo.Text.Split(Chr(13))
+            'strBuf = txtTestinfo.Text.Split(ControlChars.CrLf.ToCharArray())
+            '---------------------------------------
+
+            'sValues += vbCrLf + Space(18)
             For intIdx As Integer = 0 To strBuf.Length - 1
 
                 If specChk Then
@@ -444,7 +453,9 @@ Public Class FGPOPUPST_NCOV
 
                 Else
                     If intIdx = 0 Then
-                        sValues += strBuf(intIdx).Replace(vbLf, "") + vbCrLf
+                        ' sValues += strBuf(intIdx).Replace(vbLf, "") + vbCrLf
+                        'sValues = vbCrLf
+                        sValues += strBuf(intIdx) + vbCrLf
                         'sValues += Space(5) + strBuf(intIdx).Replace(vbLf, "") + vbCrLf
                     Else
                         sValues += Space(18) + strBuf(intIdx).Replace(vbLf, "") + vbCrLf

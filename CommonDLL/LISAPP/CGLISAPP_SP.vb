@@ -475,24 +475,24 @@ Public Class APP_SP
             If PRG_CONST.BCCLS_MicorBio.Contains(rsBcNo.Substring(8, 2)) Then sTableNm = "lm010m"
 
             sSql = ""
-            sSql += "SELECT r.bcno,  r.testcd, r.spccd, NVL(r.orgrst, r.viewrst) orgrst,"
-            sSql += "       r.regid, fn_ack_get_usr_name(r.regid) regnm, fn_ack_date_str(r.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt,"
-            sSql += "       r.mwid,  fn_ack_get_usr_name(r.mwid)  mwnm,  fn_ack_date_str(r.mwdt,  'yyyy-mm-dd hh24:mi:ss') mwdt,"
-            sSql += "       r.fnid,  fn_ack_get_usr_name(r.fnid)  fnnm,  fn_ack_date_str(r.fndt,  'yyyy-mm-dd hh24:mi:ss') fndt,"
-            sSql += "       NVL(r.rstflg, '0') rstflg, r.viewrst, r.rstcmt, rs.rstdt, rs.rstid, rs.rstflg, rs.rstrtf,"
-            sSql += "       f.strsttxtr, f.strsttxtm, f.strsttxtf, f.stsubexprg"
-            sSql += "  FROM " + sTableNm + " r"
-            sSql += "  LEFT JOIN lrs10m rs"
-            sSql += "         ON r.bcno = rs.bcno"
-            sSql += "        AND r.testcd = rs.testcd"
-            sSql += "  LEFT JOIN lf310m f"
-            sSql += "         ON f.stsubseq = rs.migymd"
-            sSql += "        AND r.testcd = f.testcd"
-            sSql += " WHERE r.bcno = :bcno"
-            sSql += "   AND r.testcd = :testcd"
+            sSql += "SELECT r.bcno,  r.testcd, r.spccd, NVL(r.orgrst, r.viewrst) orgrst," + vbCrLf
+            sSql += "       r.regid, fn_ack_get_usr_name(r.regid) regnm, fn_ack_date_str(r.regdt, 'yyyy-mm-dd hh24:mi:ss') regdt," + vbCrLf
+            sSql += "       r.mwid,  fn_ack_get_usr_name(r.mwid)  mwnm,  fn_ack_date_str(r.mwdt,  'yyyy-mm-dd hh24:mi:ss') mwdt," + vbCrLf
+            sSql += "       r.fnid,  fn_ack_get_usr_name(r.fnid)  fnnm,  fn_ack_date_str(r.fndt,  'yyyy-mm-dd hh24:mi:ss') fndt," + vbCrLf
+            sSql += "       NVL(r.rstflg, '0') rstflg, r.viewrst, r.rstcmt, rs.rstdt, rs.rstid, rs.rstflg, rs.rstrtf," + vbCrLf
+            sSql += "       f.strsttxtr, f.strsttxtm, f.strsttxtf, f.stsubexprg" + vbCrLf
+            sSql += "  FROM " + sTableNm + " r" + vbCrLf
+            sSql += "  LEFT JOIN lrs10m rs" + vbCrLf
+            sSql += "         ON r.bcno = rs.bcno" + vbCrLf
+            sSql += "        AND r.testcd = rs.testcd" + vbCrLf
+            sSql += "  LEFT JOIN lf310m f" + vbCrLf
+            sSql += "         ON f.stsubseq = rs.migymd" + vbCrLf
+            sSql += "        AND r.testcd = f.testcd" + vbCrLf
+            sSql += " WHERE r.bcno = :bcno" + vbCrLf
+            sSql += "   AND r.testcd = :testcd" + vbCrLf
 
 
-           
+
             '  sSql += "   AND ROWNUM   = 1"
 
             Dim al As New ArrayList
@@ -1106,15 +1106,15 @@ Public Class APP_SP
             Dim sSql As String = ""
 
             sSql = ""
-            sSql += "SELECT '1' chk, f60.testcd, f60.tnmd"
-            sSql += "  FROM (SELECT testcd FROM lf310m GROUP BY  testcd) f31,"
-            sSql += "       (SELECT testcd, MIN(tnmd) tnmd,"
-            sSql += " 	            MIN(tcdgbn) min_tc, MAX(tcdgbn) max_tc,"
-            sSql += " 			    MIN(ctgbn)  min_ct, MAX(ctgbn) max_ct,"
-            sSql += " 			    MIN(partcd || slipcd) min_ps, MAX(partcd || slipcd) max_ps"
-            sSql += " 	      FROM lf060m"
-            sSql += " 		 WHERE usdt <= :dates || '000000'"
-            sSql += "          AND uedt >  :datee || '235959'"
+            sSql += "SELECT '1' chk, f60.testcd, f60.tnmd" + vbCrLf
+            sSql += "  FROM (SELECT testcd FROM lf310m GROUP BY  testcd) f31," + vbCrLf
+            sSql += "       (SELECT testcd, MIN(tnmd) tnmd," + vbCrLf
+            sSql += " 	            MIN(tcdgbn) min_tc, MAX(tcdgbn) max_tc," + vbCrLf
+            sSql += " 			    MIN(ctgbn)  min_ct, MAX(ctgbn) max_ct," + vbCrLf
+            sSql += " 			    MIN(partcd || slipcd) min_ps, MAX(partcd || slipcd) max_ps" + vbCrLf
+            sSql += " 	      FROM lf060m"+vbCrLf
+            sSql += " 		 WHERE usdt <= :dates || '000000'" + vbCrLf
+            sSql += "          AND uedt >  :datee || '235959'" + vbCrLf
 
             'riUseMode = 0 --> 일반, riUseMode = 1 --> rsCd만 포함, riUseMode = 2 --> rsCd를 제외
             If rsCd <> "" Then
@@ -1122,20 +1122,20 @@ Public Class APP_SP
                     Case 0
 
                     Case 1
-                        sSql += "          AND testcd = :testcd"
+                        sSql += "          AND testcd = :testcd" + vbCrLf
 
                     Case 2
-                        sSql += "          AND testcd <> :testcd"
+                        sSql += "          AND testcd <> :testcd" + vbCrLf
 
                 End Select
             End If
 
-            sSql += " 		 GROUP BY testcd"
-            sSql += "       ) f60"
-            sSql += " WHERE ( (f60.min_tc = 'S' and f60.max_tc = 'S') or (f60.min_tc = 'P' and f60.max_tc = 'P') )"
+            sSql += " 		 GROUP BY testcd" + vbCrLf
+            sSql += "       ) f60" + vbCrLf
+            sSql += " WHERE ( (f60.min_tc = 'S' and f60.max_tc = 'S') or (f60.min_tc = 'P' and f60.max_tc = 'P') )" + vbCrLf
             'sSql += "   AND f60.min_ct = '1'"
-            sSql += "   AND f60.max_ct = '1'"
-            sSql += "   AND f60.testcd = f31.testcd"
+            sSql += "   AND f60.max_ct = '1'" + vbCrLf
+            sSql += "   AND f60.testcd = f31.testcd" + vbCrLf
 
             Dim al As New ArrayList
 
@@ -1154,8 +1154,8 @@ Public Class APP_SP
             End If
 
             If rsPartSlip.Length > 0 Then
-                sSql += "   AND f60.min_ps = :partslip"
-                sSql += "   AND f60.max_ps = :partslip"
+                sSql += "   AND f60.min_ps = :partslip" + vbCrLf
+                sSql += "   AND f60.max_ps = :partslip" + vbCrLf
 
                 al.Add(New OracleParameter("partslip", OracleDbType.Varchar2, rsPartSlip.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip))
                 al.Add(New OracleParameter("partslip", OracleDbType.Varchar2, rsPartSlip.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsPartSlip))

@@ -64,5 +64,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.349 --> 2020/10/13 : 코로나 특수보고서 모듈 수정
 'Version 3.1.10.350 --> 2020/10/22 : 코로나 특수보고서 모듈 수정
 'Version 3.1.10.351 --> 2021/09/01 : 코로나 특수보고서 모듈 수정
+'Version 3.1.10.352 --> 2022/02/21 : 코로나 특수보고서 모듈 수정
+'Version 3.1.10.353 --> 2022/03/10 : 코로나 특수보고서 모듈 수정 -우동원배포
+'Version 3.1.10.354 --> 2022/03/17 : 코로나 특수보고서 모듈 수정
 
-<Assembly: AssemblyVersion("3.1.10.351")>
+<Assembly: AssemblyVersion("3.1.10.354")>

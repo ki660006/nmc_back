@@ -3,6 +3,7 @@ Imports COMMON.CommLogin
 Imports COMMON.CommLogin.LOGIN
 Imports COMMON.SVar
 Imports Oracle.DataAccess.Client
+Imports LISAPP.APP_R
 Imports DBORA.DbProvider
 
 
@@ -328,7 +329,7 @@ Public Class FGR99
                         iReg = da_regrst.RegServer(al_rstinfo, sampinfo, al_succ, "p", Format(Now, "yyyymmdd").ToString)
 
                     Else
-                        iReg = da_regrst.RegServer(al_rstinfo, sampinfo, al_succ)
+                        iReg = da_regrst.RegServer_igra(al_rstinfo, sampinfo, al_succ)
                     End If
 
                 End If

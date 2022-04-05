@@ -1170,7 +1170,7 @@ Public Class FGB09
             If bContinue = False Then Return
 
             'bOk = (New Out).fnExe_Out(alOutList)
-            ' bOk = (New WEBSERVER.CGWEB_B).ExecuteDo_Out(alOutList)
+            'bOk = (New WEBSERVER.CGWEB_B).ExecuteDo_Out(alOutList)
 
             If Me.chkCMCO.Checked = False Then
                 ' 일반혈액 출고
