@@ -266,7 +266,8 @@ Public Class FGB26
                         .Col = .GetColFromID("outdthm") : .Text = dt.Rows(ix).Item("outdthm").ToString
                         .Col = .GetColFromID("id") : .Text = dt.Rows(ix).Item("id").ToString
                         .Col = .GetColFromID("abotype") : .Text = dt.Rows(ix).Item("abotype").ToString
-                        .Col = .GetColFromID("outnm") : .Text = dt.Rows(ix).Item("outnm").ToString
+                        '.Col = .GetColFromID("outnm") : .Text = dt.Rows(ix).Item("outnm").ToString
+                        .Col = .GetColFromID("rtncd") : .Text = dt.Rows(ix).Item("BMS_RTN_CD").ToString
 
                         .Col = .GetColFromID("sex") : .Text = dt.Rows(ix).Item("sex1").ToString
                         .Col = .GetColFromID("birth") : .Text = dt.Rows(ix).Item("birth").ToString
