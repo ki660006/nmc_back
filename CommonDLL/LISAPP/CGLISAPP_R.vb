@@ -4335,6 +4335,11 @@ Namespace APP_R
                         m_dbTran.Rollback()
                         Return False
                     End If
+
+                    'If (New RegFn()).fnEdit_Covid_SMS(alBcNos.Item(ix).ToString.Split("|"c)(0), m_dbCn, m_dbTran) = False Then
+                    '    m_dbTran.Rollback()
+                    '    Return False
+                    'End If
                 Next
 
                 m_dbTran.Commit()
@@ -6327,7 +6332,7 @@ Namespace APP_R
                 '# 한 프로세스에 멀티장비용으로 수정
                 'RegRstFn.Log("RegServer 시작 - " + r_sampinfo_Buf.BCNo)
                 LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 시작 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
-                '> mod freety 2005/03/18
+                '> mod freety 2005/03/18f
 
                 If PRG_CONST.BCCLS_MicorBio.Contains(r_sampinfo_Buf.BCNo.Substring(8, 2)) Then
                     Dim iRegOK_M As Integer = RegServerM(r_al_RstInfo, r_sampinfo_Buf, r_al_EditSuc)
@@ -6436,6 +6441,147 @@ Namespace APP_R
                 '    Call fnEdit_LR040M_OUT(r_sampinfo_Buf) '-- 자동소견
                 'End If
 
+                '-- 2009-09-15 YEJ (감염정보)
+                If fnEdit_OCS(r_sampinfo_Buf) Then
+                    'Log 남기기
+                    LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 종료 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
+
+                    Return iRegOK_Sum
+                Else
+                    Return 0
+                End If
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+        '20220221 jhs IGRA 소견 자동 입력
+        Public Function RegServer_igra(ByVal r_al_RstInfo As ArrayList, ByVal r_sampinfo_Buf As STU_SampleInfo, ByRef r_al_EditSuc As ArrayList) As Integer
+            Dim sFn As String = "Function RegServer"
+
+            Try
+                Dim iRegOK_Sum As Integer = 0
+                Dim rstinfo_Buf As STU_RstInfo
+
+                Dim alCvtRstInfo As New ArrayList
+                Dim alCvtCmtInfo As New ArrayList
+
+                'Log 남기기
+                '< mod freety 2005/03/18
+                '# 한 프로세스에 멀티장비용으로 수정
+                'RegRstFn.Log("RegServer 시작 - " + r_sampinfo_Buf.BCNo)
+                LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 시작 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
+                '> mod freety 2005/03/18f
+
+                If PRG_CONST.BCCLS_MicorBio.Contains(r_sampinfo_Buf.BCNo.Substring(8, 2)) Then
+                    Dim iRegOK_M As Integer = RegServerM(r_al_RstInfo, r_sampinfo_Buf, r_al_EditSuc)
+
+                    'Log 남기기
+                    LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 종료 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
+
+                    Return iRegOK_M
+                End If
+                '-- 2007-10.16 YOOEJ END
+
+                '1) 결과개수만큼 등록
+                For i As Integer = 1 To r_al_RstInfo.Count
+                    rstinfo_Buf = CType(r_al_RstInfo(i - 1), STU_RstInfo)
+
+                    If rstinfo_Buf.EqFlag Is Nothing Then rstinfo_Buf.EqFlag = ""
+                    If rstinfo_Buf.RstCmt Is Nothing Then rstinfo_Buf.RstCmt = ""
+
+                    If fnRegServer(rstinfo_Buf, r_sampinfo_Buf) Then
+                        iRegOK_Sum += 1
+
+                        r_al_EditSuc.Add(rstinfo_Buf.TestCd)
+
+                        '-- 소견 자동등록에서 필요
+                        Dim oCvtCmtInfo As New STU_CvtCmtInfo
+                        With oCvtCmtInfo
+                            .BcNo = r_sampinfo_Buf.BCNo
+                            .TestCd = rstinfo_Buf.TestCd
+                            .OrgRst = rstinfo_Buf.OrgRst
+                            .ViewRst = rstinfo_Buf.ViewRst
+                        End With
+
+                        alCvtCmtInfo.Add(oCvtCmtInfo)
+
+                        '-- 결과값 자동변경에서 필요
+                        Dim oCvtRstInfo As New STU_RstInfo_cvt
+                        With oCvtRstInfo
+                            .BcNo = r_sampinfo_Buf.BCNo
+                            .TestCd = rstinfo_Buf.TestCd
+                            .OrgRst = rstinfo_Buf.OrgRst
+                            .ViewRst = rstinfo_Buf.ViewRst
+                        End With
+
+                        alCvtRstInfo.Add(oCvtRstInfo)
+
+                    End If
+                Next
+
+                If r_al_EditSuc.Count = 0 Then Return iRegOK_Sum
+
+                '1-1) 계산식 관련항목 등록
+                Try
+                    Dim al_RstInfo_Calc As ArrayList = fnCalcRstInfo(r_sampinfo_Buf, r_al_RstInfo)
+
+                    If Not al_RstInfo_Calc Is Nothing Then
+                        If al_RstInfo_Calc.Count > 0 Then
+                            For i As Integer = 1 To al_RstInfo_Calc.Count
+                                rstinfo_Buf = CType(al_RstInfo_Calc(i - 1), STU_RstInfo)
+
+                                If fnRegServer(rstinfo_Buf, r_sampinfo_Buf) Then
+                                    iRegOK_Sum += 1
+
+                                    r_al_EditSuc.Add(rstinfo_Buf.TestCd)
+                                End If
+                            Next
+                        End If
+                    End If
+
+                Catch ex As Exception
+                    LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 계산식 오류 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
+                End Try
+                '>
+
+                '-- 1-2) 결과값 자동 등록
+                Try
+                    Dim al_RstInfo_Cvt As ArrayList = fnCvtRstInfo(r_sampinfo_Buf, r_al_EditSuc, m_dbTran, m_dbCn)
+
+                    If Not al_RstInfo_Cvt Is Nothing Then
+                        If al_RstInfo_Cvt.Count > 0 Then
+                            For i As Integer = 1 To al_RstInfo_Cvt.Count
+                                fnEdit_LR_Item_Edit_View(r_sampinfo_Buf.BCNo, CType(al_RstInfo_Cvt(i - 1), STU_RstInfo_cvt))
+                            Next
+                        End If
+                    End If
+                Catch ex As Exception
+                    LogFn.Log(r_sampinfo_Buf.SenderID, "RegServer 결과값 자동변환 오류 - " + r_sampinfo_Buf.EqBCNo + " : " + r_sampinfo_Buf.BCNo)
+                End Try
+
+                '2) Sub 항목 에 대한 상태 재조정(Parent 및 Child)
+                fnEdit_LR_Parent(r_sampinfo_Buf)
+
+                '3) Battery
+                fnEdit_LR_Battery(r_sampinfo_Buf)
+
+                '4) Update LJ011M
+                fnEdit_LJ011(r_sampinfo_Buf)
+
+                '5) Update LJ010M
+                fnEdit_LJ010(r_sampinfo_Buf)
+
+                '6) Upate LR040M(검사분류별 소견)
+                Call fnEdit_LR040M_igra(r_sampinfo_Buf) '-- 자동소견
+
+                '7) 위탁검사 소견 자동 등록 
+                'If rstinfo_Buf.RegStep = "3" Then
+                '    Call fnEdit_LR040M_OUT(r_sampinfo_Buf) '-- 자동소견
+                'End If
+
+                '8) 2022.03.22 JJH 코로나 SMS 문자전송
+                'Call fnEdit_Covid_SMS(r_sampinfo_Buf.BCNo, m_dbCn, m_dbTran)
 
                 '-- 2009-09-15 YEJ (감염정보)
                 If fnEdit_OCS(r_sampinfo_Buf) Then
@@ -6451,6 +6597,8 @@ Namespace APP_R
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
             End Try
         End Function
+        '-----------------------------------------------
+
 
         Public Function Reg_NCOV_RstUpd(ByVal rsBcno As String, ByVal rsTestcd As String) As Boolean
             Dim sFn As String = "Public Function Reg_NCOV_RstUpd(ByVal rsBcno As String, ByVal rsTestcd As String) As Boolean"
@@ -8127,6 +8275,193 @@ Namespace APP_R
             End Try
 
         End Function
+        '20220221 jhs IGRA 소견 자동 입력
+        Public Function fnEdit_LR040M_igra(ByVal r_sampinfo_Buf As STU_SampleInfo) As String
+
+            Dim sFn As String = "Public Function fnEdit_LR040M(object) As String"
+
+            Try
+                Dim sSql As String = ""
+                Dim dbCmd As New OracleCommand
+                Dim dbDa As OracleDataAdapter
+                Dim dt As New DataTable
+                Dim dt_t As New DataTable
+                Dim PrealCmtVal As New ArrayList
+                Dim alCmtVal As New ArrayList
+                Dim alRstInfo As New ArrayList
+                Dim sCriticalmark As String = ""
+
+                dbCmd.Connection = m_dbCn
+                dbCmd.Transaction = m_dbTran
+
+                Dim sTableNm As String = "lr010m"
+                If PRG_CONST.BCCLS_MicorBio.Contains(r_sampinfo_Buf.BCNo.Substring(8, 2)) Then sTableNm = "lm010m"
+
+                sSql = ""
+                sSql += "SELECT r.testcd, r.orgrst, r.viewrst, r.hlmark, r.eqflag, r.criticalmark, r.regno"
+                sSql += "  FROM " + sTableNm + " r"
+                sSql += " WHERE r.bcno = :bcno"
+                sSql += "   AND NVL(r.orgrst,  ' ') <> ' '"
+                sSql += "   AND NVL(r.viewrst, ' ') <> ' '"
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                    .SelectCommand.Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_sampinfo_Buf.BCNo
+                End With
+
+                dt.Reset()
+                dbDa.Fill(dt)
+
+                If dt.Rows.Count > 0 Then
+                    For ix As Integer = 0 To dt.Rows.Count - 1
+                        Dim objRst As New STU_CvtCmtInfo
+
+                        With objRst
+                            .BcNo = r_sampinfo_Buf.BCNo
+                            .TestCd = dt.Rows(ix).Item("testcd").ToString
+                            .OrgRst = dt.Rows(ix).Item("orgrst").ToString
+                            .ViewRst = dt.Rows(ix).Item("viewrst").ToString
+                            .HlMark = dt.Rows(ix).Item("hlmark").ToString
+                            .EqFlag = dt.Rows(ix).Item("eqflag").ToString
+
+                            sCriticalmark = dt.Rows(ix).Item("criticalmark").ToString
+
+                        End With
+
+                        alRstInfo.Add(objRst)
+                    Next
+                End If
+
+
+                dbCmd.Connection = m_dbCn
+                dbCmd.Transaction = m_dbTran
+
+                sSql = ""
+                sSql += " select CLSVAL          "
+                sSql += "   from LF000M          "
+                sSql += "  where CLSGBN = 'IGRA' "
+                sSql += "    and CLSCD LIKE 'T%' "
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                End With
+
+                dt_t.Reset()
+                dbDa.Fill(dt_t)
+
+                For ix As Integer = 0 To dt_t.Rows.Count - 1
+
+                Next
+
+                '---- 결핵균특이항원자극 Interferon-gamma 인 경우
+                If dt.Rows(0).Item("testcd").ToString = "LI611" Or dt.Rows(0).Item("testcd").ToString = "LI612" Or dt.Rows(0).Item("testcd").ToString = "LI613" Then
+                    sbDisplay_IgraCmt(r_sampinfo_Buf.BCNo, alCmtVal, dt.Rows(0).Item("testcd").ToString, dt.Rows(0).Item("regno").ToString)
+
+
+                    sSql = ""
+                    sSql += "DELETE lr040m "
+                    sSql += " WHERE bcno = :bcno"
+                    sSql += "   AND partcd = :partcd"
+                    sSql += "   AND slipcd = :slipcd"
+
+                    dbCmd.CommandText = sSql
+
+                    With dbCmd
+                        .Parameters.Clear()
+                        .Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_sampinfo_Buf.BCNo
+                        .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(alCmtVal(0), STU_CvtCmtInfo).SlipCd.Substring(0, 1)
+                        .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(alCmtVal(0), STU_CvtCmtInfo).SlipCd.Substring(1, 1)
+
+                    End With
+
+                    dbCmd.ExecuteNonQuery()
+
+                End If
+                '-->
+
+                Fn.log("-----------")
+
+                PrealCmtVal = alCmtVal
+                alCmtVal = LISAPP.COMM.CvtCmt.fnCvtCmtInfo(r_sampinfo_Buf.BCNo, alRstInfo, "", True, m_dbCn, m_dbTran)
+
+                If alCmtVal.Count < 1 Then
+                    If PrealCmtVal.Count < 1 Then
+                        Return ""
+                    Else
+                        alCmtVal = PrealCmtVal
+                    End If
+                End If
+
+                sSql = ""
+                sSql += "SELECT bcno, partcd, slipcd, cmt"
+                sSql += "  FROM lr040m"
+                sSql += " WHERE bcno = :bcno"
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                    .SelectCommand.Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_sampinfo_Buf.BCNo
+                End With
+
+                dt.Reset()
+                dbDa.Fill(dt)
+
+                For ix As Integer = 0 To alCmtVal.Count - 1
+                    Dim sWhere As String = ""
+                    sWhere += "bcno = '" + r_sampinfo_Buf.BCNo + "' AND "
+                    sWhere += "partcd = '" + CType(alCmtVal(ix), STU_CvtCmtInfo).SlipCd.Substring(0, 1) + "' AND "
+                    sWhere += "slipcd = '" + CType(alCmtVal(ix), STU_CvtCmtInfo).SlipCd.Substring(1, 1) + "'"
+
+                    Dim dr As DataRow() = dt.Select(sWhere)
+
+                    If dr.Count < 1 Then
+                        sSql = ""
+                        sSql += "INSERT INTO lr040m"
+                        sSql += "          (  bcno,  partcd,  slipcd,  rstseq,  cmt,  regid, regdt,           editid,  editip, editdt )"
+                        sSql += "    values( :bcno, :partcd, :slipcd, :rstseq, :cmt, :regid, fn_ack_sysdate, :editid, :editip, fn_ack_sysdate)"
+
+                        dbCmd.CommandText = sSql
+
+                        With dbCmd
+                            .Parameters.Clear()
+                            .Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_sampinfo_Buf.BCNo
+                            .Parameters.Add("partcd", OracleDbType.Varchar2).Value = CType(alCmtVal(ix), STU_CvtCmtInfo).SlipCd.Substring(0, 1)
+                            .Parameters.Add("slipcd", OracleDbType.Varchar2).Value = CType(alCmtVal(ix), STU_CvtCmtInfo).SlipCd.Substring(1, 1)
+                            .Parameters.Add("rstno", OracleDbType.Int32).Value = ix + 1
+                            .Parameters.Add("cmt", OracleDbType.Varchar2).Value = CType(alCmtVal(ix), STU_CvtCmtInfo).CmtCont
+
+                            .Parameters.Add("regid", OracleDbType.Varchar2).Value = r_sampinfo_Buf.UsrID
+                            .Parameters.Add("editid", OracleDbType.Varchar2).Value = r_sampinfo_Buf.UsrID
+                            .Parameters.Add("editip", OracleDbType.Varchar2).Value = r_sampinfo_Buf.UsrIP
+
+                        End With
+
+                        If dbCmd.ExecuteNonQuery() < 1 Then Return "Error"
+                    End If
+                Next
+
+                Return ""
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+
+        End Function
+        '-----------------------------------------------------
 
 
         Private Sub sbDisplay_XPertCmt(ByVal rsBcno As String, ByRef rarrList As ArrayList, ByVal rsCritical As String, ByVal rsViewrst As String)
@@ -8252,7 +8587,134 @@ Namespace APP_R
 
             rarrList.Add(objRst)
         End Sub
+        '20220221 jhs IGRA 소견 자동 입력
+        Private Sub sbDisplay_IgraCmt(ByVal rsBcno As String, ByRef rarrList As ArrayList, ByVal rsTestCd As String, ByVal rsRegno As String)
+            Dim dt As DataTable : Dim sCMT As String = "" : Dim sCMT1 As String = "" : Dim sCmt2 As String = "" : Dim sCmt3 As String = "" : Dim sViewrst As String = ""
 
+            Dim objRst As New STU_CvtCmtInfo
+            '환자의 최근 2년 결핵균 결과를 가져온다
+            dt = fnGet_IGRA_Comment(rsBcno)
+
+            '환자의 이전 1주일전 결과가 있을경우
+            If dt.Rows.Count > 0 Then
+                '1주일 결과중 검체의 최대 사이즈를 가져오기 위하여 Data Table에 ORDER BY하여 변수에 담는다
+                Dim a_dr As DataRow() = dt.Select("", "fndt desc")
+
+                '2. 최근 2년간 검사 총회 입력
+                sCMT1 += "이전검사결과:" + dt.Rows(0).Item("fndt").ToString + " ~ 금번 검사일 사이 기간 중 총 " + dt.Rows.Count.ToString + "회" + vbCrLf
+
+                '2 의 최근 2년간 검사결과 입력
+                For ix = 0 To dt.Rows.Count -1
+                    sCMT1 += "[" + dt.Rows(ix).Item("fndt").ToString + " 국립중앙의료원]" + dt.Rows(ix).Item("viewrst").ToString + vbCrLf
+                Next
+            ElseIf dt.Rows.Count <= 0 Then '1주일 전 결과가 없을 경우
+                sCMT1 += "상기 검체 접수일로부터 최근 2년 이내에 의뢰된 결핵균특이항원자극 Interferon-gamma 검사 결과 : 검사이력 없음" + vbCrLf + vbCrLf
+            End If
+
+            sCmt2 += "" + vbCrLf
+            sCmt2 += "1. 참고치" + vbCrLf
+            sCmt2 += " (1) TB1 Antigen: 결핵단백항원에 대한 CD4+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf
+            sCmt2 += " (2) TB2 Antigen: 결핵단백항원에 대한 CD4+ T 림프구와 CD8+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf + vbCrLf
+
+            sCmt2 += "2. 판정기준" + vbCrLf
+            sCmt2 += " (1) Negative: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 모두 0.35 IU/mL 미만인 경우" + vbCrLf
+            sCmt2 += " (2) Positive: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 중 하나 이상 " + vbCrLf
+            sCmt2 += "     0.35 IU/mL 이상인 경우" + vbCrLf
+            sCmt2 += " (3) Indeterminate: 해당 검체의 면역반응이 판정 대상 범위 외로 나타나(과도 또는 저조), " + vbCrLf
+            sCmt2 += "     결과 판정이 불가능한 경우" + vbCrLf + vbCrLf
+
+            sCmt2 += "3. 검사개요" + vbCrLf
+            sCmt2 += " (1) 검사원리: 세포매개성 면역반응, 즉 M.tuberculosis 및 소수 non-tuberculous mycobacteria에 분포하는 " + vbCrLf
+            sCmt2 += "     단백 항원에 대한 interferon-gamma 반응을 검사대상자의 전혈 검체에서 ELISA 법으로 측정함." + vbCrLf
+            sCmt2 += " (2) 관련 질환과 의의: 활동성 결핵과 잠복결핵 (Active and Latent tuberculosis infection). " + vbCrLf
+            sCmt2 += "     본 검사에서 양성 결과를 보이는 경우, 의학적/진단적 평가를 후속으로 진행할 것이 권장됨. " + vbCrLf
+            sCmt2 += "     감염의 단계, 면역학적 변수, 검체 채취 시점과 취급 중 변수 등에 의해 위음성 결과 또한 가능함." + vbCrLf
+            sCmt2 += " (3) 검사의 변경: 검사 Kit가 2019년 06월 12일부터 TB1 & TB2 Antigen tube를 사용하도록 업그레이드되었음." + vbCrLf + vbCrLf
+
+            sCMT = sCMT1 + sCmt2
+
+            '// YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
+            sCMT += Pat_CBC_Rst(rsTestCd, rsTestCd)
+
+            Fn.log("SCMT -- " + sCMT)
+
+            objRst.BcNo = rsBcno
+            objRst.SlipCd = "I2"
+            objRst.CmtCont = sCMT
+
+            rarrList.Add(objRst)
+        End Sub
+        Private Function Pat_CBC_Rst(ByVal sTestcd As String, ByVal sRegno As String) As String
+            Dim sFN As String = "Public Function Pat_CBC_Rst() As DataTable"
+            Dim sCmt2 As String = ""
+            Try
+                '< 2016-11-22 YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
+                If sTestcd = "LI611" Or sTestcd = "LI612" Or sTestcd = "LI613" Then
+                    Dim a_dt As DataTable = New DataTable
+                    Dim stestisno611 As String = "", stestisno612 As String = "", stest611rdt As String = "", stest611rst As String = "", stest611rstunit As String = "",
+                stest612rstunit As String = "", stest612rdt As String = "", stest612rst As String = ""
+
+                    'If msRegNoCmt <> "" Then 'LI611, LI612 검사로 판단되면
+                    a_dt = fnGet_Pat_Recent_Rst(sRegno) '환자의 최근 CBC검사 항목 가져오기
+
+                    '불러온 이전 결과 없을 경우 "기존의뢰 없음" 표시 
+                    If a_dt.Rows.Count = 0 Then
+                        If sCmt2 = "" Then
+                            sCmt2 += "4. 과거 일반혈액 검사결과 " '2019-07-10 JJH 3->4 수정
+                            sCmt2 += vbNewLine
+                            sCmt2 += "   검사항목                                   검사시행날짜      실제결과 "
+                            sCmt2 += vbNewLine
+                            sCmt2 += "   WBC Count (CBC)                            기존의뢰 없음"
+                            sCmt2 += vbNewLine
+                            sCmt2 += "   Lymphocyte Count (WBC Differential Count)  기존의뢰 없음"
+                        End If
+                    Else
+                        '-결과 있을 경우 이전 결과 변수 담기
+                        For i As Integer = 0 To a_dt.Rows.Count - 1
+                            If a_dt.Rows(i).Item("testcd").ToString.Equals("LH101") Then
+                                stest611rdt = a_dt.Rows(i).Item("rstdtd").ToString
+                                stest611rst = a_dt.Rows(i).Item("viewrst").ToString
+                                stest611rstunit = a_dt.Rows(i).Item("rstunit").ToString
+                            ElseIf a_dt.Rows(i).Item("testcd").ToString.Equals("LH12103") Then
+                                stest612rdt = a_dt.Rows(i).Item("rstdtd").ToString
+                                stest612rst = a_dt.Rows(i).Item("viewrst").ToString
+                                stest612rstunit = a_dt.Rows(i).Item("rstunit").ToString
+                            End If
+                        Next
+                        '-
+                        If stest611rdt = "" Then
+                            stestisno611 = "기존의뢰 없음"
+                        ElseIf stest612rdt = "" Then
+                            stestisno612 = "기존의뢰 없음"
+                        End If
+                        '-자동 소견 양식 만들고 이전 결과 넣어 주기
+                        sCmt2 += "4. 과거 일반혈액 검사결과 "  '2019-07-10 JJH 3->4 수정
+                        sCmt2 += vbNewLine
+                        sCmt2 += "   검사항목                                   검사시행날짜      실제결과 "
+                        sCmt2 += vbNewLine
+                        If stestisno611 = "" Then
+                            sCmt2 += "   WBC Count (CBC)                            " + stest611rdt + Space(8) + stest611rst + Space(1) + stest611rstunit
+                        Else
+                            sCmt2 += "   WBC Count (CBC)                            " + stestisno611
+                        End If
+                        sCmt2 += vbNewLine
+                        If stestisno612 = "" Then
+                            sCmt2 += "   Lymphocyte Count (WBC Differential Count)  " + stest612rdt + Space(8) + stest612rst + Space(1) + stest612rstunit
+                        Else
+                            sCmt2 += "   Lymphocyte Count (WBC Differential Count)  " + stestisno612
+                        End If
+                        '-
+                    End If
+                End If
+
+                Return sCmt2
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFN, ex))
+            End Try
+
+        End Function
+
+        '-------------------------------------------------------
         Public Function fnGet_Xpert_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable
             '해당 환자의 Xpert PCR 검사 최근 1주일 검사결과 가져오는 쿼리 함수
             Dim sFn As String = "Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String) As DataTable"
@@ -8343,11 +8805,131 @@ Namespace APP_R
                 Throw (New Exception(ex.Message + " @" + sFn, ex))
             End Try
         End Function
+        '20220222 jhs igra comment 추가
+        Public Function fnGet_IGRA_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable
+            '해당 환자의 igra 검사 최근 2년 검사결과 가져오는 쿼리 함수
+            Dim sFn As String = "Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String) As DataTable"
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+            Dim alParm As New ArrayList
+
+            Dim dbCmd As New OracleCommand
+            Dim dbDa As OracleDataAdapter
+
+            dbCmd.Connection = m_dbCn
+            dbCmd.Transaction = m_dbTran
+
+            Try
+                sSql = ""
+                sSql += " SELECT r.regno ,r.testcd , r.spccd ,  r.tkdt , r.bcno                                                                                                                 " + vbCrLf
+                sSql += " , decode(r.rstflg , '1' , TO_CHAR(TO_DATE(r.regdt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd'), '3' , TO_CHAR(TO_DATE(r.fndt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd')) fndt " + vbCrLf
+                sSql += " , replace(replace(r.viewrst, chr(10), '' ), chr(13), '')  viewrst                                                                                                     " + vbCrLf
+                sSql += " FROM lr010m r,                                                                                                 " + vbCrLf
+                sSql += " (SELECT regno , tclscd , tkdt , bcno                                                                           " + vbCrLf
+                sSql += "    FROM lj011m                                                                                                 " + vbCrLf
+                sSql += "   WHERE bcno = :bcno                                                                                           " + vbCrLf
+                sSql += "     AND tclscd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf '결핵검사 코드 3가지
+                sSql += "     ) x , lf030m f3                                                                                            " + vbCrLf
+                sSql += " WHERE r.regno = x.regno                                                                                        " + vbCrLf
+                sSql += "   AND r.testcd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf
+                sSql += "   AND r.tkdt BETWEEN TO_CHAR(TO_DATE(x.tkdt , 'yyyy-mm-dd hh24:mi:ss') - 730, 'yyyymmddhh24miss') AND x.tkdt   " + vbCrLf
+                sSql += "   And nvl(r.viewrst, ' ') <> ' '                                                                               " + vbCrLf
+                sSql += "   AND r.bcno NOT IN (:bcno)                                                                                    " + vbCrLf
+                sSql += "   And r.spccd = f3.spccd                                                                                       " + vbCrLf
+                sSql += "   AND f3.usdt <= r.tkdt                                                                                        " + vbCrLf
+                sSql += "   AND f3.uedt > r.tkdt                                                                                         " + vbCrLf
+                sSql += " GROUP BY  r.regno , r.testcd, r.spccd, r.tkdt, r.bcno                                                          " + vbCrLf
+                sSql += "    , decode(r.rstflg , '1' , TO_CHAR(TO_DATE(r.regdt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd'), '3' , TO_CHAR(TO_DATE(r.fndt, 'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd'))     " + vbCrLf
+                sSql += "    , r.viewrst                                                                                                  " + vbCrLf
+                sSql += "    , f3.spcnms                                                                                                  " + vbCrLf
+                sSql += " ORDER BY r.tkdt                                                                                                 " + vbCrLf
+
+                Fn.log("sql 문 - " & sSql)
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                    .SelectCommand.Parameters.Add("bcno", OracleDbType.Varchar2).Value = rsBcno
+                    .SelectCommand.Parameters.Add("bcno", OracleDbType.Varchar2).Value = rsBcno
+                End With
+
+                dt.Reset()
+                dbDa.Fill(dt)
+
+
+                fnGet_IGRA_Comment = dt
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+        End Function
+
+        '20220222 jhs igra comment 추가
+        Public Function fnGet_Pat_Recent_Rst(ByVal rsRegNo As String) As DataTable
+            '해당 환자의 igra 검사 최근 2년 검사결과 가져오는 쿼리 함수
+            Dim sFn As String = "Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String) As DataTable"
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+            Dim alParm As New ArrayList
+
+            Dim dbCmd As New OracleCommand
+            Dim dbDa As OracleDataAdapter
+
+            dbCmd.Connection = m_dbCn
+            dbCmd.Transaction = m_dbTran
+
+            Try
+                sSql += "SELECT y.* , TO_CHAR(TO_DATE(y.rstdt, 'yyyy-mm-dd hh24:miss'), 'YYYY-MM-DD') rstdtd, "
+                sSql += "       f6.testcd, f6.rstunit "
+                sSql += "  FROM ( "
+                sSql += "        SELECT ROW_NUMBER() OVER(PARTITION BY x.testcd || x.spccd ORDER BY x.tkdt desc) num, x.* "
+                sSql += "          FROM ("
+                sSql += "                SELECT testcd, spccd, orgrst, viewrst, MAX(tkdt) tkdt, MAX(rstdt) rstdt "
+                sSql += "                  FROM lr010m "
+                sSql += "                 WHERE regno = :regno"
+                sSql += "                   AND testcd IN ('LH101', 'LH12103') "
+                sSql += "                   AND spccd = 'S01' "
+                sSql += "                   AND rstflg IN ('2', '3') "
+                sSql += "                GROUP BY testcd, spccd, orgrst, viewrst "
+                sSql += "                ) x"
+                sSql += "        ) y "
+                sSql += "       , lf060m f6 "
+                sSql += "  WHERE y.num = 1 "
+                sSql += "    AND y.testcd = f6.testcd "
+                sSql += "    AND y.spccd = f6.spccd "
+                sSql += "    AND f6.usdt <= TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')"
+                sSql += "    AND f6.uedt > TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')"
+                sSql += "    ORDER BY f6.testcd"
+
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                    .SelectCommand.Parameters.Add("regno", OracleDbType.Varchar2).Value = rsRegNo
+                End With
+
+                dt.Reset()
+                dbDa.Fill(dt)
+
+                Return dt
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+        End Function
+
 
         '-- 검사분류별 자동 소견 등록
         Public Function fnEdit_LR040M_OUT(ByVal r_sampinfo_Buf As STU_SampleInfo) As String
 
-            Dim sFn As String = "Public Function fnEdit_LR040M(object) As String"
+            Dim sFn As String = "Public Function fnEdit_LR040M(Object) As String"
 
             Try
                 Dim sSql As String = ""
@@ -8366,7 +8948,7 @@ Namespace APP_R
                 If PRG_CONST.BCCLS_MicorBio.Contains(r_sampinfo_Buf.BCNo.Substring(8, 2)) Then sTableNm = "lm010m"
 
                 sSql = ""
-                sSql += "SELECT r.testcd,  c.cmt , r.partcd , r.slipcd"
+                sSql += "Select r.testcd,  c.cmt , r.partcd , r.slipcd"
                 sSql += "  FROM " + sTableNm + " r , lf086m c , lf060m f"
                 sSql += " WHERE r.bcno = :bcno"
                 sSql += "   AND r.testcd = c.testcd "
@@ -8917,6 +9499,140 @@ Namespace APP_R
                     Return False
                 End If
 
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+
+        '[2022.03.25] JJH 코로나 SMS 전송 서비스
+        Public Function fnEdit_Covid_SMS(ByVal r_bcno As String,
+                                         ByRef r_dbCn As OracleConnection, ByRef r_dbTran As OracleTransaction, Optional ByVal r_ifSrv As Boolean = False) As Boolean
+            '[r_ifSrv]
+            '> True  = I/F 결과저장 서비스
+            '> False = 그 외 (default)
+            Dim sFn As String = "Public Function fnEdit_Covid_SMS(ByVal r_bcno As String, ByRef r_dbCn As OracleConnection, ByRef r_dbTran As OracleTransaction, Optional ByVal r_ifSrv As Boolean = False) As Boolean"
+
+            Dim dbCmd As New OracleCommand
+            Dim dbDa As New OracleDataAdapter
+            Dim dt As New DataTable
+
+            Dim strErrVal As String = ""
+
+            Try
+
+                '1. 코로나 SMS전송 검체조회
+                Dim sSql As String = ""
+
+                sSql = ""
+                sSql += " select                                            "
+                sSql += "        '031' as INSTCD                            "
+                sSql += "      , a.REGNO                                    "
+                sSql += "      , c.ORDDD                                    "
+                sSql += "      , c.CRETNO                                   "
+                sSql += "      , b.IOGBN                                    "
+                sSql += "   from LJ010M a, LJ011M b, EMR.MMODEXOP c         "
+                sSql += "  where a.BCNO     = :BCNO                         "
+                sSql += "    and a.rstflg   = '2'                           "
+                sSql += "    and a.BCNO     = b.BCNO                        "
+                sSql += "    and c.INSTCD   = '031'                         "
+                sSql += "    and b.REGNO    = c.PID                         "
+                sSql += "    and b.ORDDT    = c.PRCPDD                      "
+                sSql += "    and b.OCS_KEY  = c.EXECPRCPUNIQNO              "
+                sSql += "  group by a.REGNO, c.ORDDD, c.CRETNO, b.IOGBN    "
+
+                sSql += " union                                             "
+
+                sSql += " select                                            "
+                sSql += "        '031' as INSTCD                            "
+                sSql += "      , a.REGNO                                    "
+                sSql += "      , c.ORDDD                                    "
+                sSql += "      , c.CRETNO                                   "
+                sSql += "      , b.IOGBN                                    "
+                sSql += "   from LJ010M a, LJ011M b, EMR.MMODEXIP c         "
+                sSql += "  where a.BCNO     = :BCNO                         "
+                sSql += "    and a.rstflg   = '2'                           "
+                sSql += "    and a.BCNO     = b.BCNO                        "
+                sSql += "    and c.INSTCD   = '031'                         "
+                sSql += "    and b.REGNO    = c.PID                         "
+                sSql += "    and b.ORDDT    = c.PRCPDD                      "
+                sSql += "    and b.OCS_KEY  = c.EXECPRCPUNIQNO              "
+                sSql += "  group by a.REGNO, c.ORDDD, c.CRETNO, b.IOGBN    "
+
+                dbCmd.Connection = r_dbCn
+                dbCmd.Transaction = r_dbTran
+                dbCmd.CommandType = CommandType.Text
+                dbCmd.CommandText = sSql
+
+                dbDa = New OracleDataAdapter(dbCmd)
+
+                With dbDa
+                    .SelectCommand.Parameters.Clear()
+                    .SelectCommand.Parameters.Add("bcno", OracleDbType.Varchar2).Value = r_bcno
+                End With
+
+                dt.Reset()
+                dbDa.Fill(dt)
+
+                If dt.Rows.Count < 1 Then
+                    Return True
+                End If
+
+                Dim sInstcd As String = dt.Rows(0).Item("instcd").ToString()
+                Dim sPid As String = dt.Rows(0).Item("regno").ToString()
+                Dim sOrddd As String = dt.Rows(0).Item("orddd").ToString()
+                Dim sCretno As String = dt.Rows(0).Item("cretno").ToString()
+                Dim sIogbn As String = dt.Rows(0).Item("iogbn").ToString()
+
+                Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                Console.WriteLine($"instcd = {sInstcd}")
+                Console.WriteLine($"regno  = {sPid}")
+                Console.WriteLine($"prcpdd = {sOrddd}")
+                Console.WriteLine($"cretno = {sCretno}")
+                Console.WriteLine($"sIogbn = {sIogbn}")
+                Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
+
+                '2. 코로나 SMS 전송 프로시저 (전산실제공)
+                sSql = "lisif.pc_emr_covidexam_smssend"
+
+                dbCmd = New OracleCommand()
+                Dim iRet As Integer = 0
+
+                With dbCmd
+                    .Connection = r_dbCn
+                    .Transaction = r_dbTran
+                    .CommandType = CommandType.StoredProcedure
+                    .CommandText = sSql
+
+                    .Parameters.Clear()
+                    .Parameters.Add("rs_instcd", OracleDbType.Varchar2).Value = sInstcd '기관코드 
+                    .Parameters.Add("rs_pid", OracleDbType.Varchar2).Value = sPid '등록번호
+                    .Parameters.Add("rs_orddd", OracleDbType.Varchar2).Value = sOrddd '진료일자
+                    .Parameters.Add("rs_cretno", OracleDbType.Varchar2).Value = sCretno '원무접수번호
+                    .Parameters.Add("rs_iogbn", OracleDbType.Varchar2).Value = sIogbn '입외구분
+                    .Parameters.Add("rs_userid", OracleDbType.Varchar2).Value = USER_INFO.USRID '로그인사용자
+                    .Parameters.Add("rs_resendyn", OracleDbType.Varchar2).Value = "N"  '재전송여부 (검사결과시는 무조건 N)
+
+                    .Parameters.Add("out_code", OracleDbType.Int32) '7
+                    .Parameters("out_code").Direction = ParameterDirection.Output
+                    .Parameters.Add("out_msg", OracleDbType.Varchar2, 4000) '8
+                    .Parameters("out_msg").Direction = ParameterDirection.Output
+
+                    iRet = .ExecuteNonQuery()
+
+                    Dim outCode As String = .Parameters(7).Value.ToString()
+                    Dim outMsg As String = .Parameters(8).Value.ToString()
+
+                    Console.WriteLine("*************************************")
+                    Console.WriteLine($"outCode = {outCode}")
+                    Console.WriteLine("outCode => 1 정상전송, 0 전송못함, -1 프로그램오류")
+                    Console.WriteLine($"outMsg  = {outMsg}")
+                    Console.WriteLine("*************************************")
+
+                End With
+
+                Return True
 
             Catch ex As Exception
                 Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
