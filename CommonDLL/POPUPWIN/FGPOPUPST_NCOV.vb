@@ -80,17 +80,17 @@ Public Class FGPOPUPST_NCOV
                 Me.txtSpcnm.Text = "Lower respiratory tract specimen (Sputum)"
             ElseIf msTestCd = "LG120" Or msTestCd = "LG122" Or msTestCd = "LG123" Or msTestCd = "LG125" Or msTestCd = "LG128" Or msTestCd = "LG129" Or msTestCd = "LG134" Or msTestCd = "LG135" Then
                 Me.txtSpcnm.Text = "Upper respiratory tract specimen [Nasopharyngeal swab AND Oropharyngeal swab (NP/OP swab)]"
-            ElseIf msTestCd = "LG127" Or msTestCd = "LG133" Then
+            ElseIf msTestCd = "LG127" Or msTestCd = "LG132" Or msTestCd = "LG133" Then
                 Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
-            ElseIf msTestCd = "LG132" Then
-                Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
+                'ElseIf msTestCd = "LG132" Then
+                '    Me.txtSpcnm.Text = "Pooled upper respiratory tract specimens [Transport media of nasopharyngeal/oropharyngeal (NP/OP) swabs]"
             Else
                 Me.txtSpcnm.Text = ""
             End If
             '#############
 
             '############# 검사결과 label 
-            If msTestCd = "LG127" Or msTestCd = "LG128" Then
+            If msTestCd = "LG127" Or msTestCd = "LG128" Or msTestCd = "LG132" Or msTestCd = "LG133" Or msTestCd = "LG134" Then
                 Me.lblRst.Text = "3. 검사결과: " + vbCrLf
                 Me.lblRst.Text += Space(3) + "* 코로나바이러스감염증-19 [실시간역전사중합효소연쇄반응법] 취합검사 (Pooling test)"
             End If
@@ -259,7 +259,7 @@ Public Class FGPOPUPST_NCOV
 
             Dim specChk As Boolean = False
 
-            If msTestCd = "LG127" Or msTestCd = "LG128" Or msTestCd = "LG132" Then specChk = True
+            If msTestCd = "LG127" Or msTestCd = "LG128" Or msTestCd = "LG132" Or msTestCd = "LG133" Or msTestCd = "LG134" Then specChk = True
 
             iMaxLength = Me.txtTestinfo.Text.Length
 
