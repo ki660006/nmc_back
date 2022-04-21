@@ -5970,7 +5970,7 @@ Namespace APP_BT
                 sSql += "       B2.CMT," + vbCrLf
                 sSql += "       B4.COMCD                        AS COMCD," + vbCrLf
                 sSql += "       B4.COMNM                        AS COMNM," + vbCrLf
-                sSql += "       (selecT tnsgbn from lb040m where tnsjubsuno = '20210719T0010') tnsgbn " + vbCrLf
+                sSql += "       (selecT tnsgbn from lb040m where tnsjubsuno = B4.TNSJUBSUNO) tnsgbn " + vbCrLf
                 sSql += "  FROM LB043M B4, LB020M B2, LF120M F4" + vbCrLf
                 sSql += " WHERE B4.tnsjubsuno  = :tnsno" + vbCrLf
 
