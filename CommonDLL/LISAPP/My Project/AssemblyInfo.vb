@@ -201,7 +201,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.540 --> 2022/02/23 : 진료과 명칭 변경
 'Version 3.1.10.541 --> 2022/03/15 : afb 관련내용 5년기준으로 적용되어있는데 3년기준으로 변경
 'Version 3.1.10.542 --> 2022/03/30 : 적혈구 제제 수혈관리 화면 하단 통계 쿼리 수정
+'Version 3.1.10.543 --> 2022/04/25 : 적혈구 제제 수혈관리 화면 하단 통계 쿼리 수정
 
-<Assembly: AssemblyVersion("3.1.10.542")>
+<Assembly: AssemblyVersion("3.1.10.543")>
 
 

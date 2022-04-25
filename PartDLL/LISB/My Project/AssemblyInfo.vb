@@ -98,5 +98,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.391 --> 2022/02/08 : 혈액 TAT 조회 및 오버타임 기능 추가
 'Version 3.1.10.392 --> 2022/02/23 : 적혈구 수혈관리 통계 자료  to_excel기능 추가
 'Version 3.1.10.393 --> 2022/03/30 : 적혈구 수혈관리 통계 화면 하단 통계화면 수정
+'Version 3.1.10.394 --> 2022/04/25 : 적혈구 수혈관리 통계 화면 하단 통계화면 수정
 
-<Assembly: AssemblyVersion("3.1.10.393")>
+<Assembly: AssemblyVersion("3.1.10.394")>
