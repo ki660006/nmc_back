@@ -11697,7 +11697,6 @@ Namespace APP_BT
 
             Try
                 Dim objDTable As New DataTable
-<<<<<<< HEAD
 
                 'Dim sSql As String = ""
                 'sSql &= "SELECT SUBSTR(a.bldno,0,2) || '-' || SUBSTR(a.bldno,3,2) || '-' || SUBSTR(a.bldno,5,6) AS bldno," + vbCrLf
@@ -11760,11 +11759,6 @@ Namespace APP_BT
 
                 'End If
 
-
-
-
-=======
->>>>>>> feature/bld_bms_rtn_cd
                 Dim sSql As String = ""
                 sSql &= "SELECT SUBSTR(a.bldno,0,2) || '-' || SUBSTR(a.bldno,3,2) || '-' || SUBSTR(a.bldno,5,6) AS bldno," + vbCrLf
                 sSql &= "       c.dspccd2," + vbCrLf
