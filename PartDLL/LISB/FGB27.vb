@@ -98,6 +98,7 @@ Public Class FGB27
 
             With Me.spdTnsTranList
                 .MaxRows = 0
+                Me.spdTnsTotal.MaxRows = 0
 
                 If dt.Rows.Count < 1 Then Return
 
