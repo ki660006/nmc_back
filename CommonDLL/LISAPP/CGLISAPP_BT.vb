@@ -5359,18 +5359,20 @@ Namespace APP_BT
 
             Try
                 sSql = " "
-                sSql += " select sum(hgyn) hgyn,                                           " + vbCrLf
-                sSql += "        sum(cbcyn) cbcyn,                                         " + vbCrLf
-                sSql += "        sum(allyn) allyn,                                         " + vbCrLf
-                sSql += "        sum(ecptyn) ecptyn                                        " + vbCrLf
-                sSql += "   from (selecT case when hgyn   = 'Y' then 1 else 0 end hgyn,    " + vbCrLf
-                sSql += "                case when cbcyn  = 'Y' then 1 else 0 end cbcyn,   " + vbCrLf
-                sSql += "                case when allyn  = 'Y' then 1 else 0 end allyn,   " + vbCrLf
-                sSql += "                case when ecptyn = 'Y' then 1 else 0 end ecptyn   " + vbCrLf
-                sSql += "          from lbc10m                                             " + vbCrLf
-                sSql += "         where 1=1                                                " + vbCrLf
-                sSql += "           and regdt >= :datas                                    " + vbCrLf
-                sSql += "           and regdt <= :datee || '235959')                       " + vbCrLf
+                sSql += " select sum(hgyn) hgyn,                                               " + vbCrLf
+                sSql += "        sum(cbcyn) cbcyn,                                             " + vbCrLf
+                sSql += "        sum(allyn) allyn,                                             " + vbCrLf
+                sSql += "        sum(ecptyn) ecptyn                                            " + vbCrLf
+                sSql += "   from (selecT case when bc1.hgyn   = 'Y' then 1 else 0 end hgyn,    " + vbCrLf
+                sSql += "                case when bc1.cbcyn  = 'Y' then 1 else 0 end cbcyn,   " + vbCrLf
+                sSql += "                case when bc1.allyn  = 'Y' then 1 else 0 end allyn,   " + vbCrLf
+                sSql += "                case when bc1.ecptyn = 'Y' then 1 else 0 end ecptyn   " + vbCrLf
+                sSql += "          from lbc10m  bc1                                            " + vbCrLf
+                sSql += "         inner Join lb040m b4                                         " + vbCrLf
+                sSql += "            on bc1.tnsjubsuno = b4.tnsjubsuno                         " + vbCrLf
+                sSql += "         where 1=1                                                    " + vbCrLf
+                sSql += "           and b4.jubsudt  >= :datas                                  " + vbCrLf
+                sSql += "           and b4.jubsudt  <= :datee || '235959')                     " + vbCrLf
 
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
@@ -5655,86 +5657,86 @@ Namespace APP_BT
             Dim alParm As New ArrayList
 
             Try
-                sSql += "SELECT CASE WHEN a.state = '1' THEN '완' ELSE '미' END state,"
-                sSql += "       CASE WHEN a.spcstate > 0 THEN 'Y' ELSE 'N' END spcstate,                                                          "
-                sSql += "       a.tnsjubsuno,"
-                sSql += "       fn_ack_get_tnsjubsuno_full(a.tnsjubsuno) vtnsjubsuno,"
-                sSql += "       a.comcd,"
-                sSql += "       a.comnm,"
-                sSql += "       a.regno,"
-                sSql += "       a.patnm,"
-                sSql += "       a.sexage,"
-                sSql += "       fn_ack_get_bcno_full(a.bcno_order) bcno_order,"
-                sSql += "       a.bcno_keep,"
-                sSql += "       a.reqqnt,"
-                sSql += "       a.outqnt,"
-                sSql += "       a.orddt order_date,"
-                sSql += "       r.abo,"
-                sSql += "       r.rh,"
-                sSql += "       a.spccd,"
-                sSql += "       a.ir,"
-                sSql += "       a.filter,"
-                sSql += "       a.iogbn,"
-                sSql += "       a.owngbn,"
-                sSql += "       a.eryn,"
-                sSql += "       CASE WHEN a.tnsgbn = '1' THEN 'P' WHEN a.tnsgbn = '2' THEN 'T'"
-                sSql += "            WHEN a.tnsgbn = '3' THEN 'E' WHEN a.tnsgbn = '4' THEN 'I'"
-                sSql += "       END tnsgbn,"
-                sSql += "       a.state"
-                sSql += "  FROM (SELECT DISTINCT "
-                sSql += "               a.tnsjubsuno,"
-                sSql += "               b.comcd,"
-                sSql += "               b.comnm,"
-                sSql += "               a.regno,"
-                sSql += "               a.patnm,"
-                sSql += "               a.sex || '/' || a.age sexage,"
-                sSql += "               a.bcno_order,"
-                sSql += "               a.bcno_keep,"
-                sSql += "               NVL(LENGTH(a.bcno_order), 0) + NVL(LENGTH(a.bcno_keep), 0) spcstate,"
-                sSql += "               NVL(b.reqqnt, 0) reqqnt,"
-                sSql += "               NVL(b.befoutqnt, 0) + NVL(b.outqnt, 0) + NVL(b.rtnqnt, 0) + "
-                sSql += "               NVL(b.abnqnt, 0) + NVL(b.cancelqnt, 0) outqnt,"
-                sSql += "               a.orddt,"
-                sSql += "               b.spccd,"
-                sSql += "               b.ir,"
-                sSql += "               b.filter,"
-                sSql += "               a.iogbn,"
-                sSql += "               a.owngbn,"
-                sSql += "               a.eryn,"
-                sSql += "               a.tnsgbn,"
-                sSql += "               b.state,"
-                sSql += "               a.jubsudt"
-                sSql += "          FROM lb040m a, lb042m b"
-                sSql += "         WHERE a.jubsudt BETWEEN :dates AND :datee || '235959'"
-                sSql += "           AND NVL(a.delflg, '0') <> '1'"
+                sSql += "SELECT CASE WHEN a.state = '1' THEN '완' ELSE '미' END state," + vbCrLf
+                sSql += "       CASE WHEN a.spcstate > 0 THEN 'Y' ELSE 'N' END spcstate,                                                          " + vbCrLf
+                sSql += "       a.tnsjubsuno," + vbCrLf
+                sSql += "       fn_ack_get_tnsjubsuno_full(a.tnsjubsuno) vtnsjubsuno," + vbCrLf
+                sSql += "       a.comcd," + vbCrLf
+                sSql += "       a.comnm," + vbCrLf
+                sSql += "       a.regno," + vbCrLf
+                sSql += "       a.patnm," + vbCrLf
+                sSql += "       a.sexage," + vbCrLf
+                sSql += "       fn_ack_get_bcno_full(a.bcno_order) bcno_order," + vbCrLf
+                sSql += "       a.bcno_keep," + vbCrLf
+                sSql += "       a.reqqnt," + vbCrLf
+                sSql += "       a.outqnt," + vbCrLf
+                sSql += "       a.orddt order_date," + vbCrLf
+                sSql += "       r.abo," + vbCrLf
+                sSql += "       r.rh," + vbCrLf
+                sSql += "       a.spccd," + vbCrLf
+                sSql += "       a.ir," + vbCrLf
+                sSql += "       a.filter," + vbCrLf
+                sSql += "       a.iogbn," + vbCrLf
+                sSql += "       a.owngbn," + vbCrLf
+                sSql += "       a.eryn," + vbCrLf
+                sSql += "       CASE WHEN a.tnsgbn = '1' THEN 'P' WHEN a.tnsgbn = '2' THEN 'T'" + vbCrLf
+                sSql += "            WHEN a.tnsgbn = '3' THEN 'E' WHEN a.tnsgbn = '4' THEN 'I'" + vbCrLf
+                sSql += "       END tnsgbn," + vbCrLf
+                sSql += "       a.state" + vbCrLf
+                sSql += "  FROM (SELECT DISTINCT " + vbCrLf
+                sSql += "               a.tnsjubsuno," + vbCrLf
+                sSql += "               b.comcd," + vbCrLf
+                sSql += "               b.comnm," + vbCrLf
+                sSql += "               a.regno," + vbCrLf
+                sSql += "               a.patnm," + vbCrLf
+                sSql += "               a.sex || '/' || a.age sexage," + vbCrLf
+                sSql += "               a.bcno_order," + vbCrLf
+                sSql += "               a.bcno_keep," + vbCrLf
+                sSql += "               NVL(LENGTH(a.bcno_order), 0) + NVL(LENGTH(a.bcno_keep), 0) spcstate," + vbCrLf
+                sSql += "               NVL(b.reqqnt, 0) reqqnt," + vbCrLf
+                sSql += "               NVL(b.befoutqnt, 0) + NVL(b.outqnt, 0) + NVL(b.rtnqnt, 0) + " + vbCrLf
+                sSql += "               NVL(b.abnqnt, 0) + NVL(b.cancelqnt, 0) outqnt," + vbCrLf
+                sSql += "               a.orddt," + vbCrLf
+                sSql += "               b.spccd," + vbCrLf
+                sSql += "               b.ir," + vbCrLf
+                sSql += "               b.filter," + vbCrLf
+                sSql += "               a.iogbn," + vbCrLf
+                sSql += "               a.owngbn," + vbCrLf
+                sSql += "               a.eryn," + vbCrLf
+                sSql += "               a.tnsgbn," + vbCrLf
+                sSql += "               b.state," + vbCrLf
+                sSql += "               a.jubsudt" + vbCrLf
+                sSql += "          FROM lb040m a, lb042m b" + vbCrLf
+                sSql += "         WHERE a.jubsudt BETWEEN :dates AND :datee || '235959'" + vbCrLf
+                sSql += "           AND NVL(a.delflg, '0') <> '1'" + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsFdate))
                 alParm.Add(New OracleParameter("datee", rsTdate))
 
                 If rsRegno <> "" Then
-                    sSql += "       AND a.regno      = :regno"
+                    sSql += "       AND a.regno      = :regno" + vbCrLf
                     alParm.Add(New OracleParameter("regno", rsRegno))
                 End If
 
                 If rsComcd <> "" And rsComcd <> "ALL" Then
-                    sSql += "       AND b.comcd = :comcd"
+                    sSql += "       AND b.comcd = :comcd" + vbCrLf
                     alParm.Add(New OracleParameter("comcd", rsComcd))
                 End If
 
-                sSql += "           AND a.tnsjubsuno     = b.tnsjubsuno"
+                sSql += "           AND a.tnsjubsuno     = b.tnsjubsuno" + vbCrLf
 
                 'sSql += "           AND NVL(b.filter, 0) = '0'"
-                sSql += "       ) a, lr070m r"
-                sSql += " WHERE a.regno = r.regno (+)"
+                sSql += "       ) a, lr070m r" + vbCrLf
+                sSql += " WHERE a.regno = r.regno (+)" + vbCrLf
                 If rsGbn = "0"c Then
 
                 ElseIf rsGbn = "1"c Then
-                    sSql += "   AND state = '0'"
+                    sSql += "   AND state = '0'" + vbCrLf
                 ElseIf rsGbn = "2"c Then
-                    sSql += "   AND state = '1'"
+                    sSql += "   AND state = '1'" + vbCrLf
                 End If
 
-                sSql += " ORDER BY tnsjubsuno                                                             "
+                sSql += " ORDER BY tnsjubsuno                                                             " + vbCrLf
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
@@ -11694,9 +11696,8 @@ Namespace APP_BT
             Dim sFn As String = "Public Function fBldIn_Search(String, String) As DataTable"
 
             Try
-                'Dim sDates As String = Fn.ToDateInsStr(r_dte_dates)
-                'Dim sDatee As String = Fn.ToDateInsStr(r_dte_datee)
                 Dim objDTable As New DataTable
+<<<<<<< HEAD
 
                 'Dim sSql As String = ""
                 'sSql &= "SELECT SUBSTR(a.bldno,0,2) || '-' || SUBSTR(a.bldno,3,2) || '-' || SUBSTR(a.bldno,5,6) AS bldno," + vbCrLf
@@ -11762,6 +11763,8 @@ Namespace APP_BT
 
 
 
+=======
+>>>>>>> feature/bld_bms_rtn_cd
                 Dim sSql As String = ""
                 sSql &= "SELECT SUBSTR(a.bldno,0,2) || '-' || SUBSTR(a.bldno,3,2) || '-' || SUBSTR(a.bldno,5,6) AS bldno," + vbCrLf
                 sSql &= "       c.dspccd2," + vbCrLf
@@ -11775,50 +11778,58 @@ Namespace APP_BT
                 sSql &= "              case when e.sex = 'M' THEN 'M'   " + vbCrLf
                 sSql &= " WHEN E.SEX = 'F' THEN 'W'  END AS SEX1  " + vbCrLf
                 sSql &= ",'999' as info  , substr(g.birtdate,0,4) birth , " + vbCrLf
-                sSql &= " case when e.deptcd = '2010200000' THEN '010' " + vbCrLf
-                sSql &= "when e.deptcd = '2010300000' THEN '011'" + vbCrLf
-                sSql &= "when e.deptcd = '2010600000' THEN '013'" + vbCrLf
-                sSql &= "when e.deptcd = '2010500000' THEN '014'" + vbCrLf
-                sSql &= "when e.deptcd = '2010700000' THEN '015'" + vbCrLf
-                sSql &= "when e.deptcd = '2010900000' THEN '016'" + vbCrLf
-                sSql &= "when e.deptcd = '2011000000' THEN '017'" + vbCrLf
-                sSql &= "when e.deptcd = '2011300000' THEN '018'" + vbCrLf
-                sSql &= "when e.deptcd = '2050000000' THEN '026'" + vbCrLf
-                sSql &= "when e.deptcd = '2060000000' THEN '027'" + vbCrLf
-                ' --when e.deptcd = 'BC' THEN '025'
+                '20220216 jhs 기존 표시 내용 정리
+                sSql &= " case when e.deptcd = '2010200000' THEN '010'    " + vbCrLf ' 일반내과
+                sSql &= "      when e.deptcd = '2010300000' THEN '011'    " + vbCrLf ' 소화기내과
+                sSql &= "      when e.deptcd = '2010400000' THEN '012'    " + vbCrLf ' 순환기내과
+                sSql &= "      when e.deptcd = '2010600000' THEN '013'    " + vbCrLf ' 호흡기내과
+                sSql &= "      when e.deptcd = '2010500000' THEN '014'    " + vbCrLf ' 내분비내과
+                sSql &= "      when e.deptcd = '2010700000' THEN '015'    " + vbCrLf ' 신장내과
+                sSql &= "      when e.deptcd = '2010900000' THEN '016'    " + vbCrLf ' 혈액종양내과
+                sSql &= "      when e.deptcd = '2011000000' THEN '017'    " + vbCrLf ' 감염내과 
+                sSql &= "      when e.deptcd = '2011100000' THEN '017'    " + vbCrLf ' 류마티스내과
+                sSql &= "      when e.deptcd = '2011300000' THEN '018'    " + vbCrLf ' 알레르기내과
+                sSql &= "      when e.deptcd = '2040000000' THEN '020'    " + vbCrLf ' 일반외과
+                sSql &= "      when e.deptcd = '2050000000' THEN '026'    " + vbCrLf ' 정형외과
+                sSql &= "      when e.deptcd = '2060000000' THEN '027'    " + vbCrLf ' 신경외과
+                '--when e.deptcd = 'BC' THEN '025'
                 '--when e.deptcd = 'OS' THEN '026'
                 '--when e.deptcd = 'NS' THEN '027'
-                sSql &= "when e.deptcd = '2070000000' THEN '028'" + vbCrLf
-                sSql &= "when e.deptcd = '2080000000' THEN '029'" + vbCrLf
-                sSql &= "when e.deptcd = '2020000000' THEN '030'" + vbCrLf
-                sSql &= "when e.deptcd = '2030000000' THEN '031'" + vbCrLf
-                sSql &= "when e.deptcd = '2090000000' THEN '032'" + vbCrLf
-                sSql &= "when e.deptcd = '2100000000' THEN '033'" + vbCrLf
-                sSql &= "when e.deptcd = '2110000000' THEN '034'" + vbCrLf
-                sSql &= "when e.deptcd = '2120000000' THEN '035'" + vbCrLf
-                sSql &= "when e.deptcd = '2130000000' THEN '036'" + vbCrLf
-                sSql &= "when e.deptcd = '2140000000' THEN '037'" + vbCrLf
-                sSql &= "when e.deptcd = '2150000000' THEN '038'" + vbCrLf
-                sSql &= "when e.deptcd = '2160000000' THEN '039'" + vbCrLf
-                sSql &= "when e.deptcd = '2170000000' THEN '040'" + vbCrLf
-                sSql &= "when e.deptcd = '2210000000' THEN '041'" + vbCrLf
-                sSql &= "when e.deptcd = '2200000000' THEN '042'" + vbCrLf
-                sSql &= "when e.deptcd = '2220000000' THEN '043'" + vbCrLf
-                sSql &= "when e.deptcd = '2230000000' THEN '045'" + vbCrLf
-                sSql &= "when e.deptcd = '2180000000' THEN '046'" + vbCrLf
-                sSql &= "when e.deptcd = '2280000000' THEN '048'" + vbCrLf
-                sSql &= "when e.deptcd = '2040000000' THEN '050'" + vbCrLf
-                sSql &= "when e.deptcd = '2240000000' THEN '060'" + vbCrLf
-                sSql &= "else '099' END AS DEPTNO,   " + vbCrLf
-                sSql &= "case when h.abo||h.rh = 'O+' THEN '1'    " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'A+' THEN '2' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'B+' THEN '3' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'AB+' THEN '4'" + vbCrLf
-                sSql &= "when h.abo||h.rh = 'O-' THEN '5' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'A-' THEN '6' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'B-' THEN '7' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'AB-' THEN '8' END ABO  " + vbCrLf
-                sSql &= "FROM lb030m a, lb020m b, lf120m c, lf911m d , lb040m e , lb040m f , lb043m h , VW_ACK_OCS_PAT_INFO g" + vbCrLf
+                sSql &= "      when e.deptcd = '2070000000' THEN '028'    " + vbCrLf ' 흉부외과
+                sSql &= "      when e.deptcd = '2080000000' THEN '029'    " + vbCrLf ' 성형외과
+                sSql &= "      when e.deptcd = '2020000000' THEN '030'    " + vbCrLf ' 신경과
+                sSql &= "      when e.deptcd = '2030000000' THEN '031'    " + vbCrLf ' 정신건강의학과
+                sSql &= "      when e.deptcd = '2090000000' THEN '032'    " + vbCrLf ' 마취통증의학과
+                sSql &= "      when e.deptcd = '2100000000' THEN '033'    " + vbCrLf ' 산부인과
+                sSql &= "      when e.deptcd = '2110000000' THEN '034'    " + vbCrLf ' 소아청소년과
+                sSql &= "      when e.deptcd = '2120000000' THEN '035'    " + vbCrLf ' 안과
+                sSql &= "      when e.deptcd = '2130000000' THEN '036'    " + vbCrLf ' 이비인후과
+                sSql &= "      when e.deptcd = '2140000000' THEN '037'    " + vbCrLf ' 피부과
+                sSql &= "      when e.deptcd = '2150000000' THEN '038'    " + vbCrLf ' 비뇨기과
+                sSql &= "      when e.deptcd = '2160000000' THEN '039'    " + vbCrLf ' 영상의학과
+                sSql &= "      when e.deptcd = '2170000000' THEN '040'    " + vbCrLf ' 방사선종양학과
+                sSql &= "      when e.deptcd = '2210000000' THEN '041'    " + vbCrLf ' 병리과
+                sSql &= "      when e.deptcd = '2200000000' THEN '042'    " + vbCrLf ' 진단검사의학과
+                sSql &= "      when e.deptcd = '2220000000' THEN '043'    " + vbCrLf ' 재활의학과
+                sSql &= "      when e.deptcd = '2230000000' THEN '045'    " + vbCrLf ' 가정의학과
+                sSql &= "      when e.deptcd = '2180000000' THEN '046'    " + vbCrLf ' 핵의학과
+                sSql &= "      when e.deptcd = '2280000000' THEN '048'    " + vbCrLf ' 응급의학과
+                sSql &= "      when e.deptcd = '2240000000' THEN '060'    " + vbCrLf ' 일반치과
+                sSql &= "      else '099' END AS DEPTNO,                  " + vbCrLf ' 기타
+                '---------------------------------------------------------
+                sSql &= " case when h.abo||h.rh = 'O+'  THEN '1' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'A+'  THEN '2' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'B+'  THEN '3' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'AB+' THEN '4' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'O-'  THEN '5' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'A-'  THEN '6' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'B-'  THEN '7' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'AB-' THEN '8' END ABO  " + vbCrLf
+
+                '<2022.04.05 JJH BMS 폐기사유코드 추가
+                sSql += " , '' as BMS_RTN_CD " + vbCrLf
+
+                sSql &= "  FROM lb030m a, lb020m b, lf120m c, lf911m d , lb040m e , lb040m f , lb043m h , VW_ACK_OCS_PAT_INFO g" + vbCrLf
                 sSql &= " WHERE a.outdt >= :dates" + vbCrLf
                 sSql &= "   AND a.outdt <  :datee" + vbCrLf
                 sSql &= "   AND a.bldno  = b.bldno" + vbCrLf
@@ -11826,11 +11837,11 @@ Namespace APP_BT
                 sSql &= "   AND a.comcd_out  = b.comcd" + vbCrLf ' 2019-04-04 JJH comcd -> comcd_out (실제출고된 성분코드)
                 'sSql &= "   AND b.comcd  = c.comcd" + vbCrLf
                 sSql &= "   AND a.comcd  = c.comcd" + vbCrLf ' 2019-04-25 JJH 실제출고된 성분제제 명 -> 출고된 성분제제 명
-                sSql &= " AND e.tnsjubsuno  = a.tnsjubsuno " + vbCrLf
-                sSql &= " AND f.tnsjubsuno = a.tnsjubsuno" + vbCrLf
-                sSql &= " aND e.regno = g.patno  " + vbCrLf
-                sSql &= " and g.sex = e.sex " + vbCrLf
-                sSql &= " and h.BLDNo = a.bldno " + vbCrLf
+                sSql &= "   AND e.tnsjubsuno  = a.tnsjubsuno " + vbCrLf
+                sSql &= "   AND f.tnsjubsuno = a.tnsjubsuno" + vbCrLf
+                sSql &= "   aND e.regno = g.patno  " + vbCrLf
+                sSql &= "   and g.sex = e.sex " + vbCrLf
+                sSql &= "   and h.BLDNo = a.bldno " + vbCrLf
                 sSql &= "   AND RTRIM(b.abo) || RTRIM(b.rh) = RTRIM(d.cdnm)" + vbCrLf
                 sSql &= "   AND d.cdgrpid = 'B0001'" + vbCrLf
                 ' sSql &= "   AND c.dspccd2 IN ('01','04','51','54')" + vbCrLf
@@ -11859,49 +11870,71 @@ Namespace APP_BT
                 sSql &= "              case when e.sex = 'M' THEN 'M'   " + vbCrLf
                 sSql &= " WHEN E.SEX = 'F' THEN 'W'  END AS SEX1  " + vbCrLf
                 sSql &= ",'999' as info  , substr(g.birtdate,0,4) birth , " + vbCrLf
-                sSql &= " case when e.deptcd = '2010200000' THEN '010' " + vbCrLf
-                sSql &= "when e.deptcd = '2010300000' THEN '011'" + vbCrLf
-                sSql &= "when e.deptcd = '2010600000' THEN '013'" + vbCrLf
-                sSql &= "when e.deptcd = '2010500000' THEN '014'" + vbCrLf
-                sSql &= "when e.deptcd = '2010700000' THEN '015'" + vbCrLf
-                sSql &= "when e.deptcd = '2010900000' THEN '016'" + vbCrLf
-                sSql &= "when e.deptcd = '2011000000' THEN '017'" + vbCrLf
-                sSql &= "when e.deptcd = '2011300000' THEN '018'" + vbCrLf
-                sSql &= "when e.deptcd = '2050000000' THEN '026'" + vbCrLf
-                sSql &= "when e.deptcd = '2060000000' THEN '027'" + vbCrLf
-                ' --when e.deptcd = 'BC' THEN '025'
+                '20220216 jhs 기존 표시 내용 정리
+                sSql &= " case when e.deptcd = '2010200000' THEN '010'    " + vbCrLf ' 일반내과
+                sSql &= "      when e.deptcd = '2010300000' THEN '011'    " + vbCrLf ' 소화기내과
+                sSql &= "      when e.deptcd = '2010400000' THEN '012'    " + vbCrLf ' 순환기내과
+                sSql &= "      when e.deptcd = '2010600000' THEN '013'    " + vbCrLf ' 호흡기내과
+                sSql &= "      when e.deptcd = '2010500000' THEN '014'    " + vbCrLf ' 내분비내과
+                sSql &= "      when e.deptcd = '2010700000' THEN '015'    " + vbCrLf ' 신장내과
+                sSql &= "      when e.deptcd = '2010900000' THEN '016'    " + vbCrLf ' 혈액종양내과
+                sSql &= "      when e.deptcd = '2011000000' THEN '017'    " + vbCrLf ' 감염내과 
+                sSql &= "      when e.deptcd = '2011100000' THEN '017'    " + vbCrLf ' 류마티스내과
+                sSql &= "      when e.deptcd = '2011300000' THEN '018'    " + vbCrLf ' 알레르기내과
+                sSql &= "      when e.deptcd = '2040000000' THEN '020'    " + vbCrLf ' 일반외과
+                sSql &= "      when e.deptcd = '2050000000' THEN '026'    " + vbCrLf ' 정형외과
+                sSql &= "      when e.deptcd = '2060000000' THEN '027'    " + vbCrLf ' 신경외과
+                '--when e.deptcd = 'BC' THEN '025'
                 '--when e.deptcd = 'OS' THEN '026'
                 '--when e.deptcd = 'NS' THEN '027'
-                sSql &= "when e.deptcd = '2070000000' THEN '028'" + vbCrLf
-                sSql &= "when e.deptcd = '2080000000' THEN '029'" + vbCrLf
-                sSql &= "when e.deptcd = '2020000000' THEN '030'" + vbCrLf
-                sSql &= "when e.deptcd = '2030000000' THEN '031'" + vbCrLf
-                sSql &= "when e.deptcd = '2090000000' THEN '032'" + vbCrLf
-                sSql &= "when e.deptcd = '2100000000' THEN '033'" + vbCrLf
-                sSql &= "when e.deptcd = '2110000000' THEN '034'" + vbCrLf
-                sSql &= "when e.deptcd = '2120000000' THEN '035'" + vbCrLf
-                sSql &= "when e.deptcd = '2130000000' THEN '036'" + vbCrLf
-                sSql &= "when e.deptcd = '2140000000' THEN '037'" + vbCrLf
-                sSql &= "when e.deptcd = '2150000000' THEN '038'" + vbCrLf
-                sSql &= "when e.deptcd = '2160000000' THEN '039'" + vbCrLf
-                sSql &= "when e.deptcd = '2170000000' THEN '040'" + vbCrLf
-                sSql &= "when e.deptcd = '2210000000' THEN '041'" + vbCrLf
-                sSql &= "when e.deptcd = '2200000000' THEN '042'" + vbCrLf
-                sSql &= "when e.deptcd = '2220000000' THEN '043'" + vbCrLf
-                sSql &= "when e.deptcd = '2230000000' THEN '045'" + vbCrLf
-                sSql &= "when e.deptcd = '2180000000' THEN '046'" + vbCrLf
-                sSql &= "when e.deptcd = '2280000000' THEN '048'" + vbCrLf
-                sSql &= "when e.deptcd = '2040000000' THEN '050'" + vbCrLf
-                sSql &= "when e.deptcd = '2240000000' THEN '060'" + vbCrLf
-                sSql &= "else '099' END AS DEPTNO,   " + vbCrLf
-                sSql &= "case when h.abo||h.rh = 'O+' THEN '1'    " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'A+' THEN '2' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'B+' THEN '3' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'AB+' THEN '4'" + vbCrLf
-                sSql &= "when h.abo||h.rh = 'O-' THEN '5' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'A-' THEN '6' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'B-' THEN '7' " + vbCrLf
-                sSql &= "when h.abo||h.rh = 'AB-' THEN '8' END ABO  " + vbCrLf
+                sSql &= "      when e.deptcd = '2070000000' THEN '028'    " + vbCrLf ' 흉부외과
+                sSql &= "      when e.deptcd = '2080000000' THEN '029'    " + vbCrLf ' 성형외과
+                sSql &= "      when e.deptcd = '2020000000' THEN '030'    " + vbCrLf ' 신경과
+                sSql &= "      when e.deptcd = '2030000000' THEN '031'    " + vbCrLf ' 정신건강의학과
+                sSql &= "      when e.deptcd = '2090000000' THEN '032'    " + vbCrLf ' 마취통증의학과
+                sSql &= "      when e.deptcd = '2100000000' THEN '033'    " + vbCrLf ' 산부인과
+                sSql &= "      when e.deptcd = '2110000000' THEN '034'    " + vbCrLf ' 소아청소년과
+                sSql &= "      when e.deptcd = '2120000000' THEN '035'    " + vbCrLf ' 안과
+                sSql &= "      when e.deptcd = '2130000000' THEN '036'    " + vbCrLf ' 이비인후과
+                sSql &= "      when e.deptcd = '2140000000' THEN '037'    " + vbCrLf ' 피부과
+                sSql &= "      when e.deptcd = '2150000000' THEN '038'    " + vbCrLf ' 비뇨기과
+                sSql &= "      when e.deptcd = '2160000000' THEN '039'    " + vbCrLf ' 영상의학과
+                sSql &= "      when e.deptcd = '2170000000' THEN '040'    " + vbCrLf ' 방사선종양학과
+                sSql &= "      when e.deptcd = '2210000000' THEN '041'    " + vbCrLf ' 병리과
+                sSql &= "      when e.deptcd = '2200000000' THEN '042'    " + vbCrLf ' 진단검사의학과
+                sSql &= "      when e.deptcd = '2220000000' THEN '043'    " + vbCrLf ' 재활의학과
+                sSql &= "      when e.deptcd = '2230000000' THEN '045'    " + vbCrLf ' 가정의학과
+                sSql &= "      when e.deptcd = '2180000000' THEN '046'    " + vbCrLf ' 핵의학과
+                sSql &= "      when e.deptcd = '2280000000' THEN '048'    " + vbCrLf ' 응급의학과
+                sSql &= "      when e.deptcd = '2240000000' THEN '060'    " + vbCrLf ' 일반치과
+                sSql &= "      else '099' END AS DEPTNO,                  " + vbCrLf ' 기타
+                '---------------------------------------------------------
+                sSql &= " case when h.abo||h.rh = 'O+'  THEN '1' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'A+'  THEN '2' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'B+'  THEN '3' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'AB+' THEN '4'" + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'O-'  THEN '5' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'A-'  THEN '6' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'B-'  THEN '7' " + vbCrLf
+                sSql &= "      when h.abo||h.rh = 'AB-' THEN '8' END ABO  " + vbCrLf
+
+                '<2022.04.05 JJH BMS 폐기사유코드 추가
+                sSql += ", CASE a.RTNRSNCD WHEN 'P00001' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'P00002' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'P00003' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'P00004' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'P00005' THEN '13'	" + vbCrLf
+                sSql += "                  WHEN 'P00006' THEN '14'	" + vbCrLf
+                sSql += "                  WHEN 'P00007' THEN '12'	" + vbCrLf
+                sSql += "                  WHEN 'P00008' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'P00009' THEN '11'	" + vbCrLf
+                sSql += "                  WHEN 'H00001' THEN '19'	" + vbCrLf
+                sSql += "                  WHEN 'H00002' THEN '19'	" + vbCrLf
+                sSql += "                  WHEN 'H00003' THEN '18'	" + vbCrLf
+                sSql += "                  WHEN 'H00004' THEN '17'	" + vbCrLf
+                sSql += "                  ELSE ''					" + vbCrLf
+                sSql += "   END BMS_RTN_CD							" + vbCrLf
+
                 sSql &= " FROM lb031m a, lb020m b, lf120m c, lf911m d , lb040m e , lb040m f , lb043m h,  VW_ACK_OCS_PAT_INFO g " + vbCrLf
                 sSql &= " WHERE a.outdt >= :dates" + vbCrLf
                 sSql &= "   AND a.outdt <  :datee" + vbCrLf
@@ -11911,15 +11944,15 @@ Namespace APP_BT
                 sSql &= "   AND a.comcd_out  = b.comcd" + vbCrLf ' 2019-04-04 JJH comcd -> comcd_out (실제출고된 성분코드)
                 'sSql &= "   AND b.comcd  = c.comcd" + vbCrLf
                 sSql &= "   AND a.comcd  = c.comcd" + vbCrLf ' 2019-04-25 JJH 실제출고된 성분제제 명 -> 출고된 성분제제 명
-                sSql &= " AND e.tnsjubsuno  = a.tnsjubsuno " + vbCrLf
-                sSql &= " AND f.tnsjubsuno = a.tnsjubsuno" + vbCrLf
-                sSql &= " aND e.regno = g.patno  " + vbCrLf
-                sSql &= " and g.sex = e.sex " + vbCrLf
-                sSql &= " and h.BLDNo = a.bldno " + vbCrLf
+                sSql &= "   AND e.tnsjubsuno  = a.tnsjubsuno " + vbCrLf
+                sSql &= "   AND f.tnsjubsuno = a.tnsjubsuno" + vbCrLf
+                sSql &= "   aND e.regno = g.patno  " + vbCrLf
+                sSql &= "   and g.sex = e.sex " + vbCrLf
+                sSql &= "   and h.BLDNo = a.bldno " + vbCrLf
                 sSql &= "   AND RTRIM(b.abo) || RTRIM(b.rh) = RTRIM(d.cdnm)" + vbCrLf
                 sSql &= "   AND d.cdgrpid = 'B0001'" + vbCrLf
                 'sSql &= "   AND c.dspccd2 IN ('01','04','51','54')" + vbCrLf
-                sSql &= " and c.dspccd2 in ( '01','04','06','10','51','54','56','60','76','83') " + vbCrLf
+                sSql &= "   and c.dspccd2 in ( '01','04','06','10','51','54','56','60','76','83') " + vbCrLf
 
                 Dim alParm As New ArrayList
                 alParm.Add(New OracleParameter("dates", r_dte_dates + "000000"))
@@ -11928,22 +11961,14 @@ Namespace APP_BT
                 '<<< 20151112 lhj 질병 관리 본부. 혈액 제제 종류 확대 항목. 
                 If sComcd <> "" Then
                     sSql &= "And b.comcd in (" + sComcd + ")"
-
-
                 End If
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
 
-                'DbCommand()
-                'DbExecuteText(sSql, objDTable)
-                'Dim dt As DataTable = DbExecute(sSql, al)
-
-                'Return objDTable
-
             Catch ex As Exception
-                'Fn.log(sFile & sFn, Err)
-                'MsgBox(sFile & sFn & vbCrLf & ex.Message)
+                MsgBox(sFn & vbCrLf & ex.Message)
+                Return New DataTable
             End Try
         End Function
     End Class
