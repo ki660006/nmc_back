@@ -15,6 +15,7 @@ Public Class FGB27
     Dim m_endt As String = ""
     Dim m_tnsjubsuno As String = ""
     Dim m_seq As String = ""
+    Dim ms_regno As String = ""
 
     Dim m_spdSort_tns As FPSpreadADO.SortKeyOrderConstants = FPSpreadADO.SortKeyOrderConstants.SortKeyOrderDescending
     Dim m_spd_col As Integer = 0
@@ -29,9 +30,11 @@ Public Class FGB27
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        With spdTnsTranList
-            .MaxRows = 0
-        End With
+
+        Me.spdTnsTranList.MaxRows = 0
+        Me.spdTnsTotal.MaxRows = 0
+        Me.txt_regno.Text = ""
+
     End Sub
 
     Public Sub sbDisp_Init()
@@ -56,7 +59,7 @@ Public Class FGB27
         'radio button 조건
         If Me.chkHB.Checked Then
             sReturn = "hgyn = 'Y'"
-        ElseIf Me.chkALL.Checked Then
+        ElseIf Me.chkCBC.Checked Then
             sReturn = "cbcyn = 'Y'"
         ElseIf Me.chkALL.Checked Then
             sReturn = "allyn = 'Y'"
@@ -68,9 +71,28 @@ Public Class FGB27
 
     End Function
 
-    Private Sub sbDisplay_Data()
+    Private Sub sbDisplay_Data(Optional ByVal regno As String = "")
+
         Try
-            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt(m_stdt, m_endt)
+
+            Dim dateS As String = Me.dtpDateS.Value.ToString("yyyy-MM-dd").Replace("-", "")
+            Dim dateE As String = Me.dtpDateE.Value.ToString("yyyy-MM-dd").Replace("-", "")
+
+            Dim sort As String = ""
+            If rdo_sort_tns.Checked Then
+                sort = "T"
+            Else
+                sort = "R"
+            End If
+
+            Dim sorting As String = ""
+            If rdo_sorting_asc.Checked Then
+                sorting = "A"
+            Else
+                sorting = "D"
+            End If
+
+            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_new(dateS, dateE, sort, sorting, regno)
             Dim tempTnsjubsuno As String = ""
             Dim tempSeq As String = ""
 
@@ -140,13 +162,13 @@ Public Class FGB27
                 Next
             End With
 
-            sbDisplay_TnsTotal()
+            sbDisplay_TnsTotal(regno)
 
         Catch ex As Exception
             Throw (New Exception(ex.Message, ex))
         End Try
     End Sub
-    Private Sub sbDisplay_TnsTotal()
+    Private Sub sbDisplay_TnsTotal(Optional ByVal regno As String = "")
         Try
             Dim sDT1 As String = Me.dtpDateS.Value.ToString("yyyy-MM-dd")
             Dim sDT2 As String = Me.dtpDateE.Value.ToString("yyyy-MM-dd")
@@ -164,7 +186,7 @@ Public Class FGB27
             '스프레드 날짜별 세팅
             spdTnsTotal_spdSetting(a_sDMY)
 
-            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_total_new(m_stdt, m_endt, a_sDMY)
+            Dim dt As DataTable = CGDA_BT.fnGet_trans_mgt_total_new(m_stdt, m_endt, a_sDMY, regno)
 
             With Me.spdTnsTotal
                 .MaxRows = dt.Rows.Count
@@ -497,6 +519,20 @@ Public Class FGB27
                 m_spd_col = e.col
 
             End With
+        End If
+
+    End Sub
+
+    Private Sub txt_regno_Click(sender As Object, e As EventArgs) Handles txt_regno.Click
+        Me.txt_regno.SelectAll()
+    End Sub
+
+    Private Sub txt_regno_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_regno.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+            Console.WriteLine("regno =====> " + Me.txt_regno.Text.Replace(vbCrLf, ""))
+            sbDisplay_Data(Me.txt_regno.Text.Replace(vbCrLf, ""))
+            Me.txt_regno.Text = ""
         End If
 
     End Sub
