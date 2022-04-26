@@ -69,5 +69,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.350 --> 2021/11/29 : 수혈제제 관리 코드화, 기초마스터 동의서 의뢰서 종류 텍스트 박스 추가 
 'Version 3.1.10.351 --> 2021/12/20 : 혈액 성분제제 TAT 관련 내용 추가(베타)
 'Version 3.1.10.352 --> 2022/02/08 : 혈액 성분제제 TAT 관련 내용 추가(베타)(롤백)
+'Version 3.1.10.353 --> 2022/04/26 : 결과코드 기초마스터 수정
 
-<Assembly: AssemblyVersion("3.1.10.352")>
+<Assembly: AssemblyVersion("3.1.10.353")>
