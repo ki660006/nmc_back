@@ -11904,7 +11904,7 @@ Namespace APP_BT
                 sSql &= "      when h.abo||h.rh = 'AB-' THEN '8' END ABO  " + vbCrLf
 
                 '<2022.04.05 JJH BMS 폐기사유코드 추가
-                sSql += " , '' as BMS_RTN_CD " + vbCrLf
+                sSql += " , fn_ack_get_usr_name(a.outid) as BMS_RTN_CD " + vbCrLf
 
                 sSql &= "  FROM lb030m a, lb020m b, lf120m c, lf911m d , lb040m e , lb040m f , lb043m h , VW_ACK_OCS_PAT_INFO g" + vbCrLf
                 sSql &= " WHERE a.outdt >= :dates" + vbCrLf
