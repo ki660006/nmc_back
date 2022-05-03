@@ -8359,13 +8359,18 @@ Namespace APP_R
                 dt_t.Reset()
                 dbDa.Fill(dt_t)
 
+                Dim Igra_ary As New List(Of String)
                 For ix As Integer = 0 To dt_t.Rows.Count - 1
-
+                    Igra_ary.Add(dt_t.Rows(ix).Item("clsval").ToString())
                 Next
 
+                Dim igra_testcd As String = dt.Rows(0).Item("testcd").ToString()
+                Dim igra_regno As String = dt.Rows(0).Item("regno").ToString()
+                Dim igra_cbc_cmt As String = ""
+
                 '---- 결핵균특이항원자극 Interferon-gamma 인 경우
-                If dt.Rows(0).Item("testcd").ToString = "LI611" Or dt.Rows(0).Item("testcd").ToString = "LI612" Or dt.Rows(0).Item("testcd").ToString = "LI613" Then
-                    sbDisplay_IgraCmt(r_sampinfo_Buf.BCNo, alCmtVal, dt.Rows(0).Item("testcd").ToString, dt.Rows(0).Item("regno").ToString)
+                If Igra_ary.Contains(igra_testcd) Then
+                    sbDisplay_IgraCmt(r_sampinfo_Buf.BCNo, alCmtVal, igra_testcd, igra_regno)
 
 
                     sSql = ""
@@ -8386,6 +8391,8 @@ Namespace APP_R
 
                     dbCmd.ExecuteNonQuery()
 
+                    igra_cbc_cmt = Pat_CBC_Rst(igra_testcd, igra_regno, Igra_ary)
+
                 End If
                 '-->
 
@@ -8394,11 +8401,30 @@ Namespace APP_R
                 PrealCmtVal = alCmtVal
                 alCmtVal = LISAPP.COMM.CvtCmt.fnCvtCmtInfo(r_sampinfo_Buf.BCNo, alRstInfo, "", True, m_dbCn, m_dbTran)
 
+                Dim Cmt_temp As New STU_CvtCmtInfo
                 If alCmtVal.Count < 1 Then
                     If PrealCmtVal.Count < 1 Then
                         Return ""
                     Else
                         alCmtVal = PrealCmtVal
+                        CType(alCmtVal(0), STU_CvtCmtInfo).CmtCont += vbCrLf + igra_cbc_cmt
+                    End If
+                Else
+                    If PrealCmtVal.Count > 0 Then
+
+                        '1. 환자이전결과 소견
+                        '2. 기초마스터 자동소견
+                        '3. 환자 CBC 이전결과 소견
+                        With Cmt_temp
+                            .BcNo = CType(alCmtVal(0), STU_CvtCmtInfo).BcNo
+                            .SlipCd = CType(alCmtVal(0), STU_CvtCmtInfo).SlipCd
+                            .CmtCont = CType(PrealCmtVal(0), STU_CvtCmtInfo).CmtCont + vbCrLf + vbCrLf '1
+                            .CmtCont += CType(alCmtVal(0), STU_CvtCmtInfo).CmtCont + vbCrLf '2
+                            .CmtCont += igra_cbc_cmt '3
+                        End With
+
+                        alCmtVal(0) = Cmt_temp
+
                     End If
                 End If
 
@@ -8598,7 +8624,7 @@ Namespace APP_R
             '환자의 이전 1주일전 결과가 있을경우
             If dt.Rows.Count > 0 Then
                 '1주일 결과중 검체의 최대 사이즈를 가져오기 위하여 Data Table에 ORDER BY하여 변수에 담는다
-                Dim a_dr As DataRow() = dt.Select("", "fndt desc")
+                'Dim a_dr As DataRow() = dt.Select("", "fndt desc")
 
                 '2. 최근 2년간 검사 총회 입력
                 sCMT1 += "이전검사결과:" + dt.Rows(0).Item("fndt").ToString + " ~ 금번 검사일 사이 기간 중 총 " + dt.Rows.Count.ToString + "회" + vbCrLf
@@ -8611,30 +8637,31 @@ Namespace APP_R
                 sCMT1 += "상기 검체 접수일로부터 최근 2년 이내에 의뢰된 결핵균특이항원자극 Interferon-gamma 검사 결과 : 검사이력 없음" + vbCrLf + vbCrLf
             End If
 
-            sCmt2 += "" + vbCrLf
-            sCmt2 += "1. 참고치" + vbCrLf
-            sCmt2 += " (1) TB1 Antigen: 결핵단백항원에 대한 CD4+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf
-            sCmt2 += " (2) TB2 Antigen: 결핵단백항원에 대한 CD4+ T 림프구와 CD8+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf + vbCrLf
+            'sCmt2 += "" + vbCrLf
+            'sCmt2 += "1. 참고치" + vbCrLf
+            'sCmt2 += " (1) TB1 Antigen: 결핵단백항원에 대한 CD4+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf
+            'sCmt2 += " (2) TB2 Antigen: 결핵단백항원에 대한 CD4+ T 림프구와 CD8+ T 림프구의 interferon-gamma 반응을 측정함." + vbCrLf + vbCrLf
 
-            sCmt2 += "2. 판정기준" + vbCrLf
-            sCmt2 += " (1) Negative: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 모두 0.35 IU/mL 미만인 경우" + vbCrLf
-            sCmt2 += " (2) Positive: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 중 하나 이상 " + vbCrLf
-            sCmt2 += "     0.35 IU/mL 이상인 경우" + vbCrLf
-            sCmt2 += " (3) Indeterminate: 해당 검체의 면역반응이 판정 대상 범위 외로 나타나(과도 또는 저조), " + vbCrLf
-            sCmt2 += "     결과 판정이 불가능한 경우" + vbCrLf + vbCrLf
+            'sCmt2 += "2. 판정기준" + vbCrLf
+            'sCmt2 += " (1) Negative: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 모두 0.35 IU/mL 미만인 경우" + vbCrLf
+            'sCmt2 += " (2) Positive: Nil tube가 판정 대상 범위 내 값을 보이면서 TB1, TB2 Antigen 중 하나 이상 " + vbCrLf
+            'sCmt2 += "     0.35 IU/mL 이상인 경우" + vbCrLf
+            'sCmt2 += " (3) Indeterminate: 해당 검체의 면역반응이 판정 대상 범위 외로 나타나(과도 또는 저조), " + vbCrLf
+            'sCmt2 += "     결과 판정이 불가능한 경우" + vbCrLf + vbCrLf
 
-            sCmt2 += "3. 검사개요" + vbCrLf
-            sCmt2 += " (1) 검사원리: 세포매개성 면역반응, 즉 M.tuberculosis 및 소수 non-tuberculous mycobacteria에 분포하는 " + vbCrLf
-            sCmt2 += "     단백 항원에 대한 interferon-gamma 반응을 검사대상자의 전혈 검체에서 ELISA 법으로 측정함." + vbCrLf
-            sCmt2 += " (2) 관련 질환과 의의: 활동성 결핵과 잠복결핵 (Active and Latent tuberculosis infection). " + vbCrLf
-            sCmt2 += "     본 검사에서 양성 결과를 보이는 경우, 의학적/진단적 평가를 후속으로 진행할 것이 권장됨. " + vbCrLf
-            sCmt2 += "     감염의 단계, 면역학적 변수, 검체 채취 시점과 취급 중 변수 등에 의해 위음성 결과 또한 가능함." + vbCrLf
-            sCmt2 += " (3) 검사의 변경: 검사 Kit가 2019년 06월 12일부터 TB1 & TB2 Antigen tube를 사용하도록 업그레이드되었음." + vbCrLf + vbCrLf
+            'sCmt2 += "3. 검사개요" + vbCrLf
+            'sCmt2 += " (1) 검사원리: 세포매개성 면역반응, 즉 M.tuberculosis 및 소수 non-tuberculous mycobacteria에 분포하는 " + vbCrLf
+            'sCmt2 += "     단백 항원에 대한 interferon-gamma 반응을 검사대상자의 전혈 검체에서 ELISA 법으로 측정함." + vbCrLf
+            'sCmt2 += " (2) 관련 질환과 의의: 활동성 결핵과 잠복결핵 (Active and Latent tuberculosis infection). " + vbCrLf
+            'sCmt2 += "     본 검사에서 양성 결과를 보이는 경우, 의학적/진단적 평가를 후속으로 진행할 것이 권장됨. " + vbCrLf
+            'sCmt2 += "     감염의 단계, 면역학적 변수, 검체 채취 시점과 취급 중 변수 등에 의해 위음성 결과 또한 가능함." + vbCrLf
+            'sCmt2 += " (3) 검사의 변경: 검사 Kit가 2019년 06월 12일부터 TB1 & TB2 Antigen tube를 사용하도록 업그레이드되었음." + vbCrLf + vbCrLf
 
-            sCMT = sCMT1 + sCmt2
+            'sCMT = sCMT1 + sCmt2
+            sCMT = sCMT1
 
             '// YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
-            sCMT += Pat_CBC_Rst(rsTestCd, rsTestCd)
+            'sCMT += Pat_CBC_Rst(rsTestCd, rsRegno)
 
             Fn.log("SCMT -- " + sCMT)
 
@@ -8644,12 +8671,12 @@ Namespace APP_R
 
             rarrList.Add(objRst)
         End Sub
-        Private Function Pat_CBC_Rst(ByVal sTestcd As String, ByVal sRegno As String) As String
+        Private Function Pat_CBC_Rst(ByVal sTestcd As String, ByVal sRegno As String, ByVal sIgra_Testcd As List(Of String)) As String
             Dim sFN As String = "Public Function Pat_CBC_Rst() As DataTable"
             Dim sCmt2 As String = ""
             Try
                 '< 2016-11-22 YJY 결핵검사 진행 시 환자의 최근 CBC검사항목 결과 가져와 소견으로 Display.
-                If sTestcd = "LI611" Or sTestcd = "LI612" Or sTestcd = "LI613" Then
+                If sIgra_Testcd.Contains(sTestcd) Then
                     Dim a_dt As DataTable = New DataTable
                     Dim stestisno611 As String = "", stestisno612 As String = "", stest611rdt As String = "", stest611rst As String = "", stest611rstunit As String = "",
                 stest612rstunit As String = "", stest612rdt As String = "", stest612rst As String = ""
@@ -8808,7 +8835,7 @@ Namespace APP_R
         '20220222 jhs igra comment 추가
         Public Function fnGet_IGRA_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable
             '해당 환자의 igra 검사 최근 2년 검사결과 가져오는 쿼리 함수
-            Dim sFn As String = "Public Shared Function fnGet_Xpert_Comment(ByVal rsBcno As String) As DataTable"
+            Dim sFn As String = "Public Function fnGet_IGRA_Comment(ByVal rsBcno As String, Optional ByVal RsCriticalGbn As Boolean = False) As DataTable"
             Dim sSql As String = ""
             Dim dt As New DataTable
             Dim alParm As New ArrayList
@@ -8828,10 +8855,12 @@ Namespace APP_R
                 sSql += " (SELECT regno , tclscd , tkdt , bcno                                                                           " + vbCrLf
                 sSql += "    FROM lj011m                                                                                                 " + vbCrLf
                 sSql += "   WHERE bcno = :bcno                                                                                           " + vbCrLf
-                sSql += "     AND tclscd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf '결핵검사 코드 3가지
+                'sSql += "     AND tclscd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf '결핵검사 코드 3가지
+                sSql += "     AND tclscd in (SELECT CLSVAL FROM LF000M WHERE CLSGBN = 'IGRA' AND CLSCD LIKE 'T%')                                                                   " + vbCrLf '결핵검사 코드 3가지
                 sSql += "     ) x , lf030m f3                                                                                            " + vbCrLf
                 sSql += " WHERE r.regno = x.regno                                                                                        " + vbCrLf
-                sSql += "   AND r.testcd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf
+                'sSql += "   AND r.testcd in ('LI611','LI612', 'LI613')                                                                   " + vbCrLf
+                sSql += "   AND r.testcd in (SELECT CLSVAL FROM LF000M WHERE CLSGBN = 'IGRA' AND CLSCD LIKE 'T%')                                                                   " + vbCrLf
                 sSql += "   AND r.tkdt BETWEEN TO_CHAR(TO_DATE(x.tkdt , 'yyyy-mm-dd hh24:mi:ss') - 730, 'yyyymmddhh24miss') AND x.tkdt   " + vbCrLf
                 sSql += "   And nvl(r.viewrst, ' ') <> ' '                                                                               " + vbCrLf
                 sSql += "   AND r.bcno NOT IN (:bcno)                                                                                    " + vbCrLf
@@ -8843,8 +8872,6 @@ Namespace APP_R
                 sSql += "    , r.viewrst                                                                                                  " + vbCrLf
                 sSql += "    , f3.spcnms                                                                                                  " + vbCrLf
                 sSql += " ORDER BY r.tkdt                                                                                                 " + vbCrLf
-
-                Fn.log("sql 문 - " & sSql)
 
                 dbCmd.CommandType = CommandType.Text
                 dbCmd.CommandText = sSql
@@ -8859,7 +8886,6 @@ Namespace APP_R
 
                 dt.Reset()
                 dbDa.Fill(dt)
-
 
                 fnGet_IGRA_Comment = dt
 
