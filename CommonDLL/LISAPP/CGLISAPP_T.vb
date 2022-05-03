@@ -2112,150 +2112,150 @@ Namespace APP_T
                         dateE = "1231235959"
                 End Select
 
-                sSql += "         SELECT  r.testcd ,"
-                sSql += "                 f.tnmd,   "
-                sSql += "                 'MTB' name1,"
-                sSql += "                 COUNT (*) stcnt,"
-                sSql += "                 SUM ("
-                sSql += "                    CASE WHEN SUBSTR (r.orgrst, 1, 3) = 'Myc' THEN 1 ELSE 0 END"
-                sSql += "                 )"
-                sSql += "                        stcntab1"
+                sSql += "         SELECT  r.testcd ," + vbCrLf
+                sSql += "                 f.tnmd,   " + vbCrLf
+                sSql += "                 'MTB' name1," + vbCrLf
+                sSql += "                 COUNT (*) stcnt," + vbCrLf
+                sSql += "                 SUM (" + vbCrLf
+                sSql += "                    CASE WHEN SUBSTR (r.orgrst, 1, 3) = 'Myc' THEN 1 ELSE 0 END" + vbCrLf
+                sSql += "                 )" + vbCrLf
+                sSql += "                        stcntab1" + vbCrLf
 
                 If rsType = "O" Then
-                    sSql += "          FROM lj010m j, lm010m r, lf060m f "
-                    sSql += "         WHERE j.orddt >= :dates || '" + dateS + "'"
-                    sSql += "           AND j.orddt <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lj010m j, lm010m r, lf060m f " + vbCrLf
+                    sSql += "         WHERE j.orddt >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND j.orddt <= :datee || '" + dateE + "'" + vbCrLf
                 ElseIf rsType = "T" Then
-                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f "
-                    sSql += "         WHERE r.tkdt  >= :dates || '" + dateS + "'"
-                    sSql += "           AND r.tkdt  <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f " + vbCrLf
+                    sSql += "         WHERE r.tkdt  >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND r.tkdt  <= :datee || '" + dateE + "'" + vbCrLf
                 ElseIf rsType = "F" Then
-                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f "
-                    sSql += "         WHERE r.rstdt >= :dates || '" + dateS + "'"
-                    sSql += "           AND r.rstdt <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f " + vbCrLf
+                    sSql += "         WHERE r.rstdt >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND r.rstdt <= :datee || '" + dateE + "'" + vbCrLf
                 End If
 
                 alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDT1.Replace("-", "").Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDT1.Replace("-", "")))
                 alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDT2.Replace("-", "").Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDT2.Replace("-", "")))
 
-                sSql += "                 AND j.rstflg = '2'"
+                sSql += "                 AND j.rstflg = '2'" + vbCrLf
 
                 If rsTestcd <> "" Then
-                    sSql += "                 AND r.testcd in (" + rsTestcd + ")"
+                    sSql += "                 AND r.testcd in (" + rsTestcd + ")" + vbCrLf
                 Else
-                    sSql += "                 AND r.testcd in ('LM20101', 'LM20102', 'LM20302', 'LM20303')"
+                    sSql += "                 AND r.testcd in ('LM20101', 'LM20102', 'LM20302', 'LM20303')" + vbCrLf
                 End If
 
 
                 If rsSpccd <> "" Then
-                    sSql += "              AND r.spccd IN (" + rsSpccd + ") "
+                    sSql += "              AND r.spccd IN (" + rsSpccd + ") " + vbCrLf
                 End If
 
-                sSql += "                 AND j.bcclscd = 'M2'"
-                sSql += "                 AND r.bcno = j.bcno"
-                sSql += "                 AND j.owngbn <> 'H'"
+                sSql += "                 AND j.bcclscd = 'M2'" + vbCrLf
+                sSql += "                 AND r.bcno = j.bcno" + vbCrLf
+                sSql += "                 AND j.owngbn <> 'H'" + vbCrLf
 
                 If rsIO = "O" Then
-                    sSql += "                      AND j.iogbn <> 'I'"
+                    sSql += "                      AND j.iogbn <> 'I'" + vbCrLf
                 ElseIf rsIO <> "" Then
-                    sSql += "                      AND j.iogbn = :iogbn"
+                    sSql += "                      AND j.iogbn = :iogbn" + vbCrLf
                     alParm.Add(New OracleParameter("iogbn", OracleDbType.Varchar2, rsIO.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsIO))
 
                     If rsWard <> "" Then
-                        sSql += "                  AND j.wardno = :wardno "
+                        sSql += "                  AND j.wardno = :wardno " + vbCrLf
                         alParm.Add(New OracleParameter("iogbn", OracleDbType.Varchar2, rsWard.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWard))
                     End If
 
                 End If
 
                 If rsDept <> "" Then
-                    sSql += "               AND j.deptcd = :deptcd "
+                    sSql += "               AND j.deptcd = :deptcd " + vbCrLf
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDept.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDept))
                 End If
 
-                sSql += "                 AND r.testcd = f.testcd"
-                sSql += "                 AND r.spccd = f.spccd"
-                sSql += "                 AND f.usdt <= r.tkdt"
-                sSql += "                 AND f.uedt > r.tkdt               "
-                sSql += "      GROUP BY   r.testcd,"
-                sSql += "                 f.tnmd"
-                sSql += "     UNION ALL"
-                sSql += "     SELECT      r.testcd , "
-                sSql += "                 f.tnmd,     "
-                sSql += "                 'NTM' name1,"
-                sSql += "                 COUNT (*) stcnt,"
-                sSql += "                 SUM ("
-                sSql += "                    case when r.testcd in ('LM20101','LM20102') "
-                sSql += "                         then case when substr(r.orgrst, 1, 3) = 'AFB'"
-                sSql += "                                   then 1 "
-                sSql += "                                   else 0"
-                sSql += "                                End"
-                sSql += "                         when r.testcd in ('LM20302','LM20303') "
-                sSql += "                         then case when substr(r.orgrst, 1, 3) = 'Liq'"
-                sSql += "                                   then 1 "
-                sSql += "                                   else 0"
-                sSql += "                                End"
-                sSql += "                     End"
-                sSql += "                 )"
-                sSql += "                                stcntab1 "
-                
+                sSql += "                 AND r.testcd = f.testcd" + vbCrLf
+                sSql += "                 AND r.spccd = f.spccd" + vbCrLf
+                sSql += "                 AND f.usdt <= r.tkdt" + vbCrLf
+                sSql += "                 AND f.uedt > r.tkdt               " + vbCrLf
+                sSql += "      GROUP BY   r.testcd," + vbCrLf
+                sSql += "                 f.tnmd" + vbCrLf
+                sSql += "     UNION ALL" + vbCrLf
+                sSql += "     SELECT      r.testcd , " + vbCrLf
+                sSql += "                 f.tnmd,     " + vbCrLf
+                sSql += "                 'NTM' name1," + vbCrLf
+                sSql += "                 COUNT (*) stcnt," + vbCrLf
+                sSql += "                 SUM (" + vbCrLf
+                sSql += "                    case when r.testcd in ('LM20101','LM20102') " + vbCrLf
+                sSql += "                         then case when substr(r.orgrst, 1, 3) = 'AFB'" + vbCrLf
+                sSql += "                                   then 1 " + vbCrLf
+                sSql += "                                   else 0" + vbCrLf
+                sSql += "                                End" + vbCrLf
+                sSql += "                         when r.testcd in ('LM20302','LM20303') " + vbCrLf
+                sSql += "                         then case when substr(r.orgrst, 1, 3) = 'Liq'" + vbCrLf
+                sSql += "                                   then 1 " + vbCrLf
+                sSql += "                                   else 0" + vbCrLf
+                sSql += "                                End" + vbCrLf
+                sSql += "                     End" + vbCrLf
+                sSql += "                 )" + vbCrLf
+                sSql += "                                stcntab1 " + vbCrLf
+
                 If rsType = "O" Then
-                    sSql += "          FROM lj010m j, lm010m r, lf060m f "
-                    sSql += "         WHERE j.orddt >= :dates || '" + dateS + "'"
-                    sSql += "           AND j.orddt <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lj010m j, lm010m r, lf060m f " + vbCrLf
+                    sSql += "         WHERE j.orddt >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND j.orddt <= :datee || '" + dateE + "'" + vbCrLf
                 ElseIf rsType = "T" Then
-                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f "
-                    sSql += "         WHERE r.tkdt  >= :dates || '" + dateS + "'"
-                    sSql += "           AND r.tkdt  <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f " + vbCrLf
+                    sSql += "         WHERE r.tkdt  >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND r.tkdt  <= :datee || '" + dateE + "'" + vbCrLf
                 ElseIf rsType = "F" Then
-                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f "
-                    sSql += "         WHERE r.rstdt >= :dates || '" + dateS + "'"
-                    sSql += "           AND r.rstdt <= :datee || '" + dateE + "'"
+                    sSql += "          FROM lm010m r  ,  lj010m j , lf060m f " + vbCrLf
+                    sSql += "         WHERE r.rstdt >= :dates || '" + dateS + "'" + vbCrLf
+                    sSql += "           AND r.rstdt <= :datee || '" + dateE + "'" + vbCrLf
                 End If
 
                 alParm.Add(New OracleParameter("dates", OracleDbType.Varchar2, rsDT1.Replace("-", "").Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDT1.Replace("-", "")))
                 alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDT2.Replace("-", "").Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDT2.Replace("-", "")))
 
                 'sSql += "                 AND r.rstflg = '3'"
-                sSql += "                 AND j.rstflg = '2'"
+                sSql += "                 AND j.rstflg = '2'" + vbCrLf
 
                 If rsTestcd <> "" Then
-                    sSql += "                 AND r.testcd in (" + rsTestcd + ")"
+                    sSql += "                 AND r.testcd in (" + rsTestcd + ")" + vbCrLf
                 Else
-                    sSql += "                 AND r.testcd in ('LM20101', 'LM20102', 'LM20302', 'LM20303')"
+                    sSql += "                 AND r.testcd in ('LM20101', 'LM20102', 'LM20302', 'LM20303')" + vbCrLf
                 End If
 
                 If rsSpccd <> "" Then
-                    sSql += "              AND r.spccd IN (" + rsSpccd + ") "
+                    sSql += "              AND r.spccd IN (" + rsSpccd + ") " + vbCrLf
                 End If
 
-                sSql += "                 AND j.bcclscd = 'M2'"
-                sSql += "                 AND r.bcno = j.bcno"
-                sSql += "                 AND j.owngbn <> 'H'"
+                sSql += "                 AND j.bcclscd = 'M2'" + vbCrLf
+                sSql += "                 AND r.bcno = j.bcno" + vbCrLf
+                sSql += "                 AND j.owngbn <> 'H'" + vbCrLf
 
                 If rsIO = "O" Then
-                    sSql += "                      AND j.iogbn <> 'I'"
+                    sSql += "                      AND j.iogbn <> 'I'" + vbCrLf
                 ElseIf rsIO <> "" Then
-                    sSql += "                      AND j.iogbn = :iogbn"
+                    sSql += "                      AND j.iogbn = :iogbn" + vbCrLf
                     alParm.Add(New OracleParameter("iogbn", OracleDbType.Varchar2, rsIO.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsIO))
 
                     If rsWard <> "" Then
-                        sSql += "                  AND j.wardno = :wardno "
+                        sSql += "                  AND j.wardno = :wardno " + vbCrLf
                         alParm.Add(New OracleParameter("iogbn", OracleDbType.Varchar2, rsWard.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsWard))
                     End If
                 End If
 
                 If rsDept <> "" Then
-                    sSql += "               AND j.deptcd = :deptcd "
+                    sSql += "               AND j.deptcd = :deptcd " + vbCrLf
                     alParm.Add(New OracleParameter("datee", OracleDbType.Varchar2, rsDept.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsDept))
                 End If
 
-                sSql += "                 AND r.testcd = f.testcd"
-                sSql += "                 AND r.spccd = f.spccd"
-                sSql += "                 AND f.usdt <= r.tkdt"
-                sSql += "                 AND f.uedt > r.tkdt               "
-                sSql += "      GROUP BY   r.testcd,"
-                sSql += "                 f.tnmd"
+                sSql += "                 AND r.testcd = f.testcd" + vbCrLf
+                sSql += "                 AND r.spccd = f.spccd" + vbCrLf
+                sSql += "                 AND f.usdt <= r.tkdt" + vbCrLf
+                sSql += "                 AND f.uedt > r.tkdt               " + vbCrLf
+                sSql += "      GROUP BY   r.testcd," + vbCrLf
+                sSql += "                 f.tnmd" + vbCrLf
                 sSql += "      ORDER BY testcd, name1"
 
 
