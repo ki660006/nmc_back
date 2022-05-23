@@ -5338,7 +5338,7 @@ Namespace APP_BT
         End Function
         '20220124 jhs 혈액 TAT  쿼리 
         ' 적혈구제제 관리 데이터 가져오기
-        Public Shared Function fnGet_BloodTat(ByVal rsStDt As String, ByVal rsEnDt As String) As DataTable
+        Public Shared Function fnGet_BloodTat(ByVal rsStDt As String, ByVal rsEnDt As String, ByVal rsBranchComcd As String) As DataTable
             ' 수혈 가출고 대기 리스트
             Dim sFn As String = "Public Shared Function fnGet_trans_mg(ByVal rsTnsNo As String) As DataTable"
             Dim sSql As String = ""
@@ -5380,6 +5380,11 @@ Namespace APP_BT
                 sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.outdt   , '1')  btat2          " + vbCrLf
                 sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '3')  btat1_mi       " + vbCrLf
                 sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.outdt   , '3')  btat2_mi       " + vbCrLf
+
+                'jjh 검사자, 가출고자 추가
+                sSql += " ,  fn_ack_get_usr_name(B3.TESTID) TESTID                                                          " + vbCrLf
+                sSql += " ,  fn_ack_get_usr_name(B3.BEFOUTID) BEFOUTID                                                      " + vbCrLf
+
                 sSql += "  from lb040m b4                                                                                " + vbCrLf
                 sSql += " inner join lb043m b43                                                                          " + vbCrLf
                 sSql += "    on b4.tnsjubsuno = b43.tnsjubsuno                                                           " + vbCrLf
@@ -5389,12 +5394,12 @@ Namespace APP_BT
                 sSql += "               from VW_ACK_OCS_ORD_INFO o LEFT OUTER JOIN EMR.MNRMDEEX c                        " + vbCrLf
                 sSql += "                                   ON c.prcpdd = o.orddate                                      " + vbCrLf
                 sSql += "                                   And c.instcd = '031'                                         " + vbCrLf
-                sSql += "                                   /*AND c.prcphistno = o.prcphistno*/                          " + vbCrLf
+                'sSql += "                                   /*AND c.prcphistno = o.prcphistno*/                          " + vbCrLf
                 sSql += "                                   And c.execprcpuniqno = o.ordseqno                            " + vbCrLf
                 sSql += "                                   AND c.prcpno = o.prcpno                                      " + vbCrLf
                 sSql += "               WHERE o.instcd = '031'                                                           " + vbCrLf
-                sSql += "               --AND o.hopedate >= '20211107'                                                   " + vbCrLf
-                sSql += "               --And o.hopedate <= '20211108'                                                   " + vbCrLf
+                'sSql += "               --AND o.hopedate >= '20211107'                                                   " + vbCrLf
+                'sSql += "               --And o.hopedate <= '20211108'                                                   " + vbCrLf
                 sSql += "               AND o.prcpclscd = 'B4'                                                           " + vbCrLf
                 sSql += "               And o.hscttempprcpflag = 'N'                                                     " + vbCrLf
                 sSql += "               AND o.execprcphistcd = 'O'                                                       " + vbCrLf
@@ -5407,6 +5412,13 @@ Namespace APP_BT
                 'sSql += " inner join lr010m r1                                                                           " + vbCrLf
                 'sSql += "    on b4.bcno_keep = r1.bcno                                                                   " + vbCrLf
                 'sSql += "   And r1.testcd In ('LB141', 'LB142')                                                          " + vbCrLf
+
+                If rsBranchComcd <> "" Then
+                    sSql += " inner join lf000m f0                                                                       " + vbCrLf
+                    sSql += "      on f0.clsgbn = 'B14' and f0.CLSVAL = :brcom and f0.CLSCD = b43.COMCD                 " + vbCrLf
+                    alParm.Add(New OracleParameter("brcom", rsBranchComcd))
+                End If
+
                 sSql += "  left join lbc20m bc2                                                                          " + vbCrLf '이형수혈 체크 테이블 
                 sSql += "   on B43.TNSJUBSUNO = bc2.tnsjubsuno and b43.bldno = bc2.bldno                                 " + vbCrLf
                 sSql += " where b4.jubsudt >= :dates                                                                     " + vbCrLf

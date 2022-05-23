@@ -7,6 +7,7 @@ Imports CDHELP.FGCDHELPFN
 
 Public Class FGB29
     Public Shared PRG_CONST As New COMMON.CommLogin.STU_CONST
+    Private mobjDAF As New LISAPP.APP_F_COMCD
 
     Private mbQuery As Boolean = False
     Private mbEscape As Boolean = False
@@ -48,6 +49,20 @@ Public Class FGB29
     Private Sub FGB29_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         sbDisp_Init()
+
+        Dim dt As DataTable = mobjDAF.GetBranchComCdInfo("")
+
+        Me.cboBranchComcd.Items.Clear()
+        Me.cboBranchComcd.Items.Add("[ALL] 전체")
+        If dt.Rows.Count > 0 Then
+            With Me.cboBranchComcd
+                For i As Integer = 0 To dt.Rows.Count - 1
+                    .Items.Add(dt.Rows(i).Item("COMNMD"))
+                Next
+            End With
+        End If
+        Me.cboBranchComcd.SelectedIndex = 0
+
     End Sub
 
     Public Sub sbDisp_Init()
@@ -154,41 +169,19 @@ Public Class FGB29
         Dim sBtat2 As String = ""       '접수/불출요청일시 중 큰것 ~ 출고 시간 차
         Dim sBtat1_mi As String = ""    '접수/불출요청일시 중 큰것 ~ 가출고 시간 차_type_minute
         Dim sBtat2_mi As String = ""    '접수/불출요청일시 중 큰것 ~ 출고 시간 차_type_minute
+        Dim sBranchCom As String = ""   '묶음 성분제제
 
         Try
             Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
 
             DS_StatusBar.setTextStatusBar(" ▷▶▷ TAT 데이타 조회중... -> 데이타량에 따라 다소 시간이 걸리므로 잠시만 기다려 주십시오.")
 
-            '    Dim sEmerYN As String = ""
+            If chkBldBranchSrh.Checked Then
+                sBranchCom = Ctrl.Get_Code(cboBranchComcd)
+                If sBranchCom = "ALL" Then sBranchCom = ""
+            End If
 
-            '    If chkEmer.Checked And chkNotEmer.Checked Then
-            '        sEmerYN = ""
-            '    ElseIf chkEmer.Checked Then
-            '        sEmerYN = "Y"
-            '    ElseIf chkNotEmer.Checked Then
-            '        sEmerYN = "N"
-            '    End If
-
-            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat(Me.dtpDate0.Text.Replace("-", ""), Me.dtpDate1.Text.Replace("-", ""))
-
-            '    Dim sSelect As String = ""
-
-            '    If Me.rdoBaseTkDt.Checked Then
-            '        sSortBy = "tkdt, bcno, sort_slip, sort_test, testcd"
-            '    Else
-            '        sSortBy = "sort_slip, slipcd, tkdt, sort_test, testcd"
-            '    End If
-
-            '    a_dr = dt.Select(sSelect, sSortBy)
-
-            '    dt = Fn.ChangeToDataTable(a_dr)
-
-            '    If dt.Rows.Count > 0 Then
-            '        mbQuery = True
-            '        pnlMainBtn.Enabled = False
-
-            '        Dim bldFlag As Boolean = False
+            Dim dt As DataTable = CGDA_BT.fnGet_BloodTat(Me.dtpDate0.Text.Replace("-", ""), Me.dtpDate1.Text.Replace("-", ""), sBranchCom)
 
             If dt.Rows.Count > 0 Then
                 With spdList
@@ -256,16 +249,15 @@ Public Class FGB29
                         .Col = .GetColFromID("btat1") : .Text = sBtat1 : If fn_chk_bldTAT(sVaryn, sComcd_out, sTnsgbn, sIogbn, sPataborh, sBldaborh, sBtat1_mi) Then .BackColor = System.Drawing.Color.Red : .FontBold = True
                         .Col = .GetColFromID("btat2") : .Text = sBtat2 : If fn_chk_bldTAT(sVaryn, sComcd_out, sTnsgbn, sIogbn, sPataborh, sBldaborh, sBtat2_mi) Then .BackColor = System.Drawing.Color.Red : .FontBold = True
 
+                        .Col = .GetColFromID("testid") : .Text = dt.Rows(ix).Item("testid").ToString().Trim()
+                        .Col = .GetColFromID("befoutid") : .Text = dt.Rows(ix).Item("befoutid").ToString().Trim()
+
                     Next
                 End With
             Else
                 Me.spdList.MaxRows = 0
                 CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "해당 데이타가 없습니다.")
             End If
-
-
-
-
 
         Catch ex As Exception
             CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
