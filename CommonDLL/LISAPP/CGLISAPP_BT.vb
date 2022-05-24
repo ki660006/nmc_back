@@ -4616,11 +4616,11 @@ Namespace APP_BT
                 sSql = ""
                 sSql += " SELECT DISTINCT                                                                                    " + vbCrLf
                 sSql += "        a.testcd, a.spccd, a.tnmd,                                                                  " + vbCrLf
-                sSql += "        (SELECT viewrst                                                                             " + vbCrLf
+                sSql += "        (SELECT nvl(viewrst, '검사중')                                                              " + vbCrLf
                 sSql += "           FROM lr010m                                                                              " + vbCrLf
                 sSql += "          WHERE regno = b.regno                                                                     " + vbCrLf
                 sSql += "            AND testcd = b.testcd                                                                   " + vbCrLf
-                sSql += "            AND rstdt  = (select max(rstdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd )                                                                     " + vbCrLf
+                sSql += "            AND tkdt  = (select max(tkdt) from lr010m where bcno = b.lastbcno and regno = b.regno and testcd = b.testcd and spccd = b.spccd )                                                                     " + vbCrLf
                 sSql += "            AND rstflg IN ('2', '3')                                                                " + vbCrLf
                 sSql += "            AND ROWNUM = 1 ) viewrst,                                                               " + vbCrLf
                 'sSql += "         fn_ack_date_str(b.tkdt, 'yyyy-mm-dd hh24:mi') tkdt,                                        " + vbCrLf
@@ -4653,7 +4653,7 @@ Namespace APP_BT
                 sSql += "             AND r.testcd = f.testcd                                                                " + vbCrLf
                 sSql += "             AND r.spccd  = f.spccd                                                                 " + vbCrLf
                 sSql += "             AND r.bcno   = j.bcno                                                                  " + vbCrLf
-                sSql += "             AND r.rstflg IN ('2', '3')                                                             " + vbCrLf
+                'sSql += "             AND r.rstflg IN ('2', '3')                                                             " + vbCrLf
                 sSql += "        GROUP BY r.regno, r.testcd, r.spccd                                                         " + vbCrLf
                 sSql += "         ) B ON a.testcd = b.testcd AND a.spccd = b.spccd                                           " + vbCrLf
                 sSql += "    ORDER BY a.dispseq                                                                              " + vbCrLf
