@@ -203,7 +203,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.542 --> 2022/03/30 : 적혈구 제제 수혈관리 화면 하단 통계 쿼리 수정
 'Version 3.1.10.543 --> 2022/04/25 : 적혈구 제제 수혈관리 화면 하단 통계 쿼리 수정
 'Version 3.1.10.544 --> 2022/04/26 : 질본 출고관리 수정
+'Version 3.1.10.545 --> 2022/05/25 : 혈액은행 최근검사, 혈액TAT 수정
 
-<Assembly: AssemblyVersion("3.1.10.544")>
+<Assembly: AssemblyVersion("3.1.10.545")>
 
 
