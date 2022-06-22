@@ -11094,15 +11094,8 @@ Namespace APP_BT
         Public Function fn_BldTat_Input_Upd(ByVal rsBldTatInput As BldTatInput) As Boolean
             Dim sFn As String = "Public Shared Function fn_BldTat_Input_Upd(ByVal rsTnsNo As String) As Boolean"
             Dim DbCmd As New OracleCommand
-            Dim lb_rtnValue As Boolean = False
             Dim sSql As String = ""
             Dim intRet As Integer
-
-            Dim sTnsjubsuno As String = ""
-            Dim sRegno As String = ""
-            Dim sGwa As String = ""
-            Dim sBldno As String = ""
-            Dim sVarYN As String = ""
 
             With DbCmd
                 .Connection = m_DbCn
@@ -11110,13 +11103,6 @@ Namespace APP_BT
             End With
 
             Try
-                With rsBldTatInput
-                    sTnsjubsuno = .TNSJUBSUNO
-                    sRegno = .REGNO
-                    sGwa = .GWA
-                    sBldno = .BLDNO
-                    sVarYN = .VARYN
-                End With
 
                 sSql = ""
                 sSql += "delete lbc20m                  " + vbCrLf
@@ -11128,9 +11114,9 @@ Namespace APP_BT
                 DbCmd.CommandText = sSql
 
                 DbCmd.Parameters.Clear()
-                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
-                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
-                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = sBldno
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = rsBldTatInput.TNSJUBSUNO
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = rsBldTatInput.REGNO
+                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = rsBldTatInput.BLDNO
 
                 intRet = DbCmd.ExecuteNonQuery()
 
@@ -11142,12 +11128,12 @@ Namespace APP_BT
                 DbCmd.CommandText = sSql
 
                 DbCmd.Parameters.Clear()
-                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = sTnsjubsuno
-                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = sRegno
+                DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = rsBldTatInput.TNSJUBSUNO
+                DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = rsBldTatInput.REGNO
                 DbCmd.Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
-                DbCmd.Parameters.Add("gwa", OracleDbType.Varchar2).Value = sGwa
-                DbCmd.Parameters.Add("varyn", OracleDbType.Varchar2).Value = sVarYN
-                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = sBldno
+                DbCmd.Parameters.Add("gwa", OracleDbType.Varchar2).Value = rsBldTatInput.GWA
+                DbCmd.Parameters.Add("varyn", OracleDbType.Varchar2).Value = rsBldTatInput.VARYN
+                DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = rsBldTatInput.BLDNO
 
                 intRet = DbCmd.ExecuteNonQuery()
 
@@ -11157,8 +11143,8 @@ Namespace APP_BT
                 End If
 
                 m_DbTrans.Commit()
-                lb_rtnValue = True
-                Return lb_rtnValue
+
+                Return True
 
             Catch ex As Exception
                 m_DbTrans.Rollback()
