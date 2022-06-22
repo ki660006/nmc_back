@@ -20,6 +20,8 @@ Public Class FGB09
     Private miOutChkCnt As Integer = 0
     Public mbCalled As Boolean = False
 
+    Private mlRBCList As New List(Of String)
+
     Private Sub FGB09_NEW_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         CDHELP.FGCDHELPFN.fn_PopMsg(Me, "S"c, "")
         MdiTabControl.sbTabPageMove(Me)
@@ -105,6 +107,9 @@ Public Class FGB09
             Else
                 Exit Sub
             End If
+
+            mlRBCList = CGDA_BT.fnGet_RBC_List()
+
         Catch ex As Exception
             CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
         End Try
@@ -1104,6 +1109,7 @@ Public Class FGB09
             '20210719 jhs 응급구분 추가
             Dim sTnsGbn As String = ""
             '---------------------------------
+            Dim sComcd As String = ""
 
             With Me.spdOrderList
                 .Row = .ActiveRow
@@ -1119,6 +1125,7 @@ Public Class FGB09
                 '20210719 jhs 응급구분 추가
                 .Col = .GetColFromID("tnsGbn") : sTnsGbn = .Text.Trim
                 '---------------------------------
+                .Col = .GetColFromID("comcd") : sComcd = .Text.Trim
             End With
 
             With Me.spdStOutList
@@ -1160,6 +1167,18 @@ Public Class FGB09
                     End If
                 Next
             End With
+
+            '' 2022.06.22 JJH
+            '' RBC 응급수혈요청서 조건
+            '  1. 응급처방 X (sTnsGbn)
+            '  2. 마취과 체크 X (Me.chkBldtatroom)
+            '  3. 교차미필 X (Me.chkCMCO)
+            '  4. 혈액 2개이상 출고 진행시 (alOutList)
+            If Me.chkBldtatroom.Checked = False And sTnsGbn.Trim() <> "3" And Me.chkCMCO.Checked = False _
+                And mlRBCList.Contains(sComcd) And alOutList.Count > 1 Then
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "응급수혈요청서가 필요한 혈액입니다.")
+                Return
+            End If
 
             If iChkCnt < 1 Then
                 CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "출고 등록 할 항목이 없습니다.")

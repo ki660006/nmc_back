@@ -6311,6 +6311,32 @@ Namespace APP_BT
 #End Region
 
 #Region " 혈액출고 "
+
+        Public Shared Function fnGet_RBC_List() As List(Of String)
+            ' 수혈 출고 대기 리스트
+            Dim sFn As String = "Public Shared Function fnGet_RBC_List() As List(Of String)"
+            Dim sSql As String = ""
+            Dim dt As New DataTable
+
+            Try
+                sSql += "SELECT clsval FROM LF000M                " + vbCrLf
+                sSql += " WHERE clsgbn = 'RBCL'                   "
+
+                DbCommand()
+                dt = DbExecuteQuery(sSql)
+
+                Dim rturList As New List(Of String)
+                For ix As Integer = 0 To dt.Rows.Count - 1
+                    rturList.Add(dt.Rows(ix).Item("clsval").ToString())
+                Next
+
+                Return rturList
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            End Try
+        End Function
+
         Public Shared Function fn_OutOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String, ByVal rsBldno As String, ByVal rsGbn As String) As DataTable
             ' 수혈 출고 대기 리스트
             Dim sFn As String = "Public Shared Function fn_OutOrderList(ByVal rsFdate As String, ByVal rsTdate As String, ByVal rsRegno As String, ByVal rsComcd As String) As DataTable"
