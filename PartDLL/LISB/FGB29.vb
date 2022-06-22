@@ -251,6 +251,8 @@ Public Class FGB29
 
                         .Col = .GetColFromID("testid") : .Text = dt.Rows(ix).Item("testid").ToString().Trim()
                         .Col = .GetColFromID("befoutid") : .Text = dt.Rows(ix).Item("befoutid").ToString().Trim()
+                        .Col = .GetColFromID("outid") : .Text = dt.Rows(ix).Item("outid").ToString().Trim()
+                        .Col = .GetColFromID("recid") : .Text = dt.Rows(ix).Item("recnm").ToString().Trim()
 
                     Next
                 End With

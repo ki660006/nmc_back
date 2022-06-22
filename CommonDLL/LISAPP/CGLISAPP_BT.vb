@@ -5384,6 +5384,8 @@ Namespace APP_BT
                 'jjh 검사자, 가출고자 추가
                 sSql += " ,  fn_ack_get_usr_name(B3.TESTID) TESTID                                                          " + vbCrLf
                 sSql += " ,  fn_ack_get_usr_name(B3.BEFOUTID) BEFOUTID                                                      " + vbCrLf
+                sSql += " ,  fn_ack_get_usr_name(B3.OUTID) OUTID                                                            " + vbCrLf
+                sSql += " ,  RECNM "
 
                 sSql += "  from lb040m b4                                                                                " + vbCrLf
                 sSql += " inner join lb043m b43                                                                          " + vbCrLf
