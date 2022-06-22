@@ -5347,7 +5347,7 @@ Namespace APP_BT
 
             Try
                 sSql = " "
-                sSql += " selecT b4.tnsjubsuno, b4.regno, b4.patnm, b4.sex || '/' || b4.age sexage                          " + vbCrLf
+                sSql += " selecT b4.tnsjubsuno, b4.regno, b4.patnm, b4.sex || '/' || b4.age sexage                                                  " + vbCrLf
                 sSql += " , nvl(bc2.gwa, fn_ack_get_dept_name(b4.iogbn, b4.deptcd)) deptnm                                  " + vbCrLf '이형수혈에서 데이터 변경 없으면 그냥 접수한 진료과로 표시
                 sSql += " , b4.iogbn ,  bc2.varyn                                                                           " + vbCrLf ' 이형수혈 여부
                 sSql += " , b3.comcd_out, b43.spccd                                                                         " + vbCrLf
@@ -5369,11 +5369,11 @@ Namespace APP_BT
                 sSql += " , b43.comnm, b43.abo || b43.rh  bldaborh                                                          " + vbCrLf
                 sSql += " ,  r7.abo || r7.rh pataborh                                                                       " + vbCrLf
                 sSql += " ,  fn_ack_date_str(b4.orddt, 'yyyy-mm-dd hh24:mi') orddt                                          " + vbCrLf
-                sSql += " ,  fn_ack_date_str(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'), 'yyyy-mm-dd hh24:mi') FSTRGSTDT " + vbCrLf
-                sSql += " ,  fn_ack_date_str_bld_gt(b4.regno,nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss'))) crosstkdt " + vbCrLf
-                sSql += " ,  fn_ack_date_str(b4.jubsudt, 'yyyy-mm-dd hh24:mi') jubsudt                                      " + vbCrLf
-                sSql += " ,  fn_ack_date_str(b3.befoutdt, 'yyyy-mm-dd hh24:mi') befoutdt                                    " + vbCrLf
-                sSql += " ,  fn_ack_date_str(b3.outdt, 'yyyy-mm-dd hh24:mi') outdt                                          " + vbCrLf
+                sSql += " ,  fn_ack_date_str(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'), b4.orddt), 'yyyy-mm-dd hh24:mi') FSTRGSTDT                      " + vbCrLf
+                sSql += " ,  fn_ack_date_str_bld_gt(b4.regno,nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss'))) crosstkdt                                     " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b4.jubsudt, 'yyyy-mm-dd hh24:mi') jubsudt                                                                          " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b3.befoutdt, 'yyyy-mm-dd hh24:mi') befoutdt                                                                        " + vbCrLf
+                sSql += " ,  fn_ack_date_str(b3.outdt, 'yyyy-mm-dd hh24:mi') outdt                                                                              " + vbCrLf
                 sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '1')  b1             " + vbCrLf
                 sSql += " ,  fn_ack_date_diff(b3.befoutdt, b3.outdt, '1') b2                                                                                                                                                                            " + vbCrLf
                 sSql += " ,  fn_ack_date_diff( fn_ack_date_str_gt(nvl(TO_CHAR(vw_ord.FSTRGSTDT, 'yyyymmddhh24miss'),'0'), fn_ack_date_str_bld_gt(b4.regno , nvl(b3.outdt, to_char(sysdate, 'yyyymmddhh24miss') ) )) , b3.befoutdt, '1')  btat1          " + vbCrLf
