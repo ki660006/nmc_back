@@ -11157,6 +11157,77 @@ Namespace APP_BT
                 COMMON.CommFN.MdiMain.DB_Active_YN = ""
             End Try
         End Function
+
+        '2022.06.22 JJH 다건 입력
+        Public Function fn_BldTat_Input_Upd(ByVal rsBldTatInputList As List(Of BldTatInput)) As Boolean
+            Dim sFn As String = "Public Shared Function fn_BldTat_Input_Upd(ByVal rsTnsNo As String) As Boolean"
+            Dim DbCmd As New OracleCommand
+            Dim sSql As String = ""
+            Dim intRet As Integer
+
+            With DbCmd
+                .Connection = m_DbCn
+                .Transaction = m_DbTrans
+            End With
+
+            Try
+
+                For Each rsBldTatInput As BldTatInput In rsBldTatInputList
+
+                    sSql = ""
+                    sSql += "delete lbc20m                  " + vbCrLf
+                    sSql += "where tnsjubsuno = :tnsjubsuno " + vbCrLf
+                    sSql += "  and regno = :regno           " + vbCrLf
+                    sSql += "  and bldno = :bldno           " + vbCrLf
+
+                    DbCmd.CommandType = CommandType.Text
+                    DbCmd.CommandText = sSql
+
+                    DbCmd.Parameters.Clear()
+                    DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = rsBldTatInput.TNSJUBSUNO
+                    DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = rsBldTatInput.REGNO
+                    DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = rsBldTatInput.BLDNO
+
+                    intRet = DbCmd.ExecuteNonQuery()
+
+                    sSql = ""
+                    sSql += "insert into lbc20m ( tnsjubsuno, regno, regdt           ,  regid,  gwa,  varyn,  bldno)" + vbCrLf
+                    sSql += "            values (:tnsjubsuno,:regno, fn_ack_sysdate(), :regid, :gwa, :varyn, :bldno) " + vbCrLf
+
+                    DbCmd.CommandType = CommandType.Text
+                    DbCmd.CommandText = sSql
+
+                    DbCmd.Parameters.Clear()
+                    DbCmd.Parameters.Add("tnsjubsuno", OracleDbType.Varchar2).Value = rsBldTatInput.TNSJUBSUNO
+                    DbCmd.Parameters.Add("regno", OracleDbType.Varchar2).Value = rsBldTatInput.REGNO
+                    DbCmd.Parameters.Add("regid", OracleDbType.Varchar2).Value = USER_INFO.USRID
+                    DbCmd.Parameters.Add("gwa", OracleDbType.Varchar2).Value = rsBldTatInput.GWA
+                    DbCmd.Parameters.Add("varyn", OracleDbType.Varchar2).Value = rsBldTatInput.VARYN
+                    DbCmd.Parameters.Add("bldno", OracleDbType.Varchar2).Value = rsBldTatInput.BLDNO
+
+                    intRet = DbCmd.ExecuteNonQuery()
+
+                    If intRet = 0 Then
+                        m_DbTrans.Rollback()
+                        Return False
+                    End If
+                Next
+
+                m_DbTrans.Commit()
+
+                Return True
+
+            Catch ex As Exception
+                m_DbTrans.Rollback()
+                Throw (New Exception(ex.Message + " @" + msFile + sFn, ex))
+            Finally
+                m_DbTrans.Dispose() : m_DbTrans = Nothing
+                If m_DbCn.State = ConnectionState.Open Then m_DbCn.Close()
+                m_DbCn.Dispose() : m_DbCn = Nothing
+
+                COMMON.CommFN.MdiMain.DB_Active_YN = ""
+            End Try
+        End Function
         '혈액 TAT 병실/이형수혈 입력 
         Public Function fn_BldTat_Input_Del(ByVal rsBldTatInput As BldTatInput) As Boolean
             Dim sFn As String = "Public Shared Function fn_BldTat_Input_Del(ByVal rsTnsNo As String) As Boolean"

@@ -368,6 +368,7 @@ Public Class FGB09
             Me.chkCMCO.Checked = False
             Me.txtRecid.Text = ""
             Me.txtRecnm.Text = ""
+            Me.chkBldtatroom.Checked = False
 
             ' 환자 정보 조회
             AxTnsPatinfo1.sb_setPatinfo(sRegno, sOrdDt, sTnsnum)
@@ -1194,6 +1195,29 @@ Public Class FGB09
 
                     prt.m_al_PrtData = alOutList
                     prt.sbPrint()
+
+                End If
+
+                '2022.06.22 JJH
+                If Me.chkBldtatroom.Checked Then
+                    '혈액 TAT 병실/이형수혈 입력(FGB28) 마취과 자동입력
+                    Dim bldTatInputList As New List(Of BldTatInput)
+                    For Each stuOut As STU_TnsJubsu In alOutList
+
+                        Dim bldTatInput As New BldTatInput
+                        With bldTatInput
+                            .TNSJUBSUNO = stuOut.TNSJUBSUNO
+                            .REGNO = stuOut.REGNO
+                            .BLDNO = stuOut.BLDNO
+                            .GWA = Me.chkBldtatroom.Tag.ToString() '마취과
+                        End With
+
+                        bldTatInputList.Add(bldTatInput)
+                    Next
+
+                    If bldTatInputList.Count > 0 Then
+                        Dim rturBl = (New TnsReg).fn_BldTat_Input_Upd(bldTatInputList)
+                    End If
 
                 End If
 

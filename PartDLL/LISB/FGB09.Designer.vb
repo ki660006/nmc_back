@@ -112,6 +112,7 @@ Partial Class FGB09
         Me.chkPrt = New System.Windows.Forms.CheckBox()
         Me.txtBldno = New System.Windows.Forms.TextBox()
         Me.btnBldchg = New CButtonLib.CButton()
+        Me.chkBldtatroom = New System.Windows.Forms.CheckBox()
         Me.Panel3.SuspendLayout()
         Me.pnlSearchGbn.SuspendLayout()
         Me.pnlPrintInfo.SuspendLayout()
@@ -735,7 +736,7 @@ Partial Class FGB09
         '
         'spdOrderList
         '
-        'Me.spdOrderList.DataSource = Nothing
+        Me.spdOrderList.DataSource = Nothing
         Me.spdOrderList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOrderList.Location = New System.Drawing.Point(0, 0)
         Me.spdOrderList.Name = "spdOrderList"
@@ -756,7 +757,7 @@ Partial Class FGB09
         '
         'spdPastTns
         '
-        'Me.spdPastTns.DataSource = Nothing
+        Me.spdPastTns.DataSource = Nothing
         Me.spdPastTns.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdPastTns.Location = New System.Drawing.Point(0, 0)
         Me.spdPastTns.Name = "spdPastTns"
@@ -830,7 +831,7 @@ Partial Class FGB09
         '
         'spdTnsOrd
         '
-        'Me.spdTnsOrd.DataSource = Nothing
+        Me.spdTnsOrd.DataSource = Nothing
         Me.spdTnsOrd.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdTnsOrd.Location = New System.Drawing.Point(0, 0)
         Me.spdTnsOrd.Name = "spdTnsOrd"
@@ -871,7 +872,7 @@ Partial Class FGB09
         '
         'spdOutList
         '
-        'Me.spdOutList.DataSource = Nothing
+        Me.spdOutList.DataSource = Nothing
         Me.spdOutList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdOutList.Location = New System.Drawing.Point(0, 0)
         Me.spdOutList.Name = "spdOutList"
@@ -913,7 +914,7 @@ Partial Class FGB09
         '
         'spdStOutList
         '
-        'Me.spdStOutList.DataSource = Nothing
+        Me.spdStOutList.DataSource = Nothing
         Me.spdStOutList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.spdStOutList.Location = New System.Drawing.Point(0, 0)
         Me.spdStOutList.Name = "spdStOutList"
@@ -1025,6 +1026,7 @@ Partial Class FGB09
         'pnlBottom
         '
         Me.pnlBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlBottom.Controls.Add(Me.chkBldtatroom)
         Me.pnlBottom.Controls.Add(Me.chkSummery)
         Me.pnlBottom.Controls.Add(Me.chkPrt_Label)
         Me.pnlBottom.Controls.Add(Me.chkPrt)
@@ -1125,6 +1127,17 @@ Partial Class FGB09
         Me.btnBldchg.Text = "용량변경"
         Me.btnBldchg.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         Me.btnBldchg.TextMargin = New System.Windows.Forms.Padding(0)
+        '
+        'chkBldtatroom
+        '
+        Me.chkBldtatroom.AutoSize = True
+        Me.chkBldtatroom.Location = New System.Drawing.Point(573, 7)
+        Me.chkBldtatroom.Name = "chkBldtatroom"
+        Me.chkBldtatroom.Size = New System.Drawing.Size(60, 16)
+        Me.chkBldtatroom.TabIndex = 247
+        Me.chkBldtatroom.Tag = "마취과"
+        Me.chkBldtatroom.Text = "마취과"
+        Me.chkBldtatroom.UseVisualStyleBackColor = True
         '
         'FGB09
         '
@@ -1258,4 +1271,5 @@ Partial Class FGB09
     Friend WithEvents btnBldchg As CButtonLib.CButton
     Friend WithEvents txtRequestBlood As Windows.Forms.TextBox
     Friend WithEvents lblRequestBlood As Windows.Forms.Label
+    Friend WithEvents chkBldtatroom As Windows.Forms.CheckBox
 End Class
