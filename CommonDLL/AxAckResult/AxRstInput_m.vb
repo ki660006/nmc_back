@@ -4392,7 +4392,17 @@ Public Class AxRstInput_m
 
             Dim alCmtCont As New ArrayList
 
-            alReturn = fnChecakReg(rsRstflg, alCmtCont)
+            alReturn = fnChecakReg(rsRstflg.Substring(0, 1), alCmtCont)
+
+            '<< JJH 검체 최종보고 -> 중간보고로 진행되지않도록
+            If alReturn.Count > 0 Then
+                For intIdx As Integer = 0 To alReturn.Count - 1
+                    strMsg += alReturn.Item(intIdx).ToString + vbCrLf
+                Next
+
+                MsgBox(strMsg + vbCrLf + "위 자료는 결과를 저장할 수 없습니다.", MsgBoxStyle.Information)
+                Return False
+            End If
 
             If alCmtCont.Count > 0 Then
                 For intIdx As Integer = 0 To alCmtCont.Count - 1
