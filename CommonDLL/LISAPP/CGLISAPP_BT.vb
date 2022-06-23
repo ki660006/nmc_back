@@ -5493,12 +5493,13 @@ Namespace APP_BT
                 sSql += "       seq                                                                 " + vbCrLf
 
                 sSql += "  from ( select 'Hg>10 g/dL' as flag, 1 seq,                               " + vbCrLf
-                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
-                sSql += "                sum(case when hgyn = 'Y' then 1 else 0 end) cnt            " + vbCrLf
-                sSql += "           from lbc10m                                                     " + vbCrLf
-                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
-                sSql += "            and regno = nvl(:regno, regno)                                 " + vbCrLf
-                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+                sSql += "                substr(a.jubsudt, 0, 8) regdate,                           " + vbCrLf
+                sSql += "                sum(case when b.hgyn = 'Y' then 1 else 0 end) cnt          " + vbCrLf
+                sSql += "           from lb040m a, lbc10m b                                         " + vbCrLf
+                sSql += "          where a.jubsudt between :dates and :datee || '235959'            " + vbCrLf
+                sSql += "            and a.tnsjubsuno = b.tnsjubsuno                                " + vbCrLf
+                sSql += "            and a.regno = nvl(:regno, a.regno)                             " + vbCrLf
+                sSql += "          group by substr(a.jubsudt, 0, 8)                                 " + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
                 alParm.Add(New OracleParameter("datee", rsEnDt))
@@ -5507,12 +5508,13 @@ Namespace APP_BT
                 sSql += "         union all                                                         " + vbCrLf
 
                 sSql += "         select 'CBC F/U' as flag, 2 seq,                                  " + vbCrLf
-                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
-                sSql += "                sum(case when cbcyn = 'Y' then 1 else 0 end) cnt           " + vbCrLf
-                sSql += "           from lbc10m                                                     " + vbCrLf
-                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
-                sSql += "            and regno = nvl(:regno, regno)                                 " + vbCrLf
-                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+                sSql += "                substr(a.jubsudt, 0, 8) regdate,                           " + vbCrLf
+                sSql += "                sum(case when b.cbcyn = 'Y' then 1 else 0 end) cnt         " + vbCrLf
+                sSql += "           from lb040m a, lbc10m b                                         " + vbCrLf
+                sSql += "          where a.jubsudt between :dates and :datee || '235959'            " + vbCrLf
+                sSql += "            and a.tnsjubsuno = b.tnsjubsuno                                " + vbCrLf
+                sSql += "            and a.regno = nvl(:regno, a.regno)                             " + vbCrLf
+                sSql += "          group by substr(a.jubsudt, 0, 8)                                 " + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
                 alParm.Add(New OracleParameter("datee", rsEnDt))
@@ -5521,12 +5523,13 @@ Namespace APP_BT
                 sSql += "         union all                                                         " + vbCrLf
 
                 sSql += "         select '모두요청' as flag, 3 seq,                                 " + vbCrLf
-                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
-                sSql += "                sum(case when allyn = 'Y' then 1 else 0 end) cnt           " + vbCrLf
-                sSql += "           from lbc10m                                                     " + vbCrLf
-                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
-                sSql += "            and regno = nvl(:regno, regno)                                 " + vbCrLf
-                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+                sSql += "                substr(a.jubsudt, 0, 8) regdate,                           " + vbCrLf
+                sSql += "                sum(case when b.allyn = 'Y' then 1 else 0 end) cnt         " + vbCrLf
+                sSql += "           from lb040m a, lbc10m b                                         " + vbCrLf
+                sSql += "          where a.jubsudt between :dates and :datee || '235959'            " + vbCrLf
+                sSql += "            and a.tnsjubsuno = b.tnsjubsuno                                " + vbCrLf
+                sSql += "            and a.regno = nvl(:regno, a.regno)                             " + vbCrLf
+                sSql += "          group by substr(a.jubsudt, 0, 8)                                 " + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
                 alParm.Add(New OracleParameter("datee", rsEnDt))
@@ -5535,12 +5538,13 @@ Namespace APP_BT
                 sSql += "         union all                                                         " + vbCrLf
 
                 sSql += "         select '제외 대상' as flag, 4 seq,                                " + vbCrLf
-                sSql += "                substr(regdt, 0, 8) regdate,                               " + vbCrLf
-                sSql += "                sum(case when ecptyn = 'Y' then 1 else 0 end) cnt          " + vbCrLf
-                sSql += "           from lbc10m                                                     " + vbCrLf
-                sSql += "          where regdt between :dates and :datee || '235959'                " + vbCrLf
-                sSql += "            and regno = nvl(:regno, regno)                                 " + vbCrLf
-                sSql += "          group by substr(regdt, 0, 8)                                     " + vbCrLf
+                sSql += "                substr(a.jubsudt, 0, 8) regdate,                           " + vbCrLf
+                sSql += "                sum(case when b.ecptyn = 'Y' then 1 else 0 end) cnt        " + vbCrLf
+                sSql += "           from lb040m a, lbc10m b                                         " + vbCrLf
+                sSql += "          where a.jubsudt between :dates and :datee || '235959'            " + vbCrLf
+                sSql += "            and a.tnsjubsuno = b.tnsjubsuno                                " + vbCrLf
+                sSql += "            and a.regno = nvl(:regno, a.regno)                             " + vbCrLf
+                sSql += "          group by substr(a.jubsudt, 0, 8)                                 " + vbCrLf
 
                 alParm.Add(New OracleParameter("dates", rsStDt))
                 alParm.Add(New OracleParameter("datee", rsEnDt))
