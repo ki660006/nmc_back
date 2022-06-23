@@ -2777,11 +2777,12 @@ Public Class AxRstInput_m
     End Sub
 
     ' 결과저장 가능 확인
-    Private Function fnChecakReg(ByVal rsRstflg As String, ByRef r_al_CmtCont As ArrayList) As ArrayList
+    Private Function fnChecakReg(ByVal rsRstflg As String, ByRef r_al_CmtCont As ArrayList, Optional ByVal rsFlag As Boolean = False) As ArrayList
 
         Dim sFn As String = "Function fnChecakGeneralTestReg(String) As ArrayList"
         Try
             Dim alMsg As New ArrayList
+            Dim alMsg2 As New ArrayList
             Dim sChk$ = "", sOrgRst$ = "", sViewRst$ = "", sRstCmt$ = "", sRstflg$ = ""
             Dim sOrgRst_o$ = "", sViewRst_o$ = "", sRstCmt_o$ = ""
             Dim sBcno$ = "", sSlipCd$ = "", sTestCd$ = "", strTnmd$ = "", sTcdGbn$ = "", sTitleYn$ = "", sReqSub$ = ""
@@ -2887,6 +2888,14 @@ Public Class AxRstInput_m
                                         sCmtCont += strTnmd + "{" + sOrgRst_o + "/" + sViewRst_o + "}|"
                                     End If
                                 End If
+                            End If
+                        End If
+
+                        '미생물 분야별 최종보고->중간보고 진행 안되도록..
+                        If rsRstflg = "22" And rsFlag Then
+                            If sRstflg = "3" Then
+                                alMsg2.Add("'검체번호: " + sBcno + ", 검사항목: [" + sTestCd + "] " + strTnmd + "'은 최종보고된 자료 입니다.")
+                                bFlag = True
                             End If
                         End If
 
@@ -3021,6 +3030,16 @@ Public Class AxRstInput_m
                     End If
                 Next
             End With
+
+            If alMsg2.Count > 0 Then
+                Dim strMsg As String = ""
+                For intIdx As Integer = 0 To alMsg2.Count - 1
+                    strMsg += alMsg2.Item(intIdx).ToString + vbCrLf
+                Next
+
+                MsgBox(strMsg + vbCrLf + "위 자료는 결과를 저장할 수 없습니다.", MsgBoxStyle.Information)
+            End If
+
 
             fnChecakReg = alMsg
         Catch ex As Exception
@@ -4392,7 +4411,7 @@ Public Class AxRstInput_m
 
             Dim alCmtCont As New ArrayList
 
-            alReturn = fnChecakReg(rsRstflg, alCmtCont)
+            alReturn = fnChecakReg(rsRstflg, alCmtCont, True)
 
             If alCmtCont.Count > 0 Then
                 For intIdx As Integer = 0 To alCmtCont.Count - 1
