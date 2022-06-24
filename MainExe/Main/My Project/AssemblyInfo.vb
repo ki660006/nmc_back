@@ -314,8 +314,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.817 --> 2022/06/22 : AxAckResult
 'Version 3.1.10.818 --> 2022/06/23 : AxAckResult
 'Version 3.1.10.819 --> 2022/06/24 : AxAckResult
+'Version 3.1.10.820 --> 2022/06/24 : AxAckResult
 
-<Assembly: AssemblyVersion("3.1.10.819")>
+<Assembly: AssemblyVersion("3.1.10.820")>
 
 
 

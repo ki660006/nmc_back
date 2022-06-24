@@ -110,6 +110,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.414 --> 2022/06/22 : 미생물 최종보고상태일때 중간보고로 보고되지않도록
 'Version 3.1.10.415 --> 2022/06/23 : 미생물 최종보고상태일때 중간보고로 보고되지않도록(롤백)
 'Version 3.1.10.416 --> 2022/06/24 : 결과단 titleyn 누락 수정
+'Version 3.1.10.417 --> 2022/06/24 : 결과단 titleyn 누락 수정
 
-<Assembly: AssemblyVersion("3.1.10.416")>
+<Assembly: AssemblyVersion("3.1.10.417")>
 

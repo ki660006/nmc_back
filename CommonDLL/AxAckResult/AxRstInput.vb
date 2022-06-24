@@ -3088,7 +3088,7 @@ Public Class AxRstInput
                             .Text = ""
                     End Select
 
-                    .Col = .GetColFromID("titleyn")
+                    .Col = .GetColFromID("titleyn") : .Text = r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim
                     If r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim = "1" Or r_dt.Rows(ix - 1).Item("bldgbn").ToString().Trim = "1" Then
                         .Col = .GetColFromID("orgrst")
                         .Lock = True
