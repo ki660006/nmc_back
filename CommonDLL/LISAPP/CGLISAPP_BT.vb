@@ -5585,7 +5585,8 @@ Namespace APP_BT
                 sSql += "             WHEN b4.tnsgbn = '4' THEN 'I' end   tnsgbn                             " + vbCrLf
                 sSql += "      , b42.comcd , f12.comnmd                                                      " + vbCrLf
                 sSql += "      , nvl(bc2.gwa, FN_ACK_GET_ROOM_NAME(b4.wardno, b4.roomno)) seletedRoomno      " + vbCrLf
-                sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn   " + vbCrLf '추후 이형수혈 
+                'sSql += "      ,  case when nvl(bc2.varyn,'') = 'Y'  then '이형수혈' else '' end vartnsgbn   " + vbCrLf '추후 이형수혈 
+                sSql += "      , nvl(bc2.varyn, 'N') as vartnsgbn                                            " + vbCrLf
                 sSql += "      , b42.befoutqnt , b42.reqqnt , b42.outqnt , b42.rtnqnt                        " + vbCrLf
                 sSql += "      , b42.abnqnt , r7.abo  ||  r7.rh aborh                                        " + vbCrLf
                 sSql += "      , fn_ack_get_bldno_full(b3.bldno) bldno                                       " + vbCrLf
@@ -5660,7 +5661,8 @@ Namespace APP_BT
             Try
                 sSql += "SELECT clsgbn, clsval"
                 sSql += "  FROM lf000m"
-                sSql += " WHERE clsgbn ='SH'"
+                sSql += " WHERE clsgbn ='SH1' "
+                sSql += " ORDER BY to_number(clscd) "
 
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)

@@ -69,7 +69,7 @@ Public Class FGB28
             Dim dt As DataTable = CGDA_BT.fnGet_BloodTat_Input_SuHyul()
 
             If dt.Rows.Count > 0 Then
-                Dim sCmt As String = "".PadLeft(6, " "c) + Chr(9)
+                Dim sCmt As String = "" '.PadLeft(6, " "c) + Chr(9)
                 For iCnt As Integer = 0 To dt.Rows.Count - 1
                     sCmt += dt.Rows(iCnt).Item("clsval").ToString().Trim() + Chr(9)
                 Next
@@ -116,7 +116,7 @@ Public Class FGB28
                                 .Text = dt.Rows(i - 1).Item("seletedRoomno").ToString()
                             ElseIf dt.Columns(j - 1).ColumnName.ToLower() = "vartnsgbn" Then
                                 .TypeComboBoxList = msSuHyulList
-                                .Text = dt.Rows(i - 1).Item("vartnsgbn").ToString()
+                                .TypeComboBoxCurSel = Convert.ToInt16(IIf(dt.Rows(i - 1).Item("vartnsgbn").ToString() = "Y", 1, 0))
                             Else
                                 .Row = i
                                 .Text = dt.Rows(i - 1).Item(j - 1).ToString()
@@ -196,7 +196,7 @@ Public Class FGB28
                         .Col = .GetColFromID("regno") : Dim sRegno As String = .Text
                         .Col = .GetColFromID("roomno") : Dim sGwa As String = .Text
                         .Col = .GetColFromID("bldno") : Dim sBldno As String = .Text.Replace("-", "")
-                        .Col = .GetColFromID("vartnsgbn") : Dim sVartnsgbn As String = IIf(.Text.Trim <> "", "Y", "").ToString
+                        .Col = .GetColFromID("vartnsgbn") : Dim sVartnsgbn As String = IIf(.TypeComboBoxCurSel = 1, "Y", "").ToString() 'IIf(.Text.Trim <> "", "Y", "").ToString
 
                         Dim rsbldTatInput As BldTatInput = New BldTatInput
 

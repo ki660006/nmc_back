@@ -292,8 +292,8 @@ Partial Class FGB28
         Me.btnUpd.Corners.UpperRight = CType(6, Short)
         Me.btnUpd.FillType = CButtonLib.CButton.eFillType.GradientLinear
         Me.btnUpd.FillTypeLinear = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        Me.btnUpd.FocalPoints.CenterPtX = 0.5!
-        Me.btnUpd.FocalPoints.CenterPtY = 0.24!
+        Me.btnUpd.FocalPoints.CenterPtX = 0.59!
+        Me.btnUpd.FocalPoints.CenterPtY = 0.28!
         Me.btnUpd.FocalPoints.FocusPtX = 0!
         Me.btnUpd.FocalPoints.FocusPtY = 0!
         DesignerRectTracker4.IsActive = False
@@ -444,7 +444,7 @@ Partial Class FGB28
         'btnClear
         '
         Me.btnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker11.IsActive = False
+        DesignerRectTracker11.IsActive = True
         DesignerRectTracker11.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker11.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker11
         CBlendItems6.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(82, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
