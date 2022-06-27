@@ -2777,11 +2777,12 @@ Public Class AxRstInput_m
     End Sub
 
     ' 결과저장 가능 확인
-    Private Function fnChecakReg(ByVal rsRstflg As String, ByRef r_al_CmtCont As ArrayList) As ArrayList
+    Private Function fnChecakReg(ByVal rsRstflg As String, ByRef r_al_CmtCont As ArrayList, Optional ByVal rsFlag As Boolean = False) As ArrayList
 
         Dim sFn As String = "Function fnChecakGeneralTestReg(String) As ArrayList"
         Try
             Dim alMsg As New ArrayList
+            Dim alMsg2 As New ArrayList
             Dim sChk$ = "", sOrgRst$ = "", sViewRst$ = "", sRstCmt$ = "", sRstflg$ = ""
             Dim sOrgRst_o$ = "", sViewRst_o$ = "", sRstCmt_o$ = ""
             Dim sBcno$ = "", sSlipCd$ = "", sTestCd$ = "", strTnmd$ = "", sTcdGbn$ = "", sTitleYn$ = "", sReqSub$ = ""
@@ -2887,6 +2888,14 @@ Public Class AxRstInput_m
                                         sCmtCont += strTnmd + "{" + sOrgRst_o + "/" + sViewRst_o + "}|"
                                     End If
                                 End If
+                            End If
+                        End If
+
+                        '미생물 분야별 최종보고->중간보고 진행 안되도록..
+                        If rsRstflg = "22" And rsFlag Then
+                            If sRstflg = "3" Then
+                                alMsg2.Add("'검체번호: " + sBcno + ", 검사항목: [" + sTestCd + "] " + strTnmd + "'은 최종보고된 자료 입니다.")
+                                bFlag = True
                             End If
                         End If
 
@@ -3022,6 +3031,16 @@ Public Class AxRstInput_m
                 Next
             End With
 
+            If alMsg2.Count > 0 Then
+                Dim strMsg As String = ""
+                For intIdx As Integer = 0 To alMsg2.Count - 1
+                    strMsg += alMsg2.Item(intIdx).ToString + vbCrLf
+                Next
+
+                MsgBox(strMsg + vbCrLf + "위 자료는 결과를 저장할 수 없습니다.", MsgBoxStyle.Information)
+            End If
+
+
             fnChecakReg = alMsg
         Catch ex As Exception
             fnChecakReg = New ArrayList
@@ -3044,7 +3063,7 @@ Public Class AxRstInput_m
                         .Col = .GetColFromID("mbttype") : Dim sMbtType As String = .Text
 
                         .Col = .GetColFromID("testcd") : Dim sTestCd As String = .Text
-                     
+
                         .Col = .GetColFromID("orgrst") : Dim sOrgrst As String = .Text
                         .Col = .GetColFromID("viewrst") : Dim sViewRst As String = .Text
                         .Col = .GetColFromID("panicmark") : Dim sPanic As String = .Text
@@ -3094,7 +3113,7 @@ Public Class AxRstInput_m
                             ri.CfmSign = rsCfmSign
                         End If
 
-                        If sOrgrst <> "" And ((sORst_o <> sOrgrst Or sVRst_o <> sViewRst Or sRstCmt <> sRstCmt_o Or sRstFlg_o < sRstFlg) Or _
+                        If sOrgrst <> "" And ((sORst_o <> sOrgrst Or sVRst_o <> sViewRst Or sRstCmt <> sRstCmt_o Or sRstFlg_o < sRstFlg) Or
                            (sTitleYn = "1" And sTCdGbn = "P")) And (sMbtType <> "2" Or sTCdGbn = "C") Then
 
                             arlRst.Add(ri)
@@ -3230,7 +3249,7 @@ Public Class AxRstInput_m
                         objRst.ViewRst = sViewRst
                         objRst.HlMark = sHlMark
                         objRst.EqFlag = sEqFlag
-                        
+
                         arlRst.Add(objRst)
                         .Row = .ActiveRow
                         .Col = .GetColFromID("testcd")
@@ -3248,7 +3267,7 @@ Public Class AxRstInput_m
                 If Orgrst <> "" And .Text = "LM205" Then
                     bAfbTest = True
                 End If
-             
+
             End With
             If bAfbTest = True Then
                 Dim dt As DataTable = LISAPP.COMM.RstFn.fnGet_AFB_Comment(msBcNo)
@@ -3391,7 +3410,7 @@ Public Class AxRstInput_m
                     End If
                 Next
 
-              
+
             End With
             '<2019-01-08
             If bAfbTest = True Then
@@ -3722,7 +3741,7 @@ Public Class AxRstInput_m
 
             arlRst = fnGet_Rst_ReRun(rsReRunGbn, strCmtCont, strErrMsg)
             If strErrMsg <> "" Then
-                MsgBox("[검사명 : " + strErrMsg.Substring(0, strErrMsg.Length - 1) + "]는 최종보고된 자료입니다.!!" + vbCrLf + _
+                MsgBox("[검사명 : " + strErrMsg.Substring(0, strErrMsg.Length - 1) + "]는 최종보고된 자료입니다.!!" + vbCrLf +
                        "최종보고 수정 권한이 없어 재검할 수 없습니다.")
             End If
 
@@ -3774,7 +3793,7 @@ Public Class AxRstInput_m
 
     End Function
 
-    Private Function fnFind_Enable_Reg(ByVal riRow As Integer, ByVal rsRegStep As String, ByVal riChange As Integer, _
+    Private Function fnFind_Enable_Reg(ByVal riRow As Integer, ByVal rsRegStep As String, ByVal riChange As Integer,
                                            ByVal riAlert As Integer, ByVal riPanic As Integer, ByVal riDelta As Integer, ByVal riCritical As Integer) As Integer
         Dim sFn As String = "fnFind_Enable_Reg"
 
@@ -3968,7 +3987,7 @@ Public Class AxRstInput_m
         End Try
     End Function
 
-    Private Function fnGet_Rst_Micro_Bac(ByVal riRow As Integer, ByVal rsRegStep As String, ByRef r_al_Bac As ArrayList, ByRef riDisable As Integer, _
+    Private Function fnGet_Rst_Micro_Bac(ByVal riRow As Integer, ByVal rsRegStep As String, ByRef r_al_Bac As ArrayList, ByRef riDisable As Integer,
                                          ByVal rsCfmNm As String, ByVal rsCfmSign As String) As ArrayList
         Dim sFn As String = "fnGet_Rst_Micro_Bac"
 
@@ -4122,7 +4141,7 @@ Public Class AxRstInput_m
         End Try
     End Function
 
-    Private Function fnGet_Change_Rst_Micro_Anti(ByVal riRow As Integer, ByVal riRegStep As Integer, ByRef r_al_Anti As ArrayList, ByRef riDisable As Integer, _
+    Private Function fnGet_Change_Rst_Micro_Anti(ByVal riRow As Integer, ByVal riRegStep As Integer, ByRef r_al_Anti As ArrayList, ByRef riDisable As Integer,
                                                  ByVal rsCfmNm As String, ByVal rsCfmSign As String) As ArrayList
         Dim sFn As String = "fnGet_Rst_Micro_Anti"
 
@@ -4240,7 +4259,7 @@ Public Class AxRstInput_m
         End Try
     End Function
 
-    Private Function fnGet_Rst_Micro(ByVal rsRegStep As String, ByRef r_al_Bac As ArrayList, ByRef r_al_Anti As ArrayList, _
+    Private Function fnGet_Rst_Micro(ByVal rsRegStep As String, ByRef r_al_Bac As ArrayList, ByRef r_al_Anti As ArrayList,
                                      ByVal rsCfmNm As String, ByVal rsCfmSign As String) As ArrayList
         Dim sFn As String = "fnGet_Rst_Micro"
 
@@ -4392,7 +4411,7 @@ Public Class AxRstInput_m
 
             Dim alCmtCont As New ArrayList
 
-            alReturn = fnChecakReg(rsRstflg, alCmtCont)
+            alReturn = fnChecakReg(rsRstflg, alCmtCont, True)
 
             If alCmtCont.Count > 0 Then
                 For intIdx As Integer = 0 To alCmtCont.Count - 1
