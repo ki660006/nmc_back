@@ -351,7 +351,7 @@ Partial Class FGB29
         Me.btnQuery.FocalPoints.CenterPtY = 0.16!
         Me.btnQuery.FocalPoints.FocusPtX = 0.03125!
         Me.btnQuery.FocalPoints.FocusPtY = 0.12!
-        DesignerRectTracker2.IsActive = False
+        DesignerRectTracker2.IsActive = True
         DesignerRectTracker2.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker2.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnQuery.FocusPtTracker = DesignerRectTracker2
         Me.btnQuery.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
@@ -461,7 +461,7 @@ Partial Class FGB29
         'btnClear
         '
         Me.btnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DesignerRectTracker7.IsActive = True
+        DesignerRectTracker7.IsActive = False
         DesignerRectTracker7.TrackerRectangle = CType(resources.GetObject("DesignerRectTracker7.TrackerRectangle"), System.Drawing.RectangleF)
         Me.btnClear.CenterPtTracker = DesignerRectTracker7
         CBlendItems4.iColor = New System.Drawing.Color() {System.Drawing.Color.AliceBlue, System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(180, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(20, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(128, Byte), Integer))}
@@ -551,6 +551,7 @@ Partial Class FGB29
         Me.chkEditColumn.TabIndex = 89
         Me.chkEditColumn.Text = "컬럼이동모드"
         Me.chkEditColumn.UseVisualStyleBackColor = True
+        Me.chkEditColumn.Visible = False
         '
         'lblUserNm
         '
