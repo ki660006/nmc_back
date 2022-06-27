@@ -1400,7 +1400,7 @@ Public Class AxRstInput
                         Dim iCnt% = 0
                         For ix As Integer = iRow + 1 To .MaxRows
                             '< 2016-12-20 윤장열 수정 (Parent검사 단독일 때 결과검증 안 되는 버그 수정 .Row = ix(Child부터 체크) -> .Row = iRow(Parent포함))
-                            .Row = iRow
+                            .Row = ix
                             '>
                             .Col = .GetColFromID("iud") : Dim strIUD As String = .Text
                             .Col = .GetColFromID("orgrst") : sOrgRst = .Text
@@ -3088,7 +3088,7 @@ Public Class AxRstInput
                             .Text = ""
                     End Select
 
-                    .Col = .GetColFromID("titleyn")
+                    .Col = .GetColFromID("titleyn") : .Text = r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim
                     If r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim = "1" Or r_dt.Rows(ix - 1).Item("bldgbn").ToString().Trim = "1" Then
                         .Col = .GetColFromID("orgrst")
                         .Lock = True
@@ -3528,7 +3528,7 @@ Public Class AxRstInput
 
                     End Select
 
-                    .Col = .GetColFromID("titleyn")
+                    .Col = .GetColFromID("titleyn") : .Text = r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim
                     If r_dt.Rows(ix - 1).Item("titleyn").ToString().Trim = "1" Or r_dt.Rows(ix - 1).Item("bbttype").ToString().Trim = "1" Then
                         .Col = .GetColFromID("orgrst")
                         .Lock = True
