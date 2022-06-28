@@ -102,5 +102,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.395 --> 2022/04/26 : 질본 출고관리 수정
 'Version 3.1.10.396 --> 2022/05/25 : 혈액은행 최근검사, 혈액TAT 수정
 'Version 3.1.10.397 --> 2022/06/28 : 혈액은행 요청사항 반영(git참조)
+'Version 3.1.10.398 --> 2022/06/28 : RBC 응급수혈요청서 필요한 조건 수정
 
-<Assembly: AssemblyVersion("3.1.10.397")>
+<Assembly: AssemblyVersion("3.1.10.398")>

@@ -1168,6 +1168,11 @@ Public Class FGB09
                 Next
             End With
 
+            If iChkCnt < 1 Then
+                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "출고 등록 할 항목이 없습니다.")
+                Return
+            End If
+
             '' 2022.06.22 JJH
             '' RBC 응급수혈요청서 조건
             '  1. 응급처방 X (sTnsGbn)
@@ -1177,12 +1182,7 @@ Public Class FGB09
             If Me.chkBldtatroom.Checked = False And sTnsGbn.Trim() <> "3" And Me.chkCMCO.Checked = False _
                 And mlRBCList.Contains(sComcd) And alOutList.Count > 1 Then
                 CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "응급수혈요청서가 필요한 혈액입니다.")
-                Return
-            End If
-
-            If iChkCnt < 1 Then
-                CDHELP.FGCDHELPFN.fn_PopMsg(Me, "I"c, "출고 등록 할 항목이 없습니다.")
-                Return
+                'Return
             End If
 
             bContinue = CDHELP.FGCDHELPFN.fn_PopConfirm(Me, "I"c, "출고 등록 하시겠습니까?")
