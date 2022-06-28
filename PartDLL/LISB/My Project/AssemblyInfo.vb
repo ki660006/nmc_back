@@ -101,5 +101,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.394 --> 2022/04/25 : 적혈구 수혈관리 통계 화면 하단 통계화면 수정
 'Version 3.1.10.395 --> 2022/04/26 : 질본 출고관리 수정
 'Version 3.1.10.396 --> 2022/05/25 : 혈액은행 최근검사, 혈액TAT 수정
+'Version 3.1.10.397 --> 2022/06/28 : 혈액은행 요청사항 반영(git참조)
 
-<Assembly: AssemblyVersion("3.1.10.396")>
+<Assembly: AssemblyVersion("3.1.10.397")>

@@ -537,6 +537,10 @@ Public Class FGB27
         End If
 
     End Sub
+
+    Private Sub FGB27_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        MdiTabControl.sbTabPageMove(Me)
+    End Sub
 End Class
 
 

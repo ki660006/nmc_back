@@ -70,5 +70,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.351 --> 2021/12/20 : 혈액 성분제제 TAT 관련 내용 추가(베타)
 'Version 3.1.10.352 --> 2022/02/08 : 혈액 성분제제 TAT 관련 내용 추가(베타)(롤백)
 'Version 3.1.10.353 --> 2022/04/26 : 결과코드 기초마스터 수정
+'Version 3.1.10.354 --> 2022/06/28 : 검사코드관리 시행처 문구 수정
 
-<Assembly: AssemblyVersion("3.1.10.353")>
+<Assembly: AssemblyVersion("3.1.10.354")>

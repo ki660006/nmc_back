@@ -245,4 +245,8 @@ Public Class FGB28
             btnExit_Click(Nothing, Nothing)
         End If
     End Sub
+
+    Private Sub FGB28_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        MdiTabControl.sbTabPageMove(Me)
+    End Sub
 End Class

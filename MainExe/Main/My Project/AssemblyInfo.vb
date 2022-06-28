@@ -316,8 +316,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.819 --> 2022/06/24 : AxAckResult
 'Version 3.1.10.820 --> 2022/06/24 : AxAckResult
 'Version 3.1.10.821 --> 2022/06/27 : AxAckResult
+'Version 3.1.10.822 --> 2022/06/28 : LISAPP, LISB, LISF
 
-<Assembly: AssemblyVersion("3.1.10.821")>
+<Assembly: AssemblyVersion("3.1.10.822")>
 
 
 
