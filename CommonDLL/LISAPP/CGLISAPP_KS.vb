@@ -36,6 +36,8 @@ Namespace APP_KS
                     alParm.Add(New OracleParameter("rackid", OracleDbType.Varchar2, rsRackID.Length, ParameterDirection.Input, Nothing, Nothing, Nothing, Nothing, DataRowVersion.Current, rsRackID))
                 End If
 
+                sSql += " ORDER BY a.bcclscd, a.rackid, a.spccd "
+
                 DbCommand()
                 Return DbExecuteQuery(sSql, alParm)
 

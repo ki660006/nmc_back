@@ -205,7 +205,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.544 --> 2022/04/26 : 질본 출고관리 수정
 'Version 3.1.10.545 --> 2022/05/25 : 혈액은행 최근검사, 혈액TAT 수정
 'Version 3.1.10.546 --> 2022/06/28 : 혈액은행 요청사항 반영(git참조)
+'Version 3.1.10.547 --> 2022/07/04 : 보관검체관리 Rack ID Order by 추가
 
-<Assembly: AssemblyVersion("3.1.10.546")>
+<Assembly: AssemblyVersion("3.1.10.547")>
 
 
