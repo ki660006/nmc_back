@@ -147,6 +147,28 @@ Namespace CommFN
 
         End Function
 
+        Public Shared Function Chk_Byte(ByVal Text As String) As Integer
+            '                                텍스트             
+            Try
+
+                Dim lengthB As Integer = 0
+
+                For i = 1 To Len(Text)
+                    If Asc(Mid(Text, i, 1)) > 0 Then
+                        lengthB += 1
+                    Else
+                        lengthB += 3
+                    End If
+                Next
+
+                Return lengthB
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message))
+            End Try
+
+        End Function
+
         ' Error 로그
         Public Shared Sub logFile(ByVal sLog As String, ByVal rsFileNm As String, Optional ByVal rsPath As String = "")
             Dim sFile As String
@@ -396,7 +418,7 @@ Namespace CommFN
             Return PointXY
         End Function
 
-        Public Shared Sub SearchToggle(ByRef aoLabel As System.Windows.Forms.Label, ByRef aoButton As System.Windows.Forms.Button, _
+        Public Shared Sub SearchToggle(ByRef aoLabel As System.Windows.Forms.Label, ByRef aoButton As System.Windows.Forms.Button,
                                      ByVal aeGbn As enumToggle, Optional ByRef aoText As System.Windows.Forms.TextBox = Nothing)
 
             Dim strText As String = ""
@@ -639,8 +661,8 @@ Namespace CommFN
         ' 컬럼기준 내용검색 
         ' 처음 찾은Row값 반환
         ' 없으면 0 반환
-        Public Shared Function SpdColSearch(ByVal aoSpread As AxFPSpreadADO.AxfpSpread, _
-                                            ByVal asStr As String, ByVal aiCol As Integer, _
+        Public Shared Function SpdColSearch(ByVal aoSpread As AxFPSpreadADO.AxfpSpread,
+                                            ByVal asStr As String, ByVal aiCol As Integer,
                                             Optional ByVal aiStRow As Integer = 0) As Integer
             Dim intRetVal As Integer
             SpdColSearch = 0
@@ -763,9 +785,9 @@ Namespace CommFN
 
         ' ToolTip 보이기
         ' 선 설정: Spread.TextTip = AxFPSpreadADO.TextTipConstants.TextTipFloating
-        Public Shared Sub SpreadToolTipView(ByVal aoSpd As AxFPSpreadADO.AxfpSpread, ByVal aoGraphics As System.Drawing.Graphics, _
-                                            ByVal e As AxFPSpreadADO._DSpreadEvents_TextTipFetchEvent, _
-                                            ByVal aiCol As Integer, ByVal abMultiLine As Boolean, _
+        Public Shared Sub SpreadToolTipView(ByVal aoSpd As AxFPSpreadADO.AxfpSpread, ByVal aoGraphics As System.Drawing.Graphics,
+                                            ByVal e As AxFPSpreadADO._DSpreadEvents_TextTipFetchEvent,
+                                            ByVal aiCol As Integer, ByVal abMultiLine As Boolean,
                                             Optional ByVal asToolTipText As String = "")
             If e.row < 1 Then Exit Sub
 
@@ -1100,15 +1122,15 @@ Namespace CommFN
         End Function
 
         ' 라인그리기( 해당 Row의 Top ) 
-        Public Shared Sub DrawBorderLineTop(ByVal aoSpread As AxFPSpreadADO.AxfpSpread, ByVal aiRow As Integer, _
+        Public Shared Sub DrawBorderLineTop(ByVal aoSpread As AxFPSpreadADO.AxfpSpread, ByVal aiRow As Integer,
                                             Optional ByVal aiStartCol As Integer = 1, Optional ByVal aiEndCol As Integer = -1)
             Dim sFn As String = "Public Shared Sub DrawBorderLineTop(ByVal aoSpread As AxFPSpreadADO.AxfpSpread, ByVal aiRow As Integer)"
 
             Try
                 With aoSpread
                     If aiEndCol = -1 Then aiEndCol = .MaxCols
-                    .SetCellBorder(aiStartCol, aiRow, aiEndCol, aiRow, FPSpreadADO.CellBorderIndexConstants.CellBorderIndexTop, _
-                                   Convert.ToUInt32(Microsoft.VisualBasic.RGB(128, 128, 128)), _
+                    .SetCellBorder(aiStartCol, aiRow, aiEndCol, aiRow, FPSpreadADO.CellBorderIndexConstants.CellBorderIndexTop,
+                                   Convert.ToUInt32(Microsoft.VisualBasic.RGB(128, 128, 128)),
                                    FPSpreadADO.CellBorderStyleConstants.CellBorderStyleSolid)
                 End With
 
@@ -1243,7 +1265,7 @@ Namespace CommFN
 
             End Try
         End Function
-       
+
 
         Public Shared Function Format_Day8ToDay10(ByVal rsDay As String) As String
             Dim sFn As String = "Function Format_Day8ToDay10"

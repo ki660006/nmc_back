@@ -127,6 +127,11 @@ Public Class FDF11
                 Exit Function
             End If
 
+            If Fn.Chk_Byte(Me.txtCmtCont.Text.Trim()) > 2000 Then
+                MsgBox("허용가능한 소견길이를 초과하였습니다!!", MsgBoxStyle.Critical)
+                Exit Function
+            End If
+
             If Not IsNothing(Me.Owner) Then
                 If CType(Me.Owner, FGF01).rdoWorkOpt2.Checked Then
                     Dim sBuf As String = fnFindConflict(txtCmtCd.Text)
@@ -394,32 +399,32 @@ Public Class FDF11
     Friend WithEvents txtModID As System.Windows.Forms.TextBox
     Friend WithEvents lblModNm As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Me.errpd = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.pnlTop = New System.Windows.Forms.Panel
-        Me.tclSpc = New System.Windows.Forms.TabControl
-        Me.tpg1 = New System.Windows.Forms.TabPage
-        Me.txtModNm = New System.Windows.Forms.TextBox
-        Me.txtRegNm = New System.Windows.Forms.TextBox
-        Me.txtModID = New System.Windows.Forms.TextBox
-        Me.lblModNm = New System.Windows.Forms.Label
-        Me.txtModDT = New System.Windows.Forms.TextBox
-        Me.lblModDT = New System.Windows.Forms.Label
-        Me.txtRegDT = New System.Windows.Forms.TextBox
-        Me.lblUserNm = New System.Windows.Forms.Label
-        Me.lblRegDT = New System.Windows.Forms.Label
-        Me.txtRegID = New System.Windows.Forms.TextBox
-        Me.grpCdInfo1 = New System.Windows.Forms.GroupBox
-        Me.btnReg_dispseq = New System.Windows.Forms.Button
-        Me.cboSlip = New System.Windows.Forms.ComboBox
-        Me.lblSlip = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.lblCmtCont = New System.Windows.Forms.Label
-        Me.txtCmtCont = New System.Windows.Forms.TextBox
-        Me.grpCd = New System.Windows.Forms.GroupBox
-        Me.txtCmtCd = New System.Windows.Forms.TextBox
-        Me.lblCmtCd = New System.Windows.Forms.Label
-        Me.btnUE = New System.Windows.Forms.Button
+        Me.pnlTop = New System.Windows.Forms.Panel()
+        Me.tclSpc = New System.Windows.Forms.TabControl()
+        Me.tpg1 = New System.Windows.Forms.TabPage()
+        Me.txtModNm = New System.Windows.Forms.TextBox()
+        Me.txtRegNm = New System.Windows.Forms.TextBox()
+        Me.txtModID = New System.Windows.Forms.TextBox()
+        Me.lblModNm = New System.Windows.Forms.Label()
+        Me.txtModDT = New System.Windows.Forms.TextBox()
+        Me.lblModDT = New System.Windows.Forms.Label()
+        Me.txtRegDT = New System.Windows.Forms.TextBox()
+        Me.lblUserNm = New System.Windows.Forms.Label()
+        Me.lblRegDT = New System.Windows.Forms.Label()
+        Me.txtRegID = New System.Windows.Forms.TextBox()
+        Me.grpCdInfo1 = New System.Windows.Forms.GroupBox()
+        Me.btnReg_dispseq = New System.Windows.Forms.Button()
+        Me.cboSlip = New System.Windows.Forms.ComboBox()
+        Me.lblSlip = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblCmtCont = New System.Windows.Forms.Label()
+        Me.txtCmtCont = New System.Windows.Forms.TextBox()
+        Me.grpCd = New System.Windows.Forms.GroupBox()
+        Me.txtCmtCd = New System.Windows.Forms.TextBox()
+        Me.lblCmtCd = New System.Windows.Forms.Label()
+        Me.btnUE = New System.Windows.Forms.Button()
         CType(Me.errpd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTop.SuspendLayout()
         Me.tclSpc.SuspendLayout()
@@ -616,7 +621,7 @@ Public Class FDF11
         'grpCdInfo1
         '
         Me.grpCdInfo1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.grpCdInfo1.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.grpCdInfo1.Controls.Add(Me.btnReg_dispseq)
         Me.grpCdInfo1.Controls.Add(Me.cboSlip)
@@ -694,15 +699,15 @@ Public Class FDF11
         Me.txtCmtCont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCmtCont.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
         Me.txtCmtCont.Location = New System.Drawing.Point(66, 16)
-        Me.txtCmtCont.MaxLength = 1000
+        Me.txtCmtCont.MaxLength = 2000
         Me.txtCmtCont.Multiline = True
         Me.txtCmtCont.Name = "txtCmtCont"
         Me.txtCmtCont.Size = New System.Drawing.Size(687, 174)
         Me.txtCmtCont.TabIndex = 1
         Me.txtCmtCont.Tag = "CMTCONT"
-        Me.txtCmtCont.Text = "123456789012345678901234567890123456789012345678901234567890123456789012345678901" & _
-            "23456789012345678901234567890123456789012345678901234567890123456789012345678901" & _
-            "234567890123456789012345678901234567890"
+        Me.txtCmtCont.Text = "123456789012345678901234567890123456789012345678901234567890123456789012345678901" &
+    "23456789012345678901234567890123456789012345678901234567890123456789012345678901" &
+    "234567890123456789012345678901234567890"
         '
         'grpCd
         '

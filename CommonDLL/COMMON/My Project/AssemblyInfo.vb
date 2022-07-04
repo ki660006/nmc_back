@@ -73,6 +73,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.395 --> 2021/09/01 : CVR 특정 검사는 부모검사코드의 검사명 으로 
 'Version 3.1.10.396 --> 2021/11/09 : 프린트 장수 추가
 'Version 3.1.10.397 --> 2022/02/08 : 혈액TAT 전역데이터 관련 내용 추가
+'Version 3.1.10.398 --> 2022/07/04 : string byte체크 함수 추가
 
-<Assembly: AssemblyVersion("3.1.10.397")>
+<Assembly: AssemblyVersion("3.1.10.398")>
 
