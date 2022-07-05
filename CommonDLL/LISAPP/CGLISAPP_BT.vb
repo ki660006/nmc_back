@@ -10538,7 +10538,7 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     sSql += "         , b.deptcd               as joincd                            " + vbCrLf
-                    sSql += "         , b.iogbn                                                     " + vbCrLf
+                    sSql += "         --, b.iogbn                                                     " + vbCrLf
                 Else
                     sSql += "         , c.comcd_out            as joincd                            " + vbCrLf
                     sSql += "         , e.comnmd                                                    " + vbCrLf
@@ -10604,7 +10604,7 @@ Namespace APP_BT
                 End If
 
                 If rsGroup = "1"c Then
-                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd, b.iogbn     " + vbCrLf
+                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd--, b.iogbn     " + vbCrLf
                 Else
                     sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), c.comcd_out, e.comnmd " + vbCrLf
                 End If
@@ -10613,7 +10613,7 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     sSql += "         , b.deptcd               as joincd                            " + vbCrLf
-                    sSql += "         , b.iogbn                                                     " + vbCrLf
+                    sSql += "        -- , b.iogbn                                                     " + vbCrLf
                 Else
                     sSql += "         , a.comcd_out            as joincd                            " + vbCrLf
                     sSql += "         , e.comnmd                                                    " + vbCrLf
@@ -10659,7 +10659,7 @@ Namespace APP_BT
                 End If
 
                 If rsGroup = "1"c Then
-                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd, b.iogbn     " + vbCrLf
+                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd--, b.iogbn     " + vbCrLf
                 Else
                     sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), a.comcd_out, e.comnmd " + vbCrLf
                 End If
