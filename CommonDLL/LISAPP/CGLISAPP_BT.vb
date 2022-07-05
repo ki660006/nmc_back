@@ -10538,7 +10538,7 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     sSql += "         , b.deptcd               as joincd                            " + vbCrLf
-                    sSql += "         , b.iogbn                                                     " + vbCrLf
+                    sSql += "         --, b.iogbn                                                     " + vbCrLf
                 Else
                     sSql += "         , c.comcd_out            as joincd                            " + vbCrLf
                     sSql += "         , e.comnmd                                                    " + vbCrLf
@@ -10574,6 +10574,11 @@ Namespace APP_BT
                 sSql += "                   AND rtnflg IN ( '2')                                " + vbCrLf
                 sSql += "               ) a                                                         " + vbCrLf
                 sSql += "             , lb040m b                                                    " + vbCrLf
+
+                If rsGroup = "1"c Then
+                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                End If
+
                 sSql += "             , lb043m c                                                    " + vbCrLf
                 sSql += "             , lb020m d                                                    " + vbCrLf
 
@@ -10588,13 +10593,18 @@ Namespace APP_BT
                 sSql += "           AND a.comcd_out  = d.comcd                                      " + vbCrLf
                 sSql += "           AND C.STATE IN ('4','6')                                             " + vbCrLf
 
+                If rsGroup = "1"c Then
+                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                End If
+
                 If rsGroup = "2"c Then
                     sSql += "       AND d.comcd      = e.comcd                                      " + vbCrLf
                     sSql += "       AND c.spccd      = e.spccd                                      " + vbCrLf
                 End If
 
                 If rsGroup = "1"c Then
-                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd, b.iogbn     " + vbCrLf
+                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd--, b.iogbn     " + vbCrLf
                 Else
                     sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), c.comcd_out, e.comnmd " + vbCrLf
                 End If
@@ -10603,7 +10613,7 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     sSql += "         , b.deptcd               as joincd                            " + vbCrLf
-                    sSql += "         , b.iogbn                                                     " + vbCrLf
+                    sSql += "        -- , b.iogbn                                                     " + vbCrLf
                 Else
                     sSql += "         , a.comcd_out            as joincd                            " + vbCrLf
                     sSql += "         , e.comnmd                                                    " + vbCrLf
@@ -10649,7 +10659,7 @@ Namespace APP_BT
                 End If
 
                 If rsGroup = "1"c Then
-                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd, b.iogbn     " + vbCrLf
+                    sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), b.deptcd--, b.iogbn     " + vbCrLf
                 Else
                     sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD'), a.comcd_out, e.comnmd " + vbCrLf
                 End If
@@ -10657,10 +10667,11 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     'sSql += " GROUP BY a.joincd, a.iogbn                                             "
-                    sSql += " RIGHT OUTER JOIN VW_ACK_OCS_DEPT_INFO dept" + vbCrLf '2019-04-22 진료과별일 경우 진료과별로 건수가 0이라도 모두 표시되도록 수정 요청
+                    'sSql += " RIGHT OUTER JOIN VW_ACK_OCS_DEPT_INFO dept" + vbCrLf '2019-04-22 진료과별일 경우 진료과별로 건수가 0이라도 모두 표시되도록 수정 요청
+                    sSql += "  LEFT OUTER JOIN VW_ACK_OCS_DEPT_INFO dept " + vbCrLf
                     sSql += "               ON dept.deptcd = a.joincd" + vbCrLf
                     '20210104 jhs 진료과 항목 'IMG','IMC','IME','IMR','IMN','IMH','IMI','NU','NP','GS','OS','NS','TS' ,'PS','OG','OT','OL','DM','UR','FM','EM','BB' 만 표기 되도록 수정
-                    sSql += "   where dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                    'sSql += "   where dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
                     '-------------------------------------------------------------------------------------
                     sSql += " GROUP BY a.joincd , dept.deptnmd                                      " + vbCrLf
                 Else
@@ -10741,6 +10752,11 @@ Namespace APP_BT
                 sSql += "                   AND rtnflg IN ('2')                               " + vbCrLf
                 sSql += "               ) a                                                         " + vbCrLf
                 sSql += "             , lb040m b                                                    " + vbCrLf
+
+                If rsGroup = "1"c Then
+                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                End If
+
                 sSql += "             , lb043m c                                                    " + vbCrLf
                 sSql += "             , lb020m d                                                    " + vbCrLf
                 sSql += "         WHERE b.tnsjubsuno = c.tnsjubsuno                                 " + vbCrLf
@@ -10749,7 +10765,13 @@ Namespace APP_BT
                 sSql += "           AND a.bldno      = d.bldno                                      " + vbCrLf
                 sSql += "           AND a.comcd_out  = d.comcd                                      " + vbCrLf
                 sSql += "           AND c.state      in ( '4', '6')                                 " + vbCrLf
-                sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD')  , b.deptcd                " + vbCrLf
+
+                If rsGroup = "1"c Then
+                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                End If
+
+                sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD') /* , b.deptcd */                " + vbCrLf
 
                 '20211013 jhs 총합계 자체폐기 내용 추가
                 If rsGbn = "2" Then
@@ -10782,6 +10804,11 @@ Namespace APP_BT
                 sSql += "             , COUNT(a.bldno)         as qty                               " + vbCrLf
                 sSql += "          FROM lb031m a                                                    " + vbCrLf
                 sSql += "             , lb040m b                                                    " + vbCrLf
+
+                If rsGroup = "1"c Then
+                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                End If
+
                 'sSql += "             , lb043m_temp c                                                    "+vbcrlf
                 sSql += "             , lb043m c                                                    " + vbCrLf
                 sSql += "             , lb020m d                                                    " + vbCrLf
@@ -10802,6 +10829,12 @@ Namespace APP_BT
                 ElseIf rsGbn = "2"c Then
                     sSql += "       AND a.rtnflg     = '2'                                          " + vbCrLf
                 End If
+
+                If rsGroup = "1"c Then
+                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                End If
+
                 sSql += "         GROUP BY fn_ack_date_str(a.outdt, 'DD')                           " + vbCrLf
                 sSql += "       ) b ON a.days   = b.days                                            " + vbCrLf
 
