@@ -207,7 +207,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.546 --> 2022/06/28 : 혈액은행 요청사항 반영(git참조)
 'Version 3.1.10.547 --> 2022/07/04 : 보관검체관리 Rack ID Order by 추가
 'Version 3.1.10.548 --> 2022/07/05 : 혈액반납폐기율 쿼리수정
+'Version 3.1.10.549 --> 2022/07/05 : 혈액반납폐기율 월별 쿼리수정
+'Version 3.1.10.550 --> 2022/07/06 : 혈액반납폐기율 월별 쿼리수정
 
-<Assembly: AssemblyVersion("3.1.10.548")>
+<Assembly: AssemblyVersion("3.1.10.550")>
 
 

@@ -10277,10 +10277,10 @@ Namespace APP_BT
 
                 If rsGroup = "1"c Then
                     'sSql += "GROUP BY a.joincd, a.iogbn                                                     "
-                    sSql += " RIGHT OUTER JOIN vw_ack_ocs_dept_info dept" + vbCrLf
+                    sSql += " LEFT OUTER JOIN vw_ack_ocs_dept_info dept" + vbCrLf
                     sSql += "               ON dept.deptcd = a.joincd " + vbCrLf
                     '20210104 jhs 진료과 항목 'IMG','IMC','IME','IMR','IMN','IMH','IMI','NU','NP','GS','OS','NS','TS' ,'PS','OG','OT','OL','DM','UR','FM','EM','BB' 만 표기 되도록 수정
-                    sSql += "   where dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                    'sSql += "   where dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
                     '-------------------------------------------------------------------------------------
                     sSql += " GROUP BY a.joincd  , dept.deptnmd                                                   " + vbCrLf
 
@@ -10576,7 +10576,7 @@ Namespace APP_BT
                 sSql += "             , lb040m b                                                    " + vbCrLf
 
                 If rsGroup = "1"c Then
-                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                    'sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
                 End If
 
                 sSql += "             , lb043m c                                                    " + vbCrLf
@@ -10594,8 +10594,8 @@ Namespace APP_BT
                 sSql += "           AND C.STATE IN ('4','6')                                             " + vbCrLf
 
                 If rsGroup = "1"c Then
-                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
-                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                    'sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    'sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
                 End If
 
                 If rsGroup = "2"c Then
@@ -10754,7 +10754,7 @@ Namespace APP_BT
                 sSql += "             , lb040m b                                                    " + vbCrLf
 
                 If rsGroup = "1"c Then
-                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                    'sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
                 End If
 
                 sSql += "             , lb043m c                                                    " + vbCrLf
@@ -10767,8 +10767,8 @@ Namespace APP_BT
                 sSql += "           AND c.state      in ( '4', '6')                                 " + vbCrLf
 
                 If rsGroup = "1"c Then
-                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
-                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                    'sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    'sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
                 End If
 
                 sSql += "        GROUP BY fn_ack_date_str(a.outdt, 'DD') /* , b.deptcd */                " + vbCrLf
@@ -10806,7 +10806,7 @@ Namespace APP_BT
                 sSql += "             , lb040m b                                                    " + vbCrLf
 
                 If rsGroup = "1"c Then
-                    sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
+                    'sSql += "          , VW_ACK_OCS_DEPT_INFO dept                                      " + vbCrLf
                 End If
 
                 'sSql += "             , lb043m_temp c                                                    "+vbcrlf
@@ -10831,8 +10831,8 @@ Namespace APP_BT
                 End If
 
                 If rsGroup = "1"c Then
-                    sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
-                    sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
+                    'sSql += "       AND b.DEPTCD = dept.deptcd                                           " + vbCrLf
+                    'sSql += "       AND dept.deptnmd in (SELECt clsval FROM LF000M where clsgbn = 'B23') " + vbCrLf
                 End If
 
                 sSql += "         GROUP BY fn_ack_date_str(a.outdt, 'DD')                           " + vbCrLf

@@ -321,8 +321,10 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.824 --> 2022/07/04 : LISAPP
 'Version 3.1.10.825 --> 2022/07/04 : COMMON, LISF
 'Version 3.1.10.826 --> 2022/07/05 : LISAPP
+'Version 3.1.10.827 --> 2022/07/05 : LISAPP
+'Version 3.1.10.828 --> 2022/07/06 : LISAPP
 
-<Assembly: AssemblyVersion("3.1.10.826")>
+<Assembly: AssemblyVersion("3.1.10.828")>
 
 
 
