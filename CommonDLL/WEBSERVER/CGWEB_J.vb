@@ -96,6 +96,9 @@ Public Class CGWEB_J
 #Else
             sURL = PRG_CONST.SERVERIP
 #End If
+            '1. LISIF.pro_ack_exe_cancel_spc
+            '2. LISIF.pro_ack_exe_cancel_test
+            '3. LISIF.pro_ack_exe_ocs_cancel
             sURL = PRG_CONST.SERVERIP
             sURL += "/webapps/com/commonweb/xrw/.live?submit_id=TXLIW00102&business_id=lis"
             sURL += "&instcd=" + PRG_CONST.SITECD
