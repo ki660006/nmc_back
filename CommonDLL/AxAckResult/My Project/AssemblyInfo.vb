@@ -112,6 +112,7 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.416 --> 2022/06/24 : 결과단 titleyn 누락 수정
 'Version 3.1.10.417 --> 2022/06/24 : 결과단 titleyn 누락 수정
 'Version 3.1.10.418 --> 2022/06/27 : 미생물 최종보고상태일때 중간보고로 보고되지않도록
+'Version 3.1.10.419 --> 2022/07/14 : 결과단 tityeyn 누락 수정건으로 인한 CVR등록 titeyn체크 로직 수정
 
-<Assembly: AssemblyVersion("3.1.10.418")>
+<Assembly: AssemblyVersion("3.1.10.419")>
 

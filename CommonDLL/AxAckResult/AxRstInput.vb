@@ -6595,9 +6595,8 @@ Public Class AxRstInput
                         .Col = .GetColFromID("titleyn") : Dim titleyn As String = .Text
                         .Col = .GetColFromID("rstunit") : Dim rstunit As String = .Text
 
-                        If ((tcdgbn = "C" And rstflg = "") Or _
-                            (tcdgbn = "B" And titleyn = "1") Or _
-                            (tcdgbn = "P" And titleyn = "1")) Or rst = "" Then
+                        If ((tcdgbn = "C" And rstflg = "") 'Or (tcdgbn = "B" And titleyn = "1")' Or (tcdgbn = "P" And titleyn = "1")_
+                            ) Or rst = "" Then
 
                             Continue For
                         End If
@@ -6653,8 +6652,6 @@ Public Class AxRstInput
                     With (New LISAPP.APP_R.AxRstFn)
                         If .fnExe_CVR(msBcNo, msRegNo, Info_arry, USER_INFO.USRID, USER_INFO.USRNM) = "" Then
                             MsgBox("CVR 등록되었습니다.")
-
-
                         End If
                     End With
 
