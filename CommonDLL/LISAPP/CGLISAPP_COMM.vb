@@ -1773,6 +1773,37 @@ Namespace COMM
     Public Class RstFn
         Private Const msFile As String = "File : CGLISAPP_COMM.vb, Class : LISAPP.COMM.RstFn" + vbTab
 
+        Public Shared Function fnGet_Urine_TATOverList() As DataTable
+            Dim sFn As String = "Public Shared Function fnGet_Urine_TATOverList() As DataTable"
+
+            Try
+
+                Dim sSql As String = ""
+
+                sSql += "select fn_ack_get_bcno_full(r.BCNO) BCNO                                                       "
+                sSql += "     , j.REGNO, j.PATNM, r.TESTCD, r.SPCCD, f.TNMD                                             "
+                sSql += "     , to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') TKDT                                           "
+                sSql += "     , to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24 as OVERDT                               "
+                sSql += "  from LR010M r, LJ010M j, LF060M f                                                            "
+                sSql += " where r.TKDT            >= to_char(trunc(sysdate-1), 'yyyymmddhh24miss')                      " '하루전(야간 22~23시 접수시 체크)
+                sSql += "   and sysdate           >= (to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24) - (select to_number(CLSVAL) from LF000M where CLSGBN = 'URN')/(24*60) " 'TAT초과(2hr) > 30분전부터 30분초과 
+                sSql += "   and nvl(r.RSTFLG, '0') = '0'                                                                "
+                sSql += "   and r.BCNO             = j.BCNO                                                             "
+                sSql += "   and r.TESTCD           = f.TESTCD                                                           "
+                sSql += "   and r.TKDT            >= f.USDT                                                             "
+                sSql += "   and r.TKDT            <  f.UEDT                                                             "
+                sSql += "   and ( (f.TCDGBN = 'C' and f.VIWSUB = '1') or                                                "
+                sSql += "         (f.TCDGBN = 'P' and f.TITLEYN = '0') or                                               "
+                sSql += "         (f.TCDGBN = 'S' ) )                                                                   "
+
+                Return DbExecuteQuery(sSql)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+
+        End Function
+
         '-- 특수결과 존재 여부
         Public Shared Function fnGet_SpRst_yn(ByVal rsBcNo As String, ByVal rsTestCd As String) As String
             Dim sFn As String = "Function fnGet_SpRst_yn(String) As DataTable"
