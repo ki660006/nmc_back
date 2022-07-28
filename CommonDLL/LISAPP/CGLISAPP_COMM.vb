@@ -1781,17 +1781,20 @@ Namespace COMM
                 Dim sSql As String = ""
 
                 sSql += "select fn_ack_get_bcno_full(r.BCNO) BCNO                                                       "
-                sSql += "     , j.REGNO, j.PATNM, r.TESTCD, r.SPCCD, f.TNMD                                             "
-                sSql += "     , to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') TKDT                                           "
-                sSql += "     , to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24 as OVERDT                               "
+                sSql += "     , j.REGNO, j.PATNM, r.TESTCD, r.SPCCD, f.TNMD, r.RSTFLG                                   "
+                sSql += "     , to_char(to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') TKDT                                           "
+                sSql += "     , to_char(to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24, 'yyyy-mm-dd hh24:mi:ss') as TATOVERDT                            "
+                sSql += "     , round(((to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss')+2/24)-sysdate)*24*60) REMAININGTIME    "
+                sSql += "     , to_char(to_date(r.REGDT, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') REGDT                                         "
+                sSql += "     , to_char(to_date(r.MWDT,'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') MWDT                                            "
                 sSql += "  from LR010M r, LJ010M j, LF060M f                                                            "
-                sSql += " where r.TKDT            >= to_char(trunc(sysdate-1), 'yyyymmddhh24miss')                      " '하루전(야간 22~23시 접수시 체크)
-                sSql += "   and sysdate           >= (to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24) - (select to_number(CLSVAL) from LF000M where CLSGBN = 'URN')/(24*60) " 'TAT초과(2hr) > 30분전부터 30분초과 
-                sSql += "   and nvl(r.RSTFLG, '0') = '0'                                                                "
-                sSql += "   and r.BCNO             = j.BCNO                                                             "
-                sSql += "   and r.TESTCD           = f.TESTCD                                                           "
-                sSql += "   and r.TKDT            >= f.USDT                                                             "
-                sSql += "   and r.TKDT            <  f.UEDT                                                             "
+                sSql += " where r.TKDT             >= to_char(trunc(sysdate-1), 'yyyymmddhh24miss')                      " '하루전(야간 22~23시 접수시 체크)
+                sSql += "   and sysdate            >= (to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24) - (select to_number(CLSVAL) from LF000M where CLSGBN = 'URN')/(24*60) " 'TAT초과(2hr) > 30분전부터 30분초과 
+                sSql += "   and nvl(r.RSTFLG, '0') <> '3'                                                                "
+                sSql += "   and r.BCNO             =  j.BCNO                                                             "
+                sSql += "   and r.TESTCD           =  f.TESTCD                                                           "
+                sSql += "   and r.TKDT             >= f.USDT                                                             "
+                sSql += "   and r.TKDT             <  f.UEDT                                                             "
                 sSql += "   and ( (f.TCDGBN = 'C' and f.VIWSUB = '1') or                                                "
                 sSql += "         (f.TCDGBN = 'P' and f.TITLEYN = '0') or                                               "
                 sSql += "         (f.TCDGBN = 'S' ) )                                                                   "
