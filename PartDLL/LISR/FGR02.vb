@@ -20,6 +20,8 @@ Public Class FGR02
     Private msPartSlip As String = Application.StartupPath + msXMLDir & "\FGR02_SLIPINFO.XML"
     Private msTClsFileRSL As String = Application.StartupPath + msXMLDir + "\FGR02_RstSearchList.XML"
 
+    Private mTATAlarmList As New POPUPWIN.POP_COM()
+
     Public WriteOnly Property BloodBankYN() As Boolean
         Set(ByVal value As Boolean)
             mbBloodBankYN = value
@@ -1320,4 +1322,60 @@ Public Class FGR02
         End Try
     End Sub
 
+    Private Sub lblTATAlarm_Click(sender As Object, e As EventArgs) Handles lblTATAlarm.Click
+
+        Try
+            If mbAutoQuery = False Then
+                ' 자동조회 On 설정
+                With lblTATAlarm
+                    .Text = "TAT 임박 알람 ON"
+                    .BackColor = System.Drawing.Color.FromArgb(179, 232, 147)
+                    .ForeColor = System.Drawing.Color.FromArgb(0, 64, 0)
+                End With
+                mbAutoQuery = True
+
+                ' 자동조회 타이머 동작
+                tmrReq.Enabled = True
+
+                lblTATAlarm.Enabled = True
+                'fnFormClear(0)
+
+            Else
+                ' 자동조회 Off 설정
+                With lblTATAlarm
+                    .Text = "TAT 임박 알람 OFF"
+                    .BackColor = System.Drawing.SystemColors.Control
+                    .ForeColor = System.Drawing.SystemColors.ControlText
+                End With
+                mbAutoQuery = False
+
+
+
+                ' 자동조회 타이머 동작
+                tmrReq.Enabled = False
+
+
+                lblTATAlarm.Enabled = False
+            End If
+
+            btnSearch_Click(Nothing, Nothing)
+
+            ' 자동조회는 처음에 조회
+            If mbAutoQuery = True Then btnSearch_Click(Nothing, Nothing)
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+
+        End Try
+    End Sub
+
+    Private Sub tmrTAT_Tick(sender As Object, e As EventArgs) Handles tmrTAT.Tick
+
+        Try
+            mTATAlarmList.sbPOPUP_UrineTATOverList()
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+
+    End Sub
 End Class
