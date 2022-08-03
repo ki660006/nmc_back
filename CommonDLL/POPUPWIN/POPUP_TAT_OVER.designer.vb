@@ -35,7 +35,7 @@ Partial Class POPUP_TAT_OVER
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1198, 336)
+        Me.Panel1.Size = New System.Drawing.Size(1258, 337)
         Me.Panel1.TabIndex = 0
         '
         'spdList
@@ -45,7 +45,7 @@ Partial Class POPUP_TAT_OVER
         Me.spdList.Location = New System.Drawing.Point(0, 0)
         Me.spdList.Name = "spdList"
         Me.spdList.OcxState = CType(resources.GetObject("spdList.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.spdList.Size = New System.Drawing.Size(1198, 336)
+        Me.spdList.Size = New System.Drawing.Size(1258, 337)
         Me.spdList.TabIndex = 0
         '
         'POPUP_TAT_OVER
@@ -53,10 +53,11 @@ Partial Class POPUP_TAT_OVER
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1198, 336)
+        Me.ClientSize = New System.Drawing.Size(1258, 337)
         Me.Controls.Add(Me.Panel1)
         Me.KeyPreview = True
         Me.Name = "POPUP_TAT_OVER"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "TAT OVER 임박 리스트"
         Me.TopMost = True
         Me.Panel1.ResumeLayout(False)

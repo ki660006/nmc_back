@@ -10,6 +10,7 @@ Public Class POPUP_TAT_OVER
     Private Const msFile As String = "File : POPUP_TAT_OVER.vb, Class : POPUP_TAT_OVER" & vbTab
 
     Private msDataTable As New DataTable()
+    Private mAlramWaveFile As String = "\Wave\TNS_Alarm.wav"
 
     Public Sub New(ByVal rsDataTable As DataTable)
 
@@ -69,6 +70,19 @@ Public Class POPUP_TAT_OVER
 
                 Next
 
+                If .MaxRows > 0 Then
+
+                    Dim objWave As New PlayWave
+                    Dim strWaveDir As String = Application.StartupPath & mAlramWaveFile
+
+                    Debug.WriteLine("  A:" & Now.ToLongTimeString)
+                    If Dir(strWaveDir) <> "" Then
+                        Debug.WriteLine(strWaveDir)
+                        objWave.Play(strWaveDir)
+                    End If
+
+                End If
+
             End With
         Catch ex As Exception
             Throw (New Exception(ex.Message))
@@ -78,5 +92,11 @@ Public Class POPUP_TAT_OVER
     Private Sub POPUP_TAT_OVER_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         sbInit()
         sbDisplay_Data()
+    End Sub
+
+    Private Sub POPUP_TAT_OVER_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Escape Then
+            Me.Close()
+        End If
     End Sub
 End Class
