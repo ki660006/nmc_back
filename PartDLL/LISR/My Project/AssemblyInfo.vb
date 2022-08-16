@@ -84,5 +84,6 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.382 --> 2021/08/02 : 검사자간 공유사항 항목 추가
 'Version 3.1.10.383 --> 2021/08/02 : 검사자간 공유사항 항목 추가(재배포)
 'Version 3.1.10.384 --> 2022/01/17 : 검사자간 공유사항 항목 추가(재배포)
+'Version 3.1.10.385 --> 2022/08/16 : Urine TAT 임박 알람 추가
 
-<Assembly: AssemblyVersion("3.1.10.384")>
+<Assembly: AssemblyVersion("3.1.10.385")>

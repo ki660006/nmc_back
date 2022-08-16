@@ -209,7 +209,8 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.548 --> 2022/07/05 : 혈액반납폐기율 쿼리수정
 'Version 3.1.10.549 --> 2022/07/05 : 혈액반납폐기율 월별 쿼리수정
 'Version 3.1.10.550 --> 2022/07/06 : 혈액반납폐기율 월별 쿼리수정
+'Version 3.1.10.551 --> 2022/08/16 : Urine TAT 임박 리스트 추가
 
-<Assembly: AssemblyVersion("3.1.10.550")>
+<Assembly: AssemblyVersion("3.1.10.551")>
 
 
