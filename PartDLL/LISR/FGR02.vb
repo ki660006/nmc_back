@@ -14,11 +14,15 @@ Public Class FGR02
     Public msUse_SlipCd As String = ""
     Public msSearCh_mode As Integer = 0 '< 0:접수일시 조회 , 1 :결과일시 조회 <<< 20150804
     Public mbAutoQuery As Boolean
+    Public mbAutoTAT As Boolean
+    Public mbTATQ As Boolean = False
 
     Public msTitle As String
     Private Const msXMLDir As String = "\XML"
     Private msPartSlip As String = Application.StartupPath + msXMLDir & "\FGR02_SLIPINFO.XML"
     Private msTClsFileRSL As String = Application.StartupPath + msXMLDir + "\FGR02_RstSearchList.XML"
+
+    Private mTATAlarmList As New POPUPWIN.POP_COM()
 
     Public WriteOnly Property BloodBankYN() As Boolean
         Set(ByVal value As Boolean)
@@ -309,6 +313,9 @@ Public Class FGR02
 
         If USER_INFO.USRID = "ACK" Then Me.btnReg_aborh.Visible = True
         If COMMON.CommLogin.LOGIN.USER_INFO.USRLVL = "S" Then btnRst_ocs.Visible = True
+
+        '2022.08.03 JJH TAT 임박 알람 권한
+        If USER_SKILL.Authority("T01", 2) Then lblTATAlarm.Visible = True
 
         If STU_AUTHORITY.UsrID = "ICU" Then
             btnChg_rstdt.Visible = True
@@ -679,6 +686,9 @@ Public Class FGR02
         If tmrReq.Enabled = True Then
             tmrReq.Enabled = False  '접수중 자동조회 일시중지
         End If
+        If tmrTAT.Enabled = True Then
+            tmrTAT.Enabled = False
+        End If
 
         Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor
         blnRst = AxResult.fnReg("1")
@@ -696,6 +706,9 @@ Public Class FGR02
         If mbAutoQuery = True Then
             tmrReq.Enabled = True
         End If
+        If mbAutoTAT = True Then
+            tmrTAT.Enabled = True
+        End If
 
         Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
 
@@ -708,6 +721,9 @@ Public Class FGR02
 
         If tmrReq.Enabled = True Then
             tmrReq.Enabled = False
+        End If
+        If tmrTAT.Enabled = True Then
+            tmrTAT.Enabled = False
         End If
 
         blnRst = AxResult.fnReg(IIf(btnMW.Text.StartsWith("중간보고"), "22", "2").ToString) ''' 2 결과확인 
@@ -727,6 +743,10 @@ Public Class FGR02
         If mbAutoQuery = True Then
             tmrReq.Enabled = True
         End If
+        If mbAutoTAT = True Then
+            tmrTAT.Enabled = True
+        End If
+
         Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
 
     End Sub
@@ -744,6 +764,9 @@ Public Class FGR02
         If tmrReq.Enabled = True Then
             tmrReq.Enabled = False
         End If
+        If tmrTAT.Enabled = True Then
+            tmrTAT.Enabled = False
+        End If
 
         blnRst = AxResult.fnReg("3")
         If blnRst Then
@@ -760,6 +783,9 @@ Public Class FGR02
         If mbAutoQuery = True Then
             tmrReq.Enabled = True
         End If
+        If mbAutoTAT = True Then
+            tmrTAT.Enabled = True
+        End If
 
         Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
 
@@ -774,6 +800,9 @@ Public Class FGR02
         If tmrReq.Enabled = True Then
             tmrReq.Enabled = False
         End If
+        If tmrTAT.Enabled = True Then
+            tmrTAT.Enabled = False
+        End If
 
         blnRst = AxResult.fnReg_Erase()
 
@@ -787,6 +816,9 @@ Public Class FGR02
 
         If mbAutoQuery = True Then
             tmrReq.Enabled = True
+        End If
+        If mbAutoTAT = True Then
+            tmrTAT.Enabled = True
         End If
 
         Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default
@@ -1318,6 +1350,74 @@ Public Class FGR02
             Cursor.Current = System.Windows.Forms.Cursors.Default
 
         End Try
+    End Sub
+
+    Private Sub lblTATAlarm_Click(sender As Object, e As EventArgs) Handles lblTATAlarm.Click
+
+        Try
+            If mbAutoTAT = False Then
+                'TAT 임박 알람 On 설정
+                With lblTATAlarm
+                    .Text = "TAT 임박 알람 ON"
+                    .BackColor = Color.Red
+                    .ForeColor = Color.White
+                End With
+                mbAutoTAT = True
+
+                'TAT 임박 알람 타이머 동작
+                tmrTAT.Enabled = True
+
+                'lblTATAlarm.Enabled = True
+                'fnFormClear(0)
+
+            Else
+                'TAT 임박 알람 Off 설정
+                With lblTATAlarm
+                    .Text = "TAT 임박 알람 OFF"
+                    .BackColor = System.Drawing.Color.FromArgb(179, 232, 147)
+                    .ForeColor = System.Drawing.Color.FromArgb(0, 64, 0)
+                End With
+                mbAutoTAT = False
+
+
+
+                'TAT 임박 알람 타이머 동작
+                tmrTAT.Enabled = False
+
+
+                'lblTATAlarm.Enabled = False
+            End If
+
+            'TAT 임박 조회는 처음에 조회
+            If mbAutoTAT = True Then sbTATAlarm()
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+
+        End Try
+    End Sub
+
+    Private Sub tmrTAT_Tick(sender As Object, e As EventArgs) Handles tmrTAT.Tick
+
+        If mbTATQ = True Then Return
+
+        sbTATAlarm()
+    End Sub
+
+    Private Sub sbTATAlarm()
+
+        Try
+
+            mbTATQ = True
+
+            mTATAlarmList.sbPOPUP_UrineTATOverList()
+
+            mbTATQ = False
+
+        Catch ex As Exception
+            CDHELP.FGCDHELPFN.fn_PopMsg(Me, "E"c, ex.Message)
+        End Try
+
     End Sub
 
 End Class

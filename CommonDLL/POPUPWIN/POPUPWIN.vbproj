@@ -148,6 +148,12 @@
     <Compile Include="CGDA_V.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POPUP_TAT_OVER.designer.vb">
+      <DependentUpon>POPUP_TAT_OVER.vb</DependentUpon>
+    </Compile>
+    <Compile Include="POPUP_TAT_OVER.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FGPOPUPRST.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -280,8 +286,13 @@
     <Compile Include="FGPOPUPST_PLASMA_aPPT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="POP_COM.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="POPUP_TAT_OVER.resx">
+      <DependentUpon>POPUP_TAT_OVER.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FGPOPUPRST.resx">
       <DependentUpon>FGPOPUPRST.vb</DependentUpon>
       <SubType>Designer</SubType>

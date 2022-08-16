@@ -1773,6 +1773,42 @@ Namespace COMM
     Public Class RstFn
         Private Const msFile As String = "File : CGLISAPP_COMM.vb, Class : LISAPP.COMM.RstFn" + vbTab
 
+        Public Shared Function fnGet_Urine_TATOverList() As DataTable
+            Dim sFn As String = "Public Shared Function fnGet_Urine_TATOverList() As DataTable"
+
+            Try
+
+                Dim sSql As String = ""
+
+                sSql += "select fn_ack_get_bcno_full(r.BCNO) BCNO                                                       " + vbCrLf
+                sSql += "     , j.REGNO, j.PATNM, r.TESTCD, r.SPCCD, f.TNMD, r.RSTFLG                                   " + vbCrLf
+                sSql += "     , to_char(to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') TKDT                                           " + vbCrLf
+                sSql += "     , to_char(to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24, 'yyyy-mm-dd hh24:mi:ss') as TATOVERDT                            " + vbCrLf
+                sSql += "     , round(((to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss')+2/24)-sysdate)*24*60) REMAININGTIME    " + vbCrLf
+                sSql += "     , to_char(to_date(r.REGDT, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') REGDT                                         " + vbCrLf
+                sSql += "     , to_char(to_date(r.MWDT,'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss') MWDT                                            " + vbCrLf
+                sSql += "  from LR010M r, LJ010M j, LF060M f                                                            " + vbCrLf
+                sSql += " where r.TKDT             >= to_char(trunc(sysdate-1), 'yyyymmddhh24miss')                     " + vbCrLf '하루전(야간 22~23시 접수시 체크)
+                sSql += "   and sysdate            >= (to_date(r.TKDT, 'yyyy-mm-dd hh24:mi:ss') + 2/24) - (select to_number(CLSVAL) from LF000M where CLSGBN = 'URN')/(24*60) " + vbCrLf 'TAT초과(2hr) > 30분전부터 30분초과 
+                sSql += "   and nvl(r.RSTFLG, '0') <> '3'                                                               " + vbCrLf
+                sSql += "   and r.PARTCD || r.SLIPCD in ('C8')                                                          " + vbCrLf
+                sSql += "   and r.BCNO             =  j.BCNO                                                            " + vbCrLf
+                sSql += "   and r.TESTCD           =  f.TESTCD                                                          " + vbCrLf
+                sSql += "   and r.TKDT             >= f.USDT                                                            " + vbCrLf
+                sSql += "   and r.TKDT             <  f.UEDT                                                            " + vbCrLf
+                sSql += "   and ( (f.TCDGBN = 'C' and f.VIWSUB = '1') or                                                " + vbCrLf
+                sSql += "         (f.TCDGBN = 'P' and f.TITLEYN = '0') or                                               " + vbCrLf
+                sSql += "         (f.TCDGBN = 'S' ) )                                                                   " + vbCrLf
+                sSql += "  order by REMAINING_TIME, TKDT, BCNO                                                          "
+
+                Return DbExecuteQuery(sSql)
+
+            Catch ex As Exception
+                Throw (New Exception(ex.Message + " @" + sFn, ex))
+            End Try
+
+        End Function
+
         '-- 특수결과 존재 여부
         Public Shared Function fnGet_SpRst_yn(ByVal rsBcNo As String, ByVal rsTestCd As String) As String
             Dim sFn As String = "Function fnGet_SpRst_yn(String) As DataTable"

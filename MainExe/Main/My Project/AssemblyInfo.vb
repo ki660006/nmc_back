@@ -324,8 +324,9 @@ Imports System.Runtime.InteropServices
 'Version 3.1.10.827 --> 2022/07/05 : LISAPP
 'Version 3.1.10.828 --> 2022/07/06 : LISAPP
 'Version 3.1.10.829 --> 2022/07/14 : AxAckResult
+'Version 3.1.10.830 --> 2022/08/16 : LISAPP, POPUPWIN, LISR
 
-<Assembly: AssemblyVersion("3.1.10.829")>
+<Assembly: AssemblyVersion("3.1.10.830")>
 
 
 
