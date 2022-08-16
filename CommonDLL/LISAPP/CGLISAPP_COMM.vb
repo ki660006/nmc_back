@@ -1799,7 +1799,7 @@ Namespace COMM
                 sSql += "   and ( (f.TCDGBN = 'C' and f.VIWSUB = '1') or                                                " + vbCrLf
                 sSql += "         (f.TCDGBN = 'P' and f.TITLEYN = '0') or                                               " + vbCrLf
                 sSql += "         (f.TCDGBN = 'S' ) )                                                                   " + vbCrLf
-                sSql += "  order by REMAINING_TIME, TKDT, BCNO                                                          "
+                sSql += "  order by REMAININGTIME, TKDT, BCNO                                                           "
 
                 Return DbExecuteQuery(sSql)
 
